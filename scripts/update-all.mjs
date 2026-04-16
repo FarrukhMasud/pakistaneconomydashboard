@@ -1,0 +1,181 @@
+#!/usr/bin/env node
+
+/**
+ * Pakistan Economic Dashboard — Master Update Script
+ *
+ * Orchestrates all data updates:
+ *   1. Downloads fresh SBP Excel files from their URLs
+ *   2. Runs parse-sbp-excel.mjs to parse Excel → JSON
+ *   3. Runs update-data.mjs for SBP API (remittances)
+ *   4. Prints a summary of what was updated
+ *
+ * Usage:
+ *   npm run update
+ *   node scripts/update-all.mjs
+ *   node scripts/update-all.mjs --skip-download   # skip downloading, use existing files
+ */
+
+import { writeFile, mkdir } from 'fs/promises';
+import { resolve, dirname } from 'path';
+import { fileURLToPath } from 'url';
+import { execSync } from 'child_process';
+
+// SBP's SSL certificate sometimes causes issues with Node.js
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const RAW_DIR = resolve(__dirname, 'sbp-raw');
+
+// SBP Excel file URLs
+const DOWNLOADS = [
+  {
+    name: 'exp_import_BOP.xls',
+    url: 'https://www.sbp.org.pk/ecodata/exp_import_BOP.xls',
+    description: 'Trade (Imports/Exports BOP)',
+  },
+  {
+    name: 'Foreign_Dir.xls',
+    url: 'https://www.sbp.org.pk/ecodata/Foreign_Dir.xls',
+    description: 'FDI by Sector',
+  },
+  {
+    name: 'Netinflow.xls',
+    url: 'https://www.sbp.org.pk/ecodata/Netinflow.xls',
+    description: 'FDI by Country',
+  },
+  {
+    name: 'NetinflowSummary.xls',
+    url: 'https://www.sbp.org.pk/ecodata/NetinflowSummary.xls',
+    description: 'FDI Annual Summary',
+  },
+  {
+    name: 'GDP_table.xlsx',
+    url: 'https://www.sbp.org.pk/ecodata/GDP_table.xlsx',
+    description: 'GDP Growth Data',
+  },
+  {
+    name: 'Balancepayment_BPM6.xls',
+    url: 'https://www.sbp.org.pk/ecodata/Balancepayment_BPM6.xls',
+    description: 'Balance of Payments',
+  },
+  {
+    name: 'IBF_Arch.xls',
+    url: 'https://www.sbp.org.pk/ecodata/IBF_Arch.xls',
+    description: 'Exchange Rate Archive',
+  },
+  {
+    name: 'dt.xls',
+    url: 'https://www.sbp.org.pk/ecodata/dt.xls',
+    description: 'Services Trade (EBOPS)',
+  },
+  {
+    name: 'Export_Receipts_by_all_Countries.xls',
+    url: 'https://www.sbp.org.pk/ecodata/Export_Receipts_by_all_Countries.xls',
+    description: 'Export by Country',
+  },
+  {
+    name: 'Import-Payments-by-All-Countries.xlsx',
+    url: 'https://www.sbp.org.pk/ecodata/Import-Payments-by-All-Countries.xlsx',
+    description: 'Import by Country',
+  },
+];
+
+async function downloadFile(name, url, description) {
+  const filepath = resolve(RAW_DIR, name);
+  try {
+    const res = await fetch(url, {
+      signal: AbortSignal.timeout(30000),
+      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' },
+    });
+
+    if (!res.ok) {
+      console.log(`  ⚠️  ${description}: HTTP ${res.status}`);
+      return false;
+    }
+
+    const buffer = Buffer.from(await res.arrayBuffer());
+    if (buffer.length < 1000) {
+      console.log(`  ⚠️  ${description}: Response too small (${buffer.length} bytes)`);
+      return false;
+    }
+
+    await writeFile(filepath, buffer);
+    console.log(`  ✅ ${description} (${(buffer.length / 1024).toFixed(0)} KB)`);
+    return true;
+  } catch (err) {
+    console.log(`  ⚠️  ${description}: ${err.message}`);
+    return false;
+  }
+}
+
+function runScript(scriptPath, label) {
+  console.log(`\n▶️  Running ${label}...`);
+  try {
+    execSync(`node "${scriptPath}"`, {
+      cwd: resolve(__dirname, '..'),
+      stdio: 'inherit',
+      env: { ...process.env, NODE_TLS_REJECT_UNAUTHORIZED: '0' },
+    });
+    return true;
+  } catch (err) {
+    console.error(`  ❌ ${label} failed: ${err.message}`);
+    return false;
+  }
+}
+
+async function main() {
+  console.log('╔══════════════════════════════════════════════════╗');
+  console.log('║  🇵🇰 Pakistan Economic Dashboard — Full Update    ║');
+  console.log('╚══════════════════════════════════════════════════╝');
+
+  const args = process.argv.slice(2);
+  const skipDownload = args.includes('--skip-download');
+  const summary = { downloaded: 0, failed: 0, skipped: 0 };
+
+  // Step 1: Download fresh SBP Excel files
+  if (!skipDownload) {
+    console.log('\n📥 Step 1: Downloading SBP Excel files...\n');
+    await mkdir(RAW_DIR, { recursive: true });
+
+    for (const file of DOWNLOADS) {
+      const ok = await downloadFile(file.name, file.url, file.description);
+      if (ok) summary.downloaded++;
+      else summary.failed++;
+    }
+
+    console.log(`\n  📊 Downloaded: ${summary.downloaded}/${DOWNLOADS.length}`);
+    if (summary.failed > 0) {
+      console.log(`  ⚠️  Failed: ${summary.failed} (will use existing files if available)`);
+    }
+  } else {
+    console.log('\n⏭  Step 1: Skipping downloads (--skip-download)');
+    summary.skipped = DOWNLOADS.length;
+  }
+
+  // Step 2: Parse Excel files
+  console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log('📊 Step 2: Parsing SBP Excel files...');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  const parseOk = runScript(resolve(__dirname, 'parse-sbp-excel.mjs'), 'parse-sbp-excel.mjs');
+
+  // Step 3: Run SBP API update for remittances
+  console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log('💸 Step 3: Updating remittances via SBP API...');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  const apiOk = runScript(resolve(__dirname, 'update-data.mjs'), 'update-data.mjs (SBP API)');
+
+  // Step 4: Summary
+  console.log('\n╔══════════════════════════════════════════════════╗');
+  console.log('║              Full Update Summary                  ║');
+  console.log('╚══════════════════════════════════════════════════╝');
+  console.log(`\n  📥 Downloads: ${summary.downloaded} succeeded, ${summary.failed} failed, ${summary.skipped} skipped`);
+  console.log(`  📊 Excel parse: ${parseOk ? '✅ Success' : '❌ Failed'}`);
+  console.log(`  💸 SBP API:     ${apiOk ? '✅ Success' : '⚠️  Failed (needs SBP_API_KEY in .env)'}`);
+  console.log('\n  Updated JSON files in public/data/');
+  console.log('  Run "npm run build" to rebuild, then "npm run deploy" to publish.\n');
+}
+
+main().catch((err) => {
+  console.error('\n❌ Fatal error:', err.message);
+  process.exit(1);
+});

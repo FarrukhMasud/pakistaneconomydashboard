@@ -1,0 +1,537 @@
+{
+  "monthly": [
+    {
+      "date": "2021-01",
+      "imports": 4412,
+      "exports": 2100,
+      "balance": -2312
+    },
+    {
+      "date": "2021-02",
+      "imports": 4476,
+      "exports": 2184,
+      "balance": -2292
+    },
+    {
+      "date": "2021-03",
+      "imports": 5392,
+      "exports": 2616,
+      "balance": -2776
+    },
+    {
+      "date": "2021-04",
+      "imports": 4975,
+      "exports": 2304,
+      "balance": -2671
+    },
+    {
+      "date": "2021-05",
+      "imports": 4934,
+      "exports": 2130,
+      "balance": -2804
+    },
+    {
+      "date": "2021-06",
+      "imports": 6302,
+      "exports": 2492,
+      "balance": -3810
+    },
+    {
+      "date": "2021-07",
+      "imports": 5278,
+      "exports": 2234,
+      "balance": -3044
+    },
+    {
+      "date": "2021-08",
+      "imports": 5869,
+      "exports": 2339,
+      "balance": -3530
+    },
+    {
+      "date": "2021-09",
+      "imports": 5951,
+      "exports": 2627,
+      "balance": -3324
+    },
+    {
+      "date": "2021-10",
+      "imports": 5776,
+      "exports": 2375,
+      "balance": -3401
+    },
+    {
+      "date": "2021-11",
+      "imports": 6252,
+      "exports": 2737,
+      "balance": -3515
+    },
+    {
+      "date": "2021-12",
+      "imports": 6310,
+      "exports": 2930,
+      "balance": -3380
+    },
+    {
+      "date": "2022-01",
+      "imports": 6130,
+      "exports": 2503,
+      "balance": -3627
+    },
+    {
+      "date": "2022-02",
+      "imports": 5066,
+      "exports": 2890,
+      "balance": -2176
+    },
+    {
+      "date": "2022-03",
+      "imports": 6114,
+      "exports": 3071,
+      "balance": -3043
+    },
+    {
+      "date": "2022-04",
+      "imports": 5959,
+      "exports": 3152,
+      "balance": -2807
+    },
+    {
+      "date": "2022-05",
+      "imports": 5634,
+      "exports": 2505,
+      "balance": -3129
+    },
+    {
+      "date": "2022-06",
+      "imports": 7204,
+      "exports": 3130,
+      "balance": -4074
+    },
+    {
+      "date": "2022-07",
+      "imports": 5562,
+      "exports": 2215,
+      "balance": -3347
+    },
+    {
+      "date": "2022-08",
+      "imports": 6007,
+      "exports": 2734,
+      "balance": -3273
+    },
+    {
+      "date": "2022-09",
+      "imports": 4951,
+      "exports": 2438,
+      "balance": -2513
+    },
+    {
+      "date": "2022-10",
+      "imports": 4657,
+      "exports": 2281,
+      "balance": -2376
+    },
+    {
+      "date": "2022-11",
+      "imports": 4340,
+      "exports": 2246,
+      "balance": -2094
+    },
+    {
+      "date": "2022-12",
+      "imports": 4256,
+      "exports": 2308,
+      "balance": -1948
+    },
+    {
+      "date": "2023-01",
+      "imports": 4109,
+      "exports": 2222,
+      "balance": -1887
+    },
+    {
+      "date": "2023-02",
+      "imports": 4104,
+      "exports": 2199,
+      "balance": -1905
+    },
+    {
+      "date": "2023-03",
+      "imports": 4158,
+      "exports": 2422,
+      "balance": -1736
+    },
+    {
+      "date": "2023-04",
+      "imports": 3622,
+      "exports": 2135,
+      "balance": -1487
+    },
+    {
+      "date": "2023-05",
+      "imports": 3752,
+      "exports": 2565,
+      "balance": -1187
+    },
+    {
+      "date": "2023-06",
+      "imports": 3177,
+      "exports": 2111,
+      "balance": -1066
+    },
+    {
+      "date": "2023-07",
+      "imports": 4149,
+      "exports": 2104,
+      "balance": -2045
+    },
+    {
+      "date": "2023-08",
+      "imports": 4218,
+      "exports": 2411,
+      "balance": -1807
+    },
+    {
+      "date": "2023-09",
+      "imports": 3929,
+      "exports": 2439,
+      "balance": -1490
+    },
+    {
+      "date": "2023-10",
+      "imports": 4382,
+      "exports": 2721,
+      "balance": -1661
+    },
+    {
+      "date": "2023-11",
+      "imports": 4537,
+      "exports": 2697,
+      "balance": -1840
+    },
+    {
+      "date": "2023-12",
+      "imports": 4200,
+      "exports": 2783,
+      "balance": -1417
+    },
+    {
+      "date": "2024-01",
+      "imports": 4686,
+      "exports": 2680,
+      "balance": -2006
+    },
+    {
+      "date": "2024-02",
+      "imports": 4383,
+      "exports": 2534,
+      "balance": -1849
+    },
+    {
+      "date": "2024-03",
+      "imports": 4573,
+      "exports": 2523,
+      "balance": -2050
+    },
+    {
+      "date": "2024-04",
+      "imports": 4448,
+      "exports": 2638,
+      "balance": -1810
+    },
+    {
+      "date": "2024-05",
+      "imports": 5014,
+      "exports": 3007,
+      "balance": -2007
+    },
+    {
+      "date": "2024-06",
+      "imports": 4638,
+      "exports": 2443,
+      "balance": -2195
+    },
+    {
+      "date": "2024-07",
+      "imports": 4850,
+      "exports": 2365,
+      "balance": -2485
+    },
+    {
+      "date": "2024-08",
+      "imports": 4708,
+      "exports": 2439,
+      "balance": -2269
+    },
+    {
+      "date": "2024-09",
+      "imports": 4691,
+      "exports": 2616,
+      "balance": -2075
+    },
+    {
+      "date": "2024-10",
+      "imports": 4647,
+      "exports": 3006,
+      "balance": -1641
+    },
+    {
+      "date": "2024-11",
+      "imports": 4119,
+      "exports": 2790,
+      "balance": -1329
+    },
+    {
+      "date": "2024-12",
+      "imports": 4894,
+      "exports": 3109,
+      "balance": -1785
+    },
+    {
+      "date": "2025-01",
+      "imports": 5481,
+      "exports": 3009,
+      "balance": -2472
+    },
+    {
+      "date": "2025-02",
+      "imports": 5051,
+      "exports": 2609,
+      "balance": -2442
+    },
+    {
+      "date": "2025-03",
+      "imports": 4938,
+      "exports": 2759,
+      "balance": -2179
+    },
+    {
+      "date": "2025-04",
+      "imports": 5246,
+      "exports": 2606,
+      "balance": -2640
+    },
+    {
+      "date": "2025-05",
+      "imports": 5501,
+      "exports": 2444,
+      "balance": -3057
+    },
+    {
+      "date": "2025-06",
+      "imports": 5020,
+      "exports": 2591,
+      "balance": -2429
+    },
+    {
+      "date": "2025-07",
+      "imports": 5429,
+      "exports": 2750,
+      "balance": -2679
+    },
+    {
+      "date": "2025-08",
+      "imports": 5020,
+      "exports": 2488,
+      "balance": -2532
+    },
+    {
+      "date": "2025-09",
+      "imports": 5040,
+      "exports": 2609,
+      "balance": -2431
+    },
+    {
+      "date": "2025-10",
+      "imports": 5396,
+      "exports": 2632,
+      "balance": -2764
+    },
+    {
+      "date": "2025-11",
+      "imports": 4730,
+      "exports": 2277,
+      "balance": -2453
+    },
+    {
+      "date": "2025-12",
+      "imports": 5765,
+      "exports": 2758,
+      "balance": -3007
+    },
+    {
+      "date": "2026-01",
+      "imports": 5346,
+      "exports": 2745,
+      "balance": -2601
+    },
+    {
+      "date": "2026-02",
+      "imports": 5165,
+      "exports": 2480,
+      "balance": -2685
+    },
+    {
+      "date": "2026-03",
+      "imports": 4902,
+      "exports": 2526,
+      "balance": -2376
+    }
+  ],
+  "dataSource": "SBP",
+  "topExportCountries": [
+    {
+      "country": "U. S. A.",
+      "value": 4634.19,
+      "flag": "🇺🇸"
+    },
+    {
+      "country": "China",
+      "value": 1945.05,
+      "flag": "🇨🇳"
+    },
+    {
+      "country": "U. K.",
+      "value": 1621.68,
+      "flag": "🇬🇧"
+    },
+    {
+      "country": "U. A. E. Dubai",
+      "value": 1412.72,
+      "flag": "🇦🇪"
+    },
+    {
+      "country": "Germany",
+      "value": 1239.65,
+      "flag": "🇩🇪"
+    },
+    {
+      "country": "Spain",
+      "value": 1184.46,
+      "flag": "🇪🇸"
+    },
+    {
+      "country": "Netherlands (Holland)",
+      "value": 1103.3,
+      "flag": "🇳🇱"
+    },
+    {
+      "country": "Italy",
+      "value": 880.13,
+      "flag": "🇮🇹"
+    },
+    {
+      "country": "Saudi Arabia",
+      "value": 529.98,
+      "flag": "🇸🇦"
+    },
+    {
+      "country": "Bangladesh",
+      "value": 528.85,
+      "flag": "🇧🇩"
+    },
+    {
+      "country": "France",
+      "value": 411.89,
+      "flag": "🇫🇷"
+    },
+    {
+      "country": "Belgium",
+      "value": 402.86,
+      "flag": "🇧🇪"
+    },
+    {
+      "country": "Poland",
+      "value": 371.92,
+      "flag": "🇵🇱"
+    },
+    {
+      "country": "Singapore",
+      "value": 302.23,
+      "flag": "🇸🇬"
+    },
+    {
+      "country": "Canada",
+      "value": 286.88,
+      "flag": "🇨🇦"
+    }
+  ],
+  "topImportCountries": [
+    {
+      "country": "China",
+      "value": 14038.36,
+      "flag": "🇨🇳"
+    },
+    {
+      "country": "U. A. E. Dubai",
+      "value": 4729.83,
+      "flag": "🇦🇪"
+    },
+    {
+      "country": "Saudi Arabia",
+      "value": 2973.31,
+      "flag": "🇸🇦"
+    },
+    {
+      "country": "Indonesia",
+      "value": 2653.29,
+      "flag": "🇮🇩"
+    },
+    {
+      "country": "Qatar",
+      "value": 2146.97,
+      "flag": "🇶🇦"
+    },
+    {
+      "country": "U. S. A.",
+      "value": 2132.88,
+      "flag": "🇺🇸"
+    },
+    {
+      "country": "Singapore",
+      "value": 1597.62,
+      "flag": "🇸🇬"
+    },
+    {
+      "country": "Japan",
+      "value": 1225.91,
+      "flag": "🇯🇵"
+    },
+    {
+      "country": "Kuwait",
+      "value": 1107.16,
+      "flag": "🇰🇼"
+    },
+    {
+      "country": "U. A. E. Abudhabi",
+      "value": 1072.24,
+      "flag": "🇦🇪"
+    },
+    {
+      "country": "South Korea",
+      "value": 868.64,
+      "flag": "🇰🇷"
+    },
+    {
+      "country": "Oman",
+      "value": 833.82,
+      "flag": "🇴🇲"
+    },
+    {
+      "country": "Thailand",
+      "value": 829.43,
+      "flag": "🇹🇭"
+    },
+    {
+      "country": "Brazil",
+      "value": 812.56,
+      "flag": "🇧🇷"
+    },
+    {
+      "country": "Malaysia",
+      "value": 776.94,
+      "flag": "🇲🇾"
+    }
+  ]
+}

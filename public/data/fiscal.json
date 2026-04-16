@@ -1,0 +1,45 @@
+{
+  "annual": [
+    {
+      "year": "FY2017",
+      "gdpGrowth": 4.61
+    },
+    {
+      "year": "FY2018",
+      "gdpGrowth": 6.1
+    },
+    {
+      "year": "FY2019",
+      "gdpGrowth": 3.12
+    },
+    {
+      "year": "FY2020",
+      "gdpGrowth": -0.94
+    },
+    {
+      "year": "FY2021",
+      "gdpGrowth": 5.77
+    },
+    {
+      "year": "FY2022",
+      "gdpGrowth": 6.18
+    },
+    {
+      "year": "FY2023",
+      "gdpGrowth": -0.21
+    },
+    {
+      "year": "FY2024",
+      "gdpGrowth": 2.62
+    },
+    {
+      "year": "FY2025",
+      "gdpGrowth": 3.06
+    },
+    {
+      "year": "FY2026",
+      "gdpGrowth": 3.6
+    }
+  ],
+  "dataSource": "SBP / PBS"
+}

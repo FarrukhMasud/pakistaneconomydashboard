@@ -1,0 +1,141 @@
+{
+  "by_sector": [
+    {
+      "sector": "Power & Energy",
+      "amount": 745.98
+    },
+    {
+      "sector": "Financial Services",
+      "amount": 599.86
+    },
+    {
+      "sector": "IT & Telecom",
+      "amount": -435.58
+    },
+    {
+      "sector": "Manufacturing",
+      "amount": 256.63
+    },
+    {
+      "sector": "Mining & Quarrying",
+      "amount": -116.9
+    },
+    {
+      "sector": "Construction",
+      "amount": 106.22
+    },
+    {
+      "sector": "Professional Services",
+      "amount": 82.76
+    },
+    {
+      "sector": "Trade & Commerce",
+      "amount": 48.92
+    },
+    {
+      "sector": "Other Services",
+      "amount": 32.56
+    },
+    {
+      "sector": "Others",
+      "amount": 34.07
+    }
+  ],
+  "by_country": [
+    {
+      "country": "China",
+      "amount": 678.64,
+      "flag": "🇨🇳"
+    },
+    {
+      "country": "Norway",
+      "amount": -364.85,
+      "flag": "🇳🇴"
+    },
+    {
+      "country": "Hongkong",
+      "amount": 253.71,
+      "flag": "🇭🇰"
+    },
+    {
+      "country": "Switzerland",
+      "amount": 153.2,
+      "flag": "🇨🇭"
+    },
+    {
+      "country": "U.A.E",
+      "amount": 143.91,
+      "flag": "🇦🇪"
+    },
+    {
+      "country": "Others",
+      "amount": 92.75,
+      "flag": "🌍"
+    },
+    {
+      "country": "United Kingdom",
+      "amount": 88.17,
+      "flag": "🇬🇧"
+    },
+    {
+      "country": "Kuwait",
+      "amount": 73.24,
+      "flag": "🇰🇼"
+    },
+    {
+      "country": "Korea (South)",
+      "amount": 72.44,
+      "flag": "🇰🇷"
+    },
+    {
+      "country": "Malta",
+      "amount": -68.62,
+      "flag": "🏳️"
+    },
+    {
+      "country": "Others",
+      "amount": 231.89,
+      "flag": "🌍"
+    }
+  ],
+  "annual": [
+    {
+      "year": "FY2017",
+      "net_fdi": 2407
+    },
+    {
+      "year": "FY2018",
+      "net_fdi": 2780
+    },
+    {
+      "year": "FY2019",
+      "net_fdi": 1362
+    },
+    {
+      "year": "FY2020",
+      "net_fdi": 2598
+    },
+    {
+      "year": "FY2021",
+      "net_fdi": 1821
+    },
+    {
+      "year": "FY2022",
+      "net_fdi": 1936
+    },
+    {
+      "year": "FY2023",
+      "net_fdi": 1627
+    },
+    {
+      "year": "FY2024",
+      "net_fdi": 2347
+    },
+    {
+      "year": "FY2025",
+      "net_fdi": 2477
+    }
+  ],
+  "source": "State Bank of Pakistan",
+  "dataSource": "SBP"
+}

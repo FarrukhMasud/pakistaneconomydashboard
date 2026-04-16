@@ -1,0 +1,109 @@
+{
+  "categories": [
+    {
+      "name": "Transport",
+      "credit": 645.34,
+      "debit": 3510.05,
+      "net": -2864.71,
+      "period": "Jul-Feb FY26"
+    },
+    {
+      "name": "Travel",
+      "credit": 640.9,
+      "debit": 2312.36,
+      "net": -1671.46,
+      "period": "Jul-Feb FY26"
+    },
+    {
+      "name": "Insurance & Pension",
+      "credit": 52.63,
+      "debit": 231.45,
+      "net": -178.83,
+      "period": "Jul-Feb FY26"
+    },
+    {
+      "name": "Financial Services",
+      "credit": 76.97,
+      "debit": 494.93,
+      "net": -417.97,
+      "period": "Jul-Feb FY26"
+    },
+    {
+      "name": "IP Charges",
+      "credit": 7.18,
+      "debit": 153.87,
+      "net": -146.69,
+      "period": "Jul-Feb FY26"
+    },
+    {
+      "name": "IT & Telecom",
+      "credit": 2974.29,
+      "debit": 422.04,
+      "net": 2552.25,
+      "period": "Jul-Feb FY26"
+    },
+    {
+      "name": "Other Business",
+      "credit": 1377.08,
+      "debit": 803.09,
+      "net": 573.99,
+      "period": "Jul-Feb FY26"
+    },
+    {
+      "name": "Personal/Cultural",
+      "credit": 53.25,
+      "debit": 89.77,
+      "net": -36.52,
+      "period": "Jul-Feb FY26"
+    }
+  ],
+  "itBreakdown": [
+    {
+      "name": "Telecom",
+      "credit": 461.46
+    },
+    {
+      "name": "Software Consultancy",
+      "credit": 817
+    },
+    {
+      "name": "Computer Software Export/Import",
+      "credit": 416.13
+    },
+    {
+      "name": "Freelance IT",
+      "credit": 743.39
+    },
+    {
+      "name": "Information Services",
+      "credit": 3.09
+    },
+    {
+      "name": "Other Computer Services",
+      "credit": 533.23
+    }
+  ],
+  "summary": {
+    "totalServicesCredit": 6463.43,
+    "totalServicesDebit": 8604.37,
+    "totalServicesNet": -2140.94,
+    "itTelecomCredit": 2974.29,
+    "itTelecomNet": 2552.25,
+    "computerServicesCredit": 2509.75,
+    "period": "Jul-Feb FY26"
+  },
+  "comparison": {
+    "fy25": {
+      "totalCredit": 5459.7,
+      "itCredit": 2486.62
+    },
+    "fy26": {
+      "totalCredit": 6463.43,
+      "itCredit": 2974.29
+    },
+    "period": "Jul-Feb"
+  },
+  "dataSource": "SBP",
+  "lastUpdated": "2026-04-16",
+  "dataCoverage": "Jul-Feb FY2026"
+}
