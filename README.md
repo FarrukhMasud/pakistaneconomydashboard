@@ -125,12 +125,17 @@ echo SBP_API_KEY=your_key_here > .env
 npm run update
 ```
 
-This runs 4 steps:
+This runs 6 steps:
 
 1. **Download** — Fetches 10 Excel/PDF files from sbp.org.pk
 2. **Excel Parse** — `parse-sbp-excel.mjs` processes files → JSON
-3. **API Update** — `update-data.mjs` fetches remittances, inflation, monetary, public finance
-4. **KPI Regeneration** — `parse-sbp-excel.mjs --kpi-only` rebuilds KPI summary from all data
+3. **API Update** — `update-data.mjs` fetches remittances,
+   inflation, monetary, public finance
+4. **KPI Regeneration** — rebuilds KPI summary from all data
+5. **Git Commit & Push** — commits data changes to GitHub
+6. **GitHub Actions** — auto-deploys to Azure Storage on push
+
+Use `npm run update -- --no-push` to skip the git push step.
 
 ### Partial Updates
 
@@ -163,14 +168,18 @@ SBP typically publishes updated data monthly. Recommended schedule:
 
 ## Deploying to Azure Storage
 
-The dashboard is hosted as a static website on Azure Blob Storage.
+Deployment is **automatic** via GitHub Actions. Every push to
+`main` triggers `.github/workflows/deploy.yml` which builds the
+project and uploads to Azure Storage.
 
-### Azure Prerequisites
+### CI/CD Setup (one-time)
 
-- Azure CLI installed and logged in (`az login`)
-- Resource group `rg-pak-eco` in `westus2` (auto-created)
+1. Go to your GitHub repo → Settings → Secrets → Actions
+2. Add secret `AZURE_STORAGE_CONNECTION_STRING` with the value
+   from: `az storage account show-connection-string --name pakeconomicdash --resource-group rg-pak-eco -o tsv`
+3. Push to `main` — the workflow runs automatically
 
-### Deploy
+### Manual Deploy (alternative)
 
 ```bash
 npm run deploy
@@ -178,24 +187,19 @@ npm run deploy
 pwsh scripts/deploy.ps1
 ```
 
-This will:
-
-1. Build the production bundle (`npm run build`)
-2. Create Azure resources if they don't exist
-3. Upload all files from `dist/` to the `$web` container
-4. Print the live URL
-
 ### Azure Configuration
 
 | Setting          | Value                  |
 | ---------------- | ---------------------- |
-| Storage Account | `pakeconomicdash` |
-| Resource Group | `rg-pak-eco` |
-| Region | `westus2` |
-| SKU | `Standard_LRS` |
-| Index Document | `index.html` |
-| Error Document | `index.html` |
-| Live URL | <https://pakeconomicdash.z5.web.core.windows.net/> |
+| Storage Account  | `pakeconomicdash`      |
+| Resource Group   | `rg-pak-eco`           |
+| Region           | `westus2`              |
+| SKU              | `Standard_LRS`         |
+| Index Document   | `index.html`           |
+| Error Document   | `index.html`           |
+| Live URL         | See link below         |
+
+Live: <https://pakeconomicdash.z5.web.core.windows.net/>
 
 ### Full Update + Deploy (end-to-end)
 

@@ -171,7 +171,40 @@ async function main() {
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   const kpiOk = runScript(resolve(__dirname, 'parse-sbp-excel.mjs'), 'KPI regeneration', ['--kpi-only']);
 
-  // Step 5: Summary
+  // Step 5: Commit and push data changes
+  const autoCommit = !args.includes('--no-push');
+  let pushOk = false;
+  if (autoCommit && (parseOk || apiOk)) {
+    console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.log('📤 Step 5: Committing and pushing data changes...');
+    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    try {
+      const date = new Date().toISOString().split('T')[0];
+      execSync('git add public/data/', { cwd: resolve(__dirname, '..'), stdio: 'inherit' });
+      const status = execSync('git status --porcelain public/data/', {
+        cwd: resolve(__dirname, '..'), encoding: 'utf-8',
+      }).trim();
+      if (status) {
+        execSync(
+          `git commit -m "chore: update data ${date}\n\nAuto-updated by npm run update"`,
+          { cwd: resolve(__dirname, '..'), stdio: 'inherit' },
+        );
+        execSync('git push', { cwd: resolve(__dirname, '..'), stdio: 'inherit' });
+        pushOk = true;
+        console.log('  ✅ Changes committed and pushed (deploy workflow will run)');
+      } else {
+        console.log('  ⏭  No data changes to commit');
+        pushOk = true;
+      }
+    } catch (err) {
+      console.error(`  ⚠️  Git push failed: ${err.message}`);
+      console.log('  💡 Push manually: git add public/data/ && git commit && git push');
+    }
+  } else if (!autoCommit) {
+    console.log('\n  ⏭  Skipping git push (--no-push flag)');
+  }
+
+  // Step 6: Summary
   console.log('\n╔══════════════════════════════════════════════════╗');
   console.log('║              Full Update Summary                  ║');
   console.log('╚══════════════════════════════════════════════════╝');
@@ -179,8 +212,10 @@ async function main() {
   console.log(`  📊 Excel parse: ${parseOk ? '✅ Success' : '❌ Failed'}`);
   console.log(`  💸 SBP API:     ${apiOk ? '✅ Success' : '⚠️  Failed (needs SBP_API_KEY in .env)'}`);
   console.log(`  📊 KPI regen:   ${kpiOk ? '✅ Success' : '⚠️  Failed'}`);
-  console.log('\n  Updated JSON files in public/data/');
-  console.log('  Run "npm run build" to rebuild, then "npm run deploy" to publish.\n');
+  if (autoCommit) {
+    console.log(`  📤 Git push:    ${pushOk ? '✅ Success' : '⚠️  Failed'}`);
+  }
+  console.log('\n  🌐 Live at: https://pakeconomicdash.z5.web.core.windows.net/\n');
 }
 
 main().catch((err) => {
