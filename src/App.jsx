@@ -12,6 +12,8 @@ import RemittancesSection from './components/RemittancesSection';
 import FdiSection from './components/FdiSection';
 import ServicesSection from './components/ServicesSection';
 import FiscalSection from './components/FiscalSection';
+import InflationSection from './components/InflationSection';
+import MonetarySection from './components/MonetarySection';
 
 const TABS = [
   { id: 'overview', label: '📊 Overview' },
@@ -21,7 +23,9 @@ const TABS = [
   { id: 'remittances', label: '💸 Remittances' },
   { id: 'fdi', label: '💰 FDI' },
   { id: 'services', label: '💻 IT & Services' },
-  { id: 'fiscal', label: '🏛️ Fiscal' },
+  { id: 'inflation', label: '📈 Inflation' },
+  { id: 'monetary', label: '🏛️ Monetary' },
+  { id: 'fiscal', label: '📋 Fiscal' },
 ];
 
 const SECTION_MAP = {
@@ -32,6 +36,8 @@ const SECTION_MAP = {
   remittances: RemittancesSection,
   fdi: FdiSection,
   services: ServicesSection,
+  inflation: InflationSection,
+  monetary: MonetarySection,
   fiscal: FiscalSection,
 };
 
@@ -46,8 +52,16 @@ function App() {
       const style = getComputedStyle(document.documentElement);
       ChartJS.defaults.color = style.getPropertyValue('--text-secondary').trim() || '#8b8d97';
       ChartJS.defaults.borderColor = style.getPropertyValue('--border-color').trim() || '#2a2d37';
-      ChartJS.defaults.plugins.tooltip.backgroundColor = style.getPropertyValue('--bg-card').trim() || '#1a1d27';
-      ChartJS.defaults.plugins.tooltip.borderColor = style.getPropertyValue('--border-color').trim() || '#2a2d37';
+
+      const bgCard = style.getPropertyValue('--bg-card').trim() || '#1a1d27';
+      const borderColor = style.getPropertyValue('--border-color').trim() || '#2a2d37';
+      const textPrimary = style.getPropertyValue('--text-primary').trim() || '#e4e6eb';
+      const textSecondary = style.getPropertyValue('--text-secondary').trim() || '#8b8d97';
+
+      ChartJS.defaults.plugins.tooltip.backgroundColor = bgCard;
+      ChartJS.defaults.plugins.tooltip.borderColor = borderColor;
+      ChartJS.defaults.plugins.tooltip.titleColor = textPrimary;
+      ChartJS.defaults.plugins.tooltip.bodyColor = textSecondary;
     };
     // Small delay so CSS variables are applied first
     const timer = setTimeout(update, 50);
@@ -66,7 +80,7 @@ function App() {
           <div className="header-emblem">☪</div>
           <h1>Pakistan <span className="highlight">Economic Dashboard</span></h1>
           <p className="subtitle">
-            Data sourced from SBP, PBS &amp; Ministry of Finance · FY2022–FY2026
+            Official data from SBP, PBS &amp; Ministry of Finance
           </p>
         </div>
       </header>

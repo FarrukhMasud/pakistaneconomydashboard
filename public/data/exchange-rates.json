@@ -442,5 +442,7 @@
       "CNY": 40.57
     }
   ],
-  "dataSource": "SBP"
+  "dataSource": "SBP",
+  "lastUpdated": "2026-04-17",
+  "dataCoverage": "2021-01 – 2026-03"
 }

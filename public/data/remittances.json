@@ -626,5 +626,8 @@
       "country": "United States",
       "value": 3559
     }
-  ]
+  ],
+  "dataSource": "SBP EasyData API",
+  "lastUpdated": "2026-04-17",
+  "dataCoverage": "2021-04 – 2026-03"
 }

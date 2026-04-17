@@ -179,14 +179,18 @@ async function updateTrade() {
   monthly.sort((a, b) => a.date.localeCompare(b.date));
 
   const existing = await readJson('trade.json');
+  const firstDate = monthly[0]?.date;
+  const lastDate = monthly.at(-1)?.date;
   await writeJson('trade.json', {
     monthly,
     topExportCountries: existing.topExportCountries || [],
     topImportCountries: existing.topImportCountries || [],
     dataSource: 'SBP',
+    lastUpdated: new Date().toISOString().split('T')[0],
+    dataCoverage: `${firstDate} – ${lastDate}`,
   });
 
-  console.log(`  📊 ${monthly.length} months (${monthly[0]?.date} → ${monthly.at(-1)?.date})`);
+  console.log(`  📊 ${monthly.length} months (${firstDate} → ${lastDate})`);
   return monthly.length;
 }
 
@@ -198,14 +202,40 @@ async function updateFdi() {
   console.log('\n💰 Parsing FDI Data...');
 
   // --- By Sector (Foreign_Dir.xls / BS_M sheet) ---
-  // Headers: Row 2 = period labels, Row 3 = sub-headers
-  //   Col 0: Sector name (ISIC-4)
-  //   Col 6: Net FDI for Jul-Mar FY26 (P)
+  // Row 2: period labels, Row 3: Inflow/Outflow/Net sub-headers
+  // Columns resolved from headers for robustness
   console.log('  📋 FDI by sector (Foreign_Dir.xls)...');
   const wbS = readExcel('Foreign_Dir.xls');
   const sRows = getSheet(wbS, 'BS_M');
 
-  const bySector = [];
+  // Resolve column indices from header row 2
+  const sHdr = sRows[2] || [];
+  let sCurrentNetCol = 6;  // fallback: Jul-Mar FY26 Net FDI
+  let sPriorNetCol = 9;    // fallback: Jul-Mar FY25 Net FDI
+  let sCurrentInCol = 4;   // fallback: Jul-Mar FY26 Inflow
+  let sCurrentOutCol = 5;  // fallback: Jul-Mar FY26 Outflow
+  let sPriorInCol = 7;     // fallback: Jul-Mar FY25 Inflow
+  let sPriorOutCol = 8;    // fallback: Jul-Mar FY25 Outflow
+  let sCurrentPeriod = 'Jul-Mar FY26';
+  let sPriorPeriod = 'Jul-Mar FY25';
+
+  // Try to find the actual period columns from headers
+  for (let c = 0; c < sHdr.length; c++) {
+    const h = (sHdr[c] || '').toString().trim();
+    if (/July.*FY\d{2}\s*\(P\)/i.test(h)) {
+      sCurrentInCol = c;     // first col of current FYTD group
+      sCurrentOutCol = c + 1;
+      sCurrentNetCol = c + 2;
+      sCurrentPeriod = h.replace(/\s*\(P\)\s*/i, '');
+    } else if (/July.*FY\d{2}\s*$/i.test(h)) {
+      sPriorInCol = c;
+      sPriorOutCol = c + 1;
+      sPriorNetCol = c + 2;
+      sPriorPeriod = h.trim();
+    }
+  }
+
+  const allSectors = [];
   for (let i = 4; i <= 27; i++) {
     const row = sRows[i];
     if (!row) continue;
@@ -214,80 +244,200 @@ async function updateFdi() {
     if (/privatisation|total/i.test(sector)) continue;
 
     sector = sector.replace(/^[A-Z]\.\s+/, '');
-    const netFdi = row[6];
+    const netFdi = row[sCurrentNetCol];
     if (typeof netFdi !== 'number') continue;
 
-    bySector.push({ sector: shortenSector(sector), amount: round2(netFdi) });
+    const entry = {
+      sector: shortenSector(sector),
+      amount: round2(netFdi),
+      inflow: typeof row[sCurrentInCol] === 'number' ? round2(row[sCurrentInCol]) : null,
+      outflow: typeof row[sCurrentOutCol] === 'number' ? round2(row[sCurrentOutCol]) : null,
+    };
+    // Prior year comparison
+    const priorNet = row[sPriorNetCol];
+    if (typeof priorNet === 'number') {
+      entry.priorAmount = round2(priorNet);
+      entry.priorInflow = typeof row[sPriorInCol] === 'number' ? round2(row[sPriorInCol]) : null;
+      entry.priorOutflow = typeof row[sPriorOutCol] === 'number' ? round2(row[sPriorOutCol]) : null;
+    }
+    allSectors.push(entry);
   }
 
-  bySector.sort((a, b) => Math.abs(b.amount) - Math.abs(a.amount));
-  const topSectors = bySector.slice(0, 9);
-  const otherSectorAmt = bySector.slice(9).reduce((s, x) => s + x.amount, 0);
-  if (Math.abs(otherSectorAmt) > 0.01) {
-    topSectors.push({ sector: 'Others', amount: round2(otherSectorAmt) });
+  // Stable sector universe: rank by max absolute net across both years
+  allSectors.sort((a, b) => {
+    const magA = Math.max(Math.abs(a.amount), Math.abs(a.priorAmount || 0));
+    const magB = Math.max(Math.abs(b.amount), Math.abs(b.priorAmount || 0));
+    return magB - magA;
+  });
+  const topSectors = allSectors.slice(0, 10);
+  const otherSectorAmt = allSectors.slice(10).reduce((s, x) => s + x.amount, 0);
+  const otherSectorPrior = allSectors.slice(10).reduce((s, x) => s + (x.priorAmount || 0), 0);
+  if (Math.abs(otherSectorAmt) > 0.01 || Math.abs(otherSectorPrior) > 0.01) {
+    topSectors.push({
+      sector: 'Others',
+      amount: round2(otherSectorAmt),
+      inflow: null, outflow: null,
+      priorAmount: round2(otherSectorPrior),
+      priorInflow: null, priorOutflow: null,
+    });
   }
 
   // --- By Country (Netinflow.xls / Country sheet) ---
-  // Row 5: sub-headers.  Row 6+: data.
-  //   Col 0: Sr. No (number),  Col 1: Country name
-  //   Col 9: Net FDI for Jul-Mar FY26 (P)
+  // Row 3: period headers, Row 4: sub-headers, Row 6+: data
   console.log('  📋 FDI by country (Netinflow.xls)...');
   const wbC = readExcel('Netinflow.xls');
   const cRows = getSheet(wbC, 'Country');
 
-  const byCountry = [];
+  // Resolve column indices from header rows
+  const cHdr3 = cRows[3] || [];
+  const cHdr4 = cRows[4] || [];
+  // Find Net FDI columns for current and prior FYTD
+  let cCurrentNetCol = -1, cPriorNetCol = -1;
+  let cCurrentPeriod = sCurrentPeriod, cPriorPeriod = sPriorPeriod;
+  for (let c = 2; c < cHdr3.length; c++) {
+    const h3 = (cHdr3[c] || '').toString().trim();
+    const h4 = (cHdr4[c] || '').toString().trim();
+    if (/July.*FY\d{2}\s*\(P\)/i.test(h3)) {
+      // Current FYTD block — find the "Net FDI" sub-column
+      for (let sc = c; sc < c + 6; sc++) {
+        const sub = (cHdr4[sc] || '').toString().trim();
+        if (/net/i.test(sub) && cCurrentNetCol === -1) { cCurrentNetCol = sc; break; }
+      }
+      cCurrentPeriod = h3.replace(/\s*\(P\)\s*/i, '');
+    } else if (/July.*FY\d{2}\s*$/i.test(h3) && !/\(P\)/i.test(h3)) {
+      for (let sc = c; sc < c + 6; sc++) {
+        const sub = (cHdr4[sc] || '').toString().trim();
+        if (/net/i.test(sub) && cPriorNetCol === -1) { cPriorNetCol = sc; break; }
+      }
+      cPriorPeriod = h3.trim();
+    }
+  }
+  // Fallbacks
+  if (cCurrentNetCol === -1) cCurrentNetCol = 9;
+  if (cPriorNetCol === -1) cPriorNetCol = 14;
+
+  const allCountries = [];
+  const countryNames = new Set();
   for (let i = 6; i < cRows.length; i++) {
     const row = cRows[i];
     if (!row || typeof row[0] !== 'number') break;
 
     const country = (row[1] || '').toString().trim();
-    const netFdi = row[9];
+    const netFdi = row[cCurrentNetCol];
     if (!country || typeof netFdi !== 'number' || Math.abs(netFdi) < 0.01) continue;
+    if (countryNames.has(country)) continue; // dedupe "Others"
+    countryNames.add(country);
 
-    byCountry.push({ country, amount: round2(netFdi), flag: getFlag(country) });
+    const entry = { country, amount: round2(netFdi), flag: getFlag(country) };
+    const priorNet = row[cPriorNetCol];
+    if (typeof priorNet === 'number') entry.priorAmount = round2(priorNet);
+    allCountries.push(entry);
   }
 
-  byCountry.sort((a, b) => Math.abs(b.amount) - Math.abs(a.amount));
-  const topCountries = byCountry.slice(0, 10);
-  const otherCountryAmt = byCountry.slice(10).reduce((s, x) => s + x.amount, 0);
-  if (Math.abs(otherCountryAmt) > 0.01) {
-    topCountries.push({ country: 'Others', amount: round2(otherCountryAmt), flag: '🌍' });
+  allCountries.sort((a, b) => Math.abs(b.amount) - Math.abs(a.amount));
+
+  // Separate raw "Others" from named countries, then aggregate remainder into "Others"
+  const rawOthersIdx = allCountries.findIndex(c => c.country.toLowerCase() === 'others');
+  const rawOthers = rawOthersIdx >= 0 ? allCountries.splice(rawOthersIdx, 1)[0] : null;
+  const topCountries = allCountries.slice(0, 10);
+  const remainderAmt = allCountries.slice(10).reduce((s, x) => s + x.amount, 0) + (rawOthers?.amount || 0);
+  const remainderPrior = allCountries.slice(10).reduce((s, x) => s + (x.priorAmount || 0), 0) + (rawOthers?.priorAmount || 0);
+  if (Math.abs(remainderAmt) > 0.01 || Math.abs(remainderPrior) > 0.01) {
+    topCountries.push({
+      country: 'Others', amount: round2(remainderAmt), flag: '🌍',
+      priorAmount: round2(remainderPrior),
+    });
   }
 
   // --- Annual FDI (NetinflowSummary.xls / Summary sheet) ---
-  // Row 4: FY headers (col 4 = "FY09", col 5 = "FY10", ..., col 20 = "FY25 (R)")
-  // Row 8: "Direct Investment" — net FDI values per fiscal year
+  // Row 4: FY headers, Row 8: "Direct Investment", Row 9: Inflow, Row 10: Outflow
   console.log('  📋 Annual FDI (NetinflowSummary.xls)...');
   const wbA = readExcel('NetinflowSummary.xls');
   const aRows = getSheet(wbA, 'Summary');
 
   const headerRow = aRows[4];
-  const fdiRow = aRows[8]; // "Direct Investment" row
+  const fdiRow = aRows[8];     // Direct Investment (net)
+  const inflowRow = aRows[9];  // Inflow
+  const outflowRow = aRows[10]; // Outflow
 
   const annual = [];
-  for (let col = 4; col < headerRow.length; col++) {
+  let fytdComparison = null;
+
+  // Find the "Jul-Mar" column for FYTD comparison
+  let julMarCol = -1;
+  let julMarLabel = '';
+  for (let col = 0; col < headerRow.length; col++) {
     const hdr = (headerRow[col] || '').toString().trim();
+
+    // Full fiscal year columns
     const m = hdr.match(/^FY(\d{2})/);
-    if (!m) continue;
+    if (m) {
+      const fy = parseInt(m[1]) + (parseInt(m[1]) >= 90 ? 1900 : 2000);
+      if (fy < 2017) continue;
+      const val = fdiRow[col];
+      if (typeof val !== 'number') continue;
+      const status = /\(R\)/i.test(hdr) ? 'revised' : /\(P\)/i.test(hdr) ? 'provisional' : null;
+      const entry = { year: `FY${fy}`, net_fdi: Math.round(val) };
+      if (typeof inflowRow?.[col] === 'number') entry.inflow = Math.round(inflowRow[col]);
+      if (typeof outflowRow?.[col] === 'number') entry.outflow = Math.round(outflowRow[col]);
+      if (status) entry.status = status;
+      annual.push(entry);
+    }
 
-    const fy = parseInt(m[1]) + (parseInt(m[1]) >= 90 ? 1900 : 2000);
-    if (fy < 2017) continue;
-
-    const val = fdiRow[col];
-    if (typeof val !== 'number') continue;
-
-    annual.push({ year: `FY${fy}`, net_fdi: Math.round(val) });
+    // "Jul-Mar" column for FYTD
+    if (/jul.*mar/i.test(hdr)) {
+      julMarCol = col;
+      julMarLabel = hdr;
+    }
   }
 
-  await writeJson('fdi.json', {
+  // Extract FYTD comparison (Jul-Mar FY26 vs Jul-Mar FY25)
+  if (julMarCol >= 0 && typeof fdiRow[julMarCol] === 'number') {
+    const currentFytd = fdiRow[julMarCol];
+    const priorFytd = (julMarCol + 1 < fdiRow.length && typeof fdiRow[julMarCol + 1] === 'number')
+      ? fdiRow[julMarCol + 1] : null;
+
+    // Derive FY labels from the last full-year entry
+    const lastFy = annual[annual.length - 1];
+    const lastFyNum = parseInt(lastFy?.year?.replace('FY', '') || '2025');
+    const currentFyLabel = `FY${lastFyNum + 1}`;
+    const priorFyLabel = lastFy?.year || `FY${lastFyNum}`;
+
+    fytdComparison = {
+      period: 'Jul-Mar',
+      current: {
+        label: currentFyLabel,
+        net_fdi: round2(currentFytd),
+        inflow: typeof inflowRow?.[julMarCol] === 'number' ? round2(inflowRow[julMarCol]) : null,
+        outflow: typeof outflowRow?.[julMarCol] === 'number' ? round2(outflowRow[julMarCol]) : null,
+        status: 'provisional',
+      },
+      prior: priorFytd != null ? {
+        label: priorFyLabel,
+        net_fdi: round2(priorFytd),
+        inflow: typeof inflowRow?.[julMarCol + 1] === 'number' ? round2(inflowRow[julMarCol + 1]) : null,
+        outflow: typeof outflowRow?.[julMarCol + 1] === 'number' ? round2(outflowRow[julMarCol + 1]) : null,
+      } : null,
+    };
+  }
+
+  const result = {
     by_sector: topSectors,
     by_country: topCountries,
     annual,
+    sectorPeriod: sCurrentPeriod,
+    sectorPriorPeriod: sPriorPeriod,
+    countryPeriod: cCurrentPeriod,
+    countryPriorPeriod: cPriorPeriod,
     source: 'State Bank of Pakistan',
     dataSource: 'SBP',
-  });
+  };
+  if (fytdComparison) result.fytdComparison = fytdComparison;
+
+  await writeJson('fdi.json', result);
 
   console.log(`  📊 ${topSectors.length} sectors, ${topCountries.length} countries, ${annual.length} fiscal years`);
+  if (fytdComparison) console.log(`  📊 FYTD: ${fytdComparison.current.label} ${fytdComparison.period}: $${fytdComparison.current.net_fdi}M vs ${fytdComparison.prior?.label}: $${fytdComparison.prior?.net_fdi}M`);
   return { sectors: topSectors.length, countries: topCountries.length, years: annual.length };
 }
 
@@ -306,7 +456,7 @@ async function updateGdpFiscal() {
   const headerRow = rows[4];
   const growthRow = rows[5];
 
-  const existing = await readJson('fiscal.json');
+  const existing = await readJson('fiscal.json').catch(() => ({}));
   const map = new Map();
   for (const e of existing.annual || []) map.set(e.year, { ...e });
 
@@ -329,14 +479,20 @@ async function updateGdpFiscal() {
 
   const annual = Array.from(map.values()).sort((a, b) => a.year.localeCompare(b.year));
 
-  await writeJson('fiscal.json', { annual, dataSource: 'SBP / PBS' });
+  // Spread existing keys (e.g. publicFinance from API updates) to preserve them
+  await writeJson('fiscal.json', {
+    ...existing,
+    annual,
+    dataSource: 'SBP / PBS',
+    lastUpdated: new Date().toISOString().split('T')[0],
+    dataCoverage: `${annual[0]?.year} – ${annual.at(-1)?.year}`,
+  });
   console.log(`  📊 ${annual.length} fiscal years with GDP growth data`);
   return annual.length;
 }
 
 // ═══════════════════════════════════════════════════
 // 4. BALANCE OF PAYMENTS (Balancepayment_BPM6.xls)
-//    Also updates kpi-summary.json
 // ═══════════════════════════════════════════════════
 
 async function updateBop() {
@@ -344,22 +500,6 @@ async function updateBop() {
 
   const wb = readExcel('Balancepayment_BPM6.xls');
   const rows = getSheet(wb, 'BPM6_Summary');
-
-  // Column layout (rows 3-4):
-  //   0: Items
-  //   1: Jul-Jun FY24         6: Feb FY26R
-  //   2: Mar FY25R            7: Mar FY26P
-  //   3: Jul-Jun FY25R        8: Jan-Mar FY26P
-  //   4: Jul-Sep FY26         9: Jul-Mar FY25R
-  //   5: Oct-Dec FY26R       10: Jul-Mar FY26P
-  //
-  // Key data rows (0-indexed):
-  //   6: Current Account Balance
-  //   8: Exports of Goods FOB       9: Imports of Goods FOB
-  //  24: Workers' Remittances
-  //  34: Direct Investment (net, financial-account sign)
-  //  38: Direct Investment in Pakistan (gross inflows)
-  //  79: SBP Gross Reserves incl CFC
 
   const val = (r, c) => {
     const v = rows[r]?.[c];
@@ -383,45 +523,12 @@ async function updateBop() {
       currentAccount: val(6, 9), exportsFOB: val(8, 9), importsFOB: val(9, 9),
       remittances: val(24, 9), fdiInPakistan: val(38, 9),
     },
-    sbpReservesMar26: val(79, 7), // Mar FY26P column
+    sbpReservesMar26: val(79, 7),
   };
 
-  // Use the last column that has the reserves value
-  // Row 79 col 10 = Jul-Mar FY26P closing reserves
   const latestReserves = val(79, 10) ?? val(79, 7);
 
-  // --- Update kpi-summary.json ---
-  console.log('  📊 Updating KPI summary from BOP data...');
-  const kpi = await readJson('kpi-summary.json');
-  const indicators = kpi.indicators || [];
-
-  const updateKpi = (id, updates) => {
-    const kpiItem = indicators.find(i => i.id === id);
-    if (kpiItem) Object.assign(kpiItem, updates);
-  };
-
-  if (latestReserves) {
-    const reservesBn = round2(latestReserves / 1000);
-    updateKpi('reserves', { value: reservesBn, period: 'Mar 2026', source: 'SBP' });
-  }
-
-  if (bop.julMarFY26.fdiInPakistan) {
-    const fdiBn = round2(bop.julMarFY26.fdiInPakistan / 1000);
-    updateKpi('fdi', {
-      value: String(fdiBn), period: 'FY2026 (Jul-Mar)', source: 'SBP',
-    });
-  }
-
-  if (bop.julMarFY26.remittances) {
-    // Approximate latest monthly from quarterly data
-    const julMarMonths = 9;
-    const avgMonthly = round2(bop.julMarFY26.remittances / julMarMonths / 1000);
-    // Keep existing monthly KPI unless we have a better figure
-    // The remittances KPI is already updated by the API script, so only update period info
-  }
-
-  kpi.lastUpdated = new Date().toISOString().split('T')[0];
-  await writeJson('kpi-summary.json', kpi);
+  // KPI updates are handled by generateKpiFromData() at the end of the pipeline
 
   console.log('  📊 BOP Summary:');
   console.log(`     Current Account (FY25): $${bop.fy25.currentAccount}M`);
@@ -554,7 +661,12 @@ async function updateExchangeRates() {
     }
 
     monthly.sort((a, b) => a.date.localeCompare(b.date));
-    await writeJson('exchange-rates.json', { monthly, dataSource: 'SBP' });
+    await writeJson('exchange-rates.json', {
+      monthly,
+      dataSource: 'SBP',
+      lastUpdated: new Date().toISOString().split('T')[0],
+      dataCoverage: `${monthly[0]?.date} – ${monthly.at(-1)?.date}`,
+    });
     console.log(`  📊 ${monthly.length} months (${monthly[0]?.date} → ${monthly.at(-1)?.date})`);
     return monthly.length;
   } catch (err) {
@@ -695,8 +807,8 @@ async function updateReserves() {
   await writeJson('reserves.json', {
     weekly,
     dataSource: 'SBP',
-    lastUpdated: '2026-04-16',
-    dataCoverage: 'FY2021 – Apr 2026',
+    lastUpdated: new Date().toISOString().split('T')[0],
+    dataCoverage: `${weekly[0]?.date} – ${weekly.at(-1)?.date}`,
   });
 
   console.log(`  📊 ${weekly.length} reserve data points (${weekly[0]?.date} → ${weekly.at(-1)?.date})`);
@@ -717,9 +829,50 @@ async function updateServices() {
   console.log(`  Using sheet: "${sheetName}"`);
   const rows = getSheet(wb, sheetName);
 
-  // Cumulative Jul-Feb FY26 (P) = cols 13-15 (Credit, Debit, Net)
-  // Cumulative Jul-Feb FY25 (R) = cols 10-12 (Credit, Debit, Net)
-  // Values in THOUSAND US$
+  // Resolve columns from header row (row 6)
+  const hdr6 = rows[6] || [];
+  const hdr7 = rows[7] || [];
+  // Find column groups by period header
+  // Each group: [Credit, Debit, Net]
+  let currentPeriodCols = { credit: 13, debit: 14, net: 15 };
+  let priorPeriodCols = { credit: 10, debit: 11, net: 12 };
+  let month1Cols = null, month2Cols = null;
+  let month1Label = '', month2Label = '', currentPeriodLabel = 'Jul-Feb FY26', priorPeriodLabel = 'Jul-Feb FY25';
+
+  for (let c = 0; c < hdr6.length; c++) {
+    const h = (hdr6[c] || '').toString().trim();
+    if (!h) continue;
+
+    // Skip date serial columns (old month) — only use named months
+    if (typeof hdr6[c] === 'number' && hdr6[c] > 40000 && hdr6[c] < 50000) continue;
+
+    // Named month like "Jan-26 (R)" or "Feb-26 (P)"
+    const monthMatch = h.match(/^(\w{3})-(\d{2})\s*\(([RP])\)/i);
+    if (monthMatch) {
+      if (!month1Cols) {
+        month1Cols = { credit: c, debit: c + 1, net: c + 2 };
+        month1Label = `${monthMatch[1]}-${monthMatch[2]}`;
+      } else if (!month2Cols) {
+        month2Cols = { credit: c, debit: c + 1, net: c + 2 };
+        month2Label = `${monthMatch[1]}-${monthMatch[2]}`;
+      }
+    }
+
+    // Cumulative "Jul-Feb, FY26 (P)" or "Jul-Feb, FY25"
+    const cumMatch = h.match(/^(Jul-\w+),?\s*FY(\d{2})\s*(\(P\))?/i);
+    if (cumMatch) {
+      const fyNum = parseInt(cumMatch[2]);
+      const isProv = !!cumMatch[3];
+      if (isProv) {
+        currentPeriodCols = { credit: c, debit: c + 1, net: c + 2 };
+        currentPeriodLabel = `Jul-${cumMatch[1].split('-')[1]} FY${cumMatch[2]}`;
+      } else {
+        priorPeriodCols = { credit: c, debit: c + 1, net: c + 2 };
+        priorPeriodLabel = `Jul-${cumMatch[1].split('-')[1]} FY${cumMatch[2]}`;
+      }
+    }
+  }
+
   const toM = (v) => (typeof v === 'number' ? round2(v / 1000) : 0);
 
   // Key row indices (0-based) for categories
@@ -740,10 +893,13 @@ async function updateServices() {
     if (!r) continue;
     categories.push({
       name,
-      credit: toM(r[13]),
-      debit: toM(r[14]),
-      net: toM(r[15]),
-      period: 'Jul-Feb FY26',
+      credit: toM(r[currentPeriodCols.credit]),
+      debit: toM(r[currentPeriodCols.debit]),
+      net: toM(r[currentPeriodCols.net]),
+      priorCredit: toM(r[priorPeriodCols.credit]),
+      priorDebit: toM(r[priorPeriodCols.debit]),
+      priorNet: toM(r[priorPeriodCols.net]),
+      period: currentPeriodLabel,
     });
   }
 
@@ -760,36 +916,54 @@ async function updateServices() {
   for (const { row, name } of itBreakdown) {
     const r = rows[row];
     if (!r) continue;
-    itItems.push({ name, credit: toM(r[13]) });
+    itItems.push({
+      name,
+      credit: toM(r[currentPeriodCols.credit]),
+      priorCredit: toM(r[priorPeriodCols.credit]),
+    });
   }
 
-  // Compute "Other Computer Services" = Computer services (row 62) minus the named subcategories
+  // "Other Computer Services" = Computer services (row 62) minus named subcategories
   const computerServicesRow = rows[62];
   if (computerServicesRow) {
-    const computerTotal = toM(computerServicesRow[13]);
+    const computerTotal = toM(computerServicesRow[currentPeriodCols.credit]);
     const namedSum = itItems.filter(i => ['Software Consultancy', 'Computer Software Export/Import', 'Freelance IT'].includes(i.name))
       .reduce((s, x) => s + x.credit, 0);
     const other = round2(computerTotal - namedSum);
-    if (other > 0) itItems.push({ name: 'Other Computer Services', credit: other });
+    if (other > 0) {
+      const priorComputerTotal = toM(computerServicesRow[priorPeriodCols.credit]);
+      const priorNamedSum = itItems.filter(i => ['Software Consultancy', 'Computer Software Export/Import', 'Freelance IT'].includes(i.name))
+        .reduce((s, x) => s + (x.priorCredit || 0), 0);
+      itItems.push({ name: 'Other Computer Services', credit: other, priorCredit: round2(priorComputerTotal - priorNamedSum) });
+    }
   }
 
   // Total services row (row 8)
   const totalRow = rows[8];
-  const totalCredit = toM(totalRow?.[13]);
-  const totalDebit = toM(totalRow?.[14]);
-  const totalNet = toM(totalRow?.[15]);
+  const totalCredit = toM(totalRow?.[currentPeriodCols.credit]);
+  const totalDebit = toM(totalRow?.[currentPeriodCols.debit]);
+  const totalNet = toM(totalRow?.[currentPeriodCols.net]);
+  const totalCreditPrior = toM(totalRow?.[priorPeriodCols.credit]);
 
   // IT & Telecom (row 58)
   const itRow = rows[58];
-  const itCredit = toM(itRow?.[13]);
-  const itNet = toM(itRow?.[15]);
+  const itCredit = toM(itRow?.[currentPeriodCols.credit]);
+  const itNet = toM(itRow?.[currentPeriodCols.net]);
+  const itCreditPrior = toM(itRow?.[priorPeriodCols.credit]);
 
   // Computer services (row 62)
-  const csCredit = toM(computerServicesRow?.[13]);
+  const csCredit = toM(computerServicesRow?.[currentPeriodCols.credit]);
 
-  // FY25 comparison (cols 10-12)
-  const totalCreditFY25 = toM(totalRow?.[10]);
-  const itCreditFY25 = toM(rows[58]?.[10]);
+  // Monthly data for recent months (if available)
+  const recentMonths = [];
+  for (const [cols, label] of [[month1Cols, month1Label], [month2Cols, month2Label]]) {
+    if (!cols) continue;
+    const totalMo = toM(totalRow?.[cols.credit]);
+    const itMo = toM(itRow?.[cols.credit]);
+    if (totalMo > 0) {
+      recentMonths.push({ month: label, totalCredit: totalMo, itCredit: itMo });
+    }
+  }
 
   const servicesData = {
     categories,
@@ -801,22 +975,26 @@ async function updateServices() {
       itTelecomCredit: itCredit,
       itTelecomNet: itNet,
       computerServicesCredit: csCredit,
-      period: 'Jul-Feb FY26',
+      period: currentPeriodLabel,
     },
     comparison: {
-      fy25: { totalCredit: totalCreditFY25, itCredit: itCreditFY25 },
+      fy25: { totalCredit: totalCreditPrior, itCredit: itCreditPrior },
       fy26: { totalCredit: totalCredit, itCredit: itCredit },
-      period: 'Jul-Feb',
+      period: currentPeriodLabel.replace(/FY\d{2}/, '').trim().replace(/,$/, ''),
+      currentLabel: `FY${currentPeriodLabel.match(/FY(\d{2})/)?.[1] || '26'}`,
+      priorLabel: `FY${priorPeriodLabel.match(/FY(\d{2})/)?.[1] || '25'}`,
     },
+    recentMonths,
     dataSource: 'SBP',
-    lastUpdated: '2026-04-16',
-    dataCoverage: 'Jul-Feb FY2026',
+    lastUpdated: new Date().toISOString().slice(0, 10),
+    dataCoverage: currentPeriodLabel,
   };
 
   await writeJson('services.json', servicesData);
 
   console.log(`  📊 ${categories.length} service categories, ${itItems.length} IT sub-categories`);
   console.log(`     Total Services Credit: $${totalCredit}M, IT&Telecom: $${itCredit}M`);
+  if (recentMonths.length > 0) console.log(`     Recent months: ${recentMonths.map(m => `${m.month}: $${m.totalCredit}M`).join(', ')}`);
   return servicesData;
 }
 
@@ -925,6 +1103,165 @@ async function updateTradeCountries() {
 }
 
 // ═══════════════════════════════════════════════════
+// KPI GENERATION — derives all KPIs from canonical data files
+// ═══════════════════════════════════════════════════
+
+async function generateKpiFromData() {
+  console.log('\n📊 Generating KPI summary from canonical data files...');
+
+  const today = new Date().toISOString().split('T')[0];
+  const indicators = [];
+
+  // --- Reserves (from reserves.json) ---
+  try {
+    const reserves = await readJson('reserves.json');
+    const pts = reserves.weekly || [];
+    if (pts.length > 0) {
+      const latest = pts[pts.length - 1];
+      const prev = pts.length > 1 ? pts[pts.length - 2] : latest;
+      const sbpBn = round2(latest.sbp / 1000);
+      const totalBn = round2(latest.total / 1000);
+      const changeBn = round2((latest.total - prev.total) / 1000);
+      const trend = Math.abs(changeBn) < 0.3 ? 'stable' : changeBn > 0 ? 'up' : 'down';
+      // Format date for display
+      const dateLabel = latest.date.length > 7 ? latest.date : latest.date; // weekly dates are full, monthly are YYYY-MM
+      indicators.push({
+        id: 'reserves', label: 'Foreign Reserves (Total)',
+        value: totalBn, unit: '$ Billion', period: dateLabel,
+        change: changeBn, trend, source: 'SBP',
+        sub: `SBP: $${sbpBn}B · Banks: $${round2(latest.banks / 1000)}B`,
+      });
+    }
+  } catch { /* skip */ }
+
+  // --- Exchange Rate (from exchange-rates.json) ---
+  try {
+    const ex = await readJson('exchange-rates.json');
+    const pts = ex.monthly || [];
+    if (pts.length > 0) {
+      const latest = pts[pts.length - 1];
+      const prev = pts.length > 1 ? pts[pts.length - 2] : latest;
+      const change = round2(latest.USD - prev.USD);
+      const trend = Math.abs(change) < 1 ? 'stable' : change > 0 ? 'up' : 'down';
+      indicators.push({
+        id: 'exchange-rate', label: 'PKR / USD',
+        value: latest.USD, unit: 'PKR', period: latest.date,
+        change, trend, source: 'SBP',
+      });
+    }
+  } catch { /* skip */ }
+
+  // --- Remittances (from remittances.json) ---
+  try {
+    const rem = await readJson('remittances.json');
+    const pts = rem.monthly || [];
+    if (pts.length > 0) {
+      const latest = pts[pts.length - 1];
+      const prev = pts.length > 1 ? pts[pts.length - 2] : latest;
+      const valBn = round2(latest.total / 1000);
+      const changeBn = round2((latest.total - prev.total) / 1000);
+      const trend = Math.abs(changeBn) < 0.2 ? 'stable' : changeBn > 0 ? 'up' : 'down';
+      indicators.push({
+        id: 'remittances', label: 'Remittances (Monthly)',
+        value: valBn, unit: '$ Billion', period: latest.date,
+        change: changeBn, trend, source: 'SBP',
+      });
+    }
+  } catch { /* skip */ }
+
+  // --- FDI (from fdi.json) ---
+  try {
+    const fdi = await readJson('fdi.json');
+    if (fdi.fytdComparison) {
+      const cur = fdi.fytdComparison.current;
+      const prior = fdi.fytdComparison.prior;
+      const curNet = cur.net_fdi ?? cur.net;
+      const priorNet = prior.net_fdi ?? prior.net;
+      const changePct = priorNet ? round2(((curNet - priorNet) / Math.abs(priorNet)) * 100) : null;
+      const netBn = round2(curNet / 1000);
+      const trend = changePct > 2 ? 'up' : changePct < -2 ? 'down' : 'stable';
+      indicators.push({
+        id: 'fdi', label: 'Net FDI',
+        value: String(netBn), unit: '$B',
+        period: `${fdi.fytdComparison.period} ${cur.label}${cur.status === 'provisional' ? ' (P)' : ''}`,
+        change: changePct, trend, source: 'SBP',
+      });
+    }
+  } catch { /* skip */ }
+
+  // --- IT & Services (from services.json) ---
+  try {
+    const svc = await readJson('services.json');
+    if (svc.comparison) {
+      const itBn = round2(svc.comparison.fy26.itCredit / 1000);
+      const priorBn = round2(svc.comparison.fy25.itCredit / 1000);
+      const changePct = priorBn ? round2(((itBn - priorBn) / priorBn) * 100) : null;
+      indicators.push({
+        id: 'it_exports', label: 'IT & Telecom Exports',
+        value: String(itBn), unit: '$B',
+        period: `${svc.comparison.period} ${svc.comparison.currentLabel || 'FY26'}`,
+        change: changePct, trend: changePct > 0 ? 'up' : 'down', source: 'SBP',
+      });
+    }
+  } catch { /* skip */ }
+
+  // --- GDP Growth (from fiscal.json) ---
+  try {
+    const fiscal = await readJson('fiscal.json');
+    const annual = fiscal.annual || [];
+    if (annual.length > 0) {
+      const latest = annual[annual.length - 1];
+      const prev = annual.length > 1 ? annual[annual.length - 2] : null;
+      const change = prev ? round2(latest.gdpGrowth - prev.gdpGrowth) : 0;
+      const trend = change > 0.2 ? 'up' : change < -0.2 ? 'down' : 'stable';
+      // Mark last FY as estimate if it's current/upcoming
+      const isEstimate = latest.year >= 'FY2026';
+      indicators.push({
+        id: 'gdp-growth', label: 'GDP Growth Rate',
+        value: latest.gdpGrowth, unit: '%',
+        period: `${latest.year}${isEstimate ? ' (Est.)' : ''}`,
+        change, trend, source: 'PBS / IMF',
+      });
+    }
+  } catch { /* skip */ }
+
+  // --- Inflation (from inflation.json) ---
+  try {
+    const inf = await readJson('inflation.json');
+    const cpi = inf.national_cpi?.data || [];
+    if (cpi.length > 0) {
+      const latest = cpi[cpi.length - 1];
+      const prev = cpi.length > 1 ? cpi[cpi.length - 2] : latest;
+      const change = round2(latest.value - prev.value);
+      const trend = latest.value > 5 ? (change > 0.5 ? 'up' : change < -0.5 ? 'down' : 'stable') : 'down';
+      indicators.push({
+        id: 'inflation', label: 'CPI Inflation (YoY)',
+        value: round2(latest.value), unit: '%',
+        period: latest.date,
+        change, trend, source: 'PBS',
+        sub: `SBP target: 5–7%`,
+      });
+    }
+  } catch { /* skip */ }
+
+  // --- Policy Rate (from monetary.json) ---
+  try {
+    const mon = await readJson('monetary.json');
+    const m2 = mon.m2?.data || [];
+    // Policy rate isn't directly in monetary.json — keep existing if present
+    const existingKpi = await readJson('kpi-summary.json');
+    const policyRate = existingKpi?.indicators?.find(i => i.id === 'policy-rate');
+    if (policyRate) {
+      indicators.push(policyRate);
+    }
+  } catch { /* skip */ }
+
+  const kpi = { lastUpdated: today, indicators };
+  await writeJson('kpi-summary.json', kpi);
+  console.log(`  ✅ Generated ${indicators.length} KPI indicators from data files`);
+}
+
+// ═══════════════════════════════════════════════════
 // MAIN
 // ═══════════════════════════════════════════════════
 
@@ -949,7 +1286,7 @@ async function main() {
   // 4. Parse GDP / fiscal data
   summary.fiscal = await updateGdpFiscal();
 
-  // 5. Parse BOP (also updates KPI)
+  // 5. Parse BOP data
   summary.bop = await updateBop();
 
   // 6. Exchange rates (if archive was downloaded)
@@ -978,6 +1315,9 @@ async function main() {
     console.log(`  ⚠️  Trade countries parse error: ${err.message}`);
   }
 
+  // 10. Regenerate KPI summary from all canonical data files
+  await generateKpiFromData();
+
   // ─── Summary ───
   console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   console.log('📋 Parse Summary');
@@ -985,7 +1325,7 @@ async function main() {
   console.log(`  ✅ trade.json       — ${summary.trade} monthly data points`);
   console.log(`  ✅ fdi.json         — ${summary.fdi?.sectors} sectors, ${summary.fdi?.countries} countries, ${summary.fdi?.years} FY`);
   console.log(`  ✅ fiscal.json      — ${summary.fiscal} fiscal years`);
-  console.log(`  ✅ kpi-summary.json — updated from BOP data`);
+  console.log(`  ✅ kpi-summary.json — derived from canonical data files`);
   if (summary.exchangeRates) {
     console.log(`  ✅ exchange-rates.json — ${summary.exchangeRates} months`);
   } else {
@@ -1003,8 +1343,23 @@ async function main() {
   console.log('\n✨ Done!\n');
 }
 
-main().catch(err => {
-  console.error('\n❌ Fatal error:', err.message);
-  console.error(err.stack);
-  process.exit(1);
-});
+// ─── Entry Point ───
+
+const args = process.argv.slice(2);
+
+if (args.includes('--kpi-only')) {
+  // Regenerate KPI summary from existing data files (no Excel parsing)
+  console.log('\n🇵🇰 Regenerating KPI summary from canonical data files...\n');
+  generateKpiFromData().then(() => {
+    console.log('\n✨ KPI regeneration done!\n');
+  }).catch(err => {
+    console.error('\n❌ KPI generation error:', err.message);
+    process.exit(1);
+  });
+} else {
+  main().catch(err => {
+    console.error('\n❌ Fatal error:', err.message);
+    console.error(err.stack);
+    process.exit(1);
+  });
+}

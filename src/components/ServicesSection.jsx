@@ -3,6 +3,8 @@ import { useData } from '../hooks/useData';
 import { COLORS, COLOR_LIST, baseBarOptions, baseDoughnutOptions } from '../utils/chartConfig';
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
+import SummaryCard from './ui/SummaryCard';
+import { pctChange } from '../utils/periodHelpers';
 
 export default function ServicesSection() {
   const { data, loading, error } = useData('services.json');
@@ -10,24 +12,39 @@ export default function ServicesSection() {
   if (loading || !data) return <div className="card loading-card"><div className="spinner" /><span>Loading data…</span></div>;
   if (error) return <p style={{ color: COLORS.coral }}>Error: {error.message}</p>;
 
-  const { categories, itBreakdown, summary, comparison } = data;
+  const { categories, itBreakdown, summary, comparison, recentMonths } = data;
 
-  // Chart 1 — Service Categories by Credit (horizontal bar)
+  // Chart 1 — Service Categories by Credit (horizontal bar) with YoY comparison
   const sortedCats = [...categories].sort((a, b) => b.credit - a.credit);
   const categoriesBarData = {
     labels: sortedCats.map((d) => d.name),
-    datasets: [{
-      label: 'Credit (USD M)',
-      data: sortedCats.map((d) => d.credit),
-      backgroundColor: sortedCats.map((_, i) => COLOR_LIST[i % COLOR_LIST.length]),
-      borderRadius: 4,
-    }],
+    datasets: [
+      {
+        label: comparison?.currentLabel || 'FY26',
+        data: sortedCats.map((d) => d.credit),
+        backgroundColor: sortedCats.map((_, i) => COLOR_LIST[i % COLOR_LIST.length]),
+        borderRadius: 4,
+      },
+    ],
   };
+  // Add prior year comparison bars if available
+  if (sortedCats.some(d => d.priorCredit > 0)) {
+    categoriesBarData.datasets.push({
+      label: comparison?.priorLabel || 'FY25',
+      data: sortedCats.map((d) => d.priorCredit || 0),
+      backgroundColor: sortedCats.map((_, i) => {
+        const hex = COLOR_LIST[i % COLOR_LIST.length];
+        const r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16);
+        return `rgba(${r},${g},${b},0.35)`;
+      }),
+      borderRadius: 4,
+    });
+  }
 
   const categoriesBarOptions = {
     ...baseBarOptions,
     indexAxis: 'y',
-    plugins: { ...baseBarOptions.plugins, legend: { display: false } },
+    plugins: { ...baseBarOptions.plugins },
     scales: {
       x: { ...baseBarOptions.scales.y, title: { display: true, text: 'USD Millions', color: COLORS.text }, beginAtZero: true },
       y: { ...baseBarOptions.scales.x, grid: { display: false } },
@@ -56,22 +73,14 @@ export default function ServicesSection() {
   };
 
   // Chart 3 — FY25 vs FY26 Comparison (grouped bar)
-  const compLabels = ['Total Services', 'IT & Telecom'];
+  const curLabel = comparison?.currentLabel || 'FY26';
+  const priorLabel = comparison?.priorLabel || 'FY25';
+  const compPeriod = comparison?.period || 'Jul-Feb';
   const comparisonBarData = {
-    labels: compLabels,
+    labels: ['Total Services', 'IT & Telecom'],
     datasets: [
-      {
-        label: `Jul-Feb FY25`,
-        data: [comparison.fy25.totalCredit, comparison.fy25.itCredit],
-        backgroundColor: COLORS.blue,
-        borderRadius: 4,
-      },
-      {
-        label: `Jul-Feb FY26`,
-        data: [comparison.fy26.totalCredit, comparison.fy26.itCredit],
-        backgroundColor: COLORS.teal,
-        borderRadius: 4,
-      },
+      { label: `${compPeriod} ${priorLabel}`, data: [comparison.fy25.totalCredit, comparison.fy25.itCredit], backgroundColor: COLORS.blue, borderRadius: 4 },
+      { label: `${compPeriod} ${curLabel}`, data: [comparison.fy26.totalCredit, comparison.fy26.itCredit], backgroundColor: COLORS.teal, borderRadius: 4 },
     ],
   };
 
@@ -89,18 +98,8 @@ export default function ServicesSection() {
   const balanceBarData = {
     labels: topCatsForBalance.map((d) => d.name),
     datasets: [
-      {
-        label: 'Credit (Exports)',
-        data: topCatsForBalance.map((d) => d.credit),
-        backgroundColor: COLORS.teal,
-        borderRadius: 4,
-      },
-      {
-        label: 'Debit (Imports)',
-        data: topCatsForBalance.map((d) => Math.abs(d.debit)),
-        backgroundColor: COLORS.coral,
-        borderRadius: 4,
-      },
+      { label: 'Credit (Exports)', data: topCatsForBalance.map((d) => d.credit), backgroundColor: COLORS.teal, borderRadius: 4 },
+      { label: 'Debit (Imports)', data: topCatsForBalance.map((d) => Math.abs(d.debit)), backgroundColor: COLORS.coral, borderRadius: 4 },
     ],
   };
 
@@ -121,14 +120,47 @@ export default function ServicesSection() {
         description="Pakistan's services trade classified by EBOPS (Extended Balance of Payments Services). IT & Telecom is the fastest-growing segment, with computer services (software consultancy, freelancing, and software exports) driving growth. Data from SBP's Balance of Payments detail tables."
       />
 
+      {summary && (() => {
+        const totalGrowth = comparison ? pctChange(comparison.fy26.totalCredit, comparison.fy25.totalCredit) : null;
+        const itGrowth = comparison ? pctChange(comparison.fy26.itCredit, comparison.fy25.itCredit) : null;
+        return (
+          <div className="summary-pair">
+            <SummaryCard
+              title={`${summary.period} — Services Summary`}
+              accent={COLORS.teal}
+              items={[
+                { label: 'Total Services Credit', value: `$${summary.totalServicesCredit}M`, sub: totalGrowth ? `${totalGrowth.pct > 0 ? '+' : ''}${totalGrowth.pct}% YoY` : '', direction: totalGrowth?.direction, sentiment: totalGrowth?.direction === 'up' ? 'positive' : 'negative', color: COLORS.teal },
+                { label: 'Services Net Balance', value: `$${summary.totalServicesNet}M`, sentiment: summary.totalServicesNet >= 0 ? 'positive' : 'negative', color: summary.totalServicesNet >= 0 ? COLORS.teal : COLORS.coral },
+                { label: 'IT & Telecom Credit', value: `$${summary.itTelecomCredit}M`, sub: itGrowth ? `${itGrowth.pct > 0 ? '+' : ''}${itGrowth.pct}% YoY` : '', direction: itGrowth?.direction, sentiment: itGrowth?.direction === 'up' ? 'positive' : 'negative', color: COLORS.blue },
+                { label: 'Computer Services', value: `$${summary.computerServicesCredit}M`, color: COLORS.amber },
+              ]}
+              footnote={`Source: SBP Balance of Payments · Last updated: ${data.lastUpdated || 'N/A'}`}
+            />
+            {recentMonths && recentMonths.length > 0 && (
+              <SummaryCard
+                title="Recent Monthly Performance"
+                accent={COLORS.blue}
+                items={recentMonths.map((m, i) => ({
+                  label: m.month,
+                  value: `$${m.totalCredit}M`,
+                  sub: `IT: $${m.itCredit}M`,
+                  color: i === 0 ? COLORS.blue : COLORS.purple,
+                }))}
+                footnote="Monthly services exports · Source: SBP"
+              />
+            )}
+          </div>
+        );
+      })()}
+
       <div className="section-grid">
         <ChartCard
           title="Service Categories (Exports)"
-          description="Top service categories ranked by credit (export) value in Jul-Feb FY2026. IT & Telecom leads Pakistan's services exports, followed by Transport and Other Business services."
+          description={`Service categories ranked by credit (export) value, comparing ${curLabel} vs ${priorLabel}. IT & Telecom leads Pakistan's services exports.`}
           source="SBP"
           dataSource="SBP"
-          lastUpdated="Apr 2026"
-          dataCoverage="Jul-Feb FY2026"
+          lastUpdated={data.lastUpdated}
+          dataCoverage={data.dataCoverage}
         >
           <div className="chart-container">
             <Bar data={categoriesBarData} options={categoriesBarOptions} />
@@ -136,11 +168,11 @@ export default function ServicesSection() {
         </ChartCard>
         <ChartCard
           title="IT & Telecom Breakdown"
-          description="Breakdown of IT & Telecom exports by sub-category. Computer services (including software consultancy, freelance IT, and software exports) are the dominant contributor."
+          description="Breakdown of IT & Telecom exports by sub-category. Computer services (software consultancy, freelance IT, software exports) are the dominant contributor."
           source="SBP"
           dataSource="SBP"
-          lastUpdated="Apr 2026"
-          dataCoverage="Jul-Feb FY2026"
+          lastUpdated={data.lastUpdated}
+          dataCoverage={data.dataCoverage}
         >
           <div className="chart-container">
             <Doughnut data={itDoughnutData} options={itDoughnutOptions} />
@@ -150,12 +182,12 @@ export default function ServicesSection() {
 
       <div className="section-grid" style={{ marginTop: '1.5rem' }}>
         <ChartCard
-          title="FY25 vs FY26 Comparison"
-          description={`Year-over-year comparison of cumulative services exports (${comparison.period}). Shows growth in total services and IT & Telecom exports between fiscal years.`}
+          title={`${priorLabel} vs ${curLabel} Comparison`}
+          description={`Year-over-year comparison of cumulative services exports (${compPeriod}). Shows growth in total services and IT & Telecom exports.`}
           source="SBP"
           dataSource="SBP"
-          lastUpdated="Apr 2026"
-          dataCoverage="Jul-Feb FY2025 vs FY2026"
+          lastUpdated={data.lastUpdated}
+          dataCoverage={`${compPeriod} ${priorLabel} vs ${curLabel}`}
         >
           <div className="chart-container">
             <Bar data={comparisonBarData} options={comparisonOptions} />
@@ -163,29 +195,17 @@ export default function ServicesSection() {
         </ChartCard>
         <ChartCard
           title="Services Trade Balance"
-          description="Credit (exports) vs Debit (imports) for top service categories. Categories where green exceeds red represent net services exports (surplus). Transport typically shows a deficit due to high shipping costs."
+          description="Credit (exports) vs Debit (imports) for top service categories. Green exceeding red = surplus. Transport shows a deficit due to high shipping costs."
           source="SBP"
           dataSource="SBP"
-          lastUpdated="Apr 2026"
-          dataCoverage="Jul-Feb FY2026"
+          lastUpdated={data.lastUpdated}
+          dataCoverage={data.dataCoverage}
         >
           <div className="chart-container">
             <Bar data={balanceBarData} options={balanceBarOptions} />
           </div>
         </ChartCard>
       </div>
-
-      {summary && (
-        <div className="card" style={{ marginTop: '1.5rem', padding: '1.25rem' }}>
-          <h3 style={{ marginBottom: '0.75rem' }}>📊 Services Summary ({summary.period})</h3>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-            <div><strong style={{ color: 'var(--text-primary)' }}>${summary.totalServicesCredit}M</strong><br />Total Services Credit</div>
-            <div><strong style={{ color: 'var(--text-primary)' }}>${summary.totalServicesNet}M</strong><br />Total Services Net</div>
-            <div><strong style={{ color: 'var(--accent-teal)' }}>${summary.itTelecomCredit}M</strong><br />IT & Telecom Credit</div>
-            <div><strong style={{ color: 'var(--accent-teal)' }}>${summary.computerServicesCredit}M</strong><br />Computer Services Credit</div>
-          </div>
-        </div>
-      )}
     </section>
   );
 }

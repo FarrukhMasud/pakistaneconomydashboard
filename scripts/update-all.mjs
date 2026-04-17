@@ -108,10 +108,11 @@ async function downloadFile(name, url, description) {
   }
 }
 
-function runScript(scriptPath, label) {
+function runScript(scriptPath, label, args = []) {
   console.log(`\n▶️  Running ${label}...`);
   try {
-    execSync(`node "${scriptPath}"`, {
+    const cmd = `node "${scriptPath}"${args.length ? ' ' + args.join(' ') : ''}`;
+    execSync(cmd, {
       cwd: resolve(__dirname, '..'),
       stdio: 'inherit',
       env: { ...process.env, NODE_TLS_REJECT_UNAUTHORIZED: '0' },
@@ -158,19 +159,26 @@ async function main() {
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   const parseOk = runScript(resolve(__dirname, 'parse-sbp-excel.mjs'), 'parse-sbp-excel.mjs');
 
-  // Step 3: Run SBP API update for remittances
+  // Step 3: Run SBP API update for remittances + inflation + monetary
   console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  console.log('💸 Step 3: Updating remittances via SBP API...');
+  console.log('💸 Step 3: Updating remittances + inflation + monetary via SBP API...');
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   const apiOk = runScript(resolve(__dirname, 'update-data.mjs'), 'update-data.mjs (SBP API)');
 
-  // Step 4: Summary
+  // Step 4: Regenerate KPI summary from all now-fresh data files
+  console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log('📊 Step 4: Regenerating KPI summary from all data files...');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  const kpiOk = runScript(resolve(__dirname, 'parse-sbp-excel.mjs'), 'KPI regeneration', ['--kpi-only']);
+
+  // Step 5: Summary
   console.log('\n╔══════════════════════════════════════════════════╗');
   console.log('║              Full Update Summary                  ║');
   console.log('╚══════════════════════════════════════════════════╝');
   console.log(`\n  📥 Downloads: ${summary.downloaded} succeeded, ${summary.failed} failed, ${summary.skipped} skipped`);
   console.log(`  📊 Excel parse: ${parseOk ? '✅ Success' : '❌ Failed'}`);
   console.log(`  💸 SBP API:     ${apiOk ? '✅ Success' : '⚠️  Failed (needs SBP_API_KEY in .env)'}`);
+  console.log(`  📊 KPI regen:   ${kpiOk ? '✅ Success' : '⚠️  Failed'}`);
   console.log('\n  Updated JSON files in public/data/');
   console.log('  Run "npm run build" to rebuild, then "npm run deploy" to publish.\n');
 }

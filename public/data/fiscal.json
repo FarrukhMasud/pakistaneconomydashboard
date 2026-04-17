@@ -41,5 +41,697 @@
       "gdpGrowth": 3.6
     }
   ],
-  "dataSource": "SBP / PBS"
+  "dataSource": "SBP EasyData API - Summary of Public Finance + GDP Table",
+  "lastUpdated": "2026-04-17",
+  "dataCoverage": "FY2017 – FY2026",
+  "publicFinance": {
+    "fiscal_balance": {
+      "name": "Fiscal Balance",
+      "seriesKey": "TS_GP_PF_SPF_Y.SPF370000",
+      "data": [
+        {
+          "fy": "FY10",
+          "value": -929061,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY11",
+          "value": -1194409,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY12",
+          "value": -1369704,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY13",
+          "value": -1833864,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY14",
+          "value": -1388719,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY15",
+          "value": -1456725,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY16",
+          "value": -1349323,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY17",
+          "value": -1863797,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY18",
+          "value": -2260380,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY19",
+          "value": -3444916,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY20",
+          "value": -3376320,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY21",
+          "value": -3403321,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY22",
+          "value": -5259892,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY23",
+          "value": -6521445,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY24",
+          "value": -7206908,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY25",
+          "value": -6168015,
+          "unit": "Million PKR"
+        }
+      ]
+    },
+    "primary_balance": {
+      "name": "Primary Balance",
+      "seriesKey": "TS_GP_PF_SPF_Y.SPF450000",
+      "data": [
+        {
+          "fy": "FY10",
+          "value": -267791,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY11",
+          "value": -477805,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY12",
+          "value": -467785,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY13",
+          "value": -828066,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY14",
+          "value": -226843,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY15",
+          "value": -152958,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY16",
+          "value": -85955,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY17",
+          "value": -515362,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY18",
+          "value": -760458,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY19",
+          "value": -1353790,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY20",
+          "value": -756581,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY21",
+          "value": -653592,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY22",
+          "value": -2077460,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY23",
+          "value": -825529,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY24",
+          "value": 952918,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY25",
+          "value": 2719402,
+          "unit": "Million PKR"
+        }
+      ]
+    },
+    "total_revenue": {
+      "name": "Total Revenue",
+      "seriesKey": "TS_GP_PF_SPF_Y.SPF010000",
+      "data": [
+        {
+          "fy": "FY10",
+          "value": 2078165,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY11",
+          "value": 2252855,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY12",
+          "value": 2566514,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY13",
+          "value": 2982436,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY14",
+          "value": 3637297,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY15",
+          "value": 3931042,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY16",
+          "value": 4446979,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY17",
+          "value": 4936723,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY18",
+          "value": 5228015,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY19",
+          "value": 4900724,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY20",
+          "value": 6272168,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY21",
+          "value": 6903370,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY22",
+          "value": 8035383,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY23",
+          "value": 9633505,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY24",
+          "value": 13269037,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY25",
+          "value": 17997486,
+          "unit": "Million PKR"
+        }
+      ]
+    },
+    "tax_revenue": {
+      "name": "Tax Revenue",
+      "seriesKey": "TS_GP_PF_SPF_Y.SPF050000",
+      "data": [
+        {
+          "fy": "FY10",
+          "value": 1472821,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY11",
+          "value": 1699334,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY12",
+          "value": 2052886,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY13",
+          "value": 2199232,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY14",
+          "value": 2564509,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY15",
+          "value": 3017596,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY16",
+          "value": 3660418,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY17",
+          "value": 3969248,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY18",
+          "value": 4467160,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY19",
+          "value": 4473422,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY20",
+          "value": 4747802,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY21",
+          "value": 5272699,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY22",
+          "value": 6755168,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY23",
+          "value": 7818699,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY24",
+          "value": 10085201,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY25",
+          "value": 12722909,
+          "unit": "Million PKR"
+        }
+      ]
+    },
+    "nontax_revenue": {
+      "name": "Non-Tax Revenue",
+      "seriesKey": "TS_GP_PF_SPF_Y.SPF090000",
+      "data": [
+        {
+          "fy": "FY10",
+          "value": 605344,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY11",
+          "value": 553521,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY12",
+          "value": 513628,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY13",
+          "value": 783204,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY14",
+          "value": 1072788,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY15",
+          "value": 913446,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY16",
+          "value": 786561,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY17",
+          "value": 967475,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY18",
+          "value": 760855,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY19",
+          "value": 427302,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY20",
+          "value": 1524366,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY21",
+          "value": 1630671,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY22",
+          "value": 1280215,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY23",
+          "value": 1814806,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY24",
+          "value": 3183836,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY25",
+          "value": 5274576,
+          "unit": "Million PKR"
+        }
+      ]
+    },
+    "total_expenditure": {
+      "name": "Total Expenditure",
+      "seriesKey": "TS_GP_PF_SPF_Y.SPF130000",
+      "data": [
+        {
+          "fy": "FY10",
+          "value": 3007226,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY11",
+          "value": 3447263,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY12",
+          "value": 3936218,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY13",
+          "value": 4816300,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY14",
+          "value": 5026016,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY15",
+          "value": 5387767,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY16",
+          "value": 5796302,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY17",
+          "value": 6800520,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY18",
+          "value": 7488395,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY19",
+          "value": 8345640,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY20",
+          "value": 9648488,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY21",
+          "value": 10306691,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY22",
+          "value": 13295275,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY23",
+          "value": 16154950,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY24",
+          "value": 20475945,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY25",
+          "value": 24165501,
+          "unit": "Million PKR"
+        }
+      ]
+    },
+    "current_expenditure": {
+      "name": "Current Expenditure",
+      "seriesKey": "TS_GP_PF_SPF_Y.SPF170000",
+      "data": [
+        {
+          "fy": "FY10",
+          "value": 2386042,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY11",
+          "value": 2900784,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY12",
+          "value": 3122502,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY13",
+          "value": 3660434,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY14",
+          "value": 4004582,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY15",
+          "value": 4424747,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY16",
+          "value": 4694294,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY17",
+          "value": 5197854,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY18",
+          "value": 5854267,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY19",
+          "value": 7104031,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY20",
+          "value": 8532020,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY21",
+          "value": 9084010,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY22",
+          "value": 11521375,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY23",
+          "value": 14447833,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY24",
+          "value": 18570942,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY25",
+          "value": 21528585,
+          "unit": "Million PKR"
+        }
+      ]
+    },
+    "dev_expenditure": {
+      "name": "Development Expenditure",
+      "seriesKey": "TS_GP_PF_SPF_Y.SPF250000",
+      "data": [
+        {
+          "fy": "FY10",
+          "value": 613441,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY11",
+          "value": 506103,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY12",
+          "value": 731868,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY13",
+          "value": 777096,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY14",
+          "value": 1135918,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY15",
+          "value": 1113223,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY16",
+          "value": 1301473,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY17",
+          "value": 1693474,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY18",
+          "value": 1584057,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY19",
+          "value": 1178442,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY20",
+          "value": 1155213,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY21",
+          "value": 1238738,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY22",
+          "value": 1617050,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY23",
+          "value": 1892992,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY24",
+          "value": 2026814,
+          "unit": "Million PKR"
+        },
+        {
+          "fy": "FY25",
+          "value": 2983402,
+          "unit": "Million PKR"
+        }
+      ]
+    }
+  }
 }

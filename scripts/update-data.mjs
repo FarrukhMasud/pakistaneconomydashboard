@@ -49,8 +49,7 @@ const DATA_DIR = resolve(__dirname, '..', 'public', 'data');
 
 const SBP_API_BASE = 'https://easydata.sbp.org.pk/api/v1';
 
-// Series keys — only Workers' Remittances dataset works (TS_GP_BOP_WR_M.*)
-// All other datasets (reserves, exchange rates, trade, FDI, CPI, services) return 404.
+// Series keys for Workers' Remittances (TS_GP_BOP_WR_M.*)
 const SERIES = {
   remittances_total: 'TS_GP_BOP_WR_M.WR0010',
   remit_usa: 'TS_GP_BOP_WR_M.WR0020',
@@ -60,6 +59,47 @@ const SERIES = {
   remit_other_gcc: 'TS_GP_BOP_WR_M.WR0100',
   remit_eu: 'TS_GP_BOP_WR_M.WR0150',
 };
+
+// Series keys for Inflation (TS_GP_PT_CPI_M.*)
+const INFLATION_SERIES = {
+  national_cpi:   { key: 'TS_GP_PT_CPI_M.P00011516', name: 'National CPI YoY' },
+  urban_cpi:      { key: 'TS_GP_PT_CPI_M.P00021516', name: 'Urban CPI YoY' },
+  rural_cpi:      { key: 'TS_GP_PT_CPI_M.P00031516', name: 'Rural CPI YoY' },
+  spi:            { key: 'TS_GP_PT_CPI_M.P00111516', name: 'SPI Combined YoY' },
+  urban_food:     { key: 'TS_GP_PT_CPI_M.P00041516', name: 'Urban Food CPI YoY' },
+  rural_food:     { key: 'TS_GP_PT_CPI_M.P00051516', name: 'Rural Food CPI YoY' },
+  urban_nonfood:  { key: 'TS_GP_PT_CPI_M.P00061516', name: 'Urban Non-Food CPI YoY' },
+  rural_nonfood:  { key: 'TS_GP_PT_CPI_M.P00071516', name: 'Rural Non-Food CPI YoY' },
+  wpi:            { key: 'TS_GP_PT_CPI_M.P00081516', name: 'WPI YoY' },
+};
+
+// Series keys for Public Finance (TS_GP_PF_SPF_Y.*)
+const PUBLIC_FINANCE_SERIES = {
+  fiscal_balance:      { key: 'TS_GP_PF_SPF_Y.SPF370000', name: 'Fiscal Balance' },
+  primary_balance:     { key: 'TS_GP_PF_SPF_Y.SPF450000', name: 'Primary Balance' },
+  total_revenue:       { key: 'TS_GP_PF_SPF_Y.SPF010000', name: 'Total Revenue' },
+  tax_revenue:         { key: 'TS_GP_PF_SPF_Y.SPF050000', name: 'Tax Revenue' },
+  nontax_revenue:      { key: 'TS_GP_PF_SPF_Y.SPF090000', name: 'Non-Tax Revenue' },
+  total_expenditure:   { key: 'TS_GP_PF_SPF_Y.SPF130000', name: 'Total Expenditure' },
+  current_expenditure: { key: 'TS_GP_PF_SPF_Y.SPF170000', name: 'Current Expenditure' },
+  dev_expenditure:     { key: 'TS_GP_PF_SPF_Y.SPF250000', name: 'Development Expenditure' },
+};
+
+// Series keys for Monetary Sector
+const MONETARY_SERIES = {
+  m2:              { key: 'TS_GP_BAM_M2_W.M000070', name: 'Broad Money (M2)' },
+  m2_yoy:          { key: 'TS_GP_BAM_M2_W.M000500', name: 'M2 YoY Growth' },
+  credit_private:  { key: 'TS_GP_BAM_M2_W.M000340', name: 'Credit to Private Sector' },
+  credit_pvt_yoy:  { key: 'TS_GP_BAM_M2_W.M000480', name: 'Private Sector Credit YoY Growth' },
+  deposits:        { key: 'TS_GP_BAM_M2_W.M000030', name: 'Total Deposits with Banks' },
+  deposits_yoy:    { key: 'TS_GP_BAM_M2_W.M000490', name: 'Total Deposits YoY Growth' },
+  nfa:             { key: 'TS_GP_BAM_M2_W.M000080', name: 'NFA of Banking System' },
+  budgetary:       { key: 'TS_GP_BAM_M2_W.M000150', name: 'Budgetary Support Borrowings' },
+  reserve_money:   { key: 'TS_GP_BAM_RM_W.R000050', name: 'Reserve Money' },
+};
+
+// SBP Gross Reserves (BOP BPM6)
+const RESERVES_SERIES_KEY = 'TS_GP_BOP_BPM6SUM_M.P00730';
 
 // ─── Helpers ───
 
@@ -186,7 +226,13 @@ async function updateRemittances(apiKey) {
 
     if (monthly.length > 0) {
       const existing = await readJson('remittances.json').catch(() => ({}));
-      await writeJson('remittances.json', { monthly, sourceCountries: sourceCountries.length ? sourceCountries : existing.sourceCountries });
+      await writeJson('remittances.json', {
+        monthly,
+        sourceCountries: sourceCountries.length ? sourceCountries : existing.sourceCountries,
+        dataSource: 'SBP EasyData API',
+        lastUpdated: today(),
+        dataCoverage: `${monthly[0].date} – ${monthly.at(-1).date}`,
+      });
       console.log(`  📊 ${monthly.length} months (${monthly[0].date} → ${monthly.at(-1).date})`);
       logResult('Remittances', 'updated', `${monthly.length} months`);
     } else {
@@ -195,6 +241,119 @@ async function updateRemittances(apiKey) {
   } catch (err) {
     console.error(`  ❌ ${err.message}`);
     logResult('Remittances', 'failed', err.message);
+  }
+}
+
+async function updateInflation(apiKey) {
+  console.log('\n📈 Updating Inflation data from SBP EasyData API...');
+
+  try {
+    const result = {
+      dataSource: 'SBP EasyData API - Inflation Snapshot (Base: 2015-16)',
+      lastUpdated: today(),
+    };
+
+    for (const [id, s] of Object.entries(INFLATION_SERIES)) {
+      const rows = await fetchSeriesSafe(s.key, apiKey, fiveYearsAgo(), today());
+      const data = rows
+        .map(r => ({
+          date: getDate(r).substring(0, 7),
+          value: getValue(r),
+        }))
+        .sort((a, b) => a.date.localeCompare(b.date));
+      result[id] = { name: s.name, seriesKey: s.key, data };
+      console.log(`    ${s.name}: ${data.length} observations`);
+    }
+
+    await writeJson('inflation.json', result);
+    logResult('Inflation', 'updated', `${Object.keys(INFLATION_SERIES).length} series`);
+  } catch (err) {
+    console.error(`  ❌ ${err.message}`);
+    logResult('Inflation', 'failed', err.message);
+  }
+}
+
+async function updatePublicFinance(apiKey) {
+  console.log('\n🏛️ Updating Public Finance data from SBP EasyData API...');
+
+  try {
+    const existing = await readJson('fiscal.json');
+    const pfResult = {};
+
+    for (const [id, s] of Object.entries(PUBLIC_FINANCE_SERIES)) {
+      const rows = await fetchSeriesSafe(s.key, apiKey, '2010-01-01', today());
+      const data = rows
+        .map(r => {
+          const dateStr = getDate(r);
+          const year = parseInt(dateStr.substring(0, 4));
+          return { fy: 'FY' + String(year).slice(-2), value: getValue(r), unit: r.unit || 'Million PKR' };
+        })
+        .sort((a, b) => a.fy.localeCompare(b.fy));
+      pfResult[id] = { name: s.name, seriesKey: s.key, data };
+      console.log(`    ${s.name}: ${data.length} observations`);
+    }
+
+    existing.publicFinance = pfResult;
+    existing.lastUpdated = today();
+    existing.dataSource = 'SBP EasyData API - Summary of Public Finance + GDP Table';
+    await writeJson('fiscal.json', existing);
+    logResult('Public Finance', 'updated', `${Object.keys(PUBLIC_FINANCE_SERIES).length} series`);
+  } catch (err) {
+    console.error(`  ❌ ${err.message}`);
+    logResult('Public Finance', 'failed', err.message);
+  }
+}
+
+async function updateReserves(apiKey) {
+  console.log('\n🏦 Updating Reserves data from SBP EasyData API...');
+
+  try {
+    const rows = await fetchSeriesSafe(RESERVES_SERIES_KEY, apiKey, fiveYearsAgo(), today());
+    const monthly = rows
+      .map(r => ({ date: getDate(r).substring(0, 7), sbp: Math.round(getValue(r) * 10) / 10 }))
+      .sort((a, b) => a.date.localeCompare(b.date));
+
+    const result = {
+      monthly,
+      dataSource: 'SBP EasyData API - BOP BPM6 Summary (SBP Gross Reserves)',
+      lastUpdated: today(),
+      dataCoverage: monthly[0]?.date + ' to ' + monthly.at(-1)?.date,
+    };
+    await writeJson('reserves.json', result);
+    logResult('Reserves', 'updated', `${monthly.length} monthly observations`);
+  } catch (err) {
+    console.error(`  ❌ ${err.message}`);
+    logResult('Reserves', 'failed', err.message);
+  }
+}
+
+async function updateMonetary(apiKey) {
+  console.log('\n🏛️ Updating Monetary Sector data from SBP EasyData API...');
+
+  try {
+    const result = {
+      dataSource: 'SBP EasyData API - Monetary & Financial Sector',
+      lastUpdated: today(),
+    };
+
+    for (const [id, s] of Object.entries(MONETARY_SERIES)) {
+      const rows = await fetchSeriesSafe(s.key, apiKey, fiveYearsAgo(), today());
+      // Convert weekly to monthly by taking last observation per month
+      const byMonth = new Map();
+      for (const r of rows) {
+        const date = getDate(r).substring(0, 7);
+        byMonth.set(date, { date, value: Math.round(getValue(r) * 100) / 100, unit: r.unit || '' });
+      }
+      const data = [...byMonth.values()].sort((a, b) => a.date.localeCompare(b.date));
+      result[id] = { name: s.name, seriesKey: s.key, data };
+      console.log(`    ${s.name}: ${data.length} monthly observations`);
+    }
+
+    await writeJson('monetary.json', result);
+    logResult('Monetary', 'updated', `${Object.keys(MONETARY_SERIES).length} series`);
+  } catch (err) {
+    console.error(`  ❌ ${err.message}`);
+    logResult('Monetary', 'failed', err.message);
   }
 }
 
@@ -376,7 +535,11 @@ To use this script, get a free API key from SBP EasyData:
 
   const updaters = {
     remittances: updateRemittances,
-    kpi: updateKpiSummary,
+    inflation: updateInflation,
+    // Reserves handled by parse-sbp-excel.mjs (forex.pdf has weekly + banks + total)
+    monetary: updateMonetary,
+    publicFinance: updatePublicFinance,
+    // KPI regenerated by parse-sbp-excel.mjs --kpi-only (after all data is fresh)
   };
 
   if (sectionFilter) {
@@ -414,17 +577,15 @@ To use this script, get a free API key from SBP EasyData:
   console.log(`
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  📝 The following data must be updated manually:
+  📝 The following data is updated from Excel/PDF files
+     (via parse-sbp-excel.mjs / npm run update):
 
-     • Reserves & Exchange Rates  → SBP website
-     • Trade (imports/exports)    → PBS: pbs.gov.pk/content/external-trade-statistics
-     • FDI (sector/country)       → BoI: invest.gov.pk
-     • IT/Services exports        → PSEB: pseb.org.pk
-     • Inflation (CPI)            → PBS: pbs.gov.pk/price-statistics
-     • Fiscal (GDP, deficit, debt)→ MoF: finance.gov.pk
-     • Defence spending           → SIPRI / MoD
-
-  Run guided manual entry:  npm run update-data -- --manual
+     • Reserves (forex.pdf)    → weekly, SBP + banks + total
+     • Exchange Rates          → IBF_Arch.xls
+     • Trade (imports/exports) → exp_import_BOP.xls
+     • FDI (sector/country)    → Foreign_Dir.xls, Netinflow.xls
+     • IT/Services exports     → dt.xls (EBOPS)
+     • Fiscal (GDP growth)     → GDP_table.xlsx
 
   🚀 To redeploy after updates:
 

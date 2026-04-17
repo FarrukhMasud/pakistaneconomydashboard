@@ -1,17 +1,77 @@
 {
-  "lastUpdated": "2026-04-16",
+  "lastUpdated": "2026-04-17",
   "indicators": [
+    {
+      "id": "reserves",
+      "label": "Foreign Reserves (Total)",
+      "value": 20.52,
+      "unit": "$ Billion",
+      "period": "2026-04-10",
+      "change": -1.37,
+      "trend": "down",
+      "source": "SBP",
+      "sub": "SBP: $15.08B · Banks: $5.45B"
+    },
+    {
+      "id": "exchange-rate",
+      "label": "PKR / USD",
+      "value": 279.51,
+      "unit": "PKR",
+      "period": "2026-03",
+      "change": -0.3,
+      "trend": "stable",
+      "source": "SBP"
+    },
+    {
+      "id": "remittances",
+      "label": "Remittances (Monthly)",
+      "value": 3.83,
+      "unit": "$ Billion",
+      "period": "2026-03",
+      "change": 0.54,
+      "trend": "up",
+      "source": "SBP"
+    },
+    {
+      "id": "fdi",
+      "label": "Net FDI",
+      "value": "1.86",
+      "unit": "$B",
+      "period": "Jul-Mar FY2026 (P)",
+      "change": 37.07,
+      "trend": "up",
+      "source": "SBP"
+    },
+    {
+      "id": "it_exports",
+      "label": "IT & Telecom Exports",
+      "value": "3.39",
+      "unit": "$B",
+      "period": "Jul-Mar FY26",
+      "change": 19.79,
+      "trend": "up",
+      "source": "SBP"
+    },
     {
       "id": "gdp-growth",
       "label": "GDP Growth Rate",
-      "value": 3.1,
+      "value": 3.6,
       "unit": "%",
-      "period": "FY2025",
-      "change": 0.6,
+      "period": "FY2026 (Est.)",
+      "change": 0.54,
       "trend": "up",
-      "source": "PBS / IMF",
-      "dataSource": "SBP / PBS",
-      "dataCoverage": "FY2017 – FY2026"
+      "source": "PBS / IMF"
+    },
+    {
+      "id": "inflation",
+      "label": "CPI Inflation (YoY)",
+      "value": 7.3,
+      "unit": "%",
+      "period": "2026-03",
+      "change": 0.3,
+      "trend": "stable",
+      "source": "PBS",
+      "sub": "SBP target: 5–7%"
     },
     {
       "id": "policy-rate",
@@ -24,66 +84,6 @@
       "source": "SBP",
       "dataSource": "SBP",
       "dataCoverage": "Mar 2026"
-    },
-    {
-      "id": "reserves",
-      "label": "Foreign Reserves",
-      "value": 17.69,
-      "unit": "$ Billion",
-      "period": "Mar 2026",
-      "change": 1.5,
-      "trend": "up",
-      "source": "SBP",
-      "dataSource": "SBP",
-      "dataCoverage": "FY2021 – Apr 2026"
-    },
-    {
-      "id": "remittances",
-      "label": "Remittances (Monthly)",
-      "value": "2.8",
-      "unit": "$ Billion",
-      "period": "2021-04",
-      "change": 0.3,
-      "trend": "stable",
-      "source": "SBP",
-      "dataSource": "SBP EasyData API",
-      "dataCoverage": "Apr 2021 – Mar 2026"
-    },
-    {
-      "id": "exchange-rate",
-      "label": "PKR / USD",
-      "value": 283.5,
-      "unit": "PKR",
-      "period": "Mar 2026",
-      "change": 0.2,
-      "trend": "stable",
-      "source": "SBP",
-      "dataSource": "SBP",
-      "dataCoverage": "Jan 2021 – Mar 2026"
-    },
-    {
-      "id": "fdi",
-      "label": "Net FDI",
-      "value": "1.36",
-      "unit": "$B",
-      "change": 12.5,
-      "trend": "up",
-      "period": "FY2026 (Jul-Mar)",
-      "source": "SBP",
-      "dataSource": "SBP",
-      "dataCoverage": "FY2017 – FY2025"
-    },
-    {
-      "id": "it_exports",
-      "label": "IT & Telecom Exports",
-      "value": "3.5",
-      "unit": "$B",
-      "change": 8.1,
-      "trend": "up",
-      "period": "Jul-Feb FY2026",
-      "source": "SBP",
-      "dataSource": "SBP",
-      "dataCoverage": "Jul-Feb FY2026"
     }
   ]
 }

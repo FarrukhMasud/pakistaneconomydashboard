@@ -26,9 +26,11 @@ export default function KpiCards() {
     <section className="fade-in">
       <SectionHeader
         title="Economic Overview"
-        description="Key macroeconomic indicators at a glance. Green arrows indicate improving trends, red arrows indicate deterioration. Data from the State Bank of Pakistan, PBS, and IMF."
+        description="Key macroeconomic indicators at a glance. These headline numbers summarize Pakistan's economic health — from external accounts (reserves, trade, remittances) to domestic conditions (growth, inflation, monetary policy). Green arrows indicate improving trends; red indicates deterioration."
       />
-      <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>Last updated: {lastUpdated}</p>
+      <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
+        Data refreshed: {lastUpdated} · All values derived from source datasets
+      </p>
       <div className="kpi-grid">
         {indicators.map((kpi) => {
           const color = trendColor(kpi.trend);
@@ -39,6 +41,7 @@ export default function KpiCards() {
                 {kpi.value}<span className="kpi-unit">{kpi.unit}</span>
               </div>
               <div className="kpi-period">{kpi.period}</div>
+              {kpi.sub && <div className="kpi-sub">{kpi.sub}</div>}
               <div className={`kpi-trend ${kpi.trend}`}>
                 {trendArrow(kpi.trend)} {kpi.change >= 0 ? '+' : ''}{kpi.change}
               </div>

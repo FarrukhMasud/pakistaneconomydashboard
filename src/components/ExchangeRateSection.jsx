@@ -3,6 +3,8 @@ import { useData } from '../hooks/useData';
 import { COLORS, baseLineOptions } from '../utils/chartConfig';
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
+import SummaryCard from './ui/SummaryCard';
+import { currentCalendarYear, currentFiscalYear, pctChange, fmtRate } from '../utils/periodHelpers';
 
 function formatDate(dateStr) {
   const [y, m] = dateStr.split('-');
@@ -16,7 +18,9 @@ export default function ExchangeRateSection() {
   if (loading || !data) return <div className="card loading-card"><div className="spinner" /><span>Loading data…</span></div>;
   if (error) return <div className="card fade-in"><p>Error loading exchange rates: {error.message}</p></div>;
 
-  const monthly = data.monthly;
+  const { monthly, dataSource: exDS, lastUpdated: exLU, dataCoverage: exDC } = data;
+  const cy = currentCalendarYear(monthly);
+  const fy = currentFiscalYear(monthly);
   const labels = monthly.map((d) => formatDate(d.date));
 
   const chartData = {
@@ -80,15 +84,60 @@ export default function ExchangeRateSection() {
     <section className="fade-in">
       <SectionHeader
         title="Exchange Rates"
-        description="Pakistani Rupee (PKR) exchange rates against major currencies. A rising line indicates the rupee is weakening (more PKR needed per unit of foreign currency). Exchange rate stability is crucial for import costs, debt servicing, and investor confidence."
+        description="Pakistani Rupee (PKR) exchange rates against major currencies. A rising line = weaker rupee (more PKR per foreign unit). The PKR lost ~45% against USD between 2022–2023 due to balance of payments pressures, depleted reserves, and political uncertainty. Stability since mid-2024 reflects IMF program discipline and improved reserves. Exchange rate directly affects import costs, inflation pass-through, and external debt servicing burden."
       />
+
+      {(cy || fy) && (() => {
+        const currencies = ['USD', 'EUR', 'GBP', 'CNY'];
+        const colorMap = { USD: COLORS.teal, EUR: COLORS.amber, GBP: COLORS.coral, CNY: COLORS.purple };
+        const buildItems = (period, suffix) => {
+          if (!period || !period.rows.length) return [];
+          const start = period.rows[0];
+          const end = period.rows[period.rows.length - 1];
+          return currencies.map(c => {
+            const chg = pctChange(end[c], start[c]);
+            return {
+              label: `PKR / ${c}`,
+              value: fmtRate(end[c]),
+              sub: chg.pct != null ? `${chg.pct > 0 ? '+' : ''}${chg.pct}% ${suffix}` : '',
+              direction: chg.direction,
+              sentiment: chg.direction === 'up' ? 'negative' : chg.direction === 'down' ? 'positive' : 'neutral',
+              color: colorMap[c],
+            };
+          });
+        };
+        const cyItems = buildItems(cy, 'CY YTD');
+        const fyItems = buildItems(fy, 'FY YTD');
+        const latestDate = cy?.rows?.length ? formatDate(cy.rows[cy.rows.length - 1].date) : '';
+        return (
+          <div className="summary-pair">
+            {cyItems.length > 0 && (
+              <SummaryCard
+                title={`${cy.rangeLabel} — Calendar YTD`}
+                accent={COLORS.teal}
+                items={cyItems}
+                footnote={`Latest: ${latestDate} · Source: SBP`}
+              />
+            )}
+            {fyItems.length > 0 && (
+              <SummaryCard
+                title={`${fy.fyLabel} (${fy.rangeLabel}) — Fiscal YTD`}
+                accent={COLORS.blue}
+                items={fyItems}
+                footnote={`${fy.months} month${fy.months > 1 ? 's' : ''} · Source: SBP`}
+              />
+            )}
+          </div>
+        );
+      })()}
+
       <ChartCard
         title="Exchange Rates (PKR)"
         description="PKR per unit of foreign currency — USD, EUR, GBP on left axis; CNY on right axis (different scale). The sharp rise in 2022–2023 reflects significant rupee depreciation during the economic crisis. The dashed purple line shows the Chinese Yuan rate."
         source="State Bank of Pakistan"
         dataSource="SBP"
-        lastUpdated="Apr 2026"
-        dataCoverage="Jan 2021 – Mar 2026"
+        lastUpdated={exLU}
+        dataCoverage={exDC}
       >
         <div className="chart-container">
           <Line data={chartData} options={options} />

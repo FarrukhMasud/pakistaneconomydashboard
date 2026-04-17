@@ -67,6 +67,13 @@ export const COLOR_LIST = [
   COLORS.coral,
   COLORS.blue,
   COLORS.purple,
+  '#26c6da',   // cyan
+  '#66bb6a',   // green
+  '#ff7043',   // deep orange
+  '#78909c',   // blue grey
+  '#ec407a',   // pink
+  '#8d6e63',   // brown
+  '#5c6bc0',   // indigo
 ];
 
 // ─── Helpers ───

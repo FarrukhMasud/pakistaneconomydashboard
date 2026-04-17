@@ -10,7 +10,7 @@
   position: relative;
   text-align: center;
   padding: 2rem 1.5rem 1.5rem;
-  background: linear-gradient(180deg, #0a1f12 0%, #0f1a14 50%, var(--bg-card) 100%);
+  background: var(--header-bg);
   border-bottom: 1px solid var(--border-color);
   overflow: hidden;
 }
@@ -23,7 +23,7 @@
   left: 10%;
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, rgba(1, 65, 28, 0.25) 0%, transparent 70%);
+  background: var(--header-glow-green);
   pointer-events: none;
 }
 
@@ -34,7 +34,7 @@
   right: 15%;
   width: 200px;
   height: 200px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.04) 0%, transparent 70%);
+  background: var(--header-glow-white);
   pointer-events: none;
 }
 
@@ -74,8 +74,8 @@
 /* ===== Theme Toggle ===== */
 .theme-toggle {
   display: inline-flex;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--toggle-bg);
+  border: 1px solid var(--toggle-border);
   border-radius: var(--radius-pill);
   padding: 2px;
   gap: 2px;
@@ -90,18 +90,20 @@
   border: none;
   border-radius: var(--radius-pill);
   background: transparent;
+  color: var(--text-secondary);
   cursor: pointer;
   transition: all var(--transition-fast);
   font-size: 0.8rem;
 }
 
 .theme-toggle-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--toggle-hover);
 }
 
 .theme-toggle-btn.active {
   background: rgba(0, 212, 170, 0.25);
   box-shadow: 0 0 8px rgba(0, 212, 170, 0.2);
+  color: var(--text-primary);
 }
 
 .theme-toggle-icon {

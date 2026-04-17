@@ -1,0 +1,2803 @@
+{
+  "dataSource": "SBP EasyData API - Monetary & Financial Sector",
+  "lastUpdated": "2026-04-17",
+  "m2": {
+    "name": "Broad Money (M2)",
+    "seriesKey": "TS_GP_BAM_M2_W.M000070",
+    "data": [
+      {
+        "date": "2021-04",
+        "value": 21592908.91,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-05",
+        "value": 21878449.09,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-06",
+        "value": 22321706.94,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-07",
+        "value": 23553478.79,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-08",
+        "value": 23079550.61,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-09",
+        "value": 23296205.87,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-10",
+        "value": 23606750.33,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-11",
+        "value": 23394316.75,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-12",
+        "value": 23561013.54,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-01",
+        "value": 24123876.6,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-02",
+        "value": 23743708.21,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-03",
+        "value": 23855037.11,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-04",
+        "value": 24236357.46,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-05",
+        "value": 24992326.88,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-06",
+        "value": 25388537.45,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-07",
+        "value": 26774407.34,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-08",
+        "value": 26122542.38,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-09",
+        "value": 26384928.37,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-10",
+        "value": 26688632.46,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-11",
+        "value": 26872487.52,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-12",
+        "value": 26940388.73,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-01",
+        "value": 26760741.43,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-02",
+        "value": 27068191.22,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-03",
+        "value": 27376983.86,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-04",
+        "value": 28295354.17,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-05",
+        "value": 28993650.55,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-06",
+        "value": 29464882.71,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-07",
+        "value": 30455009.5,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-08",
+        "value": 30321066.43,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-09",
+        "value": 30494074.03,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-10",
+        "value": 30703298.39,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-11",
+        "value": 31008206.93,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-12",
+        "value": 31324307.66,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-01",
+        "value": 31814902.22,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-02",
+        "value": 31632664.36,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-03",
+        "value": 32095793.93,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-04",
+        "value": 32812328.51,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-05",
+        "value": 33121328.13,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-06",
+        "value": 33880082.44,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-07",
+        "value": 35153078.67,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-08",
+        "value": 34722428.53,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-09",
+        "value": 34942476.24,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-10",
+        "value": 35206554.74,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-11",
+        "value": 35291347.66,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-12",
+        "value": 35128481,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-01",
+        "value": 35249285.55,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-02",
+        "value": 35459731.37,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-03",
+        "value": 35920808.56,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-04",
+        "value": 37241638.63,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-05",
+        "value": 37238509.62,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-06",
+        "value": 38079966.83,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-07",
+        "value": 39781026.79,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-08",
+        "value": 39055284.59,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-09",
+        "value": 39444886,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-10",
+        "value": 39399445.19,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-11",
+        "value": 39587884.77,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-12",
+        "value": 40192492.3,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-01",
+        "value": 41639944.18,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-02",
+        "value": 41274294.68,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-03",
+        "value": 41917458.16,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-04",
+        "value": 42753315.54,
+        "unit": "Million PKR"
+      }
+    ]
+  },
+  "m2_yoy": {
+    "name": "M2 YoY Growth",
+    "seriesKey": "TS_GP_BAM_M2_W.M000500",
+    "data": [
+      {
+        "date": "2021-04",
+        "value": 15.12,
+        "unit": "Percent"
+      },
+      {
+        "date": "2021-05",
+        "value": 14.48,
+        "unit": "Percent"
+      },
+      {
+        "date": "2021-06",
+        "value": 14.29,
+        "unit": "Percent"
+      },
+      {
+        "date": "2021-07",
+        "value": 16.11,
+        "unit": "Percent"
+      },
+      {
+        "date": "2021-08",
+        "value": 14.26,
+        "unit": "Percent"
+      },
+      {
+        "date": "2021-09",
+        "value": 15.39,
+        "unit": "Percent"
+      },
+      {
+        "date": "2021-10",
+        "value": 15.11,
+        "unit": "Percent"
+      },
+      {
+        "date": "2021-11",
+        "value": 14.48,
+        "unit": "Percent"
+      },
+      {
+        "date": "2021-12",
+        "value": 13.65,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-01",
+        "value": 13.8,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-02",
+        "value": 12.84,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-03",
+        "value": 12.02,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-04",
+        "value": 11.34,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-05",
+        "value": 14.23,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-06",
+        "value": 13.74,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-07",
+        "value": 13.67,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-08",
+        "value": 13.18,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-09",
+        "value": 13.26,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-10",
+        "value": 13.86,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-11",
+        "value": 14.87,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-12",
+        "value": 14.34,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-01",
+        "value": 10.93,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-02",
+        "value": 14,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-03",
+        "value": 14.76,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-04",
+        "value": 16.54,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-05",
+        "value": 16.01,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-06",
+        "value": 16.06,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-07",
+        "value": 15.78,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-08",
+        "value": 16.07,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-09",
+        "value": 15.57,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-10",
+        "value": 15.04,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-11",
+        "value": 15.39,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-12",
+        "value": 16.27,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-01",
+        "value": 18.89,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-02",
+        "value": 16.86,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-03",
+        "value": 17.24,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-04",
+        "value": 15.96,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-05",
+        "value": 14.24,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-06",
+        "value": 13.92,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-07",
+        "value": 15.43,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-08",
+        "value": 14.52,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-09",
+        "value": 13.81,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-10",
+        "value": 14.67,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-11",
+        "value": 13.81,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-12",
+        "value": 12.21,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-01",
+        "value": 10.79,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-02",
+        "value": 11.72,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-03",
+        "value": 12.64,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-04",
+        "value": 13.5,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-05",
+        "value": 12.43,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-06",
+        "value": 12.4,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-07",
+        "value": -0.22,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-08",
+        "value": 12.48,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-09",
+        "value": 12.89,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-10",
+        "value": 11.91,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-11",
+        "value": 11.45,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-12",
+        "value": 14.42,
+        "unit": "Percent"
+      },
+      {
+        "date": "2026-01",
+        "value": 16.92,
+        "unit": "Percent"
+      },
+      {
+        "date": "2026-02",
+        "value": 16.4,
+        "unit": "Percent"
+      },
+      {
+        "date": "2026-03",
+        "value": 16.24,
+        "unit": "Percent"
+      },
+      {
+        "date": "2026-04",
+        "value": 15.69,
+        "unit": "Percent"
+      }
+    ]
+  },
+  "credit_private": {
+    "name": "Credit to Private Sector",
+    "seriesKey": "TS_GP_BAM_M2_W.M000340",
+    "data": [
+      {
+        "date": "2021-04",
+        "value": 6505849.14,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-05",
+        "value": 6566647.93,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-06",
+        "value": 6556010.07,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-07",
+        "value": 6758534.93,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-08",
+        "value": 6747583.66,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-09",
+        "value": 6764597.08,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-10",
+        "value": 7030859.81,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-11",
+        "value": 7197592.61,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-12",
+        "value": 7387763.23,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-01",
+        "value": 7578237.45,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-02",
+        "value": 7632560.09,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-03",
+        "value": 7691002.03,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-04",
+        "value": 7948242.11,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-05",
+        "value": 8046425.27,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-06",
+        "value": 8142527.64,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-07",
+        "value": 8317881.45,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-08",
+        "value": 8159234.86,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-09",
+        "value": 8339768.72,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-10",
+        "value": 8394492.42,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-11",
+        "value": 8433677.84,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-12",
+        "value": 8341486.51,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-01",
+        "value": 8641895.17,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-02",
+        "value": 8675000.49,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-03",
+        "value": 8702722.99,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-04",
+        "value": 8397096.98,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-05",
+        "value": 8329631.09,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-06",
+        "value": 8211546.98,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-07",
+        "value": 8075674.46,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-08",
+        "value": 8170805.03,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-09",
+        "value": 8161293.65,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-10",
+        "value": 8143052.67,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-11",
+        "value": 8313290.25,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-12",
+        "value": 8474619.1,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-01",
+        "value": 8510379.81,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-02",
+        "value": 8593230.04,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-03",
+        "value": 8631491.6,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-04",
+        "value": 8504643.76,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-05",
+        "value": 8593806.43,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-06",
+        "value": 8552397.78,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-07",
+        "value": 8565358.15,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-08",
+        "value": 8520153.45,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-09",
+        "value": 8447113.11,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-10",
+        "value": 8569860.87,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-11",
+        "value": 9673166.52,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-12",
+        "value": 10217753.46,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-01",
+        "value": 10501036.86,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-02",
+        "value": 9630497.91,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-03",
+        "value": 9430226.3,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-04",
+        "value": 9531806.97,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-05",
+        "value": 9598354.19,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-06",
+        "value": 9610078.17,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-07",
+        "value": 9741903.34,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-08",
+        "value": 9761854.95,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-09",
+        "value": 9812262.42,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-10",
+        "value": 9871296.47,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-11",
+        "value": 9893840.82,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-12",
+        "value": 10062188.84,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-01",
+        "value": 10761598.5,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-02",
+        "value": 10575655.06,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-03",
+        "value": 10836234.9,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-04",
+        "value": 10812769.32,
+        "unit": "Million PKR"
+      }
+    ]
+  },
+  "credit_pvt_yoy": {
+    "name": "Private Sector Credit YoY Growth",
+    "seriesKey": "TS_GP_BAM_M2_W.M000480",
+    "data": [
+      {
+        "date": "2021-04",
+        "value": 3.28,
+        "unit": "Percent"
+      },
+      {
+        "date": "2021-05",
+        "value": 4.16,
+        "unit": "Percent"
+      },
+      {
+        "date": "2021-06",
+        "value": 5.69,
+        "unit": "Percent"
+      },
+      {
+        "date": "2021-07",
+        "value": 9.95,
+        "unit": "Percent"
+      },
+      {
+        "date": "2021-08",
+        "value": 11.14,
+        "unit": "Percent"
+      },
+      {
+        "date": "2021-09",
+        "value": 11.8,
+        "unit": "Percent"
+      },
+      {
+        "date": "2021-10",
+        "value": 15.35,
+        "unit": "Percent"
+      },
+      {
+        "date": "2021-11",
+        "value": 17.41,
+        "unit": "Percent"
+      },
+      {
+        "date": "2021-12",
+        "value": 18.92,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-01",
+        "value": 19.02,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-02",
+        "value": 18.13,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-03",
+        "value": 18.37,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-04",
+        "value": 21.49,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-05",
+        "value": 22.53,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-06",
+        "value": 24.2,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-07",
+        "value": 23.07,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-08",
+        "value": 20.92,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-09",
+        "value": 23.29,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-10",
+        "value": 19.73,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-11",
+        "value": 17.17,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-12",
+        "value": 12.91,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-01",
+        "value": 14.04,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-02",
+        "value": 13.66,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-03",
+        "value": 13.15,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-04",
+        "value": 5.75,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-05",
+        "value": 3.52,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-06",
+        "value": 0.85,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-07",
+        "value": 0.01,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-08",
+        "value": 0.14,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-09",
+        "value": -2.14,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-10",
+        "value": -3,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-11",
+        "value": -1.43,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-12",
+        "value": 1.6,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-01",
+        "value": -1.52,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-02",
+        "value": -0.94,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-03",
+        "value": -0.82,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-04",
+        "value": 1.28,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-05",
+        "value": 3.17,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-06",
+        "value": 4.3,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-07",
+        "value": 6.06,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-08",
+        "value": 4.28,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-09",
+        "value": 3.97,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-10",
+        "value": 5.24,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-11",
+        "value": 16.36,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-12",
+        "value": 21.25,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-01",
+        "value": 23.39,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-02",
+        "value": 12.39,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-03",
+        "value": 10.83,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-04",
+        "value": 12.08,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-05",
+        "value": 11.69,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-06",
+        "value": 12.37,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-07",
+        "value": 53.33,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-08",
+        "value": 14.57,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-09",
+        "value": 16.16,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-10",
+        "value": 15.19,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-11",
+        "value": 1.52,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-12",
+        "value": -1.52,
+        "unit": "Percent"
+      },
+      {
+        "date": "2026-01",
+        "value": -0.78,
+        "unit": "Percent"
+      },
+      {
+        "date": "2026-02",
+        "value": 9.81,
+        "unit": "Percent"
+      },
+      {
+        "date": "2026-03",
+        "value": 15.99,
+        "unit": "Percent"
+      },
+      {
+        "date": "2026-04",
+        "value": 13.8,
+        "unit": "Percent"
+      }
+    ]
+  },
+  "deposits": {
+    "name": "Total Deposits with Banks",
+    "seriesKey": "TS_GP_BAM_M2_W.M000030",
+    "data": [
+      {
+        "date": "2021-04",
+        "value": 14766217.99,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-05",
+        "value": 14838949.53,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-06",
+        "value": 15278786.02,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-07",
+        "value": 16592203.46,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-08",
+        "value": 15793409.56,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-09",
+        "value": 16168554.6,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-10",
+        "value": 16536450.52,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-11",
+        "value": 16208431.35,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-12",
+        "value": 16404859.7,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-01",
+        "value": 16964307.57,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-02",
+        "value": 16552403.61,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-03",
+        "value": 16596268.19,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-04",
+        "value": 16884756.8,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-05",
+        "value": 16942352.4,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-06",
+        "value": 17692495.87,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-07",
+        "value": 19153752.39,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-08",
+        "value": 18180307.52,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-09",
+        "value": 18611231.67,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-10",
+        "value": 18816781.35,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-11",
+        "value": 19053737.8,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-12",
+        "value": 19272526.6,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-01",
+        "value": 18892296.6,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-02",
+        "value": 19040059.87,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-03",
+        "value": 19187683.87,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-04",
+        "value": 19701452.01,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-05",
+        "value": 20000721.66,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-06",
+        "value": 20736508.81,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-07",
+        "value": 21336234.32,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-08",
+        "value": 21540803.5,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-09",
+        "value": 22082220.72,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-10",
+        "value": 22164550.6,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-11",
+        "value": 22404207.69,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-12",
+        "value": 22835803.4,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-01",
+        "value": 23162541.22,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-02",
+        "value": 23052868.23,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-03",
+        "value": 23631331.43,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-04",
+        "value": 23802251.09,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-05",
+        "value": 24206753.62,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-06",
+        "value": 24779701.42,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-07",
+        "value": 25826799.05,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-08",
+        "value": 25631759.71,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-09",
+        "value": 25805185.38,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-10",
+        "value": 26124594.48,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-11",
+        "value": 26261882.12,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-12",
+        "value": 25788918.47,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-01",
+        "value": 25955455.26,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-02",
+        "value": 25920896.91,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-03",
+        "value": 26102348.4,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-04",
+        "value": 26864904.45,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-05",
+        "value": 27123811.51,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-06",
+        "value": 27199892.12,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-07",
+        "value": 28880152.56,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-08",
+        "value": 28329402.2,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-09",
+        "value": 28701902.54,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-10",
+        "value": 28709304.91,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-11",
+        "value": 28592517.58,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-12",
+        "value": 29138289.31,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-01",
+        "value": 30673538.84,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-02",
+        "value": 29913571.56,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-03",
+        "value": 30278611.49,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-04",
+        "value": 30774247.95,
+        "unit": "Million PKR"
+      }
+    ]
+  },
+  "deposits_yoy": {
+    "name": "Total Deposits YoY Growth",
+    "seriesKey": "TS_GP_BAM_M2_W.M000490",
+    "data": [
+      {
+        "date": "2021-04",
+        "value": 15.16,
+        "unit": "Percent"
+      },
+      {
+        "date": "2021-05",
+        "value": 14.34,
+        "unit": "Percent"
+      },
+      {
+        "date": "2021-06",
+        "value": 15.45,
+        "unit": "Percent"
+      },
+      {
+        "date": "2021-07",
+        "value": 17.91,
+        "unit": "Percent"
+      },
+      {
+        "date": "2021-08",
+        "value": 15.07,
+        "unit": "Percent"
+      },
+      {
+        "date": "2021-09",
+        "value": 16.28,
+        "unit": "Percent"
+      },
+      {
+        "date": "2021-10",
+        "value": 15.08,
+        "unit": "Percent"
+      },
+      {
+        "date": "2021-11",
+        "value": 14.47,
+        "unit": "Percent"
+      },
+      {
+        "date": "2021-12",
+        "value": 13.87,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-01",
+        "value": 14.65,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-02",
+        "value": 13.84,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-03",
+        "value": 13.04,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-04",
+        "value": 11.22,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-05",
+        "value": 14.17,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-06",
+        "value": 15.8,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-07",
+        "value": 15.44,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-08",
+        "value": 15.11,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-09",
+        "value": 15.11,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-10",
+        "value": 15.89,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-11",
+        "value": 17.55,
+        "unit": "Percent"
+      },
+      {
+        "date": "2022-12",
+        "value": 17.48,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-01",
+        "value": 11.36,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-02",
+        "value": 15.03,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-03",
+        "value": 15.61,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-04",
+        "value": 17.87,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-05",
+        "value": 18.05,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-06",
+        "value": 17.21,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-07",
+        "value": 16.13,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-08",
+        "value": 18.48,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-09",
+        "value": 18.65,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-10",
+        "value": 17.79,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-11",
+        "value": 17.58,
+        "unit": "Percent"
+      },
+      {
+        "date": "2023-12",
+        "value": 18.49,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-01",
+        "value": 22.6,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-02",
+        "value": 21.08,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-03",
+        "value": 23.16,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-04",
+        "value": 20.81,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-05",
+        "value": 21.03,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-06",
+        "value": 18.56,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-07",
+        "value": 21.05,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-08",
+        "value": 18.99,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-09",
+        "value": 16.58,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-10",
+        "value": 17.87,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-11",
+        "value": 17.22,
+        "unit": "Percent"
+      },
+      {
+        "date": "2024-12",
+        "value": 14.18,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-01",
+        "value": 12.06,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-02",
+        "value": 12.77,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-03",
+        "value": 12.69,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-04",
+        "value": 12.87,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-05",
+        "value": 12.05,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-06",
+        "value": 9.77,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-07",
+        "value": 5.5,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-08",
+        "value": 10.52,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-09",
+        "value": 11.23,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-10",
+        "value": 9.89,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-11",
+        "value": 8.94,
+        "unit": "Percent"
+      },
+      {
+        "date": "2025-12",
+        "value": 12.99,
+        "unit": "Percent"
+      },
+      {
+        "date": "2026-01",
+        "value": 16.01,
+        "unit": "Percent"
+      },
+      {
+        "date": "2026-02",
+        "value": 15.4,
+        "unit": "Percent"
+      },
+      {
+        "date": "2026-03",
+        "value": 15.72,
+        "unit": "Percent"
+      },
+      {
+        "date": "2026-04",
+        "value": 15.31,
+        "unit": "Percent"
+      }
+    ]
+  },
+  "nfa": {
+    "name": "NFA of Banking System",
+    "seriesKey": "TS_GP_BAM_M2_W.M000080",
+    "data": [
+      {
+        "date": "2021-04",
+        "value": 1127272.39,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-05",
+        "value": 1042199.55,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-06",
+        "value": 1053632.28,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-07",
+        "value": 1238904.53,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-08",
+        "value": 1358770.68,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-09",
+        "value": 1300540.21,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-10",
+        "value": 1182551.75,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-11",
+        "value": 856052.11,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-12",
+        "value": 1155699.82,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-01",
+        "value": 1034398.59,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-02",
+        "value": 990063.62,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-03",
+        "value": 942944.97,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-04",
+        "value": 112164.5,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-05",
+        "value": -48956.6,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-06",
+        "value": -417033.09,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-07",
+        "value": -192363.21,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-08",
+        "value": -792638.99,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-09",
+        "value": -601388,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-10",
+        "value": -846497.48,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-11",
+        "value": -710623.95,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-12",
+        "value": -1266591.57,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-01",
+        "value": -1534532.15,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-02",
+        "value": -2200457.63,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-03",
+        "value": -2075819.74,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-04",
+        "value": -1976819.15,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-05",
+        "value": -1888055.95,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-06",
+        "value": -2013841.83,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-07",
+        "value": -1738741.12,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-08",
+        "value": -1425721.05,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-09",
+        "value": -1534349.95,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-10",
+        "value": -1572802.55,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-11",
+        "value": -1473452.86,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-12",
+        "value": -1631061.91,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-01",
+        "value": -1171861.51,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-02",
+        "value": -1386925.55,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-03",
+        "value": -1251940.33,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-04",
+        "value": -1054993.98,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-05",
+        "value": -1207189.23,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-06",
+        "value": -1328239.87,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-07",
+        "value": -1135056.2,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-08",
+        "value": -1211336.12,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-09",
+        "value": -1101209.65,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-10",
+        "value": -949345.02,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-11",
+        "value": -813811.56,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-12",
+        "value": -668153,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-01",
+        "value": -486893.38,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-02",
+        "value": -447131.99,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-03",
+        "value": -282119.28,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-04",
+        "value": 43199.86,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-05",
+        "value": 80264.05,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-06",
+        "value": 204140.25,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-07",
+        "value": 547316.35,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-08",
+        "value": 401737.93,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-09",
+        "value": 541960.92,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-10",
+        "value": 573304,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-11",
+        "value": 541380.12,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-12",
+        "value": 608799.04,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-01",
+        "value": 874755.78,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-02",
+        "value": 1212901.5,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-03",
+        "value": 1500345.49,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-04",
+        "value": 1304656.19,
+        "unit": "Million PKR"
+      }
+    ]
+  },
+  "budgetary": {
+    "name": "Budgetary Support Borrowings",
+    "seriesKey": "TS_GP_BAM_M2_W.M000150",
+    "data": [
+      {
+        "date": "2021-04",
+        "value": 13965875.76,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-05",
+        "value": 14314870.62,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-06",
+        "value": 14606263.82,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-07",
+        "value": 15307799.05,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-08",
+        "value": 15052743.01,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-09",
+        "value": 15411179.5,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-10",
+        "value": 15354776.45,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-11",
+        "value": 15407573.35,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-12",
+        "value": 15193997.12,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-01",
+        "value": 15415044.07,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-02",
+        "value": 15282174.48,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-03",
+        "value": 15540919.65,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-04",
+        "value": 16301500.14,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-05",
+        "value": 16954556.33,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-06",
+        "value": 17711916.08,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-07",
+        "value": 18496395.22,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-08",
+        "value": 18844619.21,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-09",
+        "value": 18686252.4,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-10",
+        "value": 19196623.48,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-11",
+        "value": 18862778.99,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-12",
+        "value": 19646772.82,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-01",
+        "value": 19503518.12,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-02",
+        "value": 20388302.76,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-03",
+        "value": 20632510.96,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-04",
+        "value": 20819763.66,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-05",
+        "value": 21337520.49,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-06",
+        "value": 21434260.13,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-07",
+        "value": 22517735.82,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-08",
+        "value": 22378434.48,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-09",
+        "value": 23173116.67,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-10",
+        "value": 23767044.51,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-11",
+        "value": 23588503.65,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-12",
+        "value": 25138117.49,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-01",
+        "value": 24939446.31,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-02",
+        "value": 25094277.44,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-03",
+        "value": 25613618.11,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-04",
+        "value": 26766810.63,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-05",
+        "value": 27666321.21,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-06",
+        "value": 28607167.14,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-07",
+        "value": 29758410.99,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-08",
+        "value": 30028138.88,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-09",
+        "value": 30564139.59,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-10",
+        "value": 28441862.35,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-11",
+        "value": 28291552.45,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-12",
+        "value": 27376122.01,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-01",
+        "value": 27691720.91,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-02",
+        "value": 28936893.8,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-03",
+        "value": 29969467.07,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-04",
+        "value": 31231029.32,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-05",
+        "value": 31653188.14,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-06",
+        "value": 32555020.43,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-07",
+        "value": 33936551.88,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-08",
+        "value": 33903144.33,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-09",
+        "value": 31786166.51,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-10",
+        "value": 32036973.26,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-11",
+        "value": 32810220.8,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-12",
+        "value": 33443804.83,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-01",
+        "value": 33656638.89,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-02",
+        "value": 34077123.67,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-03",
+        "value": 34738936.69,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-04",
+        "value": 34902566.39,
+        "unit": "Million PKR"
+      }
+    ]
+  },
+  "reserve_money": {
+    "name": "Reserve Money",
+    "seriesKey": "TS_GP_BAM_RM_W.R000050",
+    "data": [
+      {
+        "date": "2021-04",
+        "value": 8136641.45,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-05",
+        "value": 8696001.56,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-06",
+        "value": 8415806.07,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-07",
+        "value": 8281703.16,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-08",
+        "value": 8676216.04,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-09",
+        "value": 8533646.92,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-10",
+        "value": 8564398.32,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-11",
+        "value": 8561443.94,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2021-12",
+        "value": 8626057.12,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-01",
+        "value": 8850812.96,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-02",
+        "value": 8803240.08,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-03",
+        "value": 8823861.36,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-04",
+        "value": 9011333.3,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-05",
+        "value": 9807500.52,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-06",
+        "value": 9377297.11,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-07",
+        "value": 9274881.87,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-08",
+        "value": 9683617.68,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-09",
+        "value": 9643367.91,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-10",
+        "value": 9578622.06,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-11",
+        "value": 9518396.38,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2022-12",
+        "value": 9437020.78,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-01",
+        "value": 9717045.62,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-02",
+        "value": 9853010.04,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-03",
+        "value": 10013762.58,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-04",
+        "value": 10549732.08,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-05",
+        "value": 11120067.01,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-06",
+        "value": 10731969.77,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-07",
+        "value": 11306671.39,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-08",
+        "value": 11034913.43,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-09",
+        "value": 10723585.85,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-10",
+        "value": 10708470.27,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-11",
+        "value": 10580235.02,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2023-12",
+        "value": 10628150.01,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-01",
+        "value": 10775879.21,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-02",
+        "value": 10871533.4,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-03",
+        "value": 10813865.07,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-04",
+        "value": 11446488.72,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-05",
+        "value": 11257737.2,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-06",
+        "value": 11320546.79,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-07",
+        "value": 11860679.53,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-08",
+        "value": 11385826.72,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-09",
+        "value": 11435926.5,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-10",
+        "value": 11339214.47,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-11",
+        "value": 11481830.35,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2024-12",
+        "value": 11896130.33,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-01",
+        "value": 11907658.97,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-02",
+        "value": 12177549.91,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-03",
+        "value": 12481760.11,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-04",
+        "value": 13379949.89,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-05",
+        "value": 12500717.05,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-06",
+        "value": 13697088,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-07",
+        "value": 13550576.6,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-08",
+        "value": 13350477.38,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-09",
+        "value": 13248053.26,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-10",
+        "value": 13542549.07,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-11",
+        "value": 13582118.98,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2025-12",
+        "value": 13776506.33,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-01",
+        "value": 13771894.89,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-02",
+        "value": 13995409.88,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-03",
+        "value": 14166549.12,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-04",
+        "value": 14591385.49,
+        "unit": "Million PKR"
+      }
+    ]
+  }
+}

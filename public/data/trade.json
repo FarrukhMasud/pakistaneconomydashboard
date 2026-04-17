@@ -379,7 +379,6 @@
       "balance": -2376
     }
   ],
-  "dataSource": "SBP",
   "topExportCountries": [
     {
       "country": "U. S. A.",
@@ -533,5 +532,8 @@
       "value": 776.94,
       "flag": "🇲🇾"
     }
-  ]
+  ],
+  "dataSource": "SBP",
+  "lastUpdated": "2026-04-17",
+  "dataCoverage": "2021-01 – 2026-03"
 }

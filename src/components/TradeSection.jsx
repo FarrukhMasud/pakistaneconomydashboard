@@ -9,6 +9,8 @@ import {
 } from '../utils/chartConfig';
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
+import SummaryCard from './ui/SummaryCard';
+import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, sumField, avgField } from '../utils/periodHelpers';
 
 function formatDate(dateStr) {
   const d = new Date(dateStr + '-01');
@@ -21,7 +23,11 @@ export default function TradeSection() {
   if (loading || !data) return <div className="card loading-card"><div className="spinner" /><span>Loading data…</span></div>;
   if (error) return <p style={{ color: COLORS.coral }}>Error: {error.message}</p>;
 
-  const { monthly, topExportCountries, topImportCountries } = data;
+  const { monthly, topExportCountries, topImportCountries, lastUpdated: tradeLU, dataCoverage: tradeDC } = data;
+
+  // Current year summary
+  const cy = currentCalendarYear(monthly);
+  const fy = currentFiscalYear(monthly);
 
   const labels = monthly.map((d) => formatDate(d.date));
   const tickCallback = (_val, idx) => (idx % 3 === 0 ? labels[idx] : '');
@@ -114,8 +120,55 @@ export default function TradeSection() {
     <section className="fade-in">
       <SectionHeader
         title="Trade Overview"
-        description="Pakistan's international trade performance showing monthly imports, exports, and trade balance. Pakistan typically runs a trade deficit, importing more than it exports. Trade data is a key indicator of external economic health and foreign exchange pressure."
+        description="Pakistan's goods trade flows (excluding services). Pakistan structurally imports more than it exports — primarily energy, machinery, and consumer goods — creating a persistent trade deficit. This deficit is a key driver of foreign exchange pressure and a major focus of IMF program conditionality. Export growth, especially in textiles and food, is critical for reducing external vulnerability."
       />
+
+      {(cy || fy) && (
+        <div className="summary-pair">
+          {cy && (
+            <SummaryCard
+              title={`${cy.rangeLabel} — Calendar YTD`}
+              accent={COLORS.teal}
+              items={(() => {
+                const ytdExports = sumField(cy.rows, 'exports');
+                const ytdImports = sumField(cy.rows, 'imports');
+                const ytdBalance = sumField(cy.rows, 'balance');
+                const priorExports = sumField(cy.prior, 'exports');
+                const priorImports = sumField(cy.prior, 'imports');
+                const expChg = pctChange(ytdExports, priorExports);
+                const impChg = pctChange(ytdImports, priorImports);
+                return [
+                  { label: 'Exports', value: fmtUSD(ytdExports), sub: priorExports ? `${expChg.pct > 0 ? '+' : ''}${expChg.pct}% YoY` : '', direction: expChg.direction, sentiment: expChg.direction === 'up' ? 'positive' : 'negative', color: COLORS.teal },
+                  { label: 'Imports', value: fmtUSD(ytdImports), sub: priorImports ? `${impChg.pct > 0 ? '+' : ''}${impChg.pct}% YoY` : '', direction: impChg.direction, sentiment: impChg.direction === 'up' ? 'negative' : 'positive', color: COLORS.coral },
+                  { label: 'Trade Balance', value: fmtUSD(ytdBalance), sentiment: ytdBalance >= 0 ? 'positive' : 'negative', color: ytdBalance >= 0 ? COLORS.teal : COLORS.coral },
+                ];
+              })()}
+              footnote={`${cy.months} month${cy.months > 1 ? 's' : ''} · Source: SBP`}
+            />
+          )}
+          {fy && (
+            <SummaryCard
+              title={`${fy.fyLabel} (${fy.rangeLabel}) — Fiscal YTD`}
+              accent={COLORS.blue}
+              items={(() => {
+                const fytdExports = sumField(fy.rows, 'exports');
+                const fytdImports = sumField(fy.rows, 'imports');
+                const fytdBalance = sumField(fy.rows, 'balance');
+                const priorExports = sumField(fy.prior, 'exports');
+                const priorImports = sumField(fy.prior, 'imports');
+                const expChg = pctChange(fytdExports, priorExports);
+                const impChg = pctChange(fytdImports, priorImports);
+                return [
+                  { label: 'Exports', value: fmtUSD(fytdExports), sub: priorExports ? `${expChg.pct > 0 ? '+' : ''}${expChg.pct}% vs ${fy.priorLabel}` : '', direction: expChg.direction, sentiment: expChg.direction === 'up' ? 'positive' : 'negative', color: COLORS.teal },
+                  { label: 'Imports', value: fmtUSD(fytdImports), sub: priorImports ? `${impChg.pct > 0 ? '+' : ''}${impChg.pct}% vs ${fy.priorLabel}` : '', direction: impChg.direction, sentiment: impChg.direction === 'up' ? 'negative' : 'positive', color: COLORS.coral },
+                  { label: 'Trade Balance', value: fmtUSD(fytdBalance), sentiment: fytdBalance >= 0 ? 'positive' : 'negative', color: fytdBalance >= 0 ? COLORS.teal : COLORS.coral },
+                ];
+              })()}
+              footnote={`${fy.months} month${fy.months > 1 ? 's' : ''} · Source: SBP`}
+            />
+          )}
+        </div>
+      )}
 
       <div className="section-grid">
         <ChartCard
@@ -123,8 +176,8 @@ export default function TradeSection() {
           description="Monthly trade flows in USD millions. The gap between imports (red) and exports (green) shows the trade deficit. Import compression in 2023 was due to government restrictions to preserve foreign exchange."
           source="PBS / SBP"
           dataSource="SBP"
-          lastUpdated="Apr 2026"
-          dataCoverage="Jan 2021 – Mar 2026"
+          lastUpdated={tradeLU}
+          dataCoverage={tradeDC}
         >
           <div className="chart-container">
             <Line data={lineData} options={lineOptions} />
@@ -135,8 +188,8 @@ export default function TradeSection() {
           description="Monthly trade surplus or deficit. Red bars indicate deficit months (imports exceeded exports). A narrowing deficit signals improving external balance."
           source="PBS / SBP"
           dataSource="SBP"
-          lastUpdated="Apr 2026"
-          dataCoverage="Jan 2021 – Mar 2026"
+          lastUpdated={tradeLU}
+          dataCoverage={tradeDC}
         >
           <div className="chart-container">
             <Bar data={barData} options={barOptions} />
@@ -148,11 +201,11 @@ export default function TradeSection() {
         <div className="section-grid" style={{ marginTop: '1.5rem' }}>
           <ChartCard
             title="Top Export Destinations"
-            description="Top 15 countries by export receipts in Jul-Mar FY2026. Shows where Pakistan sends its goods."
+            description={`Top 15 countries by export receipts. The US, UK, and China are dominant buyers of Pakistani textiles and food products.`}
             source="SBP"
             dataSource="SBP"
-            lastUpdated="Apr 2026"
-            dataCoverage="Jul-Mar FY2026"
+            lastUpdated={tradeLU}
+            dataCoverage={fy ? `${fy.rangeLabel} ${fy.fyLabel}` : tradeDC}
           >
             <div className="chart-container tall">
               <Bar
@@ -171,11 +224,11 @@ export default function TradeSection() {
           </ChartCard>
           <ChartCard
             title="Top Import Sources"
-            description="Top 15 countries by import payments in Jul-Mar FY2026. Shows where Pakistan buys its goods from."
+            description={`Top 15 countries by import payments. China, UAE (oil), and Saudi Arabia dominate Pakistan's import bill.`}
             source="SBP"
             dataSource="SBP"
-            lastUpdated="Apr 2026"
-            dataCoverage="Jul-Mar FY2026"
+            lastUpdated={tradeLU}
+            dataCoverage={fy ? `${fy.rangeLabel} ${fy.fyLabel}` : tradeDC}
           >
             <div className="chart-container tall">
               <Bar
