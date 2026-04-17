@@ -133,9 +133,9 @@ This runs 6 steps:
    inflation, monetary, public finance
 4. **KPI Regeneration** — rebuilds KPI summary from all data
 5. **Git Commit & Push** — commits data changes to GitHub
-6. **GitHub Actions** — auto-deploys to Azure Storage on push
+6. **Deploy** — builds and uploads to Azure Storage
 
-Use `npm run update -- --no-push` to skip the git push step.
+Use `npm run update -- --no-deploy` to skip steps 5–6.
 
 ### Partial Updates
 
@@ -168,24 +168,27 @@ SBP typically publishes updated data monthly. Recommended schedule:
 
 ## Deploying to Azure Storage
 
-Deployment is **automatic** via GitHub Actions. Every push to
-`main` triggers `.github/workflows/deploy.yml` which builds the
-project and uploads to Azure Storage.
+The dashboard is hosted as a static website on Azure Blob Storage.
+Deployment is handled automatically by `npm run update`, or
+manually via `npm run deploy`.
 
-### CI/CD Setup (one-time)
-
-1. Go to your GitHub repo → Settings → Secrets → Actions
-2. Add secret `AZURE_STORAGE_CONNECTION_STRING` with the value
-   from: `az storage account show-connection-string --name pakeconomicdash --resource-group rg-pak-eco -o tsv`
-3. Push to `main` — the workflow runs automatically
-
-### Manual Deploy (alternative)
+### Deploy Manually
 
 ```bash
 npm run deploy
 # or
 pwsh scripts/deploy.ps1
 ```
+
+### Full Update + Commit + Deploy (one command)
+
+```bash
+npm run update
+```
+
+This fetches fresh data, commits changes to git, pushes to
+GitHub, and deploys to Azure Storage. Use `--no-deploy` to skip
+the git push and deploy steps.
 
 ### Azure Configuration
 
@@ -197,15 +200,8 @@ pwsh scripts/deploy.ps1
 | SKU              | `Standard_LRS`         |
 | Index Document   | `index.html`           |
 | Error Document   | `index.html`           |
-| Live URL         | See link below         |
 
 Live: <https://pakeconomicdash.z5.web.core.windows.net/>
-
-### Full Update + Deploy (end-to-end)
-
-```bash
-npm run update && npm run deploy
-```
 
 ---
 

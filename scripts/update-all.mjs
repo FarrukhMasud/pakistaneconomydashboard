@@ -171,12 +171,13 @@ async function main() {
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   const kpiOk = runScript(resolve(__dirname, 'parse-sbp-excel.mjs'), 'KPI regeneration', ['--kpi-only']);
 
-  // Step 5: Commit and push data changes
-  const autoCommit = !args.includes('--no-push');
+  // Step 5: Commit, push, and deploy
+  const autoDeploy = !args.includes('--no-deploy');
   let pushOk = false;
-  if (autoCommit && (parseOk || apiOk)) {
+  let deployOk = false;
+  if (autoDeploy && (parseOk || apiOk)) {
     console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    console.log('📤 Step 5: Committing and pushing data changes...');
+    console.log('📤 Step 5: Commit, push, and deploy...');
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     try {
       const date = new Date().toISOString().split('T')[0];
@@ -191,7 +192,7 @@ async function main() {
         );
         execSync('git push', { cwd: resolve(__dirname, '..'), stdio: 'inherit' });
         pushOk = true;
-        console.log('  ✅ Changes committed and pushed (deploy workflow will run)');
+        console.log('  ✅ Changes committed and pushed');
       } else {
         console.log('  ⏭  No data changes to commit');
         pushOk = true;
@@ -200,8 +201,21 @@ async function main() {
       console.error(`  ⚠️  Git push failed: ${err.message}`);
       console.log('  💡 Push manually: git add public/data/ && git commit && git push');
     }
-  } else if (!autoCommit) {
-    console.log('\n  ⏭  Skipping git push (--no-push flag)');
+
+    // Deploy to Azure Storage
+    console.log('\n  🚀 Deploying to Azure Storage...');
+    try {
+      execSync('pwsh scripts/deploy.ps1', {
+        cwd: resolve(__dirname, '..'),
+        stdio: 'inherit',
+      });
+      deployOk = true;
+    } catch (err) {
+      console.error(`  ⚠️  Deploy failed: ${err.message}`);
+      console.log('  💡 Deploy manually: npm run deploy');
+    }
+  } else if (!autoDeploy) {
+    console.log('\n  ⏭  Skipping deploy (--no-deploy flag)');
   }
 
   // Step 6: Summary
@@ -212,8 +226,9 @@ async function main() {
   console.log(`  📊 Excel parse: ${parseOk ? '✅ Success' : '❌ Failed'}`);
   console.log(`  💸 SBP API:     ${apiOk ? '✅ Success' : '⚠️  Failed (needs SBP_API_KEY in .env)'}`);
   console.log(`  📊 KPI regen:   ${kpiOk ? '✅ Success' : '⚠️  Failed'}`);
-  if (autoCommit) {
+  if (autoDeploy) {
     console.log(`  📤 Git push:    ${pushOk ? '✅ Success' : '⚠️  Failed'}`);
+    console.log(`  🚀 Deploy:      ${deployOk ? '✅ Success' : '⚠️  Failed'}`);
   }
   console.log('\n  🌐 Live at: https://pakeconomicdash.z5.web.core.windows.net/\n');
 }
