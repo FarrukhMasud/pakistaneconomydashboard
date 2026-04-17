@@ -5,7 +5,7 @@ indicators using **official government data** from the State Bank
 of Pakistan (SBP), Pakistan Bureau of Statistics (PBS), and
 Ministry of Finance.
 
-**Live:** [https://pakeconomicdash.z5.web.core.windows.net/](https://pakeconomicdash.z5.web.core.windows.net/)
+**Live:** [https://pakeconomydash.z5.web.core.windows.net/](https://pakeconomydash.z5.web.core.windows.net/)
 
 ## Dashboard Sections
 
@@ -194,14 +194,14 @@ the git push and deploy steps.
 
 | Setting          | Value                  |
 | ---------------- | ---------------------- |
-| Storage Account  | `pakeconomicdash`      |
+| Storage Account  | `pakeconomydash`       |
 | Resource Group   | `rg-pak-eco`           |
 | Region           | `westus2`              |
 | SKU              | `Standard_LRS`         |
 | Index Document   | `index.html`           |
 | Error Document   | `index.html`           |
 
-Live: <https://pakeconomicdash.z5.web.core.windows.net/>
+Live: <https://pakeconomydash.z5.web.core.windows.net/>
 
 ---
 

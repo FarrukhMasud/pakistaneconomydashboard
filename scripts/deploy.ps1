@@ -1,7 +1,7 @@
 # Pakistan Economic Dashboard - Azure Static Website Deploy Script
 # Usage: pwsh scripts/deploy.ps1
 
-$StorageAccount = "pakeconomicdash"
+$StorageAccount = "pakeconomydash"
 $ResourceGroup  = "rg-pak-eco"
 $Region         = "westus2"
 
