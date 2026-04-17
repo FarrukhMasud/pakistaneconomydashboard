@@ -1,23 +1,26 @@
 # 🇵🇰 Pakistan Economic Dashboard
 
-An interactive web dashboard visualising Pakistan's key economic indicators using **official government data** from the State Bank of Pakistan (SBP), Pakistan Bureau of Statistics (PBS), and Ministry of Finance.
+An interactive web dashboard visualising Pakistan's key economic
+indicators using **official government data** from the State Bank
+of Pakistan (SBP), Pakistan Bureau of Statistics (PBS), and
+Ministry of Finance.
 
 **Live:** [https://pakeconomicdash.z5.web.core.windows.net/](https://pakeconomicdash.z5.web.core.windows.net/)
 
 ## Dashboard Sections
 
-| Section | Key Metrics | Source |
-|---------|------------|--------|
-| **Overview** | 8 KPI cards (reserves, exchange rate, remittances, FDI, IT exports, GDP growth, inflation, policy rate) | Derived from all data files |
-| **Trade** | Monthly imports/exports, trade balance, top 15 partner countries | SBP Excel |
-| **Foreign Reserves** | Weekly SBP + commercial bank reserves, import cover estimate | SBP forex.pdf |
-| **Exchange Rate** | PKR vs USD/EUR/GBP/CNY monthly averages | SBP Excel |
-| **Remittances** | Monthly worker remittances, source country breakdown | SBP EasyData API |
-| **FDI** | Net FDI by sector & country, annual trends, FYTD comparison | SBP Excel |
-| **IT & Services** | Services exports by EBOPS category, IT sub-sector breakdown | SBP Excel |
-| **Inflation** | National/Urban/Rural CPI, Food/Non-Food, SPI, WPI | SBP EasyData API |
-| **Monetary** | M2, private credit, deposits, NFA, reserve money | SBP EasyData API |
-| **Public Finance** | GDP growth, fiscal/primary balance, revenue & expenditure | SBP EasyData API + Excel |
+| Section              | Key Metrics                                    | Source              |
+| -------------------- | ---------------------------------------------- | ------------------- |
+| **Overview**         | 8 KPI cards (reserves, exchange rate, etc.)    | All data files      |
+| **Trade**            | Monthly imports/exports, top 15 countries       | SBP Excel           |
+| **Foreign Reserves** | Weekly SBP + bank reserves, import cover        | SBP forex.pdf       |
+| **Exchange Rate**    | PKR vs USD/EUR/GBP/CNY monthly averages         | SBP Excel           |
+| **Remittances**      | Monthly remittances, source country breakdown   | SBP EasyData API    |
+| **FDI**              | Net FDI by sector & country, FYTD comparison    | SBP Excel           |
+| **IT & Services**    | Services exports (EBOPS), IT sub-sectors        | SBP Excel           |
+| **Inflation**        | National/Urban/Rural CPI, Food, SPI, WPI        | SBP EasyData API    |
+| **Monetary**         | M2, private credit, deposits, NFA               | SBP EasyData API    |
+| **Public Finance**   | GDP growth, fiscal balance, revenue/expenditure | SBP API + Excel     |
 
 ## Tech Stack
 
@@ -62,34 +65,49 @@ All data comes from official Pakistani government sources. There are **no synthe
 
 ### SBP Excel/PDF Files (parsed by `parse-sbp-excel.mjs`)
 
-| File | URL | Produces |
-|------|-----|----------|
-| `exp_import_BOP.xls` | https://www.sbp.org.pk/ecodata/exp_import_BOP.xls | `trade.json` (monthly imports/exports) |
-| `Foreign_Dir.xls` | https://www.sbp.org.pk/ecodata/Foreign_Dir.xls | `fdi.json` (FDI by sector) |
-| `Netinflow.xls` | https://www.sbp.org.pk/ecodata/Netinflow.xls | `fdi.json` (FDI by country) |
-| `NetinflowSummary.xls` | https://www.sbp.org.pk/ecodata/NetinflowSummary.xls | `fdi.json` (annual FDI) |
-| `GDP_table.xlsx` | https://www.sbp.org.pk/ecodata/GDP_table.xlsx | `fiscal.json` (GDP growth) |
-| `Balancepayment_BPM6.xls` | https://www.sbp.org.pk/ecodata/Balancepayment_BPM6.xls | BOP summary data |
-| `IBF_Arch.xls` | https://www.sbp.org.pk/ecodata/IBF_Arch.xls | `exchange-rates.json` (PKR rates) |
-| `dt.xls` | https://www.sbp.org.pk/ecodata/dt.xls | `services.json` (EBOPS services trade) |
-| `Export_Receipts_by_all_Countries.xls` | https://www.sbp.org.pk/ecodata/Export_Receipts_by_all_Countries.xls | `trade.json` (export countries) |
-| `Import-Payments-by-All-Countries.xlsx` | https://www.sbp.org.pk/ecodata/Import-Payments-by-All-Countries.xlsx | `trade.json` (import countries) |
-| `forex.pdf` | https://www.sbp.org.pk/ecodata/forex.pdf | `reserves.json` (weekly SBP + bank reserves) |
+These files are auto-downloaded by `npm run update`:
+
+- **exp_import_BOP.xls** → `trade.json`
+  <https://www.sbp.org.pk/ecodata/exp_import_BOP.xls>
+- **Foreign_Dir.xls** → `fdi.json` (by sector)
+  <https://www.sbp.org.pk/ecodata/Foreign_Dir.xls>
+- **Netinflow.xls** → `fdi.json` (by country)
+  <https://www.sbp.org.pk/ecodata/Netinflow.xls>
+- **NetinflowSummary.xls** → `fdi.json` (annual)
+  <https://www.sbp.org.pk/ecodata/NetinflowSummary.xls>
+- **GDP_table.xlsx** → `fiscal.json` (GDP growth)
+  <https://www.sbp.org.pk/ecodata/GDP_table.xlsx>
+- **Balancepayment_BPM6.xls** → BOP summary
+  <https://www.sbp.org.pk/ecodata/Balancepayment_BPM6.xls>
+- **IBF_Arch.xls** → `exchange-rates.json`
+  <https://www.sbp.org.pk/ecodata/IBF_Arch.xls>
+- **dt.xls** → `services.json` (EBOPS)
+  <https://www.sbp.org.pk/ecodata/dt.xls>
+- **Export_Receipts_by_all_Countries.xls** → `trade.json`
+  <https://www.sbp.org.pk/ecodata/Export_Receipts_by_all_Countries.xls>
+- **Import-Payments-by-All-Countries.xlsx** → `trade.json`
+  <https://www.sbp.org.pk/ecodata/Import-Payments-by-All-Countries.xlsx>
+- **forex.pdf** → `reserves.json` (weekly reserves)
+  <https://www.sbp.org.pk/ecodata/forex.pdf>
 
 ### SBP EasyData API (fetched by `update-data.mjs`)
 
-| Dataset | API Series | Produces |
-|---------|-----------|----------|
-| Workers' Remittances | `TS_GP_BOP_WR_M.*` (total + 6 country groups) | `remittances.json` |
-| Inflation (CPI/SPI/WPI) | `TS_GP_PT_CPI_M.*` (9 series) | `inflation.json` |
-| Monetary Sector | `TS_GP_BAM_M2_W.*`, `TS_GP_BAM_RM_W.*` (9 series) | `monetary.json` |
-| Public Finance | `TS_GP_PF_SPF_Y.*` (8 series) | `fiscal.json` (publicFinance key) |
+| Dataset              | API Series                  | Produces             |
+| -------------------- | --------------------------- | -------------------- |
+| Workers' Remittances | `TS_GP_BOP_WR_M.*` (7 ser.) | `remittances.json`   |
+| Inflation (CPI/WPI)  | `TS_GP_PT_CPI_M.*` (9 ser.) | `inflation.json`     |
+| Monetary Sector      | `TS_GP_BAM_M2_W.*` (9 ser.) | `monetary.json`      |
+| Public Finance       | `TS_GP_PF_SPF_Y.*` (8 ser.) | `fiscal.json`        |
 
-**API Registration:** https://easydata.sbp.org.pk → My Account → API Key → Generate
+**API Registration:**
+<https://easydata.sbp.org.pk> → My Account → API Key → Generate
 
 ### KPI Summary
 
-`kpi-summary.json` is **auto-generated** from all the above data files by `generateKpiFromData()` — it is never manually edited. This runs as the final step after all parsers and API updates complete, ensuring all 8 KPIs reflect the latest data.
+`kpi-summary.json` is **auto-generated** from all the above data
+files by `generateKpiFromData()` — it is never manually edited.
+This runs as the final step after all parsers and API updates
+complete, ensuring all 8 KPIs reflect the latest data.
 
 ---
 
@@ -108,6 +126,7 @@ npm run update
 ```
 
 This runs 4 steps:
+
 1. **Download** — Fetches 10 Excel/PDF files from sbp.org.pk
 2. **Excel Parse** — `parse-sbp-excel.mjs` processes files → JSON
 3. **API Update** — `update-data.mjs` fetches remittances, inflation, monetary, public finance
@@ -135,7 +154,9 @@ npm run update-data -- --section publicFinance
 ### Update Frequency
 
 SBP typically publishes updated data monthly. Recommended schedule:
-- **Monthly:** Run `npm run update` after SBP publishes new data (usually 2nd–3rd week of each month)
+
+- **Monthly:** Run `npm run update` after SBP publishes
+  new data (usually 2nd–3rd week of each month)
 - The pipeline is idempotent — safe to run anytime
 
 ---
@@ -144,10 +165,10 @@ SBP typically publishes updated data monthly. Recommended schedule:
 
 The dashboard is hosted as a static website on Azure Blob Storage.
 
-### Prerequisites
+### Azure Prerequisites
 
 - Azure CLI installed and logged in (`az login`)
-- Resource group `rg-pak-eco` in `westus2` (auto-created on first deploy)
+- Resource group `rg-pak-eco` in `westus2` (auto-created)
 
 ### Deploy
 
@@ -158,22 +179,23 @@ pwsh scripts/deploy.ps1
 ```
 
 This will:
+
 1. Build the production bundle (`npm run build`)
-2. Create Azure resources if they don't exist (storage account `pakeconomicdash`, static website enabled)
+2. Create Azure resources if they don't exist
 3. Upload all files from `dist/` to the `$web` container
 4. Print the live URL
 
 ### Azure Configuration
 
-| Setting | Value |
-|---------|-------|
+| Setting          | Value                  |
+| ---------------- | ---------------------- |
 | Storage Account | `pakeconomicdash` |
 | Resource Group | `rg-pak-eco` |
 | Region | `westus2` |
 | SKU | `Standard_LRS` |
 | Index Document | `index.html` |
 | Error Document | `index.html` |
-| Live URL | https://pakeconomicdash.z5.web.core.windows.net/ |
+| Live URL | <https://pakeconomicdash.z5.web.core.windows.net/> |
 
 ### Full Update + Deploy (end-to-end)
 
@@ -185,14 +207,14 @@ npm run update && npm run deploy
 
 ## Project Structure
 
-```
+```text
 pak-eco/
 ├── public/
 │   └── data/                  # JSON data files (auto-generated)
 │       ├── trade.json         # Monthly imports/exports + country breakdown
 │       ├── fdi.json           # FDI by sector, country, annual
 │       ├── fiscal.json        # GDP growth + public finance
-│       ├── exchange-rates.json# PKR vs USD/EUR/GBP/CNY
+│       ├── exchange-rates.json # PKR vs USD/EUR/GBP/CNY
 │       ├── reserves.json      # Weekly SBP + bank reserves
 │       ├── services.json      # IT & services exports (EBOPS)
 │       ├── remittances.json   # Monthly remittances + source countries
@@ -233,7 +255,7 @@ pak-eco/
 
 ## Data Pipeline Architecture
 
-```
+```text
 SBP Website (Excel/PDF)          SBP EasyData API
         │                               │
         ▼                               ▼
@@ -254,7 +276,10 @@ SBP Website (Excel/PDF)          SBP EasyData API
            (derived from ALL above)
 ```
 
-**Single source of truth:** Each JSON data file is written by exactly one script (except `fiscal.json` which merges GDP from Excel and publicFinance from API). `kpi-summary.json` is always regenerated last from all canonical data files.
+**Single source of truth:** Each JSON data file is written by
+exactly one script (except `fiscal.json` which merges GDP from
+Excel and publicFinance from API). `kpi-summary.json` is always
+regenerated last from all canonical data files.
 
 ---
 
