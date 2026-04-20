@@ -27,6 +27,10 @@ export default function KpiCards() {
       <SectionHeader
         title="Economic Overview"
         description="Key macroeconomic indicators at a glance. These headline numbers summarize Pakistan's economic health — from external accounts (reserves, trade, remittances) to domestic conditions (growth, inflation, monetary policy). Green arrows indicate improving trends; red indicates deterioration."
+        sourceLinks={[
+          { label: 'SBP EasyData Portal', url: 'https://easydata.sbp.org.pk' },
+          { label: 'PBS Statistics', url: 'https://www.pbs.gov.pk' },
+        ]}
       />
       <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
         Data refreshed: {lastUpdated} · All values derived from source datasets

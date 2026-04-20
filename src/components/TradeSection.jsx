@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Line, Bar } from 'react-chartjs-2';
 import { useData } from '../hooks/useData';
 import {
@@ -10,7 +11,8 @@ import {
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
-import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, sumField, avgField } from '../utils/periodHelpers';
+import YoYToggle from './ui/YoYToggle';
+import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, sumField, avgField, buildYoYOverlay } from '../utils/periodHelpers';
 
 function formatDate(dateStr) {
   const d = new Date(dateStr + '-01');
@@ -18,6 +20,7 @@ function formatDate(dateStr) {
 }
 
 export default function TradeSection() {
+  const [showYoY, setShowYoY] = useState(false);
   const { data, loading, error } = useData('trade.json');
 
   if (loading || !data) return <div className="card loading-card"><div className="spinner" /><span>Loading data…</span></div>;
@@ -71,6 +74,7 @@ export default function TradeSection() {
 
   // --- Trade Balance Bar ---
   const balanceColors = monthly.map((d) => (d.balance >= 0 ? COLORS.teal : COLORS.coral));
+  const { priorData: balPrior, priorLabel: balPriorLabel } = buildYoYOverlay(monthly, 'balance');
 
   const barData = {
     labels,
@@ -82,6 +86,18 @@ export default function TradeSection() {
         borderColor: balanceColors,
         borderWidth: 1,
       },
+      ...(showYoY ? [{
+        label: balPriorLabel,
+        data: balPrior,
+        type: 'line',
+        borderColor: COLORS.amber,
+        backgroundColor: 'transparent',
+        borderDash: [6, 3],
+        pointRadius: 2,
+        pointHoverRadius: 5,
+        fill: false,
+        order: 0,
+      }] : []),
     ],
   };
 
@@ -121,6 +137,10 @@ export default function TradeSection() {
       <SectionHeader
         title="Trade Overview"
         description="Pakistan's goods trade flows (excluding services). Pakistan structurally imports more than it exports — primarily energy, machinery, and consumer goods — creating a persistent trade deficit. This deficit is a key driver of foreign exchange pressure and a major focus of IMF program conditionality. Export growth, especially in textiles and food, is critical for reducing external vulnerability."
+        sourceLinks={[
+          { label: 'SBP BOP Data', url: 'https://www.sbp.org.pk/ecodata/BOP_BPM6_detail.xls' },
+          { label: 'PBS Trade Stats', url: 'https://www.pbs.gov.pk/trade-tables' },
+        ]}
       />
 
       {(cy || fy) && (
@@ -191,6 +211,7 @@ export default function TradeSection() {
           lastUpdated={tradeLU}
           dataCoverage={tradeDC}
         >
+          <YoYToggle enabled={showYoY} onToggle={() => setShowYoY(v => !v)} />
           <div className="chart-container">
             <Bar data={barData} options={barOptions} />
           </div>

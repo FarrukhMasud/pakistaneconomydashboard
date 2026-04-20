@@ -117,6 +117,38 @@ export function latestValue(dataArr) {
 }
 
 /**
+ * Build a year-over-year overlay dataset from monthly data.
+ * Returns prior-year values aligned to the same month positions.
+ *
+ * @param {Array} rows – sorted [{ date: "YYYY-MM", ... }]
+ * @param {string} field – field name to extract (e.g. 'total', 'sbp')
+ * @returns {{ priorData: Array, priorLabel: string }} – array aligned to rows, null where no prior data
+ */
+export function buildYoYOverlay(rows, field) {
+  if (!rows?.length) return { priorData: [], priorLabel: '' };
+
+  const byYM = {};
+  rows.forEach(r => {
+    const { year, month } = parseYM(r.date);
+    byYM[`${year}-${month}`] = r[field];
+  });
+
+  const latest = parseYM(rows[rows.length - 1].date);
+  const priorYear = latest.year - 1;
+
+  const priorData = rows.map(r => {
+    const { year, month } = parseYM(r.date);
+    const pKey = `${year - 1}-${month}`;
+    return byYM[pKey] ?? null;
+  });
+
+  return {
+    priorData,
+    priorLabel: `Same period ${priorYear}`,
+  };
+}
+
+/**
  * Get the fiscal-year-to-date slice of monthly data.
  * Pakistan FY runs Jul–Jun. FY26 = Jul 2025 – Jun 2026.
  *

@@ -306,6 +306,34 @@ a:hover {
   margin-bottom: 1rem;
 }
 
+/* ===== YoY Toggle ===== */
+.yoy-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 100px;
+  padding: 0.25rem 0.7rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-bottom: 0.5rem;
+}
+
+.yoy-toggle:hover {
+  color: var(--accent-amber);
+  border-color: var(--accent-amber);
+}
+
+.yoy-toggle--active {
+  color: var(--accent-amber);
+  border-color: var(--accent-amber);
+  background: rgba(255, 167, 38, 0.08);
+}
+
 /* ===== KPI Card Enhancements ===== */
 .kpi-card {
   position: relative;
@@ -514,6 +542,14 @@ a:hover {
 .chart-footnote span { white-space: nowrap; }
 
 /* ===== Section Header with Collapsible Intro ===== */
+.section-header-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
 .section-intro-toggle {
   display: inline-flex;
   align-items: center;
@@ -524,12 +560,37 @@ a:hover {
   border: none;
   cursor: pointer;
   padding: 0.25rem 0;
-  margin-top: 0.25rem;
   transition: color 0.2s;
 }
 
 .section-intro-toggle:hover {
   color: var(--accent-teal);
+}
+
+.source-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.source-link-pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 100px;
+  padding: 0.2rem 0.65rem;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.source-link-pill:hover {
+  color: var(--accent-teal);
+  border-color: var(--accent-teal);
+  background: rgba(0, 212, 170, 0.06);
 }
 
 .section-intro-panel {

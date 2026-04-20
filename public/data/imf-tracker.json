@@ -1,0 +1,87 @@
+{
+  "program": "Extended Fund Facility (EFF)",
+  "approved": "2024-09-25",
+  "totalSDR": 5320,
+  "totalUSD": 7000,
+  "duration": "37 months",
+  "endDate": "2027-09",
+  "reviews": [
+    {
+      "name": "Board Approval",
+      "date": "2024-09-25",
+      "sdrM": 760,
+      "usdM": 1020,
+      "status": "completed"
+    },
+    {
+      "name": "1st Review",
+      "date": "2025-01-31",
+      "sdrM": 760,
+      "usdM": 1020,
+      "status": "completed"
+    },
+    {
+      "name": "2nd Review",
+      "date": "2025-05-09",
+      "sdrM": 760,
+      "usdM": 1020,
+      "status": "completed"
+    },
+    {
+      "name": "3rd Review",
+      "expected": "2025-09",
+      "sdrM": 760,
+      "usdM": 1020,
+      "status": "pending"
+    },
+    {
+      "name": "4th Review",
+      "expected": "2025-12",
+      "sdrM": 760,
+      "usdM": 1020,
+      "status": "pending"
+    },
+    {
+      "name": "5th Review",
+      "expected": "2026-03",
+      "sdrM": 380,
+      "usdM": 510,
+      "status": "pending"
+    },
+    {
+      "name": "6th Review",
+      "expected": "2026-06",
+      "sdrM": 380,
+      "usdM": 510,
+      "status": "pending"
+    },
+    {
+      "name": "7th Review",
+      "expected": "2026-09",
+      "sdrM": 380,
+      "usdM": 510,
+      "status": "pending"
+    },
+    {
+      "name": "8th & Final Review",
+      "expected": "2027-03",
+      "sdrM": 380,
+      "usdM": 350,
+      "status": "pending"
+    }
+  ],
+  "keyObjectives": [
+    "Achieve primary fiscal surplus of 1% of GDP",
+    "Broaden tax base — raise tax-to-GDP ratio above 13%",
+    "Build foreign exchange reserves to $13B+ (SBP-held)",
+    "Reform energy sector SOEs to reduce circular debt",
+    "Reduce inflation to SBP's 5–7% medium-term target"
+  ],
+  "sourceUrl": "https://www.imf.org/en/Countries/PAK",
+  "lastVerified": "2025-05-09",
+  "verifiedFrom": [
+    "https://www.imf.org/en/News/Articles/2024/09/25/pr24362-imf-exec-board-approves-us7b-37-month-eff-for-pakistan",
+    "https://www.imf.org/en/News/Articles/2025/05/09/pr25161-pakistan-imf-executive-board-completes-second-review-under-eff"
+  ],
+  "methodologyNote": "Manually curated from IMF Board decisions and press releases. Review schedule is approximate and subject to IMF/Pakistan agreement. SDR amounts from IMF Country Report."
+}

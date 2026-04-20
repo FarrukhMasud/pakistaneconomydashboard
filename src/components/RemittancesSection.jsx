@@ -1,10 +1,12 @@
+import { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { useData } from '../hooks/useData';
 import { COLORS, COLOR_LIST, baseBarOptions } from '../utils/chartConfig';
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
-import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, sumField, avgField } from '../utils/periodHelpers';
+import YoYToggle from './ui/YoYToggle';
+import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, sumField, avgField, buildYoYOverlay } from '../utils/periodHelpers';
 
 function formatDate(dateStr) {
   const [y, m] = dateStr.split('-');
@@ -13,6 +15,7 @@ function formatDate(dateStr) {
 }
 
 export default function RemittancesSection() {
+  const [showYoY, setShowYoY] = useState(false);
   const { data, loading, error } = useData('remittances.json');
 
   if (loading || !data) return <div className="card loading-card"><div className="spinner" /><span>Loading data…</span></div>;
@@ -23,6 +26,7 @@ export default function RemittancesSection() {
   const fy = currentFiscalYear(monthly);
 
   // Chart 1 — Monthly total remittances (vertical bar)
+  const { priorData: remPrior, priorLabel: remPriorLabel } = buildYoYOverlay(monthly, 'total');
   const monthlyData = {
     labels: monthly.map((d) => formatDate(d.date)),
     datasets: [
@@ -34,6 +38,15 @@ export default function RemittancesSection() {
         borderWidth: 1,
         borderRadius: 4,
       },
+      ...(showYoY ? [{
+        label: remPriorLabel,
+        data: remPrior,
+        backgroundColor: 'rgba(255, 167, 38, 0.25)',
+        borderColor: COLORS.amber,
+        borderWidth: 1,
+        borderRadius: 4,
+        borderDash: [4, 3],
+      }] : []),
     ],
   };
 
@@ -41,7 +54,7 @@ export default function RemittancesSection() {
     ...baseBarOptions,
     plugins: {
       ...baseBarOptions.plugins,
-      legend: { display: false },
+      legend: { display: showYoY },
     },
     scales: {
       ...baseBarOptions.scales,
@@ -94,6 +107,10 @@ export default function RemittancesSection() {
       <SectionHeader
         title="Workers' Remittances"
         description="Overseas worker remittances are Pakistan's single largest source of foreign exchange — typically exceeding goods export earnings. Over 9 million Pakistanis abroad (primarily in Gulf states, UK, and US) send money home through formal banking channels. Remittances directly support household consumption, reduce poverty, and stabilize the current account. Seasonal spikes occur during Ramadan/Eid and December holidays."
+        sourceLinks={[
+          { label: 'SBP Remittances', url: 'https://www.sbp.org.pk/ecodata/Homeremit.pdf' },
+          { label: 'SBP EasyData', url: 'https://easydata.sbp.org.pk/apex/f?p=10:301' },
+        ]}
       />
 
       {(cy || fy) && (() => {
@@ -139,6 +156,7 @@ export default function RemittancesSection() {
           lastUpdated={remLU}
           dataCoverage={remDC}
         >
+          <YoYToggle enabled={showYoY} onToggle={() => setShowYoY(v => !v)} />
           <div className="chart-container">
             <Bar data={monthlyData} options={monthlyOptions} />
           </div>

@@ -1,0 +1,198 @@
+/* ===== IMF Program Tracker ===== */
+.imf-tracker {
+  margin-top: 1.5rem;
+}
+
+.imf-tracker__header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.imf-tracker__header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.imf-tracker__badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--accent-blue);
+  background: rgba(66, 165, 245, 0.1);
+  border: 1px solid rgba(66, 165, 245, 0.25);
+  border-radius: 100px;
+  padding: 0.2rem 0.65rem;
+}
+
+/* Summary stats row */
+.imf-tracker__summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.imf-stat {
+  text-align: center;
+  padding: 0.6rem 0.4rem;
+  background: var(--bg-body);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+}
+
+.imf-stat__label {
+  display: block;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.imf-stat__value {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Progress bar */
+.imf-progress {
+  margin-bottom: 1.25rem;
+}
+
+.imf-progress__bar {
+  height: 8px;
+  background: var(--border-color);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.imf-progress__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-teal), var(--accent-blue));
+  border-radius: 100px;
+  transition: width 0.6s ease;
+}
+
+.imf-progress__label {
+  display: block;
+  text-align: right;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+}
+
+/* Timeline */
+.imf-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 1.25rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--border-color);
+}
+
+.imf-timeline__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  position: relative;
+}
+
+.imf-timeline__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-top: 0.25rem;
+  flex-shrink: 0;
+  position: relative;
+  left: -1.35rem;
+  margin-right: -0.6rem;
+}
+
+.imf-timeline__item--completed .imf-timeline__dot {
+  background: var(--accent-teal);
+  box-shadow: 0 0 6px rgba(0, 212, 170, 0.4);
+}
+
+.imf-timeline__item--pending .imf-timeline__dot {
+  background: var(--border-color);
+  border: 2px solid var(--text-muted);
+}
+
+.imf-timeline__content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.imf-timeline__name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.imf-timeline__date {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+}
+
+.imf-timeline__amount {
+  color: var(--accent-teal);
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+.imf-timeline__item--pending .imf-timeline__name {
+  color: var(--text-secondary);
+}
+
+.imf-timeline__item--pending .imf-timeline__amount {
+  color: var(--text-muted);
+}
+
+/* Key Objectives */
+.imf-objectives {
+  margin-bottom: 1rem;
+}
+
+.imf-objectives h4 {
+  font-size: 0.8rem;
+  margin: 0 0 0.5rem;
+  color: var(--text-secondary);
+}
+
+.imf-objectives ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.imf-objectives li {
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* Disclaimer */
+.imf-disclaimer {
+  border-top: 1px solid var(--border-color);
+  padding-top: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.imf-disclaimer p {
+  margin: 0;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-style: italic;
+  flex: 1;
+  min-width: 200px;
+}

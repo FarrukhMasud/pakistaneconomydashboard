@@ -191,6 +191,10 @@ export default function MonetarySection() {
       <SectionHeader
         title="Monetary & Financial Sector"
         description="Key monetary aggregates tracked by SBP. M2 (broad money) growth that exceeds nominal GDP growth is typically inflationary. Credit to private sector reflects business investment demand — when government 'crowds out' private borrowing through heavy deficit financing, private sector growth suffers. The widening gap between M2 and credit is a classic indicator of government fiscal dominance over monetary policy."
+        sourceLinks={[
+          { label: 'SBP Monetary', url: 'https://easydata.sbp.org.pk/apex/f?p=10:104' },
+          { label: 'SBP Policy Rate', url: 'https://www.sbp.org.pk/ecodata/kibor_ann.asp' },
+        ]}
       />
 
       <div className="summary-pair">

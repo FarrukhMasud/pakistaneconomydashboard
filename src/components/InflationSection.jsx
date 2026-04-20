@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Line, Bar } from 'react-chartjs-2';
 import { useData } from '../hooks/useData';
 import {
@@ -8,7 +9,8 @@ import {
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
-import { currentCalendarYear, currentFiscalYear, pctChange, fmtPct, avgField } from '../utils/periodHelpers';
+import YoYToggle from './ui/YoYToggle';
+import { currentCalendarYear, currentFiscalYear, pctChange, fmtPct, avgField, buildYoYOverlay } from '../utils/periodHelpers';
 
 function formatDate(dateStr) {
   const d = new Date(dateStr + '-01');
@@ -16,6 +18,7 @@ function formatDate(dateStr) {
 }
 
 export default function InflationSection() {
+  const [showYoY, setShowYoY] = useState(false);
   const { data, loading, error } = useData('inflation.json');
 
   if (loading || !data)
@@ -42,6 +45,7 @@ export default function InflationSection() {
   const tickCallback = (_val, idx) => (idx % 6 === 0 ? cpiLabels[idx] : '');
 
   // --- Chart 1: National CPI Headline ---
+  const { priorData: cpiPrior, priorLabel: cpiPriorLabel } = buildYoYOverlay(national_cpi.data, 'value');
   const cpiLineData = {
     labels: cpiLabels,
     datasets: [
@@ -54,6 +58,16 @@ export default function InflationSection() {
         pointRadius: 1,
         pointHoverRadius: 5,
       },
+      ...(showYoY ? [{
+        label: cpiPriorLabel,
+        data: cpiPrior,
+        borderColor: COLORS.amber,
+        backgroundColor: 'transparent',
+        borderDash: [6, 3],
+        pointRadius: 0,
+        pointHoverRadius: 4,
+        fill: false,
+      }] : []),
     ],
   };
 
@@ -287,6 +301,10 @@ export default function InflationSection() {
       <SectionHeader
         title="Inflation"
         description="Inflation measured Year-over-Year (base year 2015–16). SBP's medium-term inflation target is 5–7%. The CPI is the primary policy target — when CPI exceeds the target, SBP raises the policy rate to cool demand. Food prices (40%+ of CPI basket) disproportionately affect lower-income households. SPI tracks weekly-priced essentials; WPI measures wholesale/producer prices and often leads CPI trends."
+        sourceLinks={[
+          { label: 'PBS Price Stats', url: 'https://www.pbs.gov.pk/cpi' },
+          { label: 'SBP EasyData', url: 'https://easydata.sbp.org.pk/apex/f?p=10:301' },
+        ]}
       />
 
       {/* Combined Summary Cards — CY and FY */}
@@ -330,6 +348,7 @@ export default function InflationSection() {
           dataCoverage={`${firstDate} – ${lastDate} (${national_cpi.data.length} months)`}
           lastUpdated={lastUpdated}
         >
+          <YoYToggle enabled={showYoY} onToggle={() => setShowYoY(v => !v)} />
           <div style={{ height: 320 }}>
             <Line data={cpiLineData} options={cpiLineOptions} />
           </div>

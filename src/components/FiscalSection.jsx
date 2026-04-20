@@ -4,6 +4,7 @@ import { COLORS, baseAreaOptions, baseBarOptions, baseLineOptions } from '../uti
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
+import ImfTracker from './ImfTracker';
 import { pctChange, fmtPKR, fmtPct } from '../utils/periodHelpers';
 
 function formatTrillion(val) {
@@ -194,6 +195,11 @@ export default function FiscalSection() {
       <SectionHeader
         title="Fiscal Overview"
         description="Pakistan's fiscal health — GDP growth, government revenue, expenditure, and budget deficits. Pakistan's tax-to-GDP ratio (~10%) is among the lowest in Asia, creating chronic revenue shortfalls. About 35–40% of revenue goes to debt servicing. The IMF program targets a positive primary balance (revenue minus non-interest spending) as a condition for continued support. All fiscal figures are for Pakistan's fiscal year (July–June)."
+        sourceLinks={[
+          { label: 'Ministry of Finance', url: 'https://www.finance.gov.pk/fiscal.html' },
+          { label: 'SBP GDP Data', url: 'https://www.sbp.org.pk/ecodata/gdp.xls' },
+          { label: 'SBP EasyData', url: 'https://easydata.sbp.org.pk/apex/f?p=10:110' },
+        ]}
       />
 
       {/* Fiscal Summary Card */}
@@ -277,6 +283,8 @@ export default function FiscalSection() {
           </ChartCard>
         )}
       </div>
+
+      <ImfTracker />
     </section>
   );
 }
