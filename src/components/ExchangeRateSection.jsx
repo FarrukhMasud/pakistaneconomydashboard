@@ -86,7 +86,7 @@ export default function ExchangeRateSection() {
         title="Exchange Rates"
         description="Pakistani Rupee (PKR) exchange rates against major currencies. A rising line = weaker rupee (more PKR per foreign unit). The PKR lost ~45% against USD between 2022–2023 due to balance of payments pressures, depleted reserves, and political uncertainty. Stability since mid-2024 reflects IMF program discipline and improved reserves. Exchange rate directly affects import costs, inflation pass-through, and external debt servicing burden."
         sourceLinks={[
-          { label: 'SBP Exchange Rates', url: 'https://www.sbp.org.pk/ecodata/rates/war/WAR-Current.asp' },
+          { label: 'SBP Exchange Rates', url: 'https://www.sbp.org.pk/ecodata/index2.asp' },
         ]}
       />
 

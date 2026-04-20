@@ -125,8 +125,7 @@ export default function ReservesSection() {
         title="Foreign Exchange Reserves"
         description="Pakistan's foreign currency reserves held by the State Bank of Pakistan and commercial banks. Adequate reserves (3+ months of import cover, or roughly $18–20B at current import levels) provide a buffer for exchange rate stability and debt repayments. Reserves hit critically low levels (~$3B SBP) in early 2023 before recovering under the IMF Extended Fund Facility."
         sourceLinks={[
-          { label: 'SBP Reserves', url: 'https://www.sbp.org.pk/ecodata/forex.pdf' },
-          { label: 'SBP EasyData', url: 'https://easydata.sbp.org.pk/apex/f?p=10:301' },
+          { label: 'SBP Reserves Data', url: 'https://www.sbp.org.pk/ecodata/index2.asp' },
         ]}
       />
 

@@ -146,8 +146,8 @@ export default function FdiSection() {
         title="Foreign Direct Investment"
         description="FDI measures long-term international investment into Pakistan. Unlike portfolio flows, FDI involves lasting ownership interest (≥10% stake) — bringing capital, technology transfer, and jobs. CPEC-era power and infrastructure projects drove FDI to $2.8B (FY2018), but declining since. Key concerns: high concentration risk (China ~38%), rising disinvestment in some sectors (profit repatriation), and limited diversification beyond power/energy."
         sourceLinks={[
-          { label: 'Board of Investment', url: 'https://invest.gov.pk/fdi-statistics' },
-          { label: 'SBP FDI Data', url: 'https://www.sbp.org.pk/ecodata/NFDI.xls' },
+          { label: 'Board of Investment', url: 'https://invest.gov.pk' },
+          { label: 'SBP FDI Data', url: 'https://www.sbp.org.pk/ecodata/index2.asp' },
         ]}
       />
 

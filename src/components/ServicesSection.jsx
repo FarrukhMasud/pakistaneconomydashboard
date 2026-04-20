@@ -119,8 +119,8 @@ export default function ServicesSection() {
         title="IT & Services Exports"
         description="Pakistan's services trade classified by EBOPS (Extended Balance of Payments Services). IT & Telecom is the fastest-growing segment, with computer services (software consultancy, freelancing, and software exports) driving growth. Data from SBP's Balance of Payments detail tables."
         sourceLinks={[
-          { label: 'SBP BOP Detail', url: 'https://www.sbp.org.pk/ecodata/BOP_BPM6_detail.xls' },
-          { label: 'PSEB', url: 'https://pseb.org.pk' },
+          { label: 'SBP BOP Detail', url: 'https://www.sbp.org.pk/ecodata/index2.asp' },
+          { label: 'PSEB', url: 'https://www.pseb.org.pk' },
         ]}
       />
 

@@ -108,8 +108,7 @@ export default function RemittancesSection() {
         title="Workers' Remittances"
         description="Overseas worker remittances are Pakistan's single largest source of foreign exchange — typically exceeding goods export earnings. Over 9 million Pakistanis abroad (primarily in Gulf states, UK, and US) send money home through formal banking channels. Remittances directly support household consumption, reduce poverty, and stabilize the current account. Seasonal spikes occur during Ramadan/Eid and December holidays."
         sourceLinks={[
-          { label: 'SBP Remittances', url: 'https://www.sbp.org.pk/ecodata/Homeremit.pdf' },
-          { label: 'SBP EasyData', url: 'https://easydata.sbp.org.pk/apex/f?p=10:301' },
+          { label: 'SBP EasyData Portal', url: 'https://easydata.sbp.org.pk' },
         ]}
       />
 

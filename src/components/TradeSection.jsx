@@ -138,8 +138,8 @@ export default function TradeSection() {
         title="Trade Overview"
         description="Pakistan's goods trade flows (excluding services). Pakistan structurally imports more than it exports — primarily energy, machinery, and consumer goods — creating a persistent trade deficit. This deficit is a key driver of foreign exchange pressure and a major focus of IMF program conditionality. Export growth, especially in textiles and food, is critical for reducing external vulnerability."
         sourceLinks={[
-          { label: 'SBP BOP Data', url: 'https://www.sbp.org.pk/ecodata/BOP_BPM6_detail.xls' },
-          { label: 'PBS Trade Stats', url: 'https://www.pbs.gov.pk/trade-tables' },
+          { label: 'SBP BOP Data', url: 'https://www.sbp.org.pk/ecodata/index2.asp' },
+          { label: 'PBS Statistics', url: 'https://www.pbs.gov.pk' },
         ]}
       />
 

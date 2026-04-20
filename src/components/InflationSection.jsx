@@ -302,8 +302,8 @@ export default function InflationSection() {
         title="Inflation"
         description="Inflation measured Year-over-Year (base year 2015–16). SBP's medium-term inflation target is 5–7%. The CPI is the primary policy target — when CPI exceeds the target, SBP raises the policy rate to cool demand. Food prices (40%+ of CPI basket) disproportionately affect lower-income households. SPI tracks weekly-priced essentials; WPI measures wholesale/producer prices and often leads CPI trends."
         sourceLinks={[
-          { label: 'PBS Price Stats', url: 'https://www.pbs.gov.pk/cpi' },
-          { label: 'SBP EasyData', url: 'https://easydata.sbp.org.pk/apex/f?p=10:301' },
+          { label: 'PBS Price Statistics', url: 'https://www.pbs.gov.pk/cpi' },
+          { label: 'SBP EasyData Portal', url: 'https://easydata.sbp.org.pk' },
         ]}
       />
 
