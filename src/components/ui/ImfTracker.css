@@ -124,6 +124,21 @@
   border: 2px solid var(--text-muted);
 }
 
+.imf-timeline__item--staff_level .imf-timeline__dot {
+  background: var(--accent-amber, #ffc107);
+  box-shadow: 0 0 6px rgba(255, 193, 7, 0.5);
+  animation: pulse-amber 2s infinite;
+}
+
+@keyframes pulse-amber {
+  0%, 100% { box-shadow: 0 0 6px rgba(255, 193, 7, 0.3); }
+  50% { box-shadow: 0 0 12px rgba(255, 193, 7, 0.6); }
+}
+
+.imf-timeline__item--staff_level .imf-timeline__name {
+  color: var(--accent-amber, #ffc107);
+}
+
 .imf-timeline__content {
   display: flex;
   flex-wrap: wrap;

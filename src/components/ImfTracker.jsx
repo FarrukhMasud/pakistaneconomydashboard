@@ -14,12 +14,13 @@ export default function ImfTracker() {
   if (loading || !data) return null;
   if (error) return null;
 
-  const { program, approved, totalUSD, reviews, keyObjectives, sourceUrl, lastVerified, methodologyNote } = data;
+  const { program, approved, totalUSD, disbursedUSD, reviews, keyObjectives, sourceUrl, lastVerified, methodologyNote } = data;
 
   const completed = reviews.filter(r => r.status === 'completed');
-  const disbursed = completed.reduce((s, r) => s + r.usdM, 0);
+  const staffLevel = reviews.find(r => r.status === 'staff_level');
+  const disbursed = disbursedUSD || completed.reduce((s, r) => s + r.usdM, 0);
   const pctDisbursed = Math.round((disbursed / totalUSD) * 100);
-  const nextReview = reviews.find(r => r.status === 'pending');
+  const nextReview = staffLevel || reviews.find(r => r.status === 'pending');
 
   return (
     <div className="imf-tracker card">
@@ -48,9 +49,9 @@ export default function ImfTracker() {
           </span>
         </div>
         <div className="imf-stat">
-          <span className="imf-stat__label">Next Review</span>
+          <span className="imf-stat__label">Next</span>
           <span className="imf-stat__value" style={{ color: COLORS.blue }}>
-            {nextReview?.name || 'Complete'}
+            {nextReview ? `${nextReview.name}${staffLevel ? ' ⏳' : ''}` : 'Complete'}
           </span>
         </div>
       </div>
@@ -75,6 +76,7 @@ export default function ImfTracker() {
               <span className="imf-timeline__name">{r.name}</span>
               <span className="imf-timeline__date">
                 {r.date ? formatDate(r.date) : r.expected ? `Expected ${r.expected}` : ''}
+                {r.status === 'staff_level' && ' — Awaiting Board'}
               </span>
               <span className="imf-timeline__amount">${r.usdM}M</span>
             </div>

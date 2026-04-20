@@ -4,7 +4,8 @@
   "totalSDR": 5320,
   "totalUSD": 7000,
   "duration": "37 months",
-  "endDate": "2027-09",
+  "endDate": "2027-10",
+  "disbursedUSD": 3000,
   "reviews": [
     {
       "name": "Board Approval",
@@ -29,44 +30,46 @@
     },
     {
       "name": "3rd Review",
-      "expected": "2025-09",
+      "date": "2026-03",
+      "expected": "2026-05",
       "sdrM": 760,
-      "usdM": 1020,
-      "status": "pending"
+      "usdM": 1000,
+      "status": "staff_level",
+      "note": "Staff-level agreement reached Mar 2026; Board approval expected May 2026"
     },
     {
       "name": "4th Review",
-      "expected": "2025-12",
+      "expected": "2026-09",
       "sdrM": 760,
-      "usdM": 1020,
+      "usdM": 1000,
       "status": "pending"
     },
     {
       "name": "5th Review",
-      "expected": "2026-03",
+      "expected": "2026-12",
       "sdrM": 380,
       "usdM": 510,
       "status": "pending"
     },
     {
       "name": "6th Review",
-      "expected": "2026-06",
+      "expected": "2027-03",
       "sdrM": 380,
       "usdM": 510,
       "status": "pending"
     },
     {
       "name": "7th Review",
-      "expected": "2026-09",
+      "expected": "2027-06",
       "sdrM": 380,
       "usdM": 510,
       "status": "pending"
     },
     {
       "name": "8th & Final Review",
-      "expected": "2027-03",
+      "expected": "2027-10",
       "sdrM": 380,
-      "usdM": 350,
+      "usdM": 410,
       "status": "pending"
     }
   ],
@@ -75,13 +78,17 @@
     "Broaden tax base — raise tax-to-GDP ratio above 13%",
     "Build foreign exchange reserves to $13B+ (SBP-held)",
     "Reform energy sector SOEs to reduce circular debt",
-    "Reduce inflation to SBP's 5–7% medium-term target"
+    "Reduce inflation to SBP's 5–7% medium-term target",
+    "Phase out fiscal incentives for SEZs/STZs by 2035",
+    "Establish Pakistan Regulatory Registry by Jun 2027"
   ],
   "sourceUrl": "https://www.imf.org/en/Countries/PAK",
-  "lastVerified": "2025-05-09",
+  "lastVerified": "2026-04-20",
   "verifiedFrom": [
     "https://www.imf.org/en/News/Articles/2024/09/25/pr24362-imf-exec-board-approves-us7b-37-month-eff-for-pakistan",
-    "https://www.imf.org/en/News/Articles/2025/05/09/pr25161-pakistan-imf-executive-board-completes-second-review-under-eff"
+    "https://www.imf.org/en/News/Articles/2025/05/09/pr25161-pakistan-imf-executive-board-completes-second-review-under-eff",
+    "https://tribune.com.pk/story/2603817/imf-loads-7-billion-package-with-11-new-conditions-for-govt",
+    "https://tribune.com.pk/story/2603544/imf-board-nod-awaited-for-next-tranche"
   ],
-  "methodologyNote": "Manually curated from IMF Board decisions and press releases. Review schedule is approximate and subject to IMF/Pakistan agreement. SDR amounts from IMF Country Report."
+  "methodologyNote": "Manually curated from IMF Board decisions, press releases, and Pakistani financial media. Review schedule is approximate and subject to IMF/Pakistan agreement. SDR amounts from IMF Country Report. The 3rd review was delayed from original Sep 2025 schedule; subsequent dates adjusted accordingly."
 }
