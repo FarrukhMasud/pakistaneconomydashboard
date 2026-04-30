@@ -4,7 +4,7 @@
  * Pakistan Economic Dashboard — Master Update Script
  *
  * Orchestrates all data updates:
- *   1. Downloads fresh SBP Excel files from their URLs
+ *   1. Downloads fresh SBP source files from their URLs
  *   2. Runs parse-sbp-excel.mjs to parse Excel → JSON
  *   3. Runs update-data.mjs for SBP API (remittances)
  *   4. Prints a summary of what was updated
@@ -26,7 +26,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const RAW_DIR = resolve(__dirname, 'sbp-raw');
 
-// SBP Excel file URLs
+// SBP source file URLs
 const DOWNLOADS = [
   {
     name: 'exp_import_BOP.xls',
@@ -57,6 +57,11 @@ const DOWNLOADS = [
     name: 'Balancepayment_BPM6.xls',
     url: 'https://www.sbp.org.pk/ecodata/Balancepayment_BPM6.xls',
     description: 'Balance of Payments',
+  },
+  {
+    name: 'forex.pdf',
+    url: 'https://www.sbp.org.pk/ecodata/forex.pdf',
+    description: 'Foreign Exchange Reserves',
   },
   {
     name: 'IBF_Arch.xls',
@@ -187,7 +192,7 @@ async function main() {
       }).trim();
       if (status) {
         execSync(
-          `git commit -m "chore: update data ${date}\n\nAuto-updated by npm run update"`,
+          `git commit -m "chore: update data ${date}\n\nAuto-updated by npm run update\n\nCo-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"`,
           { cwd: resolve(__dirname, '..'), stdio: 'inherit' },
         );
         execSync('git push', { cwd: resolve(__dirname, '..'), stdio: 'inherit' });
