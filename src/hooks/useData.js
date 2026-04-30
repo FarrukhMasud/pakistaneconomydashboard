@@ -9,11 +9,10 @@ export function useData(filename) {
     const controller = new AbortController();
     let cancelled = false;
 
-    setLoading(true);
-    setData(null);
-    setError(null);
+    const cacheBuster = import.meta.env?.VITE_DATA_VERSION || Date.now();
+    const url = `/data/${filename}?v=${encodeURIComponent(cacheBuster)}`;
 
-    fetch(`/data/${filename}`, { signal: controller.signal })
+    fetch(url, { cache: 'no-store', signal: controller.signal })
       .then((res) => {
         if (!res.ok) throw new Error(`Failed to load ${filename}: ${res.status}`);
         return res.json();

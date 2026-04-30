@@ -50,6 +50,15 @@ Write-Host "`n🚀 Uploading to Azure Storage..." -ForegroundColor Cyan
 Invoke-Checked az storage blob upload-batch --account-name $StorageAccount --source ./dist `
     --destination '$web' --overwrite --output none
 
+# Keep entry point and JSON data fresh in browsers; hashed assets can still be cached by filename.
+Write-Host "🧹 Setting no-cache headers for HTML and data files..." -ForegroundColor Cyan
+Invoke-Checked az storage blob upload --account-name $StorageAccount --container-name '$web' `
+    --name index.html --file ./dist/index.html --overwrite `
+    --content-cache-control "no-cache, no-store, must-revalidate" --output none
+Invoke-Checked az storage blob upload-batch --account-name $StorageAccount --source ./dist/data `
+    --destination '$web' --destination-path data --overwrite `
+    --content-cache-control "no-cache, no-store, must-revalidate" --output none
+
 # Step 4: Get URL
 $url = az storage account show --name $StorageAccount `
     --query "primaryEndpoints.web" --output tsv
