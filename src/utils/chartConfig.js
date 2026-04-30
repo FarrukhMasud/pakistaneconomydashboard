@@ -111,6 +111,10 @@ const commonScales = {
 export const baseLineOptions = {
   responsive: true,
   maintainAspectRatio: false,
+  animation: {
+    duration: 900,
+    easing: 'easeOutQuart',
+  },
   interaction: { mode: 'index', intersect: false },
   plugins: {
     legend: { display: true, position: 'top' },
@@ -122,6 +126,10 @@ export const baseLineOptions = {
 export const baseBarOptions = {
   responsive: true,
   maintainAspectRatio: false,
+  animation: {
+    duration: 800,
+    easing: 'easeOutQuart',
+  },
   interaction: { mode: 'index', intersect: false },
   plugins: {
     legend: { display: true, position: 'top' },
@@ -146,6 +154,12 @@ export const baseAreaOptions = {
 export const baseDoughnutOptions = {
   responsive: true,
   maintainAspectRatio: false,
+  animation: {
+    animateRotate: true,
+    animateScale: true,
+    duration: 900,
+    easing: 'easeOutQuart',
+  },
   plugins: {
     legend: { display: true, position: 'right' },
     tooltip: { enabled: true },

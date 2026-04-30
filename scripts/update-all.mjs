@@ -32,56 +32,67 @@ const DOWNLOADS = [
     name: 'exp_import_BOP.xls',
     url: 'https://www.sbp.org.pk/ecodata/exp_import_BOP.xls',
     description: 'Trade (Imports/Exports BOP)',
+    required: true,
   },
   {
     name: 'Foreign_Dir.xls',
     url: 'https://www.sbp.org.pk/ecodata/Foreign_Dir.xls',
     description: 'FDI by Sector',
+    required: true,
   },
   {
     name: 'Netinflow.xls',
     url: 'https://www.sbp.org.pk/ecodata/Netinflow.xls',
     description: 'FDI by Country',
+    required: true,
   },
   {
     name: 'NetinflowSummary.xls',
     url: 'https://www.sbp.org.pk/ecodata/NetinflowSummary.xls',
     description: 'FDI Annual Summary',
+    required: true,
   },
   {
     name: 'GDP_table.xlsx',
     url: 'https://www.sbp.org.pk/ecodata/GDP_table.xlsx',
     description: 'GDP Growth Data',
+    required: true,
   },
   {
     name: 'Balancepayment_BPM6.xls',
     url: 'https://www.sbp.org.pk/ecodata/Balancepayment_BPM6.xls',
     description: 'Balance of Payments',
+    required: true,
   },
   {
     name: 'forex.pdf',
     url: 'https://www.sbp.org.pk/ecodata/forex.pdf',
     description: 'Foreign Exchange Reserves',
+    required: true,
   },
   {
     name: 'IBF_Arch.xls',
     url: 'https://www.sbp.org.pk/ecodata/IBF_Arch.xls',
     description: 'Exchange Rate Archive',
+    required: true,
   },
   {
     name: 'dt.xls',
     url: 'https://www.sbp.org.pk/ecodata/dt.xls',
     description: 'Services Trade (EBOPS)',
+    required: true,
   },
   {
     name: 'Export_Receipts_by_all_Countries.xls',
     url: 'https://www.sbp.org.pk/ecodata/Export_Receipts_by_all_Countries.xls',
     description: 'Export by Country',
+    required: false,
   },
   {
     name: 'Import-Payments-by-All-Countries.xlsx',
     url: 'https://www.sbp.org.pk/ecodata/Import-Payments-by-All-Countries.xlsx',
     description: 'Import by Country',
+    required: false,
   },
 ];
 
@@ -146,7 +157,12 @@ async function main() {
     for (const file of DOWNLOADS) {
       const ok = await downloadFile(file.name, file.url, file.description);
       if (ok) summary.downloaded++;
-      else summary.failed++;
+      else {
+        summary.failed++;
+        if (file.required) {
+          throw new Error(`Required source download failed: ${file.description} (${file.url})`);
+        }
+      }
     }
 
     console.log(`\n  📊 Downloaded: ${summary.downloaded}/${DOWNLOADS.length}`);
@@ -175,6 +191,12 @@ async function main() {
   console.log('📊 Step 4: Regenerating KPI summary from all data files...');
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   const kpiOk = runScript(resolve(__dirname, 'parse-sbp-excel.mjs'), 'KPI regeneration', ['--kpi-only']);
+
+  // Step 4b: Generate auditable source/freshness metadata
+  console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log('🧾 Step 4b: Generating source manifest and freshness metadata...');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  const freshnessOk = runScript(resolve(__dirname, 'generate-data-freshness.mjs'), 'generate-data-freshness.mjs');
 
   // Step 5: Commit, push, and deploy
   const autoDeploy = !args.includes('--no-deploy');
@@ -231,6 +253,7 @@ async function main() {
   console.log(`  📊 Excel parse: ${parseOk ? '✅ Success' : '❌ Failed'}`);
   console.log(`  💸 SBP API:     ${apiOk ? '✅ Success' : '⚠️  Failed (needs SBP_API_KEY in .env)'}`);
   console.log(`  📊 KPI regen:   ${kpiOk ? '✅ Success' : '⚠️  Failed'}`);
+  console.log(`  🧾 Freshness:   ${freshnessOk ? '✅ Success' : '⚠️  Failed'}`);
   if (autoDeploy) {
     console.log(`  📤 Git push:    ${pushOk ? '✅ Success' : '⚠️  Failed'}`);
     console.log(`  🚀 Deploy:      ${deployOk ? '✅ Success' : '⚠️  Failed'}`);

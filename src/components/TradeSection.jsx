@@ -12,7 +12,7 @@ import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import YoYToggle from './ui/YoYToggle';
-import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, sumField, avgField, buildYoYOverlay } from '../utils/periodHelpers';
+import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, sumField, buildYoYOverlay } from '../utils/periodHelpers';
 
 function formatDate(dateStr) {
   const d = new Date(dateStr + '-01');

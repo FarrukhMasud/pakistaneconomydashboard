@@ -431,6 +431,8 @@ async function updateFdi() {
     countryPriorPeriod: cPriorPeriod,
     source: 'State Bank of Pakistan',
     dataSource: 'SBP',
+    lastUpdated: new Date().toISOString().split('T')[0],
+    dataCoverage: fytdComparison ? `${fytdComparison.current.label} ${fytdComparison.period}` : `${annual[0]?.year} – ${annual.at(-1)?.year}`,
   };
   if (fytdComparison) result.fytdComparison = fytdComparison;
 

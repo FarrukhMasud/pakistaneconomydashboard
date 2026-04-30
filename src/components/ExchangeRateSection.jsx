@@ -18,7 +18,7 @@ export default function ExchangeRateSection() {
   if (loading || !data) return <div className="card loading-card"><div className="spinner" /><span>Loading data…</span></div>;
   if (error) return <div className="card fade-in"><p>Error loading exchange rates: {error.message}</p></div>;
 
-  const { monthly, dataSource: exDS, lastUpdated: exLU, dataCoverage: exDC } = data;
+  const { monthly, lastUpdated: exLU, dataCoverage: exDC } = data;
   const cy = currentCalendarYear(monthly);
   const fy = currentFiscalYear(monthly);
   const labels = monthly.map((d) => formatDate(d.date));

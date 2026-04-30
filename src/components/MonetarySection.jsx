@@ -4,7 +4,7 @@ import { COLORS, baseLineOptions } from '../utils/chartConfig';
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
-import { currentCalendarYear, currentFiscalYear, pctChange, fmtPKR, fmtPct } from '../utils/periodHelpers';
+import { currentCalendarYear, currentFiscalYear, fmtPKR, fmtPct } from '../utils/periodHelpers';
 
 function formatDate(dateStr) {
   const d = new Date(dateStr + '-01');

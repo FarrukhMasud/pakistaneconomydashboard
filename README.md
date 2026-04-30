@@ -24,9 +24,10 @@ Ministry of Finance.
 
 ## Tech Stack
 
-- **Frontend:** React 18 + Vite 5 + Chart.js 4
+- **Frontend:** React 19 + Vite 5 + Chart.js 4
 - **Hosting:** Azure Storage Static Website
 - **Data:** JSON files in `public/data/`, updated from SBP sources
+- **Data Trust:** Generated source manifest + freshness audit metadata
 - **Theme:** Light / Dark / System (auto)
 
 ---
@@ -125,15 +126,17 @@ echo SBP_API_KEY=your_key_here > .env
 npm run update
 ```
 
-This runs 6 steps:
+This runs 7 steps:
 
-1. **Download** — Fetches 10 Excel/PDF files from sbp.org.pk
+1. **Download** — Fetches 11 Excel/PDF files from sbp.org.pk
 2. **Excel Parse** — `parse-sbp-excel.mjs` processes files → JSON
 3. **API Update** — `update-data.mjs` fetches remittances,
    inflation, monetary, public finance
 4. **KPI Regeneration** — rebuilds KPI summary from all data
-5. **Git Commit & Push** — commits data changes to GitHub
-6. **Deploy** — builds and uploads to Azure Storage
+5. **Source/Freshness Metadata** — generates `source-manifest.json`
+   and `data-freshness.json`
+6. **Git Commit & Push** — commits data changes to GitHub
+7. **Deploy** — builds and uploads to Azure Storage
 
 Use `npm run update -- --no-deploy` to skip steps 5–6.
 
@@ -149,6 +152,15 @@ node scripts/update-all.mjs --skip-download
 # Only regenerate KPIs from existing data files
 node scripts/parse-sbp-excel.mjs --kpi-only
 
+# Generate source manifest and freshness metadata
+npm run generate:freshness
+
+# Audit local data freshness against official source metadata
+npm run audit:data
+
+# Verify live Azure JSON matches local generated data
+npm run verify:live
+
 # Update a specific API section
 npm run update-data -- --section remittances
 npm run update-data -- --section inflation
@@ -158,11 +170,24 @@ npm run update-data -- --section publicFinance
 
 ### Update Frequency
 
-SBP typically publishes updated data monthly. Recommended schedule:
+Recommended schedule:
 
-- **Monthly:** Run `npm run update` after SBP publishes
-  new data (usually 2nd–3rd week of each month)
-- The pipeline is idempotent — safe to run anytime
+- **Weekly:** Run `npm run update` to capture reserves, monetary
+  updates, and newly released monthly tables as soon as available.
+- **Monthly:** Expect trade, remittances, exchange-rate monthly
+  averages, inflation, FDI, and services data to advance after SBP/PBS
+  publish the next monthly releases.
+- The pipeline is idempotent — safe to run anytime.
+
+After each update, run:
+
+```bash
+npm run audit:data
+npm run verify:live
+```
+
+The live dashboard also includes a **Data Freshness & Source Audit**
+panel in the Overview tab, generated from `public/data/data-freshness.json`.
 
 ---
 
@@ -220,7 +245,9 @@ pak-eco/
 │       ├── remittances.json   # Monthly remittances + source countries
 │       ├── inflation.json     # CPI/SPI/WPI series
 │       ├── monetary.json      # M2, credit, deposits, NFA
-│       └── kpi-summary.json   # 8 headline KPIs (auto-derived)
+│       ├── kpi-summary.json   # 8 headline KPIs (auto-derived)
+│       ├── source-manifest.json # Source URLs, cadence, parser metadata
+│       └── data-freshness.json # Latest observation/status per dataset
 ├── src/
 │   ├── App.jsx                # Main app with tab navigation + theme toggle
 │   ├── index.css              # Styles (light/dark theme via CSS variables)
@@ -241,9 +268,13 @@ pak-eco/
 │   └── utils/
 │       └── periodHelpers.js   # CY/FY period derivation from data
 ├── scripts/
-│   ├── update-all.mjs         # Master orchestrator (download + parse + API + KPI)
+│   ├── update-all.mjs         # Master orchestrator
 │   ├── parse-sbp-excel.mjs    # Excel/PDF → JSON parser
 │   ├── update-data.mjs        # SBP EasyData API fetcher
+│   ├── data-catalog.mjs       # Dataset/source catalog
+│   ├── generate-data-freshness.mjs # Builds source/freshness JSON
+│   ├── audit-data.mjs         # Local data freshness audit
+│   ├── verify-live.mjs        # Live Azure vs local JSON verification
 │   ├── deploy.ps1             # Azure Storage deploy script
 │   └── sbp-raw/               # Downloaded Excel/PDF files (gitignored)
 ├── package.json
@@ -273,7 +304,13 @@ SBP Website (Excel/PDF)          SBP EasyData API
                     │
                     ▼
             kpi-summary.json
-           (derived from ALL above)
+            (derived from ALL above)
+                    │
+                    ▼
+        generate-data-freshness.mjs
+                    │
+                    ▼
+ source-manifest.json + data-freshness.json
 ```
 
 **Single source of truth:** Each JSON data file is written by

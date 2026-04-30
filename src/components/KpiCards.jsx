@@ -1,6 +1,7 @@
 import { useData } from '../hooks/useData';
 import { COLORS } from '../utils/chartConfig';
 import SectionHeader from './SectionHeader';
+import DataFreshnessPanel from './DataFreshnessPanel';
 
 function trendColor(trend) {
   if (trend === 'up') return COLORS.teal;
@@ -54,6 +55,7 @@ export default function KpiCards() {
           );
         })}
       </div>
+      <DataFreshnessPanel />
     </section>
   );
 }

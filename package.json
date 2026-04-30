@@ -10,7 +10,10 @@
     "preview": "vite preview",
     "update-data": "node scripts/update-data.mjs",
     "update": "node scripts/update-all.mjs",
-    "deploy": "pwsh scripts/deploy.ps1"
+    "deploy": "pwsh scripts/deploy.ps1",
+    "audit:data": "node scripts/audit-data.mjs",
+    "verify:live": "node scripts/verify-live.mjs",
+    "generate:freshness": "node scripts/generate-data-freshness.mjs"
   },
   "dependencies": {
     "chart.js": "^4.5.1",

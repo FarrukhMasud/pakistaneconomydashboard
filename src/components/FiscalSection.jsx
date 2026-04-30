@@ -5,7 +5,7 @@ import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import ImfTracker from './ImfTracker';
-import { pctChange, fmtPKR, fmtPct } from '../utils/periodHelpers';
+import { fmtPKR, fmtPct } from '../utils/periodHelpers';
 
 function formatTrillion(val) {
   return (val / 1e6).toFixed(1) + 'T';
@@ -205,7 +205,6 @@ export default function FiscalSection() {
       {/* Fiscal Summary Card */}
       {(() => {
         const latestGDP = annual[annual.length - 1];
-        const prevGDP = annual.length >= 2 ? annual[annual.length - 2] : null;
         const gdpTrend = latestGDP.gdpGrowth >= 0 ? 'up' : 'down';
         const items = [
           { label: `GDP Growth (${latestGDP.year})`, value: fmtPct(latestGDP.gdpGrowth), direction: gdpTrend, sentiment: gdpTrend === 'up' ? 'positive' : 'negative', color: COLORS.teal },

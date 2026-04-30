@@ -185,7 +185,6 @@ export function currentFiscalYear(rows) {
     return false;
   });
 
-  const firstFYRow = parseYM(fyRows[0].date);
   const rangeLabel = `Jul ${fyStartYear} – ${MONTH_NAMES[latest.month - 1]} ${latest.year}`;
 
   return {

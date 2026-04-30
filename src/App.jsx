@@ -121,6 +121,9 @@ function App() {
           <a href="https://pseb.org.pk" target="_blank" rel="noreferrer">
             PSEB
           </a>
+          <a href="https://www.imf.org/en/Countries/PAK" target="_blank" rel="noreferrer">
+            IMF Pakistan
+          </a>
         </div>
       </footer>
     </div>

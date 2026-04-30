@@ -4,13 +4,12 @@ import { useData } from '../hooks/useData';
 import {
   COLORS,
   baseLineOptions,
-  baseBarOptions,
 } from '../utils/chartConfig';
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import YoYToggle from './ui/YoYToggle';
-import { currentCalendarYear, currentFiscalYear, pctChange, fmtPct, avgField, buildYoYOverlay } from '../utils/periodHelpers';
+import { currentCalendarYear, currentFiscalYear, fmtPct, avgField, buildYoYOverlay } from '../utils/periodHelpers';
 
 function formatDate(dateStr) {
   const d = new Date(dateStr + '-01');
