@@ -6,6 +6,14 @@
   "duration": "37 months",
   "endDate": "2027-10",
   "disbursedUSD": 3000,
+  "upcomingDecision": {
+    "date": "2026-05-08",
+    "label": "IMF Executive Board meeting",
+    "expectedEFFUsdM": 1000,
+    "expectedRSFUsdM": 210,
+    "status": "scheduled",
+    "note": "Board is scheduled to consider the 3rd EFF review and 2nd RSF review. Approval would unlock about $1.2B total, including roughly $1B under EFF."
+  },
   "reviews": [
     {
       "name": "Board Approval",
@@ -30,12 +38,12 @@
     },
     {
       "name": "3rd Review",
-      "date": "2026-03",
-      "expected": "2026-05",
+      "date": "2026-03-27",
+      "expected": "2026-05-08",
       "sdrM": 760,
       "usdM": 1000,
       "status": "staff_level",
-      "note": "Staff-level agreement reached Mar 2026; Board approval expected May 2026"
+      "note": "Staff-level agreement announced Mar 27, 2026; Executive Board consideration scheduled for May 8, 2026"
     },
     {
       "name": "4th Review",
@@ -73,6 +81,14 @@
       "status": "pending"
     }
   ],
+  "relatedFacilities": [
+    {
+      "program": "Resilience and Sustainability Facility (RSF)",
+      "status": "2nd review on May 8 Board agenda",
+      "expectedUsdM": 210,
+      "note": "Separate climate-resilience facility; not included in the $7B EFF progress bar."
+    }
+  ],
   "keyObjectives": [
     "Achieve primary fiscal surplus of 1% of GDP",
     "Broaden tax base — raise tax-to-GDP ratio above 13%",
@@ -83,12 +99,13 @@
     "Establish Pakistan Regulatory Registry by Jun 2027"
   ],
   "sourceUrl": "https://www.imf.org/en/Countries/PAK",
-  "lastVerified": "2026-04-20",
+  "lastVerified": "2026-04-30",
   "verifiedFrom": [
     "https://www.imf.org/en/News/Articles/2024/09/25/pr24362-imf-exec-board-approves-us7b-37-month-eff-for-pakistan",
     "https://www.imf.org/en/News/Articles/2025/05/09/pr25161-pakistan-imf-executive-board-completes-second-review-under-eff",
     "https://tribune.com.pk/story/2603817/imf-loads-7-billion-package-with-11-new-conditions-for-govt",
-    "https://tribune.com.pk/story/2603544/imf-board-nod-awaited-for-next-tranche"
+    "https://tribune.com.pk/story/2603544/imf-board-nod-awaited-for-next-tranche",
+    "https://www.nation.com.pk/27-Apr-2026/imf-consider-dollar-1-2billion-disbursement-pakistan-may-8"
   ],
-  "methodologyNote": "Manually curated from IMF Board decisions, press releases, and Pakistani financial media. Review schedule is approximate and subject to IMF/Pakistan agreement. SDR amounts from IMF Country Report. The 3rd review was delayed from original Sep 2025 schedule; subsequent dates adjusted accordingly."
+  "methodologyNote": "Manually curated from IMF Board decisions, press releases, and Pakistani financial media. Review schedule is approximate and subject to IMF/Pakistan agreement. SDR amounts from IMF Country Report. The 3rd review has a staff-level agreement but is not yet Board-approved; the Board meeting is reported for May 8, 2026."
 }

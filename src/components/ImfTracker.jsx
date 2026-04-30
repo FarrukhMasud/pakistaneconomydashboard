@@ -2,10 +2,10 @@ import { useData } from '../hooks/useData';
 import { COLORS } from '../utils/chartConfig';
 import './ui/ImfTracker.css';
 
-function formatDate(dateStr) {
+function formatDate(dateStr, options = { month: 'short', year: 'numeric' }) {
   if (!dateStr) return '';
-  const d = new Date(dateStr);
-  return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+  const d = new Date(dateStr + (dateStr.length === 10 ? 'T00:00:00' : ''));
+  return d.toLocaleDateString('en-US', options);
 }
 
 export default function ImfTracker() {
@@ -14,7 +14,18 @@ export default function ImfTracker() {
   if (loading || !data) return null;
   if (error) return null;
 
-  const { program, approved, totalUSD, disbursedUSD, reviews, keyObjectives, sourceUrl, lastVerified, methodologyNote } = data;
+  const {
+    program,
+    totalUSD,
+    disbursedUSD,
+    upcomingDecision,
+    relatedFacilities,
+    reviews,
+    keyObjectives,
+    sourceUrl,
+    lastVerified,
+    methodologyNote,
+  } = data;
 
   const completed = reviews.filter(r => r.status === 'completed');
   const staffLevel = reviews.find(r => r.status === 'staff_level');
@@ -67,6 +78,21 @@ export default function ImfTracker() {
         <span className="imf-progress__label">{pctDisbursed}% disbursed</span>
       </div>
 
+      {upcomingDecision && (
+        <div className="imf-next-decision">
+          <div>
+            <span className="imf-next-decision__label">Next Board Decision</span>
+            <strong>{formatDate(upcomingDecision.date, { month: 'short', day: 'numeric', year: 'numeric' })}</strong>
+          </div>
+          <p>
+            {upcomingDecision.note}
+            {upcomingDecision.expectedRSFUsdM && (
+              <> RSF amount is tracked separately from the EFF progress bar.</>
+            )}
+          </p>
+        </div>
+      )}
+
       {/* Timeline */}
       <div className="imf-timeline">
         {reviews.map((r, i) => (
@@ -75,7 +101,9 @@ export default function ImfTracker() {
             <div className="imf-timeline__content">
               <span className="imf-timeline__name">{r.name}</span>
               <span className="imf-timeline__date">
-                {r.date ? formatDate(r.date) : r.expected ? `Expected ${r.expected}` : ''}
+                {r.status === 'staff_level'
+                  ? `SLA ${formatDate(r.date)} · Board ${formatDate(r.expected, { month: 'short', day: 'numeric', year: 'numeric' })}`
+                  : r.date ? formatDate(r.date) : r.expected ? `Expected ${r.expected}` : ''}
                 {r.status === 'staff_level' && ' — Awaiting Board'}
               </span>
               <span className="imf-timeline__amount">${r.usdM}M</span>
@@ -83,6 +111,19 @@ export default function ImfTracker() {
           </div>
         ))}
       </div>
+
+      {relatedFacilities?.length > 0 && (
+        <div className="imf-related">
+          <h4>Related IMF Facility</h4>
+          {relatedFacilities.map((facility) => (
+            <div key={facility.program} className="imf-related__item">
+              <strong>{facility.program}</strong>
+              <span>{facility.status} · ${facility.expectedUsdM}M expected</span>
+              <small>{facility.note}</small>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Key Objectives */}
       {keyObjectives?.length > 0 && (
