@@ -1,6 +1,6 @@
 {
   "dataSource": "SBP EasyData API - Inflation Snapshot (Base: 2015-16)",
-  "lastUpdated": "2026-04-24",
+  "lastUpdated": "2026-04-30",
   "national_cpi": {
     "name": "National CPI YoY",
     "seriesKey": "TS_GP_PT_CPI_M.P00011516",

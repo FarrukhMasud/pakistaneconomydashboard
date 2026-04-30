@@ -1,16 +1,16 @@
 {
-  "lastUpdated": "2026-04-24",
+  "lastUpdated": "2026-04-30",
   "indicators": [
     {
       "id": "reserves",
       "label": "Foreign Reserves (Total)",
-      "value": 20.52,
+      "value": 21.27,
       "unit": "$ Billion",
-      "period": "2026-04-10",
-      "change": -1.37,
-      "trend": "down",
+      "period": "2026-04-24",
+      "change": 0.64,
+      "trend": "up",
       "source": "SBP",
-      "sub": "SBP: $15.08B · Banks: $5.45B"
+      "sub": "SBP: $15.83B · Banks: $5.44B"
     },
     {
       "id": "exchange-rate",
