@@ -231,6 +231,8 @@
   "countryPriorPeriod": "July-March FY25",
   "source": "State Bank of Pakistan",
   "dataSource": "SBP",
+  "lastUpdated": "2026-05-04",
+  "dataCoverage": "FY2026 Jul-Mar",
   "fytdComparison": {
     "period": "Jul-Mar",
     "current": {
@@ -246,7 +248,5 @@
       "inflow": 2705.06,
       "outflow": 1350.53
     }
-  },
-  "lastUpdated": "2026-04-30",
-  "dataCoverage": "FY2026 Jul-Mar"
+  }
 }

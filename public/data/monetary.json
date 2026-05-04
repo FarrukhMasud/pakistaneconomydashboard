@@ -1,15 +1,10 @@
 {
   "dataSource": "SBP EasyData API - Monetary & Financial Sector",
-  "lastUpdated": "2026-04-30",
+  "lastUpdated": "2026-05-04",
   "m2": {
     "name": "Broad Money (M2)",
     "seriesKey": "TS_GP_BAM_M2_W.M000070",
     "data": [
-      {
-        "date": "2021-04",
-        "value": 21934978.78,
-        "unit": "Million PKR"
-      },
       {
         "date": "2021-05",
         "value": 21878449.09,
@@ -317,11 +312,6 @@
     "seriesKey": "TS_GP_BAM_M2_W.M000500",
     "data": [
       {
-        "date": "2021-04",
-        "value": 15.5,
-        "unit": "Percent"
-      },
-      {
         "date": "2021-05",
         "value": 14.48,
         "unit": "Percent"
@@ -627,11 +617,6 @@
     "name": "Credit to Private Sector",
     "seriesKey": "TS_GP_BAM_M2_W.M000340",
     "data": [
-      {
-        "date": "2021-04",
-        "value": 6593709.99,
-        "unit": "Million PKR"
-      },
       {
         "date": "2021-05",
         "value": 6566647.93,
@@ -939,11 +924,6 @@
     "seriesKey": "TS_GP_BAM_M2_W.M000480",
     "data": [
       {
-        "date": "2021-04",
-        "value": 4.08,
-        "unit": "Percent"
-      },
-      {
         "date": "2021-05",
         "value": 4.16,
         "unit": "Percent"
@@ -1249,11 +1229,6 @@
     "name": "Total Deposits with Banks",
     "seriesKey": "TS_GP_BAM_M2_W.M000030",
     "data": [
-      {
-        "date": "2021-04",
-        "value": 15099252.48,
-        "unit": "Million PKR"
-      },
       {
         "date": "2021-05",
         "value": 14838949.53,
@@ -1561,11 +1536,6 @@
     "seriesKey": "TS_GP_BAM_M2_W.M000490",
     "data": [
       {
-        "date": "2021-04",
-        "value": 15.77,
-        "unit": "Percent"
-      },
-      {
         "date": "2021-05",
         "value": 14.34,
         "unit": "Percent"
@@ -1871,11 +1841,6 @@
     "name": "NFA of Banking System",
     "seriesKey": "TS_GP_BAM_M2_W.M000080",
     "data": [
-      {
-        "date": "2021-04",
-        "value": 998773.31,
-        "unit": "Million PKR"
-      },
       {
         "date": "2021-05",
         "value": 1042199.55,
@@ -2183,11 +2148,6 @@
     "seriesKey": "TS_GP_BAM_M2_W.M000150",
     "data": [
       {
-        "date": "2021-04",
-        "value": 14380449.33,
-        "unit": "Million PKR"
-      },
-      {
         "date": "2021-05",
         "value": 14314870.62,
         "unit": "Million PKR"
@@ -2493,11 +2453,6 @@
     "name": "Reserve Money",
     "seriesKey": "TS_GP_BAM_RM_W.R000050",
     "data": [
-      {
-        "date": "2021-04",
-        "value": 8189958.58,
-        "unit": "Million PKR"
-      },
       {
         "date": "2021-05",
         "value": 8696001.56,
