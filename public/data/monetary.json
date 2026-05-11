@@ -1,6 +1,6 @@
 {
   "dataSource": "SBP EasyData API - Monetary & Financial Sector",
-  "lastUpdated": "2026-05-04",
+  "lastUpdated": "2026-05-11",
   "m2": {
     "name": "Broad Money (M2)",
     "seriesKey": "TS_GP_BAM_M2_W.M000070",
@@ -925,7 +925,7 @@
     "data": [
       {
         "date": "2021-05",
-        "value": 4.16,
+        "value": 4.68,
         "unit": "Percent"
       },
       {

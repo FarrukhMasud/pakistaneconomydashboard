@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-05-04",
+  "lastUpdated": "2026-05-11",
   "indicators": [
     {
       "id": "reserves",
@@ -15,21 +15,21 @@
     {
       "id": "exchange-rate",
       "label": "PKR / USD",
-      "value": 279.51,
+      "value": 279.18,
       "unit": "PKR",
-      "period": "2026-03",
-      "change": -0.3,
+      "period": "2026-04",
+      "change": -0.33,
       "trend": "stable",
       "source": "SBP"
     },
     {
       "id": "remittances",
       "label": "Remittances (Monthly)",
-      "value": 3.83,
+      "value": 3.54,
       "unit": "$ Billion",
-      "period": "2026-03",
-      "change": 0.54,
-      "trend": "up",
+      "period": "2026-04",
+      "change": -0.29,
+      "trend": "down",
       "source": "SBP"
     },
     {
@@ -65,11 +65,11 @@
     {
       "id": "inflation",
       "label": "CPI Inflation (YoY)",
-      "value": 7.3,
+      "value": 10.9,
       "unit": "%",
-      "period": "2026-03",
-      "change": 0.3,
-      "trend": "stable",
+      "period": "2026-04",
+      "change": 3.6,
+      "trend": "up",
       "source": "PBS",
       "sub": "SBP target: 5–7%"
     },

@@ -42,7 +42,7 @@
     }
   ],
   "dataSource": "SBP EasyData API - Summary of Public Finance + GDP Table",
-  "lastUpdated": "2026-05-04",
+  "lastUpdated": "2026-05-11",
   "dataCoverage": "FY2017 – FY2026",
   "publicFinance": {
     "fiscal_balance": {

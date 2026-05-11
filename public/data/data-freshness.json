@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-04T19:50:53.103Z",
+  "generatedAt": "2026-05-11T17:46:44.800Z",
   "status": "fresh",
   "datasets": [
     {
@@ -16,7 +16,7 @@
       "critical": true,
       "latestObservation": "2026-04-24",
       "dataCoverage": "2025-03 – 2026-04-24",
-      "dashboardUpdated": "2026-05-04",
+      "dashboardUpdated": "2026-05-11",
       "status": "fresh"
     },
     {
@@ -31,9 +31,9 @@
       "cadence": "Monthly",
       "expectedLag": "Monthly archive usually updates after month-end. Daily/current SBP rates are not used in this monthly chart.",
       "critical": true,
-      "latestObservation": "2026-03",
-      "dataCoverage": "2021-01 – 2026-03",
-      "dashboardUpdated": "2026-05-04",
+      "latestObservation": "2026-04",
+      "dataCoverage": "2021-01 – 2026-04",
+      "dashboardUpdated": "2026-05-11",
       "status": "fresh"
     },
     {
@@ -56,9 +56,9 @@
       "cadence": "Monthly",
       "expectedLag": "Usually published monthly; April data is not expected until SBP releases the next workers remittance update.",
       "critical": true,
-      "latestObservation": "2026-03",
-      "dataCoverage": "2021-05 – 2026-03",
-      "dashboardUpdated": "2026-05-04",
+      "latestObservation": "2026-04",
+      "dataCoverage": "2021-05 – 2026-04",
+      "dashboardUpdated": "2026-05-11",
       "status": "fresh"
     },
     {
@@ -75,7 +75,7 @@
       "critical": true,
       "latestObservation": "2026-03",
       "dataCoverage": "2021-01 – 2026-03",
-      "dashboardUpdated": "2026-05-04",
+      "dashboardUpdated": "2026-05-11",
       "status": "fresh"
     },
     {
@@ -92,7 +92,7 @@
       "critical": true,
       "latestObservation": "July-March FY26",
       "dataCoverage": "FY2026 Jul-Mar",
-      "dashboardUpdated": "2026-05-04",
+      "dashboardUpdated": "2026-05-11",
       "status": "fresh"
     },
     {
@@ -109,7 +109,7 @@
       "critical": true,
       "latestObservation": "Jul-Mar FY26",
       "dataCoverage": "Jul-Mar FY26",
-      "dashboardUpdated": "2026-05-04",
+      "dashboardUpdated": "2026-05-11",
       "status": "fresh"
     },
     {
@@ -126,9 +126,9 @@
       "cadence": "Monthly",
       "expectedLag": "Monthly CPI/WPI series sourced through SBP EasyData.",
       "critical": true,
-      "latestObservation": "2026-03",
+      "latestObservation": "2026-04",
       "dataCoverage": null,
-      "dashboardUpdated": "2026-05-04",
+      "dashboardUpdated": "2026-05-11",
       "status": "fresh"
     },
     {
@@ -148,7 +148,7 @@
       "critical": true,
       "latestObservation": "2026-04",
       "dataCoverage": null,
-      "dashboardUpdated": "2026-05-04",
+      "dashboardUpdated": "2026-05-11",
       "status": "fresh"
     },
     {
@@ -165,7 +165,7 @@
       "critical": true,
       "latestObservation": "FY2026",
       "dataCoverage": "FY2017 – FY2026",
-      "dashboardUpdated": "2026-05-04",
+      "dashboardUpdated": "2026-05-11",
       "status": "fresh"
     },
     {
