@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-11T18:12:20.452Z",
+  "generatedAt": "2026-05-11T18:26:21.288Z",
   "status": "fresh",
   "datasets": [
     {
@@ -182,7 +182,7 @@
       "critical": true,
       "latestObservation": "2026-05-08",
       "dataCoverage": null,
-      "dashboardUpdated": "2026-04-30",
+      "dashboardUpdated": "2026-05-11",
       "status": "fresh"
     }
   ]

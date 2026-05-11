@@ -29,9 +29,10 @@ export default function ImfTracker() {
 
   const completed = reviews.filter(r => r.status === 'completed');
   const staffLevel = reviews.find(r => r.status === 'staff_level');
+  const needsVerification = reviews.find(r => r.status === 'needs_verification');
   const disbursed = disbursedUSD || completed.reduce((s, r) => s + r.usdM, 0);
   const pctDisbursed = Math.round((disbursed / totalUSD) * 100);
-  const nextReview = staffLevel || reviews.find(r => r.status === 'pending');
+  const nextReview = staffLevel || needsVerification || reviews.find(r => r.status === 'pending');
 
   return (
     <div className="imf-tracker card">
@@ -62,7 +63,7 @@ export default function ImfTracker() {
         <div className="imf-stat">
           <span className="imf-stat__label">Next</span>
           <span className="imf-stat__value" style={{ color: COLORS.blue }}>
-            {nextReview ? `${nextReview.name}${staffLevel ? ' ⏳' : ''}` : 'Complete'}
+            {nextReview ? `${nextReview.name}${staffLevel || needsVerification ? ' ⏳' : ''}` : 'Complete'}
           </span>
         </div>
       </div>
@@ -81,7 +82,9 @@ export default function ImfTracker() {
       {upcomingDecision && (
         <div className="imf-next-decision">
           <div>
-            <span className="imf-next-decision__label">Next Board Decision</span>
+            <span className="imf-next-decision__label">
+              {upcomingDecision.status === 'needs_verification' ? 'Board Outcome to Verify' : 'Next Board Decision'}
+            </span>
             <strong>{formatDate(upcomingDecision.date, { month: 'short', day: 'numeric', year: 'numeric' })}</strong>
           </div>
           <p>
@@ -103,6 +106,8 @@ export default function ImfTracker() {
               <span className="imf-timeline__date">
                 {r.status === 'staff_level'
                   ? `SLA ${formatDate(r.date)} · Board ${formatDate(r.expected, { month: 'short', day: 'numeric', year: 'numeric' })}`
+                  : r.status === 'needs_verification'
+                    ? `SLA ${formatDate(r.date)} · Board date passed ${formatDate(r.expected, { month: 'short', day: 'numeric', year: 'numeric' })} — verify outcome`
                   : r.date ? formatDate(r.date) : r.expected ? `Expected ${r.expected}` : ''}
                 {r.status === 'staff_level' && ' — Awaiting Board'}
               </span>

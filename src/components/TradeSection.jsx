@@ -13,6 +13,7 @@ import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import YoYToggle from './ui/YoYToggle';
 import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, sumField, buildYoYOverlay, formatMonthYear } from '../utils/periodHelpers';
+import { countryLabel } from '../utils/countryLabels';
 
 export default function TradeSection() {
   const [showYoY, setShowYoY] = useState(false);
@@ -234,7 +235,7 @@ export default function TradeSection() {
             <div className="chart-container tall">
               <Bar
                 data={{
-                  labels: topExportCountries.map((d) => `${d.flag} ${d.country}`),
+                  labels: topExportCountries.map((d) => countryLabel(d.country)),
                   datasets: [{
                     label: 'Exports (USD M)',
                     data: topExportCountries.map((d) => d.value),
@@ -257,7 +258,7 @@ export default function TradeSection() {
             <div className="chart-container tall">
               <Bar
                 data={{
-                  labels: topImportCountries.map((d) => `${d.flag} ${d.country}`),
+                  labels: topImportCountries.map((d) => countryLabel(d.country)),
                   datasets: [{
                     label: 'Imports (USD M)',
                     data: topImportCountries.map((d) => d.value),

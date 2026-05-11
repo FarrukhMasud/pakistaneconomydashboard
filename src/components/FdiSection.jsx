@@ -5,6 +5,7 @@ import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import { pctChange, fmtUSD } from '../utils/periodHelpers';
+import { countryLabel } from '../utils/countryLabels';
 
 export default function FdiSection() {
   const { data, loading, error } = useData('fdi.json');
@@ -107,7 +108,7 @@ export default function FdiSection() {
 
   // ── Chart 4: FDI by Country — diverging horizontal bar ──
   const countryBarData = {
-    labels: by_country.map((d) => `${d.flag} ${d.country}`),
+    labels: by_country.map((d) => countryLabel(d.country)),
     datasets: [{
       label: data.countryPeriod || 'Current FYTD',
       data: by_country.map((d) => d.amount),
