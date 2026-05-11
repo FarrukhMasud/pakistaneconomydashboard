@@ -141,7 +141,11 @@ export default function FdiSection() {
     },
     scales: {
       x: { ...baseBarOptions.scales.y, title: { display: true, text: 'USD Millions', color: COLORS.text } },
-      y: { ...baseBarOptions.scales.x, grid: { display: false } },
+      y: {
+        ...baseBarOptions.scales.x,
+        grid: { display: false },
+        ticks: { ...baseBarOptions.scales.x.ticks, autoSkip: false, padding: 24 },
+      },
     },
   };
 

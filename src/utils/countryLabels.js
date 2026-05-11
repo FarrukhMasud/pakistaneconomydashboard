@@ -27,6 +27,7 @@ const COUNTRY_CODE_MAP = {
   'lebanon': 'LB',
   'luxembourg': 'LU',
   'malaysia': 'MY',
+  'malta': 'MT',
   'netherlands': 'NL',
   'new zealand': 'NZ',
   'newzealand': 'NZ',
@@ -119,12 +120,14 @@ export function countryFlagPlugin(countries, id) {
       if (!yScale) return;
 
       const { ctx } = chart;
-      countries.forEach((country, index) => {
+      yScale.ticks.forEach((tick) => {
+        const index = tick.value;
+        const country = countries[index];
         const image = flagImage(country, () => chart.draw());
         if (!image?.complete || image.naturalWidth === 0) return;
 
         const x = yScale.left + 2;
-        const y = yScale.getPixelForTick(index) - 6;
+        const y = yScale.getPixelForValue(index) - 6;
         ctx.save();
         ctx.drawImage(image, x, y, 18, 12);
         ctx.restore();

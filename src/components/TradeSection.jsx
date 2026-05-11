@@ -135,7 +135,7 @@ export default function TradeSection() {
       y: {
         ...baseBarOptions.scales.x,
         grid: { display: false },
-        ticks: { ...baseBarOptions.scales.x.ticks, padding: 24 },
+        ticks: { ...baseBarOptions.scales.x.ticks, autoSkip: false, padding: 24 },
       },
     },
   };
