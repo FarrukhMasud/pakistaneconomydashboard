@@ -533,6 +533,8 @@
       "flag": "🇲🇾"
     }
   ],
+  "exportCountryPeriod": "Jul-Mar FY26 (P)",
+  "importCountryPeriod": "Jul-Mar FY26 (P)",
   "dataSource": "SBP",
   "lastUpdated": "2026-05-11",
   "dataCoverage": "2021-01 – 2026-03"
