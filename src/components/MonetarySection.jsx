@@ -4,12 +4,9 @@ import { COLORS, baseLineOptions } from '../utils/chartConfig';
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
-import { currentCalendarYear, currentFiscalYear, fmtPKR, fmtPct } from '../utils/periodHelpers';
+import { currentCalendarYear, currentFiscalYear, fmtPKR, fmtPct, formatMonthYear } from '../utils/periodHelpers';
 
-function formatDate(dateStr) {
-  const d = new Date(dateStr + '-01');
-  return d.toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
-}
+const formatDate = formatMonthYear;
 
 function formatTrillion(val) {
   if (Math.abs(val) >= 1e6) return (val / 1e6).toFixed(1) + 'T';

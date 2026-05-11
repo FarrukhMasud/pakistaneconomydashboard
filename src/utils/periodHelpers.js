@@ -8,6 +8,25 @@ const MONTH_NAMES = [
   'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
 ];
 
+/** Format YYYY-MM as a timezone-safe month label. */
+export function formatMonthYear(dateStr) {
+  if (!dateStr) return '';
+  const { year, month } = parseYM(dateStr);
+  return `${MONTH_NAMES[month - 1]} ${String(year).slice(-2)}`;
+}
+
+/** Format YYYY-MM-DD without UTC/local timezone rollover. */
+export function formatDayMonthYear(dateStr) {
+  if (!dateStr) return '';
+  const [year, month, day] = dateStr.split('-').map(Number);
+  if (!year || !month || !day) return formatMonthYear(dateStr);
+  return new Date(year, month - 1, day).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: '2-digit',
+  });
+}
+
 /** Parse "YYYY-MM" or "YYYY-MM-DD" into { year, month } */
 function parseYM(dateStr) {
   const [y, m] = dateStr.split('-').map(Number);

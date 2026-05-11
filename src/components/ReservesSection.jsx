@@ -8,17 +8,15 @@ import {
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
-import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD } from '../utils/periodHelpers';
+import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, formatMonthYear, formatDayMonthYear } from '../utils/periodHelpers';
 
 function formatDate(dateStr) {
   if (!dateStr) return '';
   // Handle both YYYY-MM (monthly) and YYYY-MM-DD (weekly) formats
   if (dateStr.length <= 7) {
-    const d = new Date(dateStr + '-01');
-    return d.toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
+    return formatMonthYear(dateStr);
   }
-  const d = new Date(dateStr);
-  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' });
+  return formatDayMonthYear(dateStr);
 }
 
 export default function ReservesSection() {

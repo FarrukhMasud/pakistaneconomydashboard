@@ -12,12 +12,7 @@ import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import YoYToggle from './ui/YoYToggle';
-import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, sumField, buildYoYOverlay } from '../utils/periodHelpers';
-
-function formatDate(dateStr) {
-  const d = new Date(dateStr + '-01');
-  return d.toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
-}
+import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, sumField, buildYoYOverlay, formatMonthYear } from '../utils/periodHelpers';
 
 export default function TradeSection() {
   const [showYoY, setShowYoY] = useState(false);
@@ -40,7 +35,7 @@ export default function TradeSection() {
   const cy = currentCalendarYear(monthly);
   const fy = currentFiscalYear(monthly);
 
-  const labels = monthly.map((d) => formatDate(d.date));
+  const labels = monthly.map((d) => formatMonthYear(d.date));
   const tickCallback = (_val, idx) => (idx % 3 === 0 || idx === labels.length - 1 ? labels[idx] : '');
 
   // --- Imports vs Exports Line ---
