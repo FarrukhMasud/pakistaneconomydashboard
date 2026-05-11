@@ -14,8 +14,10 @@ async function readJson(file) {
 }
 
 async function fetchSbpIndex() {
+  if (process.env.AUDIT_SKIP_SOURCE === '1') return '';
   const res = await fetch(SBP_INDEX, {
     headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' },
+    signal: AbortSignal.timeout(8000),
   });
   if (!res.ok) throw new Error(`SBP index HTTP ${res.status}`);
   return res.text();

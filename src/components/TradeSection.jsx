@@ -26,14 +26,22 @@ export default function TradeSection() {
   if (loading || !data) return <div className="card loading-card"><div className="spinner" /><span>Loading data…</span></div>;
   if (error) return <p style={{ color: COLORS.coral }}>Error: {error.message}</p>;
 
-  const { monthly, topExportCountries, topImportCountries, lastUpdated: tradeLU, dataCoverage: tradeDC } = data;
+  const {
+    monthly,
+    topExportCountries,
+    topImportCountries,
+    exportCountryPeriod,
+    importCountryPeriod,
+    lastUpdated: tradeLU,
+    dataCoverage: tradeDC,
+  } = data;
 
   // Current year summary
   const cy = currentCalendarYear(monthly);
   const fy = currentFiscalYear(monthly);
 
   const labels = monthly.map((d) => formatDate(d.date));
-  const tickCallback = (_val, idx) => (idx % 3 === 0 ? labels[idx] : '');
+  const tickCallback = (_val, idx) => (idx % 3 === 0 || idx === labels.length - 1 ? labels[idx] : '');
 
   // --- Imports vs Exports Line ---
   const lineData = {
@@ -222,11 +230,11 @@ export default function TradeSection() {
         <div className="section-grid" style={{ marginTop: '1.5rem' }}>
           <ChartCard
             title="Top Export Destinations"
-            description={`Top 15 countries by export receipts. The US, UK, and China are dominant buyers of Pakistani textiles and food products.`}
+            description={`Top 15 countries by export receipts${exportCountryPeriod ? ` for ${exportCountryPeriod}` : ''}. The US, UK, and China are dominant buyers of Pakistani textiles and food products.`}
             source="SBP"
             dataSource="SBP"
             lastUpdated={tradeLU}
-            dataCoverage={fy ? `${fy.rangeLabel} ${fy.fyLabel}` : tradeDC}
+            dataCoverage={exportCountryPeriod || tradeDC}
           >
             <div className="chart-container tall">
               <Bar
@@ -245,11 +253,11 @@ export default function TradeSection() {
           </ChartCard>
           <ChartCard
             title="Top Import Sources"
-            description={`Top 15 countries by import payments. China, UAE (oil), and Saudi Arabia dominate Pakistan's import bill.`}
+            description={`Top 15 countries by import payments${importCountryPeriod ? ` for ${importCountryPeriod}` : ''}. China, UAE (oil), and Saudi Arabia dominate Pakistan's import bill.`}
             source="SBP"
             dataSource="SBP"
             lastUpdated={tradeLU}
-            dataCoverage={fy ? `${fy.rangeLabel} ${fy.fyLabel}` : tradeDC}
+            dataCoverage={importCountryPeriod || tradeDC}
           >
             <div className="chart-container tall">
               <Bar

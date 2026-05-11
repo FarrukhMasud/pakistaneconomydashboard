@@ -158,6 +158,9 @@ npm run generate:freshness
 # Audit local data freshness against official source metadata
 npm run audit:data
 
+# Run local deployment gates: data sanity, freshness audit, lint, build
+npm run ci:audit
+
 # Verify live Azure JSON matches local generated data
 npm run verify:live
 
@@ -182,12 +185,18 @@ Recommended schedule:
 After each update, run:
 
 ```bash
+npm run audit:sanity
 npm run audit:data
 npm run verify:live
 ```
 
 The live dashboard also includes a **Data Freshness & Source Audit**
 panel in the Overview tab, generated from `public/data/data-freshness.json`.
+
+`npm run deploy` automatically runs the `predeploy` gate first
+(`audit:sanity`, `audit:data`, and lint). In CI environments that should not
+fetch SBP source metadata, set `AUDIT_SKIP_SOURCE=1`; the local data sanity
+checks still run.
 
 ---
 
@@ -214,6 +223,22 @@ npm run update
 This fetches fresh data, commits changes to git, pushes to
 GitHub, and deploys to Azure Storage. Use `--no-deploy` to skip
 the git push and deploy steps.
+
+### GitHub Actions Deployment
+
+`.github/workflows/dashboard-ci.yml` runs data sanity checks, freshness audit,
+lint, and production build on pushes and pull requests. A manual
+`workflow_dispatch` deployment is also available after configuring Azure OIDC
+secrets:
+
+| Secret | Description |
+| ------ | ----------- |
+| `AZURE_CLIENT_ID` | Entra application/client ID with federated GitHub credentials |
+| `AZURE_TENANT_ID` | Azure tenant ID |
+| `AZURE_SUBSCRIPTION_ID` | Subscription containing `pakeconomydash` |
+
+Grant the app access to deploy to the storage account, then run the workflow
+manually with `deploy=true`.
 
 ### Azure Configuration
 

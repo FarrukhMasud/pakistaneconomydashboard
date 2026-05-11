@@ -48,7 +48,10 @@ export default function DataFreshnessPanel() {
             <div className="freshness-item__meta">
               <span>Latest: {item.latestObservation || 'N/A'}</span>
               <span>Updated: {item.dashboardUpdated || 'N/A'}</span>
+              {item.sourceFile && <span>Source file: {item.sourceFile}</span>}
+              {item.apiSeries?.length > 0 && <span>API series: {item.apiSeries.length}</span>}
               <span>{item.source}</span>
+              {item.expectedLag && <small>{item.expectedLag}</small>}
             </div>
           </a>
         ))}

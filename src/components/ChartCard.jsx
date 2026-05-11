@@ -8,6 +8,11 @@ export default function ChartCard({ title, description, source, dataSource, last
       <div className="chart-card-header">
         <div className="chart-title-row">
           <h3>{title}</h3>
+          {dataCoverage && (
+            <span className="latest-period-badge" title="Latest available period in this chart">
+              Latest: {dataCoverage}
+            </span>
+          )}
           <button
             className={`info-toggle ${expanded ? 'active' : ''}`}
             onClick={() => setExpanded(e => !e)}
@@ -30,7 +35,7 @@ export default function ChartCard({ title, description, source, dataSource, last
       {(dataSource || dataCoverage || lastUpdated) && (
         <div className="chart-footnote">
           {dataSource && <span>Source: {dataSource}</span>}
-          {dataCoverage && <span>Coverage: {dataCoverage}</span>}
+          {dataCoverage && <span>Latest available period: {dataCoverage}</span>}
           {lastUpdated && <span>Updated: {lastUpdated}</span>}
         </div>
       )}

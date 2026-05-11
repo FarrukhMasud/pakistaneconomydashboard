@@ -185,6 +185,8 @@ async function updateTrade() {
     monthly,
     topExportCountries: existing.topExportCountries || [],
     topImportCountries: existing.topImportCountries || [],
+    exportCountryPeriod: existing.exportCountryPeriod || null,
+    importCountryPeriod: existing.importCountryPeriod || null,
     dataSource: 'SBP',
     lastUpdated: new Date().toISOString().split('T')[0],
     dataCoverage: `${firstDate} – ${lastDate}`,
@@ -1007,6 +1009,15 @@ async function updateServices() {
 async function updateTradeCountries() {
   console.log('\n🌍 Parsing Trade by Country...');
 
+  const countryPeriodLabel = (headerPeriods, headerYears, col) => {
+    let period = (headerPeriods[col] || '').toString().trim();
+    for (let c = col - 1; !period && c >= 0; c--) {
+      period = (headerPeriods[c] || '').toString().trim();
+    }
+    const year = (headerYears[col] || '').toString().trim();
+    return [period, year].filter(Boolean).join(' ');
+  };
+
   // --- Exports by Country ---
   console.log('  📋 Export destinations (Export_Receipts_by_all_Countries.xls)...');
   const wbExp = readExcel('Export_Receipts_by_all_Countries.xls');
@@ -1029,6 +1040,7 @@ async function updateTradeCountries() {
     expCol = 7;
   }
   console.log(`  Export data column: ${expCol}`);
+  const exportCountryPeriod = countryPeriodLabel(expHeader4, expHeader5, expCol);
 
   const exportCountries = [];
   for (let i = 6; i < expRows.length; i++) {
@@ -1062,6 +1074,7 @@ async function updateTradeCountries() {
   console.log(`  Using sheet: "${impSheetName}"`);
   const impRows = getSheet(wbImp, impSheetName);
 
+  const impHeader4 = impRows[4] || [];
   const impHeader5 = impRows[5] || [];
   let impCol = -1;
   for (let c = impHeader5.length - 1; c >= 0; c--) {
@@ -1070,6 +1083,7 @@ async function updateTradeCountries() {
   }
   if (impCol < 0) impCol = 7;
   console.log(`  Import data column: ${impCol}`);
+  const importCountryPeriod = countryPeriodLabel(impHeader4, impHeader5, impCol);
 
   const importCountries = [];
   for (let i = 6; i < impRows.length; i++) {
@@ -1098,9 +1112,11 @@ async function updateTradeCountries() {
   const existing = await readJson('trade.json');
   existing.topExportCountries = topExportCountries;
   existing.topImportCountries = topImportCountries;
+  existing.exportCountryPeriod = exportCountryPeriod || null;
+  existing.importCountryPeriod = importCountryPeriod || null;
   await writeJson('trade.json', existing);
 
-  console.log(`  📊 Top ${topExportCountries.length} export destinations, Top ${topImportCountries.length} import sources`);
+  console.log(`  📊 Top ${topExportCountries.length} export destinations (${exportCountryPeriod || 'period unknown'}), Top ${topImportCountries.length} import sources (${importCountryPeriod || 'period unknown'})`);
   return { exports: topExportCountries.length, imports: topImportCountries.length };
 }
 

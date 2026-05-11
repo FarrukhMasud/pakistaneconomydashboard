@@ -596,6 +596,12 @@ a:hover {
   color: var(--text-muted);
 }
 
+.freshness-item__meta small {
+  font-size: 0.66rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
 @media (max-width: 800px) {
   .freshness-grid { grid-template-columns: 1fr; }
   .data-freshness__header { flex-direction: column; }
@@ -606,14 +612,41 @@ a:hover {
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .chart-title-row h3 {
   flex: 1;
+  min-width: 12rem;
   font-size: 1rem;
   font-weight: 600;
   color: var(--text-primary);
   margin: 0;
+}
+
+.latest-period-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  max-width: 100%;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid rgba(0, 212, 170, 0.24);
+  border-radius: var(--radius-pill);
+  background: rgba(0, 212, 170, 0.08);
+  color: var(--accent-teal);
+  font-size: 0.66rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .latest-period-badge {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    white-space: normal;
+  }
 }
 
 .info-toggle {
