@@ -91,5 +91,44 @@ export function countryCode(country) {
 }
 
 export function countryLabel(country) {
-  return `[${countryCode(country)}] ${country}`;
+  return country;
+}
+
+const flagImageCache = new Map();
+
+function flagImage(country, redraw) {
+  const code = countryCode(country).toLowerCase();
+  if (code === '--') return null;
+
+  const url = `https://flagcdn.com/w40/${code}.png`;
+  if (flagImageCache.has(url)) return flagImageCache.get(url);
+
+  const image = new Image();
+  image.crossOrigin = 'anonymous';
+  image.onload = redraw;
+  image.src = url;
+  flagImageCache.set(url, image);
+  return image;
+}
+
+export function countryFlagPlugin(countries, id) {
+  return {
+    id: `country-flag-labels-${id}`,
+    afterDraw(chart) {
+      const yScale = chart.scales.y;
+      if (!yScale) return;
+
+      const { ctx } = chart;
+      countries.forEach((country, index) => {
+        const image = flagImage(country, () => chart.draw());
+        if (!image?.complete || image.naturalWidth === 0) return;
+
+        const x = yScale.left + 2;
+        const y = yScale.getPixelForTick(index) - 6;
+        ctx.save();
+        ctx.drawImage(image, x, y, 18, 12);
+        ctx.restore();
+      });
+    },
+  };
 }

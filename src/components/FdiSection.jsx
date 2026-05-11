@@ -5,7 +5,7 @@ import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import { pctChange, fmtUSD } from '../utils/periodHelpers';
-import { countryLabel } from '../utils/countryLabels';
+import { countryFlagPlugin, countryLabel } from '../utils/countryLabels';
 
 export default function FdiSection() {
   const { data, loading, error } = useData('fdi.json');
@@ -102,7 +102,11 @@ export default function FdiSection() {
     },
     scales: {
       x: { ...baseBarOptions.scales.y, title: { display: true, text: 'USD Millions (negative = disinvestment)', color: COLORS.text } },
-      y: { ...baseBarOptions.scales.x, grid: { display: false } },
+      y: {
+        ...baseBarOptions.scales.x,
+        grid: { display: false },
+        ticks: { ...baseBarOptions.scales.x.ticks, padding: 24 },
+      },
     },
   };
 
@@ -226,7 +230,7 @@ export default function FdiSection() {
           dataCoverage={data.countryPeriod}
         >
           <div className="chart-container">
-            <Bar data={countryBarData} options={countryBarOptions} />
+            <Bar data={countryBarData} options={countryBarOptions} plugins={[countryFlagPlugin(by_country.map((d) => d.country), 'fdi-countries')]} />
           </div>
         </ChartCard>
       </div>

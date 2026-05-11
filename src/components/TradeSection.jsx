@@ -13,7 +13,7 @@ import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import YoYToggle from './ui/YoYToggle';
 import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, sumField, buildYoYOverlay, formatMonthYear } from '../utils/periodHelpers';
-import { countryLabel } from '../utils/countryLabels';
+import { countryFlagPlugin, countryLabel } from '../utils/countryLabels';
 
 export default function TradeSection() {
   const [showYoY, setShowYoY] = useState(false);
@@ -132,9 +132,16 @@ export default function TradeSection() {
     plugins: { ...baseBarOptions.plugins, legend: { display: false } },
     scales: {
       x: { ...baseBarOptions.scales.y, title: { display: true, text: 'USD Millions', color: COLORS.text }, beginAtZero: true },
-      y: { ...baseBarOptions.scales.x, grid: { display: false } },
+      y: {
+        ...baseBarOptions.scales.x,
+        grid: { display: false },
+        ticks: { ...baseBarOptions.scales.x.ticks, padding: 24 },
+      },
     },
   };
+
+  const exportCountries = topExportCountries?.map((d) => d.country) || [];
+  const importCountries = topImportCountries?.map((d) => d.country) || [];
 
   return (
     <section className="fade-in">
@@ -244,6 +251,7 @@ export default function TradeSection() {
                   }],
                 }}
                 options={countryBarOptions}
+                plugins={[countryFlagPlugin(exportCountries, 'trade-exports')]}
               />
             </div>
           </ChartCard>
@@ -267,6 +275,7 @@ export default function TradeSection() {
                   }],
                 }}
                 options={countryBarOptions}
+                plugins={[countryFlagPlugin(importCountries, 'trade-imports')]}
               />
             </div>
           </ChartCard>
