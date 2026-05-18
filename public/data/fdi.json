@@ -264,5 +264,382 @@
       "outflow": 99.61,
       "status": null
     }
+  },
+  "monthly": [
+    {
+      "date": "2021-05",
+      "net_fdi": 199,
+      "equity": 129,
+      "debt": 70
+    },
+    {
+      "date": "2021-06",
+      "net_fdi": 141,
+      "equity": 134,
+      "debt": 7
+    },
+    {
+      "date": "2021-07",
+      "net_fdi": 117,
+      "equity": 129,
+      "debt": -12
+    },
+    {
+      "date": "2021-08",
+      "net_fdi": 137,
+      "equity": 95,
+      "debt": 42
+    },
+    {
+      "date": "2021-09",
+      "net_fdi": 261,
+      "equity": 206,
+      "debt": 55
+    },
+    {
+      "date": "2021-10",
+      "net_fdi": 247,
+      "equity": 137,
+      "debt": 110
+    },
+    {
+      "date": "2021-11",
+      "net_fdi": 158,
+      "equity": 145,
+      "debt": 13
+    },
+    {
+      "date": "2021-12",
+      "net_fdi": 240,
+      "equity": 118,
+      "debt": 122
+    },
+    {
+      "date": "2022-01",
+      "net_fdi": 121,
+      "equity": 138,
+      "debt": -17
+    },
+    {
+      "date": "2022-02",
+      "net_fdi": 102,
+      "equity": 112,
+      "debt": -10
+    },
+    {
+      "date": "2022-03",
+      "net_fdi": -30,
+      "equity": 144,
+      "debt": -174
+    },
+    {
+      "date": "2022-04",
+      "net_fdi": 171,
+      "equity": 123,
+      "debt": 48
+    },
+    {
+      "date": "2022-05",
+      "net_fdi": 141,
+      "equity": 102,
+      "debt": 39
+    },
+    {
+      "date": "2022-06",
+      "net_fdi": 271,
+      "equity": 141,
+      "debt": 130
+    },
+    {
+      "date": "2022-07",
+      "net_fdi": 99,
+      "equity": 118,
+      "debt": -19
+    },
+    {
+      "date": "2022-08",
+      "net_fdi": 149,
+      "equity": 138,
+      "debt": 11
+    },
+    {
+      "date": "2022-09",
+      "net_fdi": 133,
+      "equity": 164,
+      "debt": -31
+    },
+    {
+      "date": "2022-10",
+      "net_fdi": 145,
+      "equity": 136,
+      "debt": 9
+    },
+    {
+      "date": "2022-11",
+      "net_fdi": 122,
+      "equity": 180,
+      "debt": -58
+    },
+    {
+      "date": "2022-12",
+      "net_fdi": 38,
+      "equity": -5,
+      "debt": 43
+    },
+    {
+      "date": "2023-01",
+      "net_fdi": 242,
+      "equity": 193,
+      "debt": 49
+    },
+    {
+      "date": "2023-02",
+      "net_fdi": 119,
+      "equity": 106,
+      "debt": 13
+    },
+    {
+      "date": "2023-03",
+      "net_fdi": 170,
+      "equity": 173,
+      "debt": -3
+    },
+    {
+      "date": "2023-04",
+      "net_fdi": 132,
+      "equity": 122,
+      "debt": 10
+    },
+    {
+      "date": "2023-05",
+      "net_fdi": 156,
+      "equity": 123,
+      "debt": 33
+    },
+    {
+      "date": "2023-06",
+      "net_fdi": 122,
+      "equity": 116,
+      "debt": 6
+    },
+    {
+      "date": "2023-07",
+      "net_fdi": 124,
+      "equity": 131,
+      "debt": -7
+    },
+    {
+      "date": "2023-08",
+      "net_fdi": 183,
+      "equity": 179,
+      "debt": 4
+    },
+    {
+      "date": "2023-09",
+      "net_fdi": 213,
+      "equity": 200,
+      "debt": 13
+    },
+    {
+      "date": "2023-10",
+      "net_fdi": 163,
+      "equity": 137,
+      "debt": 26
+    },
+    {
+      "date": "2023-11",
+      "net_fdi": 172,
+      "equity": 186,
+      "debt": -14
+    },
+    {
+      "date": "2023-12",
+      "net_fdi": 252,
+      "equity": 240,
+      "debt": 12
+    },
+    {
+      "date": "2024-01",
+      "net_fdi": -132,
+      "equity": -134,
+      "debt": 2
+    },
+    {
+      "date": "2024-02",
+      "net_fdi": 172,
+      "equity": 156,
+      "debt": 16
+    },
+    {
+      "date": "2024-03",
+      "net_fdi": 294,
+      "equity": 274,
+      "debt": 20
+    },
+    {
+      "date": "2024-04",
+      "net_fdi": 394,
+      "equity": 371,
+      "debt": 23
+    },
+    {
+      "date": "2024-05",
+      "net_fdi": 306,
+      "equity": 287,
+      "debt": 19
+    },
+    {
+      "date": "2024-06",
+      "net_fdi": 205,
+      "equity": 201,
+      "debt": 4
+    },
+    {
+      "date": "2024-07",
+      "net_fdi": 185,
+      "equity": 195,
+      "debt": -10
+    },
+    {
+      "date": "2024-08",
+      "net_fdi": 264,
+      "equity": 257,
+      "debt": 7
+    },
+    {
+      "date": "2024-09",
+      "net_fdi": 417,
+      "equity": 431,
+      "debt": -14
+    },
+    {
+      "date": "2024-10",
+      "net_fdi": 146,
+      "equity": 127,
+      "debt": 19
+    },
+    {
+      "date": "2024-11",
+      "net_fdi": 232,
+      "equity": 240,
+      "debt": -8
+    },
+    {
+      "date": "2024-12",
+      "net_fdi": 182,
+      "equity": 175,
+      "debt": 7
+    },
+    {
+      "date": "2025-01",
+      "net_fdi": 236,
+      "equity": 219,
+      "debt": 17
+    },
+    {
+      "date": "2025-02",
+      "net_fdi": 130,
+      "equity": 173,
+      "debt": -43
+    },
+    {
+      "date": "2025-03",
+      "net_fdi": 64,
+      "equity": 67,
+      "debt": -3
+    },
+    {
+      "date": "2025-04",
+      "net_fdi": 179,
+      "equity": 197,
+      "debt": -18
+    },
+    {
+      "date": "2025-05",
+      "net_fdi": 232,
+      "equity": 191,
+      "debt": 41
+    },
+    {
+      "date": "2025-06",
+      "net_fdi": 210,
+      "equity": 225,
+      "debt": -15
+    },
+    {
+      "date": "2025-07",
+      "net_fdi": 224,
+      "equity": 252,
+      "debt": -28
+    },
+    {
+      "date": "2025-08",
+      "net_fdi": 175,
+      "equity": 175,
+      "debt": 0
+    },
+    {
+      "date": "2025-09",
+      "net_fdi": 186,
+      "equity": 215,
+      "debt": -29
+    },
+    {
+      "date": "2025-10",
+      "net_fdi": 171,
+      "equity": 177,
+      "debt": -6
+    },
+    {
+      "date": "2025-11",
+      "net_fdi": 180,
+      "equity": 168,
+      "debt": 12
+    },
+    {
+      "date": "2025-12",
+      "net_fdi": -135,
+      "equity": 34,
+      "debt": -169
+    },
+    {
+      "date": "2026-01",
+      "net_fdi": 173,
+      "equity": 177,
+      "debt": -4
+    },
+    {
+      "date": "2026-02",
+      "net_fdi": 214,
+      "equity": 175,
+      "debt": 39
+    },
+    {
+      "date": "2026-03",
+      "net_fdi": 168,
+      "equity": 212,
+      "debt": -44
+    },
+    {
+      "date": "2026-04",
+      "net_fdi": 54,
+      "equity": 86,
+      "debt": -32
+    }
+  ],
+  "monthlyDataSource": "SBP EasyData API - BOP BPM6",
+  "monthlySeries": {
+    "net_fdi": {
+      "key": "TS_GP_BOP_BPM6SUM_M.P00330",
+      "name": "Net Direct Investment in Pakistan"
+    },
+    "equity": {
+      "key": "TS_GP_BOP_BPM6SUM_M.P00340",
+      "name": "Equity and Reinvested Earnings"
+    },
+    "debt": {
+      "key": "TS_GP_BOP_BPM6SUM_M.P00350",
+      "name": "Debt Instruments"
+    }
   }
 }
