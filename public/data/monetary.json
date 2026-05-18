@@ -1,13 +1,13 @@
 {
   "dataSource": "SBP EasyData API - Monetary & Financial Sector",
-  "lastUpdated": "2026-05-11",
+  "lastUpdated": "2026-05-18",
   "m2": {
     "name": "Broad Money (M2)",
     "seriesKey": "TS_GP_BAM_M2_W.M000070",
     "data": [
       {
         "date": "2021-05",
-        "value": 21878449.09,
+        "value": 21962272.04,
         "unit": "Million PKR"
       },
       {
@@ -304,6 +304,11 @@
         "date": "2026-04",
         "value": 42753315.54,
         "unit": "Million PKR"
+      },
+      {
+        "date": "2026-05",
+        "value": 43456305.5,
+        "unit": "Million PKR"
       }
     ]
   },
@@ -313,7 +318,7 @@
     "data": [
       {
         "date": "2021-05",
-        "value": 14.48,
+        "value": 11.61,
         "unit": "Percent"
       },
       {
@@ -610,6 +615,11 @@
         "date": "2026-04",
         "value": 15.69,
         "unit": "Percent"
+      },
+      {
+        "date": "2026-05",
+        "value": 17.03,
+        "unit": "Percent"
       }
     ]
   },
@@ -619,7 +629,7 @@
     "data": [
       {
         "date": "2021-05",
-        "value": 6566647.93,
+        "value": 6592457.69,
         "unit": "Million PKR"
       },
       {
@@ -916,6 +926,11 @@
         "date": "2026-04",
         "value": 10797236.59,
         "unit": "Million PKR"
+      },
+      {
+        "date": "2026-05",
+        "value": 10853058.25,
+        "unit": "Million PKR"
       }
     ]
   },
@@ -925,7 +940,7 @@
     "data": [
       {
         "date": "2021-05",
-        "value": 4.68,
+        "value": 2.6,
         "unit": "Percent"
       },
       {
@@ -1222,6 +1237,11 @@
         "date": "2026-04",
         "value": 13.64,
         "unit": "Percent"
+      },
+      {
+        "date": "2026-05",
+        "value": 13.98,
+        "unit": "Percent"
       }
     ]
   },
@@ -1231,7 +1251,7 @@
     "data": [
       {
         "date": "2021-05",
-        "value": 14838949.53,
+        "value": 14885194.17,
         "unit": "Million PKR"
       },
       {
@@ -1528,6 +1548,11 @@
         "date": "2026-04",
         "value": 30774247.95,
         "unit": "Million PKR"
+      },
+      {
+        "date": "2026-05",
+        "value": 31755605.34,
+        "unit": "Million PKR"
       }
     ]
   },
@@ -1537,7 +1562,7 @@
     "data": [
       {
         "date": "2021-05",
-        "value": 14.34,
+        "value": 11.09,
         "unit": "Percent"
       },
       {
@@ -1834,6 +1859,11 @@
         "date": "2026-04",
         "value": 15.31,
         "unit": "Percent"
+      },
+      {
+        "date": "2026-05",
+        "value": 18.66,
+        "unit": "Percent"
       }
     ]
   },
@@ -1843,7 +1873,7 @@
     "data": [
       {
         "date": "2021-05",
-        "value": 1042199.55,
+        "value": 1032843.06,
         "unit": "Million PKR"
       },
       {
@@ -2140,6 +2170,11 @@
         "date": "2026-04",
         "value": 1304656.19,
         "unit": "Million PKR"
+      },
+      {
+        "date": "2026-05",
+        "value": 1983081.8,
+        "unit": "Million PKR"
       }
     ]
   },
@@ -2149,7 +2184,7 @@
     "data": [
       {
         "date": "2021-05",
-        "value": 14314870.62,
+        "value": 14211738.02,
         "unit": "Million PKR"
       },
       {
@@ -2446,6 +2481,11 @@
         "date": "2026-04",
         "value": 34902554.39,
         "unit": "Million PKR"
+      },
+      {
+        "date": "2026-05",
+        "value": 35016464.34,
+        "unit": "Million PKR"
       }
     ]
   },
@@ -2455,7 +2495,7 @@
     "data": [
       {
         "date": "2021-05",
-        "value": 8696001.56,
+        "value": 8506640.08,
         "unit": "Million PKR"
       },
       {
@@ -2751,6 +2791,11 @@
       {
         "date": "2026-04",
         "value": 14591385,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-05",
+        "value": 14240148.56,
         "unit": "Million PKR"
       }
     ]

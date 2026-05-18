@@ -2,152 +2,152 @@
   "categories": [
     {
       "name": "Transport",
-      "credit": 706.33,
-      "debit": 3891.97,
-      "net": -3185.65,
-      "priorCredit": 766.31,
-      "priorDebit": 3566.57,
-      "priorNet": -2800.27,
-      "period": "Jul-Mar FY26"
+      "credit": 799.61,
+      "debit": 4207.75,
+      "net": -3408.14,
+      "priorCredit": 854.6,
+      "priorDebit": 3945.99,
+      "priorNet": -3091.38,
+      "period": "Jul-Apr FY26"
     },
     {
       "name": "Travel",
-      "credit": 752.4,
-      "debit": 2469.06,
-      "net": -1716.66,
-      "priorCredit": 553.28,
-      "priorDebit": 1875.87,
-      "priorNet": -1322.59,
-      "period": "Jul-Mar FY26"
+      "credit": 869.27,
+      "debit": 2666.34,
+      "net": -1797.07,
+      "priorCredit": 624.47,
+      "priorDebit": 2080.47,
+      "priorNet": -1456,
+      "period": "Jul-Apr FY26"
     },
     {
       "name": "Insurance & Pension",
-      "credit": 56.1,
-      "debit": 255.83,
-      "net": -199.73,
-      "priorCredit": 73.61,
-      "priorDebit": 265.5,
-      "priorNet": -191.89,
-      "period": "Jul-Mar FY26"
+      "credit": 59.12,
+      "debit": 269.61,
+      "net": -210.49,
+      "priorCredit": 87.65,
+      "priorDebit": 293.94,
+      "priorNet": -206.29,
+      "period": "Jul-Apr FY26"
     },
     {
       "name": "Financial Services",
-      "credit": 57.49,
-      "debit": 542.57,
-      "net": -485.08,
-      "priorCredit": 47.82,
-      "priorDebit": 629.31,
-      "priorNet": -581.5,
-      "period": "Jul-Mar FY26"
+      "credit": 61.85,
+      "debit": 600.57,
+      "net": -538.71,
+      "priorCredit": 51.54,
+      "priorDebit": 734.7,
+      "priorNet": -683.16,
+      "period": "Jul-Apr FY26"
     },
     {
       "name": "IP Charges",
-      "credit": 8.03,
-      "debit": 188.48,
-      "net": -180.45,
-      "priorCredit": 8.36,
-      "priorDebit": 226.61,
-      "priorNet": -218.25,
-      "period": "Jul-Mar FY26"
+      "credit": 8.74,
+      "debit": 216.25,
+      "net": -207.51,
+      "priorCredit": 9.99,
+      "priorDebit": 250,
+      "priorNet": -240.01,
+      "period": "Jul-Apr FY26"
     },
     {
       "name": "IT & Telecom",
-      "credit": 3387.92,
-      "debit": 474.79,
-      "net": 2913.13,
-      "priorCredit": 2833.53,
-      "priorDebit": 396.88,
-      "priorNet": 2436.64,
-      "period": "Jul-Mar FY26"
+      "credit": 3810.18,
+      "debit": 542.65,
+      "net": 3267.53,
+      "priorCredit": 3151.17,
+      "priorDebit": 425.96,
+      "priorNet": 2725.21,
+      "period": "Jul-Apr FY26"
     },
     {
       "name": "Other Business",
-      "credit": 1573.49,
-      "debit": 898.15,
-      "net": 675.34,
-      "priorCredit": 1230.23,
-      "priorDebit": 1016.52,
-      "priorNet": 213.7,
-      "period": "Jul-Mar FY26"
+      "credit": 1762.13,
+      "debit": 978.38,
+      "net": 783.75,
+      "priorCredit": 1402.77,
+      "priorDebit": 1094.98,
+      "priorNet": 307.79,
+      "period": "Jul-Apr FY26"
     },
     {
       "name": "Personal/Cultural",
-      "credit": 56.72,
-      "debit": 98.94,
-      "net": -42.22,
-      "priorCredit": 37.49,
-      "priorDebit": 6.67,
-      "priorNet": 30.82,
-      "period": "Jul-Mar FY26"
+      "credit": 72.82,
+      "debit": 111.05,
+      "net": -38.23,
+      "priorCredit": 42.64,
+      "priorDebit": 9.24,
+      "priorNet": 33.4,
+      "period": "Jul-Apr FY26"
     }
   ],
   "itBreakdown": [
     {
       "name": "Telecom",
-      "credit": 515.63,
-      "priorCredit": 402.56
+      "credit": 591.12,
+      "priorCredit": 450.76
     },
     {
       "name": "Software Consultancy",
-      "credit": 936.59,
-      "priorCredit": 827.77
+      "credit": 1047.58,
+      "priorCredit": 912.66
     },
     {
       "name": "Computer Software Export/Import",
-      "credit": 473.57,
-      "priorCredit": 445.93
+      "credit": 542.13,
+      "priorCredit": 490.49
     },
     {
       "name": "Freelance IT",
-      "credit": 856.37,
-      "priorCredit": 567.52
+      "credit": 959.28,
+      "priorCredit": 642.26
     },
     {
       "name": "Information Services",
-      "credit": 3.53,
-      "priorCredit": 19.72
+      "credit": 3.93,
+      "priorCredit": 20.26
     },
     {
       "name": "Other Computer Services",
-      "credit": 602.22,
-      "priorCredit": 570.03
+      "credit": 666.14,
+      "priorCredit": 634.74
     }
   ],
   "summary": {
-    "totalServicesCredit": 7345.35,
-    "totalServicesDebit": 9496.44,
-    "totalServicesNet": -2151.09,
-    "itTelecomCredit": 3387.92,
-    "itTelecomNet": 2913.13,
-    "computerServicesCredit": 2868.75,
-    "period": "Jul-Mar FY26"
+    "totalServicesCredit": 8269.63,
+    "totalServicesDebit": 10310.08,
+    "totalServicesNet": -2040.44,
+    "itTelecomCredit": 3810.18,
+    "itTelecomNet": 3267.53,
+    "computerServicesCredit": 3215.13,
+    "period": "Jul-Apr FY26"
   },
   "comparison": {
     "fy25": {
-      "totalCredit": 6275.66,
-      "itCredit": 2833.53
+      "totalCredit": 7027.4,
+      "itCredit": 3151.17
     },
     "fy26": {
-      "totalCredit": 7345.35,
-      "itCredit": 3387.92
+      "totalCredit": 8269.63,
+      "itCredit": 3810.18
     },
-    "period": "Jul-Mar",
+    "period": "Jul-Apr",
     "currentLabel": "FY26",
     "priorLabel": "FY25"
   },
   "recentMonths": [
     {
-      "month": "Mar-25",
-      "totalCredit": 777.22,
-      "itCredit": 344.93
+      "month": "Mar-26",
+      "totalCredit": 912.21,
+      "itCredit": 413.62
     },
     {
-      "month": "Feb-26",
-      "totalCredit": 800.21,
-      "itCredit": 363.81
+      "month": "Apr-26",
+      "totalCredit": 914.98,
+      "itCredit": 422.26
     }
   ],
   "dataSource": "SBP",
-  "lastUpdated": "2026-05-11",
-  "dataCoverage": "Jul-Mar FY26"
+  "lastUpdated": "2026-05-18",
+  "dataCoverage": "Jul-Apr FY26"
 }

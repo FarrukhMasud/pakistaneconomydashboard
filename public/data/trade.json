@@ -374,168 +374,174 @@
     },
     {
       "date": "2026-03",
-      "imports": 4902,
-      "exports": 2526,
-      "balance": -2376
+      "imports": 4892,
+      "exports": 2527,
+      "balance": -2365
+    },
+    {
+      "date": "2026-04",
+      "imports": 5970,
+      "exports": 2558,
+      "balance": -3412
     }
   ],
   "topExportCountries": [
     {
       "country": "U. S. A.",
-      "value": 4634.19,
+      "value": 5123.94,
       "flag": "🇺🇸"
     },
     {
       "country": "China",
-      "value": 1945.05,
+      "value": 2220.97,
       "flag": "🇨🇳"
     },
     {
       "country": "U. K.",
-      "value": 1621.68,
+      "value": 1801.46,
       "flag": "🇬🇧"
     },
     {
       "country": "U. A. E. Dubai",
-      "value": 1412.72,
+      "value": 1545.77,
       "flag": "🇦🇪"
     },
     {
       "country": "Germany",
-      "value": 1239.65,
+      "value": 1369.17,
       "flag": "🇩🇪"
     },
     {
       "country": "Spain",
-      "value": 1184.46,
+      "value": 1322.2,
       "flag": "🇪🇸"
     },
     {
       "country": "Netherlands (Holland)",
-      "value": 1103.3,
+      "value": 1227.41,
       "flag": "🇳🇱"
     },
     {
       "country": "Italy",
-      "value": 880.13,
+      "value": 969.43,
       "flag": "🇮🇹"
     },
     {
-      "country": "Saudi Arabia",
-      "value": 529.98,
-      "flag": "🇸🇦"
-    },
-    {
       "country": "Bangladesh",
-      "value": 528.85,
+      "value": 607.58,
       "flag": "🇧🇩"
     },
     {
+      "country": "Saudi Arabia",
+      "value": 583.94,
+      "flag": "🇸🇦"
+    },
+    {
       "country": "France",
-      "value": 411.89,
+      "value": 457.99,
       "flag": "🇫🇷"
     },
     {
       "country": "Belgium",
-      "value": 402.86,
+      "value": 440.67,
       "flag": "🇧🇪"
     },
     {
       "country": "Poland",
-      "value": 371.92,
+      "value": 408.26,
       "flag": "🇵🇱"
     },
     {
       "country": "Singapore",
-      "value": 302.23,
+      "value": 355.64,
       "flag": "🇸🇬"
     },
     {
       "country": "Canada",
-      "value": 286.88,
+      "value": 317.71,
       "flag": "🇨🇦"
     }
   ],
   "topImportCountries": [
     {
       "country": "China",
-      "value": 14038.36,
+      "value": 15815.74,
       "flag": "🇨🇳"
     },
     {
       "country": "U. A. E. Dubai",
-      "value": 4729.83,
+      "value": 5592.56,
       "flag": "🇦🇪"
     },
     {
       "country": "Saudi Arabia",
-      "value": 2973.31,
+      "value": 3316.35,
       "flag": "🇸🇦"
     },
     {
       "country": "Indonesia",
-      "value": 2653.29,
+      "value": 2930.18,
       "flag": "🇮🇩"
     },
     {
-      "country": "Qatar",
-      "value": 2146.97,
-      "flag": "🇶🇦"
-    },
-    {
       "country": "U. S. A.",
-      "value": 2132.88,
+      "value": 2540.28,
       "flag": "🇺🇸"
     },
     {
+      "country": "Qatar",
+      "value": 2157.49,
+      "flag": "🇶🇦"
+    },
+    {
       "country": "Singapore",
-      "value": 1597.62,
+      "value": 1747.65,
       "flag": "🇸🇬"
     },
     {
       "country": "Japan",
-      "value": 1225.91,
+      "value": 1365.01,
       "flag": "🇯🇵"
     },
     {
       "country": "Kuwait",
-      "value": 1107.16,
+      "value": 1309.17,
       "flag": "🇰🇼"
     },
     {
       "country": "U. A. E. Abudhabi",
-      "value": 1072.24,
+      "value": 1193.31,
       "flag": "🇦🇪"
     },
     {
-      "country": "South Korea",
-      "value": 868.64,
-      "flag": "🇰🇷"
-    },
-    {
       "country": "Oman",
-      "value": 833.82,
+      "value": 1070.02,
       "flag": "🇴🇲"
     },
     {
-      "country": "Thailand",
-      "value": 829.43,
-      "flag": "🇹🇭"
-    },
-    {
       "country": "Brazil",
-      "value": 812.56,
+      "value": 984.24,
       "flag": "🇧🇷"
     },
     {
+      "country": "South Korea",
+      "value": 950.84,
+      "flag": "🇰🇷"
+    },
+    {
+      "country": "Thailand",
+      "value": 925.83,
+      "flag": "🇹🇭"
+    },
+    {
       "country": "Malaysia",
-      "value": 776.94,
+      "value": 886.28,
       "flag": "🇲🇾"
     }
   ],
-  "exportCountryPeriod": "Jul-Mar FY26 (P)",
-  "importCountryPeriod": "Jul-Mar FY26 (P)",
+  "exportCountryPeriod": "Jul-Apr FY26 (P)",
+  "importCountryPeriod": "Jul-Apr FY26 (P)",
   "dataSource": "SBP",
-  "lastUpdated": "2026-05-11",
-  "dataCoverage": "2021-01 – 2026-03"
+  "lastUpdated": "2026-05-18",
+  "dataCoverage": "2021-01 – 2026-04"
 }

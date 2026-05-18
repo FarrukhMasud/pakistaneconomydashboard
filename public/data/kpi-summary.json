@@ -1,16 +1,16 @@
 {
-  "lastUpdated": "2026-05-11",
+  "lastUpdated": "2026-05-18",
   "indicators": [
     {
       "id": "reserves",
       "label": "Foreign Reserves (Total)",
-      "value": 21.27,
+      "value": 21.34,
       "unit": "$ Billion",
-      "period": "2026-04-24",
-      "change": 0.64,
-      "trend": "up",
+      "period": "2026-05-08",
+      "change": 0.04,
+      "trend": "stable",
       "source": "SBP",
-      "sub": "SBP: $15.83B · Banks: $5.44B"
+      "sub": "SBP: $15.87B · Banks: $5.47B"
     },
     {
       "id": "exchange-rate",
@@ -33,32 +33,22 @@
       "source": "SBP"
     },
     {
-      "id": "fdi",
-      "label": "Net FDI",
-      "value": "1.86",
-      "unit": "$B",
-      "period": "Jul-Mar FY2026 (P)",
-      "change": 37.07,
-      "trend": "up",
-      "source": "SBP"
-    },
-    {
       "id": "it_exports",
       "label": "IT & Telecom Exports",
-      "value": "3.39",
+      "value": "3.81",
       "unit": "$B",
-      "period": "Jul-Mar FY26",
-      "change": 19.79,
+      "period": "Jul-Apr FY26",
+      "change": 20.95,
       "trend": "up",
       "source": "SBP"
     },
     {
       "id": "gdp-growth",
       "label": "GDP Growth Rate",
-      "value": 3.6,
+      "value": 3.7,
       "unit": "%",
       "period": "FY2026 (Est.)",
-      "change": 0.54,
+      "change": 0.52,
       "trend": "up",
       "source": "PBS / IMF"
     },

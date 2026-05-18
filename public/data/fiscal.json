@@ -34,15 +34,15 @@
     },
     {
       "year": "FY2025",
-      "gdpGrowth": 3.06
+      "gdpGrowth": 3.18
     },
     {
       "year": "FY2026",
-      "gdpGrowth": 3.6
+      "gdpGrowth": 3.7
     }
   ],
   "dataSource": "SBP EasyData API - Summary of Public Finance + GDP Table",
-  "lastUpdated": "2026-05-11",
+  "lastUpdated": "2026-05-18",
   "dataCoverage": "FY2017 – FY2026",
   "publicFinance": {
     "fiscal_balance": {

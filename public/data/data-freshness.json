@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-11T18:26:21.288Z",
+  "generatedAt": "2026-05-18T17:34:33.232Z",
   "status": "fresh",
   "datasets": [
     {
@@ -14,9 +14,9 @@
       "cadence": "Weekly",
       "expectedLag": "Usually published weekly; dashboard should advance after SBP updates forex.pdf.",
       "critical": true,
-      "latestObservation": "2026-04-24",
-      "dataCoverage": "2025-03 – 2026-04-24",
-      "dashboardUpdated": "2026-05-11",
+      "latestObservation": "2026-05-08",
+      "dataCoverage": "2025-03 – 2026-05-08",
+      "dashboardUpdated": "2026-05-18",
       "status": "fresh"
     },
     {
@@ -33,7 +33,7 @@
       "critical": true,
       "latestObservation": "2026-04",
       "dataCoverage": "2021-01 – 2026-04",
-      "dashboardUpdated": "2026-05-11",
+      "dashboardUpdated": "2026-05-18",
       "status": "fresh"
     },
     {
@@ -58,7 +58,7 @@
       "critical": true,
       "latestObservation": "2026-04",
       "dataCoverage": "2021-05 – 2026-04",
-      "dashboardUpdated": "2026-05-11",
+      "dashboardUpdated": "2026-05-18",
       "status": "fresh"
     },
     {
@@ -73,9 +73,9 @@
       "cadence": "Monthly",
       "expectedLag": "Monthly BOP goods trade data.",
       "critical": true,
-      "latestObservation": "2026-03",
-      "dataCoverage": "2021-01 – 2026-03",
-      "dashboardUpdated": "2026-05-11",
+      "latestObservation": "2026-04",
+      "dataCoverage": "2021-01 – 2026-04",
+      "dashboardUpdated": "2026-05-18",
       "status": "fresh"
     },
     {
@@ -90,9 +90,9 @@
       "cadence": "Monthly/FYTD",
       "expectedLag": "Monthly FDI tables are released after source files are updated by SBP.",
       "critical": true,
-      "latestObservation": "July-March FY26",
-      "dataCoverage": "FY2026 Jul-Mar",
-      "dashboardUpdated": "2026-05-11",
+      "latestObservation": "July-April FY26",
+      "dataCoverage": "FY2017 – FY2025",
+      "dashboardUpdated": "2026-05-18",
       "status": "fresh"
     },
     {
@@ -107,9 +107,9 @@
       "cadence": "Monthly/FYTD",
       "expectedLag": "Detailed services trade data from SBP EBOPS file.",
       "critical": true,
-      "latestObservation": "Jul-Mar FY26",
-      "dataCoverage": "Jul-Mar FY26",
-      "dashboardUpdated": "2026-05-11",
+      "latestObservation": "Jul-Apr FY26",
+      "dataCoverage": "Jul-Apr FY26",
+      "dashboardUpdated": "2026-05-18",
       "status": "fresh"
     },
     {
@@ -128,7 +128,7 @@
       "critical": true,
       "latestObservation": "2026-04",
       "dataCoverage": null,
-      "dashboardUpdated": "2026-05-11",
+      "dashboardUpdated": "2026-05-18",
       "status": "fresh"
     },
     {
@@ -146,9 +146,9 @@
       "cadence": "Weekly/Monthly",
       "expectedLag": "SBP monetary series include weekly/monthly observations depending on the indicator.",
       "critical": true,
-      "latestObservation": "2026-04",
+      "latestObservation": "2026-05",
       "dataCoverage": null,
-      "dashboardUpdated": "2026-05-11",
+      "dashboardUpdated": "2026-05-18",
       "status": "fresh"
     },
     {
@@ -165,7 +165,7 @@
       "critical": true,
       "latestObservation": "FY2026",
       "dataCoverage": "FY2017 – FY2026",
-      "dashboardUpdated": "2026-05-11",
+      "dashboardUpdated": "2026-05-18",
       "status": "fresh"
     },
     {
