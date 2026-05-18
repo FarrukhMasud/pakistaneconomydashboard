@@ -33,6 +33,16 @@
       "source": "SBP"
     },
     {
+      "id": "fdi",
+      "label": "Net FDI",
+      "value": "2.04",
+      "unit": "$B",
+      "period": "Jul-Apr FY2026 (P)",
+      "change": 44.46,
+      "trend": "up",
+      "source": "SBP"
+    },
+    {
       "id": "it_exports",
       "label": "IT & Telecom Exports",
       "value": "3.81",

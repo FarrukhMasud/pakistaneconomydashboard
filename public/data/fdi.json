@@ -231,5 +231,21 @@
   "source": "State Bank of Pakistan",
   "dataSource": "SBP",
   "lastUpdated": "2026-05-18",
-  "dataCoverage": "FY2017 – FY2025"
+  "dataCoverage": "FY2026 Jul-Apr",
+  "fytdComparison": {
+    "period": "Jul-Apr",
+    "current": {
+      "label": "FY2026",
+      "net_fdi": 2035.42,
+      "inflow": 3632.26,
+      "outflow": 1596.85,
+      "status": "provisional"
+    },
+    "prior": {
+      "label": "FY2025",
+      "net_fdi": 1408.99,
+      "inflow": 2978.44,
+      "outflow": 1569.45
+    }
+  }
 }
