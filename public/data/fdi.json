@@ -247,5 +247,22 @@
       "inflow": 2978.44,
       "outflow": 1569.45
     }
+  },
+  "monthlyComparison": {
+    "month": "Apr",
+    "current": {
+      "label": "FY2026",
+      "net_fdi": 54.46,
+      "inflow": 273.38,
+      "outflow": 218.92,
+      "status": "provisional"
+    },
+    "prior": {
+      "label": "FY2025",
+      "net_fdi": 178.75,
+      "inflow": 278.36,
+      "outflow": 99.61,
+      "status": null
+    }
   }
 }
