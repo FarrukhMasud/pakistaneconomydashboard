@@ -1,35 +1,35 @@
 {
-  "lastUpdated": "2026-05-18",
+  "lastUpdated": "2026-06-12",
   "indicators": [
     {
       "id": "reserves",
       "label": "Foreign Reserves (Total)",
-      "value": 21.34,
+      "value": 22.67,
       "unit": "$ Billion",
-      "period": "2026-05-08",
+      "period": "2026-06-05",
       "change": 0.04,
       "trend": "stable",
       "source": "SBP",
-      "sub": "SBP: $15.87B · Banks: $5.47B"
+      "sub": "SBP: $17.22B · Banks: $5.46B"
     },
     {
       "id": "exchange-rate",
       "label": "PKR / USD",
-      "value": 279.18,
+      "value": 278.84,
       "unit": "PKR",
-      "period": "2026-04",
-      "change": -0.33,
+      "period": "2026-05",
+      "change": -0.34,
       "trend": "stable",
       "source": "SBP"
     },
     {
       "id": "remittances",
       "label": "Remittances (Monthly)",
-      "value": 3.54,
+      "value": 4.25,
       "unit": "$ Billion",
-      "period": "2026-04",
-      "change": -0.29,
-      "trend": "down",
+      "period": "2026-05",
+      "change": 0.71,
+      "trend": "up",
       "source": "SBP"
     },
     {
@@ -65,10 +65,10 @@
     {
       "id": "inflation",
       "label": "CPI Inflation (YoY)",
-      "value": 10.9,
+      "value": 11.7,
       "unit": "%",
-      "period": "2026-04",
-      "change": 3.6,
+      "period": "2026-05",
+      "change": 0.8,
       "trend": "up",
       "source": "PBS",
       "sub": "SBP target: 5–7%"
