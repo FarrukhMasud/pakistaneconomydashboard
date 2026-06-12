@@ -361,13 +361,16 @@ async function updateFdi() {
   const fdiRow = aRows[8];     // Direct Investment (net)
   const inflowRow = aRows[9];  // Inflow
   const outflowRow = aRows[10]; // Outflow
+  const subHeaderRow = aRows[5] || [];
 
   const annual = [];
   let fytdComparison = null;
+  let monthlyComparison = null;
 
-  // Find the "Jul-Mar" column for FYTD comparison
-  let julMarCol = -1;
-  let julMarLabel = '';
+  // Find the latest cumulative FYTD column (for example "Jul-Apr").
+  // SBP places current FYTD first, with the prior-year comparison in the next column.
+  let fytdCol = -1;
+  let fytdPeriod = '';
   for (let col = 0; col < headerRow.length; col++) {
     const hdr = (headerRow[col] || '').toString().trim();
 
@@ -386,18 +389,62 @@ async function updateFdi() {
       annual.push(entry);
     }
 
-    // "Jul-Mar" column for FYTD
-    if (/jul.*mar/i.test(hdr)) {
-      julMarCol = col;
-      julMarLabel = hdr;
+    if (
+      fytdCol === -1 &&
+      /^jul[-\s]/i.test(hdr) &&
+      typeof fdiRow[col] === 'number' &&
+      typeof fdiRow[col + 1] === 'number'
+    ) {
+      fytdCol = col;
+      fytdPeriod = hdr.replace(/\s*\([RP]\)\s*/i, '').trim();
+    }
+
+    if (!monthlyComparison && /^(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)$/i.test(hdr)) {
+      const priorHdr = (subHeaderRow[col] || '').toString().trim();
+      const currentHdr = (subHeaderRow[col + 1] || '').toString().trim();
+      const priorMatch = priorHdr.match(/^FY(\d{2,4})/i);
+      const currentMatch = currentHdr.match(/^FY(\d{2,4})/i);
+
+      if (
+        priorMatch &&
+        currentMatch &&
+        typeof fdiRow[col] === 'number' &&
+        typeof fdiRow[col + 1] === 'number'
+      ) {
+        const toFullFy = (raw) => {
+          const n = parseInt(raw, 10);
+          if (n > 1000) return n;
+          return n >= 90 ? 1900 + n : 2000 + n;
+        };
+        const priorFy = toFullFy(priorMatch[1]);
+        const currentFy = toFullFy(currentMatch[1]);
+
+        monthlyComparison = {
+          month: hdr,
+          current: {
+            label: `FY${currentFy}`,
+            net_fdi: round2(fdiRow[col + 1]),
+            inflow: typeof inflowRow?.[col + 1] === 'number' ? round2(inflowRow[col + 1]) : null,
+            outflow: typeof outflowRow?.[col + 1] === 'number' ? round2(outflowRow[col + 1]) : null,
+            status: /\(P\)/i.test(currentHdr) ? 'provisional' : /\(R\)/i.test(currentHdr) ? 'revised' : null,
+          },
+          prior: {
+            label: `FY${priorFy}`,
+            net_fdi: round2(fdiRow[col]),
+            inflow: typeof inflowRow?.[col] === 'number' ? round2(inflowRow[col]) : null,
+            outflow: typeof outflowRow?.[col] === 'number' ? round2(outflowRow[col]) : null,
+            status: /\(P\)/i.test(priorHdr) ? 'provisional' : /\(R\)/i.test(priorHdr) ? 'revised' : null,
+          },
+        };
+      }
     }
   }
 
-  // Extract FYTD comparison (Jul-Mar FY26 vs Jul-Mar FY25)
-  if (julMarCol >= 0 && typeof fdiRow[julMarCol] === 'number') {
-    const currentFytd = fdiRow[julMarCol];
-    const priorFytd = (julMarCol + 1 < fdiRow.length && typeof fdiRow[julMarCol + 1] === 'number')
-      ? fdiRow[julMarCol + 1] : null;
+  // Extract FYTD comparison (e.g. Jul-Apr FY26 vs Jul-Apr FY25)
+  if (fytdCol >= 0 && typeof fdiRow[fytdCol] === 'number') {
+    const currentFytd = fdiRow[fytdCol];
+    const priorFytd = (fytdCol + 1 < fdiRow.length && typeof fdiRow[fytdCol + 1] === 'number')
+      ? fdiRow[fytdCol + 1] : null;
 
     // Derive FY labels from the last full-year entry
     const lastFy = annual[annual.length - 1];
@@ -406,24 +453,25 @@ async function updateFdi() {
     const priorFyLabel = lastFy?.year || `FY${lastFyNum}`;
 
     fytdComparison = {
-      period: 'Jul-Mar',
+      period: fytdPeriod,
       current: {
         label: currentFyLabel,
         net_fdi: round2(currentFytd),
-        inflow: typeof inflowRow?.[julMarCol] === 'number' ? round2(inflowRow[julMarCol]) : null,
-        outflow: typeof outflowRow?.[julMarCol] === 'number' ? round2(outflowRow[julMarCol]) : null,
+        inflow: typeof inflowRow?.[fytdCol] === 'number' ? round2(inflowRow[fytdCol]) : null,
+        outflow: typeof outflowRow?.[fytdCol] === 'number' ? round2(outflowRow[fytdCol]) : null,
         status: 'provisional',
       },
       prior: priorFytd != null ? {
         label: priorFyLabel,
         net_fdi: round2(priorFytd),
-        inflow: typeof inflowRow?.[julMarCol + 1] === 'number' ? round2(inflowRow[julMarCol + 1]) : null,
-        outflow: typeof outflowRow?.[julMarCol + 1] === 'number' ? round2(outflowRow[julMarCol + 1]) : null,
+        inflow: typeof inflowRow?.[fytdCol + 1] === 'number' ? round2(inflowRow[fytdCol + 1]) : null,
+        outflow: typeof outflowRow?.[fytdCol + 1] === 'number' ? round2(outflowRow[fytdCol + 1]) : null,
       } : null,
     };
   }
 
   const result = {
+    ...(await readJson('fdi.json').catch(() => ({}))),
     by_sector: topSectors,
     by_country: topCountries,
     annual,
@@ -437,11 +485,13 @@ async function updateFdi() {
     dataCoverage: fytdComparison ? `${fytdComparison.current.label} ${fytdComparison.period}` : `${annual[0]?.year} – ${annual.at(-1)?.year}`,
   };
   if (fytdComparison) result.fytdComparison = fytdComparison;
+  if (monthlyComparison) result.monthlyComparison = monthlyComparison;
 
   await writeJson('fdi.json', result);
 
   console.log(`  📊 ${topSectors.length} sectors, ${topCountries.length} countries, ${annual.length} fiscal years`);
   if (fytdComparison) console.log(`  📊 FYTD: ${fytdComparison.current.label} ${fytdComparison.period}: $${fytdComparison.current.net_fdi}M vs ${fytdComparison.prior?.label}: $${fytdComparison.prior?.net_fdi}M`);
+  if (monthlyComparison) console.log(`  📊 Monthly: ${monthlyComparison.month} ${monthlyComparison.current.label}: $${monthlyComparison.current.net_fdi}M vs ${monthlyComparison.prior.label}: $${monthlyComparison.prior.net_fdi}M`);
   return { sectors: topSectors.length, countries: topCountries.length, years: annual.length };
 }
 

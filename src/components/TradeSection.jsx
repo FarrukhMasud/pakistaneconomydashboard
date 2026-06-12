@@ -16,7 +16,7 @@ import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, sumField, bu
 import { countryFlagPlugin, countryLabel } from '../utils/countryLabels';
 
 export default function TradeSection() {
-  const [showYoY, setShowYoY] = useState(false);
+  const [showYoY, setShowYoY] = useState(true);
   const { data, loading, error } = useData('trade.json');
 
   if (loading || !data) return <div className="card loading-card"><div className="spinner" /><span>Loading data…</span></div>;
@@ -95,12 +95,17 @@ export default function TradeSection() {
         data: balPrior,
         type: 'line',
         borderColor: COLORS.amber,
-        backgroundColor: 'transparent',
+        backgroundColor: COLORS.amber,
+        pointBackgroundColor: COLORS.amber,
+        pointBorderColor: '#1a1d27',
+        pointBorderWidth: 2,
+        borderWidth: 3,
         borderDash: [6, 3],
-        pointRadius: 2,
-        pointHoverRadius: 5,
+        pointRadius: 3,
+        pointHoverRadius: 6,
         fill: false,
-        order: 0,
+        spanGaps: true,
+        order: -10,
       }] : []),
     ],
   };
@@ -120,7 +125,102 @@ export default function TradeSection() {
       ...baseBarOptions.plugins,
       tooltip: {
         ...baseBarOptions.plugins.tooltip,
-        callbacks: { label: (ctx) => `Balance: ${formatCurrency(ctx.raw * 1e6)}` },
+        callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatCurrency(ctx.raw * 1e6)}` },
+      },
+    },
+  };
+
+  const cumulative = (rows, field) => {
+    let total = 0;
+    return rows.map((row) => {
+      total += Number(row[field]) || 0;
+      return Math.round(total * 100) / 100;
+    });
+  };
+
+  const fyRows = fy?.rows || [];
+  const priorFyRows = fy?.prior || [];
+  const fyLabels = fyRows.map((d) => formatMonthYear(d.date));
+  const cumulativeFlowData = fyRows.length ? {
+    labels: fyLabels,
+    datasets: [
+      {
+        label: `${fy.fyLabel} cumulative imports`,
+        data: cumulative(fyRows, 'imports'),
+        borderColor: COLORS.coral,
+        backgroundColor: COLORS.coralAlpha,
+        fill: false,
+        borderWidth: 3,
+      },
+      {
+        label: `${fy.fyLabel} cumulative exports`,
+        data: cumulative(fyRows, 'exports'),
+        borderColor: COLORS.teal,
+        backgroundColor: COLORS.tealAlpha,
+        fill: false,
+        borderWidth: 3,
+      },
+      ...(priorFyRows.length ? [
+        {
+          label: `${fy.priorLabel} same-period imports`,
+          data: cumulative(priorFyRows, 'imports').slice(0, fyRows.length),
+          borderColor: COLORS.coral,
+          backgroundColor: 'transparent',
+          borderDash: [6, 3],
+          pointRadius: 2,
+          fill: false,
+        },
+        {
+          label: `${fy.priorLabel} same-period exports`,
+          data: cumulative(priorFyRows, 'exports').slice(0, fyRows.length),
+          borderColor: COLORS.teal,
+          backgroundColor: 'transparent',
+          borderDash: [6, 3],
+          pointRadius: 2,
+          fill: false,
+        },
+      ] : []),
+    ],
+  } : null;
+
+  const cumulativeBalanceData = fyRows.length ? {
+    labels: fyLabels,
+    datasets: [
+      {
+        label: `${fy.fyLabel} cumulative trade balance`,
+        data: cumulative(fyRows, 'balance'),
+        borderColor: COLORS.amber,
+        backgroundColor: COLORS.amberAlpha,
+        fill: true,
+        borderWidth: 3,
+      },
+      ...(priorFyRows.length ? [{
+        label: `${fy.priorLabel} same-period balance`,
+        data: cumulative(priorFyRows, 'balance').slice(0, fyRows.length),
+        borderColor: COLORS.blue,
+        backgroundColor: 'transparent',
+        borderDash: [6, 3],
+        borderWidth: 3,
+        pointRadius: 2,
+        fill: false,
+      }] : []),
+    ],
+  } : null;
+
+  const cumulativeOptions = {
+    ...baseLineOptions,
+    scales: {
+      ...baseLineOptions.scales,
+      y: {
+        ...baseLineOptions.scales.y,
+        title: { display: true, text: 'Cumulative USD Millions', color: COLORS.text },
+      },
+    },
+    plugins: {
+      ...baseLineOptions.plugins,
+      tooltip: {
+        ...baseLineOptions.plugins.tooltip,
+        callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatCurrency(ctx.raw * 1e6)}` },
       },
     },
   };
@@ -216,7 +316,7 @@ export default function TradeSection() {
         </ChartCard>
         <ChartCard
           title="Trade Balance"
-          description="Monthly trade surplus or deficit. Red bars indicate deficit months (imports exceeded exports). A narrowing deficit signals improving external balance."
+          description="Monthly trade surplus or deficit. Red bars indicate deficit months (imports exceeded exports). The amber dashed line compares each month with the same month in the previous year, making seasonality easier to interpret."
           source="PBS / SBP"
           dataSource="SBP"
           lastUpdated={tradeLU}
@@ -228,6 +328,35 @@ export default function TradeSection() {
           </div>
         </ChartCard>
       </div>
+
+      {cumulativeFlowData && cumulativeBalanceData && (
+        <div className="section-grid" style={{ marginTop: '1.5rem' }}>
+          <ChartCard
+            title="Cumulative Imports & Exports (FYTD)"
+            description={`Running fiscal-year-to-date imports and exports for ${fy.fyLabel}, compared with the same months of ${fy.priorLabel}. This shows whether trade flows are accumulating faster or slower than last year, not just what happened in one month.`}
+            source="SBP"
+            dataSource="SBP"
+            lastUpdated={tradeLU}
+            dataCoverage={`${fy.fyLabel}: ${fy.rangeLabel}`}
+          >
+            <div className="chart-container">
+              <Line data={cumulativeFlowData} options={cumulativeOptions} />
+            </div>
+          </ChartCard>
+          <ChartCard
+            title="Cumulative Trade Balance (FYTD)"
+            description={`Running trade balance for ${fy.fyLabel} compared with ${fy.priorLabel}. A more negative line means the external financing gap is widening; a less negative line means imports and exports are moving toward better balance.`}
+            source="SBP"
+            dataSource="SBP"
+            lastUpdated={tradeLU}
+            dataCoverage={`${fy.fyLabel}: ${fy.rangeLabel}`}
+          >
+            <div className="chart-container">
+              <Line data={cumulativeBalanceData} options={cumulativeOptions} />
+            </div>
+          </ChartCard>
+        </div>
+      )}
 
       {topExportCountries?.length > 0 && topImportCountries?.length > 0 && (
         <div className="section-grid" style={{ marginTop: '1.5rem' }}>

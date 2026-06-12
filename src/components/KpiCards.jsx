@@ -2,6 +2,7 @@ import { useData } from '../hooks/useData';
 import { COLORS } from '../utils/chartConfig';
 import SectionHeader from './SectionHeader';
 import DataFreshnessPanel from './DataFreshnessPanel';
+import ExpandableTile from './ui/ExpandableTile';
 
 function trendColor(trend) {
   if (trend === 'up') return COLORS.teal;
@@ -40,7 +41,38 @@ export default function KpiCards() {
         {indicators.map((kpi) => {
           const color = trendColor(kpi.trend);
           return (
-            <div key={kpi.id} className={`card kpi-card trend-${kpi.trend}`}>
+            <ExpandableTile
+              key={kpi.id}
+              className={`card kpi-card trend-${kpi.trend}`}
+              title={kpi.label}
+              subtitle={`${kpi.period} · Source: ${kpi.source}`}
+              details={(
+                <div className="tile-detail-list">
+                  <div className="tile-detail-row">
+                    <span>Latest value</span>
+                    <strong style={{ color }}>{kpi.value}{kpi.unit}</strong>
+                  </div>
+                  <div className="tile-detail-row">
+                    <span>Period</span>
+                    <strong>{kpi.period}</strong>
+                  </div>
+                  <div className="tile-detail-row">
+                    <span>Change</span>
+                    <strong>{trendArrow(kpi.trend)} {kpi.change >= 0 ? '+' : ''}{kpi.change}</strong>
+                  </div>
+                  {kpi.sub && (
+                    <div className="tile-detail-row">
+                      <span>Context</span>
+                      <strong>{kpi.sub}</strong>
+                    </div>
+                  )}
+                  <div className="tile-detail-row">
+                    <span>Source</span>
+                    <strong>{kpi.source}</strong>
+                  </div>
+                </div>
+              )}
+            >
               <div className="kpi-label">{kpi.label}</div>
               <div className="kpi-value" style={{ color }}>
                 {kpi.value}<span className="kpi-unit">{kpi.unit}</span>
@@ -51,7 +83,7 @@ export default function KpiCards() {
                 {trendArrow(kpi.trend)} {kpi.change >= 0 ? '+' : ''}{kpi.change}
               </div>
               <div className="kpi-source">Source: {kpi.source}</div>
-            </div>
+            </ExpandableTile>
           );
         })}
       </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import './SummaryCard.css';
+import ExpandableTile from './ExpandableTile';
 
 /**
  * Reusable summary card for section-level KPIs.
@@ -26,7 +27,24 @@ export default function SummaryCard({ title, items = [], footnote, accent }) {
   };
 
   return (
-    <div className="summary-card" style={accent ? { '--summary-accent': accent } : undefined}>
+    <ExpandableTile
+      className="summary-card"
+      style={accent ? { '--summary-accent': accent } : undefined}
+      title={title}
+      subtitle={footnote}
+      details={(
+        <div className="tile-detail-list">
+          {items.map((item, i) => (
+            <div key={i} className="tile-detail-row">
+              <span>{item.label}</span>
+              <strong style={item.color ? { color: item.color } : undefined}>{item.value}</strong>
+              {item.sub && <small>{item.sub}</small>}
+            </div>
+          ))}
+          {footnote && <p className="summary-card__footnote">{footnote}</p>}
+        </div>
+      )}
+    >
       {title && <h3 className="summary-card__title">{title}</h3>}
       <div className="summary-card__grid">
         {items.map((item, i) => (
@@ -50,6 +68,6 @@ export default function SummaryCard({ title, items = [], footnote, accent }) {
         ))}
       </div>
       {footnote && <p className="summary-card__footnote">{footnote}</p>}
-    </div>
+    </ExpandableTile>
   );
 }
