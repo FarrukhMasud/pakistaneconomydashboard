@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "update-data": "node scripts/update-data.mjs",
+    "update-fbr": "node scripts/update-fbr.mjs",
     "update": "node scripts/update-all.mjs",
     "predeploy": "npm run audit:sanity && npm run audit:data && npm run lint",
     "deploy": "pwsh scripts/deploy.ps1",

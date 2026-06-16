@@ -2,6 +2,7 @@ import { useData } from '../hooks/useData';
 import { COLORS } from '../utils/chartConfig';
 import SectionHeader from './SectionHeader';
 import DataFreshnessPanel from './DataFreshnessPanel';
+import SnapshotPanel from './SnapshotPanel';
 import ExpandableTile from './ui/ExpandableTile';
 
 function trendColor(trend) {
@@ -87,6 +88,7 @@ export default function KpiCards() {
           );
         })}
       </div>
+      <SnapshotPanel />
       <DataFreshnessPanel />
     </section>
   );

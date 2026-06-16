@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-12T23:36:24.409Z",
+  "generatedAt": "2026-06-16T20:25:03.474Z",
   "sources": [
     {
       "id": "reserves",
@@ -121,6 +121,17 @@
       "cadence": "Quarterly/Annual",
       "expectedLag": "GDP/fiscal data is lower frequency than external-sector data.",
       "critical": true
+    },
+    {
+      "id": "fbr-tax",
+      "label": "FBR Tax Collection",
+      "file": "fbr-tax.json",
+      "source": "Federal Board of Revenue (FBR)",
+      "sourceUrl": "https://www.fbr.gov.pk",
+      "parser": "manual-curation",
+      "cadence": "Monthly (provisional)",
+      "expectedLag": "FBR publishes provisional monthly net collection in a press release shortly after each month-end; figures are finalised later in the FBR Year Book.",
+      "critical": false
     },
     {
       "id": "imf-tracker",

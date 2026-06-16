@@ -1312,6 +1312,25 @@ async function generateKpiFromData() {
     }
   } catch { /* skip */ }
 
+  // --- FBR Tax Collection (from fbr-tax.json) ---
+  try {
+    const fbr = await readJson('fbr-tax.json');
+    const pts = (fbr.monthly || []).slice().sort((a, b) => a.date.localeCompare(b.date));
+    const latest = pts[pts.length - 1];
+    if (fbr.fytd && latest) {
+      const f = fbr.fytd;
+      const growthPct = f.priorNet ? round2(((f.net - f.priorNet) / f.priorNet) * 100) : 0;
+      const trend = growthPct > 0.5 ? 'up' : growthPct < -0.5 ? 'down' : 'stable';
+      indicators.push({
+        id: 'fbr-tax', label: 'FBR Tax Collection (FYTD)',
+        value: round2(f.net / 1000), unit: 'T PKR',
+        period: f.period,
+        change: growthPct, trend, source: 'FBR',
+        sub: `Latest: ₨${Math.round(latest.net)}B (${latest.date})`,
+      });
+    }
+  } catch { /* skip */ }
+
   // --- Policy Rate (from monetary.json) ---
   try {
     const mon = await readJson('monetary.json');

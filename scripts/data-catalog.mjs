@@ -119,6 +119,18 @@ export const DATASETS = [
     latest: data => data.publicFinance?.fiscal_balance?.data?.at(-1)?.date || data.annual?.at(-1)?.year,
   },
   {
+    id: 'fbr-tax',
+    label: 'FBR Tax Collection',
+    file: 'fbr-tax.json',
+    source: 'Federal Board of Revenue (FBR)',
+    sourceUrl: 'https://www.fbr.gov.pk',
+    parser: 'manual-curation',
+    cadence: 'Monthly (provisional)',
+    expectedLag: 'FBR publishes provisional monthly net collection in a press release shortly after each month-end; figures are finalised later in the FBR Year Book.',
+    critical: false,
+    latest: data => data.monthly?.at(-1)?.date,
+  },
+  {
     id: 'imf-tracker',
     label: 'IMF Program Tracker',
     file: 'imf-tracker.json',

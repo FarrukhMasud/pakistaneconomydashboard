@@ -12,6 +12,7 @@ import RemittancesSection from './components/RemittancesSection';
 import FdiSection from './components/FdiSection';
 import ServicesSection from './components/ServicesSection';
 import FiscalSection from './components/FiscalSection';
+import FbrTaxSection from './components/FbrTaxSection';
 import InflationSection from './components/InflationSection';
 import MonetarySection from './components/MonetarySection';
 
@@ -26,6 +27,7 @@ const TABS = [
   { id: 'inflation', label: '📈 Inflation' },
   { id: 'monetary', label: '🏛️ Monetary' },
   { id: 'fiscal', label: '📋 Fiscal' },
+  { id: 'fbr', label: '🧾 FBR Tax' },
 ];
 
 const SECTION_MAP = {
@@ -39,6 +41,7 @@ const SECTION_MAP = {
   inflation: InflationSection,
   monetary: MonetarySection,
   fiscal: FiscalSection,
+  fbr: FbrTaxSection,
 };
 
 function App() {

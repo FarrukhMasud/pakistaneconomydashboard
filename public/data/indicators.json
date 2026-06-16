@@ -1,0 +1,86 @@
+{
+  "dataSource": "SBP, Finance Division (Pakistan Economic Survey 2025-26), PSX, OGRA, Power Division",
+  "lastUpdated": "2026-06-16",
+  "lastVerified": "2026-06-16",
+  "methodologyNote": "Manually curated headline indicators, each verified against an official or primary-corroborated source on the date shown. Market and fuel-price figures are point-in-time snapshots and should be refreshed periodically; they are clearly dated. Public-debt, current-account and growth figures are from the Pakistan Economic Survey 2025-26 (released 11 Jun 2026).",
+  "indicators": [
+    {
+      "id": "policy-rate",
+      "label": "SBP Policy Rate",
+      "value": "11.5",
+      "unit": "%",
+      "asOf": "MPC, Jun 2026",
+      "trend": "stable",
+      "sentiment": "neutral",
+      "change": "Held",
+      "note": "Unchanged; down from 22% peak (Jun 2024).",
+      "source": "State Bank of Pakistan",
+      "sourceUrl": "https://www.sbp.org.pk/m_policy/index.asp"
+    },
+    {
+      "id": "kse-100",
+      "label": "KSE-100 Index",
+      "value": "177,039",
+      "unit": "pts",
+      "asOf": "16 Jun 2026",
+      "trend": "up",
+      "sentiment": "positive",
+      "change": "+2.7% (day)",
+      "note": "Pakistan Stock Exchange benchmark close.",
+      "source": "Pakistan Stock Exchange",
+      "sourceUrl": "https://www.psx.com.pk/psx/resources-and-tools/indices/kse100"
+    },
+    {
+      "id": "current-account",
+      "label": "Current Account (FYTD)",
+      "value": "−$252",
+      "unit": "M",
+      "asOf": "Jul–Apr FY2026",
+      "trend": "down",
+      "sentiment": "negative",
+      "change": "Deficit",
+      "note": "Small deficit vs $1.7bn surplus a year earlier.",
+      "source": "SBP / Economic Survey 2025-26",
+      "sourceUrl": "https://www.finance.gov.pk/survey_2026.html"
+    },
+    {
+      "id": "public-debt",
+      "label": "Total Public Debt",
+      "value": "₨83.3",
+      "unit": "tn",
+      "asOf": "End-Mar 2026",
+      "trend": "stable",
+      "sentiment": "neutral",
+      "change": "Debt/GDP 68.5%",
+      "note": "Domestic ₨57.6tn + external ₨25.7tn; ratio down from 70.7%.",
+      "source": "Finance Division / SBP",
+      "sourceUrl": "https://www.finance.gov.pk/survey_2026.html"
+    },
+    {
+      "id": "circular-debt",
+      "label": "Power Circular Debt",
+      "value": "₨1.85",
+      "unit": "tn",
+      "asOf": "Apr 2026",
+      "trend": "up",
+      "sentiment": "positive",
+      "change": "−23% YoY",
+      "note": "Down from ~₨2.4tn a year earlier (flow basis; reconciled at FY-end).",
+      "source": "Power Division / Ministry of Energy",
+      "sourceUrl": "https://power.gov.pk"
+    },
+    {
+      "id": "petrol-price",
+      "label": "Petrol (MS-92)",
+      "value": "₨373.78",
+      "unit": "/L",
+      "asOf": "13 Jun 2026",
+      "trend": "down",
+      "sentiment": "positive",
+      "change": "Reduced",
+      "note": "OGRA-notified retail price; diesel ₨378.78/L.",
+      "source": "OGRA / Finance Division",
+      "sourceUrl": "https://www.ogra.org.pk"
+    }
+  ]
+}

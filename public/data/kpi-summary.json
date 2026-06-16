@@ -74,16 +74,27 @@
       "sub": "SBP target: 5–7%"
     },
     {
+      "id": "fbr-tax",
+      "label": "FBR Tax Collection (FYTD)",
+      "value": 10.16,
+      "unit": "T PKR",
+      "period": "Jul–Apr FY2026",
+      "change": 9.2,
+      "trend": "up",
+      "source": "FBR",
+      "sub": "Latest: ₨754B (2025-07)"
+    },
+    {
       "id": "policy-rate",
       "label": "SBP Policy Rate",
-      "value": 12,
+      "value": 11.5,
       "unit": "%",
-      "period": "Mar 2026",
-      "change": -1,
+      "period": "Jun 2026",
+      "change": -0.5,
       "trend": "down",
       "source": "SBP",
       "dataSource": "SBP",
-      "dataCoverage": "Mar 2026"
+      "dataCoverage": "Jun 2026"
     }
   ]
 }

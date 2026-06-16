@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-12T23:36:24.409Z",
+  "generatedAt": "2026-06-16T20:25:03.474Z",
   "status": "fresh",
   "datasets": [
     {
@@ -166,6 +166,23 @@
       "latestObservation": "FY2026",
       "dataCoverage": "FY2017 – FY2026",
       "dashboardUpdated": "2026-06-12",
+      "status": "fresh"
+    },
+    {
+      "id": "fbr-tax",
+      "label": "FBR Tax Collection",
+      "file": "fbr-tax.json",
+      "source": "Federal Board of Revenue (FBR)",
+      "sourceUrl": "https://www.fbr.gov.pk",
+      "sourceFile": null,
+      "apiSeries": null,
+      "parser": "manual-curation",
+      "cadence": "Monthly (provisional)",
+      "expectedLag": "FBR publishes provisional monthly net collection in a press release shortly after each month-end; figures are finalised later in the FBR Year Book.",
+      "critical": false,
+      "latestObservation": "2025-07",
+      "dataCoverage": null,
+      "dashboardUpdated": "2026-06-16",
       "status": "fresh"
     },
     {

@@ -186,6 +186,12 @@ async function main() {
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   const apiOk = runScript(resolve(__dirname, 'update-data.mjs'), 'update-data.mjs (SBP API)');
 
+  // Step 3b: Refresh FBR tax collection from official FBR month-wise PDFs
+  console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log('🧾 Step 3b: Updating FBR tax collection from official FBR PDFs...');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  const fbrOk = runScript(resolve(__dirname, 'update-fbr.mjs'), 'update-fbr.mjs');
+
   // Step 4: Regenerate KPI summary from all now-fresh data files
   console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   console.log('📊 Step 4: Regenerating KPI summary from all data files...');
@@ -252,6 +258,7 @@ async function main() {
   console.log(`\n  📥 Downloads: ${summary.downloaded} succeeded, ${summary.failed} failed, ${summary.skipped} skipped`);
   console.log(`  📊 Excel parse: ${parseOk ? '✅ Success' : '❌ Failed'}`);
   console.log(`  💸 SBP API:     ${apiOk ? '✅ Success' : '⚠️  Failed (needs SBP_API_KEY in .env)'}`);
+  console.log(`  🧾 FBR PDF:     ${fbrOk ? '✅ Success' : '⚠️  Failed (kept existing FBR data)'}`);
   console.log(`  📊 KPI regen:   ${kpiOk ? '✅ Success' : '⚠️  Failed'}`);
   console.log(`  🧾 Freshness:   ${freshnessOk ? '✅ Success' : '⚠️  Failed'}`);
   if (autoDeploy) {

@@ -21,6 +21,7 @@ Ministry of Finance.
 | **Inflation**        | National/Urban/Rural CPI, Food, SPI, WPI        | SBP EasyData API    |
 | **Monetary**         | M2, private credit, deposits, NFA               | SBP EasyData API    |
 | **Public Finance**   | GDP growth, fiscal balance, revenue/expenditure | SBP API + Excel     |
+| **FBR Tax**          | Monthly net tax collection + tax-head breakdown | FBR official tables |
 
 ## Tech Stack
 
@@ -103,12 +104,33 @@ These files are auto-downloaded by `npm run update`:
 **API Registration:**
 <https://easydata.sbp.org.pk> → My Account → API Key → Generate
 
+### Manually-curated official data
+
+Some datasets have no machine-readable feed and are curated by hand from
+official sources, with every figure carrying a source URL and verification
+date (mirroring the IMF tracker pattern):
+
+| File              | Content                                          | Primary source                         |
+| ----------------- | ------------------------------------------------ | -------------------------------------- |
+| `fbr-tax.json`    | Monthly net tax collection + tax-head breakdown  | FBR official Month-wise/Tax-wise table (`download1.fbr.gov.pk`) + FBR press releases |
+| `indicators.json` | At-a-glance rates/markets/fiscal-stress snapshot | SBP, Finance Division (Economic Survey), PSX, OGRA, Power Division |
+| `imf-tracker.json`| IMF EFF program review schedule & disbursements   | IMF press releases                      |
+
+FBR monthly figures and the four-way breakdown (Direct/Income Tax, Sales Tax,
+FED, Customs) for the latest completed fiscal year are taken verbatim from
+FBR's official *"Month-wise / Tax-wise Net Collection"* table; current-year
+months are provisional press-release figures, clearly flagged. `indicators.json`
+holds point-in-time snapshots (policy rate, KSE-100, current account, public
+debt, circular debt, petrol price), each dated and linked to its source.
+
 ### KPI Summary
 
 `kpi-summary.json` is **auto-generated** from all the above data
 files by `generateKpiFromData()` — it is never manually edited.
 This runs as the final step after all parsers and API updates
-complete, ensuring all 8 KPIs reflect the latest data.
+complete, ensuring all KPIs (including FBR FYTD collection) reflect
+the latest data. The `policy-rate` and `fbr-tax` KPIs are carried
+from the curated files above.
 
 ---
 
@@ -126,25 +148,44 @@ echo SBP_API_KEY=your_key_here > .env
 npm run update
 ```
 
-This runs 7 steps:
+This runs these steps:
 
 1. **Download** — Fetches 11 Excel/PDF files from sbp.org.pk
 2. **Excel Parse** — `parse-sbp-excel.mjs` processes files → JSON
 3. **API Update** — `update-data.mjs` fetches remittances,
    inflation, monetary, public finance
-4. **KPI Regeneration** — rebuilds KPI summary from all data
-5. **Source/Freshness Metadata** — generates `source-manifest.json`
+4. **FBR Update** — `update-fbr.mjs` downloads & parses FBR's official
+   month-wise/tax-wise PDF → refreshes closed-FY rows in `fbr-tax.json`
+5. **KPI Regeneration** — rebuilds KPI summary from all data
+6. **Source/Freshness Metadata** — generates `source-manifest.json`
    and `data-freshness.json`
-6. **Git Commit & Push** — commits data changes to GitHub
-7. **Deploy** — builds and uploads to Azure Storage
+7. **Git Commit & Push** — commits data changes to GitHub
+8. **Deploy** — builds and uploads to Azure Storage
 
-Use `npm run update -- --no-deploy` to skip steps 5–6.
+Use `npm run update -- --no-deploy` to skip the git push and deploy steps.
+
+> **FBR monthly data:** `update-fbr.mjs` auto-refreshes the *closed* fiscal
+> year from FBR's official PDF (exact, internally validated — the parsed
+> monthly nets must sum to the printed full-year total or the file is left
+> unchanged). The **current** fiscal year's provisional months and the `fytd`
+> block are curated by hand from FBR press releases (`fbr.gov.pk`). When FBR
+> publishes a new month-wise PDF, add its URL to `FBR_MONTHWISE_SOURCES` in
+> `scripts/update-fbr.mjs`.
+>
+> **Snapshot indicators (`indicators.json`):** policy rate, KSE-100, current
+> account, public debt, circular debt and petrol price are point-in-time
+> official figures curated by hand — refresh them when a new MPC decision,
+> Economic Survey, or OGRA notification lands, updating each `asOf` date.
 
 ### Partial Updates
 
 ```bash
 # Only API data (remittances, inflation, monetary, public finance)
 npm run update-data
+
+# Only refresh FBR tax collection from the official FBR PDF
+npm run update-fbr
+node scripts/update-fbr.mjs --skip-download   # reparse an already-downloaded PDF
 
 # Only parse existing Excel files (skip download)
 node scripts/update-all.mjs --skip-download
@@ -270,7 +311,10 @@ pak-eco/
 │       ├── remittances.json   # Monthly remittances + source countries
 │       ├── inflation.json     # CPI/SPI/WPI series
 │       ├── monetary.json      # M2, credit, deposits, NFA
-│       ├── kpi-summary.json   # 8 headline KPIs (auto-derived)
+│       ├── fbr-tax.json       # Monthly FBR net collection + tax-head breakdown
+│       ├── indicators.json    # At-a-glance rates/markets/fiscal-stress snapshot
+│       ├── imf-tracker.json   # IMF EFF program tracker (curated)
+│       ├── kpi-summary.json   # Headline KPIs (auto-derived)
 │       ├── source-manifest.json # Source URLs, cadence, parser metadata
 │       └── data-freshness.json # Latest observation/status per dataset
 ├── src/
@@ -287,6 +331,8 @@ pak-eco/
 │   │   ├── InflationSection.jsx
 │   │   ├── MonetarySection.jsx
 │   │   ├── FiscalSection.jsx
+│   │   ├── FbrTaxSection.jsx  # Monthly FBR tax collection
+│   │   ├── SnapshotPanel.jsx  # At-a-glance indicators (Overview)
 │   │   └── ChartCard.jsx      # Reusable chart wrapper
 │   ├── hooks/
 │   │   └── useData.js         # Data loading hook
