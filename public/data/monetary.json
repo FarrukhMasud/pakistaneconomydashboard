@@ -1,6 +1,6 @@
 {
   "dataSource": "SBP EasyData API - Monetary & Financial Sector",
-  "lastUpdated": "2026-06-12",
+  "lastUpdated": "2026-06-17",
   "m2": {
     "name": "Broad Money (M2)",
     "seriesKey": "TS_GP_BAM_M2_W.M000070",
@@ -303,6 +303,11 @@
       {
         "date": "2026-05",
         "value": 43044021.42,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-06",
+        "value": 43453936.16,
         "unit": "Million PKR"
       }
     ]
@@ -610,6 +615,11 @@
         "date": "2026-05",
         "value": 15.92,
         "unit": "Percent"
+      },
+      {
+        "date": "2026-06",
+        "value": 13.08,
+        "unit": "Percent"
       }
     ]
   },
@@ -915,6 +925,11 @@
       {
         "date": "2026-05",
         "value": 10866055.62,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-06",
+        "value": 10842985.93,
         "unit": "Million PKR"
       }
     ]
@@ -1222,6 +1237,11 @@
         "date": "2026-05",
         "value": 14.12,
         "unit": "Percent"
+      },
+      {
+        "date": "2026-06",
+        "value": 13.62,
+        "unit": "Percent"
       }
     ]
   },
@@ -1527,6 +1547,11 @@
       {
         "date": "2026-05",
         "value": 31343322.11,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-06",
+        "value": 31203542.31,
         "unit": "Million PKR"
       }
     ]
@@ -1834,6 +1859,11 @@
         "date": "2026-05",
         "value": 17.12,
         "unit": "Percent"
+      },
+      {
+        "date": "2026-06",
+        "value": 13.6,
+        "unit": "Percent"
       }
     ]
   },
@@ -2139,6 +2169,11 @@
       {
         "date": "2026-05",
         "value": 1886702.33,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-06",
+        "value": 2075356.43,
         "unit": "Million PKR"
       }
     ]
@@ -2446,6 +2481,11 @@
         "date": "2026-05",
         "value": 34700560.58,
         "unit": "Million PKR"
+      },
+      {
+        "date": "2026-06",
+        "value": 35252293.56,
+        "unit": "Million PKR"
       }
     ]
   },
@@ -2751,6 +2791,11 @@
       {
         "date": "2026-05",
         "value": 14240147.72,
+        "unit": "Million PKR"
+      },
+      {
+        "date": "2026-06",
+        "value": 14839392.26,
         "unit": "Million PKR"
       }
     ]

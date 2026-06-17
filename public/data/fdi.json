@@ -2,100 +2,100 @@
   "by_sector": [
     {
       "sector": "Power & Energy",
-      "amount": 820.68,
-      "inflow": 983.39,
-      "outflow": 162.71,
-      "priorAmount": 1089.17,
-      "priorInflow": 1508.53,
-      "priorOutflow": 419.36
+      "amount": 909.74,
+      "inflow": 1081.06,
+      "outflow": 171.32,
+      "priorAmount": 1179.38,
+      "priorInflow": 1606.5,
+      "priorOutflow": 427.12
     },
     {
       "sector": "Financial Services",
-      "amount": 671.37,
-      "inflow": 740.64,
-      "outflow": 69.27,
-      "priorAmount": 603.94,
-      "priorInflow": 673.46,
-      "priorOutflow": 69.52
+      "amount": 732.02,
+      "inflow": 808.21,
+      "outflow": 76.18,
+      "priorAmount": 658.14,
+      "priorInflow": 734.52,
+      "priorOutflow": 76.38
     },
     {
       "sector": "IT & Telecom",
-      "amount": -443.23,
-      "inflow": 89.36,
-      "outflow": 532.59,
-      "priorAmount": -70.4,
-      "priorInflow": 116.73,
-      "priorOutflow": 187.13
+      "amount": -452.76,
+      "inflow": 94.27,
+      "outflow": 547.03,
+      "priorAmount": -73.33,
+      "priorInflow": 126.79,
+      "priorOutflow": 200.12
     },
     {
       "sector": "Manufacturing",
-      "amount": 156.44,
-      "inflow": 473.73,
-      "outflow": 317.29,
-      "priorAmount": 309.28,
-      "priorInflow": 545.7,
-      "priorOutflow": 236.42
+      "amount": 176.69,
+      "inflow": 502.87,
+      "outflow": 326.18,
+      "priorAmount": 324.45,
+      "priorInflow": 579.8,
+      "priorOutflow": 255.34
     },
     {
       "sector": "Mining & Quarrying",
-      "amount": -130.47,
-      "inflow": 216.78,
-      "outflow": 347.25,
-      "priorAmount": -141.83,
-      "priorInflow": 314.81,
-      "priorOutflow": 456.64
+      "amount": -147.32,
+      "inflow": 228.34,
+      "outflow": 375.66,
+      "priorAmount": -97.1,
+      "priorInflow": 389.15,
+      "priorOutflow": 486.24
     },
     {
       "sector": "Construction",
-      "amount": 118.28,
-      "inflow": 138.32,
-      "outflow": 20.05,
-      "priorAmount": 132.11,
-      "priorInflow": 152.18,
-      "priorOutflow": 20.06
+      "amount": 132.19,
+      "inflow": 154.17,
+      "outflow": 21.98,
+      "priorAmount": 143.84,
+      "priorInflow": 165.83,
+      "priorOutflow": 22
     },
     {
       "sector": "Professional Services",
-      "amount": 91.94,
-      "inflow": 93.73,
-      "outflow": 1.79,
-      "priorAmount": 93.52,
-      "priorInflow": 94.6,
+      "amount": 100.34,
+      "inflow": 102.71,
+      "outflow": 2.37,
+      "priorAmount": 103.09,
+      "priorInflow": 104.18,
       "priorOutflow": 1.08
     },
     {
       "sector": "Trade & Commerce",
-      "amount": 52.94,
-      "inflow": 83.57,
-      "outflow": 30.63,
-      "priorAmount": 19.61,
-      "priorInflow": 99.17,
-      "priorOutflow": 79.56
+      "amount": 57.16,
+      "inflow": 90.6,
+      "outflow": 33.44,
+      "priorAmount": 23.57,
+      "priorInflow": 108.14,
+      "priorOutflow": 84.57
+    },
+    {
+      "sector": "Transport & Storage",
+      "amount": 39.96,
+      "inflow": 72.5,
+      "outflow": 32.53,
+      "priorAmount": -10.53,
+      "priorInflow": 15.72,
+      "priorOutflow": 26.24
     },
     {
       "sector": "Other Services",
-      "amount": 33.09,
-      "inflow": 34.82,
-      "outflow": 1.73,
-      "priorAmount": 6.83,
-      "priorInflow": 8.79,
-      "priorOutflow": 1.96
-    },
-    {
-      "sector": "Real Estate",
-      "amount": 28.03,
-      "inflow": 53.59,
-      "outflow": 25.56,
-      "priorAmount": 31.2,
-      "priorInflow": 56.76,
-      "priorOutflow": 25.56
+      "amount": 34.77,
+      "inflow": 37.02,
+      "outflow": 2.26,
+      "priorAmount": 7.95,
+      "priorInflow": 10.04,
+      "priorOutflow": 2.09
     },
     {
       "sector": "Others",
-      "amount": 9.94,
+      "amount": 40.51,
       "inflow": null,
       "outflow": null,
-      "priorAmount": -38.04,
+      "priorAmount": 7.87,
       "priorInflow": null,
       "priorOutflow": null
     }
@@ -103,69 +103,69 @@
   "by_country": [
     {
       "country": "China",
-      "amount": 739.64,
+      "amount": 818.96,
       "flag": "🇨🇳",
-      "priorAmount": 1040.88
+      "priorAmount": 1155.41
     },
     {
       "country": "Norway",
-      "amount": -364.8,
+      "amount": -364.76,
       "flag": "🇳🇴",
-      "priorAmount": 4.86
+      "priorAmount": 9.46
     },
     {
       "country": "Hongkong",
-      "amount": 281.28,
+      "amount": 308.39,
       "flag": "🇭🇰",
-      "priorAmount": 391.5
-    },
-    {
-      "country": "Switzerland",
-      "amount": 169.86,
-      "flag": "🇨🇭",
-      "priorAmount": 134.42
+      "priorAmount": 428.85
     },
     {
       "country": "U.A.E",
-      "amount": 168.91,
+      "amount": 219.37,
       "flag": "🇦🇪",
-      "priorAmount": 233.49
+      "priorAmount": 244.38
+    },
+    {
+      "country": "Switzerland",
+      "amount": 187.29,
+      "flag": "🇨🇭",
+      "priorAmount": 151.19
     },
     {
       "country": "United Kingdom",
-      "amount": 98.72,
+      "amount": 113.5,
       "flag": "🇬🇧",
-      "priorAmount": 53.34
+      "priorAmount": 60.94
     },
     {
       "country": "Lebanon",
-      "amount": -94.81,
+      "amount": -93.96,
       "flag": "🇱🇧",
-      "priorAmount": 8.91
+      "priorAmount": 9.77
     },
     {
       "country": "Kuwait",
-      "amount": 84.76,
+      "amount": 93.95,
       "flag": "🇰🇼",
-      "priorAmount": 24.93
+      "priorAmount": 27.68
     },
     {
       "country": "Korea (South)",
-      "amount": 80.46,
+      "amount": 88.47,
       "flag": "🇰🇷",
-      "priorAmount": 80.21
+      "priorAmount": 88.22
     },
     {
       "country": "Malta",
-      "amount": -76.25,
+      "amount": -83.87,
       "flag": "🏳️",
-      "priorAmount": -76.25
+      "priorAmount": -83.87
     },
     {
       "country": "Others",
-      "amount": 321.25,
+      "amount": 335.94,
       "flag": "🌍",
-      "priorAmount": 153.13
+      "priorAmount": 189.3
     }
   ],
   "annual": [
@@ -224,44 +224,44 @@
       "outflow": 1791
     }
   ],
-  "sectorPeriod": "July-April FY26",
-  "sectorPriorPeriod": "July-April FY25",
-  "countryPeriod": "July-April FY26",
-  "countryPriorPeriod": "July-April FY25",
+  "sectorPeriod": "July-May FY26",
+  "sectorPriorPeriod": "July-May FY25",
+  "countryPeriod": "July-May FY26",
+  "countryPriorPeriod": "July-May FY25",
   "source": "State Bank of Pakistan",
   "dataSource": "SBP",
-  "lastUpdated": "2026-06-12",
-  "dataCoverage": "FY2026 Jul-Apr",
+  "lastUpdated": "2026-06-17",
+  "dataCoverage": "FY2026 Jul-May",
   "fytdComparison": {
-    "period": "Jul-Apr",
+    "period": "Jul-May",
     "current": {
       "label": "FY2026",
-      "net_fdi": 2035.42,
-      "inflow": 3632.26,
-      "outflow": 1596.85,
+      "net_fdi": 2267.33,
+      "inflow": 3953.11,
+      "outflow": 1685.79,
       "status": "provisional"
     },
     "prior": {
       "label": "FY2025",
-      "net_fdi": 1408.99,
-      "inflow": 2978.44,
-      "outflow": 1569.45
+      "net_fdi": 1623.28,
+      "inflow": 3273.51,
+      "outflow": 1650.23
     }
   },
   "monthlyComparison": {
-    "month": "Apr",
+    "month": "May",
     "current": {
       "label": "FY2026",
-      "net_fdi": 54.46,
-      "inflow": 273.38,
-      "outflow": 218.92,
+      "net_fdi": 214.29,
+      "inflow": 295.07,
+      "outflow": 80.78,
       "status": "provisional"
     },
     "prior": {
       "label": "FY2025",
-      "net_fdi": 178.75,
-      "inflow": 278.36,
-      "outflow": 99.61,
+      "net_fdi": 231.91,
+      "inflow": 320.85,
+      "outflow": 88.94,
       "status": null
     }
   },
@@ -619,6 +619,12 @@
       "net_fdi": 54,
       "equity": 86,
       "debt": -32
+    },
+    {
+      "date": "2026-05",
+      "net_fdi": 214,
+      "equity": 206,
+      "debt": 8
     }
   ],
   "monthlyDataSource": "SBP EasyData API - BOP BPM6",
