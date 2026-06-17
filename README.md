@@ -22,6 +22,11 @@ Ministry of Finance.
 | **Monetary**         | M2, private credit, deposits, NFA               | SBP EasyData API    |
 | **Public Finance**   | GDP growth, fiscal balance, revenue/expenditure | SBP API + Excel     |
 | **FBR Tax**          | Monthly net tax collection + tax-head breakdown | FBR official tables |
+| **Federal Budget**   | Outlay, revenue, deficit, spending mix + Good/Bad/Ugly commentary | Finance Division (Budget in Brief) |
+| **Provincial Budgets** | Punjab/Sindh/KP/Balochistan outlay, ADP, transfers + commentary | Provincial Finance Depts |
+
+Navigation is grouped into **Overview**, **External Sector**, **Prices & Money**, and
+**Public Finance & Budget**, each drilling down to its sub-sections.
 
 ## Tech Stack
 
@@ -115,6 +120,15 @@ date (mirroring the IMF tracker pattern):
 | `fbr-tax.json`    | Monthly net tax collection + tax-head breakdown  | FBR official Month-wise/Tax-wise table (`download1.fbr.gov.pk`) + FBR press releases |
 | `indicators.json` | At-a-glance rates/markets/fiscal-stress snapshot | SBP, Finance Division (Economic Survey), PSX, OGRA, Power Division |
 | `imf-tracker.json`| IMF EFF program review schedule & disbursements   | IMF press releases                      |
+| `budget-federal.json` | Federal budget (FY2025-26 & FY2026-27): outlay, revenue, deficit, spending mix, tax measures + editorial Good/Bad/Ugly commentary | Finance Division "Budget in Brief", as reported by Dawn & Business Recorder |
+| `budget-provincial.json` | Provincial budgets (Punjab/Sindh/KP/Balochistan): outlay, ADP, transfers, surplus + commentary | Provincial Finance Department White Papers, as reported by Dawn & Business Recorder |
+
+> **Budget data & commentary:** federal and provincial budget figures are budgeted
+> estimates taken from official budget documents (Finance Division / provincial White
+> Papers) as reported in detail by Dawn and Business Recorder, in PKR billion. Figures that
+> could not be authentically sourced are explicitly marked **NOT FOUND** rather than
+> estimated (e.g. KP and Balochistan FY2025-26 detail). The "Good / Bad / Ugly" panels are
+> **editorial opinion**, clearly labelled as such, and grounded in the official figures shown.
 
 FBR monthly figures and the four-way breakdown (Direct/Income Tax, Sales Tax,
 FED, Customs) for the latest completed fiscal year are taken verbatim from
@@ -312,6 +326,8 @@ pak-eco/
 │       ├── inflation.json     # CPI/SPI/WPI series
 │       ├── monetary.json      # M2, credit, deposits, NFA
 │       ├── fbr-tax.json       # Monthly FBR net collection + tax-head breakdown
+│       ├── budget-federal.json # Federal budget + Good/Bad/Ugly commentary (curated)
+│       ├── budget-provincial.json # Provincial budgets + commentary (curated)
 │       ├── indicators.json    # At-a-glance rates/markets/fiscal-stress snapshot
 │       ├── imf-tracker.json   # IMF EFF program tracker (curated)
 │       ├── kpi-summary.json   # Headline KPIs (auto-derived)

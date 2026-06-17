@@ -49,3 +49,32 @@
 .fbr-disclaimer .source-link-pill {
   align-self: flex-start;
 }
+
+.fbr-target-notes {
+  margin: 0.9rem 0 0;
+  padding-left: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fbr-target-notes li {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.fbr-target-notes strong {
+  color: var(--text-primary);
+}
+
+.fbr-target-srcs a {
+  color: var(--accent-blue);
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 2px;
+}
+
+.fbr-target-srcs a:hover {
+  text-decoration: underline;
+}

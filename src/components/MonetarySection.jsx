@@ -4,6 +4,7 @@ import { COLORS, baseLineOptions } from '../utils/chartConfig';
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
+import MonetaryPolicyTracker from './MonetaryPolicyTracker';
 import { currentCalendarYear, currentFiscalYear, fmtPKR, fmtPct, formatMonthYear } from '../utils/periodHelpers';
 
 const formatDate = formatMonthYear;
@@ -193,6 +194,8 @@ export default function MonetarySection() {
           { label: 'SBP Monetary Data', url: 'https://www.sbp.org.pk/ecodata/index2.asp' },
         ]}
       />
+
+      <MonetaryPolicyTracker />
 
       <div className="summary-pair">
         <SummaryCard

@@ -5,6 +5,8 @@ import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import ImfTracker from './ImfTracker';
+import CircularDebtTracker from './CircularDebtTracker';
+import ExternalDebtTracker from './ExternalDebtTracker';
 import { fmtPKR, fmtPct } from '../utils/periodHelpers';
 
 function formatTrillion(val) {
@@ -284,6 +286,8 @@ export default function FiscalSection() {
       </div>
 
       <ImfTracker />
+      <CircularDebtTracker />
+      <ExternalDebtTracker />
     </section>
   );
 }

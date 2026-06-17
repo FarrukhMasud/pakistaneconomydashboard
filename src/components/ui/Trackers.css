@@ -1,0 +1,207 @@
+/* Shared styles for compact milestone "trackers" (policy rate, circular debt,
+   external debt, reserves adequacy). Mirrors the ImfTracker visual language. */
+
+.tracker.card {
+  margin-top: 1.25rem;
+  padding: 1.25rem 1.4rem 1.4rem;
+}
+
+.tracker__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+}
+
+.tracker__header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.tracker__badge {
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  background: var(--bg-body);
+  border: 1px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.tracker__subtitle {
+  margin: 0 0 1rem;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+/* Stat tiles */
+.tracker__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.7rem;
+  margin-bottom: 1.1rem;
+}
+
+.tracker-stat {
+  background: var(--bg-body);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.tracker-stat__label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
+}
+
+.tracker-stat__value {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.tracker-stat__sub {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  line-height: 1.35;
+}
+
+/* Chart wrapper */
+.tracker__chart {
+  position: relative;
+  height: 220px;
+  margin-bottom: 1.1rem;
+}
+
+/* Targets / milestone list */
+.tracker__targets {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-bottom: 1rem;
+}
+
+.tracker-target {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.6rem 0.7rem;
+  background: var(--bg-body);
+  border: 1px solid var(--border-color);
+  border-left-width: 3px;
+  border-radius: var(--radius-sm);
+}
+
+.tracker-target--met { border-left-color: var(--accent-teal, #00d4aa); }
+.tracker-target--risk { border-left-color: var(--accent-coral, #ef5350); }
+.tracker-target--target { border-left-color: var(--accent-amber, #ffa726); }
+
+.tracker-target__badge {
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.tracker-target--met .tracker-target__badge { background: rgba(0,212,170,0.15); color: var(--accent-teal, #00d4aa); }
+.tracker-target--risk .tracker-target__badge { background: rgba(239,83,80,0.15); color: var(--accent-coral, #ef5350); }
+.tracker-target--target .tracker-target__badge { background: rgba(255,167,38,0.15); color: var(--accent-amber, #ffa726); }
+
+.tracker-target__body { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; }
+.tracker-target__title { font-size: 0.82rem; color: var(--text-primary); font-weight: 600; }
+.tracker-target__title strong { color: var(--text-primary); }
+.tracker-target__detail { font-size: 0.74rem; color: var(--text-secondary); line-height: 1.4; }
+
+/* Decision timeline (policy rate) */
+.tracker__decisions {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 1rem;
+}
+
+.tracker-decision {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px dashed var(--border-color);
+}
+.tracker-decision:last-child { border-bottom: none; }
+
+.tracker-decision__date { font-size: 0.74rem; color: var(--text-muted); width: 88px; flex-shrink: 0; }
+.tracker-decision__rate { font-size: 0.9rem; font-weight: 700; color: var(--text-primary); width: 56px; flex-shrink: 0; }
+.tracker-decision__chip {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.12rem 0.5rem;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+.tracker-decision__chip--cut { background: rgba(0,212,170,0.15); color: var(--accent-teal, #00d4aa); }
+.tracker-decision__chip--hike { background: rgba(239,83,80,0.15); color: var(--accent-coral, #ef5350); }
+.tracker-decision__chip--hold { background: var(--bg-body); color: var(--text-muted); border: 1px solid var(--border-color); }
+.tracker-decision__note { font-size: 0.72rem; color: var(--text-secondary); line-height: 1.35; }
+
+/* Generic bulleted list (reforms / drivers) */
+.tracker__list { margin: 0 0 1rem; }
+.tracker__list h4 { font-size: 0.8rem; margin: 0 0 0.5rem; color: var(--text-secondary); }
+.tracker__list ul { margin: 0; padding-left: 1.2rem; }
+.tracker__list li { font-size: 0.78rem; line-height: 1.6; color: var(--text-secondary); }
+
+/* Next event banner */
+.tracker__next {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 0.7rem 0.85rem;
+  background: var(--bg-body);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.1rem;
+}
+.tracker__next-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--text-muted); display: block; }
+.tracker__next strong { font-size: 0.95rem; color: var(--text-primary); }
+.tracker__next p { margin: 0.2rem 0 0; font-size: 0.74rem; color: var(--text-secondary); line-height: 1.4; flex-basis: 100%; }
+
+/* Risk / context callout */
+.tracker__callout {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  padding: 0.7rem 0.85rem;
+  background: var(--bg-body);
+  border: 1px solid var(--border-color);
+  border-left: 3px solid var(--accent-amber, #ffa726);
+  border-radius: var(--radius-sm);
+  margin-bottom: 1rem;
+}
+
+/* Disclaimer / source */
+.tracker__disclaimer {
+  border-top: 1px solid var(--border-color);
+  padding-top: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+.tracker__disclaimer p { margin: 0; font-size: 0.68rem; color: var(--text-muted); font-style: italic; flex: 1 1 auto; }
+.tracker__sources { font-size: 0.7rem; }
+.tracker__sources summary { cursor: pointer; color: var(--text-secondary); }
+.tracker__sources ul { margin: 0.4rem 0 0; padding-left: 1.1rem; }
+.tracker__sources li { font-size: 0.7rem; line-height: 1.5; word-break: break-word; }

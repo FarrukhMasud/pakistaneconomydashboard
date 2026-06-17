@@ -90,11 +90,12 @@
       "value": 11.5,
       "unit": "%",
       "period": "Jun 2026",
-      "change": -0.5,
-      "trend": "down",
+      "change": 0,
+      "trend": "stable",
       "source": "SBP",
       "dataSource": "SBP",
-      "dataCoverage": "Jun 2026"
+      "dataCoverage": "Jun 2026",
+      "sub": "Held; last move +100 bps (Apr 2026)"
     }
   ]
 }

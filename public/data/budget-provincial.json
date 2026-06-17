@@ -1,0 +1,323 @@
+{
+  "title": "Provincial Budgets",
+  "dataSource": "Provincial Finance Departments (as reported by Dawn & Business Recorder)",
+  "unit": "PKR billion",
+  "lastUpdated": "2026-06-17",
+  "lastVerified": "2026-06-17",
+  "methodologyNote": "Budgeted estimates compiled from each province's budget speech / White Paper as reported by Dawn, Business Recorder and other reputable outlets. FY2026-27 figures for all four provinces are from June 2026 budget reporting; KP's FY2026-27 totals are early/round 'set-to-cross' figures pending the final White Paper. FY2025-26 detail for KP and Balochistan beyond their NFC transfer share was not independently sourced and is marked accordingly. Commentary is editorial opinion, clearly labelled, grounded in the official figures shown.",
+  "fiscalYears": ["2026-27", "2025-26"],
+  "provincialSurplus": {
+    "period": "Jul–Mar FY2025-26 (first 9 months)",
+    "asOf": "2026-03-31",
+    "fullYearTarget": 1464,
+    "actualTotal": 1636,
+    "byProvince": { "punjab": 824, "sindh": 441, "kp": 253, "balochistan": 118 },
+    "note": "Cash surpluses provinces actually delivered in the first nine months, per Ministry of Finance Fiscal Operations. The combined Rs1,636bn already EXCEEDED the full-year IMF target of Rs1,464bn — even Sindh, which budgeted a deficit, ran an in-year cash surplus because provinces under-spend their development budgets early in the year.",
+    "sources": [
+      { "label": "ProPakistani — provincial surpluses (MoF data, 13 May 2026)", "url": "https://propakistani.pk/2026/05/13/pakistans-records-27-year-low-fiscal-deficit/" }
+    ]
+  },
+  "provinces": [
+    {
+      "id": "punjab",
+      "name": "Punjab",
+      "source": "Punjab Finance Department (as reported by Dawn 2008300)",
+      "years": [
+        {
+          "fy": "2026-27",
+          "status": "budgeted",
+          "totalOutlay": 5900,
+          "totalReceipts": null,
+          "federalTransfers": null,
+          "ownTaxRevenue": 1200,
+          "adp": 752,
+          "surplus": null,
+          "highlights": [
+            { "label": "Education", "value": 750, "note": "+15% YoY" },
+            { "label": "Health", "value": 500, "note": "+10% YoY" },
+            { "label": "Salaries", "value": 639, "note": "+7% pay raise" },
+            { "label": "Pensions", "value": 500, "note": "+3.5%" },
+            { "label": "Law & order", "value": 252 },
+            "No new provincial taxes — financed by federal transfers and higher own-source revenue.",
+            "Flagship projects: electric buses (Rs168bn), Nawaz Sharif Medical District (Rs169bn), cancer & children's hospitals, IT labs in colleges."
+          ],
+          "commentary": {
+            "summary": "Pakistan's biggest province posts a record-size, tax-free social-spending budget — politically shrewd, but heavily dependent on federal transfers and thin on quantified fiscal surplus.",
+            "good": [
+              "Record social spend — education Rs750bn (+15%) and health Rs500bn (+10%) — with no new taxes on citizens.",
+              "Big-ticket human-development projects: electric-bus fleets, new cancer hospitals and medical districts, and IT labs in colleges."
+            ],
+            "bad": [
+              "Punjab's own-source revenue is only ~Rs1.2tr against a Rs5.9tr budget; the rest leans on federal NFC transfers, so fiscal autonomy stays weak.",
+              "Development (ADP) of Rs752bn is only ~13% of outlay — current spending and salaries dominate the envelope."
+            ],
+            "ugly": [
+              "'No new taxes' plus a big spending hike makes the cash surplus the federation is banking on look fragile — and the province quantifies it only vaguely as a 'substantial share to the federation'.",
+              "Branded mega-projects risk crowding out routine service delivery and recurrent maintenance."
+            ]
+          },
+          "sources": [
+            { "label": "Dawn 2008300 — Punjab FY2026-27 budget (17 Jun 2026)", "url": "https://www.dawn.com/news/2008300" }
+          ]
+        },
+        {
+          "fy": "2025-26",
+          "status": "budgeted",
+          "totalOutlay": 5335,
+          "totalReceipts": null,
+          "federalTransfers": 4070,
+          "ownTaxRevenue": 828.2,
+          "adp": 1240,
+          "surplus": 740,
+          "highlights": [
+            { "label": "Development (ADP)", "value": 1240, "note": "+47% YoY, ~23% of budget" },
+            { "label": "Social sector (within ADP)", "value": 494, "note": "~40% of ADP" },
+            { "label": "Health (total)", "value": 631, "note": "incl. development Rs181bn (+131% YoY dev health)" },
+            { "label": "Non-development expenditure", "value": 2706 },
+            { "label": "Own-revenue target", "value": 828.2 },
+            "No new taxes — the largest budget in Punjab's history, financed by record federal transfers and higher own-source revenue."
+          ],
+          "commentary": {
+            "summary": "Punjab's FY2025-26 budget was the largest in its history, with a record Rs1.24tr development programme and an ambitious Rs740bn surplus pledge that underpinned the national IMF consolidation — but that surplus was explicitly conditional on the FBR hitting revenue targets it ultimately missed.",
+            "good": [
+              "Record development programme — ADP Rs1,240bn (+47%), the biggest provincial ADP in the country, with ~Rs494bn (40%) for the social sectors.",
+              "No new taxes, while own-source revenue was pushed to a Rs828bn target."
+            ],
+            "bad": [
+              "Own revenue (~Rs828bn) covers only ~16% of a Rs5,335bn budget; the rest leans on Rs4.07tr of federal NFC transfers — fiscal autonomy stays weak.",
+              "The headline Rs740bn surplus was conditional on federal transfers arriving in full."
+            ],
+            "ugly": [
+              "The Rs740bn surplus the federation banked on assumed the FBR would hit its target — but FBR fell ~Rs1.2tr short in FY2024-25 and again in FY2025-26, so the consolidation math was fragile from the outset.",
+              "A 47% ADP jump raises real questions about execution capacity and the quality, not just the size, of development spending."
+            ]
+          },
+          "sources": [
+            { "label": "APP — Punjab presents Rs5,335bn FY2025-26 budget", "url": "https://www.app.com.pk/domestic/punjab-presents-rs-5335b-budget-2025-26/" },
+            { "label": "The News — Punjab Rs1.24tr development plan", "url": "https://www.thenews.com.pk/print/1321890-budget-2025-26-punjab-presents-rs1-24tr-development-plan" },
+            { "label": "ProPakistani — Punjab unveils Rs5,335bn tax-free budget", "url": "https://propakistani.pk/2025/06/16/punjab-unveils-rs-5335-billion-tax-free-budget/" },
+            { "label": "Business Recorder 40368030 — Punjab FY2025-26 health allocation", "url": "https://www.brecorder.com/news/40368030" },
+            { "label": "Dawn 1916464 — federal NFC transfers to provinces", "url": "https://www.dawn.com/news/1916464" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sindh",
+      "name": "Sindh",
+      "source": "Sindh Finance Department White Paper (as reported by Business Recorder & Dawn)",
+      "years": [
+        {
+          "fy": "2026-27",
+          "status": "budgeted",
+          "totalOutlay": 3562,
+          "totalReceipts": null,
+          "federalTransfers": null,
+          "ownTaxRevenue": null,
+          "adp": 385,
+          "surplus": -36.9,
+          "highlights": [
+            { "label": "Development (provincial ADP)", "value": 385, "note": "total dev programme Rs720.4bn incl. foreign assistance Rs256bn & federal PSDP Rs64bn" },
+            { "label": "Karachi development package", "value": 100.19 },
+            "Salaries and pensions raised 7%; minimum wage increased to Rs43,000/month.",
+            "No new taxes; development programme cut ~26% on expected federal transfer shortfall."
+          ],
+          "commentary": {
+            "summary": "Sindh again budgets a deficit and trims its development programme — protecting salaries and pensions while defying, for a second straight year, the surplus the IMF expects provinces to post.",
+            "good": [
+              "No new taxes; 7% pay and pension rise; minimum wage lifted to Rs43,000.",
+              "Rs100bn Karachi development package targeting the province's economic engine."
+            ],
+            "bad": [
+              "Provincial ADP cut sharply (~Rs385bn vs Rs520bn) — development is again the shock-absorber when transfers look uncertain.",
+              "Most of the Rs3.56tr budget still rides on federal transfers Sindh does not control."
+            ],
+            "ugly": [
+              "Budgeted a ~Rs36.9bn DEFICIT for the second year running, undercutting the national fiscal-consolidation target that requires provinces to run surpluses.",
+              "That repeated stance shifts the surplus burden onto Punjab and the smaller provinces."
+            ]
+          },
+          "sources": [
+            { "label": "PkRevenue — Sindh Budget 2026-27: Rs3.56tr outlay, no new taxes", "url": "https://pkrevenue.com/sindh-unveils-rs3-56-trillion-budget-with-salary-hike-no-new-taxes/" },
+            { "label": "ARY News — Sindh budget 2026-27 details", "url": "https://arynews.tv/sindh-budget-2026-27-salary-raise-karachi-projects-full-details" },
+            { "label": "UrduPoint — Sindh proposes over Rs720bn development", "url": "https://www.urdupoint.com/en/pakistan/sindh-govt-proposes-over-rs-720bln-developmen-2205243.html" },
+            { "label": "24News — Sindh plans Rs719.9bn development programme FY27", "url": "https://www.24newshd.tv/16-Jun-2026/sindh-plans-rs719-9b-development-programme-fy27-budget" }
+          ]
+        },
+        {
+          "fy": "2025-26",
+          "status": "budgeted",
+          "totalOutlay": 3450,
+          "totalReceipts": null,
+          "federalTransfers": 2040,
+          "ownTaxRevenue": null,
+          "adp": 520,
+          "surplus": -38.4,
+          "totalCurrentExpenditure": 2150,
+          "highlights": [
+            { "label": "Education (current)", "value": 523.73, "note": "+12.4%, 25.3% of current spend" },
+            { "label": "Health (current)", "value": 326.5, "note": "+8%" },
+            { "label": "Development (ADP)", "value": 520, "note": "cut ~20% on expected transfer shortfall" },
+            { "label": "Karachi package", "value": 236, "note": "largely via public-private partnerships" },
+            "Salaries raised 10–12% and pensions +8%; own revenue grew ~16%; several nuisance taxes (entertainment, restaurant, professional) cut or abolished."
+          ],
+          "commentary": {
+            "summary": "Sindh protected its social sectors and pay bill but openly defied the national fiscal-consolidation plan by budgeting a deficit — a politically defiant, fiscally risky stance.",
+            "good": [
+              "Protected the social sectors — education Rs523.7bn (+12.4%) and health Rs326.5bn (+8%) — and raised pay (10–12%) and pensions (+8%).",
+              "Grew own-source revenue ~16% while cutting or abolishing several nuisance taxes."
+            ],
+            "bad": [
+              "Slashed its ADP ~20% to Rs520bn in anticipation of a federal transfer shortfall — development is once again the shock-absorber.",
+              "More than Rs2tr of the Rs3.45tr budget rides on NFC transfers Sindh does not control, leaving it exposed to federal collection misses."
+            ],
+            "ugly": [
+              "Budgeted a Rs38.4bn DEFICIT — openly defying the IMF-driven requirement for provinces to post a combined ~Rs1.46tr surplus.",
+              "That single decision undermined the federal consolidation story and shifted the surplus burden onto Punjab and KP."
+            ]
+          },
+          "sources": [
+            { "label": "Business Recorder 40367589 — Sindh FY2025-26 budget (13 Jun 2025)", "url": "https://www.brecorder.com/news/40367589" },
+            { "label": "Business Recorder 40367770 — Sindh CM post-budget press conference", "url": "https://www.brecorder.com/news/40367770" },
+            { "label": "Dawn 1917278 — Sindh budget analysis (deficit Rs38.4bn)", "url": "https://www.dawn.com/news/1917278" },
+            { "label": "Dawn 1919500 — Sindh budget winding-up session", "url": "https://www.dawn.com/news/1919500" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kp",
+      "name": "Khyber Pakhtunkhwa",
+      "source": "KP Finance Department (as reported by Business Recorder, Samaa, Dunya & Profit)",
+      "years": [
+        {
+          "fy": "2026-27",
+          "status": "pre-budget estimate (not yet presented)",
+          "totalOutlay": 2300,
+          "totalReceipts": null,
+          "federalTransfers": 1671,
+          "ownTaxRevenue": 99,
+          "adp": 560,
+          "surplus": null,
+          "highlights": [
+            { "label": "Federal transfers", "value": 1671, "note": "incl Rs159bn war-on-terror; plus Rs107bn net hydel profit (Rs36bn + Rs71bn arrears)" },
+            { "label": "Development (ADP)", "value": 560, "note": "estimate; settled-district development ~Rs426bn + merged districts" },
+            { "label": "Merged (ex-FATA) districts", "value": 334, "note": "ongoing & development projects" },
+            { "label": "Foreign project assistance", "value": 160 },
+            { "label": "Own resources", "value": 150, "note": "Rs99bn tax + Rs51bn non-tax" },
+            "Expected to be a tax-free budget with a salary increase mirroring the federal raise — figures are pre-budget estimates pending formal presentation."
+          ],
+          "commentary": {
+            "summary": "As of 17 June 2026 KP had finalised its budget preparations but NOT yet formally presented FY2026-27; the figures shown are pre-budget estimates. They point to a tax-free, transfer-dependent plan tilted toward the merged tribal districts.",
+            "good": [
+              "Large planned development programme (~Rs560bn) with a clear pro-poor, merged-districts focus (Rs334bn).",
+              "Expected to be tax-free, with a salary raise for employees."
+            ],
+            "bad": [
+              "~Rs1.67tr of resources would come from federal transfers, plus ~Rs107bn net hydel profit — own resources are only ~Rs150bn, so any federal shortfall bites hard.",
+              "Headline outlay (~Rs2.3tr) and the ADP are pre-budget estimates that may shift in the final White Paper."
+            ],
+            "ugly": [
+              "KP's finances hinge on long-disputed flows — net hydel profit arrears (Rs71bn) and withheld ex-FATA merger funds — that Islamabad has repeatedly delayed, making the resource side optimistic.",
+              "Spending heavily in merged districts is right on need, but the province utilised only ~Rs1,025bn of its budget in the first three quarters of FY2025-26 — execution, not allocation, is the binding constraint."
+            ]
+          },
+          "sources": [
+            { "label": "Dunya News — KP budget 2026-27 estimates (preparations finalised)", "url": "https://dunyanews.tv/en/Business/954502-kp-budget-2026-27" },
+            { "label": "Profit (Pakistan Today) — KP finalises Finance Bill, 1,000+ ADP schemes", "url": "https://profit.pakistantoday.com.pk/2026/06/10/kp-finalises-finance-bill-proposes-over-1000-development-schemes-for-fy27" },
+            { "label": "Samaa TV — KP budget 2026-27 likely to hit Rs2.3tr", "url": "https://www.samaa.tv/2087351826-khyber-pakhtunkhwa-budget-expected-to-reach-rs2-3tr" }
+          ]
+        },
+        {
+          "fy": "2025-26",
+          "status": "budgeted",
+          "totalOutlay": 2119,
+          "totalReceipts": null,
+          "federalTransfers": 1340,
+          "ownTaxRevenue": null,
+          "adp": 547,
+          "surplus": null,
+          "highlights": [
+            { "label": "Development (ADP)", "value": 547 },
+            { "label": "Merged (ex-FATA) districts", "value": 293 },
+            "Only ~Rs1,025bn of the budget was utilised in the first three quarters (Jul–Mar) — a recurring under-spend.",
+            "Own-source revenue and sector-level allocations were not independently sourced."
+          ],
+          "commentary": {
+            "summary": "KP's FY2025-26 budget totalled Rs2,119bn with a Rs547bn development programme, but only ~Rs1,025bn was spent in nine months — the familiar gap between what KP budgets and what it actually delivers."
+          },
+          "sources": [
+            { "label": "Dunya News — KP budget figures incl. FY2025-26 comparison", "url": "https://dunyanews.tv/en/Business/954502-kp-budget-2026-27" },
+            { "label": "Dawn 1916464 — federal NFC transfers to provinces", "url": "https://www.dawn.com/news/1916464" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balochistan",
+      "name": "Balochistan",
+      "source": "Balochistan Finance Department (as reported by Business Recorder, Samaa & Profit)",
+      "years": [
+        {
+          "fy": "2026-27",
+          "status": "budgeted",
+          "totalOutlay": 1089,
+          "totalReceipts": null,
+          "federalTransfers": null,
+          "ownTaxRevenue": 170,
+          "adp": 206,
+          "surplus": 45.66,
+          "highlights": [
+            { "label": "School education", "value": 127 },
+            { "label": "Health", "value": 96 },
+            { "label": "Higher & technical education", "value": 31 },
+            { "label": "Development (ADP)", "value": 206, "note": "new Rs106bn + ongoing Rs100bn; plus Rs45bn federal grants & Rs40bn foreign assistance" },
+            { "label": "Own-revenue target", "value": 170 },
+            "Surplus budget; no new taxes; 7% salary & pension raise; 5,000 new jobs."
+          ],
+          "commentary": {
+            "summary": "Balochistan posts a rare surplus budget with a sizeable education allocation — fiscally cooperative with the IMF consolidation line, but its tiny Rs170bn own-revenue base leaves it almost wholly dependent on federal money.",
+            "good": [
+              "Budgeted a Rs45.7bn SURPLUS, directly supporting the national consolidation target the larger provinces have wobbled on.",
+              "Education leads the budget — school education Rs127bn plus Rs31bn higher/technical — alongside Rs96bn for health, tax-free and with 5,000 new jobs."
+            ],
+            "bad": [
+              "Own-source revenue is targeted at just ~Rs170bn against a Rs1,089bn budget — over 80% rides on federal transfers Balochistan does not control.",
+              "Development (Rs206bn) still depends partly on Rs45bn federal grants and Rs40bn foreign assistance that may not fully materialise."
+            ],
+            "ugly": [
+              "Pakistan's poorest province has chronically under-spent and under-delivered on development; on past form, headline allocations translate poorly into actual schools, clinics and roads.",
+              "A paper surplus is easy when capacity constraints mean money goes unspent — fiscal 'discipline' here can mask a delivery failure."
+            ]
+          },
+          "sources": [
+            { "label": "Business Recorder 40425989 — Balochistan unveils Rs1,089bn budget FY2026-27", "url": "https://www.brecorder.com/news/40425989/balochistan-unveils-rs1089-billion-budget-for-fy-2026-27" },
+            { "label": "Samaa TV — Balochistan presents Rs1.089tr surplus budget", "url": "https://www.samaa.tv/2087352186-balochistan-presents-rs1-089-trillion-surplus-budget-for-fy-2026-27" },
+            { "label": "Profit (Pakistan Today) — Balochistan clears Rs1.089tr budget, Rs170bn revenue target", "url": "https://profit.pakistantoday.com.pk/2026/06/17/balochistan-clears-rs1089-trillion-budget-for-fy2026-27-sets-rs170bn-revenue-target" },
+            { "label": "Pakistan Observer — Key takeaways from Balochistan budget 2026-27", "url": "https://pakobserver.net/key-takeaways-from-balochistan-budget-2026-27/" }
+          ]
+        },
+        {
+          "fy": "2025-26",
+          "status": "partial",
+          "totalOutlay": null,
+          "totalReceipts": null,
+          "federalTransfers": 743,
+          "ownTaxRevenue": null,
+          "adp": null,
+          "surplus": null,
+          "highlights": [
+            "Provincial budget detail (outlay, ADP, own revenue, surplus) NOT FOUND in accessible reputable sources.",
+            "Only the confirmed FY2025-26 federal NFC transfer share (Rs743bn) is shown."
+          ],
+          "commentary": {
+            "summary": "Balochistan's provincial budget could not be independently sourced from reputable open archives; only its confirmed FY2025-26 federal NFC transfer share (Rs743bn) is shown rather than an estimate."
+          },
+          "sources": [
+            { "label": "Dawn 1916464 — federal NFC transfers to provinces", "url": "https://www.dawn.com/news/1916464" }
+          ]
+        }
+      ]
+    }
+  ]
+}

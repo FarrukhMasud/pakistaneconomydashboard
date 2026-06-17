@@ -1,0 +1,170 @@
+{
+  "title": "Federal Budget",
+  "source": "Government of Pakistan, Finance Division — Budget in Brief",
+  "dataSource": "Finance Division, GoP (as reported by Dawn & Business Recorder budget coverage)",
+  "unit": "PKR billion",
+  "lastUpdated": "2026-06-17",
+  "lastVerified": "2026-06-17",
+  "methodologyNote": "Budgeted estimates compiled from the Finance Minister's budget speech and the Finance Division's figures as reported in detail by Dawn and Business Recorder. Values are in PKR billion (1,000 bn = 1 tn). Where two reputable sources differ slightly the more detailed figure is used and the discrepancy noted. The Good/Bad/Ugly commentary is editorial opinion, clearly labelled, and grounded in the official figures shown.",
+  "years": [
+    {
+      "fy": "2026-27",
+      "label": "FY2026-27",
+      "presented": "2026-06-12",
+      "status": "budgeted",
+      "headline": {
+        "totalOutlay": 18800,
+        "grossRevenue": 20600,
+        "fbrTaxTarget": 15264,
+        "nonTaxRevenue": 5336,
+        "provincialTransfers": 8848,
+        "netRevenue": 11751,
+        "totalCurrentExpenditure": 17495,
+        "fiscalDeficit": 7020,
+        "fiscalDeficitPctGdp": 3.6,
+        "primaryBalance": null,
+        "primaryBalancePctGdp": 2.0,
+        "psdp": 1000,
+        "psdpTotal": 1451,
+        "gdpGrowthTarget": 4.0,
+        "inflationTarget": 8.2
+      },
+      "resources": [
+        { "key": "fbrTax", "label": "FBR tax revenue", "value": 15264 },
+        { "key": "nonTax", "label": "Non-tax revenue", "value": 5336 }
+      ],
+      "currentExpenditure": [
+        { "key": "markup", "label": "Debt servicing (interest)", "value": 8045 },
+        { "key": "defense", "label": "Defence affairs & services", "value": 3000 },
+        { "key": "grants", "label": "Grants & transfers (incl. BISP)", "value": 2680 },
+        { "key": "pensions", "label": "Pensions", "value": 1169 },
+        { "key": "subsidies", "label": "Subsidies", "value": 1091 },
+        { "key": "civilGovt", "label": "Running of civil government", "value": 1071 }
+      ],
+      "taxMeasures": [
+        "Salaried-class relief: 9% surcharge abolished and income-tax rates cut across four upper slabs (e.g. Rs2.2–3.2M slab 23% → 20%).",
+        "Super tax abolished for firms earning Rs150M–Rs500M; cut from 10% to 8% for incomes above Rs500M.",
+        "Withholding tax on cash withdrawals and on export proceeds reduced (export WHT 2% → 1.25%).",
+        "Taxes abolished on sanitary products and contraceptives; duty exemptions on cancer medicines.",
+        "Deemed-income tax on property and capital value tax on residents' foreign assets abolished.",
+        "IT & freelancer final-tax regime extended to FY2030; 5% WHT introduced on social-media income.",
+        "New FED on petroleum solvents and a special excise duty on imported vehicles above 2,000cc.",
+        "BISP raised 17% to Rs838bn, expanding coverage toward 12 million families."
+      ],
+      "commentary": {
+        "summary": "A consolidation-and-relief budget: the salaried class finally gets a break and the primary surplus is preserved, but it leans on a heroic FBR target, an eye-watering defence rise, and a debt-servicing bill that swallows the budget whole.",
+        "good": [
+          "Real relief for the salaried class at last — the 9% surcharge is gone and four upper tax slabs are cut, easing the squeeze on Pakistan's most-documented taxpayers.",
+          "Fiscal discipline maintained: a primary surplus of ~2.0% of GDP and an FBR target set 17.6% above the revised FY2025-26 collection keep the IMF EFF on track.",
+          "Social protection expanded — BISP up 17% to Rs838bn for ~12m families — plus pro-equity moves (no tax on sanitary pads/contraceptives, duty-free cancer medicines).",
+          "Pro-growth signals for the digital economy: IT/freelancer final-tax regime extended to FY2030 and export withholding tax cut to 1.25%."
+        ],
+        "bad": [
+          "The Rs15.26tr FBR target is optimistic to the point of risk — it assumes a 17.6% jump straight after FY2025-26 missed its own target by ~Rs1.13tr (collecting ~Rs13tr vs Rs14.13tr). Missed targets historically trigger mid-year mini-budgets.",
+          "Guns over growth: defence leaps to Rs3.0tr (+~18%) while the core federal PSDP is frozen at Rs1.0tr — development is being starved to fund current spending.",
+          "Growth target trimmed to 4.0% with inflation pencilled at 8.2% — modest expansion and still-sticky prices mean living standards barely move."
+        ],
+        "ugly": [
+          "Debt servicing alone is Rs8.05tr — about 43% of the entire Rs18.8tr budget and larger than all net federal revenue (Rs11.75tr after transfers). Pakistan is borrowing to pay interest on what it already borrowed.",
+          "The new 'cooperative federalism' clawback — returning provinces' NFC share above Rs13,350bn to the centre as Article 164 'grants' — is a constitutional grey zone that effectively re-centralises the divisible pool and invites legal and political challenge.",
+          "The arithmetic rests on USD 23.4bn of external financing; the budget's credibility hinges on rollovers and friendly-country deposits actually landing."
+        ]
+      },
+      "sources": [
+        { "label": "Dawn 2007283 — FY2026-27 federal budget (12 Jun 2026)", "url": "https://www.dawn.com/news/2007283" },
+        { "label": "Business Recorder 40425176 — FY2026-27 budget (12 Jun 2026)", "url": "https://www.brecorder.com/news/40425176" },
+        { "label": "Dawn 2007900 — FY2026-27 budget analysis (15 Jun 2026)", "url": "https://www.dawn.com/news/2007900" },
+        { "label": "Business Recorder 40425350 — external financing detail", "url": "https://www.brecorder.com/news/40425350" },
+        { "label": "Business Recorder 40425250 — FBR FY2025-26 actual ~Rs13tr", "url": "https://www.brecorder.com/news/40425250" }
+      ]
+    },
+    {
+      "fy": "2025-26",
+      "label": "FY2025-26",
+      "presented": "2025-06-10",
+      "status": "budgeted",
+      "headline": {
+        "totalOutlay": 17573,
+        "grossRevenue": 19278,
+        "fbrTaxTarget": 14131,
+        "nonTaxRevenue": 5147,
+        "provincialTransfers": 8206,
+        "netRevenue": 11072,
+        "totalCurrentExpenditure": 16286,
+        "fiscalDeficit": 5037,
+        "fiscalDeficitPctGdp": 3.9,
+        "primaryBalance": null,
+        "primaryBalancePctGdp": 2.4,
+        "psdp": 1000,
+        "psdpTotal": 1355,
+        "gdpGrowthTarget": 4.2,
+        "inflationTarget": 7.5
+      },
+      "resources": [
+        { "key": "fbrTax", "label": "FBR tax revenue", "value": 14131 },
+        { "key": "nonTax", "label": "Non-tax revenue", "value": 5147 }
+      ],
+      "currentExpenditure": [
+        { "key": "markup", "label": "Debt servicing (interest)", "value": 8207 },
+        { "key": "defense", "label": "Defence affairs & services", "value": 2550 },
+        { "key": "grants", "label": "Grants & transfers (incl. BISP Rs716bn)", "value": 1928 },
+        { "key": "subsidies", "label": "Subsidies", "value": 1186 },
+        { "key": "pensions", "label": "Pensions", "value": 1055 },
+        { "key": "civilGovt", "label": "Running of civil government", "value": 971 }
+      ],
+      "taxMeasures": [
+        "18% GST imposed on imported solar panels (later reduced to 10% after public backlash).",
+        "New carbon levy of Rs2.5/litre on petroleum products; Petroleum Development Levy target ~Rs1.47tr.",
+        "Withholding tax on interest income raised from 15% to 20%; 5% tax on large pension payments.",
+        "Defence allocation raised ~20% to Rs2.55tr; BISP funded at Rs716bn.",
+        "Agricultural income tax again left to the provinces — no federal AIT (IMF exempted at Pakistan's request).",
+        "Subsidies cut ~14% to Rs1.19tr."
+      ],
+      "commentary": {
+        "summary": "The budget that bought the IMF program: a genuine, painful consolidation that cut the deficit to 3.9% and posted a primary surplus — but did it largely on the backs of the salaried class while sparing agriculture and drowning in debt-service.",
+        "good": [
+          "A credible primary surplus (~2.4% of GDP) and the deficit cut to 3.9% from 5.6% — the consolidation that unlocked the IMF Extended Fund Facility.",
+          "First steps toward taxing consumption and externalities (carbon levy, higher PDL) rather than only documented incomes.",
+          "Continued social protection with BISP funded at Rs716bn despite a tight envelope."
+        ],
+        "bad": [
+          "The Rs14.13tr FBR target needed a ~9% one-year jump and leaned again on the salaried class (interest WHT 15% → 20%, 5% tax on big pensions) — squeezing those already in the net.",
+          "An 18% GST slapped on imported solar panels taxed the country's brightest spot — the rooftop-solar boom — and had to be walked back to 10% after backlash.",
+          "Subsidies cut 14% to Rs1.19tr — fiscally necessary but a risk to the power sector and export competitiveness."
+        ],
+        "ugly": [
+          "Debt servicing of Rs8.21tr ≈ 47% of the Rs17.57tr outlay — and roughly equal to the entire NFC transfer to the provinces. It is the single most damning line in the budget.",
+          "Agricultural income tax dodged at the federal level yet again — the most under-taxed sector stays protected while salaried workers pay more.",
+          "The whole consolidation rests on provinces delivering a ~Rs1.46tr combined cash surplus; Sindh promptly budgeted a deficit, exposing how fragile the national target really is."
+        ]
+      },
+      "sources": [
+        { "label": "Dawn 1916292 — FY2025-26 federal budget summary (11 Jun 2025)", "url": "https://www.dawn.com/news/1916292" },
+        { "label": "Business Recorder 40366957 — FY2025-26 budget (10 Jun 2025)", "url": "https://www.brecorder.com/news/40366957" },
+        { "label": "Dawn 1916437 — defence budget breakdown", "url": "https://www.dawn.com/news/1916437" },
+        { "label": "Dawn 1916442 — budget analysis (subsidies, pensions, PDL)", "url": "https://www.dawn.com/news/1916442" },
+        { "label": "Dawn 1916464 — NFC transfers to provinces", "url": "https://www.dawn.com/news/1916464" }
+      ],
+      "execution": {
+        "period": "Jul–Mar FY2025-26 (first 9 months)",
+        "asOf": "2026-03-31",
+        "publishedBy": "Ministry of Finance — Fiscal Operations",
+        "note": "Consolidated federal + provincial actuals for the first nine months, compared with the same period a year earlier. Nine-month actuals are not directly comparable to the full-year budget totals, but show the trajectory and the fiscal-consolidation story; % of GDP figures are the cleanest comparison.",
+        "metrics": [
+          { "key": "fiscalDeficit", "label": "Fiscal deficit", "current": 856, "prior": 2970, "currentPctGdp": 0.7, "priorPctGdp": 2.4, "betterWhen": "lower", "highlight": "27-year low for the period" },
+          { "key": "primarySurplus", "label": "Primary surplus", "current": 4100, "prior": null, "currentPctGdp": 3.2, "priorPctGdp": 3.0, "betterWhen": "higher" },
+          { "key": "interest", "label": "Interest (markup) payments", "current": 4948, "prior": 6440, "betterWhen": "lower" },
+          { "key": "totalRevenue", "label": "Total revenue", "current": 14800, "currentPctGdp": 11.4, "priorPctGdp": 11.7 },
+          { "key": "totalExpenditure", "label": "Total expenditure", "current": 15700, "currentPctGdp": 12.1, "priorPctGdp": 14.2, "betterWhen": "lower" },
+          { "key": "defense", "label": "Defence spending", "current": 1690, "prior": 1423 },
+          { "key": "petroleumLevy", "label": "Petroleum levy", "current": 1205, "prior": 835 },
+          { "key": "fbrTax", "label": "FBR tax collection", "current": 9306, "prior": null }
+        ],
+        "sources": [
+          { "label": "ProPakistani — Pakistan records 27-year-low fiscal deficit (MoF data, 13 May 2026)", "url": "https://propakistani.pk/2026/05/13/pakistans-records-27-year-low-fiscal-deficit/" },
+          { "label": "The Nation — Fiscal deficit falls below 1pc of GDP for first time", "url": "https://www.nation.com.pk/13-May-2026/fiscal-deficit-falls-1pc-gdp-first-time" }
+        ]
+      }
+    }
+  ]
+}

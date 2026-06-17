@@ -22,6 +22,7 @@ export default function ImfTracker() {
     relatedFacilities,
     reviews,
     keyObjectives,
+    programScorecard,
     sourceUrl,
     lastVerified,
     methodologyNote,
@@ -85,7 +86,7 @@ export default function ImfTracker() {
             <span className="imf-next-decision__label">
               {upcomingDecision.status === 'needs_verification' ? 'Board Outcome to Verify' : 'Next Board Decision'}
             </span>
-            <strong>{formatDate(upcomingDecision.date, { month: 'short', day: 'numeric', year: 'numeric' })}</strong>
+            <strong>{upcomingDecision.dateText || formatDate(upcomingDecision.date, { month: 'short', day: 'numeric', year: 'numeric' })}</strong>
           </div>
           <p>
             {upcomingDecision.note}
@@ -93,6 +94,30 @@ export default function ImfTracker() {
               <> RSF amount is tracked separately from the EFF progress bar.</>
             )}
           </p>
+        </div>
+      )}
+
+      {/* Program scorecard — performance against IMF conditions */}
+      {programScorecard?.items?.length > 0 && (
+        <div className="imf-scorecard">
+          <h4>Performance vs IMF Conditions</h4>
+          <div className="imf-scorecard__grid">
+            {programScorecard.items.map((it, i) => (
+              <div key={i} className={`imf-scorecard__item imf-scorecard__item--${it.met === true ? 'met' : it.met === false ? 'missed' : 'mixed'}`}>
+                <span className="imf-scorecard__icon">{it.met === true ? '✓' : it.met === false ? '✕' : '≈'}</span>
+                <div className="imf-scorecard__body">
+                  <span className="imf-scorecard__label">{it.label}</span>
+                  <span className="imf-scorecard__detail">
+                    <strong>{it.actual}</strong>
+                    {it.target && <> · target {it.target}</>}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+          {programScorecard.source && (
+            <p className="imf-scorecard__src">Source: {programScorecard.source}</p>
+          )}
         </div>
       )}
 
@@ -123,7 +148,14 @@ export default function ImfTracker() {
           {relatedFacilities.map((facility) => (
             <div key={facility.program} className="imf-related__item">
               <strong>{facility.program}</strong>
-              <span>{facility.status} · ${facility.expectedUsdM}M expected</span>
+              <span>
+                {facility.status}
+                {facility.disbursedUsdM != null && facility.totalUsdM != null
+                  ? ` · $${facility.disbursedUsdM}M of $${(facility.totalUsdM / 1000).toFixed(1)}B disbursed`
+                  : facility.expectedUsdM != null
+                    ? ` · $${facility.expectedUsdM}M`
+                    : ''}
+              </span>
               <small>{facility.note}</small>
             </div>
           ))}

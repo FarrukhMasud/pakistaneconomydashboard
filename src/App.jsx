@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Chart as ChartJS } from 'chart.js';
 import './App.css';
 import './utils/chartConfig';
@@ -15,39 +15,77 @@ import FiscalSection from './components/FiscalSection';
 import FbrTaxSection from './components/FbrTaxSection';
 import InflationSection from './components/InflationSection';
 import MonetarySection from './components/MonetarySection';
+import FederalBudgetSection from './components/FederalBudgetSection';
+import ProvincialBudgetSection from './components/ProvincialBudgetSection';
 
-const TABS = [
-  { id: 'overview', label: '📊 Overview' },
-  { id: 'trade', label: '🚢 Trade' },
-  { id: 'reserves', label: '🏦 Reserves' },
-  { id: 'exchange', label: '💱 Exchange Rate' },
-  { id: 'remittances', label: '💸 Remittances' },
-  { id: 'fdi', label: '💰 FDI' },
-  { id: 'services', label: '💻 IT & Services' },
-  { id: 'inflation', label: '📈 Inflation' },
-  { id: 'monetary', label: '🏛️ Monetary' },
-  { id: 'fiscal', label: '📋 Fiscal' },
-  { id: 'fbr', label: '🧾 FBR Tax' },
+const NAV_GROUPS = [
+  {
+    id: 'overview',
+    label: 'Overview',
+    icon: '📊',
+    blurb: 'State of the economy at a glance',
+    sections: [
+      { id: 'overview', label: 'State of the Economy', component: KpiCards },
+    ],
+  },
+  {
+    id: 'external',
+    label: 'External Sector',
+    icon: '🌍',
+    blurb: 'Trade, reserves, flows & the rupee',
+    sections: [
+      { id: 'trade', label: '🚢 Trade', component: TradeSection },
+      { id: 'reserves', label: '🏦 Reserves', component: ReservesSection },
+      { id: 'exchange', label: '💱 Exchange Rate', component: ExchangeRateSection },
+      { id: 'remittances', label: '💸 Remittances', component: RemittancesSection },
+      { id: 'fdi', label: '💰 FDI', component: FdiSection },
+      { id: 'services', label: '💻 IT & Services', component: ServicesSection },
+    ],
+  },
+  {
+    id: 'prices',
+    label: 'Prices & Money',
+    icon: '📈',
+    blurb: 'Inflation and the monetary sector',
+    sections: [
+      { id: 'inflation', label: '📈 Inflation', component: InflationSection },
+      { id: 'monetary', label: '🏛️ Monetary', component: MonetarySection },
+    ],
+  },
+  {
+    id: 'fiscal',
+    label: 'Public Finance & Budget',
+    icon: '🧾',
+    blurb: 'Revenue, deficits, federal & provincial budgets',
+    sections: [
+      { id: 'fiscal', label: '📋 Fiscal & GDP', component: FiscalSection },
+      { id: 'fbr', label: '🧾 FBR Tax', component: FbrTaxSection },
+      { id: 'federal-budget', label: '🏛️ Federal Budget', component: FederalBudgetSection },
+      { id: 'provincial-budget', label: '🗺️ Provincial Budgets', component: ProvincialBudgetSection },
+    ],
+  },
 ];
 
-const SECTION_MAP = {
-  overview: KpiCards,
-  trade: TradeSection,
-  reserves: ReservesSection,
-  exchange: ExchangeRateSection,
-  remittances: RemittancesSection,
-  fdi: FdiSection,
-  services: ServicesSection,
-  inflation: InflationSection,
-  monetary: MonetarySection,
-  fiscal: FiscalSection,
-  fbr: FbrTaxSection,
-};
-
 function App() {
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeGroupId, setActiveGroupId] = useState('overview');
+  const [activeSectionId, setActiveSectionId] = useState('overview');
   const { theme, setTheme } = useTheme();
-  const ActiveSection = SECTION_MAP[activeTab];
+
+  const activeGroup = useMemo(
+    () => NAV_GROUPS.find((g) => g.id === activeGroupId) || NAV_GROUPS[0],
+    [activeGroupId],
+  );
+  const activeSection = useMemo(
+    () => activeGroup.sections.find((s) => s.id === activeSectionId) || activeGroup.sections[0],
+    [activeGroup, activeSectionId],
+  );
+  const ActiveSection = activeSection.component;
+  const showSubNav = activeGroup.sections.length > 1;
+
+  const selectGroup = (group) => {
+    setActiveGroupId(group.id);
+    setActiveSectionId(group.sections[0].id);
+  };
 
   // Update Chart.js defaults when theme changes
   useEffect(() => {
@@ -66,7 +104,6 @@ function App() {
       ChartJS.defaults.plugins.tooltip.titleColor = textPrimary;
       ChartJS.defaults.plugins.tooltip.bodyColor = textSecondary;
     };
-    // Small delay so CSS variables are applied first
     const timer = setTimeout(update, 50);
     return () => clearTimeout(timer);
   }, [theme]);
@@ -83,50 +120,57 @@ function App() {
           <div className="header-emblem">☪</div>
           <h1>Pakistan <span className="highlight">Economic Dashboard</span></h1>
           <p className="subtitle">
-            Official data from SBP, PBS &amp; Ministry of Finance
+            Authentic, officially-sourced data from SBP, PBS, FBR &amp; the Finance Division
           </p>
         </div>
       </header>
 
-      <nav className="tab-nav">
-        {TABS.map((tab) => (
+      <nav className="group-nav" aria-label="Primary">
+        {NAV_GROUPS.map((group) => (
           <button
-            key={tab.id}
-            className={`tab-btn ${activeTab === tab.id ? 'active' : ''}`}
-            onClick={() => setActiveTab(tab.id)}
+            key={group.id}
+            className={`group-btn ${activeGroupId === group.id ? 'active' : ''}`}
+            onClick={() => selectGroup(group)}
+            aria-current={activeGroupId === group.id ? 'page' : undefined}
           >
-            {tab.label}
+            <span className="group-btn__icon">{group.icon}</span>
+            <span className="group-btn__text">
+              <span className="group-btn__label">{group.label}</span>
+              <span className="group-btn__blurb">{group.blurb}</span>
+            </span>
           </button>
         ))}
       </nav>
 
+      {showSubNav && (
+        <nav className="sub-nav" aria-label={activeGroup.label}>
+          {activeGroup.sections.map((section) => (
+            <button
+              key={section.id}
+              className={`sub-tab-btn ${activeSectionId === section.id ? 'active' : ''}`}
+              onClick={() => setActiveSectionId(section.id)}
+            >
+              {section.label}
+            </button>
+          ))}
+        </nav>
+      )}
+
       <main className="dashboard-content">
-        <div className="fade-in" key={`${activeTab}-${theme}`}>
+        <div className="fade-in" key={`${activeSectionId}-${theme}`}>
           <ActiveSection />
         </div>
       </main>
 
       <footer className="app-footer">
-        <p>Pakistan Economic Dashboard &mdash; Built with open data</p>
+        <p>Pakistan Economic Dashboard &mdash; Built with authentic open government data</p>
         <div className="footer-sources">
-          <a href="https://www.sbp.org.pk" target="_blank" rel="noreferrer">
-            State Bank of Pakistan
-          </a>
-          <a href="https://www.pbs.gov.pk" target="_blank" rel="noreferrer">
-            Pakistan Bureau of Statistics
-          </a>
-          <a href="https://www.finance.gov.pk" target="_blank" rel="noreferrer">
-            Ministry of Finance
-          </a>
-          <a href="https://invest.gov.pk" target="_blank" rel="noreferrer">
-            Board of Investment
-          </a>
-          <a href="https://pseb.org.pk" target="_blank" rel="noreferrer">
-            PSEB
-          </a>
-          <a href="https://www.imf.org/en/Countries/PAK" target="_blank" rel="noreferrer">
-            IMF Pakistan
-          </a>
+          <a href="https://www.sbp.org.pk" target="_blank" rel="noreferrer">State Bank of Pakistan</a>
+          <a href="https://www.pbs.gov.pk" target="_blank" rel="noreferrer">Pakistan Bureau of Statistics</a>
+          <a href="https://www.finance.gov.pk" target="_blank" rel="noreferrer">Ministry of Finance</a>
+          <a href="https://www.fbr.gov.pk" target="_blank" rel="noreferrer">Federal Board of Revenue</a>
+          <a href="https://invest.gov.pk" target="_blank" rel="noreferrer">Board of Investment</a>
+          <a href="https://www.imf.org/en/Countries/PAK" target="_blank" rel="noreferrer">IMF Pakistan</a>
         </div>
       </footer>
     </div>

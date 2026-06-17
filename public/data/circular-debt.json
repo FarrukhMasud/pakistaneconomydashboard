@@ -1,0 +1,53 @@
+{
+  "title": "Power-Sector Circular Debt",
+  "unit": "PKR billion",
+  "current": {
+    "stock": 1850,
+    "asOf": "2026-04-30",
+    "imfEstimate": 1760,
+    "note": "Ministry of Energy reported the power-sector circular debt flow/stock at about Rs1.85 trillion at end-April 2026; the IMF's estimate is slightly lower at ~Rs1.76 trillion."
+  },
+  "yoy": {
+    "priorStock": 2410,
+    "priorAsOf": "2025-04-30",
+    "changePct": -23.2,
+    "note": "Down about 23% from ~Rs2.41 trillion a year earlier — a genuine reduction in the stock."
+  },
+  "fytdBuildup": {
+    "value": 240,
+    "priorValue": 18,
+    "period": "Jul 2025 – Apr 2026",
+    "note": "Despite the lower stock, fresh circular debt of ~Rs240bn was added during FY2025-26 to date — up sharply from just ~Rs18bn in the same period a year earlier — driven by DISCO under-performance and K-Electric non-payments."
+  },
+  "powerVsGas": {
+    "power": 1760,
+    "gas": 3440,
+    "combined": 5200,
+    "asOf": "2026 (early)",
+    "note": "Looking beyond electricity, the combined power + gas circular debt is far larger at ~Rs5.20 trillion (power ~Rs1.76tn, gas ~Rs3.44tn)."
+  },
+  "stockTrend": [
+    { "date": "2025-04", "value": 2410, "label": "Apr 2025" },
+    { "date": "2026-04", "value": 1850, "label": "Apr 2026" }
+  ],
+  "targets": [
+    { "label": "FY2026", "goal": "Zero NET addition", "detail": "Government committed under the IMF programme to no net increase in circular debt by end-June 2026.", "status": "at risk", "statusNote": "Rs240bn has already been added in the year to date." },
+    { "label": "FY2027", "goal": "Cap gross flow ≤ Rs300bn", "detail": "Circular Debt Management Plan caps the annual gross flow at Rs300bn.", "status": "target" },
+    { "label": "FY2031", "goal": "Zero gross flow", "detail": "Medium-term goal to eliminate fresh circular-debt accumulation entirely.", "status": "target" }
+  ],
+  "reforms": [
+    "Annual electricity tariff rebasing plus regular fuel/quarterly adjustments",
+    "Phasing out untargeted electricity subsidies",
+    "Renegotiating power-purchase agreements with IPPs to lower capacity payments",
+    "Converting part of the stock into formal CPPA-G liabilities (bank financing)",
+    "Improving DISCO recoveries and curbing theft; resolving K-Electric dues"
+  ],
+  "sourceUrl": "https://www.imf.org/en/Countries/PAK",
+  "lastVerified": "2026-06-17",
+  "verifiedFrom": [
+    "https://profit.pakistantoday.com.pk/2026/06/15/power-circular-debt-falls-23percent-yoy-to-rs185-trillion-but-fy26-buildup-reaches-rs240-billion",
+    "https://www.energyupdate.com.pk/2026/06/16/power-sector-circular-debt-flow-reaches-rs1-86-trillion-government-expects-zero-net-addition-by-fiscal-year-end/",
+    "https://www.nation.com.pk/16-May-2026/pakistan-s-power-gas-circular-debt-surges-rs5-20tr"
+  ],
+  "methodologyNote": "Power-sector circular debt is the unpaid stock owed across the electricity supply chain (generators, fuel suppliers, IPPs). Figures are from the Ministry of Energy / Power Division and IMF, reported by Pakistani financial media. Power and gas figures are not directly additive across all reporting dates; targets are IMF-programme / Circular Debt Management Plan commitments and are subject to revision."
+}

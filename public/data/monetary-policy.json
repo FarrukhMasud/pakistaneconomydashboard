@@ -1,0 +1,53 @@
+{
+  "currentRate": 11.5,
+  "asOf": "2026-06-15",
+  "unit": "%",
+  "lastDecision": {
+    "date": "2026-06-15",
+    "action": "hold",
+    "changeBps": 0,
+    "note": "Held at 11.5%. Headline inflation rose to 11.7% in May 2026 (highest since Jun 2024), above the 5–7% target; the MPC cited global oil prices and possible fiscal slippages as upside risks."
+  },
+  "nextMeeting": {
+    "date": null,
+    "dateText": "Expected late-July 2026",
+    "note": "The FY2025-26 MPC calendar ended with the 15 Jun 2026 meeting. SBP typically announces the FY2026-27 calendar in July; the next decision is expected at end-July 2026."
+  },
+  "context": {
+    "inflationYoY": 11.7,
+    "inflationPeriod": "May 2026",
+    "realRate": -0.2,
+    "peak": { "rate": 22.0, "date": "2023-06", "note": "All-time high, held until easing began in June 2024." },
+    "trough": { "rate": 10.5, "date": "2025-12", "note": "Cyclical low before the April 2026 hike." },
+    "easingNote": "From the 22% peak, SBP cut a cumulative 1,150 bps to a low of 10.5% (Dec 2025) — then surprised markets with a 100 bps hike in April 2026, its first increase in almost three years, as the Middle East conflict pushed up oil and inflation."
+  },
+  "decisions": [
+    { "date": "2024-06-10", "rate": 20.5, "changeBps": -150, "action": "cut" },
+    { "date": "2024-07-29", "rate": 19.5, "changeBps": -100, "action": "cut" },
+    { "date": "2024-09-12", "rate": 17.5, "changeBps": -200, "action": "cut" },
+    { "date": "2024-11-04", "rate": 15.0, "changeBps": -250, "action": "cut" },
+    { "date": "2024-12-16", "rate": 13.0, "changeBps": -200, "action": "cut" },
+    { "date": "2025-01-27", "rate": 12.0, "changeBps": -100, "action": "cut" },
+    { "date": "2025-03-10", "rate": 12.0, "changeBps": 0, "action": "hold" },
+    { "date": "2025-05-05", "rate": 11.0, "changeBps": -100, "action": "cut" },
+    { "date": "2025-06-16", "rate": 11.0, "changeBps": 0, "action": "hold" },
+    { "date": "2025-07-30", "rate": 11.0, "changeBps": 0, "action": "hold" },
+    { "date": "2025-09-15", "rate": 11.0, "changeBps": 0, "action": "hold" },
+    { "date": "2025-10-27", "rate": 11.0, "changeBps": 0, "action": "hold" },
+    { "date": "2025-12-15", "rate": 10.5, "changeBps": -50, "action": "cut" },
+    { "date": "2026-01-26", "rate": 10.5, "changeBps": 0, "action": "hold" },
+    { "date": "2026-03-09", "rate": 10.5, "changeBps": 0, "action": "hold" },
+    { "date": "2026-04-27", "rate": 11.5, "changeBps": 100, "action": "hike", "note": "First hike in almost three years — inflation risks from the Middle East war and higher global energy prices." },
+    { "date": "2026-06-15", "rate": 11.5, "changeBps": 0, "action": "hold" }
+  ],
+  "sourceUrl": "https://www.sbp.org.pk/m_policy/index.asp",
+  "lastVerified": "2026-06-17",
+  "verifiedFrom": [
+    "https://tradingeconomics.com/pakistan/interest-rate",
+    "https://www.sbp.org.pk/press/2026/Pr-09-Mar-2026.pdf",
+    "https://www.brecorder.com/news/40418213",
+    "https://profit.pakistantoday.com.pk/2026/04/27/sbp-raises-policy-rate-by-100-bps-to-11-5-after-three-years-as-inflation-risks-mount",
+    "https://profit.pakistantoday.com.pk/2025/07/22/sbp-announces-fy26-mpc-meeting-calendar-introduces-biannual-monetary-policy-reports"
+  ],
+  "methodologyNote": "SBP Monetary Policy Committee decisions, compiled from SBP press releases and reputable financial media. Rates are the announced policy (target) rate effective the day after each decision. The real policy rate is the policy rate minus latest YoY CPI inflation."
+}

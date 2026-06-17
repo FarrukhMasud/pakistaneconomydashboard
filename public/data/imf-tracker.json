@@ -5,107 +5,137 @@
   "totalUSD": 7000,
   "duration": "37 months",
   "endDate": "2027-10",
-  "disbursedUSD": 3000,
+  "disbursedUSD": 4150,
   "upcomingDecision": {
-    "date": "2026-05-08",
-    "label": "IMF Executive Board meeting outcome",
-    "expectedEFFUsdM": 1000,
-    "expectedRSFUsdM": 210,
-    "status": "needs_verification",
-    "note": "The Board date has passed. Confirm the official IMF Board outcome before marking the 3rd EFF review or 2nd RSF review as approved."
+    "date": null,
+    "dateText": "Expected ~Dec 2026",
+    "label": "4th EFF review — Executive Board",
+    "expectedEFFUsdM": 950,
+    "status": "pending",
+    "note": "The 3rd EFF review and 2nd RSF review were completed by the IMF Executive Board on May 8, 2026. The next (4th) EFF review is expected around December 2026, assessed against end-June 2026 performance criteria; a staff-level agreement typically precedes the Board date by several weeks."
+  },
+  "programScorecard": {
+    "asOf": "2026-05-08",
+    "source": "IMF Press Release No. 26/147 (May 8, 2026)",
+    "items": [
+      {
+        "label": "Primary fiscal surplus (FY26)",
+        "target": "≥ 1.0% of GDP",
+        "actual": "1.6% of GDP expected",
+        "met": true
+      },
+      {
+        "label": "Gross FX reserves",
+        "target": "Rebuild to $13B+",
+        "actual": "$16B at end-Dec 2025",
+        "met": true
+      },
+      {
+        "label": "Reserves trajectory",
+        "target": "Continue rising",
+        "actual": "Up from $14.5B (end-Jun 2025)",
+        "met": true
+      },
+      {
+        "label": "Inflation",
+        "target": "5–7% medium-term",
+        "actual": "Rose as global energy prices passed through",
+        "met": null
+      },
+      {
+        "label": "Current account (9M FY26)",
+        "target": "Sustainable / contained",
+        "actual": "Broadly balanced",
+        "met": true
+      }
+    ]
   },
   "reviews": [
     {
       "name": "Board Approval",
       "date": "2024-09-25",
       "sdrM": 760,
-      "usdM": 1020,
-      "status": "completed"
+      "usdM": 1030,
+      "status": "completed",
+      "note": "37-month EFF approved; immediate disbursement of about SDR 760M (~$1bn)."
     },
     {
       "name": "1st Review",
-      "date": "2025-01-31",
-      "sdrM": 760,
-      "usdM": 1020,
-      "status": "completed"
-    },
-    {
-      "name": "2nd Review",
       "date": "2025-05-09",
       "sdrM": 760,
       "usdM": 1020,
-      "status": "completed"
+      "status": "completed",
+      "note": "1st EFF review completed; ~$1bn disbursed. The Resilience and Sustainability Facility (RSF) was also approved on this date."
+    },
+    {
+      "name": "2nd Review",
+      "date": "2025-12-08",
+      "sdrM": 760,
+      "usdM": 1000,
+      "status": "completed",
+      "note": "2nd EFF review and 1st RSF review completed (PR 25/411); ~$1bn EFF + ~$200M RSF disbursed."
     },
     {
       "name": "3rd Review",
-      "date": "2026-03-27",
-      "expected": "2026-05-08",
+      "date": "2026-05-08",
       "sdrM": 760,
-      "usdM": 1000,
-      "status": "needs_verification",
-      "note": "Staff-level agreement announced Mar 27, 2026; May 8 Board date has passed and official outcome needs verification."
+      "usdM": 1100,
+      "status": "completed",
+      "note": "3rd EFF review and 2nd RSF review completed (PR 26/147); ~$1.1bn EFF + ~$220M RSF disbursed. Total under both arrangements reached ~$4.8bn."
     },
     {
       "name": "4th Review",
-      "expected": "2026-09",
+      "expected": "2026-12",
       "sdrM": 760,
-      "usdM": 1000,
-      "status": "pending"
+      "usdM": 950,
+      "status": "pending",
+      "note": "Expected around December 2026, based on end-June 2026 performance criteria. Amount is an estimate."
     },
     {
       "name": "5th Review",
-      "expected": "2026-12",
-      "sdrM": 380,
-      "usdM": 510,
-      "status": "pending"
-    },
-    {
-      "name": "6th Review",
-      "expected": "2027-03",
-      "sdrM": 380,
-      "usdM": 510,
-      "status": "pending"
-    },
-    {
-      "name": "7th Review",
       "expected": "2027-06",
-      "sdrM": 380,
-      "usdM": 510,
-      "status": "pending"
+      "sdrM": 760,
+      "usdM": 950,
+      "status": "pending",
+      "note": "Expected around mid-2027. Amount is an estimate."
     },
     {
-      "name": "8th & Final Review",
+      "name": "6th & Final Review",
       "expected": "2027-10",
-      "sdrM": 380,
-      "usdM": 410,
-      "status": "pending"
+      "sdrM": 760,
+      "usdM": 950,
+      "status": "pending",
+      "note": "Final review near the 37-month programme end (Oct 2027). Amount is an estimate."
     }
   ],
   "relatedFacilities": [
     {
       "program": "Resilience and Sustainability Facility (RSF)",
-      "status": "May 8 Board outcome needs verification",
-      "expectedUsdM": 210,
-      "note": "Separate climate-resilience facility; not included in the $7B EFF progress bar."
+      "approved": "2025-05-09",
+      "totalUsdM": 1400,
+      "disbursedUsdM": 420,
+      "status": "2nd review completed (May 8, 2026)",
+      "expectedUsdM": 220,
+      "note": "Separate 28-month climate-resilience facility (SDR 1bn ≈ $1.4bn), approved May 9, 2025. The 1st review (Dec 2025) and 2nd review (May 2026) released about $200M and $220M respectively. Tracked separately from the $7B EFF progress bar."
     }
   ],
   "keyObjectives": [
-    "Achieve primary fiscal surplus of 1% of GDP",
+    "Achieve primary fiscal surplus of 1% of GDP (1.6% expected in FY26)",
     "Broaden tax base — raise tax-to-GDP ratio above 13%",
-    "Build foreign exchange reserves to $13B+ (SBP-held)",
+    "Build foreign exchange reserves to $13B+ (SBP-held; $16B at end-Dec 2025)",
     "Reform energy sector SOEs to reduce circular debt",
     "Reduce inflation to SBP's 5–7% medium-term target",
     "Phase out fiscal incentives for SEZs/STZs by 2035",
     "Establish Pakistan Regulatory Registry by Jun 2027"
   ],
   "sourceUrl": "https://www.imf.org/en/Countries/PAK",
-  "lastVerified": "2026-05-11",
+  "lastVerified": "2026-06-17",
   "verifiedFrom": [
     "https://www.imf.org/en/News/Articles/2024/09/25/pr24362-imf-exec-board-approves-us7b-37-month-eff-for-pakistan",
-    "https://www.imf.org/en/News/Articles/2025/05/09/pr25161-pakistan-imf-executive-board-completes-second-review-under-eff",
-    "https://tribune.com.pk/story/2603817/imf-loads-7-billion-package-with-11-new-conditions-for-govt",
-    "https://tribune.com.pk/story/2603544/imf-board-nod-awaited-for-next-tranche",
-    "https://www.nation.com.pk/27-Apr-2026/imf-consider-dollar-1-2billion-disbursement-pakistan-may-8"
+    "https://www.imf.org/en/news/articles/2025/12/08/pr-25411-pakistan-imf-completes-2nd-rev-of-ext-arrange-eff-and-1st-rev-of-arrange-rsf",
+    "https://www.imf.org/en/news/articles/2026/05/08/pr-26147-pakistan-imf-completes-3rd-rev-of-extended-arrangement-under-eff-and-2nd-rev-arrang-rsf",
+    "https://propakistani.pk/2026/05/13/pakistan-receives-loan-tranche-of-1-3-billion-from-imf/",
+    "https://www.nation.com.pk/14-May-2025/pakistan-receives-dollar-1bn-imf-tranche-under-extended-fund-facility"
   ],
-  "methodologyNote": "Manually curated from IMF Board decisions, press releases, and Pakistani financial media. Review schedule is approximate and subject to IMF/Pakistan agreement. SDR amounts from IMF Country Report. The May 8, 2026 Board date has passed; keep the 3rd EFF review and 2nd RSF review in verification status until an official IMF outcome is confirmed."
+  "methodologyNote": "Manually curated from IMF Executive Board decisions and press releases (PR 24/362, 25/411, 26/147) plus Pakistani financial media. The 3rd EFF review and 2nd RSF review were completed on May 8, 2026. Completed-review amounts are the figures IMF announced; future review dates and amounts are estimates subject to IMF/Pakistan agreement. EFF amounts are in SDR (USD equivalents vary with the exchange rate); the $7B headline reflects SDR 5,320M."
 }

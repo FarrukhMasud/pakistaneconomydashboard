@@ -8,6 +8,7 @@ import {
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
+import ReservesAdequacyTracker from './ReservesAdequacyTracker';
 import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, formatMonthYear, formatDayMonthYear } from '../utils/periodHelpers';
 
 function formatDate(dateStr) {
@@ -159,6 +160,8 @@ export default function ReservesSection() {
           <Line data={chartData} options={options} />
         </div>
       </ChartCard>
+
+      <ReservesAdequacyTracker />
     </section>
   );
 }
