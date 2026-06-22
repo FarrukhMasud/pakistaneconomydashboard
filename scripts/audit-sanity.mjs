@@ -81,6 +81,12 @@ async function main() {
       assert(data.countryMonthly && Array.isArray(data.countryMonthly.countries) && data.countryMonthly.countries.length > 0, 'trade: missing per-country monthly snapshot', failures);
       assert(data.countryMonthly?.latestMonth, 'trade: countryMonthly missing latestMonth metadata', failures);
     }
+
+    if (dataset.id === 'services') {
+      assert(data.itMonthly && Array.isArray(data.itMonthly.components) && data.itMonthly.components.length > 0, 'services: missing IT monthly snapshot', failures);
+      assert(data.itMonthly?.components?.some((c) => c.key === 'freelance'), 'services: IT monthly missing Freelance IT component', failures);
+      assert(Array.isArray(data.monthlySeries) && data.monthlySeries.length > 0, 'services: missing accumulating monthly series', failures);
+    }
   }
 
   if (failures.length > 0) {

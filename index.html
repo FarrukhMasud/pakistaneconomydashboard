@@ -4,10 +4,94 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ───────────────────────── Primary SEO ───────────────────────── -->
+    <title>Pakistan Economic Dashboard — Reserves, Inflation, Trade, FBR & Budget</title>
+    <meta
+      name="description"
+      content="Track Pakistan's economy with authentic, officially-sourced data: foreign reserves, PKR exchange rate, inflation (CPI), workers' remittances, imports & exports by country, FBR tax collection, IT & freelancing exports, GDP, and federal & provincial budgets — updated from the State Bank of Pakistan (SBP), PBS, FBR and the Finance Division."
+    />
+    <meta
+      name="keywords"
+      content="Pakistan economy, Pakistan economic dashboard, Pakistan foreign reserves, PKR exchange rate, Pakistan inflation, CPI Pakistan, Pakistan remittances, Pakistan trade, imports exports Pakistan, FBR tax collection, Pakistan GDP growth, Pakistan IT exports, freelancing Pakistan, Pakistan federal budget, provincial budget, State Bank of Pakistan, SBP, Pakistan circular debt, IMF Pakistan"
+    />
+    <meta name="author" content="Pakistan Economic Dashboard" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="theme-color" content="#01411c" />
+    <link rel="canonical" href="https://pakeconomydash.z5.web.core.windows.net/" />
+
+    <!-- ─────────────────── Open Graph (Facebook, LinkedIn) ─────────────────── -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Pakistan Economic Dashboard" />
+    <meta property="og:title" content="Pakistan Economic Dashboard — Reserves, Inflation, Trade, FBR & Budget" />
+    <meta
+      property="og:description"
+      content="Authentic, officially-sourced charts of Pakistan's economy: reserves, exchange rate, inflation, remittances, trade by country, FBR tax, IT & freelancing exports, GDP and budgets. Updated from SBP, PBS, FBR & the Finance Division."
+    />
+    <meta property="og:url" content="https://pakeconomydash.z5.web.core.windows.net/" />
+    <meta property="og:image" content="https://pakeconomydash.z5.web.core.windows.net/og-image.svg" />
+    <meta property="og:image:alt" content="Pakistan Economic Dashboard — key economic indicators at a glance" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- ─────────────────────────── Twitter Card ─────────────────────────── -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Pakistan Economic Dashboard — Reserves, Inflation, Trade, FBR & Budget" />
+    <meta
+      name="twitter:description"
+      content="Authentic, officially-sourced charts of Pakistan's economy: reserves, exchange rate, inflation, remittances, trade by country, FBR tax, IT & freelancing exports, GDP and budgets."
+    />
+    <meta name="twitter:image" content="https://pakeconomydash.z5.web.core.windows.net/og-image.svg" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <title>Pakistan Economic Dashboard</title>
+
+    <!-- ──────────────────── Structured data (JSON-LD) ──────────────────── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://pakeconomydash.z5.web.core.windows.net/#website",
+          "url": "https://pakeconomydash.z5.web.core.windows.net/",
+          "name": "Pakistan Economic Dashboard",
+          "description": "Interactive dashboard of Pakistan's key economic indicators using official government data from the State Bank of Pakistan (SBP), Pakistan Bureau of Statistics (PBS), the Federal Board of Revenue (FBR) and the Finance Division.",
+          "inLanguage": "en"
+        },
+        {
+          "@type": "Dataset",
+          "name": "Pakistan Economic Indicators",
+          "description": "Foreign exchange reserves, PKR exchange rate, inflation (CPI/SPI/WPI), workers' remittances, monthly imports and exports by country, FBR tax collection, IT and freelancing exports, GDP growth, and federal & provincial budgets for Pakistan.",
+          "url": "https://pakeconomydash.z5.web.core.windows.net/",
+          "keywords": [
+            "Pakistan economy",
+            "foreign reserves",
+            "exchange rate",
+            "inflation",
+            "remittances",
+            "trade",
+            "FBR tax",
+            "IT exports",
+            "freelancing",
+            "GDP",
+            "budget"
+          ],
+          "creator": { "@type": "Organization", "name": "Pakistan Economic Dashboard" },
+          "isAccessibleForFree": true,
+          "license": "https://creativecommons.org/licenses/by/4.0/",
+          "spatialCoverage": { "@type": "Place", "name": "Pakistan" },
+          "sourceOrganization": [
+            { "@type": "Organization", "name": "State Bank of Pakistan", "url": "https://www.sbp.org.pk" },
+            { "@type": "Organization", "name": "Pakistan Bureau of Statistics", "url": "https://www.pbs.gov.pk" },
+            { "@type": "Organization", "name": "Federal Board of Revenue", "url": "https://www.fbr.gov.pk" },
+            { "@type": "Organization", "name": "Ministry of Finance", "url": "https://www.finance.gov.pk" }
+          ]
+        }
+      ]
+    }
+    </script>
+
     <!-- Microsoft Clarity -->
     <script type="text/javascript">
       (function(c,l,a,r,i,t,y){
@@ -18,7 +102,31 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Crawlable fallback for search engines / no-JS clients. Replaced by the React app once it loads. -->
+      <main style="max-width:760px;margin:0 auto;padding:2rem 1.25rem;font-family:Inter,system-ui,sans-serif;">
+        <h1>Pakistan Economic Dashboard</h1>
+        <p>
+          An interactive dashboard of Pakistan's key economic indicators, built entirely from
+          <strong>official government data</strong> — the State Bank of Pakistan (SBP), Pakistan
+          Bureau of Statistics (PBS), the Federal Board of Revenue (FBR) and the Finance Division.
+        </p>
+        <p>The dashboard covers:</p>
+        <ul>
+          <li>Foreign exchange reserves and import cover</li>
+          <li>PKR exchange rate vs USD, EUR, GBP and CNY</li>
+          <li>Inflation — national, urban and rural CPI, SPI and WPI</li>
+          <li>Workers' remittances by source country</li>
+          <li>Monthly imports, exports and trade balance by country</li>
+          <li>Foreign direct investment (FDI)</li>
+          <li>IT, software and freelancing exports</li>
+          <li>FBR tax collection and targets</li>
+          <li>GDP growth and public finance</li>
+          <li>Federal and provincial budgets</li>
+        </ul>
+        <p>Enable JavaScript to view the interactive charts.</p>
+      </main>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

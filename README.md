@@ -13,11 +13,12 @@ Ministry of Finance.
 | -------------------- | ---------------------------------------------- | ------------------- |
 | **Overview**         | 8 KPI cards (reserves, exchange rate, etc.)    | All data files      |
 | **Trade**            | Monthly imports/exports, top 15 countries       | SBP Excel           |
+| **Country Trends**   | Per-partner exports, imports & remittance corridors with MoM/YoY momentum & FYTD | SBP Excel + EasyData API |
 | **Foreign Reserves** | Weekly SBP + bank reserves, import cover        | SBP forex.pdf       |
 | **Exchange Rate**    | PKR vs USD/EUR/GBP/CNY monthly averages         | SBP Excel           |
 | **Remittances**      | Monthly remittances, source country breakdown   | SBP EasyData API    |
 | **FDI**              | Net FDI by sector & country, FYTD comparison    | SBP Excel           |
-| **IT & Services**    | Services exports (EBOPS), IT sub-sectors        | SBP Excel           |
+| **IT & Services**    | Services exports (EBOPS), IT sub-sectors, **monthly IT & freelance exports** | SBP Excel           |
 | **Inflation**        | National/Urban/Rural CPI, Food, SPI, WPI        | SBP EasyData API    |
 | **Monetary**         | M2, private credit, deposits, NFA               | SBP EasyData API    |
 | **Public Finance**   | GDP growth, fiscal balance, revenue/expenditure | SBP API + Excel     |
@@ -34,6 +35,7 @@ Navigation is grouped into **Overview**, **External Sector**, **Prices & Money**
 - **Hosting:** Azure Storage Static Website
 - **Data:** JSON files in `public/data/`, updated from SBP sources
 - **Data Trust:** Generated source manifest + freshness audit metadata
+- **SEO:** `index.html` meta/Open Graph/Twitter tags + JSON-LD (`WebSite`/`Dataset`) structured data, a crawlable no-JS fallback, plus `public/robots.txt`, `public/sitemap.xml` and `public/og-image.svg`
 - **Theme:** Light / Dark / System (auto)
 
 ---

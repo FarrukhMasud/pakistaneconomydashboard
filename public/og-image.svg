@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Pakistan Economic Dashboard">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0c2a18"/>
+      <stop offset="1" stop-color="#01411c"/>
+    </linearGradient>
+    <linearGradient id="teal" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#00d4aa" stop-opacity="0.15"/>
+      <stop offset="1" stop-color="#00d4aa" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="0" y="0" width="14" height="630" fill="#00d4aa"/>
+
+  <!-- Crescent & star emblem -->
+  <g transform="translate(980,150)">
+    <circle cx="0" cy="0" r="78" fill="#ffffff" opacity="0.95"/>
+    <circle cx="22" cy="-6" r="64" fill="#01411c"/>
+    <path d="M70 -34 L80 -8 L108 -8 L86 9 L94 35 L70 19 L46 35 L54 9 L32 -8 L60 -8 Z" fill="#ffffff" opacity="0.95"/>
+  </g>
+
+  <text x="70" y="150" font-family="Inter, Segoe UI, sans-serif" font-size="34" fill="#9be8d6" font-weight="600" letter-spacing="3">🇵🇰 STATE OF THE ECONOMY</text>
+
+  <text x="66" y="250" font-family="Inter, Segoe UI, sans-serif" font-size="86" fill="#ffffff" font-weight="700">Pakistan Economic</text>
+  <text x="66" y="345" font-family="Inter, Segoe UI, sans-serif" font-size="86" fill="#00d4aa" font-weight="700">Dashboard</text>
+
+  <text x="70" y="410" font-family="Inter, Segoe UI, sans-serif" font-size="30" fill="#cfe9df" font-weight="400">Reserves · Inflation · Trade · Remittances · FBR Tax · IT &amp; Freelancing · Budgets</text>
+
+  <!-- Mini bar chart motif -->
+  <g transform="translate(70,470)">
+    <rect x="0"   y="60"  width="44" height="60"  rx="6" fill="url(#teal)"/>
+    <rect x="64"  y="34"  width="44" height="86"  rx="6" fill="url(#teal)"/>
+    <rect x="128" y="78"  width="44" height="42"  rx="6" fill="url(#teal)"/>
+    <rect x="192" y="14"  width="44" height="106" rx="6" fill="url(#teal)"/>
+    <rect x="256" y="48"  width="44" height="72"  rx="6" fill="url(#teal)"/>
+    <polyline points="22,72 86,40 150,86 214,20 278,54" fill="none" stroke="#ffd166" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <text x="70" y="600" font-family="Inter, Segoe UI, sans-serif" font-size="24" fill="#9be8d6">Authentic data from SBP · PBS · FBR · Finance Division</text>
+</svg>

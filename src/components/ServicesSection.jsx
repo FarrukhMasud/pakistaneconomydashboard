@@ -4,7 +4,7 @@ import { COLORS, COLOR_LIST, baseBarOptions, baseDoughnutOptions } from '../util
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
-import { pctChange } from '../utils/periodHelpers';
+import { pctChange, formatMonthYear } from '../utils/periodHelpers';
 
 export default function ServicesSection() {
   const { data, loading, error } = useData('services.json');
@@ -12,7 +12,41 @@ export default function ServicesSection() {
   if (loading || !data) return <div className="card loading-card"><div className="spinner" /><span>Loading data…</span></div>;
   if (error) return <p style={{ color: COLORS.coral }}>Error: {error.message}</p>;
 
-  const { categories, itBreakdown, summary, comparison, recentMonths } = data;
+  const { categories, itBreakdown, summary, comparison, recentMonths, itMonthly, monthlySeries } = data;
+
+  // ── Monthly IT & Freelance exports (accumulating series + momentum snapshot) ──
+  const mseries = monthlySeries || [];
+  const monthlyItData = mseries.length ? {
+    labels: mseries.map((m) => formatMonthYear(m.month)),
+    datasets: [
+      { label: 'IT & Telecom', data: mseries.map((m) => m.itCredit), backgroundColor: COLORS.teal, borderRadius: 4 },
+      { label: 'Freelance IT', data: mseries.map((m) => m.freelanceCredit), backgroundColor: COLORS.amber, borderRadius: 4 },
+    ],
+  } : null;
+  const monthlyItOptions = {
+    ...baseBarOptions,
+    plugins: { ...baseBarOptions.plugins },
+    scales: {
+      ...baseBarOptions.scales,
+      y: { ...baseBarOptions.scales.y, title: { display: true, text: 'USD Millions / month', color: COLORS.text } },
+    },
+  };
+  const itMomentum = itMonthly ? itMonthly.components.filter((c) => c.latest != null).map((c) => {
+    const yoy = c.yearAgo ? pctChange(c.latest, c.yearAgo) : { pct: null, direction: 'flat' };
+    const fy = c.fytdPrior ? pctChange(c.fytd, c.fytdPrior) : { pct: null };
+    const sub = [
+      yoy.pct != null ? `${yoy.pct >= 0 ? '+' : ''}${yoy.pct}% YoY` : null,
+      fy.pct != null ? `FYTD ${fy.pct >= 0 ? '+' : ''}${fy.pct}%` : null,
+    ].filter(Boolean).join(' · ');
+    return {
+      label: c.name,
+      value: `$${c.latest}M`,
+      sub,
+      direction: yoy.direction,
+      sentiment: yoy.direction === 'up' ? 'positive' : yoy.direction === 'down' ? 'negative' : 'neutral',
+      color: c.key === 'freelance' ? COLORS.amber : c.key === 'itTotal' ? COLORS.teal : undefined,
+    };
+  }) : [];
 
   // Chart 1 — Service Categories by Credit (horizontal bar) with YoY comparison
   const sortedCats = [...categories].sort((a, b) => b.credit - a.credit);
@@ -117,7 +151,7 @@ export default function ServicesSection() {
     <section className="fade-in">
       <SectionHeader
         title="IT & Services Exports"
-        description="Pakistan's services trade classified by EBOPS (Extended Balance of Payments Services). IT & Telecom is the fastest-growing segment, with computer services (software consultancy, freelancing, and software exports) driving growth. Data from SBP's Balance of Payments detail tables."
+        description="Pakistan's services trade classified by EBOPS (Extended Balance of Payments Services). IT & Telecom is the fastest-growing segment, with computer services (software consultancy, freelancing, and software exports) driving growth. This section includes a month-by-month view of IT and freelance exports with year-on-year momentum. Data from SBP's Balance of Payments detail tables."
         sourceLinks={[
           { label: 'SBP BOP Detail', url: 'https://www.sbp.org.pk/ecodata/index2.asp' },
           { label: 'PSEB', url: 'https://www.pseb.org.pk' },
@@ -156,6 +190,29 @@ export default function ServicesSection() {
           </div>
         );
       })()}
+
+      {itMonthly && (
+        <div className="section-grid" style={{ marginTop: '1.5rem' }}>
+          <ChartCard
+            title="Monthly IT & Freelance Exports"
+            description={`Monthly IT & Telecom and Freelance IT export earnings (US$ million), as SBP releases each month. ${mseries.length < 4 ? 'This series accumulates a new month with every SBP release and will lengthen into a fuller trend over time. ' : ''}Freelance IT is SBP's dedicated line for individual freelancer earnings repatriated through formal channels.`}
+            source="SBP — EBOPS services detail"
+            dataSource="SBP"
+            lastUpdated={data.lastUpdated}
+            dataCoverage={itMonthly.latestMonth ? `latest ${formatMonthYear(itMonthly.latestMonth)}` : data.dataCoverage}
+          >
+            <div className="chart-container">
+              {monthlyItData && <Bar data={monthlyItData} options={monthlyItOptions} />}
+            </div>
+          </ChartCard>
+          <SummaryCard
+            title={`IT Exports — ${itMonthly.latestMonth ? formatMonthYear(itMonthly.latestMonth) : 'Latest month'} (vs a year ago)`}
+            accent={COLORS.teal}
+            items={itMomentum}
+            footnote={`Latest-month export value with year-on-year change and fiscal-year-to-date growth (${itMonthly.fytdLabel} vs ${itMonthly.fytdPriorLabel}). Source: SBP EBOPS services detail.`}
+          />
+        </div>
+      )}
 
       <div className="section-grid">
         <ChartCard

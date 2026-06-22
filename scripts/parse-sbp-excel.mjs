@@ -1019,6 +1019,76 @@ async function updateServices() {
     }
   }
 
+  // ── IT & Freelance monthly snapshot (latest month, prior month, year-ago month,
+  // plus FYTD current vs prior) per IT sub-component. The SBP EBOPS file publishes
+  // only the latest two months + same-month-last-year + FYTD — every figure authentic.
+  const shortMonthToNum = { jan: '01', feb: '02', mar: '03', apr: '04', may: '05', jun: '06', jul: '07', aug: '08', sep: '09', oct: '10', nov: '11', dec: '12' };
+  const labelToYearMonth = (label) => {
+    const m = (label || '').match(/^(\w{3})-(\d{2})/);
+    if (!m) return null;
+    const mm = shortMonthToNum[m[1].toLowerCase()];
+    return mm ? `20${m[2]}-${mm}` : null;
+  };
+  // The year-ago comparison month is stored as an Excel date serial in row 6.
+  let yearAgoCol = null;
+  let yearAgoMonth = null;
+  for (let c = 0; c < hdr6.length; c++) {
+    if (typeof hdr6[c] === 'number' && hdr6[c] > 40000 && hdr6[c] < 50000) {
+      yearAgoCol = c;
+      yearAgoMonth = excelDateToYYYYMM(hdr6[c]);
+      break;
+    }
+  }
+
+  const IT_COMPONENT_ROWS = [
+    { row: 58, name: 'IT & Telecom (total)', key: 'itTotal' },
+    { row: 59, name: 'Telecommunications', key: 'telecom' },
+    { row: 64, name: 'Software Consultancy', key: 'softwareConsultancy' },
+    { row: 66, name: 'Computer Software Exports', key: 'softwareExports' },
+    { row: 67, name: 'Freelance IT', key: 'freelance' },
+    { row: 69, name: 'Information Services', key: 'informationServices' },
+  ];
+  const components = IT_COMPONENT_ROWS.map(({ row, name, key }) => {
+    const r = rows[row] || [];
+    return {
+      key,
+      name,
+      latest: month2Cols ? toM(r[month2Cols.credit]) : null,
+      prev: month1Cols ? toM(r[month1Cols.credit]) : null,
+      yearAgo: yearAgoCol != null ? toM(r[yearAgoCol]) : null,
+      fytd: toM(r[currentPeriodCols.credit]),
+      fytdPrior: toM(r[priorPeriodCols.credit]),
+    };
+  });
+  const fytdStem = (currentPeriodLabel.match(/Jul-\w+/) || ['Jul–latest'])[0].replace('-', '–');
+  const itMonthly = {
+    latestMonth: labelToYearMonth(month2Label),
+    prevMonth: labelToYearMonth(month1Label),
+    yearAgoMonth,
+    fytdLabel: currentPeriodLabel,
+    fytdPriorLabel: priorPeriodLabel,
+    note: `SBP's EBOPS services file publishes the latest month, prior month, the same month a year earlier, and fiscal-year-to-date totals. Values are exports (credit) in US$ million. "Freelance IT" is SBP's own line for individual freelancer earnings; total IT & freelancing exports are captured within IT & Telecom (${fytdStem}).`,
+    components,
+  };
+
+  // ── Accumulating monthly IT/freelance export series. SBP only exposes two months
+  // at a time, so we persist them into a growing contiguous series across updates.
+  const existingSvc = await readJson('services.json').catch(() => ({}));
+  const seriesMap = new Map((existingSvc.monthlySeries || []).map((m) => [m.month, m]));
+  const freelanceRow = rows[67] || [];
+  for (const cols of [month1Cols, month2Cols]) {
+    if (!cols) continue;
+    const ym = labelToYearMonth(cols === month1Cols ? month1Label : month2Label);
+    if (!ym) continue;
+    const totalMo = toM(totalRow?.[cols.credit]);
+    const itMo = toM(itRow?.[cols.credit]);
+    const freelanceMo = toM(freelanceRow[cols.credit]);
+    if (itMo > 0 || totalMo > 0) {
+      seriesMap.set(ym, { month: ym, totalCredit: totalMo, itCredit: itMo, freelanceCredit: freelanceMo });
+    }
+  }
+  const monthlySeries = [...seriesMap.values()].sort((a, b) => a.month.localeCompare(b.month));
+
   const servicesData = {
     categories,
     itBreakdown: itItems,
@@ -1039,6 +1109,8 @@ async function updateServices() {
       priorLabel: `FY${priorPeriodLabel.match(/FY(\d{2})/)?.[1] || '25'}`,
     },
     recentMonths,
+    itMonthly,
+    monthlySeries,
     dataSource: 'SBP',
     lastUpdated: new Date().toISOString().slice(0, 10),
     dataCoverage: currentPeriodLabel,
@@ -1049,6 +1121,7 @@ async function updateServices() {
   console.log(`  📊 ${categories.length} service categories, ${itItems.length} IT sub-categories`);
   console.log(`     Total Services Credit: $${totalCredit}M, IT&Telecom: $${itCredit}M`);
   if (recentMonths.length > 0) console.log(`     Recent months: ${recentMonths.map(m => `${m.month}: $${m.totalCredit}M`).join(', ')}`);
+  console.log(`     IT monthly snapshot: latest ${itMonthly.latestMonth || '?'}, ${components.length} components; accumulating series ${monthlySeries.length} month(s)`);
   return servicesData;
 }
 

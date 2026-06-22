@@ -147,6 +147,84 @@
       "itCredit": 373.27
     }
   ],
+  "itMonthly": {
+    "latestMonth": "2026-05",
+    "prevMonth": "2026-04",
+    "yearAgoMonth": "2025-05",
+    "fytdLabel": "Jul-May FY26",
+    "fytdPriorLabel": "Jul-May FY25",
+    "note": "SBP's EBOPS services file publishes the latest month, prior month, the same month a year earlier, and fiscal-year-to-date totals. Values are exports (credit) in US$ million. \"Freelance IT\" is SBP's own line for individual freelancer earnings; total IT & freelancing exports are captured within IT & Telecom (Jul–May).",
+    "components": [
+      {
+        "key": "itTotal",
+        "name": "IT & Telecom (total)",
+        "latest": 373.27,
+        "prev": 422.26,
+        "yearAgo": 329.29,
+        "fytd": 4183.44,
+        "fytdPrior": 3480.46
+      },
+      {
+        "key": "telecom",
+        "name": "Telecommunications",
+        "latest": 49.05,
+        "prev": 75.49,
+        "yearAgo": 48.01,
+        "fytd": 640.18,
+        "fytdPrior": 498.77
+      },
+      {
+        "key": "softwareConsultancy",
+        "name": "Software Consultancy",
+        "latest": 112.01,
+        "prev": 110.99,
+        "yearAgo": 99.08,
+        "fytd": 1159.58,
+        "fytdPrior": 1011.73
+      },
+      {
+        "key": "softwareExports",
+        "name": "Computer Software Exports",
+        "latest": 47.72,
+        "prev": 68.56,
+        "yearAgo": 49.15,
+        "fytd": 589.85,
+        "fytdPrior": 539.65
+      },
+      {
+        "key": "freelance",
+        "name": "Freelance IT",
+        "latest": 101.51,
+        "prev": 102.91,
+        "yearAgo": 65.79,
+        "fytd": 1060.79,
+        "fytdPrior": 708.05
+      },
+      {
+        "key": "informationServices",
+        "name": "Information Services",
+        "latest": 0.32,
+        "prev": 0.4,
+        "yearAgo": 0.38,
+        "fytd": 4.25,
+        "fytdPrior": 20.64
+      }
+    ]
+  },
+  "monthlySeries": [
+    {
+      "month": "2026-04",
+      "totalCredit": 904.09,
+      "itCredit": 422.26,
+      "freelanceCredit": 102.91
+    },
+    {
+      "month": "2026-05",
+      "totalCredit": 838.28,
+      "itCredit": 373.27,
+      "freelanceCredit": 101.51
+    }
+  ],
   "dataSource": "SBP",
   "lastUpdated": "2026-06-22",
   "dataCoverage": "Jul-May FY26"
