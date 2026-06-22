@@ -250,7 +250,7 @@ async function main() {
   if (autoPush) {
     console.log(`  📤 Git push:    ${pushOk ? '✅ Success (Cloudflare auto-deploys)' : '⚠️  Failed'}`);
   }
-  console.log('\n  🌐 Live at: https://pakistaneconomydashboard.farrukhmasudali.workers.dev/\n');
+  console.log('\n  🌐 Live at: https://economyofpakistan.com/\n');
 }
 
 main().catch((err) => {

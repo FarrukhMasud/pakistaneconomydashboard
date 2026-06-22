@@ -1,4 +1,4 @@
-export const LIVE_URL = 'https://pakistaneconomydashboard.farrukhmasudali.workers.dev';
+export const LIVE_URL = 'https://economyofpakistan.com';
 
 export const DATASETS = [
   {
