@@ -37,7 +37,7 @@
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
     "pdfreader": "^3.0.8",
-    "vite": "^5.4.21",
+    "vite": "^6.4.3",
     "xlsx": "^0.18.5"
   }
 }
