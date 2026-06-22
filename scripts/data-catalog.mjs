@@ -1,4 +1,4 @@
-export const LIVE_URL = 'https://pakeconomydash.z5.web.core.windows.net';
+export const LIVE_URL = 'https://pakistaneconomydashboard.farrukhmasudali.workers.dev';
 
 export const DATASETS = [
   {

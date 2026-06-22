@@ -8,4 +8,4 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-Sitemap: https://pakeconomydash.z5.web.core.windows.net/sitemap.xml
+Sitemap: https://pakistaneconomydashboard.farrukhmasudali.workers.dev/sitemap.xml

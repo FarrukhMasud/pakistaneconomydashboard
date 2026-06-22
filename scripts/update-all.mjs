@@ -265,7 +265,7 @@ async function main() {
     console.log(`  📤 Git push:    ${pushOk ? '✅ Success' : '⚠️  Failed'}`);
     console.log(`  🚀 Deploy:      ${deployOk ? '✅ Success' : '⚠️  Failed'}`);
   }
-  console.log('\n  🌐 Live at: https://pakeconomydash.z5.web.core.windows.net/\n');
+  console.log('\n  🌐 Live at: https://pakistaneconomydashboard.farrukhmasudali.workers.dev/\n');
 }
 
 main().catch((err) => {

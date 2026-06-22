@@ -5,7 +5,7 @@ indicators using **official government data** from the State Bank
 of Pakistan (SBP), Pakistan Bureau of Statistics (PBS), and
 Ministry of Finance.
 
-**Live:** [https://pakeconomydash.z5.web.core.windows.net/](https://pakeconomydash.z5.web.core.windows.net/)
+**Live:** [https://pakistaneconomydashboard.farrukhmasudali.workers.dev/](https://pakistaneconomydashboard.farrukhmasudali.workers.dev/)
 
 ## Dashboard Sections
 
@@ -308,7 +308,7 @@ manually with `deploy=true`.
 | Index Document   | `index.html`           |
 | Error Document   | `index.html`           |
 
-Live: <https://pakeconomydash.z5.web.core.windows.net/>
+Live: <https://pakistaneconomydashboard.farrukhmasudali.workers.dev/>
 
 ---
 
