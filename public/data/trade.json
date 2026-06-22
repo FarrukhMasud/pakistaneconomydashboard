@@ -549,5 +549,339 @@
   "importCountryPeriod": "Jul-May FY26 (P)",
   "dataSource": "SBP",
   "lastUpdated": "2026-06-22",
-  "dataCoverage": "2021-01 – 2026-05"
+  "dataCoverage": "2021-01 – 2026-05",
+  "countryMonthly": {
+    "latestMonth": "2026-05",
+    "prevMonth": "2026-04",
+    "yearAgoMonth": "2025-05",
+    "fytdLabel": "Jul–May FY26",
+    "fytdPriorLabel": "Jul–May FY25",
+    "note": "SBP by-country files publish the latest month, prior month, same month a year earlier, and fiscal-year-to-date totals per country. Values in US$ million.",
+    "countries": [
+      {
+        "country": "China",
+        "flag": "🇨🇳",
+        "exports": {
+          "latest": 216.25,
+          "prev": 275.92,
+          "yearAgo": 199.53,
+          "fytd": 2437.22,
+          "fytdPrior": 2270.87
+        },
+        "imports": {
+          "latest": 1739.61,
+          "prev": 1777.39,
+          "yearAgo": 1698.86,
+          "fytd": 17555.36,
+          "fytdPrior": 14890.47
+        }
+      },
+      {
+        "country": "U.A.E.",
+        "flag": "🇦🇪",
+        "exports": {
+          "latest": 164,
+          "prev": 157.39,
+          "yearAgo": 200.28,
+          "fytd": 1950.3,
+          "fytdPrior": 1980.35
+        },
+        "imports": {
+          "latest": 800.55,
+          "prev": 988.28,
+          "yearAgo": 785.24,
+          "fytd": 7744.63,
+          "fytdPrior": 7400.09
+        }
+      },
+      {
+        "country": "United States",
+        "flag": "🇺🇸",
+        "exports": {
+          "latest": 461.25,
+          "prev": 489.75,
+          "yearAgo": 516.16,
+          "fytd": 5585.19,
+          "fytdPrior": 5553.93
+        },
+        "imports": {
+          "latest": 449.84,
+          "prev": 400.97,
+          "yearAgo": 244.49,
+          "fytd": 2990.12,
+          "fytdPrior": 2153.62
+        }
+      },
+      {
+        "country": "Saudi Arabia",
+        "flag": "🇸🇦",
+        "exports": {
+          "latest": 49.06,
+          "prev": 53.96,
+          "yearAgo": 49.37,
+          "fytd": 632.99,
+          "fytdPrior": 656.58
+        },
+        "imports": {
+          "latest": 297.22,
+          "prev": 343.05,
+          "yearAgo": 290.85,
+          "fytd": 3613.57,
+          "fytdPrior": 3467.17
+        }
+      },
+      {
+        "country": "Indonesia",
+        "flag": "🇮🇩",
+        "exports": {
+          "latest": 5.86,
+          "prev": 6.52,
+          "yearAgo": 6.64,
+          "fytd": 86.6,
+          "fytdPrior": 264.25
+        },
+        "imports": {
+          "latest": 214.38,
+          "prev": 276.88,
+          "yearAgo": 229.74,
+          "fytd": 3144.56,
+          "fytdPrior": 2686.52
+        }
+      },
+      {
+        "country": "United Kingdom",
+        "flag": "🇬🇧",
+        "exports": {
+          "latest": 159.39,
+          "prev": 181.14,
+          "yearAgo": 173.38,
+          "fytd": 1972.26,
+          "fytdPrior": 1994.69
+        },
+        "imports": {
+          "latest": 69.22,
+          "prev": 43.96,
+          "yearAgo": 64.16,
+          "fytd": 666.56,
+          "fytdPrior": 872.42
+        }
+      },
+      {
+        "country": "Singapore",
+        "flag": "🇸🇬",
+        "exports": {
+          "latest": 68.05,
+          "prev": 53.42,
+          "yearAgo": 4.91,
+          "fytd": 423.69,
+          "fytdPrior": 297.37
+        },
+        "imports": {
+          "latest": 234.98,
+          "prev": 156.46,
+          "yearAgo": 211.38,
+          "fytd": 1982.64,
+          "fytdPrior": 2131.12
+        }
+      },
+      {
+        "country": "Germany",
+        "flag": "🇩🇪",
+        "exports": {
+          "latest": 106.5,
+          "prev": 129.52,
+          "yearAgo": 132.34,
+          "fytd": 1475.66,
+          "fytdPrior": 1552.1
+        },
+        "imports": {
+          "latest": 74.18,
+          "prev": 63.34,
+          "yearAgo": 96.94,
+          "fytd": 804.31,
+          "fytdPrior": 798.95
+        }
+      },
+      {
+        "country": "Qatar",
+        "flag": "🇶🇦",
+        "exports": {
+          "latest": 4.41,
+          "prev": 5.47,
+          "yearAgo": 7.01,
+          "fytd": 87.48,
+          "fytdPrior": 107.52
+        },
+        "imports": {
+          "latest": 5.94,
+          "prev": 10.52,
+          "yearAgo": 215.96,
+          "fytd": 2163.43,
+          "fytdPrior": 3149.6
+        }
+      },
+      {
+        "country": "Netherlands",
+        "flag": "🇳🇱",
+        "exports": {
+          "latest": 103.47,
+          "prev": 124.11,
+          "yearAgo": 113.09,
+          "fytd": 1330.88,
+          "fytdPrior": 1385.9
+        },
+        "imports": {
+          "latest": 110.23,
+          "prev": 28.81,
+          "yearAgo": 38.74,
+          "fytd": 456.03,
+          "fytdPrior": 377.91
+        }
+      },
+      {
+        "country": "Japan",
+        "flag": "🇯🇵",
+        "exports": {
+          "latest": 16.22,
+          "prev": 17.42,
+          "yearAgo": 15.23,
+          "fytd": 165.16,
+          "fytdPrior": 170.72
+        },
+        "imports": {
+          "latest": 98.11,
+          "prev": 139.1,
+          "yearAgo": 89.56,
+          "fytd": 1463.12,
+          "fytdPrior": 1062.54
+        }
+      },
+      {
+        "country": "Spain",
+        "flag": "🇪🇸",
+        "exports": {
+          "latest": 105.68,
+          "prev": 137.74,
+          "yearAgo": 122.47,
+          "fytd": 1427.89,
+          "fytdPrior": 1358.01
+        },
+        "imports": {
+          "latest": 11.9,
+          "prev": 16.87,
+          "yearAgo": 24.93,
+          "fytd": 183.49,
+          "fytdPrior": 178.62
+        }
+      },
+      {
+        "country": "Kuwait",
+        "flag": "🇰🇼",
+        "exports": {
+          "latest": 8.3,
+          "prev": 6.84,
+          "yearAgo": 7.74,
+          "fytd": 116.18,
+          "fytdPrior": 105.56
+        },
+        "imports": {
+          "latest": 154.15,
+          "prev": 202,
+          "yearAgo": 131.32,
+          "fytd": 1463.32,
+          "fytdPrior": 1585.06
+        }
+      },
+      {
+        "country": "Italy",
+        "flag": "🇮🇹",
+        "exports": {
+          "latest": 87.5,
+          "prev": 89.3,
+          "yearAgo": 112.19,
+          "fytd": 1056.93,
+          "fytdPrior": 1048.64
+        },
+        "imports": {
+          "latest": 33.66,
+          "prev": 34.67,
+          "yearAgo": 37.13,
+          "fytd": 447.96,
+          "fytdPrior": 504.76
+        }
+      },
+      {
+        "country": "Oman",
+        "flag": "🇴🇲",
+        "exports": {
+          "latest": 13.27,
+          "prev": 15.14,
+          "yearAgo": 17.46,
+          "fytd": 160.91,
+          "fytdPrior": 205.15
+        },
+        "imports": {
+          "latest": 251.78,
+          "prev": 236.21,
+          "yearAgo": 56.75,
+          "fytd": 1321.81,
+          "fytdPrior": 777.74
+        }
+      },
+      {
+        "country": "Brazil",
+        "flag": "🇧🇷",
+        "exports": {
+          "latest": 11.43,
+          "prev": 12.73,
+          "yearAgo": 11.4,
+          "fytd": 142.64,
+          "fytdPrior": 119.9
+        },
+        "imports": {
+          "latest": 159.3,
+          "prev": 171.67,
+          "yearAgo": 219.89,
+          "fytd": 1143.54,
+          "fytdPrior": 1062.25
+        }
+      },
+      {
+        "country": "South Korea",
+        "flag": "🇰🇷",
+        "exports": {
+          "latest": 26.03,
+          "prev": 21.82,
+          "yearAgo": 8.57,
+          "fytd": 222.87,
+          "fytdPrior": 138.94
+        },
+        "imports": {
+          "latest": 89.86,
+          "prev": 82.2,
+          "yearAgo": 110.17,
+          "fytd": 1040.7,
+          "fytdPrior": 925.31
+        }
+      },
+      {
+        "country": "Thailand",
+        "flag": "🇹🇭",
+        "exports": {
+          "latest": 13.97,
+          "prev": 19.62,
+          "yearAgo": 56.87,
+          "fytd": 219.59,
+          "fytdPrior": 297.04
+        },
+        "imports": {
+          "latest": 80.48,
+          "prev": 96.4,
+          "yearAgo": 78.98,
+          "fytd": 1006.31,
+          "fytdPrior": 746.8
+        }
+      }
+    ]
+  }
 }

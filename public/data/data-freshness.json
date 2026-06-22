@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-22T17:42:50.830Z",
+  "generatedAt": "2026-06-22T18:01:39.820Z",
   "status": "fresh",
   "datasets": [
     {
@@ -299,9 +299,9 @@
       "cadence": "Quarterly/Annual",
       "expectedLag": "Annual; provincial budgets are presented each June for the July–June fiscal year. Update as each province announces.",
       "critical": false,
-      "latestObservation": "2026-06-17",
+      "latestObservation": "2026-06-22",
       "dataCoverage": null,
-      "dashboardUpdated": "2026-06-17",
+      "dashboardUpdated": "2026-06-22",
       "status": "fresh"
     }
   ]

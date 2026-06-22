@@ -1,0 +1,118 @@
+.country-trends__intro {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  margin: 0 0 1.25rem;
+}
+
+.country-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 1rem;
+}
+
+.country-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1rem 1.1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.country-card__head {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.country-card__flag {
+  font-size: 1.55rem;
+  line-height: 1;
+}
+
+.country-card__name {
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  flex: 1;
+}
+
+.balance-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.18rem 0.5rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.balance-badge.surplus { background: rgba(0, 212, 170, 0.16); color: #00d4aa; }
+.balance-badge.deficit { background: rgba(239, 83, 80, 0.16); color: #ef5350; }
+
+.country-row {
+  display: grid;
+  grid-template-columns: 1.6rem 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0;
+  border-top: 1px solid var(--border-color);
+}
+.country-row:first-of-type { border-top: none; }
+
+.country-row__icon { font-size: 1rem; text-align: center; }
+
+.country-row__main { display: flex; flex-direction: column; gap: 0.12rem; min-width: 0; }
+.country-row__label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+}
+.country-row__value {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.country-row__value .month-tag {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-left: 0.35rem;
+}
+
+.country-row__chips { display: flex; flex-direction: column; align-items: flex-end; gap: 0.18rem; }
+
+.trend-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.1rem 0.4rem;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+.trend-chip.pos { background: rgba(0, 212, 170, 0.14); color: #00d4aa; }
+.trend-chip.neg { background: rgba(239, 83, 80, 0.14); color: #ef5350; }
+.trend-chip.flat { background: rgba(139, 141, 151, 0.16); color: var(--text-secondary); }
+.trend-chip__cap { color: var(--text-secondary); font-weight: 500; font-size: 0.66rem; }
+
+.country-card__fytd {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  border-top: 1px dashed var(--border-color);
+  padding-top: 0.5rem;
+  margin-top: 0.1rem;
+}
+.country-card__fytd b { color: var(--text-primary); font-weight: 600; }
+
+.country-trends__note {
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  margin-top: 1rem;
+  line-height: 1.5;
+}

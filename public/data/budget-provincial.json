@@ -2,9 +2,9 @@
   "title": "Provincial Budgets",
   "dataSource": "Provincial Finance Departments (as reported by Dawn & Business Recorder)",
   "unit": "PKR billion",
-  "lastUpdated": "2026-06-17",
-  "lastVerified": "2026-06-17",
-  "methodologyNote": "Budgeted estimates compiled from each province's budget speech / White Paper as reported by Dawn, Business Recorder and other reputable outlets. FY2026-27 figures for all four provinces are from June 2026 budget reporting; KP's FY2026-27 totals are early/round 'set-to-cross' figures pending the final White Paper. FY2025-26 detail for KP and Balochistan beyond their NFC transfer share was not independently sourced and is marked accordingly. Commentary is editorial opinion, clearly labelled, grounded in the official figures shown.",
+  "lastUpdated": "2026-06-22",
+  "lastVerified": "2026-06-22",
+  "methodologyNote": "Budgeted estimates compiled from each province's budget speech / White Paper as reported by Dawn, Business Recorder and other reputable outlets. FY2026-27 figures for all four provinces are from June 2026 budget reporting; KP presented its FY2026-27 budget on 20 June 2026 (Rs2.17tr). FY2025-26 detail for KP and Balochistan beyond their NFC transfer share was not independently sourced and is marked accordingly. Commentary is editorial opinion, clearly labelled, grounded in the official figures shown.",
   "fiscalYears": ["2026-27", "2025-26"],
   "provincialSurplus": {
     "period": "Jul–Mar FY2025-26 (first 9 months)",
@@ -192,40 +192,47 @@
       "years": [
         {
           "fy": "2026-27",
-          "status": "pre-budget estimate (not yet presented)",
-          "totalOutlay": 2300,
+          "status": "budgeted",
+          "presented": "2026-06-20",
+          "totalOutlay": 2170,
           "totalReceipts": null,
-          "federalTransfers": 1671,
-          "ownTaxRevenue": 99,
-          "adp": 560,
-          "surplus": null,
+          "federalTransfers": null,
+          "ownTaxRevenue": null,
+          "adp": 524,
+          "currentExpenditure": 1645,
+          "surplus": -48,
           "highlights": [
-            { "label": "Federal transfers", "value": 1671, "note": "incl Rs159bn war-on-terror; plus Rs107bn net hydel profit (Rs36bn + Rs71bn arrears)" },
-            { "label": "Development (ADP)", "value": 560, "note": "estimate; settled-district development ~Rs426bn + merged districts" },
-            { "label": "Merged (ex-FATA) districts", "value": 334, "note": "ongoing & development projects" },
-            { "label": "Foreign project assistance", "value": 160 },
-            { "label": "Own resources", "value": 150, "note": "Rs99bn tax + Rs51bn non-tax" },
-            "Expected to be a tax-free budget with a salary increase mirroring the federal raise — figures are pre-budget estimates pending formal presentation."
+            { "label": "Education", "value": 468 },
+            { "label": "Health", "value": 334, "note": "incl. Sehat Card Rs80bn + MTI hospitals Rs80bn" },
+            { "label": "Police / law & order", "value": 191 },
+            { "label": "Development (ADP)", "value": 524 },
+            { "label": "Local government", "value": 90 },
+            { "label": "Merged (ex-FATA) districts", "value": 35 },
+            "Salaries & pensions raised 7%; provincial minimum wage proposed at Rs45,000.",
+            "Tax relief rather than new taxes: Infrastructure Development Cess cut 2% → 0.75%; hotel bed tax 7% → 5%; property-tax exemption for homes up to 5 marla (~200,000 households); professional tax abolished for minimum-income earners; 30% discount on industrial tax arrears.",
+            "Deficit budget of Rs48bn, to be met from provincial savings with no new borrowing."
           ],
           "commentary": {
-            "summary": "As of 17 June 2026 KP had finalised its budget preparations but NOT yet formally presented FY2026-27; the figures shown are pre-budget estimates. They point to a tax-free, transfer-dependent plan tilted toward the merged tribal districts.",
+            "summary": "Presented on 20 June 2026 by CM Sohail Afridi, KP's Rs2.17tr budget is a tax-relief, social-spending plan — but it breaks ranks by budgeting a Rs48bn deficit just as the IMF programme asks provinces to run surpluses, and KP's chronic under-spend means delivery, not allocation, remains the real test.",
             "good": [
-              "Large planned development programme (~Rs560bn) with a clear pro-poor, merged-districts focus (Rs334bn).",
-              "Expected to be tax-free, with a salary raise for employees."
+              "Heavy social and human-development tilt — education Rs468bn and health Rs334bn (including Rs80bn Sehat Card and Rs80bn for teaching hospitals) — with a 7% pay-and-pension rise.",
+              "Genuine tax relief for citizens and industry: lower Infrastructure Development Cess and hotel bed tax, a property-tax exemption for small (≤5-marla) homes, and a 30% discount on industrial tax arrears.",
+              "A sizeable Rs524bn development programme funded without new taxes or fresh borrowing."
             ],
             "bad": [
-              "~Rs1.67tr of resources would come from federal transfers, plus ~Rs107bn net hydel profit — own resources are only ~Rs150bn, so any federal shortfall bites hard.",
-              "Headline outlay (~Rs2.3tr) and the ADP are pre-budget estimates that may shift in the final White Paper."
+              "KP budgeted a Rs48bn deficit — at odds with the IMF requirement that provinces post cash surpluses to anchor the national fiscal target.",
+              "Own-source revenue remains tiny relative to the outlay, leaving the province heavily dependent on federal transfers and disputed net-hydel-profit flows.",
+              "Only Rs35bn was earmarked for the merged tribal districts — modest given their needs and the political weight KP places on them."
             ],
             "ugly": [
-              "KP's finances hinge on long-disputed flows — net hydel profit arrears (Rs71bn) and withheld ex-FATA merger funds — that Islamabad has repeatedly delayed, making the resource side optimistic.",
-              "Spending heavily in merged districts is right on need, but the province utilised only ~Rs1,025bn of its budget in the first three quarters of FY2025-26 — execution, not allocation, is the binding constraint."
+              "KP's resource side still hinges on long-disputed flows — net hydel profit arrears and withheld ex-FATA merger funds — that Islamabad has repeatedly delayed, making the financing optimistic.",
+              "The province utilised only ~Rs1,025bn of its budget in the first three quarters of FY2025-26; on that record, much of this record-size programme risks going unspent again — execution, not allocation, is the binding constraint."
             ]
           },
           "sources": [
-            { "label": "Dunya News — KP budget 2026-27 estimates (preparations finalised)", "url": "https://dunyanews.tv/en/Business/954502-kp-budget-2026-27" },
-            { "label": "Profit (Pakistan Today) — KP finalises Finance Bill, 1,000+ ADP schemes", "url": "https://profit.pakistantoday.com.pk/2026/06/10/kp-finalises-finance-bill-proposes-over-1000-development-schemes-for-fy27" },
-            { "label": "Samaa TV — KP budget 2026-27 likely to hit Rs2.3tr", "url": "https://www.samaa.tv/2087351826-khyber-pakhtunkhwa-budget-expected-to-reach-rs2-3tr" }
+            { "label": "The News — KP CM presents Rs2.17tr FY27 budget with Rs48bn deficit (20 Jun 2026)", "url": "https://www.thenews.pk/print/1421561-budget-fy27-kp-cm-presents-rs2-17tr-budget-with-rs48bn-deficit" },
+            { "label": "Chitral Times — Budget at a glance: KP Budget 2026-27 (sector allocations)", "url": "https://english.chitraltimes.com/budget-at-glance-and-key-highlights-of-khyber-pakhtunkhwa-budget-2026-27/" },
+            { "label": "The Nation — KP CM presents Rs2.17tr budget FY2026-27 (20 Jun 2026)", "url": "https://www.nation.com.pk/20-Jun-2026/kp-cm-presents-rs2-17tr-budget-fy-2026-27-rs48b-deficit" }
           ]
         },
         {

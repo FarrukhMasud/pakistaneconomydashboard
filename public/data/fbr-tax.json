@@ -149,11 +149,11 @@
   ],
   "fytd": {
     "fyLabel": "FY2026",
-    "period": "Jul–Apr FY2026",
-    "net": 10160,
-    "target": 10843,
-    "priorNet": 9300.2,
-    "source": "https://pkrevenue.com/fbr-tax-shortfall-fy2025-26-pakistan/"
+    "period": "Jul–May FY2026",
+    "net": 11227,
+    "target": 12095,
+    "priorNet": 10233.9,
+    "source": "https://www.brecorder.com/news/40423269"
   },
   "annualTargets": [
     {
@@ -264,8 +264,12 @@
       "url": "https://thestandard.com.pk/fbr-collects-rs-754n-in-july-2025/"
     },
     {
-      "label": "FY2025-26 Jul–Apr collection Rs10.16tn (shortfall ~Rs683bn)",
-      "url": "https://pkrevenue.com/fbr-tax-shortfall-fy2025-26-pakistan/"
+      "label": "FY2025-26 Jul–May provisional Rs11,227bn vs Rs12,095bn target (shortfall ~Rs868bn)",
+      "url": "https://www.brecorder.com/news/40423269"
+    },
+    {
+      "label": "FBR collects Rs966bn in May 2026, misses Rs1,150bn target",
+      "url": "https://www.nation.com.pk/01-Jun-2026/fbr-collects-rs-966bn-misses-target-may"
     },
     {
       "label": "H1 FY2025-26 (Jul-Dec 2025) Rs6,154bn vs Rs6,490bn target",

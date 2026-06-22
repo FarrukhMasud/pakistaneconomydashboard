@@ -11,6 +11,7 @@ import ExchangeRateSection from './components/ExchangeRateSection';
 import RemittancesSection from './components/RemittancesSection';
 import FdiSection from './components/FdiSection';
 import ServicesSection from './components/ServicesSection';
+import CountryTrendsSection from './components/CountryTrendsSection';
 import FiscalSection from './components/FiscalSection';
 import FbrTaxSection from './components/FbrTaxSection';
 import InflationSection from './components/InflationSection';
@@ -35,6 +36,7 @@ const NAV_GROUPS = [
     blurb: 'Trade, reserves, flows & the rupee',
     sections: [
       { id: 'trade', label: '🚢 Trade', component: TradeSection },
+      { id: 'country-trends', label: '🌐 Country Trends', component: CountryTrendsSection },
       { id: 'reserves', label: '🏦 Reserves', component: ReservesSection },
       { id: 'exchange', label: '💱 Exchange Rate', component: ExchangeRateSection },
       { id: 'remittances', label: '💸 Remittances', component: RemittancesSection },

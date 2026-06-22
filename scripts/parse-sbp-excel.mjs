@@ -1056,6 +1056,121 @@ async function updateServices() {
 // 8. TRADE BY COUNTRY (Export/Import by country files)
 // ═══════════════════════════════════════════════════
 
+const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+// Convert a "month name + FY two-digit" pair to a calendar YYYY-MM string.
+// Pakistan fiscal year FYxx runs Jul (xx-1) → Jun (xx). Jul–Dec fall in the
+// previous calendar year; Jan–Jun fall in the FY calendar year.
+function fyMonthToYearMonth(monthName, fy) {
+  const idx = MONTH_NAMES.findIndex((m) => new RegExp(`^${m}`, 'i').test(monthName));
+  if (idx < 0 || !fy) return null;
+  const monthNum = idx + 1; // 1-12
+  const calYear = monthNum >= 7 ? 2000 + fy - 1 : 2000 + fy;
+  return `${calYear}-${String(monthNum).padStart(2, '0')}`;
+}
+
+// Inspect the SBP by-country header rows (row 4 = period, row 5 = FY) and
+// classify which physical column holds each snapshot we care about: the latest
+// provisional month, the prior (revised) month, the year-ago same month, and
+// the fiscal-year-to-date totals for the current and prior fiscal years.
+function classifyCountryColumns(rows) {
+  const r4 = rows[4] || [];
+  const r5 = rows[5] || [];
+  const maxc = Math.max(r4.length, r5.length);
+
+  // Carry period labels forward across horizontally-merged header cells
+  // (e.g. "Jul-Jun" spans the FY24/FY25 columns, "Jul-May" spans FY25/FY26).
+  const periods = [];
+  let lastLabel = '';
+  for (let c = 0; c < maxc; c++) {
+    const v = (r4[c] ?? '').toString().trim();
+    if (v) lastLabel = v;
+    periods[c] = v || lastLabel;
+  }
+
+  let maxFY = 0;
+  for (let c = 0; c < maxc; c++) {
+    const m = (r5[c] || '').toString().match(/FY\s*(\d{2})/i);
+    if (m) maxFY = Math.max(maxFY, +m[1]);
+  }
+  const curFY = maxFY;
+  const priorFY = maxFY - 1;
+
+  const cols = { curFY, priorFY };
+  for (let c = 1; c < maxc; c++) {
+    const p4 = periods[c] || '';
+    const f5 = (r5[c] || '').toString().trim();
+    const fym = f5.match(/FY\s*(\d{2})/i);
+    const fy = fym ? +fym[1] : null;
+    if (!fy) continue;
+
+    // Skip full fiscal-year (annual) columns — "Jul-Jun".
+    if (/jul\s*-\s*jun/i.test(p4)) continue;
+
+    const isFytd = /jul\s*-/i.test(p4);
+    const isProv = /\(\s*P\s*\)/i.test(p4) || /\(\s*P\s*\)/i.test(f5);
+    const isRev = /\(\s*R\s*\)/i.test(p4);
+    const monthMatch = p4.match(/^(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)/i);
+
+    if (isFytd) {
+      if (fy === curFY && cols.fytdCur === undefined) {
+        cols.fytdCur = c;
+        cols.fytdLabel = p4.replace(/\s*\(.*$/, '').trim();
+      } else if (fy === priorFY && cols.fytdPrior === undefined) {
+        cols.fytdPrior = c;
+      }
+    } else if (monthMatch) {
+      const monthName = monthMatch[1];
+      if (isProv && fy === curFY && cols.latest === undefined) {
+        cols.latest = c;
+        cols.latestMonth = fyMonthToYearMonth(monthName, fy);
+      } else if (isRev && fy === curFY && cols.prev === undefined) {
+        cols.prev = c;
+        cols.prevMonth = fyMonthToYearMonth(monthName, fy);
+      } else if (fy === priorFY && cols.yearAgo === undefined) {
+        cols.yearAgo = c;
+        cols.yearAgoMonth = fyMonthToYearMonth(monthName, fy);
+      }
+    }
+  }
+  return cols;
+}
+
+// Read a by-country export/import workbook into a Map keyed by clean country
+// name, capturing the snapshot columns (values converted thousand-USD → $M).
+function parseCountryTradeFile(filename, sheetRegex) {
+  const wb = readExcel(filename);
+  const sheetName = wb.SheetNames.find((s) => sheetRegex.test(s)) || wb.SheetNames[0];
+  const rows = getSheet(wb, sheetName);
+  const cols = classifyCountryColumns(rows);
+
+  const cell = (row, c) => {
+    if (c === undefined) return null;
+    const v = row[c];
+    return typeof v === 'number' && isFinite(v) ? round2(v / 1000) : null;
+  };
+
+  const map = new Map();
+  for (let i = 6; i < rows.length; i++) {
+    const row = rows[i];
+    if (!row) continue;
+    let country = (row[0] || '').toString().trim();
+    if (!country || /^total|^grand|^sub|^all|^others?\s*$/i.test(country)) continue;
+    if (/^\d+$/.test(country)) continue;
+    if (/^[IVX]+\./i.test(country)) continue;
+    if (/receipts|payments|through\s+banks|memo|of which/i.test(country)) continue;
+    country = country.replace(/\s*\*+$/, '').trim();
+    map.set(country, {
+      latest: cell(row, cols.latest),
+      prev: cell(row, cols.prev),
+      yearAgo: cell(row, cols.yearAgo),
+      fytd: cell(row, cols.fytdCur),
+      fytdPrior: cell(row, cols.fytdPrior),
+    });
+  }
+  return { sheetName, cols, map };
+}
+
 async function updateTradeCountries() {
   console.log('\n🌍 Parsing Trade by Country...');
 
@@ -1158,15 +1273,92 @@ async function updateTradeCountries() {
   importCountries.sort((a, b) => b.value - a.value);
   const topImportCountries = importCountries.slice(0, 15);
 
+  // --- Per-country monthly snapshot (latest month, prior month, year-ago month,
+  // FYTD current & prior) for the most important trade partners. The SBP
+  // by-country files only publish these few points per country (no long monthly
+  // series), so this is a snapshot + YoY/MoM/FYTD view — every figure authentic.
+  const expParsed = parseCountryTradeFile('Export_Receipts_by_all_Countries.xls', /Exp.*Acount/i);
+  const impParsed = parseCountryTradeFile('Import-Payments-by-All-Countries.xlsx', /Import/i);
+
+  // Normalise country names so export & import rows line up and split sub-rows
+  // (e.g. UAE is listed as "Dubai" + "Abu Dhabi") collapse into one partner.
+  const normName = (s) => s.toLowerCase().replace(/\.\s*/g, '').replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+  const canonical = (raw) => {
+    const n = normName(raw);
+    if (/^u ?a ?e|^uae|abu ?dhabi|^dubai|sharjah/.test(n)) return { key: 'uae', display: 'U.A.E.' };
+    if (/^u ?s ?a|united states|^usa/.test(n)) return { key: 'usa', display: 'United States' };
+    if (/^u ?k|united kingdom/.test(n)) return { key: 'uk', display: 'United Kingdom' };
+    if (/netherland|holland/.test(n)) return { key: 'netherlands', display: 'Netherlands' };
+    if (/saudi/.test(n)) return { key: 'saudi arabia', display: 'Saudi Arabia' };
+    if (/south korea|korea, rep|rep.*korea|^korea/.test(n) && !/north/.test(n)) return { key: 'south korea', display: 'South Korea' };
+    // Default: strip parentheticals for display
+    const display = raw.replace(/\s*\(.*?\)\s*/g, ' ').replace(/\s+/g, ' ').trim();
+    return { key: n, display };
+  };
+  const FIELDS = ['latest', 'prev', 'yearAgo', 'fytd', 'fytdPrior'];
+  const blank = () => ({ latest: null, prev: null, yearAgo: null, fytd: null, fytdPrior: null });
+  const addSnap = (target, snap) => {
+    if (!snap) return;
+    for (const f of FIELDS) {
+      if (typeof snap[f] === 'number') target[f] = round2((target[f] || 0) + snap[f]);
+    }
+  };
+  const merged = new Map();
+  const collect = (map, kind) => {
+    for (const [country, snap] of map) {
+      const { key, display } = canonical(country);
+      if (!key) continue;
+      if (!merged.has(key)) merged.set(key, { name: display, exports: blank(), imports: blank() });
+      addSnap(merged.get(key)[kind], snap);
+    }
+  };
+  collect(expParsed.map, 'exports');
+  collect(impParsed.map, 'imports');
+
+  // Rank by total trade engagement (export FYTD + import FYTD), keep the leaders.
+  const ranked = [...merged.values()]
+    .map((e) => ({ ...e, totalTrade: (e.exports.fytd || 0) + (e.imports.fytd || 0) }))
+    .filter((e) => e.totalTrade > 0)
+    .sort((a, b) => b.totalTrade - a.totalTrade);
+
+  // Always include key remittance/strategic partners even if outside the top trade list.
+  const MUST_INCLUDE = ['saudi arabia', 'usa', 'uk', 'uae', 'china'];
+  const importantKeys = new Set(ranked.slice(0, 18).map((e) => canonical(e.name).key));
+  for (const k of MUST_INCLUDE) importantKeys.add(k);
+  const countries = ranked
+    .filter((e) => importantKeys.has(canonical(e.name).key))
+    .map((e) => ({
+      country: e.name,
+      flag: getFlag(e.name),
+      exports: e.exports,
+      imports: e.imports,
+    }));
+
+  const c = expParsed.cols;
+  const fytdStem = (c.fytdLabel || 'Jul–latest').replace(/-/g, '–');
+  const fytdLabel = `${fytdStem} FY${c.curFY}`;
+  const fytdPriorLabel = `${fytdStem} FY${c.priorFY}`;
+  const countryMonthly = {
+    latestMonth: c.latestMonth || null,
+    prevMonth: c.prevMonth || null,
+    yearAgoMonth: c.yearAgoMonth || null,
+    fytdLabel,
+    fytdPriorLabel,
+    note: 'SBP by-country files publish the latest month, prior month, same month a year earlier, and fiscal-year-to-date totals per country. Values in US$ million.',
+    countries,
+  };
+
   // Update trade.json — merge with existing data
   const existing = await readJson('trade.json');
   existing.topExportCountries = topExportCountries;
   existing.topImportCountries = topImportCountries;
   existing.exportCountryPeriod = exportCountryPeriod || null;
   existing.importCountryPeriod = importCountryPeriod || null;
+  existing.countryMonthly = countryMonthly;
   await writeJson('trade.json', existing);
 
   console.log(`  📊 Top ${topExportCountries.length} export destinations (${exportCountryPeriod || 'period unknown'}), Top ${topImportCountries.length} import sources (${importCountryPeriod || 'period unknown'})`);
+  console.log(`  🌍 Country monthly snapshot: ${countries.length} partners (latest ${countryMonthly.latestMonth || '?'}, ${fytdLabel})`);
   return { exports: topExportCountries.length, imports: topImportCountries.length };
 }
 
@@ -1321,12 +1513,16 @@ async function generateKpiFromData() {
       const f = fbr.fytd;
       const growthPct = f.priorNet ? round2(((f.net - f.priorNet) / f.priorNet) * 100) : 0;
       const trend = growthPct > 0.5 ? 'up' : growthPct < -0.5 ? 'down' : 'stable';
+      const gap = f.target != null ? Math.round(f.net - f.target) : null;
+      const sub = gap != null
+        ? `Target ₨${(f.target / 1000).toFixed(2)}T · ${gap >= 0 ? 'surplus' : 'shortfall'} ₨${Math.abs(gap)}B`
+        : `Latest: ₨${Math.round(latest.net)}B (${latest.date})`;
       indicators.push({
         id: 'fbr-tax', label: 'FBR Tax Collection (FYTD)',
         value: round2(f.net / 1000), unit: 'T PKR',
         period: f.period,
         change: growthPct, trend, source: 'FBR',
-        sub: `Latest: ₨${Math.round(latest.net)}B (${latest.date})`,
+        sub,
       });
     }
   } catch { /* skip */ }

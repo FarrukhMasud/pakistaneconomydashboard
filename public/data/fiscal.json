@@ -41,7 +41,7 @@
       "gdpGrowth": 3.7
     }
   ],
-  "dataSource": "SBP EasyData API - Summary of Public Finance + GDP Table",
+  "dataSource": "SBP / PBS",
   "lastUpdated": "2026-06-22",
   "dataCoverage": "FY2017 – FY2026",
   "publicFinance": {

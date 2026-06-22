@@ -78,6 +78,8 @@ async function main() {
       assert(data.importCountryPeriod, 'trade: missing import country period metadata', failures);
       assert(Array.isArray(data.topExportCountries) && data.topExportCountries.length > 0, 'trade: missing top export countries', failures);
       assert(Array.isArray(data.topImportCountries) && data.topImportCountries.length > 0, 'trade: missing top import countries', failures);
+      assert(data.countryMonthly && Array.isArray(data.countryMonthly.countries) && data.countryMonthly.countries.length > 0, 'trade: missing per-country monthly snapshot', failures);
+      assert(data.countryMonthly?.latestMonth, 'trade: countryMonthly missing latestMonth metadata', failures);
     }
   }
 

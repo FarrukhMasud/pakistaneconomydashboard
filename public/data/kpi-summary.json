@@ -76,13 +76,13 @@
     {
       "id": "fbr-tax",
       "label": "FBR Tax Collection (FYTD)",
-      "value": 10.16,
+      "value": 11.23,
       "unit": "T PKR",
-      "period": "Jul–Apr FY2026",
-      "change": 9.24,
+      "period": "Jul–May FY2026",
+      "change": 9.7,
       "trend": "up",
       "source": "FBR",
-      "sub": "Latest: ₨754B (2025-07)"
+      "sub": "Target ₨12.10T · shortfall ₨868B"
     },
     {
       "id": "policy-rate",
