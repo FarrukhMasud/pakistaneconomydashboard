@@ -32,7 +32,7 @@ Navigation is grouped into **Overview**, **External Sector**, **Prices & Money**
 ## Tech Stack
 
 - **Frontend:** React 19 + Vite 5 + Chart.js 4
-- **Hosting:** Azure Storage Static Website
+- **Hosting:** Cloudflare Pages (auto-build & deploy on push); legacy Azure Storage script retained as fallback
 - **Data:** JSON files in `public/data/`, updated from SBP sources
 - **Data Trust:** Generated source manifest + freshness audit metadata
 - **SEO:** `index.html` meta/Open Graph/Twitter tags + JSON-LD (`WebSite`/`Dataset`) structured data, a crawlable no-JS fallback, plus `public/robots.txt`, `public/sitemap.xml` and `public/og-image.svg`
@@ -175,10 +175,11 @@ This runs these steps:
 5. **KPI Regeneration** — rebuilds KPI summary from all data
 6. **Source/Freshness Metadata** — generates `source-manifest.json`
    and `data-freshness.json`
-7. **Git Commit & Push** — commits data changes to GitHub
-8. **Deploy** — builds and uploads to Azure Storage
+7. **Git Commit & Push** — commits data changes to GitHub. **Cloudflare Pages
+   then auto-builds and deploys the site on push** (no separate upload step).
 
-Use `npm run update -- --no-deploy` to skip the git push and deploy steps.
+Use `npm run update -- --no-deploy` to skip the git commit & push (and therefore
+the Cloudflare auto-deploy).
 
 > **FBR monthly data:** `update-fbr.mjs` auto-refreshes the *closed* fiscal
 > year from FBR's official PDF (exact, internally validated — the parsed
@@ -257,29 +258,39 @@ checks still run.
 
 ---
 
-## Deploying to Azure Storage
+## Deployment (Cloudflare Pages)
 
-The dashboard is hosted as a static website on Azure Blob Storage.
-Deployment is handled automatically by `npm run update`, or
-manually via `npm run deploy`.
+The dashboard is hosted on **Cloudflare Pages**, connected to this GitHub repo.
+**Every push to `main` triggers an automatic build (`npm run build`) and deploy** —
+so refreshing data (`npm run update`, which commits & pushes) ships the site with
+no separate upload step.
 
-### Deploy Manually
+- Build command: `npm run build` · Output directory: `dist`
+- Node version pinned via `.nvmrc` (Node 22; Vite 6 requires Node ≥ 18)
+- `public/_headers` keeps `index.html` and `/data/*` `no-store` (always-fresh data)
+  and caches hashed `/assets/*` immutably.
 
-```bash
-npm run deploy
-# or
-pwsh scripts/deploy.ps1
-```
-
-### Full Update + Commit + Deploy (one command)
+### Refresh data + auto-deploy (one command)
 
 ```bash
 npm run update
 ```
 
-This fetches fresh data, commits changes to git, pushes to
-GitHub, and deploys to Azure Storage. Use `--no-deploy` to skip
-the git push and deploy steps.
+This fetches fresh data, regenerates KPIs/freshness, commits and pushes to GitHub;
+Cloudflare Pages then builds and deploys automatically. Use `--no-deploy` to skip
+the commit & push (and therefore the auto-deploy).
+
+### Legacy Azure Storage deploy (optional)
+
+The original Azure Blob static-website deploy script is retained as a fallback:
+
+```bash
+npm run deploy        # or: pwsh scripts/deploy.ps1
+```
+
+This uploads `dist` + data files to the `pakeconomydash` storage account. It is no
+longer part of `npm run update`; use it only if deploying to Azure instead of/along
+with Cloudflare.
 
 ### GitHub Actions Deployment
 

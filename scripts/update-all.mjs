@@ -204,13 +204,12 @@ async function main() {
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   const freshnessOk = runScript(resolve(__dirname, 'generate-data-freshness.mjs'), 'generate-data-freshness.mjs');
 
-  // Step 5: Commit, push, and deploy
-  const autoDeploy = !args.includes('--no-deploy');
+  // Step 5: Commit and push — Cloudflare Pages auto-builds & deploys on push.
+  const autoPush = !args.includes('--no-deploy');
   let pushOk = false;
-  let deployOk = false;
-  if (autoDeploy && (parseOk || apiOk)) {
+  if (autoPush && (parseOk || apiOk)) {
     console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    console.log('📤 Step 5: Commit, push, and deploy...');
+    console.log('📤 Step 5: Commit & push (Cloudflare auto-deploys)...');
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     try {
       const date = new Date().toISOString().split('T')[0];
@@ -225,7 +224,7 @@ async function main() {
         );
         execSync('git push', { cwd: resolve(__dirname, '..'), stdio: 'inherit' });
         pushOk = true;
-        console.log('  ✅ Changes committed and pushed');
+        console.log('  ✅ Changes committed and pushed — Cloudflare Pages will build & deploy automatically');
       } else {
         console.log('  ⏭  No data changes to commit');
         pushOk = true;
@@ -234,21 +233,8 @@ async function main() {
       console.error(`  ⚠️  Git push failed: ${err.message}`);
       console.log('  💡 Push manually: git add public/data/ && git commit && git push');
     }
-
-    // Deploy to Azure Storage
-    console.log('\n  🚀 Deploying to Azure Storage...');
-    try {
-      execSync('pwsh scripts/deploy.ps1', {
-        cwd: resolve(__dirname, '..'),
-        stdio: 'inherit',
-      });
-      deployOk = true;
-    } catch (err) {
-      console.error(`  ⚠️  Deploy failed: ${err.message}`);
-      console.log('  💡 Deploy manually: npm run deploy');
-    }
-  } else if (!autoDeploy) {
-    console.log('\n  ⏭  Skipping deploy (--no-deploy flag)');
+  } else if (!autoPush) {
+    console.log('\n  ⏭  Skipping commit & push (--no-deploy flag)');
   }
 
   // Step 6: Summary
@@ -261,9 +247,8 @@ async function main() {
   console.log(`  🧾 FBR PDF:     ${fbrOk ? '✅ Success' : '⚠️  Failed (kept existing FBR data)'}`);
   console.log(`  📊 KPI regen:   ${kpiOk ? '✅ Success' : '⚠️  Failed'}`);
   console.log(`  🧾 Freshness:   ${freshnessOk ? '✅ Success' : '⚠️  Failed'}`);
-  if (autoDeploy) {
-    console.log(`  📤 Git push:    ${pushOk ? '✅ Success' : '⚠️  Failed'}`);
-    console.log(`  🚀 Deploy:      ${deployOk ? '✅ Success' : '⚠️  Failed'}`);
+  if (autoPush) {
+    console.log(`  📤 Git push:    ${pushOk ? '✅ Success (Cloudflare auto-deploys)' : '⚠️  Failed'}`);
   }
   console.log('\n  🌐 Live at: https://pakistaneconomydashboard.farrukhmasudali.workers.dev/\n');
 }
