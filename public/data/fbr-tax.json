@@ -2,8 +2,8 @@
   "unit": "PKR Billion",
   "basis": "Net collection (after refunds)",
   "dataSource": "FBR official month-wise/tax-wise table (FY2024-25) + FBR press releases (FY2025-26)",
-  "lastUpdated": "2026-06-17",
-  "lastVerified": "2026-06-17",
+  "lastUpdated": "2026-06-22",
+  "lastVerified": "2026-06-22",
   "sourceUrl": "https://www.fbr.gov.pk",
   "monthly": [
     {
@@ -165,7 +165,10 @@
       "status": "final",
       "note": "FBR met its (downward-revised) target, collecting Rs9,306bn — the only recent year it claimed to hit the goal.",
       "sources": [
-        { "label": "FBR — comfortably achieves FY2023-24 target (official PR)", "url": "https://www.fbr.gov.pk/pr/fbr-comfortably-achieves-target-for-the-fy-20/174097/2024" }
+        {
+          "label": "FBR — comfortably achieves FY2023-24 target (official PR)",
+          "url": "https://www.fbr.gov.pk/pr/fbr-comfortably-achieves-target-for-the-fy-20/174097/2024"
+        }
       ]
     },
     {
@@ -177,8 +180,14 @@
       "status": "final",
       "note": "Original Rs12,970bn target revised down twice (to ~Rs12,332bn, then ~Rs11,900bn). Final collection Rs11,744bn missed even the last revised target by ~Rs156–178bn — and the original by ~Rs1,226bn.",
       "sources": [
-        { "label": "Business Recorder — FBR misses revised FY25 target by Rs178bn", "url": "https://www.brecorder.com/news/40370455" },
-        { "label": "Geo — FBR falls Rs1.235tr short of original FY25 target", "url": "https://www.geo.tv/latest/611798-fbr-falls-rs1235-trillion-short-of-annual-tax-target-in-fiscal-year-2024-25" }
+        {
+          "label": "Business Recorder — FBR misses revised FY25 target by Rs178bn",
+          "url": "https://www.brecorder.com/news/40370455"
+        },
+        {
+          "label": "Geo — FBR falls Rs1.235tr short of original FY25 target",
+          "url": "https://www.geo.tv/latest/611798-fbr-falls-rs1235-trillion-short-of-annual-tax-target-in-fiscal-year-2024-25"
+        }
       ]
     },
     {
@@ -190,8 +199,14 @@
       "status": "provisional",
       "note": "Budget target Rs14,131bn; IMF revised it to ~Rs13,980bn (Dec 2025), with talk of a further cut to ~Rs13,450bn. Provisional full-year collection ~Rs12,983bn — a shortfall of ~Rs1,148bn against the budget target.",
       "sources": [
-        { "label": "ProPakistani — IMF lowers FY26 FBR target to Rs13.98tr", "url": "https://propakistani.pk/2025/12/11/imf-lowers-pakistans-tax-collection-target-to-rs-13-98-trillion-for-fy26/" },
-        { "label": "Business Recorder — FBR FY2025-26 collection ~Rs13tr", "url": "https://www.brecorder.com/news/40425250" }
+        {
+          "label": "ProPakistani — IMF lowers FY26 FBR target to Rs13.98tr",
+          "url": "https://propakistani.pk/2025/12/11/imf-lowers-pakistans-tax-collection-target-to-rs-13-98-trillion-for-fy26/"
+        },
+        {
+          "label": "Business Recorder — FBR FY2025-26 collection ~Rs13tr",
+          "url": "https://www.brecorder.com/news/40425250"
+        }
       ]
     },
     {
@@ -203,7 +218,10 @@
       "status": "target",
       "note": "Budgeted FBR target for the new fiscal year — 17.6% above FY2025-26's provisional collection and the basis for the FY2026-27 federal budget.",
       "sources": [
-        { "label": "Dawn — FY2026-27 federal budget", "url": "https://www.dawn.com/news/2007283" }
+        {
+          "label": "Dawn — FY2026-27 federal budget",
+          "url": "https://www.dawn.com/news/2007283"
+        }
       ]
     }
   ],
