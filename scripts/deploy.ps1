@@ -4,7 +4,10 @@
 $StorageAccount = "pakeconomydash"
 $ResourceGroup  = "rg-pak-eco"
 $Region         = "westus2"
-$SubscriptionId = if ($env:AZURE_SUBSCRIPTION_ID) { $env:AZURE_SUBSCRIPTION_ID } else { "390ba656-47f7-435c-a233-8ba40bc2316f" }
+$SubscriptionId = $env:AZURE_SUBSCRIPTION_ID
+if (-not $SubscriptionId) {
+    throw "Set the AZURE_SUBSCRIPTION_ID environment variable before running. (Legacy Azure deploy — the project now deploys via Cloudflare Pages on git push.)"
+}
 
 function Invoke-Checked {
     param(
