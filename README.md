@@ -32,7 +32,7 @@ Navigation is grouped into **Overview**, **External Sector**, **Prices & Money**
 ## Tech Stack
 
 - **Frontend:** React 19 + Vite 5 + Chart.js 4
-- **Hosting:** Cloudflare Pages (auto-build & deploy on push); legacy Azure Storage script retained as fallback
+- **Hosting:** Cloudflare Pages (auto-build & deploy on push)
 - **Data:** JSON files in `public/data/`, updated from SBP sources
 - **Data Trust:** Generated source manifest + freshness audit metadata
 - **SEO:** `index.html` meta/Open Graph/Twitter tags + JSON-LD (`WebSite`/`Dataset`) structured data, a crawlable no-JS fallback, plus `public/robots.txt`, `public/sitemap.xml` and `public/og-image.svg`
@@ -45,7 +45,6 @@ Navigation is grouped into **Overview**, **External Sector**, **Prices & Money**
 ### Prerequisites
 
 - **Node.js** ≥ 18 (tested with 22.x)
-- **Azure CLI** (for deployment only)
 - **SBP EasyData API key** (for API-sourced data — free registration)
 
 ### Install & Run Locally
@@ -219,7 +218,7 @@ npm run audit:data
 # Run local deployment gates: data sanity, freshness audit, lint, build
 npm run ci:audit
 
-# Verify live Azure JSON matches local generated data
+# Verify live site JSON matches local generated data
 npm run verify:live
 
 # Update a specific API section
@@ -251,10 +250,9 @@ npm run verify:live
 The live dashboard also includes a **Data Freshness & Source Audit**
 panel in the Overview tab, generated from `public/data/data-freshness.json`.
 
-`npm run deploy` automatically runs the `predeploy` gate first
-(`audit:sanity`, `audit:data`, and lint). In CI environments that should not
-fetch SBP source metadata, set `AUDIT_SKIP_SOURCE=1`; the local data sanity
-checks still run.
+Run `npm run ci:audit` to execute the full gate (`audit:sanity`, `audit:data`,
+lint, and build) before pushing. In CI environments that should not fetch SBP
+source metadata, set `AUDIT_SKIP_SOURCE=1`; the local data sanity checks still run.
 
 ---
 
@@ -280,44 +278,12 @@ This fetches fresh data, regenerates KPIs/freshness, commits and pushes to GitHu
 Cloudflare Pages then builds and deploys automatically. Use `--no-deploy` to skip
 the commit & push (and therefore the auto-deploy).
 
-### Legacy Azure Storage deploy (optional)
+### Continuous integration
 
-The original Azure Blob static-website deploy script is retained as a fallback:
-
-```bash
-npm run deploy        # or: pwsh scripts/deploy.ps1
-```
-
-This uploads `dist` + data files to the `pakeconomydash` storage account. It is no
-longer part of `npm run update`; use it only if deploying to Azure instead of/along
-with Cloudflare.
-
-### GitHub Actions Deployment
-
-`.github/workflows/dashboard-ci.yml` runs data sanity checks, freshness audit,
-lint, and production build on pushes and pull requests. A manual
-`workflow_dispatch` deployment is also available after configuring Azure OIDC
-secrets:
-
-| Secret | Description |
-| ------ | ----------- |
-| `AZURE_CLIENT_ID` | Entra application/client ID with federated GitHub credentials |
-| `AZURE_TENANT_ID` | Azure tenant ID |
-| `AZURE_SUBSCRIPTION_ID` | Subscription containing `pakeconomydash` |
-
-Grant the app access to deploy to the storage account, then run the workflow
-manually with `deploy=true`.
-
-### Azure Configuration
-
-| Setting          | Value                  |
-| ---------------- | ---------------------- |
-| Storage Account  | `pakeconomydash`       |
-| Resource Group   | `rg-pak-eco`           |
-| Region           | `westus2`              |
-| SKU              | `Standard_LRS`         |
-| Index Document   | `index.html`           |
-| Error Document   | `index.html`           |
+`.github/workflows/dashboard-ci.yml` runs the data sanity checks, freshness
+audit, lint, and production build (`npm run ci:audit`) on every push and pull
+request. Deployment itself is handled by Cloudflare Pages' own build on push —
+no deploy credentials are stored in the repo.
 
 Live: <https://economyofpakistan.com/>
 
@@ -374,8 +340,7 @@ pak-eco/
 │   ├── data-catalog.mjs       # Dataset/source catalog
 │   ├── generate-data-freshness.mjs # Builds source/freshness JSON
 │   ├── audit-data.mjs         # Local data freshness audit
-│   ├── verify-live.mjs        # Live Azure vs local JSON verification
-│   ├── deploy.ps1             # Azure Storage deploy script
+│   ├── verify-live.mjs        # Live site vs local JSON verification
 │   └── sbp-raw/               # Downloaded Excel/PDF files (gitignored)
 ├── package.json
 ├── vite.config.js

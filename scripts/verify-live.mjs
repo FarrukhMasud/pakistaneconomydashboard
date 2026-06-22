@@ -21,7 +21,7 @@ async function readLive(file) {
 
 async function main() {
   let mismatches = 0;
-  console.log('\nVerifying live Azure data against local files\n');
+  console.log('\nVerifying live site data against local files\n');
 
   for (const dataset of DATASETS) {
     const [localData, liveData] = await Promise.all([
@@ -40,7 +40,7 @@ async function main() {
     process.exit(1);
   }
 
-  console.log('\n✅ Live Azure data matches local generated data.');
+  console.log('\n✅ Live site data matches local generated data.');
 }
 
 main().catch((err) => {

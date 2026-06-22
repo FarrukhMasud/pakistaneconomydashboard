@@ -11,8 +11,6 @@
     "update-data": "node scripts/update-data.mjs",
     "update-fbr": "node scripts/update-fbr.mjs",
     "update": "node scripts/update-all.mjs",
-    "predeploy": "npm run audit:sanity && npm run audit:data && npm run lint",
-    "deploy": "pwsh scripts/deploy.ps1",
     "audit:sanity": "node scripts/audit-sanity.mjs",
     "audit:data": "node scripts/audit-data.mjs",
     "ci:audit": "npm run audit:sanity && npm run audit:data && npm run lint && npm run build",
