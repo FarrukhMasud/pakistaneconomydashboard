@@ -1,0 +1,242 @@
+.insight-grid,
+.trust-grid,
+.learning-grid,
+.insight-two-col {
+  display: grid;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.insight-grid,
+.trust-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.insight-two-col {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.insight-card,
+.context-block,
+.learning-card,
+.insight-panel,
+.timeline-event {
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+}
+
+.insight-card {
+  padding: 1rem;
+  border-top: 3px solid var(--text-muted);
+}
+
+.insight-card--positive { border-top-color: var(--accent-teal); }
+.insight-card--negative { border-top-color: var(--accent-coral); }
+.insight-card--neutral { border-top-color: var(--accent-amber); }
+
+.insight-card__top,
+.insight-panel,
+.timeline-event {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.insight-card h3,
+.context-block h3,
+.learning-section h3,
+.learning-card h4,
+.timeline-event h3 {
+  margin: 0 0 0.5rem;
+  color: var(--text-primary);
+}
+
+.insight-card__value {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0.35rem 0;
+}
+
+.insight-card__meta,
+.insight-note,
+.source-pill,
+.official-badge {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.insight-card p,
+.learning-card p,
+.timeline-event p,
+.insight-panel p {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.insight-card__source,
+.learning-card a,
+.timeline-event a,
+.insight-panel a {
+  color: var(--accent-teal);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.official-badge,
+.source-pill,
+.metric-chip {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-pill);
+  background: var(--bg-elevated);
+}
+
+.official-badge,
+.source-pill {
+  padding: 0.2rem 0.5rem;
+}
+
+.metric-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.metric-chip {
+  padding: 0.45rem 0.75rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.metric-chip.active,
+.metric-chip:hover {
+  border-color: var(--accent-teal);
+  color: var(--text-primary);
+  background: rgba(0, 212, 170, 0.12);
+}
+
+.insight-panel {
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.context-block {
+  padding: 1rem;
+}
+
+.context-list {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.context-list > div {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) auto;
+  gap: 0.35rem 0.75rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.context-list > div:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.context-list span {
+  color: var(--text-secondary);
+}
+
+.context-list strong {
+  color: var(--text-primary);
+  text-align: right;
+}
+
+.context-list small {
+  grid-column: 1 / -1;
+  color: var(--text-muted);
+}
+
+.insight-table-wrap {
+  overflow-x: auto;
+  margin: 1rem 0;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+}
+
+.insight-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+}
+
+.insight-table th,
+.insight-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+  text-align: left;
+}
+
+.insight-table th {
+  color: var(--text-primary);
+  background: var(--bg-elevated);
+}
+
+.insight-table td {
+  color: var(--text-secondary);
+}
+
+.learning-section {
+  margin: 1.25rem 0;
+}
+
+.learning-card {
+  padding: 1rem;
+}
+
+.learning-card__read {
+  color: var(--text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.timeline {
+  position: relative;
+  display: grid;
+  gap: 0.8rem;
+  margin: 1rem 0;
+}
+
+.timeline-event {
+  padding: 1rem;
+  align-items: flex-start;
+}
+
+.timeline-event__date {
+  min-width: 7rem;
+  color: var(--accent-teal);
+  font-weight: 800;
+}
+
+@media (max-width: 720px) {
+  .insight-panel,
+  .timeline-event {
+    flex-direction: column;
+  }
+
+  .context-list > div {
+    grid-template-columns: 1fr;
+  }
+
+  .context-list strong {
+    text-align: left;
+  }
+}

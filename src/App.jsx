@@ -18,6 +18,14 @@ import InflationSection from './components/InflationSection';
 import MonetarySection from './components/MonetarySection';
 import FederalBudgetSection from './components/FederalBudgetSection';
 import ProvincialBudgetSection from './components/ProvincialBudgetSection';
+import {
+  EconomicBriefingSection,
+  EconomicTimelineSection,
+  LearningCenterSection,
+  PeerComparisonSection,
+  RiskOutlookSection,
+  SourceTrustSection,
+} from './components/InsightsSections';
 
 const NAV_GROUPS = [
   {
@@ -64,6 +72,20 @@ const NAV_GROUPS = [
       { id: 'fbr', label: '🧾 FBR Tax', component: FbrTaxSection },
       { id: 'federal-budget', label: '🏛️ Federal Budget', component: FederalBudgetSection },
       { id: 'provincial-budget', label: '🗺️ Provincial Budgets', component: ProvincialBudgetSection },
+    ],
+  },
+  {
+    id: 'insights',
+    label: 'Insights & Learning',
+    icon: '🎓',
+    blurb: 'Explain, compare, contextualize',
+    sections: [
+      { id: 'briefing', label: '🧭 Briefing', component: EconomicBriefingSection },
+      { id: 'risk-outlook', label: '⚠️ Risk & Outlook', component: RiskOutlookSection },
+      { id: 'peers', label: '🌏 Peer Comparison', component: PeerComparisonSection },
+      { id: 'timeline', label: '🕰️ Timeline', component: EconomicTimelineSection },
+      { id: 'learning', label: '🎓 Learning Center', component: LearningCenterSection },
+      { id: 'source-trust', label: '✅ Source Trust', component: SourceTrustSection },
     ],
   },
 ];

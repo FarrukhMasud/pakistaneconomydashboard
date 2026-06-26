@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "update-data": "node scripts/update-data.mjs",
     "update-fbr": "node scripts/update-fbr.mjs",
+    "update-peers": "node scripts/update-peer-comparison.mjs",
     "update": "node scripts/update-all.mjs",
     "audit:sanity": "node scripts/audit-sanity.mjs",
     "audit:data": "node scripts/audit-data.mjs",

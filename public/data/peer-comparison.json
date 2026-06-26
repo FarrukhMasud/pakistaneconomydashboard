@@ -1,0 +1,357 @@
+{
+  "dataSource": "World Bank Open Data API (official WDI indicators)",
+  "sourceUrl": "https://data.worldbank.org",
+  "lastUpdated": "2026-06-26",
+  "latestObservation": "2024",
+  "countries": [
+    {
+      "code": "PAK",
+      "name": "Pakistan"
+    },
+    {
+      "code": "IND",
+      "name": "India"
+    },
+    {
+      "code": "BGD",
+      "name": "Bangladesh"
+    },
+    {
+      "code": "LKA",
+      "name": "Sri Lanka"
+    },
+    {
+      "code": "EGY",
+      "name": "Egypt"
+    },
+    {
+      "code": "TUR",
+      "name": "Türkiye"
+    },
+    {
+      "code": "VNM",
+      "name": "Vietnam"
+    }
+  ],
+  "indicators": [
+    {
+      "id": "gdp-growth",
+      "label": "GDP growth",
+      "code": "NY.GDP.MKTP.KD.ZG",
+      "unit": "%",
+      "higherIsGood": true,
+      "whyItMatters": "Shows how quickly real output is expanding after inflation.",
+      "sourceUrl": "https://api.worldbank.org/v2/country/PAK;IND;BGD;LKA;EGY;TUR;VNM/indicator/NY.GDP.MKTP.KD.ZG",
+      "values": [
+        {
+          "countryCode": "PAK",
+          "countryName": "Pakistan",
+          "year": 2024,
+          "value": 3.05
+        },
+        {
+          "countryCode": "IND",
+          "countryName": "India",
+          "year": 2024,
+          "value": 6.49
+        },
+        {
+          "countryCode": "BGD",
+          "countryName": "Bangladesh",
+          "year": 2024,
+          "value": 4.22
+        },
+        {
+          "countryCode": "LKA",
+          "countryName": "Sri Lanka",
+          "year": 2024,
+          "value": 5.01
+        },
+        {
+          "countryCode": "EGY",
+          "countryName": "Egypt",
+          "year": 2024,
+          "value": 2.4
+        },
+        {
+          "countryCode": "TUR",
+          "countryName": "Türkiye",
+          "year": 2024,
+          "value": 3.33
+        },
+        {
+          "countryCode": "VNM",
+          "countryName": "Vietnam",
+          "year": 2024,
+          "value": 7.09
+        }
+      ]
+    },
+    {
+      "id": "inflation",
+      "label": "Inflation",
+      "code": "FP.CPI.TOTL.ZG",
+      "unit": "%",
+      "higherIsGood": false,
+      "whyItMatters": "High inflation erodes purchasing power and often forces tighter monetary policy.",
+      "sourceUrl": "https://api.worldbank.org/v2/country/PAK;IND;BGD;LKA;EGY;TUR;VNM/indicator/FP.CPI.TOTL.ZG",
+      "values": [
+        {
+          "countryCode": "PAK",
+          "countryName": "Pakistan",
+          "year": 2024,
+          "value": 12.63
+        },
+        {
+          "countryCode": "IND",
+          "countryName": "India",
+          "year": 2024,
+          "value": 4.95
+        },
+        {
+          "countryCode": "BGD",
+          "countryName": "Bangladesh",
+          "year": 2024,
+          "value": 10.47
+        },
+        {
+          "countryCode": "LKA",
+          "countryName": "Sri Lanka",
+          "year": 2024,
+          "value": -0.43
+        },
+        {
+          "countryCode": "EGY",
+          "countryName": "Egypt",
+          "year": 2024,
+          "value": 28.27
+        },
+        {
+          "countryCode": "TUR",
+          "countryName": "Türkiye",
+          "year": 2024,
+          "value": 58.51
+        },
+        {
+          "countryCode": "VNM",
+          "countryName": "Vietnam",
+          "year": 2024,
+          "value": 3.62
+        }
+      ]
+    },
+    {
+      "id": "exports-gdp",
+      "label": "Exports of goods & services",
+      "code": "NE.EXP.GNFS.ZS",
+      "unit": "% of GDP",
+      "higherIsGood": true,
+      "whyItMatters": "Export intensity is a proxy for foreign-exchange earning capacity.",
+      "sourceUrl": "https://api.worldbank.org/v2/country/PAK;IND;BGD;LKA;EGY;TUR;VNM/indicator/NE.EXP.GNFS.ZS",
+      "values": [
+        {
+          "countryCode": "PAK",
+          "countryName": "Pakistan",
+          "year": 2024,
+          "value": 10.39
+        },
+        {
+          "countryCode": "IND",
+          "countryName": "India",
+          "year": 2024,
+          "value": 21.16
+        },
+        {
+          "countryCode": "BGD",
+          "countryName": "Bangladesh",
+          "year": 2024,
+          "value": 10.46
+        },
+        {
+          "countryCode": "LKA",
+          "countryName": "Sri Lanka",
+          "year": 2024,
+          "value": 19.89
+        },
+        {
+          "countryCode": "EGY",
+          "countryName": "Egypt",
+          "year": 2024,
+          "value": 16.38
+        },
+        {
+          "countryCode": "TUR",
+          "countryName": "Türkiye",
+          "year": 2024,
+          "value": 27.57
+        },
+        {
+          "countryCode": "VNM",
+          "countryName": "Vietnam",
+          "year": 2024,
+          "value": 90.15
+        }
+      ]
+    },
+    {
+      "id": "reserves-imports",
+      "label": "Total reserves",
+      "code": "FI.RES.TOTL.MO",
+      "unit": "months of imports",
+      "higherIsGood": true,
+      "whyItMatters": "Import-cover months indicate the external buffer available during FX stress.",
+      "sourceUrl": "https://api.worldbank.org/v2/country/PAK;IND;BGD;LKA;EGY;TUR;VNM/indicator/FI.RES.TOTL.MO",
+      "values": [
+        {
+          "countryCode": "PAK",
+          "countryName": "Pakistan",
+          "year": 2024,
+          "value": 2.85
+        },
+        {
+          "countryCode": "IND",
+          "countryName": "India",
+          "year": 2024,
+          "value": 7.52
+        },
+        {
+          "countryCode": "BGD",
+          "countryName": "Bangladesh",
+          "year": 2024,
+          "value": 3.07
+        },
+        {
+          "countryCode": "LKA",
+          "countryName": "Sri Lanka",
+          "year": 2024,
+          "value": 2.86
+        },
+        {
+          "countryCode": "EGY",
+          "countryName": "Egypt",
+          "year": 2024,
+          "value": 4.54
+        },
+        {
+          "countryCode": "TUR",
+          "countryName": "Türkiye",
+          "year": 2024,
+          "value": 4.73
+        },
+        {
+          "countryCode": "VNM",
+          "countryName": "Vietnam",
+          "year": 2024,
+          "value": 2.37
+        }
+      ]
+    },
+    {
+      "id": "current-account",
+      "label": "Current account balance",
+      "code": "BN.CAB.XOKA.GD.ZS",
+      "unit": "% of GDP",
+      "higherIsGood": true,
+      "whyItMatters": "Persistent deficits increase dependence on financing and rollovers.",
+      "sourceUrl": "https://api.worldbank.org/v2/country/PAK;IND;BGD;LKA;EGY;TUR;VNM/indicator/BN.CAB.XOKA.GD.ZS",
+      "values": [
+        {
+          "countryCode": "PAK",
+          "countryName": "Pakistan",
+          "year": 2024,
+          "value": 0.13
+        },
+        {
+          "countryCode": "IND",
+          "countryName": "India",
+          "year": 2024,
+          "value": -0.82
+        },
+        {
+          "countryCode": "BGD",
+          "countryName": "Bangladesh",
+          "year": 2024,
+          "value": -0.67
+        },
+        {
+          "countryCode": "LKA",
+          "countryName": "Sri Lanka",
+          "year": 2024,
+          "value": 1.22
+        },
+        {
+          "countryCode": "EGY",
+          "countryName": "Egypt",
+          "year": 2024,
+          "value": -5.69
+        },
+        {
+          "countryCode": "TUR",
+          "countryName": "Türkiye",
+          "year": 2024,
+          "value": -0.77
+        },
+        {
+          "countryCode": "VNM",
+          "countryName": "Vietnam",
+          "year": 2024,
+          "value": 6.33
+        }
+      ]
+    },
+    {
+      "id": "tax-revenue",
+      "label": "Tax revenue",
+      "code": "GC.TAX.TOTL.GD.ZS",
+      "unit": "% of GDP",
+      "higherIsGood": true,
+      "whyItMatters": "Tax-to-GDP indicates the state capacity available to fund services and debt costs.",
+      "sourceUrl": "https://api.worldbank.org/v2/country/PAK;IND;BGD;LKA;EGY;TUR;VNM/indicator/GC.TAX.TOTL.GD.ZS",
+      "values": [
+        {
+          "countryCode": "PAK",
+          "countryName": "Pakistan",
+          "year": null,
+          "value": null
+        },
+        {
+          "countryCode": "IND",
+          "countryName": "India",
+          "year": 2022,
+          "value": 6.73
+        },
+        {
+          "countryCode": "BGD",
+          "countryName": "Bangladesh",
+          "year": 2021,
+          "value": 7.64
+        },
+        {
+          "countryCode": "LKA",
+          "countryName": "Sri Lanka",
+          "year": 2023,
+          "value": 9.92
+        },
+        {
+          "countryCode": "EGY",
+          "countryName": "Egypt",
+          "year": 2015,
+          "value": 12.52
+        },
+        {
+          "countryCode": "TUR",
+          "countryName": "Türkiye",
+          "year": 2024,
+          "value": 17.62
+        },
+        {
+          "countryCode": "VNM",
+          "countryName": "Vietnam",
+          "year": null,
+          "value": null
+        }
+      ]
+    }
+  ],
+  "methodologyNote": "Peer comparison values are the latest non-null annual World Development Indicators observation available for each country and indicator. Years can differ by country because official annual data is released at different times."
+}

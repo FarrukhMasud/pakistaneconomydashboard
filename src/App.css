@@ -184,7 +184,7 @@
 /* ===== Grouped Primary Navigation ===== */
 .group-nav {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 0.6rem;
   padding: 1rem 1.5rem;
   background: var(--bg-card);

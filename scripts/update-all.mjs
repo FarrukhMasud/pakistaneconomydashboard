@@ -192,6 +192,12 @@ async function main() {
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   const fbrOk = runScript(resolve(__dirname, 'update-fbr.mjs'), 'update-fbr.mjs');
 
+  // Step 3c: Refresh official World Bank peer comparison data
+  console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log('🌐 Step 3c: Updating peer-country comparison from World Bank API...');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  const peersOk = runScript(resolve(__dirname, 'update-peer-comparison.mjs'), 'update-peer-comparison.mjs');
+
   // Step 4: Regenerate KPI summary from all now-fresh data files
   console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   console.log('📊 Step 4: Regenerating KPI summary from all data files...');
@@ -245,6 +251,7 @@ async function main() {
   console.log(`  📊 Excel parse: ${parseOk ? '✅ Success' : '❌ Failed'}`);
   console.log(`  💸 SBP API:     ${apiOk ? '✅ Success' : '⚠️  Failed (needs SBP_API_KEY in .env)'}`);
   console.log(`  🧾 FBR PDF:     ${fbrOk ? '✅ Success' : '⚠️  Failed (kept existing FBR data)'}`);
+  console.log(`  🌐 Peers:       ${peersOk ? '✅ Success' : '⚠️  Failed (kept existing peer data)'}`);
   console.log(`  📊 KPI regen:   ${kpiOk ? '✅ Success' : '⚠️  Failed'}`);
   console.log(`  🧾 Freshness:   ${freshnessOk ? '✅ Success' : '⚠️  Failed'}`);
   if (autoPush) {

@@ -1,0 +1,104 @@
+{
+  "dataSource": "Official methodology pages from SBP, PBS, Finance Division, FBR, IMF, and World Bank",
+  "sourceUrl": "https://www.sbp.org.pk/ecodata/index2.asp",
+  "lastUpdated": "2026-06-26",
+  "lastVerified": "2026-06-26",
+  "methodologyNote": "Educational text is explanatory only. Metric values shown elsewhere in the dashboard come from the linked official datasets and generated JSON files.",
+  "sections": [
+    {
+      "id": "external-sector",
+      "title": "External sector",
+      "terms": [
+        {
+          "term": "Foreign exchange reserves",
+          "plainEnglish": "Foreign-currency assets held by SBP and banks. They are the buffer used to pay for imports and external debt when foreign exchange is scarce.",
+          "howToRead": "Rising reserves usually improve confidence. Import-cover months are more informative than the dollar amount alone.",
+          "officialSource": "State Bank of Pakistan",
+          "sourceUrl": "https://www.sbp.org.pk/ecodata/index2.asp"
+        },
+        {
+          "term": "Current account",
+          "plainEnglish": "The net balance of trade in goods and services, remittances, income, and transfers with the rest of the world.",
+          "howToRead": "A deficit means the country needs financing from reserves, borrowing, FDI, or portfolio flows. A surplus reduces external pressure.",
+          "officialSource": "State Bank of Pakistan",
+          "sourceUrl": "https://www.sbp.org.pk/ecodata/index2.asp"
+        },
+        {
+          "term": "Remittances",
+          "plainEnglish": "Money sent home by overseas Pakistanis through official channels.",
+          "howToRead": "Remittances are a major source of foreign exchange and often help offset the trade deficit.",
+          "officialSource": "SBP EasyData",
+          "sourceUrl": "https://easydata.sbp.org.pk"
+        },
+        {
+          "term": "Import cover",
+          "plainEnglish": "How many months of imports can be paid for using reserves.",
+          "howToRead": "Around three months is commonly treated as a minimum comfort threshold; below that, external vulnerability rises.",
+          "officialSource": "IMF reserve adequacy framework / SBP reserves",
+          "sourceUrl": "https://www.imf.org/en/Countries/PAK"
+        }
+      ]
+    },
+    {
+      "id": "prices-money",
+      "title": "Prices and money",
+      "terms": [
+        {
+          "term": "CPI inflation",
+          "plainEnglish": "The year-on-year change in the consumer price index, a basket of goods and services households buy.",
+          "howToRead": "Higher CPI means prices are rising faster. Food and fuel components often matter most for households.",
+          "officialSource": "Pakistan Bureau of Statistics / SBP EasyData",
+          "sourceUrl": "https://www.pbs.gov.pk/cpi"
+        },
+        {
+          "term": "Policy rate",
+          "plainEnglish": "The benchmark interest rate set by SBP's Monetary Policy Committee.",
+          "howToRead": "A higher policy rate can slow inflation and support the rupee, but it also raises borrowing costs.",
+          "officialSource": "State Bank of Pakistan",
+          "sourceUrl": "https://www.sbp.org.pk/m_policy/index.asp"
+        },
+        {
+          "term": "Real policy rate",
+          "plainEnglish": "Policy rate minus inflation.",
+          "howToRead": "A positive real rate is generally tighter; a negative real rate means inflation is above the nominal policy rate.",
+          "officialSource": "State Bank of Pakistan / PBS",
+          "sourceUrl": "https://www.sbp.org.pk/m_policy/index.asp"
+        }
+      ]
+    },
+    {
+      "id": "fiscal",
+      "title": "Fiscal health",
+      "terms": [
+        {
+          "term": "Fiscal balance",
+          "plainEnglish": "Government revenue minus total expenditure.",
+          "howToRead": "A deficit must be financed through borrowing, cash balances, or other financing sources.",
+          "officialSource": "Finance Division / SBP EasyData",
+          "sourceUrl": "https://www.finance.gov.pk"
+        },
+        {
+          "term": "Primary balance",
+          "plainEnglish": "Fiscal balance before interest payments.",
+          "howToRead": "A primary surplus means current revenues cover non-interest spending, a key IMF program metric.",
+          "officialSource": "IMF / Finance Division",
+          "sourceUrl": "https://www.imf.org/en/Countries/PAK"
+        },
+        {
+          "term": "Tax-to-GDP ratio",
+          "plainEnglish": "Tax revenue as a share of the economy.",
+          "howToRead": "A low ratio limits the government's ability to fund services and debt costs without borrowing.",
+          "officialSource": "FBR / Finance Division / World Bank",
+          "sourceUrl": "https://www.fbr.gov.pk"
+        },
+        {
+          "term": "Circular debt",
+          "plainEnglish": "Unpaid obligations in the power sector that accumulate when tariffs, subsidies, recoveries, and costs do not align.",
+          "howToRead": "A rising stock points to fiscal risks and pressure for tariff/subsidy reform.",
+          "officialSource": "Ministry of Energy / Power Division",
+          "sourceUrl": "https://power.gov.pk"
+        }
+      ]
+    }
+  ]
+}
