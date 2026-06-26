@@ -2,8 +2,8 @@
   "unit": "PKR Billion",
   "basis": "Net collection (after refunds)",
   "dataSource": "FBR official month-wise/tax-wise table (FY2024-25) + FBR press releases (FY2025-26)",
-  "lastUpdated": "2026-06-22",
-  "lastVerified": "2026-06-22",
+  "lastUpdated": "2026-06-26",
+  "lastVerified": "2026-06-26",
   "sourceUrl": "https://www.fbr.gov.pk",
   "monthly": [
     {

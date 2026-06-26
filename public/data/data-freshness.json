@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-22T18:24:02.685Z",
+  "generatedAt": "2026-06-26T22:48:50.031Z",
   "status": "fresh",
   "datasets": [
     {
@@ -16,7 +16,7 @@
       "critical": true,
       "latestObservation": "2026-06-12",
       "dataCoverage": "2025-04 – 2026-06-12",
-      "dashboardUpdated": "2026-06-22",
+      "dashboardUpdated": "2026-06-26",
       "status": "fresh"
     },
     {
@@ -33,7 +33,7 @@
       "critical": true,
       "latestObservation": "2026-05",
       "dataCoverage": "2021-01 – 2026-05",
-      "dashboardUpdated": "2026-06-22",
+      "dashboardUpdated": "2026-06-26",
       "status": "fresh"
     },
     {
@@ -58,7 +58,7 @@
       "critical": true,
       "latestObservation": "2026-05",
       "dataCoverage": "2021-06 – 2026-05",
-      "dashboardUpdated": "2026-06-22",
+      "dashboardUpdated": "2026-06-26",
       "status": "fresh"
     },
     {
@@ -75,7 +75,7 @@
       "critical": true,
       "latestObservation": "2026-05",
       "dataCoverage": "2021-01 – 2026-05",
-      "dashboardUpdated": "2026-06-22",
+      "dashboardUpdated": "2026-06-26",
       "status": "fresh"
     },
     {
@@ -92,7 +92,7 @@
       "critical": true,
       "latestObservation": "July-May FY26",
       "dataCoverage": "FY2026 Jul-May",
-      "dashboardUpdated": "2026-06-22",
+      "dashboardUpdated": "2026-06-26",
       "status": "fresh"
     },
     {
@@ -109,7 +109,7 @@
       "critical": true,
       "latestObservation": "Jul-May FY26",
       "dataCoverage": "Jul-May FY26",
-      "dashboardUpdated": "2026-06-22",
+      "dashboardUpdated": "2026-06-26",
       "status": "fresh"
     },
     {
@@ -128,7 +128,7 @@
       "critical": true,
       "latestObservation": "2026-05",
       "dataCoverage": null,
-      "dashboardUpdated": "2026-06-22",
+      "dashboardUpdated": "2026-06-26",
       "status": "fresh"
     },
     {
@@ -148,7 +148,7 @@
       "critical": true,
       "latestObservation": "2026-06",
       "dataCoverage": null,
-      "dashboardUpdated": "2026-06-22",
+      "dashboardUpdated": "2026-06-26",
       "status": "fresh"
     },
     {
@@ -165,7 +165,7 @@
       "critical": true,
       "latestObservation": "FY2026",
       "dataCoverage": "FY2017 – FY2026",
-      "dashboardUpdated": "2026-06-22",
+      "dashboardUpdated": "2026-06-26",
       "status": "fresh"
     },
     {
@@ -182,7 +182,7 @@
       "critical": false,
       "latestObservation": "2025-07",
       "dataCoverage": null,
-      "dashboardUpdated": "2026-06-22",
+      "dashboardUpdated": "2026-06-26",
       "status": "fresh"
     },
     {
