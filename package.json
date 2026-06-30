@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
+    "preview": "npm run build && wrangler dev",
     "update-data": "node scripts/update-data.mjs",
     "update-fbr": "node scripts/update-fbr.mjs",
     "update-peers": "node scripts/update-peer-comparison.mjs",
@@ -16,7 +16,8 @@
     "audit:data": "node scripts/audit-data.mjs",
     "ci:audit": "npm run audit:sanity && npm run audit:data && npm run lint && npm run build",
     "verify:live": "node scripts/verify-live.mjs",
-    "generate:freshness": "node scripts/generate-data-freshness.mjs"
+    "generate:freshness": "node scripts/generate-data-freshness.mjs",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "chart.js": "^4.5.1",
@@ -27,6 +28,7 @@
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.42.4",
     "@eslint/js": "^9.39.4",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
@@ -37,6 +39,7 @@
     "globals": "^17.4.0",
     "pdfreader": "^3.0.8",
     "vite": "^6.4.3",
+    "wrangler": "^4.106.0",
     "xlsx": "^0.18.5"
   }
 }
