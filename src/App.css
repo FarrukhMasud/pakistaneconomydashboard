@@ -341,8 +341,16 @@
   grid-column: 1 / -1;
 }
 
+.monthly-it-spotlight {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
 @media (max-width: 900px) {
   .section-grid { grid-template-columns: 1fr; }
+  .monthly-it-spotlight { grid-template-columns: 1fr; }
 }
 
 /* ===== Chart Container ===== */

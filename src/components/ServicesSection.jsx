@@ -158,6 +158,29 @@ export default function ServicesSection() {
         ]}
       />
 
+      {itMonthly && (
+        <div className="monthly-it-spotlight">
+          <ChartCard
+            title="Monthly IT & Freelance Exports"
+            description={`Monthly IT & Telecom and Freelance IT export earnings (US$ million), as SBP releases each month. ${mseries.length < 4 ? 'This series accumulates a new month with every SBP release and will lengthen into a fuller trend over time. ' : ''}Freelance IT is SBP's dedicated line for individual freelancer earnings repatriated through formal channels.`}
+            source="SBP — EBOPS services detail"
+            dataSource="SBP"
+            lastUpdated={data.lastUpdated}
+            dataCoverage={itMonthly.latestMonth ? `latest ${formatMonthYear(itMonthly.latestMonth)}` : data.dataCoverage}
+          >
+            <div className="chart-container tall">
+              {monthlyItData && <Bar data={monthlyItData} options={monthlyItOptions} />}
+            </div>
+          </ChartCard>
+          <SummaryCard
+            title={`IT Exports — ${itMonthly.latestMonth ? formatMonthYear(itMonthly.latestMonth) : 'Latest month'} (vs a year ago)`}
+            accent={COLORS.teal}
+            items={itMomentum}
+            footnote={`Latest-month export value with year-on-year change and fiscal-year-to-date growth (${itMonthly.fytdLabel} vs ${itMonthly.fytdPriorLabel}). Source: SBP EBOPS services detail.`}
+          />
+        </div>
+      )}
+
       {summary && (() => {
         const totalGrowth = comparison ? pctChange(comparison.fy26.totalCredit, comparison.fy25.totalCredit) : null;
         const itGrowth = comparison ? pctChange(comparison.fy26.itCredit, comparison.fy25.itCredit) : null;
@@ -190,29 +213,6 @@ export default function ServicesSection() {
           </div>
         );
       })()}
-
-      {itMonthly && (
-        <div className="section-grid" style={{ marginTop: '1.5rem' }}>
-          <ChartCard
-            title="Monthly IT & Freelance Exports"
-            description={`Monthly IT & Telecom and Freelance IT export earnings (US$ million), as SBP releases each month. ${mseries.length < 4 ? 'This series accumulates a new month with every SBP release and will lengthen into a fuller trend over time. ' : ''}Freelance IT is SBP's dedicated line for individual freelancer earnings repatriated through formal channels.`}
-            source="SBP — EBOPS services detail"
-            dataSource="SBP"
-            lastUpdated={data.lastUpdated}
-            dataCoverage={itMonthly.latestMonth ? `latest ${formatMonthYear(itMonthly.latestMonth)}` : data.dataCoverage}
-          >
-            <div className="chart-container">
-              {monthlyItData && <Bar data={monthlyItData} options={monthlyItOptions} />}
-            </div>
-          </ChartCard>
-          <SummaryCard
-            title={`IT Exports — ${itMonthly.latestMonth ? formatMonthYear(itMonthly.latestMonth) : 'Latest month'} (vs a year ago)`}
-            accent={COLORS.teal}
-            items={itMomentum}
-            footnote={`Latest-month export value with year-on-year change and fiscal-year-to-date growth (${itMonthly.fytdLabel} vs ${itMonthly.fytdPriorLabel}). Source: SBP EBOPS services detail.`}
-          />
-        </div>
-      )}
 
       <div className="section-grid">
         <ChartCard

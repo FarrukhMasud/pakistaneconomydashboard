@@ -8,10 +8,29 @@ import SummaryCard from './ui/SummaryCard';
 import YoYToggle from './ui/YoYToggle';
 import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, sumField, avgField, buildYoYOverlay } from '../utils/periodHelpers';
 
+const CORRIDORS = [
+  { field: 'saudiArabia', label: 'Saudi Arabia', color: COLORS.teal },
+  { field: 'uae', label: 'UAE', color: COLORS.amber },
+  { field: 'uk', label: 'United Kingdom', color: COLORS.blue },
+  { field: 'usa', label: 'United States', color: COLORS.purple },
+  { field: 'otherGcc', label: 'Other GCC', color: '#26c6da' },
+  { field: 'eu', label: 'EU Countries', color: '#66bb6a' },
+  { field: 'otherCountries', label: 'Other countries', color: '#78909c' },
+];
+
 function formatDate(dateStr) {
   const [y, m] = dateStr.split('-');
   const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   return `${months[parseInt(m, 10) - 1]} ${y.slice(2)}`;
+}
+
+function withOtherCountries(row) {
+  const known = ['saudiArabia', 'uae', 'uk', 'usa', 'otherGcc', 'eu']
+    .reduce((sum, field) => sum + (Number(row[field]) || 0), 0);
+  return {
+    ...row,
+    otherCountries: Math.max(0, (Number(row.total) || 0) - known),
+  };
 }
 
 export default function RemittancesSection() {
@@ -24,6 +43,16 @@ export default function RemittancesSection() {
   const { monthly, sourceCountries, lastUpdated: remLU, dataCoverage: remDC } = data;
   const cy = currentCalendarYear(monthly);
   const fy = currentFiscalYear(monthly);
+  const corridorRows = monthly.slice(-36).map(withOtherCountries);
+  const latestCorridor = corridorRows.at(-1);
+  const corridorSummary = latestCorridor ? CORRIDORS
+    .map((corridor) => ({
+      label: corridor.label,
+      value: latestCorridor[corridor.field],
+      share: latestCorridor.total ? (latestCorridor[corridor.field] / latestCorridor.total) * 100 : 0,
+      color: corridor.color,
+    }))
+    .sort((a, b) => b.value - a.value) : [];
 
   // Chart 1 — Monthly total remittances (vertical bar)
   const { priorData: remPrior, priorLabel: remPriorLabel } = buildYoYOverlay(monthly, 'total');
@@ -65,6 +94,47 @@ export default function RemittancesSection() {
       y: {
         ...baseBarOptions.scales.y,
         title: { display: true, text: 'USD Millions', color: COLORS.text },
+      },
+    },
+  };
+
+  // Chart 1b — Monthly remittances by official corridor bucket
+  const corridorData = {
+    labels: corridorRows.map((d) => formatDate(d.date)),
+    datasets: CORRIDORS.map((corridor) => ({
+      label: corridor.label,
+      data: corridorRows.map((d) => d[corridor.field]),
+      backgroundColor: corridor.color,
+      borderRadius: 3,
+      stack: 'remittances',
+    })),
+  };
+  const corridorOptions = {
+    ...baseBarOptions,
+    plugins: {
+      ...baseBarOptions.plugins,
+      legend: {
+        display: true,
+        position: 'top',
+        labels: { ...baseBarOptions.plugins.legend?.labels, boxWidth: 10 },
+      },
+      tooltip: {
+        ...baseBarOptions.plugins.tooltip,
+        callbacks: {
+          label: (ctx) => `${ctx.dataset.label}: $${Number(ctx.raw).toLocaleString(undefined, { maximumFractionDigits: 1 })}M`,
+        },
+      },
+    },
+    scales: {
+      x: {
+        ...baseBarOptions.scales.x,
+        stacked: true,
+        ticks: { ...baseBarOptions.scales.x.ticks, maxTicksLimit: 12 },
+      },
+      y: {
+        ...baseBarOptions.scales.y,
+        stacked: true,
+        title: { display: true, text: 'USD Millions / month', color: COLORS.text },
       },
     },
   };
@@ -145,6 +215,34 @@ export default function RemittancesSection() {
           </div>
         );
       })()}
+
+      <div className="section-grid">
+        <ChartCard
+          title="Monthly Remittances by Corridor"
+          description="Monthly workers' remittances split by SBP's published corridor buckets. SBP exposes major single-country corridors (Saudi Arabia, UAE, UK, USA), grouped Other GCC and EU buckets, plus the residual shown here as Other countries."
+          source="State Bank of Pakistan"
+          dataSource="SBP EasyData API"
+          lastUpdated={remLU}
+          dataCoverage={`${formatDate(corridorRows[0]?.date)} – ${formatDate(corridorRows.at(-1)?.date)}`}
+        >
+          <div className="chart-container tall">
+            <Bar data={corridorData} options={corridorOptions} />
+          </div>
+        </ChartCard>
+        {latestCorridor && (
+          <SummaryCard
+            title={`${formatDate(latestCorridor.date)} — Corridor Split`}
+            accent={COLORS.teal}
+            items={corridorSummary.map((corridor) => ({
+              label: corridor.label,
+              value: fmtUSD(corridor.value),
+              sub: `${corridor.share.toFixed(1)}% of total`,
+              color: corridor.color,
+            }))}
+            footnote="Official SBP country/corridor buckets; Other countries is total remittances minus the published corridor buckets."
+          />
+        )}
+      </div>
 
       <div className="section-grid">
         <ChartCard
