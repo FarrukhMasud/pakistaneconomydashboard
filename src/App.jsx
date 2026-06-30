@@ -18,6 +18,7 @@ import InflationSection from './components/InflationSection';
 import MonetarySection from './components/MonetarySection';
 import FederalBudgetSection from './components/FederalBudgetSection';
 import ProvincialBudgetSection from './components/ProvincialBudgetSection';
+import FeedbackSection from './components/FeedbackSection';
 import {
   EconomicBriefingSection,
   EconomicTimelineSection,
@@ -86,6 +87,7 @@ const NAV_GROUPS = [
       { id: 'timeline', label: '🕰️ Timeline', component: EconomicTimelineSection },
       { id: 'learning', label: '🎓 Learning Center', component: LearningCenterSection },
       { id: 'source-trust', label: '✅ Source Trust', component: SourceTrustSection },
+      { id: 'feedback', label: '✉️ Feedback', component: FeedbackSection },
     ],
   },
 ];
@@ -189,6 +191,17 @@ function App() {
       <footer className="app-footer">
         <p>Pakistan Economic Dashboard &mdash; Built with authentic open government data</p>
         <div className="footer-sources">
+          <button
+            type="button"
+            className="footer-feedback-link"
+            onClick={() => {
+              setActiveGroupId('insights');
+              setActiveSectionId('feedback');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          >
+            Send feedback
+          </button>
           <a href="https://www.sbp.org.pk" target="_blank" rel="noreferrer">State Bank of Pakistan</a>
           <a href="https://www.pbs.gov.pk" target="_blank" rel="noreferrer">Pakistan Bureau of Statistics</a>
           <a href="https://www.finance.gov.pk" target="_blank" rel="noreferrer">Ministry of Finance</a>
