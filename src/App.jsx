@@ -140,7 +140,9 @@ function App() {
         <div className="flag-accent" />
         <div className="header-content">
           <div className="header-top-row">
-            <div />
+            <a className="header-feedback-link" href="mailto:feedback@economyofpakistan.com">
+              ✉️ Feedback
+            </a>
             <ThemeToggle theme={theme} setTheme={setTheme} />
           </div>
           <div className="header-emblem">☪</div>
@@ -200,7 +202,7 @@ function App() {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           >
-            Send feedback
+            Feedback: feedback@economyofpakistan.com
           </button>
           <a href="https://www.sbp.org.pk" target="_blank" rel="noreferrer">State Bank of Pakistan</a>
           <a href="https://www.pbs.gov.pk" target="_blank" rel="noreferrer">Pakistan Bureau of Statistics</a>
