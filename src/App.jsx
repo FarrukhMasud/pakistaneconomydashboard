@@ -22,8 +22,14 @@ import FeedbackSection from './components/FeedbackSection';
 import {
   EconomicBriefingSection,
   EconomicTimelineSection,
+  ExternalFinancingWallSection,
+  GoodBadWatchSection,
+  ImfComplianceSection,
+  ItExportDeepDiveSection,
   LearningCenterSection,
+  MacroRiskScorecardSection,
   PeerComparisonSection,
+  RevenueTargetMeterSection,
   RiskOutlookSection,
   SourceTrustSection,
 } from './components/InsightsSections';
@@ -82,6 +88,12 @@ const NAV_GROUPS = [
     blurb: 'Explain, compare, contextualize',
     sections: [
       { id: 'briefing', label: '🧭 Briefing', component: EconomicBriefingSection },
+      { id: 'macro-risk', label: '🚦 Macro Risk', component: MacroRiskScorecardSection },
+      { id: 'good-bad-watch', label: '🧾 Good / Bad / Watch', component: GoodBadWatchSection },
+      { id: 'imf-compliance', label: '🏛️ IMF Compliance', component: ImfComplianceSection },
+      { id: 'financing-wall', label: '🌐 Financing Wall', component: ExternalFinancingWallSection },
+      { id: 'revenue-meter', label: '🎯 Revenue Meter', component: RevenueTargetMeterSection },
+      { id: 'it-deep-dive', label: '💻 IT Deep Dive', component: ItExportDeepDiveSection },
       { id: 'risk-outlook', label: '⚠️ Risk & Outlook', component: RiskOutlookSection },
       { id: 'peers', label: '🌏 Peer Comparison', component: PeerComparisonSection },
       { id: 'timeline', label: '🕰️ Timeline', component: EconomicTimelineSection },
