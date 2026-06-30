@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-30T18:49:23.318Z",
+  "generatedAt": "2026-06-30T18:52:00.902Z",
   "status": "fresh",
   "datasets": [
     {
@@ -265,9 +265,9 @@
       "cadence": "Event-driven",
       "expectedLag": "Update alongside SBP weekly reserves and IMF import-cover assessments.",
       "critical": false,
-      "latestObservation": "2026-06-05",
+      "latestObservation": "2026-06-19",
       "dataCoverage": null,
-      "dashboardUpdated": "2026-06-17",
+      "dashboardUpdated": "2026-06-30",
       "status": "fresh"
     },
     {

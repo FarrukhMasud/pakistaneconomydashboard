@@ -1,12 +1,12 @@
 {
   "title": "Reserves Adequacy & Import Cover",
   "current": {
-    "sbpReserves": 17.22,
-    "totalReserves": 22.67,
-    "bankReserves": 5.46,
-    "asOf": "2026-06-05",
-    "importCoverMonths": 3.0,
-    "importCoverNote": "Around 3 months of import cover by mid-2026 — at or just above the IMF's adequacy benchmark.",
+    "sbpReserves": 15.92,
+    "totalReserves": 21.48,
+    "bankReserves": 5.57,
+    "asOf": "2026-06-19",
+    "importCoverMonths": 2.9,
+    "importCoverNote": "Around 3 months of import cover by mid-2026; SBP reserves dipped in the latest week because of external debt repayments, while SBP indicated end-June inflows were expected to rebuild the buffer.",
     "unit": "US$ billion"
   },
   "benchmark": {
@@ -23,18 +23,21 @@
     { "date": "2025-06", "sbpReserves": 14.5, "importCoverMonths": 2.5, "label": "Jun 2025" },
     { "date": "2025-12", "sbpReserves": 15.89, "importCoverMonths": 2.6, "label": "Dec 2025" },
     { "date": "2026-03", "sbpReserves": 17.2, "importCoverMonths": 3.1, "label": "Mar 2026" },
-    { "date": "2026-06", "sbpReserves": 17.22, "importCoverMonths": 3.0, "label": "Jun 2026" }
+    { "date": "2026-06", "sbpReserves": 15.92, "importCoverMonths": 2.9, "label": "Jun 2026" }
   ],
   "drivers": [
     "IMF EFF + RSF disbursements (~$1.3bn in May 2026)",
+    "SBP-flagged end-June inflows of about $2.4bn after the June 19 repayment-driven reserves dip",
     "Rollovers of bilateral deposits, notably from China and the Gulf",
     "A contained current-account balance and stronger remittances",
     "Tighter monetary policy supporting the rupee and inflows"
   ],
-  "context": "Pakistan's reserves fell to barely two weeks of import cover in early 2023. Reaching ~3 months by mid-2026 marks a major rebuild of the external buffer — though it remains thin by regional standards and reliant on continued IMF and bilateral support.",
+  "context": "Pakistan's reserves fell to barely two weeks of import cover in early 2023. Holding near 3 months by mid-2026 marks a major rebuild of the external buffer — though it remains thin by regional standards, volatile around debt-repayment weeks, and reliant on continued IMF and bilateral support.",
   "sourceUrl": "https://www.sbp.org.pk/ecodata/index2.asp",
-  "lastVerified": "2026-06-17",
+  "lastVerified": "2026-06-30",
   "verifiedFrom": [
+    "https://profit.pakistantoday.com.pk/2026/06/29/sbp-forex-reserves-fall-to-dollar159-billion-after-external-debt-payments",
+    "https://www.brecorder.com/news/40427722",
     "https://www.ainvest.com/news/pakistan-fx-reserves-reach-3-month-import-cover-june-2606/",
     "https://isn.media/article/pakistan-foreign-reserves-march-2026/",
     "https://www.geo.tv/latest/612144-pakistan-exceeds-imfs-target-with-sbps-reserves-reaching-145bn",
