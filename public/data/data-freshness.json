@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-26T22:48:50.031Z",
+  "generatedAt": "2026-06-30T18:49:23.318Z",
   "status": "fresh",
   "datasets": [
     {
@@ -14,9 +14,9 @@
       "cadence": "Weekly",
       "expectedLag": "Usually published weekly; dashboard should advance after SBP updates forex.pdf.",
       "critical": true,
-      "latestObservation": "2026-06-12",
-      "dataCoverage": "2025-04 – 2026-06-12",
-      "dashboardUpdated": "2026-06-26",
+      "latestObservation": "2026-06-19",
+      "dataCoverage": "2025-05 – 2026-06-19",
+      "dashboardUpdated": "2026-06-30",
       "status": "fresh"
     },
     {
@@ -33,7 +33,7 @@
       "critical": true,
       "latestObservation": "2026-05",
       "dataCoverage": "2021-01 – 2026-05",
-      "dashboardUpdated": "2026-06-26",
+      "dashboardUpdated": "2026-06-30",
       "status": "fresh"
     },
     {
@@ -58,7 +58,7 @@
       "critical": true,
       "latestObservation": "2026-05",
       "dataCoverage": "2021-06 – 2026-05",
-      "dashboardUpdated": "2026-06-26",
+      "dashboardUpdated": "2026-06-30",
       "status": "fresh"
     },
     {
@@ -75,7 +75,7 @@
       "critical": true,
       "latestObservation": "2026-05",
       "dataCoverage": "2021-01 – 2026-05",
-      "dashboardUpdated": "2026-06-26",
+      "dashboardUpdated": "2026-06-30",
       "status": "fresh"
     },
     {
@@ -92,7 +92,7 @@
       "critical": true,
       "latestObservation": "July-May FY26",
       "dataCoverage": "FY2026 Jul-May",
-      "dashboardUpdated": "2026-06-26",
+      "dashboardUpdated": "2026-06-30",
       "status": "fresh"
     },
     {
@@ -109,7 +109,7 @@
       "critical": true,
       "latestObservation": "Jul-May FY26",
       "dataCoverage": "Jul-May FY26",
-      "dashboardUpdated": "2026-06-26",
+      "dashboardUpdated": "2026-06-30",
       "status": "fresh"
     },
     {
@@ -128,7 +128,7 @@
       "critical": true,
       "latestObservation": "2026-05",
       "dataCoverage": null,
-      "dashboardUpdated": "2026-06-26",
+      "dashboardUpdated": "2026-06-30",
       "status": "fresh"
     },
     {
@@ -148,7 +148,7 @@
       "critical": true,
       "latestObservation": "2026-06",
       "dataCoverage": null,
-      "dashboardUpdated": "2026-06-26",
+      "dashboardUpdated": "2026-06-30",
       "status": "fresh"
     },
     {
@@ -165,7 +165,7 @@
       "critical": true,
       "latestObservation": "FY2026",
       "dataCoverage": "FY2017 – FY2026",
-      "dashboardUpdated": "2026-06-26",
+      "dashboardUpdated": "2026-06-30",
       "status": "fresh"
     },
     {
@@ -182,7 +182,7 @@
       "critical": false,
       "latestObservation": "2025-07",
       "dataCoverage": null,
-      "dashboardUpdated": "2026-06-26",
+      "dashboardUpdated": "2026-06-30",
       "status": "fresh"
     },
     {
@@ -302,6 +302,57 @@
       "latestObservation": "2026-06-22",
       "dataCoverage": null,
       "dashboardUpdated": "2026-06-22",
+      "status": "fresh"
+    },
+    {
+      "id": "peer-comparison",
+      "label": "Peer Economy Comparison",
+      "file": "peer-comparison.json",
+      "source": "World Bank Open Data API",
+      "sourceUrl": "https://data.worldbank.org",
+      "sourceFile": null,
+      "apiSeries": null,
+      "parser": "update-peer-comparison.mjs",
+      "cadence": "Annual",
+      "expectedLag": "World Bank WDI annual indicators update after national accounts and balance-of-payments releases; years can differ by country and indicator.",
+      "critical": false,
+      "latestObservation": "2024",
+      "dataCoverage": null,
+      "dashboardUpdated": "2026-06-30",
+      "status": "fresh"
+    },
+    {
+      "id": "economic-events",
+      "label": "Official Economic Timeline",
+      "file": "economic-events.json",
+      "source": "IMF / SBP / Finance Division / NDMA",
+      "sourceUrl": "https://www.imf.org/en/Countries/PAK",
+      "sourceFile": null,
+      "apiSeries": null,
+      "parser": "manual-curation",
+      "cadence": "Event-driven",
+      "expectedLag": "Update when an official institution publishes a major macroeconomic event, program decision, survey, or policy decision.",
+      "critical": false,
+      "latestObservation": "2026-06-15",
+      "dataCoverage": null,
+      "dashboardUpdated": "2026-06-26",
+      "status": "fresh"
+    },
+    {
+      "id": "explainers",
+      "label": "Learning Center Explainers",
+      "file": "explainers.json",
+      "source": "Official methodology pages",
+      "sourceUrl": "https://www.sbp.org.pk/ecodata/index2.asp",
+      "sourceFile": null,
+      "apiSeries": null,
+      "parser": "manual-curation",
+      "cadence": "Event-driven",
+      "expectedLag": "Update when dashboard terminology changes or official methodology pages change.",
+      "critical": false,
+      "latestObservation": "2026-06-26",
+      "dataCoverage": null,
+      "dashboardUpdated": "2026-06-26",
       "status": "fresh"
     }
   ]
