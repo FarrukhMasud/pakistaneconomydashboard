@@ -1,14 +1,10 @@
 {
   "dataSource": "SBP EasyData API - Inflation Snapshot (Base: 2015-16)",
-  "lastUpdated": "2026-06-30",
+  "lastUpdated": "2026-07-07",
   "national_cpi": {
     "name": "National CPI YoY",
     "seriesKey": "TS_GP_PT_CPI_M.P00011516",
     "data": [
-      {
-        "date": "2021-06",
-        "value": 9.655669291
-      },
       {
         "date": "2021-07",
         "value": 8.405968385
@@ -244,6 +240,10 @@
       {
         "date": "2026-05",
         "value": 11.7
+      },
+      {
+        "date": "2026-06",
+        "value": 11.1
       }
     ]
   },
@@ -251,10 +251,6 @@
     "name": "Urban CPI YoY",
     "seriesKey": "TS_GP_PT_CPI_M.P00021516",
     "data": [
-      {
-        "date": "2021-06",
-        "value": 9.591326105
-      },
       {
         "date": "2021-07",
         "value": 8.669190232
@@ -490,6 +486,10 @@
       {
         "date": "2026-05",
         "value": 11.8
+      },
+      {
+        "date": "2026-06",
+        "value": 11.2
       }
     ]
   },
@@ -497,10 +497,6 @@
     "name": "Rural CPI YoY",
     "seriesKey": "TS_GP_PT_CPI_M.P00031516",
     "data": [
-      {
-        "date": "2021-06",
-        "value": 9.731036567
-      },
       {
         "date": "2021-07",
         "value": 8.008213552
@@ -736,6 +732,10 @@
       {
         "date": "2026-05",
         "value": 11.5
+      },
+      {
+        "date": "2026-06",
+        "value": 10.9
       }
     ]
   },
@@ -743,10 +743,6 @@
     "name": "SPI Combined YoY",
     "seriesKey": "TS_GP_PT_CPI_M.P00111516",
     "data": [
-      {
-        "date": "2021-06",
-        "value": 15.37443562
-      },
       {
         "date": "2021-07",
         "value": 12.60674157
@@ -982,6 +978,10 @@
       {
         "date": "2026-05",
         "value": 14.91
+      },
+      {
+        "date": "2026-06",
+        "value": 15
       }
     ]
   },
@@ -989,10 +989,6 @@
     "name": "Urban Food CPI YoY",
     "seriesKey": "TS_GP_PT_CPI_M.P00041516",
     "data": [
-      {
-        "date": "2021-06",
-        "value": 11.03316117
-      },
       {
         "date": "2021-07",
         "value": 9.399334826
@@ -1228,6 +1224,10 @@
       {
         "date": "2026-05",
         "value": 6.5
+      },
+      {
+        "date": "2026-06",
+        "value": 8.2
       }
     ]
   },
@@ -1235,10 +1235,6 @@
     "name": "Rural Food CPI YoY",
     "seriesKey": "TS_GP_PT_CPI_M.P00051516",
     "data": [
-      {
-        "date": "2021-06",
-        "value": 9.777551279
-      },
       {
         "date": "2021-07",
         "value": 7.303188078
@@ -1474,6 +1470,10 @@
       {
         "date": "2026-05",
         "value": 8.5
+      },
+      {
+        "date": "2026-06",
+        "value": 9.4
       }
     ]
   },
@@ -1481,10 +1481,6 @@
     "name": "Urban Non-Food CPI YoY",
     "seriesKey": "TS_GP_PT_CPI_M.P00061516",
     "data": [
-      {
-        "date": "2021-06",
-        "value": 8.772921073
-      },
       {
         "date": "2021-07",
         "value": 8.227870341
@@ -1720,6 +1716,10 @@
       {
         "date": "2026-05",
         "value": 15.2
+      },
+      {
+        "date": "2026-06",
+        "value": 13.1
       }
     ]
   },
@@ -1727,10 +1727,6 @@
     "name": "Rural Non-Food CPI YoY",
     "seriesKey": "TS_GP_PT_CPI_M.P00071516",
     "data": [
-      {
-        "date": "2021-06",
-        "value": 9.69240028
-      },
       {
         "date": "2021-07",
         "value": 8.651859566
@@ -1966,6 +1962,10 @@
       {
         "date": "2026-05",
         "value": 14.2
+      },
+      {
+        "date": "2026-06",
+        "value": 12.3
       }
     ]
   },
@@ -1973,10 +1973,6 @@
     "name": "WPI YoY",
     "seriesKey": "TS_GP_PT_CPI_M.P00081516",
     "data": [
-      {
-        "date": "2021-06",
-        "value": 20.85419735
-      },
       {
         "date": "2021-07",
         "value": 17.26980578
@@ -2212,6 +2208,10 @@
       {
         "date": "2026-05",
         "value": 12.7
+      },
+      {
+        "date": "2026-06",
+        "value": 10.7
       }
     ]
   }

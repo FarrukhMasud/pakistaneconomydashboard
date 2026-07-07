@@ -1,8 +1,8 @@
 {
   "dataSource": "World Bank Open Data API (official WDI indicators)",
   "sourceUrl": "https://data.worldbank.org",
-  "lastUpdated": "2026-06-30",
-  "latestObservation": "2024",
+  "lastUpdated": "2026-07-07",
+  "latestObservation": "2025",
   "countries": [
     {
       "code": "PAK",
@@ -46,44 +46,44 @@
         {
           "countryCode": "PAK",
           "countryName": "Pakistan",
-          "year": 2024,
-          "value": 3.05
+          "year": 2025,
+          "value": 3.7
         },
         {
           "countryCode": "IND",
           "countryName": "India",
-          "year": 2024,
-          "value": 6.49
+          "year": 2025,
+          "value": 7.57
         },
         {
           "countryCode": "BGD",
           "countryName": "Bangladesh",
-          "year": 2024,
-          "value": 4.22
+          "year": 2025,
+          "value": 3.49
         },
         {
           "countryCode": "LKA",
           "countryName": "Sri Lanka",
-          "year": 2024,
-          "value": 5.01
+          "year": 2025,
+          "value": 4.95
         },
         {
           "countryCode": "EGY",
           "countryName": "Egypt",
-          "year": 2024,
-          "value": 2.4
+          "year": 2025,
+          "value": 4.39
         },
         {
           "countryCode": "TUR",
           "countryName": "Türkiye",
-          "year": 2024,
-          "value": 3.33
+          "year": 2025,
+          "value": 3.6
         },
         {
           "countryCode": "VNM",
           "countryName": "Vietnam",
-          "year": 2024,
-          "value": 7.09
+          "year": 2025,
+          "value": 8.02
         }
       ]
     },
@@ -99,44 +99,44 @@
         {
           "countryCode": "PAK",
           "countryName": "Pakistan",
-          "year": 2024,
-          "value": 12.63
+          "year": 2025,
+          "value": 3.55
         },
         {
           "countryCode": "IND",
           "countryName": "India",
-          "year": 2024,
-          "value": 4.95
+          "year": 2025,
+          "value": 2.4
         },
         {
           "countryCode": "BGD",
           "countryName": "Bangladesh",
-          "year": 2024,
-          "value": 10.47
+          "year": 2025,
+          "value": 8.77
         },
         {
           "countryCode": "LKA",
           "countryName": "Sri Lanka",
-          "year": 2024,
-          "value": -0.43
+          "year": 2025,
+          "value": -4.76
         },
         {
           "countryCode": "EGY",
           "countryName": "Egypt",
-          "year": 2024,
-          "value": 28.27
+          "year": 2025,
+          "value": 14.07
         },
         {
           "countryCode": "TUR",
           "countryName": "Türkiye",
-          "year": 2024,
-          "value": 58.51
+          "year": 2025,
+          "value": 34.88
         },
         {
           "countryCode": "VNM",
           "countryName": "Vietnam",
-          "year": 2024,
-          "value": 3.62
+          "year": 2025,
+          "value": 3.31
         }
       ]
     },
@@ -152,44 +152,44 @@
         {
           "countryCode": "PAK",
           "countryName": "Pakistan",
-          "year": 2024,
-          "value": 10.39
+          "year": 2025,
+          "value": 9.99
         },
         {
           "countryCode": "IND",
           "countryName": "India",
-          "year": 2024,
-          "value": 21.16
+          "year": 2025,
+          "value": 22.26
         },
         {
           "countryCode": "BGD",
           "countryName": "Bangladesh",
-          "year": 2024,
-          "value": 10.46
+          "year": 2025,
+          "value": 11.12
         },
         {
           "countryCode": "LKA",
           "countryName": "Sri Lanka",
-          "year": 2024,
-          "value": 19.89
+          "year": 2025,
+          "value": 18.97
         },
         {
           "countryCode": "EGY",
           "countryName": "Egypt",
-          "year": 2024,
-          "value": 16.38
+          "year": 2025,
+          "value": 19.82
         },
         {
           "countryCode": "TUR",
           "countryName": "Türkiye",
-          "year": 2024,
-          "value": 27.57
+          "year": 2025,
+          "value": 24.85
         },
         {
           "countryCode": "VNM",
           "countryName": "Vietnam",
-          "year": 2024,
-          "value": 90.15
+          "year": 2025,
+          "value": 98.24
         }
       ]
     },
@@ -205,20 +205,20 @@
         {
           "countryCode": "PAK",
           "countryName": "Pakistan",
-          "year": 2024,
-          "value": 2.85
+          "year": 2025,
+          "value": 3.76
         },
         {
           "countryCode": "IND",
           "countryName": "India",
-          "year": 2024,
-          "value": 7.52
+          "year": 2025,
+          "value": 7.88
         },
         {
           "countryCode": "BGD",
           "countryName": "Bangladesh",
-          "year": 2024,
-          "value": 3.07
+          "year": 2025,
+          "value": 3.91
         },
         {
           "countryCode": "LKA",
@@ -229,8 +229,8 @@
         {
           "countryCode": "EGY",
           "countryName": "Egypt",
-          "year": 2024,
-          "value": 4.54
+          "year": 2025,
+          "value": 4.36
         },
         {
           "countryCode": "TUR",
@@ -258,32 +258,32 @@
         {
           "countryCode": "PAK",
           "countryName": "Pakistan",
-          "year": 2024,
-          "value": 0.13
+          "year": 2025,
+          "value": -0.11
         },
         {
           "countryCode": "IND",
           "countryName": "India",
-          "year": 2024,
-          "value": -0.82
+          "year": 2025,
+          "value": -0.42
         },
         {
           "countryCode": "BGD",
           "countryName": "Bangladesh",
-          "year": 2024,
-          "value": -0.67
+          "year": 2025,
+          "value": -0.05
         },
         {
           "countryCode": "LKA",
           "countryName": "Sri Lanka",
           "year": 2024,
-          "value": 1.22
+          "value": 1.21
         },
         {
           "countryCode": "EGY",
           "countryName": "Egypt",
-          "year": 2024,
-          "value": -5.69
+          "year": 2025,
+          "value": -3.82
         },
         {
           "countryCode": "TUR",
@@ -318,7 +318,7 @@
           "countryCode": "IND",
           "countryName": "India",
           "year": 2022,
-          "value": 6.73
+          "value": 6.93
         },
         {
           "countryCode": "BGD",
@@ -330,7 +330,7 @@
           "countryCode": "LKA",
           "countryName": "Sri Lanka",
           "year": 2023,
-          "value": 9.92
+          "value": 9.88
         },
         {
           "countryCode": "EGY",

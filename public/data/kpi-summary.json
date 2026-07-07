@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-30",
+  "lastUpdated": "2026-07-07",
   "indicators": [
     {
       "id": "reserves",
@@ -65,11 +65,11 @@
     {
       "id": "inflation",
       "label": "CPI Inflation (YoY)",
-      "value": 11.7,
+      "value": 11.1,
       "unit": "%",
-      "period": "2026-05",
-      "change": 0.8,
-      "trend": "up",
+      "period": "2026-06",
+      "change": -0.6,
+      "trend": "down",
       "source": "PBS",
       "sub": "SBP target: 5–7%"
     },

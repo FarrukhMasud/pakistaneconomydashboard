@@ -230,7 +230,7 @@
   "countryPriorPeriod": "July-May FY25",
   "source": "State Bank of Pakistan",
   "dataSource": "SBP",
-  "lastUpdated": "2026-06-30",
+  "lastUpdated": "2026-07-07",
   "dataCoverage": "FY2026 Jul-May",
   "fytdComparison": {
     "period": "Jul-May",
@@ -266,12 +266,6 @@
     }
   },
   "monthly": [
-    {
-      "date": "2021-06",
-      "net_fdi": 141,
-      "equity": 134,
-      "debt": 7
-    },
     {
       "date": "2021-07",
       "net_fdi": 117,
