@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-07",
+  "lastUpdated": "2026-07-09",
   "indicators": [
     {
       "id": "reserves",
@@ -25,11 +25,11 @@
     {
       "id": "remittances",
       "label": "Remittances (Monthly)",
-      "value": 4.25,
+      "value": 3.47,
       "unit": "$ Billion",
-      "period": "2026-05",
-      "change": 0.71,
-      "trend": "up",
+      "period": "2026-06",
+      "change": -0.78,
+      "trend": "down",
       "source": "SBP"
     },
     {

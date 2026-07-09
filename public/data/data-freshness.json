@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-07T20:12:52.492Z",
+  "generatedAt": "2026-07-09T19:06:30.358Z",
   "status": "fresh",
   "datasets": [
     {
@@ -56,9 +56,9 @@
       "cadence": "Monthly",
       "expectedLag": "Usually published monthly; April data is not expected until SBP releases the next workers remittance update.",
       "critical": true,
-      "latestObservation": "2026-05",
-      "dataCoverage": "2021-07 – 2026-05",
-      "dashboardUpdated": "2026-07-07",
+      "latestObservation": "2026-06",
+      "dataCoverage": "2021-07 – 2026-06",
+      "dashboardUpdated": "2026-07-09",
       "status": "fresh"
     },
     {
@@ -92,7 +92,7 @@
       "critical": true,
       "latestObservation": "July-May FY26",
       "dataCoverage": "FY2026 Jul-May",
-      "dashboardUpdated": "2026-07-07",
+      "dashboardUpdated": "2026-07-09",
       "status": "fresh"
     },
     {
@@ -128,7 +128,7 @@
       "critical": true,
       "latestObservation": "2026-06",
       "dataCoverage": null,
-      "dashboardUpdated": "2026-07-07",
+      "dashboardUpdated": "2026-07-09",
       "status": "fresh"
     },
     {
@@ -148,7 +148,7 @@
       "critical": true,
       "latestObservation": "2026-06",
       "dataCoverage": null,
-      "dashboardUpdated": "2026-07-07",
+      "dashboardUpdated": "2026-07-09",
       "status": "fresh"
     },
     {
@@ -165,7 +165,7 @@
       "critical": true,
       "latestObservation": "FY2026",
       "dataCoverage": "FY2017 – FY2026",
-      "dashboardUpdated": "2026-07-07",
+      "dashboardUpdated": "2026-07-09",
       "status": "fresh"
     },
     {
@@ -182,7 +182,7 @@
       "critical": false,
       "latestObservation": "2025-07",
       "dataCoverage": null,
-      "dashboardUpdated": "2026-07-07",
+      "dashboardUpdated": "2026-07-09",
       "status": "fresh"
     },
     {
@@ -318,7 +318,7 @@
       "critical": false,
       "latestObservation": "2025",
       "dataCoverage": null,
-      "dashboardUpdated": "2026-07-07",
+      "dashboardUpdated": "2026-07-09",
       "status": "fresh"
     },
     {

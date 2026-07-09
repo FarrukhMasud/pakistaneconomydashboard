@@ -582,42 +582,52 @@
     },
     {
       "date": "2026-05",
-      "total": 4251.436841,
-      "saudiArabia": 1025.019423,
-      "uae": 1006.604439,
-      "uk": 645.4889183,
-      "usa": 349.8315407,
-      "otherGcc": 392.7014999,
-      "eu": 465.8011863
+      "total": 4252.157161,
+      "saudiArabia": 1025.062151,
+      "uae": 1006.61649,
+      "uk": 645.4829447,
+      "usa": 349.0526892,
+      "otherGcc": 392.7149407,
+      "eu": 465.8083145
+    },
+    {
+      "date": "2026-06",
+      "total": 3474.529933,
+      "saudiArabia": 829.6129138,
+      "uae": 792.2467235,
+      "uk": 514.8659817,
+      "usa": 296.7873482,
+      "otherGcc": 320.6886041,
+      "eu": 415.3712113
     }
   ],
   "sourceCountries": [
     {
       "country": "Saudi Arabia",
-      "value": 9777
+      "value": 9783
     },
     {
       "country": "UAE",
-      "value": 8732
+      "value": 8807
     },
     {
       "country": "United Kingdom",
-      "value": 6349
+      "value": 6326
     },
     {
       "country": "EU Countries",
-      "value": 5253
+      "value": 5227
     },
     {
       "country": "Other GCC Countries",
-      "value": 3917
+      "value": 3934
     },
     {
       "country": "United States",
-      "value": 3609
+      "value": 3624
     }
   ],
   "dataSource": "SBP EasyData API",
-  "lastUpdated": "2026-07-07",
-  "dataCoverage": "2021-07 – 2026-05"
+  "lastUpdated": "2026-07-09",
+  "dataCoverage": "2021-07 – 2026-06"
 }
