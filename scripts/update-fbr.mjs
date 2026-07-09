@@ -13,8 +13,8 @@
  *   1. Downloads each configured FBR month-wise PDF.
  *   2. Parses the monthly table with pdfreader (no fabricated numbers).
  *   3. Replaces the monthly rows for the FYs the PDF covers, while PRESERVING
- *      any provisional current-FY rows (sourced from press releases) and all
- *      curated metadata (fytd, methodologyNote, verifiedFrom, etc.).
+ *      separately attributed current-FY rows and all curated metadata
+ *      (fytd, methodologyNote, verifiedFrom, etc.).
  *   4. Upserts the full-year total into fyTotals and recomputes fytd.priorNet
  *      from the freshly parsed rows so growth figures stay exact.
  *
@@ -36,10 +36,7 @@ import { readFile, writeFile, mkdir } from 'fs/promises';
 import { existsSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { PdfReader } from 'pdfreader';
-
-// FBR's TLS chain occasionally trips up Node's verifier.
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+import { parsePdfTextItems } from './pdf-text.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = resolve(__dirname, '..', 'public', 'data');
@@ -54,6 +51,7 @@ const FBR_MONTHWISE_SOURCES = [
     fyStartYear: 2024,
     file: 'fbr-monthwise-FY2024-25.pdf',
     url: 'https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf',
+    provisional: true,
   },
 ];
 
@@ -76,38 +74,35 @@ async function downloadPdf(url, file) {
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const buf = Buffer.from(await res.arrayBuffer());
   if (buf.length < 5000) throw new Error(`response too small (${buf.length} bytes)`);
+  const contentType = res.headers.get('content-type') || '';
+  if (contentType.toLowerCase().includes('text/html') || buf.subarray(0, 5).toString('ascii') !== '%PDF-') {
+    throw new Error('invalid PDF response');
+  }
   await mkdir(RAW_DIR, { recursive: true });
   await writeFile(dest, buf);
   return dest;
 }
 
 // Parse the PDF into ordered text lines: [{ text, nums:[...] }, ...]
-function parsePdfLines(path) {
-  return new Promise((resolvePromise, reject) => {
-    let page = 0;
-    const rows = {};
-    new PdfReader().parseFileItems(path, (err, item) => {
-      if (err) return reject(err instanceof Error ? err : new Error(String(err)));
-      if (!item) {
-        const keys = Object.keys(rows).sort((a, b) => {
-          const [pa, ya] = a.split('|').map(Number);
-          const [pb, yb] = b.split('|').map(Number);
-          return pa - pb || ya - yb;
-        });
-        const lines = keys.map((k) => {
-          const cells = rows[k].sort((c, d) => c.x - d.x);
-          const nums = cells.map((c) => num(c.t)).filter((n) => n !== null);
-          return { text: cells.map((c) => c.t).join(' ').trim(), nums };
-        });
-        return resolvePromise(lines);
-      }
-      if (item.page) { page = item.page; return; }
-      if (item.text !== undefined) {
-        const key = `${page}|${item.y.toFixed(2)}`;
-        (rows[key] ||= []).push({ x: item.x, t: item.text });
-      }
+async function parsePdfLines(path) {
+  const rows = {};
+  for (const item of await parsePdfTextItems(path)) {
+    if (item.text === undefined) continue;
+    const key = `${item.page}|${item.y.toFixed(2)}`;
+    (rows[key] ||= []).push({ x: item.x, t: item.text });
+  }
+
+  return Object.keys(rows)
+    .sort((a, b) => {
+      const [pa, ya] = a.split('|').map(Number);
+      const [pb, yb] = b.split('|').map(Number);
+      return pa - pb || ya - yb;
+    })
+    .map((key) => {
+      const cells = rows[key].sort((a, b) => a.x - b.x);
+      const nums = cells.map(cell => num(cell.t)).filter(value => value !== null);
+      return { text: cells.map(cell => cell.t).join(' ').trim(), nums };
     });
-  });
 }
 
 // Turn parsed lines into monthly rows for a given fiscal year.
@@ -126,7 +121,8 @@ function extractMonthly(lines, source) {
         date, fy: source.fyLabel,
         net: total,
         incomeTax: dt, salesTax: st, fed, customs: cus,
-        provisional: false,
+        provisional: source.provisional,
+        sourceType: 'official',
         source: source.url,
       });
     } else if (label === 'TOTAL' && next && next.nums.length >= 5) {
@@ -167,6 +163,11 @@ async function main() {
   console.log('\n🧾 Updating FBR tax collection from official month-wise PDFs...');
 
   const fbr = JSON.parse(await readFile(FBR_FILE, 'utf-8'));
+  const originalData = JSON.stringify({
+    monthly: fbr.monthly,
+    fytd: fbr.fytd,
+    fyTotals: fbr.fyTotals,
+  });
   let updated = 0;
   const today = new Date().toISOString().split('T')[0];
 
@@ -186,8 +187,13 @@ async function main() {
       // Upsert the full-year total.
       fbr.fyTotals ||= [];
       const existing = fbr.fyTotals.find((t) => t.fy === source.fyLabel);
-      if (existing) { existing.net = fyTotal; existing.source = source.url; existing.provisional = false; }
-      else fbr.fyTotals.push({ fy: source.fyLabel, net: fyTotal, provisional: false, source: source.url });
+      if (existing) {
+        existing.net = fyTotal;
+        existing.source = source.url;
+        existing.provisional = source.provisional;
+      } else {
+        fbr.fyTotals.push({ fy: source.fyLabel, net: fyTotal, provisional: source.provisional, source: source.url });
+      }
 
       console.log(`  📊 ${source.fyLabel}: 12 months parsed, FY total ₨${fyTotal.toLocaleString()}bn`);
       updated++;
@@ -197,19 +203,24 @@ async function main() {
   }
 
   if (updated === 0) {
-    console.log('  ⏭  No FBR PDFs updated; fbr-tax.json left unchanged.');
-    return;
+    throw new Error('No official FBR source could be downloaded and verified; fbr-tax.json was left unchanged.');
   }
 
   fbr.monthly.sort((a, b) => a.date.localeCompare(b.date));
   fbr.fyTotals?.sort((a, b) => a.fy.localeCompare(b.fy));
   recomputePriorNet(fbr);
-  fbr.lastUpdated = today;
+  const dataChanged = originalData !== JSON.stringify({
+    monthly: fbr.monthly,
+    fytd: fbr.fytd,
+    fyTotals: fbr.fyTotals,
+  });
+  if (dataChanged) fbr.lastUpdated = today;
   fbr.lastVerified = today;
 
   await writeFile(FBR_FILE, JSON.stringify(fbr, null, 2) + '\n');
-  console.log(`  ✅ Updated fbr-tax.json from ${updated} official source(s).`);
-  console.log('  ℹ️  Current-FY provisional months + fytd remain curated from FBR press releases.');
+  console.log(`  ✅ Verified fbr-tax.json against ${updated} official source(s).`);
+  if (!dataChanged) console.log('  ℹ️  Official figures were unchanged; lastUpdated was preserved.');
+  console.log('  ℹ️  Current-FY provisional months and aggregates retain their explicit source attribution.');
 }
 
 main().catch((err) => {

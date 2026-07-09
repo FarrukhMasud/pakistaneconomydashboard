@@ -39,9 +39,6 @@ import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { createInterface } from 'readline';
 
-// SBP's SSL certificate sometimes causes issues with Node.js
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = resolve(__dirname, '..', 'public', 'data');
 
@@ -117,7 +114,9 @@ function getApiKey() {
     const envFile = readFileSync(envPath, 'utf-8');
     const match = envFile.match(/^SBP_API_KEY=(.+)$/m);
     if (match) return match[1].trim();
-  } catch { /* no .env file */ }
+  } catch (error) {
+    if (error?.code !== 'ENOENT') throw error;
+  }
   return null;
 }
 
@@ -138,19 +137,24 @@ async function fetchSeries(seriesKey, apiKey, startDate, endDate) {
 
 // SBP returns { columns: [...], rows: [[...], ...] }
 // Each row: [datasetName, seriesKey, seriesName, observationDate, observationValue, unit, status, comments]
-async function fetchSeriesSafe(seriesKey, apiKey, startDate, endDate) {
-  try {
-    const raw = await fetchSeries(seriesKey, apiKey, startDate, endDate);
-    const rows = raw?.rows || [];
-    return rows.map(row => ({
+async function fetchSeriesRequired(seriesKey, apiKey, startDate, endDate) {
+  const raw = await fetchSeries(seriesKey, apiKey, startDate, endDate);
+  if (!Array.isArray(raw?.rows)) {
+    throw new Error(`${seriesKey}: unexpected SBP API response`);
+  }
+
+  const rows = raw.rows
+    .map(row => ({
       date: row[3],     // Observation Date
       value: row[4],    // Observation Value
       unit: row[5],     // Unit
-    }));
-  } catch (err) {
-    console.log(`    ⚠️  ${seriesKey}: ${err.message}`);
-    return [];
+    }))
+    .filter(row => row.date && Number.isFinite(Number(row.value)));
+
+  if (rows.length === 0) {
+    throw new Error(`${seriesKey}: SBP API returned no valid observations`);
   }
+  return rows;
 }
 
 async function readJson(filename) {
@@ -194,13 +198,13 @@ async function updateRemittances(apiKey) {
 
   try {
     const [totalData, usaData, ukData, saudiData, uaeData, otherGccData, euData] = await Promise.all([
-      fetchSeriesSafe(SERIES.remittances_total, apiKey, start, end),
-      fetchSeriesSafe(SERIES.remit_usa, apiKey, start, end),
-      fetchSeriesSafe(SERIES.remit_uk, apiKey, start, end),
-      fetchSeriesSafe(SERIES.remit_saudi, apiKey, start, end),
-      fetchSeriesSafe(SERIES.remit_uae, apiKey, start, end),
-      fetchSeriesSafe(SERIES.remit_other_gcc, apiKey, start, end),
-      fetchSeriesSafe(SERIES.remit_eu, apiKey, start, end),
+      fetchSeriesRequired(SERIES.remittances_total, apiKey, start, end),
+      fetchSeriesRequired(SERIES.remit_usa, apiKey, start, end),
+      fetchSeriesRequired(SERIES.remit_uk, apiKey, start, end),
+      fetchSeriesRequired(SERIES.remit_saudi, apiKey, start, end),
+      fetchSeriesRequired(SERIES.remit_uae, apiKey, start, end),
+      fetchSeriesRequired(SERIES.remit_other_gcc, apiKey, start, end),
+      fetchSeriesRequired(SERIES.remit_eu, apiKey, start, end),
     ]);
 
     const dateMap = new Map();
@@ -262,7 +266,7 @@ async function updateInflation(apiKey) {
     };
 
     for (const [id, s] of Object.entries(INFLATION_SERIES)) {
-      const rows = await fetchSeriesSafe(s.key, apiKey, fiveYearsAgo(), today());
+      const rows = await fetchSeriesRequired(s.key, apiKey, fiveYearsAgo(), today());
       const data = rows
         .map(r => ({
           date: getDate(r).substring(0, 7),
@@ -289,7 +293,7 @@ async function updatePublicFinance(apiKey) {
     const pfResult = {};
 
     for (const [id, s] of Object.entries(PUBLIC_FINANCE_SERIES)) {
-      const rows = await fetchSeriesSafe(s.key, apiKey, '2010-01-01', today());
+      const rows = await fetchSeriesRequired(s.key, apiKey, '2010-01-01', today());
       const data = rows
         .map(r => {
           const dateStr = getDate(r);
@@ -316,7 +320,7 @@ async function updateReserves(apiKey) {
   console.log('\n🏦 Updating Reserves data from SBP EasyData API...');
 
   try {
-    const rows = await fetchSeriesSafe(RESERVES_SERIES_KEY, apiKey, fiveYearsAgo(), today());
+    const rows = await fetchSeriesRequired(RESERVES_SERIES_KEY, apiKey, fiveYearsAgo(), today());
     const monthly = rows
       .map(r => ({ date: getDate(r).substring(0, 7), sbp: Math.round(getValue(r) * 10) / 10 }))
       .sort((a, b) => a.date.localeCompare(b.date));
@@ -345,7 +349,7 @@ async function updateMonetary(apiKey) {
     };
 
     for (const [id, s] of Object.entries(MONETARY_SERIES)) {
-      const rows = await fetchSeriesSafe(s.key, apiKey, fiveYearsAgo(), today());
+      const rows = await fetchSeriesRequired(s.key, apiKey, fiveYearsAgo(), today());
       // Convert weekly to monthly by taking last observation per month
       const byMonth = new Map();
       for (const r of rows) {
@@ -373,7 +377,7 @@ async function updateFdiMonthly(apiKey) {
     const seriesData = {};
 
     for (const [field, s] of Object.entries(FDI_MONTHLY_SERIES)) {
-      const rows = await fetchSeriesSafe(s.key, apiKey, fiveYearsAgo(), today());
+      const rows = await fetchSeriesRequired(s.key, apiKey, fiveYearsAgo(), today());
       seriesData[field] = rows
         .map(r => ({ date: toYearMonth(getDate(r)), value: round2(getValue(r)) }))
         .filter(r => r.date && Number.isFinite(r.value))
@@ -416,7 +420,7 @@ async function updateKpiSummary(apiKey) {
     const indicators = existing.indicators || existing;
     const indicatorList = Array.isArray(indicators) ? indicators : [];
 
-    const remitTotal = await fetchSeriesSafe(SERIES.remittances_total, apiKey, fiveYearsAgo(), today());
+    const remitTotal = await fetchSeriesRequired(SERIES.remittances_total, apiKey, fiveYearsAgo(), today());
 
     // Only update remittances KPI — other KPIs kept as-is (manual update)
     const kpi = indicatorList.find(i => i.id === 'remittances');
@@ -580,7 +584,7 @@ To use this script, get a free API key from SBP EasyData:
     process.exit(1);
   }
 
-  console.log(`\n🔑 API key: ${apiKey.substring(0, 6)}...`);
+  console.log('\n🔑 SBP API credentials loaded');
   console.log(`📅 Range: ${fiveYearsAgo()} → ${today()}`);
   if (sectionFilter) console.log(`🎯 Section: ${sectionFilter}`);
 
@@ -645,6 +649,8 @@ To use this script, get a free API key from SBP EasyData:
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 `);
+
+  if (results.failed.length > 0) process.exitCode = 1;
 }
 
 main().catch((err) => {

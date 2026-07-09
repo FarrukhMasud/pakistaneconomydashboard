@@ -1,22 +1,24 @@
 {
-  "generatedAt": "2026-07-09T19:06:30.358Z",
-  "status": "fresh",
+  "generatedAt": "2026-07-09T19:45:02.912Z",
+  "status": "needs-review",
   "datasets": [
     {
       "id": "reserves",
       "label": "Foreign Exchange Reserves",
       "file": "reserves.json",
       "source": "State Bank of Pakistan",
-      "sourceUrl": "https://www.sbp.org.pk/ecodata/forex.pdf",
+      "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
       "sourceFile": "forex.pdf",
       "apiSeries": null,
       "parser": "parse-sbp-excel.mjs:updateReserves",
       "cadence": "Weekly",
       "expectedLag": "Usually published weekly; dashboard should advance after SBP updates forex.pdf.",
       "critical": true,
-      "latestObservation": "2026-06-19",
-      "dataCoverage": "2025-05 – 2026-06-19",
-      "dashboardUpdated": "2026-06-30",
+      "latestObservation": "2026-07-03",
+      "freshnessDate": null,
+      "dataCoverage": "2025-05 – 2026-07-03",
+      "dashboardUpdated": "2026-07-09",
+      "reviewReason": null,
       "status": "fresh"
     },
     {
@@ -24,16 +26,18 @@
       "label": "Monthly Average Exchange Rates",
       "file": "exchange-rates.json",
       "source": "State Bank of Pakistan",
-      "sourceUrl": "https://www.sbp.org.pk/ecodata/IBF_Arch.xls",
+      "sourceUrl": "https://www.sbp.org.pk/assets/document/IBF_Arch.xls",
       "sourceFile": "IBF_Arch.xls",
       "apiSeries": null,
       "parser": "parse-sbp-excel.mjs:updateExchangeRates",
       "cadence": "Monthly",
       "expectedLag": "Monthly archive usually updates after month-end. Daily/current SBP rates are not used in this monthly chart.",
       "critical": true,
-      "latestObservation": "2026-05",
-      "dataCoverage": "2021-01 – 2026-05",
-      "dashboardUpdated": "2026-06-30",
+      "latestObservation": "2026-06",
+      "freshnessDate": null,
+      "dataCoverage": "2021-01 – 2026-06",
+      "dashboardUpdated": "2026-07-09",
+      "reviewReason": null,
       "status": "fresh"
     },
     {
@@ -57,8 +61,10 @@
       "expectedLag": "Usually published monthly; April data is not expected until SBP releases the next workers remittance update.",
       "critical": true,
       "latestObservation": "2026-06",
+      "freshnessDate": null,
       "dataCoverage": "2021-07 – 2026-06",
       "dashboardUpdated": "2026-07-09",
+      "reviewReason": null,
       "status": "fresh"
     },
     {
@@ -66,7 +72,7 @@
       "label": "Trade in Goods",
       "file": "trade.json",
       "source": "State Bank of Pakistan",
-      "sourceUrl": "https://www.sbp.org.pk/ecodata/exp_import_BOP.xls",
+      "sourceUrl": "https://archive.sbp.org.pk/ecodata/exp_import_BOP.xls",
       "sourceFile": "exp_import_BOP.xls",
       "apiSeries": null,
       "parser": "parse-sbp-excel.mjs:updateTrade",
@@ -74,8 +80,10 @@
       "expectedLag": "Monthly BOP goods trade data.",
       "critical": true,
       "latestObservation": "2026-05",
+      "freshnessDate": null,
       "dataCoverage": "2021-01 – 2026-05",
-      "dashboardUpdated": "2026-06-30",
+      "dashboardUpdated": "2026-07-09",
+      "reviewReason": null,
       "status": "fresh"
     },
     {
@@ -83,7 +91,7 @@
       "label": "Foreign Direct Investment",
       "file": "fdi.json",
       "source": "State Bank of Pakistan",
-      "sourceUrl": "https://www.sbp.org.pk/ecodata/NetinflowSummary.xls",
+      "sourceUrl": "https://archive.sbp.org.pk/ecodata/NetinflowSummary.xls",
       "sourceFile": "NetinflowSummary.xls",
       "apiSeries": null,
       "parser": "parse-sbp-excel.mjs:updateFdi",
@@ -91,8 +99,10 @@
       "expectedLag": "Monthly FDI tables are released after source files are updated by SBP.",
       "critical": true,
       "latestObservation": "July-May FY26",
+      "freshnessDate": "2026-05-31",
       "dataCoverage": "FY2026 Jul-May",
       "dashboardUpdated": "2026-07-09",
+      "reviewReason": null,
       "status": "fresh"
     },
     {
@@ -100,7 +110,7 @@
       "label": "IT & Services Trade",
       "file": "services.json",
       "source": "State Bank of Pakistan",
-      "sourceUrl": "https://www.sbp.org.pk/ecodata/dt.xls",
+      "sourceUrl": "https://archive.sbp.org.pk/ecodata/dt.xls",
       "sourceFile": "dt.xls",
       "apiSeries": null,
       "parser": "parse-sbp-excel.mjs:updateServices",
@@ -108,8 +118,10 @@
       "expectedLag": "Detailed services trade data from SBP EBOPS file.",
       "critical": true,
       "latestObservation": "Jul-May FY26",
+      "freshnessDate": "2026-05-31",
       "dataCoverage": "Jul-May FY26",
-      "dashboardUpdated": "2026-06-30",
+      "dashboardUpdated": "2026-07-09",
+      "reviewReason": null,
       "status": "fresh"
     },
     {
@@ -127,8 +139,10 @@
       "expectedLag": "Monthly CPI/WPI series sourced through SBP EasyData.",
       "critical": true,
       "latestObservation": "2026-06",
+      "freshnessDate": null,
       "dataCoverage": null,
       "dashboardUpdated": "2026-07-09",
+      "reviewReason": null,
       "status": "fresh"
     },
     {
@@ -147,8 +161,10 @@
       "expectedLag": "SBP monetary series include weekly/monthly observations depending on the indicator.",
       "critical": true,
       "latestObservation": "2026-06",
+      "freshnessDate": null,
       "dataCoverage": null,
       "dashboardUpdated": "2026-07-09",
+      "reviewReason": null,
       "status": "fresh"
     },
     {
@@ -156,7 +172,7 @@
       "label": "Public Finance & GDP",
       "file": "fiscal.json",
       "source": "SBP EasyData API / SBP GDP table",
-      "sourceUrl": "https://www.sbp.org.pk/ecodata/GDP_table.xlsx",
+      "sourceUrl": "https://www.sbp.org.pk/assets/document/GDP_table.xlsx",
       "sourceFile": "GDP_table.xlsx",
       "apiSeries": null,
       "parser": "parse-sbp-excel.mjs:updateGdpFiscal + update-data.mjs:updatePublicFinance",
@@ -164,8 +180,10 @@
       "expectedLag": "GDP/fiscal data is lower frequency than external-sector data.",
       "critical": true,
       "latestObservation": "FY2026",
+      "freshnessDate": "2026-06-30",
       "dataCoverage": "FY2017 – FY2026",
       "dashboardUpdated": "2026-07-09",
+      "reviewReason": null,
       "status": "fresh"
     },
     {
@@ -180,10 +198,12 @@
       "cadence": "Monthly (provisional)",
       "expectedLag": "FBR publishes provisional monthly net collection in a press release shortly after each month-end; figures are finalised later in the FBR Year Book.",
       "critical": false,
-      "latestObservation": "2025-07",
+      "latestObservation": "2026-05",
+      "freshnessDate": null,
       "dataCoverage": null,
       "dashboardUpdated": "2026-07-09",
-      "status": "fresh"
+      "reviewReason": "FBR has not yet published a numeric FY2025-26 year-end release or its official month-wise/tax-wise table. The latest official numeric monthly release is January 2026; the Jul-May aggregate is secondary-attributed provisional reporting.",
+      "status": "needs-review"
     },
     {
       "id": "imf-tracker",
@@ -198,8 +218,10 @@
       "expectedLag": "Update when IMF publishes Board decisions, press releases, staff reports, or official schedule changes.",
       "critical": true,
       "latestObservation": "2026-06-17",
+      "freshnessDate": null,
       "dataCoverage": null,
       "dashboardUpdated": "2026-06-17",
+      "reviewReason": null,
       "status": "fresh"
     },
     {
@@ -215,8 +237,10 @@
       "expectedLag": "Update after each SBP Monetary Policy Committee decision (roughly every 6 weeks).",
       "critical": false,
       "latestObservation": "2026-06-15",
+      "freshnessDate": null,
       "dataCoverage": null,
       "dashboardUpdated": "2026-06-17",
+      "reviewReason": null,
       "status": "fresh"
     },
     {
@@ -232,8 +256,10 @@
       "expectedLag": "Update when the Power Division / IMF publish new circular-debt figures (typically monthly/quarterly).",
       "critical": false,
       "latestObservation": "2026-04-30",
+      "freshnessDate": null,
       "dataCoverage": null,
       "dashboardUpdated": "2026-06-17",
+      "reviewReason": null,
       "status": "fresh"
     },
     {
@@ -249,25 +275,29 @@
       "expectedLag": "Update when SBP/MoF disclose revised external-debt servicing or stock figures.",
       "critical": false,
       "latestObservation": "2026-06-17",
+      "freshnessDate": null,
       "dataCoverage": null,
       "dashboardUpdated": "2026-06-17",
+      "reviewReason": null,
       "status": "fresh"
     },
     {
       "id": "reserves-adequacy",
       "label": "Reserves Adequacy Tracker",
       "file": "reserves-adequacy.json",
-      "source": "State Bank of Pakistan / IMF",
-      "sourceUrl": "https://www.sbp.org.pk/ecodata/index2.asp",
+      "source": "State Bank of Pakistan",
+      "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
       "sourceFile": null,
       "apiSeries": null,
-      "parser": "manual-curation",
-      "cadence": "Event-driven",
-      "expectedLag": "Update alongside SBP weekly reserves and IMF import-cover assessments.",
+      "parser": "parse-sbp-excel.mjs:updateReservesAdequacyFromData",
+      "cadence": "Weekly",
+      "expectedLag": "Derived from the latest SBP weekly reserves and trailing 12 months of official SBP goods imports.",
       "critical": false,
-      "latestObservation": "2026-06-19",
+      "latestObservation": "2026-07-03",
+      "freshnessDate": null,
       "dataCoverage": null,
-      "dashboardUpdated": "2026-06-30",
+      "dashboardUpdated": "2026-07-09",
+      "reviewReason": null,
       "status": "fresh"
     },
     {
@@ -283,8 +313,10 @@
       "expectedLag": "Annual; the federal budget is presented each June for the July–June fiscal year. Update when the new budget is announced.",
       "critical": false,
       "latestObservation": "2026-06-12",
+      "freshnessDate": null,
       "dataCoverage": null,
       "dashboardUpdated": "2026-06-17",
+      "reviewReason": null,
       "status": "fresh"
     },
     {
@@ -300,8 +332,10 @@
       "expectedLag": "Annual; provincial budgets are presented each June for the July–June fiscal year. Update as each province announces.",
       "critical": false,
       "latestObservation": "2026-06-22",
+      "freshnessDate": null,
       "dataCoverage": null,
       "dashboardUpdated": "2026-06-22",
+      "reviewReason": null,
       "status": "fresh"
     },
     {
@@ -317,8 +351,10 @@
       "expectedLag": "World Bank WDI annual indicators update after national accounts and balance-of-payments releases; years can differ by country and indicator.",
       "critical": false,
       "latestObservation": "2025",
+      "freshnessDate": null,
       "dataCoverage": null,
       "dashboardUpdated": "2026-07-09",
+      "reviewReason": null,
       "status": "fresh"
     },
     {
@@ -334,8 +370,10 @@
       "expectedLag": "Update when an official institution publishes a major macroeconomic event, program decision, survey, or policy decision.",
       "critical": false,
       "latestObservation": "2026-06-15",
+      "freshnessDate": null,
       "dataCoverage": null,
       "dashboardUpdated": "2026-06-26",
+      "reviewReason": null,
       "status": "fresh"
     },
     {
@@ -351,8 +389,10 @@
       "expectedLag": "Update when dashboard terminology changes or official methodology pages change.",
       "critical": false,
       "latestObservation": "2026-06-26",
+      "freshnessDate": null,
       "dataCoverage": null,
       "dashboardUpdated": "2026-06-26",
+      "reviewReason": null,
       "status": "fresh"
     }
   ]

@@ -27,6 +27,16 @@ function fmtDate(dateStr) {
   return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 }
 
+function provenanceLabel(row) {
+  if (row?.sourceType === 'secondary-attributed') {
+    return 'Secondary report citing provisional FBR data';
+  }
+  if (row?.sourceType === 'official') {
+    return row.provisional ? 'Official FBR publication · provisional' : 'Official FBR publication';
+  }
+  return row?.provisional ? 'Provisional; see source link' : null;
+}
+
 export default function FbrTaxSection() {
   const { data, loading, error } = useData('fbr-tax.json');
 
@@ -84,7 +94,8 @@ export default function FbrTaxSection() {
           afterBody: (items) => {
             const row = sorted[items[0].dataIndex];
             const notes = [];
-            if (row?.provisional) notes.push('Provisional (FBR press release)');
+            const provenance = provenanceLabel(row);
+            if (provenance) notes.push(provenance);
             if (row?.target != null) {
               const diff = row.net - row.target;
               notes.push(`Target: ${fmtBn(row.target)} (${diff >= 0 ? '+' : '−'}${fmtBn(Math.abs(diff))})`);
@@ -135,7 +146,7 @@ export default function FbrTaxSection() {
     },
   };
 
-  // ── Annual target vs revised vs actual (the "miss") ──
+  // ── Annual target vs revised vs reported collection ──
   const hasTargets = annualTargets.length > 0;
   const targetData = {
     labels: annualTargets.map((d) => d.fy),
@@ -153,8 +164,8 @@ export default function FbrTaxSection() {
         borderRadius: 4,
       },
       {
-        label: 'Actual collection',
-        data: annualTargets.map((d) => d.actual ?? null),
+        label: 'Actual / stated estimate',
+        data: annualTargets.map((d) => d.actual ?? d.estimate ?? null),
         backgroundColor: COLORS.teal,
         borderRadius: 4,
       },
@@ -172,12 +183,13 @@ export default function FbrTaxSection() {
             const row = annualTargets[items[0].dataIndex];
             if (!row) return [];
             const out = [];
-            if (row.actual != null && row.budgetTarget != null) {
-              const miss = row.actual - row.budgetTarget;
+            const reported = row.actual ?? row.estimate;
+            if (reported != null && row.budgetTarget != null) {
+              const miss = reported - row.budgetTarget;
               out.push(`vs budget: ${miss >= 0 ? '+' : '−'}${fmtBn(Math.abs(miss))}`);
             }
-            if (row.actual != null && row.revisedTarget != null) {
-              const miss = row.actual - row.revisedTarget;
+            if (reported != null && row.revisedTarget != null) {
+              const miss = reported - row.revisedTarget;
               out.push(`vs revised: ${miss >= 0 ? '+' : '−'}${fmtBn(Math.abs(miss))}`);
             }
             if (row.status) out.push(`(${row.status})`);
@@ -295,16 +307,26 @@ export default function FbrTaxSection() {
     }
   }
 
-  // ── Latest finalised annual miss (headline) ──
-  const latestFinal = [...annualTargets].reverse().find((d) => d.actual != null && d.budgetTarget != null);
-  if (latestFinal) {
-    const miss = latestFinal.actual - latestFinal.budgetTarget;
+  // ── Latest reported annual result (headline) ──
+  const latestActual = [...annualTargets].reverse().find((d) => d.actual != null && d.budgetTarget != null);
+  if (latestActual) {
+    const miss = latestActual.actual - latestActual.budgetTarget;
     summaryItems.push({
-      label: `${latestFinal.fy} miss vs budget target`,
+      label: `${latestActual.fy} result vs budget target`,
       value: `${miss >= 0 ? '+' : '−'}${fmtBn(Math.abs(miss))}`,
-      sub: miss >= 0 ? 'Target met' : `${latestFinal.status === 'provisional' ? 'Provisional' : 'Final'} shortfall`,
+      sub: miss >= 0 ? 'Target met' : `${latestActual.status} shortfall`,
       sentiment: miss >= 0 ? 'positive' : 'negative',
       color: miss >= 0 ? COLORS.teal : COLORS.coral,
+    });
+  }
+  const latestEstimate = [...annualTargets].reverse().find((d) => d.estimate != null);
+  if (latestEstimate) {
+    summaryItems.push({
+      label: `${latestEstimate.fy} stated estimate`,
+      value: fmtBn(latestEstimate.estimate),
+      sub: 'Budget-speech estimate; not an FBR year-end actual',
+      sentiment: 'neutral',
+      color: COLORS.amber,
     });
   }
 
@@ -312,10 +334,11 @@ export default function FbrTaxSection() {
     <section className="fade-in">
       <SectionHeader
         title="FBR Tax Collection"
-        description="Monthly federal tax collection by the Federal Board of Revenue (FBR) — the single largest source of government revenue. Figures are NET collection (after refunds) in PKR billion. Teal bars are FBR's official consolidated month-wise figures (FY2024-25); amber bars are provisional current-fiscal-year figures from FBR press releases, finalised later in the FBR Year Book. Pakistan's fiscal year runs July–June."
+        description="Federal tax collection reported by the Federal Board of Revenue (FBR), Pakistan's largest source of government revenue. Figures are net of refunds in PKR billion. Official FBR figures and secondary reports attributed to provisional FBR data are explicitly distinguished; missing months are never estimated or interpolated."
         sourceLinks={[
           { label: 'FBR Official Site', url: 'https://www.fbr.gov.pk' },
           { label: 'FBR Press Releases', url: 'https://www.fbr.gov.pk/categ/press-releases/51147/131163' },
+          ...(fytd?.source ? [{ label: fytd.sourceLabel || 'FYTD source', url: fytd.source }] : []),
         ]}
       />
 
@@ -324,16 +347,16 @@ export default function FbrTaxSection() {
           title={fytd ? `FBR Revenue — ${fytd.fyLabel}` : 'FBR Revenue'}
           accent={COLORS.teal}
           items={summaryItems}
-          footnote={`Source: ${dataSource}. Current-FY figures are provisional.`}
+          footnote={`Source: ${dataSource}. Latest official numeric monthly release: January 2026; later aggregates are explicitly marked provisional and secondary-attributed.`}
         />
       )}
 
       <div className="section-grid">
         {hasTargets && (
           <ChartCard
-            title="Tax Targets vs Actual — How Far FBR Missed"
-            description="For each fiscal year: the original budget target (blue), the downward-revised target (amber, where one was set), and the actual collection (teal). The gap between blue and teal is the headline miss. FY2025-26 is provisional; FY2026-27 shows only the budgeted target (year in progress)."
-            source="FBR, IMF, Business Recorder, Geo, ProPakistani"
+            title="Tax Targets vs Reported Collection"
+            description="The original budget target (blue), revised target (amber), and reported collection (teal). FY2025-26's Rs12.983T is a pre-year-end budget-speech estimate, not an FBR year-end actual; the chart and notes label it accordingly."
+            source="FBR / Finance Division; secondary references identified below"
             dataSource={dataSource}
             lastUpdated={lastUpdated}
           >
@@ -342,7 +365,7 @@ export default function FbrTaxSection() {
             </div>
             <ul className="fbr-target-notes">
               {annualTargets
-                .filter((d) => d.actual != null && d.budgetTarget != null)
+                .filter((d) => (d.actual != null || d.estimate != null) && d.budgetTarget != null)
                 .map((d) => {
                   return (
                     <li key={d.fy}>
@@ -366,8 +389,8 @@ export default function FbrTaxSection() {
         {hasRunRate && (
           <ChartCard
             title="Run-Rate Tracker — Is FBR On Pace?"
-            description={`Cumulative collection so far this fiscal year (${fytd.period}) against the run-rate FBR needed to hit its target by this point, with the same period a year earlier for context. ${runRateGap != null && runRateGap < 0 ? `FBR is running ₨${Math.abs(runRateGap).toLocaleString()}bn behind the pace required` : 'FBR is ahead of the required pace'}${annualForFytd?.budgetTarget ? `; the full-year target is ₨${annualForFytd.budgetTarget.toLocaleString()}bn` : ''}. A gap this early is hard to claw back and usually triggers a mini-budget or downward revision.`}
-            source="FBR / pkrevenue — FYTD shortfall"
+            description={`Cumulative collection so far this fiscal year (${fytd.period}) against the run-rate needed to hit its target by this point, with the same period a year earlier for context. ${runRateGap != null && runRateGap < 0 ? `Reported collection is ₨${Math.abs(runRateGap).toLocaleString()}bn behind the required pace` : 'Reported collection is ahead of the required pace'}${annualForFytd?.budgetTarget ? `; the full-year target is ₨${annualForFytd.budgetTarget.toLocaleString()}bn` : ''}.`}
+            source={fytd.sourceLabel || 'Provisional FBR reporting'}
             dataSource={dataSource}
             dataCoverage={fytd.period}
             lastUpdated={lastUpdated}
@@ -380,8 +403,8 @@ export default function FbrTaxSection() {
 
         <ChartCard
           title="Monthly Net Collection vs Target"
-          description="Net FBR collection each month in PKR billion. Teal bars are FBR's official consolidated month-wise/tax-wise figures (FY2024-25); amber bars are provisional current-year figures from FBR press releases. Hover a bar for the tax-head breakdown and target comparison where FBR has published one."
-          source="Federal Board of Revenue (FBR)"
+          description="Available monthly net FBR collection in PKR billion. FY2024-25 comes from FBR's official table; for FY2025-26 only July 2025 (secondary-attributed) and January 2026 (official FBR release) are shown. Missing months are intentionally left absent rather than estimated."
+          source="FBR official publications / identified secondary-attributed reports"
           dataSource={dataSource}
           dataCoverage={latest ? fmtDate(latest.date) : undefined}
           lastUpdated={lastUpdated}

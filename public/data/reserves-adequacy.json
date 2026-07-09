@@ -1,18 +1,20 @@
 {
   "title": "Reserves Adequacy & Import Cover",
   "current": {
-    "sbpReserves": 15.92,
-    "totalReserves": 21.48,
-    "bankReserves": 5.57,
-    "asOf": "2026-06-19",
-    "importCoverMonths": 2.9,
-    "importCoverNote": "Around 3 months of import cover by mid-2026; SBP reserves dipped in the latest week because of external debt repayments, while SBP indicated end-June inflows were expected to rebuild the buffer.",
+    "sbpReserves": 18.47,
+    "totalReserves": 23.99,
+    "bankReserves": 5.52,
+    "asOf": "2026-07-03",
+    "importCoverMonths": 3.5,
+    "importCoverLabel": "Goods-import cover",
+    "importCoverNote": "Computed from SBP-held reserves of $18.47bn and the trailing 12-month average monthly goods-import bill of $5.29bn.",
+    "importCoverBasis": "SBP-held reserves divided by the trailing 12-month average of official SBP monthly goods imports.",
     "unit": "US$ billion"
   },
   "benchmark": {
     "months": 3,
-    "label": "IMF adequacy guideline",
-    "note": "The IMF and standard reserve-adequacy metrics use ~3 months of imports as a minimum comfort threshold for external resilience."
+    "label": "Common minimum rule-of-thumb",
+    "note": "Three months of imports is a widely used minimum rule-of-thumb. It is not a substitute for the IMF's broader reserve-adequacy assessment."
   },
   "imfTarget": {
     "value": 13.9,
@@ -20,22 +22,49 @@
     "note": "The IMF's end-FY25 SBP reserves target was $13.9bn; Pakistan exceeded it at $14.5bn. Reserves have since been rebuilt further."
   },
   "trajectory": [
-    { "date": "2025-06", "sbpReserves": 14.5, "importCoverMonths": 2.5, "label": "Jun 2025" },
-    { "date": "2025-12", "sbpReserves": 15.89, "importCoverMonths": 2.6, "label": "Dec 2025" },
-    { "date": "2026-03", "sbpReserves": 17.2, "importCoverMonths": 3.1, "label": "Mar 2026" },
-    { "date": "2026-06", "sbpReserves": 15.92, "importCoverMonths": 2.9, "label": "Jun 2026" }
+    {
+      "date": "2025-06",
+      "sbpReserves": 14.5,
+      "importCoverMonths": 2.5,
+      "label": "Jun 2025"
+    },
+    {
+      "date": "2025-12",
+      "sbpReserves": 15.89,
+      "importCoverMonths": 2.6,
+      "label": "Dec 2025"
+    },
+    {
+      "date": "2026-03",
+      "sbpReserves": 17.2,
+      "importCoverMonths": 3.1,
+      "label": "Mar 2026"
+    },
+    {
+      "date": "2026-06",
+      "sbpReserves": 15.92,
+      "importCoverMonths": 2.9,
+      "label": "19 Jun 2026"
+    },
+    {
+      "date": "2026-07",
+      "sbpReserves": 18.47,
+      "importCoverMonths": 3.5,
+      "label": "Jul 3, 2026"
+    }
   ],
   "drivers": [
     "IMF EFF + RSF disbursements (~$1.3bn in May 2026)",
-    "SBP-flagged end-June inflows of about $2.4bn after the June 19 repayment-driven reserves dip",
     "Rollovers of bilateral deposits, notably from China and the Gulf",
     "A contained current-account balance and stronger remittances",
     "Tighter monetary policy supporting the rupee and inflows"
   ],
-  "context": "Pakistan's reserves fell to barely two weeks of import cover in early 2023. Holding near 3 months by mid-2026 marks a major rebuild of the external buffer — though it remains thin by regional standards, volatile around debt-repayment weeks, and reliant on continued IMF and bilateral support.",
-  "sourceUrl": "https://www.sbp.org.pk/ecodata/index2.asp",
-  "lastVerified": "2026-06-30",
+  "context": "The latest official SBP reserve stock covers about 3.5 months of the trailing goods-import bill on this dashboard's stated calculation. This is a transparent directional measure, not the IMF's broader reserve-adequacy metric.",
+  "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
+  "lastVerified": "2026-07-09",
   "verifiedFrom": [
+    "https://www.sbp.org.pk/assets/document/forex.pdf",
+    "https://archive.sbp.org.pk/ecodata/exp_import_BOP.xls",
     "https://profit.pakistantoday.com.pk/2026/06/29/sbp-forex-reserves-fall-to-dollar159-billion-after-external-debt-payments",
     "https://www.brecorder.com/news/40427722",
     "https://www.ainvest.com/news/pakistan-fx-reserves-reach-3-month-import-cover-june-2606/",
@@ -43,5 +72,5 @@
     "https://www.geo.tv/latest/612144-pakistan-exceeds-imfs-target-with-sbps-reserves-reaching-145bn",
     "https://www.imf.org/-/media/files/publications/cr/2026/english/1pakea2026001.pdf"
   ],
-  "methodologyNote": "Import cover is foreign-exchange reserves divided by the average monthly import bill, expressed in months. Reserves figures are SBP-held (and total, including commercial banks) from SBP weekly data; import-cover months are as reported by SBP/IMF and reputable media and vary slightly by source and the import window used."
+  "methodologyNote": "The current 3.5-month figure is calculated as $18.47bn of SBP-held reserves divided by $5.29bn, the trailing 12-month average of SBP monthly goods imports through 2026-05. It therefore measures goods-import cover and may differ from official or IMF measures that use broader imports or reserve-adequacy methods. Historical trajectory points are reported estimates and are not recalculated on the same basis."
 }

@@ -20,108 +20,157 @@ import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
 
-// SBP's SSL certificate sometimes causes issues with Node.js
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const RAW_DIR = resolve(__dirname, 'sbp-raw');
+
+function hasPrefix(buffer, bytes) {
+  return bytes.every((byte, index) => buffer[index] === byte);
+}
+
+function validateSourceFile(name, buffer, contentType = '') {
+  const lowerName = name.toLowerCase();
+  const header = buffer.subarray(0, 512).toString('utf8').trimStart().toLowerCase();
+
+  if (contentType.toLowerCase().includes('text/html') || header.startsWith('<!doctype html') || header.startsWith('<html')) {
+    return 'received an HTML page instead of the requested dataset';
+  }
+
+  if (lowerName.endsWith('.pdf')) {
+    return buffer.subarray(0, 5).toString('ascii') === '%PDF-'
+      ? null
+      : 'invalid PDF signature';
+  }
+
+  if (lowerName.endsWith('.xlsx')) {
+    return hasPrefix(buffer, [0x50, 0x4b, 0x03, 0x04])
+      ? null
+      : 'invalid XLSX/ZIP signature';
+  }
+
+  if (lowerName.endsWith('.xls')) {
+    return hasPrefix(buffer, [0xd0, 0xcf, 0x11, 0xe0, 0xa1, 0xb1, 0x1a, 0xe1])
+      ? null
+      : 'invalid legacy XLS signature';
+  }
+
+  return `unsupported source file type for ${name}`;
+}
 
 // SBP source file URLs
 const DOWNLOADS = [
   {
     name: 'exp_import_BOP.xls',
-    url: 'https://www.sbp.org.pk/ecodata/exp_import_BOP.xls',
+    url: 'https://archive.sbp.org.pk/ecodata/exp_import_BOP.xls',
     description: 'Trade (Imports/Exports BOP)',
     required: true,
   },
   {
     name: 'Foreign_Dir.xls',
-    url: 'https://www.sbp.org.pk/ecodata/Foreign_Dir.xls',
+    url: 'https://archive.sbp.org.pk/ecodata/Foreign_Dir.xls',
+    fallbackUrl: 'https://www.sbp.org.pk/assets/document/Foreign_Dir.xls',
     description: 'FDI by Sector',
     required: true,
   },
   {
     name: 'Netinflow.xls',
-    url: 'https://www.sbp.org.pk/ecodata/Netinflow.xls',
+    url: 'https://archive.sbp.org.pk/ecodata/Netinflow.xls',
+    fallbackUrl: 'https://www.sbp.org.pk/assets/document/Netinflow.xls',
     description: 'FDI by Country',
     required: true,
   },
   {
     name: 'NetinflowSummary.xls',
-    url: 'https://www.sbp.org.pk/ecodata/NetinflowSummary.xls',
+    url: 'https://archive.sbp.org.pk/ecodata/NetinflowSummary.xls',
+    fallbackUrl: 'https://www.sbp.org.pk/assets/document/NetinflowSummary.xls',
     description: 'FDI Annual Summary',
     required: true,
   },
   {
     name: 'GDP_table.xlsx',
-    url: 'https://www.sbp.org.pk/ecodata/GDP_table.xlsx',
+    url: 'https://www.sbp.org.pk/assets/document/GDP_table.xlsx',
+    fallbackUrl: 'https://archive.sbp.org.pk/ecodata/GDP_table.xlsx',
     description: 'GDP Growth Data',
     required: true,
   },
   {
     name: 'Balancepayment_BPM6.xls',
-    url: 'https://www.sbp.org.pk/ecodata/Balancepayment_BPM6.xls',
+    url: 'https://www.sbp.org.pk/assets/document/Balancepayment_BPM6.xls',
+    fallbackUrl: 'https://archive.sbp.org.pk/ecodata/Balancepayment_BPM6.xls',
     description: 'Balance of Payments',
     required: true,
   },
   {
     name: 'forex.pdf',
-    url: 'https://www.sbp.org.pk/ecodata/forex.pdf',
+    url: 'https://www.sbp.org.pk/assets/document/forex.pdf',
+    fallbackUrl: 'https://archive.sbp.org.pk/ecodata/forex.pdf',
     description: 'Foreign Exchange Reserves',
     required: true,
   },
   {
     name: 'IBF_Arch.xls',
-    url: 'https://www.sbp.org.pk/ecodata/IBF_Arch.xls',
+    url: 'https://www.sbp.org.pk/assets/document/IBF_Arch.xls',
+    fallbackUrl: 'https://archive.sbp.org.pk/ecodata/IBF_Arch.xls',
     description: 'Exchange Rate Archive',
     required: true,
   },
   {
     name: 'dt.xls',
-    url: 'https://www.sbp.org.pk/ecodata/dt.xls',
+    url: 'https://archive.sbp.org.pk/ecodata/dt.xls',
     description: 'Services Trade (EBOPS)',
     required: true,
   },
   {
     name: 'Export_Receipts_by_all_Countries.xls',
-    url: 'https://www.sbp.org.pk/ecodata/Export_Receipts_by_all_Countries.xls',
+    url: 'https://archive.sbp.org.pk/ecodata/Export_Receipts_by_all_Countries.xls',
     description: 'Export by Country',
     required: false,
   },
   {
     name: 'Import-Payments-by-All-Countries.xlsx',
-    url: 'https://www.sbp.org.pk/ecodata/Import-Payments-by-All-Countries.xlsx',
+    url: 'https://archive.sbp.org.pk/ecodata/Import-Payments-by-All-Countries.xlsx',
     description: 'Import by Country',
     required: false,
   },
 ];
 
-async function downloadFile(name, url, description) {
+async function downloadFile(name, url, fallbackUrl, description) {
   const filepath = resolve(RAW_DIR, name);
-  try {
-    const res = await fetch(url, {
-      signal: AbortSignal.timeout(30000),
-      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' },
-    });
+  const urls = [url, fallbackUrl].filter(Boolean);
 
-    if (!res.ok) {
-      console.log(`  ⚠️  ${description}: HTTP ${res.status}`);
-      return false;
+  for (const sourceUrl of urls) {
+    try {
+      const res = await fetch(sourceUrl, {
+        signal: AbortSignal.timeout(30000),
+        headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' },
+      });
+
+      if (!res.ok) {
+        console.log(`  ⚠️  ${description}: HTTP ${res.status} from ${sourceUrl}`);
+        continue;
+      }
+
+      const buffer = Buffer.from(await res.arrayBuffer());
+      if (buffer.length < 1000) {
+        console.log(`  ⚠️  ${description}: Response too small (${buffer.length} bytes) from ${sourceUrl}`);
+        continue;
+      }
+
+      const validationError = validateSourceFile(name, buffer, res.headers.get('content-type') || '');
+      if (validationError) {
+        console.log(`  ⚠️  ${description}: ${validationError} from ${sourceUrl}`);
+        continue;
+      }
+
+      await writeFile(filepath, buffer);
+      console.log(`  ✅ ${description} (${(buffer.length / 1024).toFixed(0)} KB)`);
+      return true;
+    } catch (err) {
+      console.log(`  ⚠️  ${description}: ${err.message} from ${sourceUrl}`);
     }
-
-    const buffer = Buffer.from(await res.arrayBuffer());
-    if (buffer.length < 1000) {
-      console.log(`  ⚠️  ${description}: Response too small (${buffer.length} bytes)`);
-      return false;
-    }
-
-    await writeFile(filepath, buffer);
-    console.log(`  ✅ ${description} (${(buffer.length / 1024).toFixed(0)} KB)`);
-    return true;
-  } catch (err) {
-    console.log(`  ⚠️  ${description}: ${err.message}`);
-    return false;
   }
+
+  console.log(`  ⚠️  ${description}: no verified official source succeeded; existing source file preserved`);
+  return false;
 }
 
 function runScript(scriptPath, label, args = []) {
@@ -131,7 +180,7 @@ function runScript(scriptPath, label, args = []) {
     execSync(cmd, {
       cwd: resolve(__dirname, '..'),
       stdio: 'inherit',
-      env: { ...process.env, NODE_TLS_REJECT_UNAUTHORIZED: '0' },
+      env: process.env,
     });
     return true;
   } catch (err) {
@@ -155,7 +204,7 @@ async function main() {
     await mkdir(RAW_DIR, { recursive: true });
 
     for (const file of DOWNLOADS) {
-      const ok = await downloadFile(file.name, file.url, file.description);
+      const ok = await downloadFile(file.name, file.url, file.fallbackUrl, file.description);
       if (ok) summary.downloaded++;
       else {
         summary.failed++;
@@ -210,10 +259,17 @@ async function main() {
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   const freshnessOk = runScript(resolve(__dirname, 'generate-data-freshness.mjs'), 'generate-data-freshness.mjs');
 
+  // Step 4c: Enforce critical source freshness before any deployment.
+  console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log('🔎 Step 4c: Auditing critical dataset freshness...');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  const auditOk = runScript(resolve(__dirname, 'audit-data.mjs'), 'audit-data.mjs');
+
   // Step 5: Commit and push — Cloudflare Pages auto-builds & deploys on push.
   const autoPush = !args.includes('--no-deploy');
+  const pipelineOk = parseOk && apiOk && fbrOk && peersOk && kpiOk && freshnessOk && auditOk;
   let pushOk = false;
-  if (autoPush && (parseOk || apiOk)) {
+  if (autoPush && pipelineOk) {
     console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     console.log('📤 Step 5: Commit & push (Cloudflare auto-deploys)...');
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
@@ -241,6 +297,8 @@ async function main() {
     }
   } else if (!autoPush) {
     console.log('\n  ⏭  Skipping commit & push (--no-deploy flag)');
+  } else {
+    console.log('\n  ⛔ Skipping commit & push because one or more required update stages failed');
   }
 
   // Step 6: Summary
@@ -254,10 +312,13 @@ async function main() {
   console.log(`  🌐 Peers:       ${peersOk ? '✅ Success' : '⚠️  Failed (kept existing peer data)'}`);
   console.log(`  📊 KPI regen:   ${kpiOk ? '✅ Success' : '⚠️  Failed'}`);
   console.log(`  🧾 Freshness:   ${freshnessOk ? '✅ Success' : '⚠️  Failed'}`);
+  console.log(`  🔎 Data audit:  ${auditOk ? '✅ Success' : '❌ Failed'}`);
   if (autoPush) {
     console.log(`  📤 Git push:    ${pushOk ? '✅ Success (Cloudflare auto-deploys)' : '⚠️  Failed'}`);
   }
   console.log('\n  🌐 Live at: https://economyofpakistan.com/\n');
+
+  if (!pipelineOk || (autoPush && !pushOk)) process.exitCode = 1;
 }
 
 main().catch((err) => {

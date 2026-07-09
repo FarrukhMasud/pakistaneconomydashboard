@@ -21,13 +21,13 @@
  */
 
 import XLSX from 'xlsx';
+import * as fs from 'fs';
 import { readFile, writeFile, access } from 'fs/promises';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { createRequire } from 'module';
+import { parsePdfTextItems } from './pdf-text.mjs';
 
-const require = createRequire(import.meta.url);
-const { PdfReader } = require('pdfreader');
+XLSX.set_fs(fs);
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const RAW_DIR = resolve(__dirname, 'sbp-raw');
@@ -52,6 +52,32 @@ function excelDateToYYYYMM(serial) {
 
 function round2(n) {
   return Math.round(n * 100) / 100;
+}
+
+function directionalSentiment(trend, positiveWhenUp = true) {
+  if (trend === 'stable') return 'neutral';
+  const positive = positiveWhenUp ? trend === 'up' : trend === 'down';
+  return positive ? 'positive' : 'negative';
+}
+
+function targetBandSentiment(value, trend, min, max) {
+  if (value >= min && value <= max) return 'positive';
+  if (value > max) return trend === 'down' ? 'positive' : 'negative';
+  return trend === 'up' ? 'positive' : 'negative';
+}
+
+function fiscalPeriodEndIndex(period) {
+  const match = String(period || '').match(/jul(?:y)?[-\s]+([a-z]+)/i);
+  if (!match) return null;
+  const order = ['jul', 'aug', 'sep', 'oct', 'nov', 'dec', 'jan', 'feb', 'mar', 'apr', 'may', 'jun'];
+  const end = match[1].slice(0, 3).toLowerCase();
+  const index = order.indexOf(end);
+  return index >= 0 ? index : null;
+}
+
+function isLegacyExcel(buffer) {
+  const signature = [0xd0, 0xcf, 0x11, 0xe0, 0xa1, 0xb1, 0x1a, 0xe1];
+  return signature.every((byte, index) => buffer[index] === byte);
 }
 
 async function readJson(filename) {
@@ -470,8 +496,23 @@ async function updateFdi() {
     };
   }
 
+  const existing = await readJson('fdi.json').catch(() => ({}));
+  const existingFytd = existing.fytdComparison;
+  if (
+    fytdComparison &&
+    existingFytd?.current?.label === fytdComparison.current.label
+  ) {
+    const existingEnd = fiscalPeriodEndIndex(existingFytd.period);
+    const incomingEnd = fiscalPeriodEndIndex(fytdComparison.period);
+    if (existingEnd != null && incomingEnd != null && incomingEnd < existingEnd) {
+      throw new Error(
+        `Refusing FDI period regression from ${existingFytd.period} to ${fytdComparison.period} for ${fytdComparison.current.label}`,
+      );
+    }
+  }
+
   const result = {
-    ...(await readJson('fdi.json').catch(() => ({}))),
+    ...existing,
     by_sector: topSectors,
     by_country: topCountries,
     annual,
@@ -601,34 +642,47 @@ async function updateBop() {
 
 async function downloadExchangeRateArchive() {
   console.log('\n💱 Attempting to download exchange rate archive...');
-  const url = 'https://www.sbp.org.pk/ecodata/IBF_Arch.xls';
+  const urls = [
+    'https://www.sbp.org.pk/assets/document/IBF_Arch.xls',
+    'https://archive.sbp.org.pk/ecodata/IBF_Arch.xls',
+  ];
   const filepath = resolve(RAW_DIR, 'IBF_Arch.xls');
 
-  try {
-    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-    const res = await fetch(url, {
-      signal: AbortSignal.timeout(30000),
-      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' },
-    });
+  for (const url of urls) {
+    try {
+      const res = await fetch(url, {
+        signal: AbortSignal.timeout(30000),
+        headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' },
+      });
 
-    if (!res.ok) {
-      console.log(`  ⚠️  HTTP ${res.status} — exchange rate archive not available`);
-      return false;
+      if (!res.ok) {
+        console.log(`  ⚠️  HTTP ${res.status} from ${url}`);
+        continue;
+      }
+
+      const buffer = Buffer.from(await res.arrayBuffer());
+      if (buffer.length < 5000) {
+        console.log(`  ⚠️  Response too small (${buffer.length} bytes) from ${url}`);
+        continue;
+      }
+
+      const contentType = res.headers.get('content-type') || '';
+      const header = buffer.subarray(0, 512).toString('utf8').trimStart().toLowerCase();
+      if (contentType.toLowerCase().includes('text/html') || header.startsWith('<!doctype html') || !isLegacyExcel(buffer)) {
+        console.log(`  ⚠️  Invalid XLS response from ${url}`);
+        continue;
+      }
+
+      await writeFile(filepath, buffer);
+      console.log(`  ✅ Downloaded IBF_Arch.xls (${(buffer.length / 1024).toFixed(0)} KB)`);
+      return true;
+    } catch (err) {
+      console.log(`  ⚠️  Download failed from ${url}: ${err.message}`);
     }
-
-    const buffer = Buffer.from(await res.arrayBuffer());
-    if (buffer.length < 5000) {
-      console.log(`  ⚠️  Response too small (${buffer.length} bytes) — likely an error page`);
-      return false;
-    }
-
-    await writeFile(filepath, buffer);
-    console.log(`  ✅ Downloaded IBF_Arch.xls (${(buffer.length / 1024).toFixed(0)} KB)`);
-    return true;
-  } catch (err) {
-    console.log(`  ⚠️  Download failed: ${err.message}`);
-    return false;
   }
+
+  console.log('  ⚠️  No verified official exchange-rate source succeeded; existing archive preserved');
+  return false;
 }
 
 async function updateExchangeRates() {
@@ -734,16 +788,7 @@ async function updateExchangeRates() {
 // ═══════════════════════════════════════════════════
 
 function parseForexPdf() {
-  return new Promise((resolve_, reject) => {
-    const items = [];
-    let currentPage = 0;
-    new PdfReader().parseFileItems(resolve(RAW_DIR, 'forex.pdf'), (err, item) => {
-      if (err) { reject(err); return; }
-      if (!item) { resolve_(items); return; }
-      if (item.page) { currentPage = item.page; return; }
-      if (item.text) items.push({ page: currentPage, x: item.x, y: item.y, text: item.text });
-    });
-  });
+  return parsePdfTextItems(resolve(RAW_DIR, 'forex.pdf'));
 }
 
 const MONTH_NAMES_SHORT = {
@@ -1436,6 +1481,80 @@ async function updateTradeCountries() {
 }
 
 // ═══════════════════════════════════════════════════
+// DERIVED RESERVES ADEQUACY — official reserves / goods imports
+// ═══════════════════════════════════════════════════
+
+async function updateReservesAdequacyFromData() {
+  console.log('\n🏦 Updating reserves adequacy from canonical official data...');
+
+  const reserves = await readJson('reserves.json');
+  const trade = await readJson('trade.json');
+  const existing = await readJson('reserves-adequacy.json');
+  const latest = reserves.weekly?.at(-1);
+  const imports = (trade.monthly || [])
+    .filter(row => typeof row.imports === 'number')
+    .slice(-12);
+
+  if (!latest || imports.length !== 12) {
+    throw new Error('Reserves adequacy requires the latest reserves point and 12 months of goods imports');
+  }
+
+  const averageMonthlyImports = imports.reduce((sum, row) => sum + row.imports, 0) / imports.length;
+  const importCoverMonths = Math.round((latest.sbp / averageMonthlyImports) * 10) / 10;
+  const date = latest.date;
+  const monthKey = date.slice(0, 7);
+  const label = new Date(`${date}T00:00:00Z`).toLocaleDateString('en-US', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });
+  const trajectory = (existing.trajectory || [])
+    .filter(point => point.date !== monthKey)
+    .concat({
+      date: monthKey,
+      sbpReserves: round2(latest.sbp / 1000),
+      importCoverMonths,
+      label,
+    })
+    .sort((a, b) => a.date.localeCompare(b.date));
+
+  const sbpReserves = round2(latest.sbp / 1000);
+  const totalReserves = round2(latest.total / 1000);
+  const bankReserves = round2(latest.banks / 1000);
+  const averageImportsBn = round2(averageMonthlyImports / 1000);
+  const officialSources = [
+    'https://www.sbp.org.pk/assets/document/forex.pdf',
+    'https://archive.sbp.org.pk/ecodata/exp_import_BOP.xls',
+  ];
+
+  await writeJson('reserves-adequacy.json', {
+    ...existing,
+    current: {
+      ...existing.current,
+      sbpReserves,
+      totalReserves,
+      bankReserves,
+      asOf: date,
+      importCoverMonths,
+      importCoverLabel: 'Goods-import cover',
+      importCoverNote: `Computed from SBP-held reserves of $${sbpReserves}bn and the trailing 12-month average monthly goods-import bill of $${averageImportsBn}bn.`,
+      importCoverBasis: 'SBP-held reserves divided by the trailing 12-month average of official SBP monthly goods imports.',
+    },
+    trajectory,
+    context: `The latest official SBP reserve stock covers about ${importCoverMonths} months of the trailing goods-import bill on this dashboard's stated calculation. This is a transparent directional measure, not the IMF's broader reserve-adequacy metric.`,
+    sourceUrl: officialSources[0],
+    lastVerified: new Date().toISOString().split('T')[0],
+    verifiedFrom: [
+      ...officialSources,
+      ...(existing.verifiedFrom || []).filter(url => !officialSources.includes(url)),
+    ],
+    methodologyNote: `The current ${importCoverMonths}-month figure is calculated as $${sbpReserves}bn of SBP-held reserves divided by $${averageImportsBn}bn, the trailing 12-month average of SBP monthly goods imports through ${imports.at(-1).date}. It therefore measures goods-import cover and may differ from official or IMF measures that use broader imports or reserve-adequacy methods. Historical trajectory points are reported estimates and are not recalculated on the same basis.`,
+  });
+  console.log(`  📊 ${importCoverMonths} months of trailing goods imports as of ${date}`);
+}
+
+// ═══════════════════════════════════════════════════
 // KPI GENERATION — derives all KPIs from canonical data files
 // ═══════════════════════════════════════════════════
 
@@ -1461,11 +1580,13 @@ async function generateKpiFromData() {
       indicators.push({
         id: 'reserves', label: 'Foreign Reserves (Total)',
         value: totalBn, unit: '$ Billion', period: dateLabel,
-        change: changeBn, trend, source: 'SBP',
+        change: changeBn, trend, sentiment: directionalSentiment(trend), source: 'SBP',
         sub: `SBP: $${sbpBn}B · Banks: $${round2(latest.banks / 1000)}B`,
       });
     }
-  } catch { /* skip */ }
+  } catch (err) {
+    throw new Error(`Could not generate reserves KPI: ${err.message}`, { cause: err });
+  }
 
   // --- Exchange Rate (from exchange-rates.json) ---
   try {
@@ -1479,10 +1600,12 @@ async function generateKpiFromData() {
       indicators.push({
         id: 'exchange-rate', label: 'PKR / USD',
         value: latest.USD, unit: 'PKR', period: latest.date,
-        change, trend, source: 'SBP',
+        change, trend, sentiment: directionalSentiment(trend, false), source: 'SBP',
       });
     }
-  } catch { /* skip */ }
+  } catch (err) {
+    throw new Error(`Could not generate exchange-rate KPI: ${err.message}`, { cause: err });
+  }
 
   // --- Remittances (from remittances.json) ---
   try {
@@ -1497,10 +1620,12 @@ async function generateKpiFromData() {
       indicators.push({
         id: 'remittances', label: 'Remittances (Monthly)',
         value: valBn, unit: '$ Billion', period: latest.date,
-        change: changeBn, trend, source: 'SBP',
+        change: changeBn, trend, sentiment: directionalSentiment(trend), source: 'SBP',
       });
     }
-  } catch { /* skip */ }
+  } catch (err) {
+    throw new Error(`Could not generate remittances KPI: ${err.message}`, { cause: err });
+  }
 
   // --- FDI (from fdi.json) ---
   try {
@@ -1517,10 +1642,12 @@ async function generateKpiFromData() {
         id: 'fdi', label: 'Net FDI',
         value: String(netBn), unit: '$B',
         period: `${fdi.fytdComparison.period} ${cur.label}${cur.status === 'provisional' ? ' (P)' : ''}`,
-        change: changePct, trend, source: 'SBP',
+        change: changePct, trend, sentiment: directionalSentiment(trend), source: 'SBP',
       });
     }
-  } catch { /* skip */ }
+  } catch (err) {
+    throw new Error(`Could not generate FDI KPI: ${err.message}`, { cause: err });
+  }
 
   // --- IT & Services (from services.json) ---
   try {
@@ -1529,14 +1656,19 @@ async function generateKpiFromData() {
       const itBn = round2(svc.comparison.fy26.itCredit / 1000);
       const priorBn = round2(svc.comparison.fy25.itCredit / 1000);
       const changePct = priorBn ? round2(((itBn - priorBn) / priorBn) * 100) : null;
+      const trend = changePct == null ? 'stable' : changePct > 0 ? 'up' : 'down';
       indicators.push({
         id: 'it_exports', label: 'IT & Telecom Exports',
         value: String(itBn), unit: '$B',
         period: `${svc.comparison.period} ${svc.comparison.currentLabel || 'FY26'}`,
-        change: changePct, trend: changePct > 0 ? 'up' : 'down', source: 'SBP',
+        change: changePct, trend,
+        sentiment: directionalSentiment(trend),
+        source: 'SBP',
       });
     }
-  } catch { /* skip */ }
+  } catch (err) {
+    throw new Error(`Could not generate IT exports KPI: ${err.message}`, { cause: err });
+  }
 
   // --- GDP Growth (from fiscal.json) ---
   try {
@@ -1553,10 +1685,12 @@ async function generateKpiFromData() {
         id: 'gdp-growth', label: 'GDP Growth Rate',
         value: latest.gdpGrowth, unit: '%',
         period: `${latest.year}${isEstimate ? ' (Est.)' : ''}`,
-        change, trend, source: 'PBS / IMF',
+        change, trend, sentiment: directionalSentiment(trend), source: 'PBS / IMF',
       });
     }
-  } catch { /* skip */ }
+  } catch (err) {
+    throw new Error(`Could not generate GDP KPI: ${err.message}`, { cause: err });
+  }
 
   // --- Inflation (from inflation.json) ---
   try {
@@ -1570,12 +1704,15 @@ async function generateKpiFromData() {
       indicators.push({
         id: 'inflation', label: 'CPI Inflation (YoY)',
         value: round2(latest.value), unit: '%',
-        period: latest.date,
-        change, trend, source: 'PBS',
+        period: latest.date, change, trend,
+        sentiment: targetBandSentiment(latest.value, trend, 5, 7),
+        source: 'PBS',
         sub: `SBP target: 5–7%`,
       });
     }
-  } catch { /* skip */ }
+  } catch (err) {
+    throw new Error(`Could not generate inflation KPI: ${err.message}`, { cause: err });
+  }
 
   // --- FBR Tax Collection (from fbr-tax.json) ---
   try {
@@ -1594,11 +1731,17 @@ async function generateKpiFromData() {
         id: 'fbr-tax', label: 'FBR Tax Collection (FYTD)',
         value: round2(f.net / 1000), unit: 'T PKR',
         period: f.period,
-        change: growthPct, trend, source: 'FBR',
+        change: growthPct, trend,
+        sentiment: gap == null ? directionalSentiment(trend) : gap >= 0 ? 'positive' : 'negative',
+        source: f.sourceType === 'secondary-attributed'
+          ? (f.sourceLabel || 'Secondary report citing provisional FBR data')
+          : 'FBR',
         sub,
       });
     }
-  } catch { /* skip */ }
+  } catch (err) {
+    throw new Error(`Could not generate FBR KPI: ${err.message}`, { cause: err });
+  }
 
   // --- Policy Rate (from monetary.json) ---
   try {
@@ -1608,10 +1751,17 @@ async function generateKpiFromData() {
     const existingKpi = await readJson('kpi-summary.json');
     const policyRate = existingKpi?.indicators?.find(i => i.id === 'policy-rate');
     if (policyRate) {
-      indicators.push(policyRate);
+      indicators.push({ ...policyRate, sentiment: policyRate.sentiment || 'neutral' });
     }
-  } catch { /* skip */ }
+  } catch (err) {
+    throw new Error(`Could not preserve policy-rate KPI: ${err.message}`, { cause: err });
+  }
 
+  const expectedIds = ['reserves', 'exchange-rate', 'remittances', 'fdi', 'it_exports', 'gdp-growth', 'inflation', 'fbr-tax', 'policy-rate'];
+  const missingIds = expectedIds.filter(id => !indicators.some(indicator => indicator.id === id));
+  if (missingIds.length > 0) {
+    throw new Error(`KPI generation incomplete; missing: ${missingIds.join(', ')}`);
+  }
   const kpi = { lastUpdated: today, indicators };
   await writeJson('kpi-summary.json', kpi);
   console.log(`  ✅ Generated ${indicators.length} KPI indicators from data files`);
@@ -1651,27 +1801,18 @@ async function main() {
   }
 
   // 7. Reserves (forex.pdf)
-  try {
-    summary.reserves = await updateReserves();
-  } catch (err) {
-    console.log(`  ⚠️  Reserves parse error: ${err.message}`);
-  }
+  summary.reserves = await updateReserves();
 
   // 8. Services (dt.xls — EBOPS)
-  try {
-    summary.services = await updateServices();
-  } catch (err) {
-    console.log(`  ⚠️  Services parse error: ${err.message}`);
-  }
+  summary.services = await updateServices();
 
   // 9. Trade by country
-  try {
-    summary.tradeCountries = await updateTradeCountries();
-  } catch (err) {
-    console.log(`  ⚠️  Trade countries parse error: ${err.message}`);
-  }
+  summary.tradeCountries = await updateTradeCountries();
 
-  // 10. Regenerate KPI summary from all canonical data files
+  // 10. Refresh derived metrics from the newly parsed canonical data.
+  await updateReservesAdequacyFromData();
+
+  // 11. Regenerate KPI summary from all canonical data files
   await generateKpiFromData();
 
   // ─── Summary ───
@@ -1706,7 +1847,7 @@ const args = process.argv.slice(2);
 if (args.includes('--kpi-only')) {
   // Regenerate KPI summary from existing data files (no Excel parsing)
   console.log('\n🇵🇰 Regenerating KPI summary from canonical data files...\n');
-  generateKpiFromData().then(() => {
+  updateReservesAdequacyFromData().then(generateKpiFromData).then(() => {
     console.log('\n✨ KPI regeneration done!\n');
   }).catch(err => {
     console.error('\n❌ KPI generation error:', err.message);

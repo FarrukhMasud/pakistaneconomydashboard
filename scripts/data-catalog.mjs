@@ -1,12 +1,54 @@
 export const LIVE_URL = 'https://economyofpakistan.com';
 
+const MAX_AGE_DAYS = {
+  Weekly: 45,
+  Monthly: 150,
+  'Monthly (provisional)': 75,
+  'Monthly/FYTD': 180,
+  'Weekly/Monthly': 75,
+  'Quarterly/Annual': 540,
+};
+
+function observationAgeDays(value) {
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}(?:-\d{2})?$/.test(value)) return null;
+  const date = new Date(value.length === 7 ? `${value}-01T00:00:00Z` : `${value}T00:00:00Z`);
+  if (Number.isNaN(date.getTime())) return null;
+  return Math.floor((Date.now() - date.getTime()) / 86_400_000);
+}
+
+function fiscalPeriodEndDate(value) {
+  const match = String(value || '').match(/jul(?:y)?[-\s]+([a-z]+).*?fy\s*(\d{2,4})/i);
+  if (!match) return null;
+
+  const months = {
+    jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6,
+    jul: 7, aug: 8, sep: 9, oct: 10, nov: 11, dec: 12,
+  };
+  const month = months[match[1].slice(0, 3).toLowerCase()];
+  if (!month) return null;
+
+  const rawFy = Number(match[2]);
+  const fiscalYear = rawFy < 100 ? 2000 + rawFy : rawFy;
+  const calendarYear = month >= 7 ? fiscalYear - 1 : fiscalYear;
+  const end = new Date(Date.UTC(calendarYear, month, 0));
+  return end.toISOString().slice(0, 10);
+}
+
+function fiscalYearEndDate(value) {
+  const match = String(value || '').match(/fy\s*(\d{2,4})/i);
+  if (!match) return null;
+  const rawFy = Number(match[1]);
+  const fiscalYear = rawFy < 100 ? 2000 + rawFy : rawFy;
+  return `${fiscalYear}-06-30`;
+}
+
 export const DATASETS = [
   {
     id: 'reserves',
     label: 'Foreign Exchange Reserves',
     file: 'reserves.json',
     source: 'State Bank of Pakistan',
-    sourceUrl: 'https://www.sbp.org.pk/ecodata/forex.pdf',
+    sourceUrl: 'https://www.sbp.org.pk/assets/document/forex.pdf',
     sourceFile: 'forex.pdf',
     parser: 'parse-sbp-excel.mjs:updateReserves',
     cadence: 'Weekly',
@@ -19,7 +61,7 @@ export const DATASETS = [
     label: 'Monthly Average Exchange Rates',
     file: 'exchange-rates.json',
     source: 'State Bank of Pakistan',
-    sourceUrl: 'https://www.sbp.org.pk/ecodata/IBF_Arch.xls',
+    sourceUrl: 'https://www.sbp.org.pk/assets/document/IBF_Arch.xls',
     sourceFile: 'IBF_Arch.xls',
     parser: 'parse-sbp-excel.mjs:updateExchangeRates',
     cadence: 'Monthly',
@@ -45,7 +87,7 @@ export const DATASETS = [
     label: 'Trade in Goods',
     file: 'trade.json',
     source: 'State Bank of Pakistan',
-    sourceUrl: 'https://www.sbp.org.pk/ecodata/exp_import_BOP.xls',
+    sourceUrl: 'https://archive.sbp.org.pk/ecodata/exp_import_BOP.xls',
     sourceFile: 'exp_import_BOP.xls',
     parser: 'parse-sbp-excel.mjs:updateTrade',
     cadence: 'Monthly',
@@ -58,26 +100,28 @@ export const DATASETS = [
     label: 'Foreign Direct Investment',
     file: 'fdi.json',
     source: 'State Bank of Pakistan',
-    sourceUrl: 'https://www.sbp.org.pk/ecodata/NetinflowSummary.xls',
+    sourceUrl: 'https://archive.sbp.org.pk/ecodata/NetinflowSummary.xls',
     sourceFile: 'NetinflowSummary.xls',
     parser: 'parse-sbp-excel.mjs:updateFdi',
     cadence: 'Monthly/FYTD',
     expectedLag: 'Monthly FDI tables are released after source files are updated by SBP.',
     critical: true,
     latest: data => data.sectorPeriod || data.fytdComparison?.current?.period || data.annual?.at(-1)?.year,
+    latestDate: data => fiscalPeriodEndDate(data.sectorPeriod || `${data.fytdComparison?.period || ''} ${data.fytdComparison?.current?.label || ''}`),
   },
   {
     id: 'services',
     label: 'IT & Services Trade',
     file: 'services.json',
     source: 'State Bank of Pakistan',
-    sourceUrl: 'https://www.sbp.org.pk/ecodata/dt.xls',
+    sourceUrl: 'https://archive.sbp.org.pk/ecodata/dt.xls',
     sourceFile: 'dt.xls',
     parser: 'parse-sbp-excel.mjs:updateServices',
     cadence: 'Monthly/FYTD',
     expectedLag: 'Detailed services trade data from SBP EBOPS file.',
     critical: true,
     latest: data => data.dataCoverage,
+    latestDate: data => fiscalPeriodEndDate(data.dataCoverage),
   },
   {
     id: 'inflation',
@@ -110,13 +154,16 @@ export const DATASETS = [
     label: 'Public Finance & GDP',
     file: 'fiscal.json',
     source: 'SBP EasyData API / SBP GDP table',
-    sourceUrl: 'https://www.sbp.org.pk/ecodata/GDP_table.xlsx',
+    sourceUrl: 'https://www.sbp.org.pk/assets/document/GDP_table.xlsx',
     sourceFile: 'GDP_table.xlsx',
     parser: 'parse-sbp-excel.mjs:updateGdpFiscal + update-data.mjs:updatePublicFinance',
     cadence: 'Quarterly/Annual',
     expectedLag: 'GDP/fiscal data is lower frequency than external-sector data.',
     critical: true,
     latest: data => data.publicFinance?.fiscal_balance?.data?.at(-1)?.date || data.annual?.at(-1)?.year,
+    latestDate: data => fiscalYearEndDate(
+      data.publicFinance?.fiscal_balance?.data?.at(-1)?.date || data.annual?.at(-1)?.year,
+    ),
   },
   {
     id: 'fbr-tax',
@@ -128,7 +175,7 @@ export const DATASETS = [
     cadence: 'Monthly (provisional)',
     expectedLag: 'FBR publishes provisional monthly net collection in a press release shortly after each month-end; figures are finalised later in the FBR Year Book.',
     critical: false,
-    latest: data => data.monthly?.at(-1)?.date,
+    latest: data => data.fytd?.asOf || [...(data.monthly || [])].reverse().find(row => typeof row.net === 'number')?.date,
   },
   {
     id: 'imf-tracker',
@@ -182,11 +229,11 @@ export const DATASETS = [
     id: 'reserves-adequacy',
     label: 'Reserves Adequacy Tracker',
     file: 'reserves-adequacy.json',
-    source: 'State Bank of Pakistan / IMF',
-    sourceUrl: 'https://www.sbp.org.pk/ecodata/index2.asp',
-    parser: 'manual-curation',
-    cadence: 'Event-driven',
-    expectedLag: 'Update alongside SBP weekly reserves and IMF import-cover assessments.',
+    source: 'State Bank of Pakistan',
+    sourceUrl: 'https://www.sbp.org.pk/assets/document/forex.pdf',
+    parser: 'parse-sbp-excel.mjs:updateReservesAdequacyFromData',
+    cadence: 'Weekly',
+    expectedLag: 'Derived from the latest SBP weekly reserves and trailing 12 months of official SBP goods imports.',
     critical: false,
     latest: data => data.current?.asOf || data.lastVerified,
   },
@@ -254,6 +301,12 @@ export const DATASETS = [
 
 export function getDatasetFreshness(dataset, data) {
   const latestObservation = dataset.latest?.(data) || data.dataCoverage || data.lastUpdated || null;
+  const freshnessDate = dataset.latestDate?.(data) || latestObservation;
+  const maxAgeDays = MAX_AGE_DAYS[dataset.cadence];
+  const observationAge = observationAgeDays(freshnessDate);
+  const stale = maxAgeDays != null && observationAge != null && observationAge > maxAgeDays;
+  const undated = maxAgeDays != null && observationAge == null;
+  const reviewRequired = data.reviewRequired === true;
   return {
     id: dataset.id,
     label: dataset.label,
@@ -267,8 +320,10 @@ export function getDatasetFreshness(dataset, data) {
     expectedLag: dataset.expectedLag,
     critical: dataset.critical,
     latestObservation,
+    freshnessDate: freshnessDate !== latestObservation ? freshnessDate : null,
     dataCoverage: data.dataCoverage || null,
     dashboardUpdated: data.lastUpdated || data.lastVerified || null,
-    status: latestObservation ? 'fresh' : 'needs-review',
+    reviewReason: data.reviewReason || null,
+    status: latestObservation && !stale && !undated && !reviewRequired ? 'fresh' : 'needs-review',
   };
 }

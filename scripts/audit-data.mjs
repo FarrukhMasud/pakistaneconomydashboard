@@ -7,7 +7,7 @@ import { DATASETS, getDatasetFreshness } from './data-catalog.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = resolve(__dirname, '..', 'public', 'data');
-const SBP_INDEX = 'https://www.sbp.org.pk/ecodata/index2.asp';
+const SBP_INDEX = 'https://www.sbp.org.pk/economic-data';
 
 async function readJson(file) {
   return JSON.parse(await readFile(resolve(DATA_DIR, file), 'utf-8'));
@@ -63,7 +63,7 @@ async function main() {
 
   let failures = 0;
   for (const row of rows) {
-    const ok = row.latestObservation && row.dashboardUpdated;
+    const ok = row.status === 'fresh';
     if (!ok && row.critical) failures++;
     console.log(`${pad(row.label, 27)} ${pad(row.latestObservation || 'N/A', 18)} ${pad(row.dashboardUpdated || 'N/A', 12)} ${pad(row.sourceUpdated || 'API/manual', 16)} ${ok ? 'OK' : 'REVIEW'}`);
   }

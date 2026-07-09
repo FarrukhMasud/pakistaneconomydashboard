@@ -14,7 +14,7 @@ export default function ReservesAdequacyTracker() {
     labels: trajectory.map((p) => p.label),
     datasets: [
       {
-        label: 'Import cover (months)',
+        label: `${current?.importCoverLabel || 'Import cover'} (months)`,
         data: trajectory.map((p) => p.importCoverMonths),
         borderColor: COLORS.teal,
         backgroundColor: COLORS.tealAlpha,
@@ -24,7 +24,7 @@ export default function ReservesAdequacyTracker() {
         fill: true,
       },
       {
-        label: `IMF benchmark (${benchmark?.months} months)`,
+        label: `${benchmark?.label || 'Benchmark'} (${benchmark?.months} months)`,
         data: trajectory.map(() => benchmark?.months),
         borderColor: COLORS.amber,
         borderDash: [6, 4],
@@ -46,7 +46,7 @@ export default function ReservesAdequacyTracker() {
     },
     scales: {
       ...baseLineOptions.scales,
-      y: { ...baseLineOptions.scales.y, title: { display: true, text: 'Months of imports', color: COLORS.text }, beginAtZero: true },
+      y: { ...baseLineOptions.scales.y, title: { display: true, text: 'Months of goods imports', color: COLORS.text }, beginAtZero: true },
     },
   };
 
@@ -59,7 +59,7 @@ export default function ReservesAdequacyTracker() {
         <span className="tracker__badge">~{current?.importCoverMonths} months</span>
       </div>
       <p className="tracker__subtitle">
-        How many months of imports Pakistan's reserves can cover — the key gauge of external resilience. {context}
+        How many months of goods imports Pakistan's SBP-held reserves can cover — one gauge of external resilience. {context}
       </p>
 
       <div className="tracker__stats">
@@ -69,9 +69,9 @@ export default function ReservesAdequacyTracker() {
           <span className="tracker-stat__sub">total ${current?.totalReserves}B · {current?.asOf}</span>
         </div>
         <div className="tracker-stat">
-          <span className="tracker-stat__label">Import cover</span>
+          <span className="tracker-stat__label">{current?.importCoverLabel || 'Import cover'}</span>
           <span className="tracker-stat__value" style={{ color: meetsBenchmark ? COLORS.teal : COLORS.amber }}>~{current?.importCoverMonths} mo</span>
-          <span className="tracker-stat__sub">{meetsBenchmark ? 'meets' : 'below'} IMF 3-month benchmark</span>
+          <span className="tracker-stat__sub">{meetsBenchmark ? 'meets' : 'below'} common 3-month rule</span>
         </div>
         <div className="tracker-stat">
           <span className="tracker-stat__label">IMF reserves target</span>

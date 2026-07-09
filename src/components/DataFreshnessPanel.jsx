@@ -51,6 +51,7 @@ export default function DataFreshnessPanel() {
               {item.sourceFile && <span>Source file: {item.sourceFile}</span>}
               {item.apiSeries?.length > 0 && <span>API series: {item.apiSeries.length}</span>}
               <span>{item.source}</span>
+              {item.reviewReason && <small><strong>Review note:</strong> {item.reviewReason}</small>}
               {item.expectedLag && <small>{item.expectedLag}</small>}
             </div>
           </a>

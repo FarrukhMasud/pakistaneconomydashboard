@@ -454,9 +454,16 @@
       "EUR": 325.66,
       "GBP": 376.07,
       "CNY": 41.02
+    },
+    {
+      "date": "2026-06",
+      "USD": 278.58,
+      "EUR": 321.39,
+      "GBP": 371.86,
+      "CNY": 41.13
     }
   ],
   "dataSource": "SBP",
-  "lastUpdated": "2026-06-30",
-  "dataCoverage": "2021-01 – 2026-05"
+  "lastUpdated": "2026-07-09",
+  "dataCoverage": "2021-01 – 2026-06"
 }

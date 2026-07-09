@@ -22,6 +22,7 @@ function formatDate(dateStr) {
 
 export default function ReservesSection() {
   const { data, loading, error } = useData('reserves.json');
+  const adequacy = useData('reserves-adequacy.json');
 
   if (loading || !data) return <div className="card loading-card"><div className="spinner" /><span>Loading data…</span></div>;
   if (error) return <p style={{ color: COLORS.coral }}>Error: {error.message}</p>;
@@ -89,8 +90,8 @@ export default function ReservesSection() {
   const cy = currentCalendarYear(timeSeries);
   const fy = currentFiscalYear(timeSeries);
 
-  // Import cover estimate (rough: latest monthly imports ~$5-6B)
-  const importCoverMonths = latest ? Math.round((latest.total / 5500) * 10) / 10 : null;
+  const importCoverMonths = adequacy.data?.current?.importCoverMonths;
+  const importCoverLabel = adequacy.data?.current?.importCoverLabel || 'Goods-import cover';
 
   // Build summary items for CY
   const cyItems = [];
@@ -99,8 +100,8 @@ export default function ReservesSection() {
     const endVal = cy.rows[cy.rows.length - 1]?.sbp;
     const chg = pctChange(endVal, startVal);
     cyItems.push(
-      { label: 'SBP Reserves', value: fmtUSD(latest.sbp), sub: formatDate(latest.date), color: COLORS.teal },
-      { label: 'Total (SBP + Banks)', value: fmtUSD(latest.total), sub: importCoverMonths ? `≈ ${importCoverMonths} months import cover` : '', color: COLORS.blue },
+      { label: 'SBP Reserves', value: fmtUSD(latest.sbp), sub: `${formatDate(latest.date)}${importCoverMonths != null ? ` · ${importCoverMonths} months ${importCoverLabel.toLowerCase()}` : ''}`, color: COLORS.teal },
+      { label: 'Total (SBP + Banks)', value: fmtUSD(latest.total), sub: 'Includes commercial-bank reserves', color: COLORS.blue },
       { label: 'CY Change', value: `${(endVal - startVal) >= 0 ? '+' : ''}${fmtUSD(endVal - startVal)}`, direction: chg.direction, sentiment: chg.direction === 'up' ? 'positive' : 'negative', sub: `${chg.pct > 0 ? '+' : ''}${chg.pct}%` },
     );
   }
@@ -122,7 +123,7 @@ export default function ReservesSection() {
     <section className="fade-in">
       <SectionHeader
         title="Foreign Exchange Reserves"
-        description="Pakistan's foreign currency reserves held by the State Bank of Pakistan and commercial banks. Adequate reserves (3+ months of import cover, or roughly $18–20B at current import levels) provide a buffer for exchange rate stability and debt repayments. Reserves hit critically low levels (~$3B SBP) in early 2023 before recovering under the IMF Extended Fund Facility."
+        description="Pakistan's foreign currency reserves held by the State Bank of Pakistan and commercial banks. The canonical goods-import-cover measure below uses SBP-held reserves and trailing official goods imports. Reserves hit critically low levels in early 2023 before recovering under successive IMF-supported programs."
         sourceLinks={[
           { label: 'SBP Reserves Data', url: 'https://www.sbp.org.pk/ecodata/index2.asp' },
         ]}
@@ -151,7 +152,7 @@ export default function ReservesSection() {
 
       <ChartCard
         title="Foreign Exchange Reserves"
-        description="SBP gross reserves (solid) and total reserves including commercial banks (dashed). The sharp decline in 2022–23 reflects the balance of payments crisis when Pakistan's import cover fell below 1 month. Recovery since mid-2023 is supported by the $3B IMF Extended Fund Facility, bilateral rollovers, and improved current account."
+        description="SBP gross reserves (solid) and total reserves including commercial banks (dashed). The sharp decline in 2022–23 reflects the balance-of-payments crisis. Recovery since mid-2023 has been supported by successive IMF programs, bilateral rollovers, and the current-account adjustment."
         dataSource={dataSource}
         lastUpdated={lastUpdated}
         dataCoverage={dataCoverage}

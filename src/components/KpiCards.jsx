@@ -5,9 +5,9 @@ import DataFreshnessPanel from './DataFreshnessPanel';
 import SnapshotPanel from './SnapshotPanel';
 import ExpandableTile from './ui/ExpandableTile';
 
-function trendColor(trend) {
-  if (trend === 'up') return COLORS.teal;
-  if (trend === 'down') return COLORS.coral;
+function sentimentColor(sentiment) {
+  if (sentiment === 'positive') return COLORS.teal;
+  if (sentiment === 'negative') return COLORS.coral;
   return COLORS.amber;
 }
 
@@ -29,7 +29,7 @@ export default function KpiCards() {
     <section className="fade-in">
       <SectionHeader
         title="Economic Overview"
-        description="Key macroeconomic indicators at a glance. These headline numbers summarize Pakistan's economic health — from external accounts (reserves, trade, remittances) to domestic conditions (growth, inflation, monetary policy). Green arrows indicate improving trends; red indicates deterioration."
+        description="Key macroeconomic indicators at a glance. These headline numbers summarize Pakistan's economic health — from external accounts (reserves, trade, remittances) to domestic conditions (growth, inflation, monetary policy). Arrows show the direction of change; color reflects whether that movement is favorable, unfavorable, or neutral for the indicator."
         sourceLinks={[
           { label: 'SBP EasyData Portal', url: 'https://easydata.sbp.org.pk' },
           { label: 'PBS Statistics', url: 'https://www.pbs.gov.pk' },
@@ -40,11 +40,12 @@ export default function KpiCards() {
       </p>
       <div className="kpi-grid">
         {indicators.map((kpi) => {
-          const color = trendColor(kpi.trend);
+          const sentiment = kpi.sentiment || 'neutral';
+          const color = sentimentColor(sentiment);
           return (
             <ExpandableTile
               key={kpi.id}
-              className={`card kpi-card trend-${kpi.trend}`}
+              className={`card kpi-card sentiment-${sentiment}`}
               title={kpi.label}
               subtitle={`${kpi.period} · Source: ${kpi.source}`}
               details={(
@@ -80,7 +81,7 @@ export default function KpiCards() {
               </div>
               <div className="kpi-period">{kpi.period}</div>
               {kpi.sub && <div className="kpi-sub">{kpi.sub}</div>}
-              <div className={`kpi-trend ${kpi.trend}`}>
+              <div className={`kpi-trend ${sentiment}`}>
                 {trendArrow(kpi.trend)} {kpi.change >= 0 ? '+' : ''}{kpi.change}
               </div>
               <div className="kpi-source">Source: {kpi.source}</div>

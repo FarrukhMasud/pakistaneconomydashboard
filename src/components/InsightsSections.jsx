@@ -15,6 +15,11 @@ const SOURCE_LINKS = [
   { label: 'IMF Pakistan', url: 'https://www.imf.org/en/Countries/PAK' },
 ];
 
+function sourceLinksWithFytd(fytd) {
+  if (!fytd?.source) return SOURCE_LINKS;
+  return [...SOURCE_LINKS, { label: fytd.sourceLabel || 'FBR FYTD source', url: fytd.source }];
+}
+
 function LoadingCard({ label = 'Loading official data…' }) {
   return <div className="card loading-card"><div className="spinner" /><span>{label}</span></div>;
 }
@@ -133,15 +138,15 @@ export function MacroRiskScorecardSection() {
       area: 'External buffer',
       signal: `${fmt(importCover)} months import cover`,
       status: importCover >= 3 ? 'ok' : 'pressure',
-      detail: `${reservesAdequacy.data.current.asOf}; IMF benchmark ${reservesAdequacy.data.benchmark?.months} months.`,
-      source: 'SBP / IMF',
+      detail: `${reservesAdequacy.data.current.asOf}; ${reservesAdequacy.data.benchmark?.label} ${reservesAdequacy.data.benchmark?.months} months.`,
+      source: 'SBP data / dashboard calculation',
     },
     fbrGap != null && {
       area: 'Fiscal revenue',
       signal: `${fmtPkrBn(Math.abs(fbrGap))} ${fbrGap >= 0 ? 'ahead' : 'short'}`,
       status: fbrGap >= 0 ? 'ok' : 'behind',
-      detail: `${fbr.data.fytd.period}; actual ${fmtPkrBn(fbr.data.fytd.net)} vs target ${fmtPkrBn(fbr.data.fytd.target)}.`,
-      source: 'FBR',
+      detail: `${fbr.data.fytd.period}; reported ${fmtPkrBn(fbr.data.fytd.net)} vs target ${fmtPkrBn(fbr.data.fytd.target)}.`,
+      source: fbr.data.fytd.sourceLabel || 'FBR',
     },
     realRate != null && {
       area: 'Inflation / monetary',
@@ -185,7 +190,7 @@ export function MacroRiskScorecardSection() {
       <SectionHeader
         title="Macro Risk Scorecard"
         description="A compact risk dashboard built only from verified dashboard datasets. It labels pressure points without adding estimates or unpublished figures."
-        sourceLinks={SOURCE_LINKS}
+        sourceLinks={sourceLinksWithFytd(fbr.data?.fytd)}
       />
       <div className="risk-scorecard card">
         {rows.map((row) => (
@@ -217,20 +222,22 @@ export function ImfComplianceSection() {
 
   const fbrFy26 = fbr.data?.annualTargets?.find((row) => row.fyLabel === 'FY2026');
   const fbrFy27 = fbr.data?.annualTargets?.find((row) => row.fyLabel === 'FY2027');
+  const fbrFy26Reference = fbrFy26?.actual ?? fbrFy26?.estimate;
+  const fbrFy26ReferenceLabel = fbrFy26?.actual != null ? 'reported FY26 collection' : 'FY26 budget-speech estimate';
   const circularTarget = circularDebt.data?.targets?.find((target) => target.label === 'FY2026');
   const scoreItems = imf.data?.programScorecard?.items || [];
   const watchItems = [
     fbrFy26?.actual != null && fbrFy26?.budgetTarget != null && {
       label: 'FBR FY26 collection',
       target: `Budget target ${fmtPkrBn(fbrFy26.budgetTarget)}`,
-      actual: `Provisional actual ${fmtPkrBn(fbrFy26.actual)}`,
+      actual: `Reported collection ${fmtPkrBn(fbrFy26.actual)}`,
       met: fbrFy26.actual >= fbrFy26.budgetTarget,
       source: 'FBR / budget documents',
     },
-    fbrFy27?.budgetTarget != null && fbrFy26?.actual != null && {
+    fbrFy27?.budgetTarget != null && fbrFy26Reference != null && {
       label: 'FY27 tax effort',
       target: `Budget target ${fmtPkrBn(fbrFy27.budgetTarget)}`,
-      actual: `${fmtPct(pctChange(fbrFy27.budgetTarget, fbrFy26.actual))} above FY26 provisional actual`,
+      actual: `${fmtPct(pctChange(fbrFy27.budgetTarget, fbrFy26Reference))} above ${fbrFy26ReferenceLabel}`,
       met: null,
       source: 'Finance Division / FBR',
     },
@@ -239,7 +246,7 @@ export function ImfComplianceSection() {
       target: `${reservesAdequacy.data.benchmark?.months} months benchmark`,
       actual: `${reservesAdequacy.data.current.importCoverMonths} months as of ${reservesAdequacy.data.current.asOf}`,
       met: reservesAdequacy.data.current.importCoverMonths >= reservesAdequacy.data.benchmark?.months,
-      source: 'SBP / IMF',
+      source: 'SBP data / dashboard calculation',
     },
     circularTarget && {
       label: 'Power circular debt',
@@ -452,7 +459,7 @@ export function GoodBadWatchSection() {
       <SectionHeader
         title="Good / Bad / Watch Brief"
         description="A rule-based monthly brief from verified dashboard data. It intentionally avoids adding unverified claims, forecasts, or figures not present in source-backed datasets."
-        sourceLinks={SOURCE_LINKS}
+        sourceLinks={sourceLinksWithFytd(fbr.data?.fytd)}
       />
       <div className="brief-columns">
         {columns.map((column) => (
@@ -478,14 +485,16 @@ export function RevenueTargetMeterSection() {
   const fytd = fbr.data.fytd;
   const fy26BudgetGap = fy26?.actual != null && fy26?.budgetTarget != null ? fy26.actual - fy26.budgetTarget : null;
   const fy26RevisedGap = fy26?.actual != null && fy26?.revisedTarget != null ? fy26.actual - fy26.revisedTarget : null;
-  const fy27Increase = fy27?.budgetTarget != null && fy26?.actual != null ? pctChange(fy27.budgetTarget, fy26.actual) : null;
+  const fy26Reference = fy26?.actual ?? fy26?.estimate;
+  const fy26ReferenceLabel = fy26?.actual != null ? 'actual' : 'budget-speech estimate';
+  const fy27Increase = fy27?.budgetTarget != null && fy26Reference != null ? pctChange(fy27.budgetTarget, fy26Reference) : null;
 
   const chart = {
-    labels: ['FY26 budget', 'FY26 revised', 'FY26 actual (P)', 'FY27 target'],
+    labels: ['FY26 budget', 'FY26 revised', `FY26 ${fy26ReferenceLabel}`, 'FY27 target'],
     datasets: [{
       label: 'FBR net collection / target',
-      data: [fy26?.budgetTarget, fy26?.revisedTarget, fy26?.actual, fy27?.budgetTarget],
-      backgroundColor: [COLORS.blue, COLORS.amber, fy26BudgetGap >= 0 ? COLORS.teal : COLORS.coral, COLORS.purple],
+      data: [fy26?.budgetTarget, fy26?.revisedTarget, fy26Reference, fy27?.budgetTarget],
+      backgroundColor: [COLORS.blue, COLORS.amber, fy26?.actual != null ? (fy26BudgetGap >= 0 ? COLORS.teal : COLORS.coral) : COLORS.text, COLORS.purple],
       borderRadius: 6,
     }],
   };
@@ -506,14 +515,17 @@ export function RevenueTargetMeterSection() {
     <section className="fade-in">
       <SectionHeader
         title="Revenue Target Meter"
-        description="FBR actuals versus official targets. The meter only uses FBR/Finance Division target and collection figures already present in the dashboard source file."
-        sourceLinks={[{ label: 'FBR', url: fbr.data.sourceUrl || 'https://www.fbr.gov.pk' }]}
+        description="Available FBR collections and explicitly labeled budget estimates versus official targets. Missing official actuals are not inferred."
+        sourceLinks={[{
+          label: fytd?.sourceLabel || 'FBR',
+          url: fytd?.source || fbr.data.sourceUrl || 'https://www.fbr.gov.pk',
+        }]}
       />
       <div className="insight-grid">
-        {fytd && <InsightCard title="FYTD pace" value={`${fmtPkrBn(fytd.net)} collected`} meta={`${fmtPkrBn(Math.abs(fytd.net - fytd.target))} ${fytd.net >= fytd.target ? 'ahead' : 'short'} vs target`} body={`${fytd.period}; prior-year same-period collection was ${fmtPkrBn(fytd.priorNet)}.`} source="FBR" sourceUrl={fytd.source} tone={fytd.net >= fytd.target ? 'positive' : 'negative'} />}
+        {fytd && <InsightCard title="FYTD pace" value={`${fmtPkrBn(fytd.net)} collected`} meta={`${fmtPkrBn(Math.abs(fytd.net - fytd.target))} ${fytd.net >= fytd.target ? 'ahead' : 'short'} vs target`} body={`${fytd.period}; prior-year same-period collection was ${fmtPkrBn(fytd.priorNet)}.`} source={fytd.sourceLabel || 'FBR'} sourceUrl={fytd.source} tone={fytd.net >= fytd.target ? 'positive' : 'negative'} />}
         {fy26BudgetGap != null && <InsightCard title="FY26 budget target gap" value={`${fmtPkrBn(Math.abs(fy26BudgetGap))} ${fy26BudgetGap >= 0 ? 'ahead' : 'short'}`} meta={`Actual ${fmtPkrBn(fy26.actual)} vs budget ${fmtPkrBn(fy26.budgetTarget)}`} body={fy26.note} source="FBR / budget documents" sourceUrl={fy26.sources?.[0]?.url} tone={fy26BudgetGap >= 0 ? 'positive' : 'negative'} />}
         {fy26RevisedGap != null && <InsightCard title="FY26 revised target gap" value={`${fmtPkrBn(Math.abs(fy26RevisedGap))} ${fy26RevisedGap >= 0 ? 'ahead' : 'short'}`} meta={`Revised target ${fmtPkrBn(fy26.revisedTarget)}`} body="Shows whether the year ended above or below the revised IMF/FBR target in the source data." source="FBR / IMF reporting" sourceUrl={fy26.sources?.[0]?.url} tone={fy26RevisedGap >= 0 ? 'positive' : 'negative'} />}
-        {fy27Increase != null && <InsightCard title="FY27 required uplift" value={fmtPct(fy27Increase)} meta={`${fmtPkrBn(fy27.budgetTarget)} target`} body="Increase implied by the FY27 budget target compared with FY26 provisional actual collection." source="Finance Division / FBR" sourceUrl={fy27.sources?.[0]?.url} tone="neutral" />}
+        {fy27Increase != null && <InsightCard title="FY27 required uplift" value={fmtPct(fy27Increase)} meta={`${fmtPkrBn(fy27.budgetTarget)} target`} body={`Increase implied by the FY27 budget target compared with the FY26 ${fy26ReferenceLabel}.`} source="Finance Division / FBR" sourceUrl={fy27.sources?.[0]?.url} tone="neutral" />}
       </div>
       <div className="card chart-card">
         <div className="chart-container"><Bar data={chart} options={options} /></div>
@@ -639,8 +651,8 @@ export function EconomicBriefingSection() {
       meta: fbr.data?.fytd?.period,
       tone: fbrGap >= 0 ? 'positive' : 'negative',
       body: 'Tax collection relative to target indicates how much fiscal adjustment may be needed through revenue measures or spending control.',
-      source: 'Federal Board of Revenue',
-      sourceUrl: 'https://www.fbr.gov.pk',
+      source: fbr.data?.fytd?.sourceLabel || 'Federal Board of Revenue',
+      sourceUrl: fbr.data?.fytd?.source || 'https://www.fbr.gov.pk',
     },
   ];
 
@@ -648,8 +660,8 @@ export function EconomicBriefingSection() {
     <section className="fade-in">
       <SectionHeader
         title="Monthly Economic Briefing"
-        description="A plain-English briefing generated from the same official datasets that power the dashboard. It highlights what changed, why it matters, and which source backs each statement."
-        sourceLinks={SOURCE_LINKS}
+        description="A plain-English briefing generated from the same source-attributed datasets that power the dashboard. It highlights what changed, why it matters, and which source backs each statement."
+        sourceLinks={sourceLinksWithFytd(fbr.data?.fytd)}
       />
       <div className="insight-grid">
         {cards.map((card) => <InsightCard key={card.title} {...card} />)}
@@ -780,8 +792,8 @@ export function RiskOutlookSection() {
     <section className="fade-in">
       <SectionHeader
         title="Risk, Outlook & Household Impact"
-        description="Official-data panels that connect macro indicators to fiscal pressure, external vulnerability, and everyday household impact. Forward-looking labels are trend math only, not forecasts."
-        sourceLinks={SOURCE_LINKS}
+        description="Source-backed panels that connect macro indicators to fiscal pressure, external vulnerability, and everyday household impact. Forward-looking labels are trend math only, not forecasts."
+        sourceLinks={sourceLinksWithFytd(fbr.data?.fytd)}
       />
 
       <div className="insight-two-col">
@@ -825,12 +837,12 @@ export function RiskOutlookSection() {
             <div><span>Remittances vs 3-month average</span><strong>{signed(pctChange(latestRemit?.total, remitAvg), '%')}</strong><small>{latestRemit?.date}</small></div>
             <div><span>Trade balance vs 3-month average</span><strong>{signed((latestTrade?.balance || 0) - tradeAvg, 'M', 0)}</strong><small>less negative is better</small></div>
             <div><span>Inflation direction</span><strong>{(latestInf?.value || 0) >= (priorInf?.value || 0) ? 'Rising' : 'Cooling'}</strong><small>latest official CPI print</small></div>
-            <div><span>Tax collection vs FYTD target</span><strong>{fbrGap >= 0 ? 'Ahead' : 'Behind'}</strong><small>official FBR target comparison</small></div>
+            <div><span>Tax collection vs FYTD target</span><strong>{fbrGap >= 0 ? 'Ahead' : 'Behind'}</strong><small>source-attributed FYTD comparison</small></div>
           </div>
         </div>
       </div>
 
-      <p className="insight-note">No synthetic estimates are introduced here. Every value is either directly sourced from the dashboard datasets or a transparent arithmetic comparison of those official values.</p>
+      <p className="insight-note">No synthetic estimates are introduced here. Every value is either directly sourced from the dashboard datasets or a transparent arithmetic comparison of source-attributed values.</p>
     </section>
   );
 }

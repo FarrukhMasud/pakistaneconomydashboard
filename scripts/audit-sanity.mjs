@@ -11,6 +11,7 @@ const DATA_DIR = resolve(__dirname, '..', 'public', 'data');
 const MAX_AGE_DAYS = {
   Weekly: 45,
   Monthly: 150,
+  'Monthly (provisional)': 75,
   'Monthly/FYTD': 180,
   'Weekly/Monthly': 75,
   'Quarterly/Annual': 540,

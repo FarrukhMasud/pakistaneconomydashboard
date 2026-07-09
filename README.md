@@ -1,9 +1,9 @@
 # 🇵🇰 Pakistan Economic Dashboard
 
 An interactive web dashboard visualising Pakistan's key economic
-indicators using **official government data** from the State Bank
-of Pakistan (SBP), Pakistan Bureau of Statistics (PBS), and
-Ministry of Finance.
+indicators using primarily **official government data** from the State Bank
+of Pakistan (SBP), Pakistan Bureau of Statistics (PBS), and Ministry of
+Finance. Any secondary reporting is explicitly identified and attributed.
 
 **Live:** [https://economyofpakistan.com/](https://economyofpakistan.com/)
 
@@ -22,7 +22,7 @@ Ministry of Finance.
 | **Inflation**        | National/Urban/Rural CPI, Food, SPI, WPI        | SBP EasyData API    |
 | **Monetary**         | M2, private credit, deposits, NFA               | SBP EasyData API    |
 | **Public Finance**   | GDP growth, fiscal balance, revenue/expenditure | SBP API + Excel     |
-| **FBR Tax**          | Monthly net tax collection + tax-head breakdown | FBR official tables |
+| **FBR Tax**          | Monthly net tax collection + tax-head breakdown | FBR tables/releases + identified secondary reporting |
 | **Federal Budget**   | Outlay, revenue, deficit, spending mix + Good/Bad/Ugly commentary | Finance Division (Budget in Brief) |
 | **Provincial Budgets** | Punjab/Sindh/KP/Balochistan outlay, ADP, transfers + commentary | Provincial Finance Depts |
 
@@ -69,34 +69,26 @@ npm run build
 
 ## Data Sources
 
-All data comes from official Pakistani government sources. There are **no synthetic or fabricated** data points.
+Data is sourced primarily from official Pakistani government publications.
+Where an official numeric release is unavailable, explicitly identified
+secondary reporting may be retained with its attribution and review status.
+There are **no synthetic or fabricated** data points.
 
 ### SBP Excel/PDF Files (parsed by `parse-sbp-excel.mjs`)
 
 These files are auto-downloaded by `npm run update`:
 
-- **exp_import_BOP.xls** → `trade.json`
-  <https://www.sbp.org.pk/ecodata/exp_import_BOP.xls>
-- **Foreign_Dir.xls** → `fdi.json` (by sector)
-  <https://www.sbp.org.pk/ecodata/Foreign_Dir.xls>
-- **Netinflow.xls** → `fdi.json` (by country)
-  <https://www.sbp.org.pk/ecodata/Netinflow.xls>
-- **NetinflowSummary.xls** → `fdi.json` (annual)
-  <https://www.sbp.org.pk/ecodata/NetinflowSummary.xls>
-- **GDP_table.xlsx** → `fiscal.json` (GDP growth)
-  <https://www.sbp.org.pk/ecodata/GDP_table.xlsx>
-- **Balancepayment_BPM6.xls** → BOP summary
-  <https://www.sbp.org.pk/ecodata/Balancepayment_BPM6.xls>
-- **IBF_Arch.xls** → `exchange-rates.json`
-  <https://www.sbp.org.pk/ecodata/IBF_Arch.xls>
-- **dt.xls** → `services.json` (EBOPS)
-  <https://www.sbp.org.pk/ecodata/dt.xls>
-- **Export_Receipts_by_all_Countries.xls** → `trade.json`
-  <https://www.sbp.org.pk/ecodata/Export_Receipts_by_all_Countries.xls>
-- **Import-Payments-by-All-Countries.xlsx** → `trade.json`
-  <https://www.sbp.org.pk/ecodata/Import-Payments-by-All-Countries.xlsx>
-- **forex.pdf** → `reserves.json` (weekly reserves)
-  <https://www.sbp.org.pk/ecodata/forex.pdf>
+- **exp_import_BOP.xls** → `trade.json` — <https://archive.sbp.org.pk/ecodata/exp_import_BOP.xls>
+- **Foreign_Dir.xls** → `fdi.json` (by sector) — <https://archive.sbp.org.pk/ecodata/Foreign_Dir.xls>
+- **Netinflow.xls** → `fdi.json` (by country) — <https://archive.sbp.org.pk/ecodata/Netinflow.xls>
+- **NetinflowSummary.xls** → `fdi.json` (annual) — <https://archive.sbp.org.pk/ecodata/NetinflowSummary.xls>
+- **GDP_table.xlsx** → `fiscal.json` (GDP growth) — <https://www.sbp.org.pk/assets/document/GDP_table.xlsx>
+- **Balancepayment_BPM6.xls** → BOP summary — <https://www.sbp.org.pk/assets/document/Balancepayment_BPM6.xls>
+- **IBF_Arch.xls** → `exchange-rates.json` — <https://www.sbp.org.pk/assets/document/IBF_Arch.xls>
+- **dt.xls** → `services.json` (EBOPS) — <https://archive.sbp.org.pk/ecodata/dt.xls>
+- **Export_Receipts_by_all_Countries.xls** → `trade.json` — <https://archive.sbp.org.pk/ecodata/Export_Receipts_by_all_Countries.xls>
+- **Import-Payments-by-All-Countries.xlsx** → `trade.json` — <https://archive.sbp.org.pk/ecodata/Import-Payments-by-All-Countries.xlsx>
+- **forex.pdf** → `reserves.json` (weekly reserves) — <https://www.sbp.org.pk/assets/document/forex.pdf>
 
 ### SBP EasyData API (fetched by `update-data.mjs`)
 
@@ -118,7 +110,7 @@ date (mirroring the IMF tracker pattern):
 
 | File              | Content                                          | Primary source                         |
 | ----------------- | ------------------------------------------------ | -------------------------------------- |
-| `fbr-tax.json`    | Monthly net tax collection + tax-head breakdown  | FBR official Month-wise/Tax-wise table (`download1.fbr.gov.pk`) + FBR press releases |
+| `fbr-tax.json`    | Monthly net tax collection + tax-head breakdown  | FBR official tables/releases + explicitly identified secondary reporting |
 | `indicators.json` | At-a-glance rates/markets/fiscal-stress snapshot | SBP, Finance Division (Economic Survey), PSX, OGRA, Power Division |
 | `imf-tracker.json`| IMF EFF program review schedule & disbursements   | IMF press releases                      |
 | `budget-federal.json` | Federal budget (FY2025-26 & FY2026-27): outlay, revenue, deficit, spending mix, tax measures + editorial Good/Bad/Ugly commentary | Finance Division "Budget in Brief", as reported by Dawn & Business Recorder |
@@ -133,8 +125,9 @@ date (mirroring the IMF tracker pattern):
 
 FBR monthly figures and the four-way breakdown (Direct/Income Tax, Sales Tax,
 FED, Customs) for the latest completed fiscal year are taken verbatim from
-FBR's official *"Month-wise / Tax-wise Net Collection"* table; current-year
-months are provisional press-release figures, clearly flagged. `indicators.json`
+FBR's official *"Month-wise / Tax-wise Net Collection"* table. Current-year
+figures are explicitly labeled by source type; secondary reports are never
+presented as official FBR releases. `indicators.json`
 holds point-in-time snapshots (policy rate, KSE-100, current account, public
 debt, circular debt, petrol price), each dated and linked to its source.
 
@@ -174,17 +167,21 @@ This runs these steps:
 5. **KPI Regeneration** — rebuilds KPI summary from all data
 6. **Source/Freshness Metadata** — generates `source-manifest.json`
    and `data-freshness.json`
-7. **Git Commit & Push** — commits data changes to GitHub. **Cloudflare Pages
+7. **Freshness Audit** — blocks deployment if a critical dataset is stale,
+   missing, or requires review
+8. **Git Commit & Push** — commits data changes to GitHub. **Cloudflare Pages
    then auto-builds and deploys the site on push** (no separate upload step).
 
-Use `npm run update -- --no-deploy` to skip the git commit & push (and therefore
+Use `npm run update:local` to skip the git commit & push (and therefore
 the Cloudflare auto-deploy).
 
 > **FBR monthly data:** `update-fbr.mjs` auto-refreshes the *closed* fiscal
 > year from FBR's official PDF (exact, internally validated — the parsed
 > monthly nets must sum to the printed full-year total or the file is left
 > unchanged). The **current** fiscal year's provisional months and the `fytd`
-> block are curated by hand from FBR press releases (`fbr.gov.pk`). When FBR
+> block are curated by hand from identified sources. These can include FBR
+> releases and explicitly labeled secondary reporting when FBR has not
+> published a numeric release. When FBR
 > publishes a new month-wise PDF, add its URL to `FBR_MONTHWISE_SOURCES` in
 > `scripts/update-fbr.mjs`.
 >
@@ -391,4 +388,6 @@ Pakistan's fiscal year runs **July 1 – June 30**. FY2026 = July 2025 – June 
 
 ## License
 
-Data sourced from the State Bank of Pakistan, Pakistan Bureau of Statistics, and Ministry of Finance. All data is publicly available from official government sources.
+Data is sourced primarily from the State Bank of Pakistan, Pakistan Bureau of
+Statistics, Ministry of Finance, and other official institutions. Any
+secondary reporting is explicitly identified and linked.

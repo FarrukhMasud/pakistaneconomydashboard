@@ -12,6 +12,7 @@
     "update-fbr": "node scripts/update-fbr.mjs",
     "update-peers": "node scripts/update-peer-comparison.mjs",
     "update": "node scripts/update-all.mjs",
+    "update:local": "node scripts/update-all.mjs --no-deploy",
     "audit:sanity": "node scripts/audit-sanity.mjs",
     "audit:data": "node scripts/audit-data.mjs",
     "ci:audit": "npm run audit:sanity && npm run audit:data && npm run lint && npm run build",
@@ -35,8 +36,8 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
-    "pdfreader": "^3.0.8",
+    "pdf2json": "^4.0.3",
     "vite": "^6.4.3",
-    "xlsx": "^0.18.5"
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   }
 }

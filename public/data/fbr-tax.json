@@ -1,9 +1,11 @@
 {
   "unit": "PKR Billion",
   "basis": "Net collection (after refunds)",
-  "dataSource": "FBR official month-wise/tax-wise table (FY2024-25) + FBR press releases (FY2025-26)",
+  "dataSource": "FBR official tables/releases, with separately identified secondary provisional reporting where no official numeric release exists",
   "lastUpdated": "2026-07-09",
   "lastVerified": "2026-07-09",
+  "reviewRequired": true,
+  "reviewReason": "FBR has not yet published a numeric FY2025-26 year-end release or its official month-wise/tax-wise table. The latest official numeric monthly release is January 2026; the Jul-May aggregate is secondary-attributed provisional reporting.",
   "sourceUrl": "https://www.fbr.gov.pk",
   "monthly": [
     {
@@ -14,7 +16,8 @@
       "salesTax": 256.4,
       "fed": 37.4,
       "customs": 81.9,
-      "provisional": false,
+      "provisional": true,
+      "sourceType": "official",
       "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
     },
     {
@@ -25,7 +28,8 @@
       "salesTax": 315.5,
       "fed": 58.2,
       "customs": 90.5,
-      "provisional": false,
+      "provisional": true,
+      "sourceType": "official",
       "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
     },
     {
@@ -36,7 +40,8 @@
       "salesTax": 332.9,
       "fed": 55.4,
       "customs": 104.5,
-      "provisional": false,
+      "provisional": true,
+      "sourceType": "official",
       "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
     },
     {
@@ -47,7 +52,8 @@
       "salesTax": 331.6,
       "fed": 62.6,
       "customs": 99.6,
-      "provisional": false,
+      "provisional": true,
+      "sourceType": "official",
       "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
     },
     {
@@ -58,7 +64,8 @@
       "salesTax": 314.9,
       "fed": 63.7,
       "customs": 99.3,
-      "provisional": false,
+      "provisional": true,
+      "sourceType": "official",
       "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
     },
     {
@@ -69,7 +76,8 @@
       "salesTax": 346.9,
       "fed": 69.2,
       "customs": 122.8,
-      "provisional": false,
+      "provisional": true,
+      "sourceType": "official",
       "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
     },
     {
@@ -80,7 +88,8 @@
       "salesTax": 320.9,
       "fed": 57.5,
       "customs": 115.1,
-      "provisional": false,
+      "provisional": true,
+      "sourceType": "official",
       "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
     },
     {
@@ -91,7 +100,8 @@
       "salesTax": 311.2,
       "fed": 62.7,
       "customs": 106.1,
-      "provisional": false,
+      "provisional": true,
+      "sourceType": "official",
       "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
     },
     {
@@ -102,7 +112,8 @@
       "salesTax": 330.5,
       "fed": 70.3,
       "customs": 107.7,
-      "provisional": false,
+      "provisional": true,
+      "sourceType": "official",
       "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
     },
     {
@@ -113,7 +124,8 @@
       "salesTax": 313.3,
       "fed": 66.4,
       "customs": 115.9,
-      "provisional": false,
+      "provisional": true,
+      "sourceType": "official",
       "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
     },
     {
@@ -124,7 +136,8 @@
       "salesTax": 329.4,
       "fed": 69.5,
       "customs": 113.3,
-      "provisional": false,
+      "provisional": true,
+      "sourceType": "official",
       "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
     },
     {
@@ -135,7 +148,8 @@
       "salesTax": 397.9,
       "fed": 93.7,
       "customs": 127.9,
-      "provisional": false,
+      "provisional": true,
+      "sourceType": "official",
       "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
     },
     {
@@ -144,15 +158,31 @@
       "net": 754,
       "target": 748,
       "provisional": true,
+      "sourceType": "secondary-attributed",
       "source": "https://thestandard.com.pk/fbr-collects-rs-754n-in-july-2025/"
+    },
+    {
+      "date": "2026-01",
+      "fy": "FY2026",
+      "net": 1015,
+      "incomeTax": 483,
+      "salesTax": 360,
+      "provisional": true,
+      "partialBreakdown": true,
+      "sourceType": "official",
+      "source": "https://www.fbr.gov.pk/pr/fbr-revenue-collection-picks-up-momentum-in-j/174566/2026"
     }
   ],
   "fytd": {
     "fyLabel": "FY2026",
     "period": "Jul–May FY2026",
+    "asOf": "2026-05",
     "net": 11227,
     "target": 12095,
     "priorNet": 10233.9,
+    "provisional": true,
+    "sourceType": "secondary-attributed",
+    "sourceLabel": "Business Recorder, citing provisional FBR data",
     "source": "https://www.brecorder.com/news/40423269"
   },
   "annualTargets": [
@@ -163,7 +193,7 @@
       "revisedTarget": 9252,
       "actual": 9306,
       "status": "final",
-      "note": "FBR met its (downward-revised) target, collecting Rs9,306bn — the only recent year it claimed to hit the goal.",
+      "note": "FBR met its downward-revised target, collecting Rs9,306bn — the only recent target-achievement claim here backed by a published numeric year-end collection.",
       "sources": [
         {
           "label": "FBR — comfortably achieves FY2023-24 target (official PR)",
@@ -177,9 +207,13 @@
       "budgetTarget": 12970,
       "revisedTarget": 11900,
       "actual": 11744.3,
-      "status": "final",
-      "note": "Original Rs12,970bn target revised down twice (to ~Rs12,332bn, then ~Rs11,900bn). Final collection Rs11,744bn missed even the last revised target by ~Rs156–178bn — and the original by ~Rs1,226bn.",
+      "status": "official provisional",
+      "note": "FBR's official FY2024-25 table reports Rs11,744.3bn. The table is provisional subject to reconciliation; it is not labeled final.",
       "sources": [
+        {
+          "label": "FBR — official month-wise/tax-wise FY2024-25 table",
+          "url": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
+        },
         {
           "label": "Business Recorder — FBR misses revised FY25 target by Rs178bn",
           "url": "https://www.brecorder.com/news/40370455"
@@ -195,17 +229,22 @@
       "fyLabel": "FY2026",
       "budgetTarget": 14131,
       "revisedTarget": 13980,
-      "actual": 12983,
-      "status": "provisional",
-      "note": "Budget target Rs14,131bn; IMF revised it to ~Rs13,980bn (Dec 2025), with talk of a further cut to ~Rs13,450bn. Provisional full-year collection ~Rs12,983bn — a shortfall of ~Rs1,148bn against the budget target.",
+      "actual": null,
+      "estimate": 12983,
+      "status": "budget-speech estimate",
+      "note": "The Rs12,983bn figure was stated in the 12 June 2026 budget speech before fiscal year-end. It is retained as an estimate, not presented as FBR's final or provisional year-end actual. FBR's 1 July release claims the annual target was achieved but gives no collection figure.",
       "sources": [
         {
           "label": "ProPakistani — IMF lowers FY26 FBR target to Rs13.98tr",
           "url": "https://propakistani.pk/2025/12/11/imf-lowers-pakistans-tax-collection-target-to-rs-13-98-trillion-for-fy26/"
         },
         {
-          "label": "Business Recorder — FBR FY2025-26 collection ~Rs13tr",
-          "url": "https://www.brecorder.com/news/40425250"
+          "label": "Dawn — Finance Minister's FY2026-27 budget speech",
+          "url": "https://www.dawn.com/news/2007283"
+        },
+        {
+          "label": "FBR — 1 July release claims target achieved but states no collection amount",
+          "url": "https://www.fbr.gov.pk/pr/finance-minister-visits-fbr-headquarters-comm/174643/2026"
         }
       ]
     },
@@ -216,7 +255,7 @@
       "revisedTarget": null,
       "actual": null,
       "status": "target",
-      "note": "Budgeted FBR target for the new fiscal year — 17.6% above FY2025-26's provisional collection and the basis for the FY2026-27 federal budget.",
+      "note": "Budgeted FBR target for the new fiscal year — 17.6% above the finance minister's pre-year-end FY2025-26 budget-speech estimate and the basis for the FY2026-27 federal budget.",
       "sources": [
         {
           "label": "Dawn — FY2026-27 federal budget",
@@ -241,11 +280,11 @@
     {
       "fy": "FY2025",
       "net": 11744.3,
-      "provisional": false,
+      "provisional": true,
       "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
     }
   ],
-  "methodologyNote": "Monthly FY2024-25 figures and the four-way tax-head breakdown (Direct/Income Tax, Sales Tax, FED, Customs) are taken verbatim from FBR's official \"Month-wise / Tax-wise Net Collection during FY 2024-25\" table; FBR notes these are provisional subject to reconciliation. The latest month (Jul 2025) is a provisional press-release figure and has no published tax-head split yet. Full-year totals: FY2023 = ₨7,164bn, FY2024 = ₨9,306bn (both official final), FY2025 = ₨11,744.3bn (FBR provisional). Current-year (FY2026) month-by-month tax-head detail is not appended until FBR publishes it, to avoid mixing inconsistent press-release breakdowns. All figures are NET collection in PKR billion.",
+  "methodologyNote": "FY2024-25 monthly figures come verbatim from FBR's official month-wise/tax-wise table, which FBR labels provisional subject to reconciliation. For FY2025-26, January 2026 is the latest individual month with a numeric official FBR release; missing months are not estimated or interpolated. The Jul-May aggregate is retained as secondary reporting explicitly attributed to provisional FBR data. The Rs12,983bn budget-speech figure is an estimate made before fiscal year-end and is not presented as an actual. All figures are NET collection in PKR billion unless stated otherwise.",
   "verifiedFrom": [
     {
       "label": "FBR — Month-wise/Tax-wise Net Collection FY2024-25 (official table)",
@@ -262,6 +301,14 @@
     {
       "label": "Jul 2025 collection Rs754bn vs Rs748bn target",
       "url": "https://thestandard.com.pk/fbr-collects-rs-754n-in-july-2025/"
+    },
+    {
+      "label": "FBR — January 2026 Rs1,015bn and Jul-Jan Rs7,176bn (official press release)",
+      "url": "https://www.fbr.gov.pk/pr/fbr-revenue-collection-picks-up-momentum-in-j/174566/2026"
+    },
+    {
+      "label": "FBR — FY2025-26 target-achievement statement and Rs599bn refunds; no collection amount",
+      "url": "https://www.fbr.gov.pk/pr/finance-minister-visits-fbr-headquarters-comm/174643/2026"
     },
     {
       "label": "FY2025-26 Jul–May provisional Rs11,227bn vs Rs12,095bn target (shortfall ~Rs868bn)",
