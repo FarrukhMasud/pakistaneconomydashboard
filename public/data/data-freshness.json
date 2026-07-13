@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-09T19:45:02.912Z",
+  "generatedAt": "2026-07-13T23:56:18.819Z",
   "status": "needs-review",
   "datasets": [
     {
@@ -17,7 +17,7 @@
       "latestObservation": "2026-07-03",
       "freshnessDate": null,
       "dataCoverage": "2025-05 – 2026-07-03",
-      "dashboardUpdated": "2026-07-09",
+      "dashboardUpdated": "2026-07-13",
       "reviewReason": null,
       "status": "fresh"
     },
@@ -36,7 +36,7 @@
       "latestObservation": "2026-06",
       "freshnessDate": null,
       "dataCoverage": "2021-01 – 2026-06",
-      "dashboardUpdated": "2026-07-09",
+      "dashboardUpdated": "2026-07-13",
       "reviewReason": null,
       "status": "fresh"
     },
@@ -63,7 +63,7 @@
       "latestObservation": "2026-06",
       "freshnessDate": null,
       "dataCoverage": "2021-07 – 2026-06",
-      "dashboardUpdated": "2026-07-09",
+      "dashboardUpdated": "2026-07-13",
       "reviewReason": null,
       "status": "fresh"
     },
@@ -82,7 +82,7 @@
       "latestObservation": "2026-05",
       "freshnessDate": null,
       "dataCoverage": "2021-01 – 2026-05",
-      "dashboardUpdated": "2026-07-09",
+      "dashboardUpdated": "2026-07-13",
       "reviewReason": null,
       "status": "fresh"
     },
@@ -101,7 +101,7 @@
       "latestObservation": "July-May FY26",
       "freshnessDate": "2026-05-31",
       "dataCoverage": "FY2026 Jul-May",
-      "dashboardUpdated": "2026-07-09",
+      "dashboardUpdated": "2026-07-13",
       "reviewReason": null,
       "status": "fresh"
     },
@@ -120,7 +120,7 @@
       "latestObservation": "Jul-May FY26",
       "freshnessDate": "2026-05-31",
       "dataCoverage": "Jul-May FY26",
-      "dashboardUpdated": "2026-07-09",
+      "dashboardUpdated": "2026-07-13",
       "reviewReason": null,
       "status": "fresh"
     },
@@ -141,7 +141,7 @@
       "latestObservation": "2026-06",
       "freshnessDate": null,
       "dataCoverage": null,
-      "dashboardUpdated": "2026-07-09",
+      "dashboardUpdated": "2026-07-13",
       "reviewReason": null,
       "status": "fresh"
     },
@@ -163,7 +163,7 @@
       "latestObservation": "2026-06",
       "freshnessDate": null,
       "dataCoverage": null,
-      "dashboardUpdated": "2026-07-09",
+      "dashboardUpdated": "2026-07-13",
       "reviewReason": null,
       "status": "fresh"
     },
@@ -182,7 +182,7 @@
       "latestObservation": "FY2026",
       "freshnessDate": "2026-06-30",
       "dataCoverage": "FY2017 – FY2026",
-      "dashboardUpdated": "2026-07-09",
+      "dashboardUpdated": "2026-07-13",
       "reviewReason": null,
       "status": "fresh"
     },
@@ -296,7 +296,7 @@
       "latestObservation": "2026-07-03",
       "freshnessDate": null,
       "dataCoverage": null,
-      "dashboardUpdated": "2026-07-09",
+      "dashboardUpdated": "2026-07-13",
       "reviewReason": null,
       "status": "fresh"
     },
@@ -353,7 +353,7 @@
       "latestObservation": "2025",
       "freshnessDate": null,
       "dataCoverage": null,
-      "dashboardUpdated": "2026-07-09",
+      "dashboardUpdated": "2026-07-13",
       "reviewReason": null,
       "status": "fresh"
     },

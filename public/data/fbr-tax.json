@@ -3,7 +3,7 @@
   "basis": "Net collection (after refunds)",
   "dataSource": "FBR official tables/releases, with separately identified secondary provisional reporting where no official numeric release exists",
   "lastUpdated": "2026-07-09",
-  "lastVerified": "2026-07-09",
+  "lastVerified": "2026-07-13",
   "reviewRequired": true,
   "reviewReason": "FBR has not yet published a numeric FY2025-26 year-end release or its official month-wise/tax-wise table. The latest official numeric monthly release is January 2026; the Jul-May aggregate is secondary-attributed provisional reporting.",
   "sourceUrl": "https://www.fbr.gov.pk",

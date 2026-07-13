@@ -1,13 +1,13 @@
 {
   "dataSource": "SBP EasyData API - Monetary & Financial Sector",
-  "lastUpdated": "2026-07-09",
+  "lastUpdated": "2026-07-13",
   "m2": {
     "name": "Broad Money (M2)",
     "seriesKey": "TS_GP_BAM_M2_W.M000070",
     "data": [
       {
         "date": "2021-07",
-        "value": 23114338.03,
+        "value": 23244058.32,
         "unit": "Million PKR"
       },
       {
@@ -313,7 +313,7 @@
     "data": [
       {
         "date": "2021-07",
-        "value": 14.56,
+        "value": 15.84,
         "unit": "Percent"
       },
       {
@@ -619,7 +619,7 @@
     "data": [
       {
         "date": "2021-07",
-        "value": 6689576.5,
+        "value": 6730621.65,
         "unit": "Million PKR"
       },
       {
@@ -925,7 +925,7 @@
     "data": [
       {
         "date": "2021-07",
-        "value": 9.57,
+        "value": 10.04,
         "unit": "Percent"
       },
       {
@@ -1231,7 +1231,7 @@
     "data": [
       {
         "date": "2021-07",
-        "value": 15932067.19,
+        "value": 16010989.47,
         "unit": "Million PKR"
       },
       {
@@ -1537,7 +1537,7 @@
     "data": [
       {
         "date": "2021-07",
-        "value": 15.1,
+        "value": 16.51,
         "unit": "Percent"
       },
       {
@@ -1843,7 +1843,7 @@
     "data": [
       {
         "date": "2021-07",
-        "value": 1246983.77,
+        "value": 1390308.37,
         "unit": "Million PKR"
       },
       {
@@ -2149,7 +2149,7 @@
     "data": [
       {
         "date": "2021-07",
-        "value": 15083283.48,
+        "value": 15164433.22,
         "unit": "Million PKR"
       },
       {
@@ -2455,7 +2455,7 @@
     "data": [
       {
         "date": "2021-07",
-        "value": 8476135.99,
+        "value": 8797639.69,
         "unit": "Million PKR"
       },
       {
