@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-13T23:56:18.819Z",
+  "generatedAt": "2026-07-24T18:06:24.403Z",
   "status": "needs-review",
   "datasets": [
     {
@@ -14,10 +14,10 @@
       "cadence": "Weekly",
       "expectedLag": "Usually published weekly; dashboard should advance after SBP updates forex.pdf.",
       "critical": true,
-      "latestObservation": "2026-07-03",
+      "latestObservation": "2026-07-17",
       "freshnessDate": null,
-      "dataCoverage": "2025-05 – 2026-07-03",
-      "dashboardUpdated": "2026-07-13",
+      "dataCoverage": "2025-06 – 2026-07-17",
+      "dashboardUpdated": "2026-07-24",
       "reviewReason": null,
       "status": "fresh"
     },
@@ -36,7 +36,7 @@
       "latestObservation": "2026-06",
       "freshnessDate": null,
       "dataCoverage": "2021-01 – 2026-06",
-      "dashboardUpdated": "2026-07-13",
+      "dashboardUpdated": "2026-07-24",
       "reviewReason": null,
       "status": "fresh"
     },
@@ -63,7 +63,7 @@
       "latestObservation": "2026-06",
       "freshnessDate": null,
       "dataCoverage": "2021-07 – 2026-06",
-      "dashboardUpdated": "2026-07-13",
+      "dashboardUpdated": "2026-07-24",
       "reviewReason": null,
       "status": "fresh"
     },
@@ -82,7 +82,7 @@
       "latestObservation": "2026-05",
       "freshnessDate": null,
       "dataCoverage": "2021-01 – 2026-05",
-      "dashboardUpdated": "2026-07-13",
+      "dashboardUpdated": "2026-07-24",
       "reviewReason": null,
       "status": "fresh"
     },
@@ -101,7 +101,7 @@
       "latestObservation": "July-May FY26",
       "freshnessDate": "2026-05-31",
       "dataCoverage": "FY2026 Jul-May",
-      "dashboardUpdated": "2026-07-13",
+      "dashboardUpdated": "2026-07-24",
       "reviewReason": null,
       "status": "fresh"
     },
@@ -120,7 +120,7 @@
       "latestObservation": "Jul-May FY26",
       "freshnessDate": "2026-05-31",
       "dataCoverage": "Jul-May FY26",
-      "dashboardUpdated": "2026-07-13",
+      "dashboardUpdated": "2026-07-24",
       "reviewReason": null,
       "status": "fresh"
     },
@@ -141,7 +141,7 @@
       "latestObservation": "2026-06",
       "freshnessDate": null,
       "dataCoverage": null,
-      "dashboardUpdated": "2026-07-13",
+      "dashboardUpdated": "2026-07-24",
       "reviewReason": null,
       "status": "fresh"
     },
@@ -160,10 +160,10 @@
       "cadence": "Weekly/Monthly",
       "expectedLag": "SBP monetary series include weekly/monthly observations depending on the indicator.",
       "critical": true,
-      "latestObservation": "2026-06",
+      "latestObservation": "2026-07",
       "freshnessDate": null,
       "dataCoverage": null,
-      "dashboardUpdated": "2026-07-13",
+      "dashboardUpdated": "2026-07-24",
       "reviewReason": null,
       "status": "fresh"
     },
@@ -182,7 +182,7 @@
       "latestObservation": "FY2026",
       "freshnessDate": "2026-06-30",
       "dataCoverage": "FY2017 – FY2026",
-      "dashboardUpdated": "2026-07-13",
+      "dashboardUpdated": "2026-07-24",
       "reviewReason": null,
       "status": "fresh"
     },
@@ -293,10 +293,10 @@
       "cadence": "Weekly",
       "expectedLag": "Derived from the latest SBP weekly reserves and trailing 12 months of official SBP goods imports.",
       "critical": false,
-      "latestObservation": "2026-07-03",
+      "latestObservation": "2026-07-17",
       "freshnessDate": null,
       "dataCoverage": null,
-      "dashboardUpdated": "2026-07-13",
+      "dashboardUpdated": "2026-07-24",
       "reviewReason": null,
       "status": "fresh"
     },
@@ -353,7 +353,7 @@
       "latestObservation": "2025",
       "freshnessDate": null,
       "dataCoverage": null,
-      "dashboardUpdated": "2026-07-13",
+      "dashboardUpdated": "2026-07-24",
       "reviewReason": null,
       "status": "fresh"
     },

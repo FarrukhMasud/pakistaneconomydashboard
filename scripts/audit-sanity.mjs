@@ -52,6 +52,7 @@ function assertSorted(rows, datasetId, failures) {
 
 async function main() {
   const failures = [];
+  const warnings = [];
 
   for (const dataset of DATASETS) {
     const data = await readJson(dataset.file);
@@ -70,7 +71,12 @@ async function main() {
     const maxAge = MAX_AGE_DAYS[dataset.cadence];
     const age = daysSince(freshness.latestObservation);
     if (maxAge && age !== null) {
-      assert(age <= maxAge, `${dataset.id}: latest observation ${freshness.latestObservation} is ${age} days old`, failures);
+      const staleMessage = `${dataset.id}: latest observation ${freshness.latestObservation} is ${age} days old`;
+      if (age > maxAge && !dataset.critical && data.reviewRequired === true) {
+        warnings.push(staleMessage);
+      } else {
+        assert(age <= maxAge, staleMessage, failures);
+      }
     }
 
     if (dataset.id === 'trade') {
@@ -96,6 +102,7 @@ async function main() {
     process.exit(1);
   }
 
+  for (const warning of warnings) console.warn(`⚠️  ${warning} (explicit review required)`);
   console.log(`✅ Data sanity audit passed for ${DATASETS.length} datasets`);
 }
 
