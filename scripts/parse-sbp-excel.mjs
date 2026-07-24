@@ -177,21 +177,31 @@ async function updateTrade() {
   console.log('\n📦 Parsing Trade Data (exp_import_BOP.xls)...');
 
   const wb = readExcel('exp_import_BOP.xls');
-  const rows = getSheet(wb, 'Exp.Imp.(BOP)');
+  const sheetName = wb.SheetNames.find(name =>
+    ['Exp.Imp.(BOP)Arch', 'Exp.Imp.(BOP)'].includes(name.trim()),
+  );
+  if (!sheetName) {
+    throw new Error(`Trade sheet not found. Available: ${wb.SheetNames.join(', ')}`);
+  }
+  const rows = getSheet(wb, sheetName);
+  const currentArchiveLayout = sheetName.trim() === 'Exp.Imp.(BOP)Arch';
+  const dateCol = currentArchiveLayout ? 1 : 0;
+  const exportsCol = currentArchiveLayout ? 3 : 2;
+  const importsCol = currentArchiveLayout ? 7 : 6;
 
-  // Row 7+: data. Col 0 = Excel serial date, 2 = exports, 6 = imports
-  // Empty rows at fiscal-year boundaries; text rows are footnotes.
+  // The current SBP archive adds a leading blank column and a revision-status
+  // column. The legacy workbook remains supported as a fallback source.
   const monthly = [];
 
-  for (let i = 7; i < rows.length; i++) {
+  for (let i = 0; i < rows.length; i++) {
     const row = rows[i];
-    if (!row || typeof row[0] !== 'number') continue;
+    if (!row || typeof row[dateCol] !== 'number') continue;
 
-    const exports_ = row[2];
-    const imports_ = row[6];
+    const exports_ = row[exportsCol];
+    const imports_ = row[importsCol];
     if (typeof exports_ !== 'number' || typeof imports_ !== 'number') continue;
 
-    const date = excelDateToYYYYMM(row[0]);
+    const date = excelDateToYYYYMM(row[dateCol]);
     if (parseInt(date.substring(0, 4)) < 2021) continue;
 
     monthly.push({
@@ -203,6 +213,9 @@ async function updateTrade() {
   }
 
   monthly.sort((a, b) => a.date.localeCompare(b.date));
+  if (new Set(monthly.map(row => row.date)).size !== monthly.length) {
+    throw new Error('Trade source contains duplicate monthly observations');
+  }
 
   const existing = await readJson('trade.json');
   const firstDate = monthly[0]?.date;
@@ -1525,8 +1538,11 @@ async function updateReservesAdequacyFromData() {
   const averageImportsBn = round2(averageMonthlyImports / 1000);
   const officialSources = [
     'https://www.sbp.org.pk/assets/document/forex.pdf',
-    'https://archive.sbp.org.pk/ecodata/exp_import_BOP.xls',
+    'https://www.sbp.org.pk/assets/document/exp_import_BOP_Arch.xls',
   ];
+  const retiredSources = new Set([
+    'https://archive.sbp.org.pk/ecodata/exp_import_BOP.xls',
+  ]);
 
   await writeJson('reserves-adequacy.json', {
     ...existing,
@@ -1547,7 +1563,9 @@ async function updateReservesAdequacyFromData() {
     lastVerified: new Date().toISOString().split('T')[0],
     verifiedFrom: [
       ...officialSources,
-      ...(existing.verifiedFrom || []).filter(url => !officialSources.includes(url)),
+      ...(existing.verifiedFrom || []).filter(url =>
+        !officialSources.includes(url) && !retiredSources.has(url),
+      ),
     ],
     methodologyNote: `The current ${importCoverMonths}-month figure is calculated as $${sbpReserves}bn of SBP-held reserves divided by $${averageImportsBn}bn, the trailing 12-month average of SBP monthly goods imports through ${imports.at(-1).date}. It therefore measures goods-import cover and may differ from official or IMF measures that use broader imports or reserve-adequacy methods. Historical trajectory points are reported estimates and are not recalculated on the same basis.`,
   });

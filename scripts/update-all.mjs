@@ -60,7 +60,8 @@ function validateSourceFile(name, buffer, contentType = '') {
 const DOWNLOADS = [
   {
     name: 'exp_import_BOP.xls',
-    url: 'https://archive.sbp.org.pk/ecodata/exp_import_BOP.xls',
+    url: 'https://www.sbp.org.pk/assets/document/exp_import_BOP_Arch.xls',
+    fallbackUrl: 'https://archive.sbp.org.pk/ecodata/exp_import_BOP.xls',
     description: 'Trade (Imports/Exports BOP)',
     required: true,
   },

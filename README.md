@@ -78,7 +78,7 @@ There are **no synthetic or fabricated** data points.
 
 These files are auto-downloaded by `npm run update`:
 
-- **exp_import_BOP.xls** → `trade.json` — <https://archive.sbp.org.pk/ecodata/exp_import_BOP.xls>
+- **exp_import_BOP_Arch.xls** → `trade.json` — <https://www.sbp.org.pk/assets/document/exp_import_BOP_Arch.xls>
 - **Foreign_Dir.xls** → `fdi.json` (by sector) — <https://archive.sbp.org.pk/ecodata/Foreign_Dir.xls>
 - **Netinflow.xls** → `fdi.json` (by country) — <https://archive.sbp.org.pk/ecodata/Netinflow.xls>
 - **NetinflowSummary.xls** → `fdi.json` (annual) — <https://archive.sbp.org.pk/ecodata/NetinflowSummary.xls>

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-24T18:06:24.403Z",
+  "generatedAt": "2026-07-24T18:35:54.827Z",
   "sources": [
     {
       "id": "reserves",
@@ -50,8 +50,8 @@
       "label": "Trade in Goods",
       "file": "trade.json",
       "source": "State Bank of Pakistan",
-      "sourceUrl": "https://archive.sbp.org.pk/ecodata/exp_import_BOP.xls",
-      "sourceFile": "exp_import_BOP.xls",
+      "sourceUrl": "https://www.sbp.org.pk/assets/document/exp_import_BOP_Arch.xls",
+      "sourceFile": "exp_import_BOP_Arch.xls",
       "parser": "parse-sbp-excel.mjs:updateTrade",
       "cadence": "Monthly",
       "expectedLag": "Monthly BOP goods trade data.",

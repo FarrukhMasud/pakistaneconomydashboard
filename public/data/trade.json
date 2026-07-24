@@ -362,21 +362,21 @@
     },
     {
       "date": "2026-01",
-      "imports": 5346,
-      "exports": 2745,
-      "balance": -2601
+      "imports": 5339,
+      "exports": 2749,
+      "balance": -2590
     },
     {
       "date": "2026-02",
-      "imports": 5165,
-      "exports": 2480,
-      "balance": -2685
+      "imports": 5114,
+      "exports": 2481,
+      "balance": -2633
     },
     {
       "date": "2026-03",
-      "imports": 4892,
-      "exports": 2527,
-      "balance": -2365
+      "imports": 4857,
+      "exports": 2528,
+      "balance": -2329
     },
     {
       "date": "2026-04",
@@ -386,9 +386,15 @@
     },
     {
       "date": "2026-05",
-      "imports": 5686,
-      "exports": 2368,
-      "balance": -3318
+      "imports": 5640,
+      "exports": 2357,
+      "balance": -3283
+    },
+    {
+      "date": "2026-06",
+      "imports": 6147,
+      "exports": 2595,
+      "balance": -3552
     }
   ],
   "topExportCountries": [
@@ -549,7 +555,7 @@
   "importCountryPeriod": "Jul-May FY26 (P)",
   "dataSource": "SBP",
   "lastUpdated": "2026-07-24",
-  "dataCoverage": "2021-01 – 2026-05",
+  "dataCoverage": "2021-01 – 2026-06",
   "countryMonthly": {
     "latestMonth": "2026-05",
     "prevMonth": "2026-04",
