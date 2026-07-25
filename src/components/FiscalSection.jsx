@@ -196,7 +196,9 @@ export default function FiscalSection() {
     <section className="fade-in">
       <SectionHeader
         title="Fiscal Overview"
-        description="Pakistan's fiscal health — GDP growth, government revenue, expenditure, and budget deficits. Pakistan's tax-to-GDP ratio (~10%) is among the lowest in Asia, creating chronic revenue shortfalls. About 35–40% of revenue goes to debt servicing. The IMF program targets a positive primary balance (revenue minus non-interest spending) as a condition for continued support. All fiscal figures are for Pakistan's fiscal year (July–June)."
+        datasetId="fiscal"
+        description="Pakistan's fiscal health — GDP growth, government revenue, expenditure, and budget deficits. Pakistan's tax-to-GDP ratio is among the lowest in Asia, creating chronic revenue shortfalls, and the IMF program targets a positive primary balance (revenue minus non-interest spending) as a condition for continued support."
+        noteKey="fiscal.revenueGap"
         sourceLinks={[
           { label: 'Ministry of Finance', url: 'https://www.finance.gov.pk' },
           { label: 'SBP GDP & Fiscal Data', url: 'https://www.sbp.org.pk/ecodata/index2.asp' },
@@ -236,6 +238,7 @@ export default function FiscalSection() {
           dataSource="SBP / PBS"
           lastUpdated={lastUpdated}
           dataCoverage={fiscDC || `${annual[0]?.year} – ${annual[annual.length-1]?.year}`}
+          provenanceKeys={['fiscal.gdpGrowth.latest']}
         >
           <div style={{ height: 300 }}>
             <Line data={growthData} options={growthOptions} />

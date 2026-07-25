@@ -8,6 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "test": "node --test \"scripts/tests/*.test.mjs\"",
     "update-data": "node scripts/update-data.mjs",
     "update-fbr": "node scripts/update-fbr.mjs",
     "update-peers": "node scripts/update-peer-comparison.mjs",
@@ -15,9 +16,11 @@
     "update:local": "node scripts/update-all.mjs --no-deploy",
     "audit:sanity": "node scripts/audit-sanity.mjs",
     "audit:data": "node scripts/audit-data.mjs",
-    "ci:audit": "npm run audit:sanity && npm run audit:data && npm run lint && npm run build",
+    "ci:audit": "npm run test && npm run audit:sanity && npm run audit:data && npm run lint && npm run build",
     "verify:live": "node scripts/verify-live.mjs",
-    "generate:freshness": "node scripts/generate-data-freshness.mjs"
+    "generate:freshness": "node scripts/generate-data-freshness.mjs",
+    "generate:notes": "node scripts/generate-editorial-notes.mjs",
+    "generate:api": "node scripts/generate-api.mjs"
   },
   "dependencies": {
     "chart.js": "^4.5.1",

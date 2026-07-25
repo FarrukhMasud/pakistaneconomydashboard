@@ -1,0 +1,659 @@
+{
+  "id": "fdi",
+  "label": "Foreign Direct Investment",
+  "source": "State Bank of Pakistan",
+  "sourceUrl": "https://archive.sbp.org.pk/ecodata/NetinflowSummary.xls",
+  "sourceType": "official-primary",
+  "cadence": "Monthly/FYTD",
+  "latestObservation": "2026-06",
+  "lastUpdated": "2026-07-24",
+  "lastChecked": "2026-07-24",
+  "licence": "Official public data, redistributed with attribution. Cite the original institution.",
+  "data": {
+    "by_sector": [
+      {
+        "sector": "Power & Energy",
+        "amount": 909.74,
+        "inflow": 1081.06,
+        "outflow": 171.32,
+        "priorAmount": 1179.38,
+        "priorInflow": 1606.5,
+        "priorOutflow": 427.12
+      },
+      {
+        "sector": "Financial Services",
+        "amount": 732.02,
+        "inflow": 808.21,
+        "outflow": 76.18,
+        "priorAmount": 658.14,
+        "priorInflow": 734.52,
+        "priorOutflow": 76.38
+      },
+      {
+        "sector": "IT & Telecom",
+        "amount": -452.76,
+        "inflow": 94.27,
+        "outflow": 547.03,
+        "priorAmount": -73.33,
+        "priorInflow": 126.79,
+        "priorOutflow": 200.12
+      },
+      {
+        "sector": "Manufacturing",
+        "amount": 176.69,
+        "inflow": 502.87,
+        "outflow": 326.18,
+        "priorAmount": 324.45,
+        "priorInflow": 579.8,
+        "priorOutflow": 255.34
+      },
+      {
+        "sector": "Mining & Quarrying",
+        "amount": -147.32,
+        "inflow": 228.34,
+        "outflow": 375.66,
+        "priorAmount": -97.1,
+        "priorInflow": 389.15,
+        "priorOutflow": 486.24
+      },
+      {
+        "sector": "Construction",
+        "amount": 132.19,
+        "inflow": 154.17,
+        "outflow": 21.98,
+        "priorAmount": 143.84,
+        "priorInflow": 165.83,
+        "priorOutflow": 22
+      },
+      {
+        "sector": "Professional Services",
+        "amount": 100.34,
+        "inflow": 102.71,
+        "outflow": 2.37,
+        "priorAmount": 103.09,
+        "priorInflow": 104.18,
+        "priorOutflow": 1.08
+      },
+      {
+        "sector": "Trade & Commerce",
+        "amount": 57.16,
+        "inflow": 90.6,
+        "outflow": 33.44,
+        "priorAmount": 23.57,
+        "priorInflow": 108.14,
+        "priorOutflow": 84.57
+      },
+      {
+        "sector": "Transport & Storage",
+        "amount": 39.96,
+        "inflow": 72.5,
+        "outflow": 32.53,
+        "priorAmount": -10.53,
+        "priorInflow": 15.72,
+        "priorOutflow": 26.24
+      },
+      {
+        "sector": "Other Services",
+        "amount": 34.77,
+        "inflow": 37.02,
+        "outflow": 2.26,
+        "priorAmount": 7.95,
+        "priorInflow": 10.04,
+        "priorOutflow": 2.09
+      },
+      {
+        "sector": "Others",
+        "amount": 40.51,
+        "inflow": null,
+        "outflow": null,
+        "priorAmount": 7.87,
+        "priorInflow": null,
+        "priorOutflow": null
+      }
+    ],
+    "by_country": [
+      {
+        "country": "China",
+        "amount": 861.98,
+        "flag": "🇨🇳",
+        "priorAmount": 1204.82
+      },
+      {
+        "country": "Norway",
+        "amount": -364.72,
+        "flag": "🇳🇴",
+        "priorAmount": 14.07
+      },
+      {
+        "country": "Hongkong",
+        "amount": 339.37,
+        "flag": "🇭🇰",
+        "priorAmount": 470.04
+      },
+      {
+        "country": "U.A.E",
+        "amount": 235.93,
+        "flag": "🇦🇪",
+        "priorAmount": 294.26
+      },
+      {
+        "country": "Switzerland",
+        "amount": 204.71,
+        "flag": "🇨🇭",
+        "priorAmount": 168.34
+      },
+      {
+        "country": "United States",
+        "amount": -155.96,
+        "flag": "🇺🇸",
+        "priorAmount": 35.28
+      },
+      {
+        "country": "United Kingdom",
+        "amount": 131.88,
+        "flag": "🇬🇧",
+        "priorAmount": 68.2
+      },
+      {
+        "country": "Kuwait",
+        "amount": 103.52,
+        "flag": "🇰🇼",
+        "priorAmount": 30.39
+      },
+      {
+        "country": "Korea (South)",
+        "amount": 96.48,
+        "flag": "🇰🇷",
+        "priorAmount": 96.23
+      },
+      {
+        "country": "Lebanon",
+        "amount": -93.11,
+        "flag": "🇱🇧",
+        "priorAmount": 10.62
+      },
+      {
+        "country": "Others",
+        "amount": 276.71,
+        "flag": "🌍",
+        "priorAmount": 99.06
+      }
+    ],
+    "annual": [
+      {
+        "year": "FY2017",
+        "net_fdi": 2407,
+        "inflow": 3111,
+        "outflow": 704
+      },
+      {
+        "year": "FY2018",
+        "net_fdi": 2780,
+        "inflow": 3495,
+        "outflow": 714
+      },
+      {
+        "year": "FY2019",
+        "net_fdi": 1362,
+        "inflow": 2785,
+        "outflow": 1423
+      },
+      {
+        "year": "FY2020",
+        "net_fdi": 2598,
+        "inflow": 3322,
+        "outflow": 725
+      },
+      {
+        "year": "FY2021",
+        "net_fdi": 1821,
+        "inflow": 3061,
+        "outflow": 1241
+      },
+      {
+        "year": "FY2022",
+        "net_fdi": 1936,
+        "inflow": 2692,
+        "outflow": 757
+      },
+      {
+        "year": "FY2023",
+        "net_fdi": 1627,
+        "inflow": 2568,
+        "outflow": 941
+      },
+      {
+        "year": "FY2024",
+        "net_fdi": 2347,
+        "inflow": 3166,
+        "outflow": 819
+      },
+      {
+        "year": "FY2025",
+        "net_fdi": 2477,
+        "inflow": 4268,
+        "outflow": 1791
+      }
+    ],
+    "sectorPeriod": "July-May FY26",
+    "sectorPriorPeriod": "July-May FY25",
+    "countryPeriod": "July-June FY26",
+    "countryPriorPeriod": "July-June FY25",
+    "source": "State Bank of Pakistan",
+    "dataSource": "SBP",
+    "lastUpdated": "2026-07-24",
+    "dataCoverage": "monthly through 2026-06; sector July-May FY26; country July-June FY26; summary FY2026 Jul-May",
+    "fytdComparison": {
+      "period": "Jul-May",
+      "current": {
+        "label": "FY2026",
+        "net_fdi": 1623.28,
+        "inflow": 3273.51,
+        "outflow": 1650.23,
+        "status": "provisional"
+      },
+      "prior": {
+        "label": "FY2025",
+        "net_fdi": 2267.33,
+        "inflow": 3953.11,
+        "outflow": 1685.79
+      }
+    },
+    "monthlyComparison": {
+      "month": "May",
+      "current": {
+        "label": "FY2026",
+        "net_fdi": 214.29,
+        "inflow": 295.07,
+        "outflow": 80.78,
+        "status": "provisional"
+      },
+      "prior": {
+        "label": "FY2025",
+        "net_fdi": 231.91,
+        "inflow": 320.85,
+        "outflow": 88.94,
+        "status": null
+      }
+    },
+    "monthly": [
+      {
+        "date": "2021-07",
+        "net_fdi": 117,
+        "equity": 129,
+        "debt": -12
+      },
+      {
+        "date": "2021-08",
+        "net_fdi": 137,
+        "equity": 95,
+        "debt": 42
+      },
+      {
+        "date": "2021-09",
+        "net_fdi": 261,
+        "equity": 206,
+        "debt": 55
+      },
+      {
+        "date": "2021-10",
+        "net_fdi": 247,
+        "equity": 137,
+        "debt": 110
+      },
+      {
+        "date": "2021-11",
+        "net_fdi": 158,
+        "equity": 145,
+        "debt": 13
+      },
+      {
+        "date": "2021-12",
+        "net_fdi": 240,
+        "equity": 118,
+        "debt": 122
+      },
+      {
+        "date": "2022-01",
+        "net_fdi": 121,
+        "equity": 138,
+        "debt": -17
+      },
+      {
+        "date": "2022-02",
+        "net_fdi": 102,
+        "equity": 112,
+        "debt": -10
+      },
+      {
+        "date": "2022-03",
+        "net_fdi": -30,
+        "equity": 144,
+        "debt": -174
+      },
+      {
+        "date": "2022-04",
+        "net_fdi": 171,
+        "equity": 123,
+        "debt": 48
+      },
+      {
+        "date": "2022-05",
+        "net_fdi": 141,
+        "equity": 102,
+        "debt": 39
+      },
+      {
+        "date": "2022-06",
+        "net_fdi": 271,
+        "equity": 141,
+        "debt": 130
+      },
+      {
+        "date": "2022-07",
+        "net_fdi": 99,
+        "equity": 118,
+        "debt": -19
+      },
+      {
+        "date": "2022-08",
+        "net_fdi": 149,
+        "equity": 138,
+        "debt": 11
+      },
+      {
+        "date": "2022-09",
+        "net_fdi": 133,
+        "equity": 164,
+        "debt": -31
+      },
+      {
+        "date": "2022-10",
+        "net_fdi": 145,
+        "equity": 136,
+        "debt": 9
+      },
+      {
+        "date": "2022-11",
+        "net_fdi": 122,
+        "equity": 180,
+        "debt": -58
+      },
+      {
+        "date": "2022-12",
+        "net_fdi": 38,
+        "equity": -5,
+        "debt": 43
+      },
+      {
+        "date": "2023-01",
+        "net_fdi": 242,
+        "equity": 193,
+        "debt": 49
+      },
+      {
+        "date": "2023-02",
+        "net_fdi": 119,
+        "equity": 106,
+        "debt": 13
+      },
+      {
+        "date": "2023-03",
+        "net_fdi": 170,
+        "equity": 173,
+        "debt": -3
+      },
+      {
+        "date": "2023-04",
+        "net_fdi": 132,
+        "equity": 122,
+        "debt": 10
+      },
+      {
+        "date": "2023-05",
+        "net_fdi": 156,
+        "equity": 123,
+        "debt": 33
+      },
+      {
+        "date": "2023-06",
+        "net_fdi": 122,
+        "equity": 116,
+        "debt": 6
+      },
+      {
+        "date": "2023-07",
+        "net_fdi": 124,
+        "equity": 131,
+        "debt": -7
+      },
+      {
+        "date": "2023-08",
+        "net_fdi": 183,
+        "equity": 179,
+        "debt": 4
+      },
+      {
+        "date": "2023-09",
+        "net_fdi": 213,
+        "equity": 200,
+        "debt": 13
+      },
+      {
+        "date": "2023-10",
+        "net_fdi": 163,
+        "equity": 137,
+        "debt": 26
+      },
+      {
+        "date": "2023-11",
+        "net_fdi": 172,
+        "equity": 186,
+        "debt": -14
+      },
+      {
+        "date": "2023-12",
+        "net_fdi": 252,
+        "equity": 240,
+        "debt": 12
+      },
+      {
+        "date": "2024-01",
+        "net_fdi": -132,
+        "equity": -134,
+        "debt": 2
+      },
+      {
+        "date": "2024-02",
+        "net_fdi": 172,
+        "equity": 156,
+        "debt": 16
+      },
+      {
+        "date": "2024-03",
+        "net_fdi": 294,
+        "equity": 274,
+        "debt": 20
+      },
+      {
+        "date": "2024-04",
+        "net_fdi": 394,
+        "equity": 371,
+        "debt": 23
+      },
+      {
+        "date": "2024-05",
+        "net_fdi": 306,
+        "equity": 287,
+        "debt": 19
+      },
+      {
+        "date": "2024-06",
+        "net_fdi": 205,
+        "equity": 201,
+        "debt": 4
+      },
+      {
+        "date": "2024-07",
+        "net_fdi": 185,
+        "equity": 195,
+        "debt": -10
+      },
+      {
+        "date": "2024-08",
+        "net_fdi": 264,
+        "equity": 257,
+        "debt": 7
+      },
+      {
+        "date": "2024-09",
+        "net_fdi": 417,
+        "equity": 431,
+        "debt": -14
+      },
+      {
+        "date": "2024-10",
+        "net_fdi": 146,
+        "equity": 127,
+        "debt": 19
+      },
+      {
+        "date": "2024-11",
+        "net_fdi": 232,
+        "equity": 240,
+        "debt": -8
+      },
+      {
+        "date": "2024-12",
+        "net_fdi": 182,
+        "equity": 175,
+        "debt": 7
+      },
+      {
+        "date": "2025-01",
+        "net_fdi": 236,
+        "equity": 219,
+        "debt": 17
+      },
+      {
+        "date": "2025-02",
+        "net_fdi": 130,
+        "equity": 173,
+        "debt": -43
+      },
+      {
+        "date": "2025-03",
+        "net_fdi": 64,
+        "equity": 67,
+        "debt": -3
+      },
+      {
+        "date": "2025-04",
+        "net_fdi": 179,
+        "equity": 197,
+        "debt": -18
+      },
+      {
+        "date": "2025-05",
+        "net_fdi": 232,
+        "equity": 191,
+        "debt": 41
+      },
+      {
+        "date": "2025-06",
+        "net_fdi": 210,
+        "equity": 225,
+        "debt": -15
+      },
+      {
+        "date": "2025-07",
+        "net_fdi": 224,
+        "equity": 252,
+        "debt": -28
+      },
+      {
+        "date": "2025-08",
+        "net_fdi": 175,
+        "equity": 175,
+        "debt": 0
+      },
+      {
+        "date": "2025-09",
+        "net_fdi": 186,
+        "equity": 215,
+        "debt": -29
+      },
+      {
+        "date": "2025-10",
+        "net_fdi": 171,
+        "equity": 177,
+        "debt": -6
+      },
+      {
+        "date": "2025-11",
+        "net_fdi": 180,
+        "equity": 168,
+        "debt": 12
+      },
+      {
+        "date": "2025-12",
+        "net_fdi": -135,
+        "equity": 34,
+        "debt": -169
+      },
+      {
+        "date": "2026-01",
+        "net_fdi": 173,
+        "equity": 177,
+        "debt": -4
+      },
+      {
+        "date": "2026-02",
+        "net_fdi": 214,
+        "equity": 175,
+        "debt": 39
+      },
+      {
+        "date": "2026-03",
+        "net_fdi": 168,
+        "equity": 212,
+        "debt": -44
+      },
+      {
+        "date": "2026-04",
+        "net_fdi": 54,
+        "equity": 86,
+        "debt": -32
+      },
+      {
+        "date": "2026-05",
+        "net_fdi": 214,
+        "equity": 206,
+        "debt": 8
+      },
+      {
+        "date": "2026-06",
+        "net_fdi": 14,
+        "equity": 29,
+        "debt": -15
+      }
+    ],
+    "monthlyDataSource": "SBP EasyData API - BOP BPM6",
+    "monthlySeries": {
+      "net_fdi": {
+        "key": "TS_GP_BOP_BPM6SUM_M.P00330",
+        "name": "Net Direct Investment in Pakistan"
+      },
+      "equity": {
+        "key": "TS_GP_BOP_BPM6SUM_M.P00340",
+        "name": "Equity and Reinvested Earnings"
+      },
+      "debt": {
+        "key": "TS_GP_BOP_BPM6SUM_M.P00350",
+        "name": "Debt Instruments"
+      }
+    },
+    "monthlyDataCoverage": "2021-07 – 2026-06",
+    "lastChecked": "2026-07-24"
+  }
+}

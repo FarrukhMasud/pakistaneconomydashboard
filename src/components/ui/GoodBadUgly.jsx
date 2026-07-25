@@ -1,4 +1,5 @@
 import './GoodBadUgly.css';
+import useI18n from '../../i18n/useI18n';
 
 const COLUMNS = [
   { key: 'good', label: 'The Good', icon: '✅', cls: 'gbu-col--good' },
@@ -13,6 +14,7 @@ const COLUMNS = [
  * @param {string} title      – panel heading
  */
 export default function GoodBadUgly({ commentary, title = 'The Good, the Bad & the Ugly' }) {
+  const { tx } = useI18n();
   if (!commentary) return null;
   const { summary, good = [], bad = [], ugly = [] } = commentary;
   const hasAny = good.length || bad.length || ugly.length;
@@ -21,8 +23,8 @@ export default function GoodBadUgly({ commentary, title = 'The Good, the Bad & t
   return (
     <div className="gbu card">
       <div className="gbu__head">
-        <h3>🗣️ {title}</h3>
-        <span className="gbu__tag">Editorial · opinion, not official data</span>
+        <h3>🗣️ {tx(title)}</h3>
+        <span className="gbu__tag">{tx('Editorial · opinion, not official data')}</span>
       </div>
       {summary && <p className="gbu__summary">{summary}</p>}
       <div className="gbu__grid">
@@ -33,7 +35,7 @@ export default function GoodBadUgly({ commentary, title = 'The Good, the Bad & t
             <div key={col.key} className={`gbu-col ${col.cls}`}>
               <div className="gbu-col__head">
                 <span className="gbu-col__icon">{col.icon}</span>
-                {col.label}
+                {tx(col.label)}
               </div>
               <ul className="gbu-col__list">
                 {items.map((item, i) => (

@@ -1,6 +1,7 @@
 import { useData } from '../hooks/useData';
 import { COLORS } from '../utils/chartConfig';
 import './ui/ImfTracker.css';
+import useI18n from '../i18n/useI18n';
 
 function formatDate(dateStr, options = { month: 'short', year: 'numeric' }) {
   if (!dateStr) return '';
@@ -9,6 +10,7 @@ function formatDate(dateStr, options = { month: 'short', year: 'numeric' }) {
 }
 
 export default function ImfTracker() {
+  const { tx } = useI18n();
   const { data, loading, error } = useData('imf-tracker.json');
 
   if (loading || !data) return null;
@@ -46,23 +48,23 @@ export default function ImfTracker() {
 
       <div className="imf-tracker__summary">
         <div className="imf-stat">
-          <span className="imf-stat__label">Total Program</span>
+          <span className="imf-stat__label">{tx("Total Program")}</span>
           <span className="imf-stat__value">${(totalUSD / 1000).toFixed(0)}B</span>
         </div>
         <div className="imf-stat">
-          <span className="imf-stat__label">Disbursed</span>
+          <span className="imf-stat__label">{tx("Disbursed")}</span>
           <span className="imf-stat__value" style={{ color: COLORS.teal }}>
             ${(disbursed / 1000).toFixed(1)}B
           </span>
         </div>
         <div className="imf-stat">
-          <span className="imf-stat__label">Remaining</span>
+          <span className="imf-stat__label">{tx("Remaining")}</span>
           <span className="imf-stat__value" style={{ color: COLORS.amber }}>
             ${((totalUSD - disbursed) / 1000).toFixed(1)}B
           </span>
         </div>
         <div className="imf-stat">
-          <span className="imf-stat__label">Next</span>
+          <span className="imf-stat__label">{tx("Next")}</span>
           <span className="imf-stat__value" style={{ color: COLORS.blue }}>
             {nextReview ? `${nextReview.name}${staffLevel || needsVerification ? ' ⏳' : ''}` : 'Complete'}
           </span>
@@ -91,7 +93,7 @@ export default function ImfTracker() {
           <p>
             {upcomingDecision.note}
             {upcomingDecision.expectedRSFUsdM && (
-              <> RSF amount is tracked separately from the EFF progress bar.</>
+              <>{tx("RSF amount is tracked separately from the EFF progress bar.")}</>
             )}
           </p>
         </div>
@@ -100,7 +102,7 @@ export default function ImfTracker() {
       {/* Program scorecard — performance against IMF conditions */}
       {programScorecard?.items?.length > 0 && (
         <div className="imf-scorecard">
-          <h4>Performance vs IMF Conditions</h4>
+          <h4>{tx("Performance vs IMF Conditions")}</h4>
           <div className="imf-scorecard__grid">
             {programScorecard.items.map((it, i) => (
               <div key={i} className={`imf-scorecard__item imf-scorecard__item--${it.met === true ? 'met' : it.met === false ? 'missed' : 'mixed'}`}>
@@ -144,7 +146,7 @@ export default function ImfTracker() {
 
       {relatedFacilities?.length > 0 && (
         <div className="imf-related">
-          <h4>Related IMF Facility</h4>
+          <h4>{tx("Related IMF Facility")}</h4>
           {relatedFacilities.map((facility) => (
             <div key={facility.program} className="imf-related__item">
               <strong>{facility.program}</strong>
@@ -165,7 +167,7 @@ export default function ImfTracker() {
       {/* Key Objectives */}
       {keyObjectives?.length > 0 && (
         <div className="imf-objectives">
-          <h4>Key Program Objectives</h4>
+          <h4>{tx("Key Program Objectives")}</h4>
           <ul>
             {keyObjectives.map((obj, i) => (
               <li key={i}>{obj}</li>

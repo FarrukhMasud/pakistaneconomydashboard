@@ -247,6 +247,7 @@ export default function TradeSection() {
     <section className="fade-in">
       <SectionHeader
         title="Trade Overview"
+        datasetId="trade"
         description="Pakistan's goods trade flows (excluding services). Pakistan structurally imports more than it exports — primarily energy, machinery, and consumer goods — creating a persistent trade deficit. This deficit is a key driver of foreign exchange pressure and a major focus of IMF program conditionality. Export growth, especially in textiles and food, is critical for reducing external vulnerability."
         sourceLinks={[
           { label: 'SBP BOP Data', url: 'https://www.sbp.org.pk/ecodata/index2.asp' },
@@ -304,11 +305,13 @@ export default function TradeSection() {
       <div className="section-grid">
         <ChartCard
           title="Imports vs Exports"
-          description="Monthly trade flows in USD millions. The gap between imports (red) and exports (green) shows the trade deficit. Import compression in 2023 was due to government restrictions to preserve foreign exchange."
+          description="Monthly trade flows in USD millions. The gap between imports (red) and exports (green) shows the trade deficit."
+          noteKey="trade.deficit"
           source="PBS / SBP"
           dataSource="SBP"
           lastUpdated={tradeLU}
           dataCoverage={tradeDC}
+          provenanceKeys={['trade.monthly.balance']}
         >
           <div className="chart-container">
             <Line data={lineData} options={lineOptions} />

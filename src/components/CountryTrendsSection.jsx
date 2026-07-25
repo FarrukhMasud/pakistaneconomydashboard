@@ -6,6 +6,7 @@ import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import { fmtUSD, formatMonthYear } from '../utils/periodHelpers';
 import './ui/CountryTrends.css';
+import useI18n from '../i18n/useI18n';
 
 // Map a country card to its monthly remittance bucket in remittances.json (only
 // these four corridors are published as discrete country series by SBP).
@@ -65,6 +66,7 @@ function FlowRow({ icon, label, snap, latestMonth, goodWhenUp }) {
 }
 
 export default function CountryTrendsSection() {
+  const { tx } = useI18n();
   const { data: trade, loading: tLoading } = useData('trade.json');
   const { data: remit, loading: rLoading } = useData('remittances.json');
 
@@ -187,8 +189,8 @@ export default function CountryTrendsSection() {
               )}
 
               <div className="country-card__fytd">
-                <span>Exports <b>${fmtUSD(c.exports?.fytd)}</b> {expGrowth != null && <em style={{ fontStyle: 'normal', color: expGrowth >= 0 ? COLORS.teal : COLORS.coral }}>({expGrowth >= 0 ? '+' : ''}{expGrowth.toFixed(1)}%)</em>}</span>
-                <span>Imports <b>${fmtUSD(c.imports?.fytd)}</b> {impGrowth != null && <em style={{ fontStyle: 'normal', color: impGrowth >= 0 ? COLORS.coral : COLORS.teal }}>({impGrowth >= 0 ? '+' : ''}{impGrowth.toFixed(1)}%)</em>}</span>
+                <span>{tx("Exports")}<b>${fmtUSD(c.exports?.fytd)}</b> {expGrowth != null && <em style={{ fontStyle: 'normal', color: expGrowth >= 0 ? COLORS.teal : COLORS.coral }}>({expGrowth >= 0 ? '+' : ''}{expGrowth.toFixed(1)}%)</em>}</span>
+                <span>{tx("Imports")}<b>${fmtUSD(c.imports?.fytd)}</b> {impGrowth != null && <em style={{ fontStyle: 'normal', color: impGrowth >= 0 ? COLORS.coral : COLORS.teal }}>({impGrowth >= 0 ? '+' : ''}{impGrowth.toFixed(1)}%)</em>}</span>
               </div>
               <div className="country-card__fytd" style={{ borderTop: 'none', paddingTop: 0, marginTop: '-0.3rem' }}>
                 <span style={{ fontSize: '0.68rem' }}>{cm.fytdLabel} vs {cm.fytdPriorLabel}</span>

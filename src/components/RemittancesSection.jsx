@@ -176,6 +176,7 @@ export default function RemittancesSection() {
     <section className="fade-in">
       <SectionHeader
         title="Workers' Remittances"
+        datasetId="remittances"
         description="Overseas worker remittances are Pakistan's single largest source of foreign exchange — typically exceeding goods export earnings. Over 9 million Pakistanis abroad (primarily in Gulf states, UK, and US) send money home through formal banking channels. Remittances directly support household consumption, reduce poverty, and stabilize the current account. Seasonal spikes occur during Ramadan/Eid and December holidays."
         sourceLinks={[
           { label: 'SBP EasyData Portal', url: 'https://easydata.sbp.org.pk' },
@@ -252,6 +253,7 @@ export default function RemittancesSection() {
           dataSource="SBP EasyData API"
           lastUpdated={remLU}
           dataCoverage={remDC}
+          provenanceKeys={['remittances.monthly.total']}
         >
           <YoYToggle enabled={showYoY} onToggle={() => setShowYoY(v => !v)} />
           <div className="chart-container">

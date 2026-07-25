@@ -3,8 +3,10 @@ import { useData } from '../hooks/useData';
 import { COLORS, baseLineOptions } from '../utils/chartConfig';
 import TrackerFooter from './ui/TrackerFooter';
 import './ui/Trackers.css';
+import useI18n from '../i18n/useI18n';
 
 export default function ReservesAdequacyTracker() {
+  const { tx } = useI18n();
   const { data, loading, error } = useData('reserves-adequacy.json');
   if (loading || !data || error) return null;
 
@@ -64,7 +66,7 @@ export default function ReservesAdequacyTracker() {
 
       <div className="tracker__stats">
         <div className="tracker-stat">
-          <span className="tracker-stat__label">SBP reserves</span>
+          <span className="tracker-stat__label">{tx("SBP reserves")}</span>
           <span className="tracker-stat__value">${current?.sbpReserves}B</span>
           <span className="tracker-stat__sub">total ${current?.totalReserves}B · {current?.asOf}</span>
         </div>
@@ -74,7 +76,7 @@ export default function ReservesAdequacyTracker() {
           <span className="tracker-stat__sub">{meetsBenchmark ? 'meets' : 'below'} common 3-month rule</span>
         </div>
         <div className="tracker-stat">
-          <span className="tracker-stat__label">IMF reserves target</span>
+          <span className="tracker-stat__label">{tx("IMF reserves target")}</span>
           <span className="tracker-stat__value" style={{ color: COLORS.teal }}>${imfTarget?.value}B ✓</span>
           <span className="tracker-stat__sub">end-FY25 target — exceeded</span>
         </div>
@@ -93,7 +95,7 @@ export default function ReservesAdequacyTracker() {
 
       {drivers.length > 0 && (
         <div className="tracker__list">
-          <h4>What's driving the rebuild</h4>
+          <h4>{tx("What's driving the rebuild")}</h4>
           <ul>{drivers.map((d, i) => <li key={i}>{d}</li>)}</ul>
         </div>
       )}

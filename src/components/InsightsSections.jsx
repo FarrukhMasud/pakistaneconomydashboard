@@ -5,6 +5,7 @@ import { COLORS, baseBarOptions } from '../utils/chartConfig';
 import DataFreshnessPanel from './DataFreshnessPanel';
 import SectionHeader from './SectionHeader';
 import './ui/Insights.css';
+import useI18n from '../i18n/useI18n';
 
 const SOURCE_LINKS = [
   { label: 'SBP', url: 'https://www.sbp.org.pk' },
@@ -21,7 +22,8 @@ function sourceLinksWithFytd(fytd) {
 }
 
 function LoadingCard({ label = 'Loading official data…' }) {
-  return <div className="card loading-card"><div className="spinner" /><span>{label}</span></div>;
+  const { tx } = useI18n();
+  return <div className="card loading-card"><div className="spinner" /><span>{tx(label)}</span></div>;
 }
 
 function fmt(value, digits = 1) {
@@ -76,11 +78,12 @@ function fmtPkrBn(value) {
 }
 
 function ProgressMeter({ label, value, max, color = COLORS.teal, detail }) {
+  const { tx } = useI18n();
   const pct = max ? Math.min(100, Math.max(0, (value / max) * 100)) : 0;
   return (
     <div className="progress-meter">
       <div className="progress-meter__top">
-        <span>{label}</span>
+        <span>{tx(label)}</span>
         <strong>{fmt(value, 0)} / {fmt(max, 0)}</strong>
       </div>
       <div className="progress-meter__track">
@@ -92,11 +95,12 @@ function ProgressMeter({ label, value, max, color = COLORS.teal, detail }) {
 }
 
 function InsightCard({ title, value, meta, body, source, sourceUrl, tone = 'neutral' }) {
+  const { tx } = useI18n();
   return (
     <article className={`insight-card insight-card--${tone}`}>
       <div className="insight-card__top">
-        <h3>{title}</h3>
-        <span className="official-badge">Official data</span>
+        <h3>{tx(title)}</h3>
+        <span className="official-badge">{tx("Official data")}</span>
       </div>
       <div className="insight-card__value">{value}</div>
       {meta && <div className="insight-card__meta">{meta}</div>}
@@ -111,6 +115,7 @@ function InsightCard({ title, value, meta, body, source, sourceUrl, tone = 'neut
 }
 
 export function MacroRiskScorecardSection() {
+  const { tx } = useI18n();
   const reservesAdequacy = useData('reserves-adequacy.json');
   const fbr = useData('fbr-tax.json');
   const policy = useData('monetary-policy.json');
@@ -205,12 +210,13 @@ export function MacroRiskScorecardSection() {
           </div>
         ))}
       </div>
-      <p className="insight-note">Rows are omitted automatically if a verified source value is missing.</p>
+      <p className="insight-note">{tx("Rows are omitted automatically if a verified source value is missing.")}</p>
     </section>
   );
 }
 
 export function ImfComplianceSection() {
+  const { tx } = useI18n();
   const imf = useData('imf-tracker.json');
   const fbr = useData('fbr-tax.json');
   const reservesAdequacy = useData('reserves-adequacy.json');
@@ -292,11 +298,11 @@ export function ImfComplianceSection() {
       </div>
       <div className="compliance-grid">
         <div className="card">
-          <h3>IMF-published scorecard</h3>
+          <h3>{tx("IMF-published scorecard")}</h3>
           {scoreItems.map((item, index) => renderItem(item, index, imf.data?.programScorecard?.source))}
         </div>
         <div className="card">
-          <h3>Live watch items</h3>
+          <h3>{tx("Live watch items")}</h3>
           {watchItems.map((item, index) => renderItem(item, index))}
         </div>
       </div>
@@ -306,6 +312,7 @@ export function ImfComplianceSection() {
 }
 
 export function ExternalFinancingWallSection() {
+  const { tx } = useI18n();
   const externalDebt = useData('external-debt.json');
   const reservesAdequacy = useData('reserves-adequacy.json');
   const reserves = useData('reserves.json');
@@ -388,7 +395,7 @@ export function ExternalFinancingWallSection() {
         {cards.map((card) => <InsightCard key={card.title} {...card} />)}
       </div>
       <div className="card chart-card">
-        <div className="chart-card-header"><h3>FY26 repayment split</h3></div>
+        <div className="chart-card-header"><h3>{tx("FY26 repayment split")}</h3></div>
         <div className="chart-container short"><Bar data={chart} options={options} /></div>
       </div>
       {externalDebt.data?.fy27?.note && <p className="insight-note">{externalDebt.data.fy27.note}</p>}
@@ -397,6 +404,7 @@ export function ExternalFinancingWallSection() {
 }
 
 export function GoodBadWatchSection() {
+  const { tx } = useI18n();
   const remittances = useData('remittances.json');
   const services = useData('services.json');
   const reserves = useData('reserves.json');
@@ -466,7 +474,7 @@ export function GoodBadWatchSection() {
           <div key={column.title} className={`brief-column brief-column--${column.tone}`}>
             <h3>{column.title}</h3>
             <ul>
-              {column.items.length ? column.items.map((item) => <li key={item}>{item}</li>) : <li>No verified item currently qualifies.</li>}
+              {column.items.length ? column.items.map((item) => <li key={item}>{item}</li>) : <li>{tx("No verified item currently qualifies.")}</li>}
             </ul>
           </div>
         ))}
@@ -537,6 +545,7 @@ export function RevenueTargetMeterSection() {
 }
 
 export function ItExportDeepDiveSection() {
+  const { tx } = useI18n();
   const services = useData('services.json');
   if (services.loading || !services.data) return <LoadingCard label="Loading IT export deep dive…" />;
 
@@ -579,7 +588,7 @@ export function ItExportDeepDiveSection() {
         {softwareExports && <InsightCard title="Computer software exports" value={`$${fmt(softwareExports.latest)}M`} meta={`${fmtPct(pctChange(softwareExports.latest, softwareExports.yearAgo))} YoY`} body={`FYTD computer software exports are $${fmt(softwareExports.fytd)}M.`} source="SBP EBOPS" sourceUrl="https://www.sbp.org.pk/ecodata/index2.asp" tone="neutral" />}
       </div>
       <div className="card chart-card">
-        <div className="chart-card-header"><h3>Monthly IT and freelance export receipts</h3></div>
+        <div className="chart-card-header"><h3>{tx("Monthly IT and freelance export receipts")}</h3></div>
         <div className="chart-container tall"><Bar data={chart} options={options} /></div>
       </div>
       <p className="insight-note">{itMonthly?.note}</p>
@@ -672,6 +681,7 @@ export function EconomicBriefingSection() {
 }
 
 export function PeerComparisonSection() {
+  const { tx } = useI18n();
   const { data, loading, error } = useData('peer-comparison.json');
   const [activeId, setActiveId] = useState('gdp-growth');
 
@@ -741,7 +751,7 @@ export function PeerComparisonSection() {
       </div>
       <div className="insight-table-wrap">
         <table className="insight-table">
-          <thead><tr><th>Country</th><th>Value</th><th>Official year</th></tr></thead>
+          <thead><tr><th>{tx("Country")}</th><th>{tx("Value")}</th><th>{tx("Official year")}</th></tr></thead>
           <tbody>
             {active.values.map((row) => (
               <tr key={row.countryCode}>
@@ -759,6 +769,7 @@ export function PeerComparisonSection() {
 }
 
 export function RiskOutlookSection() {
+  const { tx } = useI18n();
   const fiscal = useData('fiscal.json');
   const fbr = useData('fbr-tax.json');
   const reservesAdequacy = useData('reserves-adequacy.json');
@@ -798,46 +809,46 @@ export function RiskOutlookSection() {
 
       <div className="insight-two-col">
         <div className="context-block card">
-          <h3>Fiscal stress monitor</h3>
+          <h3>{tx("Fiscal stress monitor")}</h3>
           <div className="context-list">
-            <div><span>Fiscal balance</span><strong>{latestFiscal ? `₨${fmt(latestFiscal.value / 1e6, 2)}T` : '—'}</strong><small>{latestFiscal?.fy}</small></div>
-            <div><span>Primary balance</span><strong>{latestPrimary ? `₨${fmt(latestPrimary.value / 1e6, 2)}T` : '—'}</strong><small>{latestPrimary?.fy}</small></div>
-            <div><span>FBR target gap</span><strong>₨{fmt(Math.abs(fbrGap || 0), 0)}B {fbrGap >= 0 ? 'ahead' : 'short'}</strong><small>{fbr.data?.fytd?.period}</small></div>
-            <div><span>Public debt</span><strong>{publicDebt?.value}{publicDebt?.unit}</strong><small>{publicDebt?.change}</small></div>
-            <div><span>Power circular debt</span><strong>{circularDebt?.value}{circularDebt?.unit}</strong><small>{circularDebt?.asOf}</small></div>
+            <div><span>{tx("Fiscal balance")}</span><strong>{latestFiscal ? `₨${fmt(latestFiscal.value / 1e6, 2)}T` : '—'}</strong><small>{latestFiscal?.fy}</small></div>
+            <div><span>{tx("Primary balance")}</span><strong>{latestPrimary ? `₨${fmt(latestPrimary.value / 1e6, 2)}T` : '—'}</strong><small>{latestPrimary?.fy}</small></div>
+            <div><span>{tx("FBR target gap")}</span><strong>₨{fmt(Math.abs(fbrGap || 0), 0)}B {fbrGap >= 0 ? 'ahead' : 'short'}</strong><small>{fbr.data?.fytd?.period}</small></div>
+            <div><span>{tx("Public debt")}</span><strong>{publicDebt?.value}{publicDebt?.unit}</strong><small>{publicDebt?.change}</small></div>
+            <div><span>{tx("Power circular debt")}</span><strong>{circularDebt?.value}{circularDebt?.unit}</strong><small>{circularDebt?.asOf}</small></div>
           </div>
         </div>
 
         <div className="context-block card">
-          <h3>External vulnerability scorecard</h3>
+          <h3>{tx("External vulnerability scorecard")}</h3>
           <div className="context-list">
-            <div><span>Import cover</span><strong>{reservesAdequacy.data?.current?.importCoverMonths} months</strong><small>{reservesAdequacy.data?.benchmark?.label}</small></div>
-            <div><span>SBP reserves</span><strong>${reservesAdequacy.data?.current?.sbpReserves}B</strong><small>{reservesAdequacy.data?.current?.asOf}</small></div>
-            <div><span>FY26 gross external repayment</span><strong>${externalDebt.data?.fy26?.grossRepayment}B</strong><small>rollovers remain critical</small></div>
-            <div><span>Hard-cash repayment</span><strong>${externalDebt.data?.fy26?.hardRepayment}B</strong><small>interest + non-rolled principal</small></div>
-            <div><span>Latest trade deficit</span><strong>${fmt(Math.abs(latestTrade?.balance || 0) / 1000, 2)}B</strong><small>{latestTrade?.date}</small></div>
+            <div><span>{tx("Import cover")}</span><strong>{reservesAdequacy.data?.current?.importCoverMonths} months</strong><small>{reservesAdequacy.data?.benchmark?.label}</small></div>
+            <div><span>{tx("SBP reserves")}</span><strong>${reservesAdequacy.data?.current?.sbpReserves}B</strong><small>{reservesAdequacy.data?.current?.asOf}</small></div>
+            <div><span>{tx("FY26 gross external repayment")}</span><strong>${externalDebt.data?.fy26?.grossRepayment}B</strong><small>rollovers remain critical</small></div>
+            <div><span>{tx("Hard-cash repayment")}</span><strong>${externalDebt.data?.fy26?.hardRepayment}B</strong><small>interest + non-rolled principal</small></div>
+            <div><span>{tx("Latest trade deficit")}</span><strong>${fmt(Math.abs(latestTrade?.balance || 0) / 1000, 2)}B</strong><small>{latestTrade?.date}</small></div>
           </div>
         </div>
       </div>
 
       <div className="insight-two-col">
         <div className="context-block card">
-          <h3>Household impact view</h3>
+          <h3>{tx("Household impact view")}</h3>
           <div className="context-list">
-            <div><span>CPI inflation</span><strong>{fmt(latestInf?.value)}%</strong><small>{latestInf?.date}</small></div>
-            <div><span>Inflation momentum</span><strong>{signed((latestInf?.value || 0) - (priorInf?.value || 0), ' pp')}</strong><small>latest vs prior month</small></div>
-            <div><span>Policy rate</span><strong>{policy?.value}{policy?.unit}</strong><small>{policy?.asOf}</small></div>
-            <div><span>Petrol price</span><strong>{petrol?.value}{petrol?.unit}</strong><small>{petrol?.asOf}</small></div>
+            <div><span>{tx("CPI inflation")}</span><strong>{fmt(latestInf?.value)}%</strong><small>{latestInf?.date}</small></div>
+            <div><span>{tx("Inflation momentum")}</span><strong>{signed((latestInf?.value || 0) - (priorInf?.value || 0), ' pp')}</strong><small>latest vs prior month</small></div>
+            <div><span>{tx("Policy rate")}</span><strong>{policy?.value}{policy?.unit}</strong><small>{policy?.asOf}</small></div>
+            <div><span>{tx("Petrol price")}</span><strong>{petrol?.value}{petrol?.unit}</strong><small>{petrol?.asOf}</small></div>
           </div>
         </div>
 
         <div className="context-block card">
-          <h3>Trend watch, not a forecast</h3>
+          <h3>{tx("Trend watch, not a forecast")}</h3>
           <div className="context-list">
-            <div><span>Remittances vs 3-month average</span><strong>{signed(pctChange(latestRemit?.total, remitAvg), '%')}</strong><small>{latestRemit?.date}</small></div>
-            <div><span>Trade balance vs 3-month average</span><strong>{signed((latestTrade?.balance || 0) - tradeAvg, 'M', 0)}</strong><small>less negative is better</small></div>
-            <div><span>Inflation direction</span><strong>{(latestInf?.value || 0) >= (priorInf?.value || 0) ? 'Rising' : 'Cooling'}</strong><small>latest official CPI print</small></div>
-            <div><span>Tax collection vs FYTD target</span><strong>{fbrGap >= 0 ? 'Ahead' : 'Behind'}</strong><small>source-attributed FYTD comparison</small></div>
+            <div><span>{tx("Remittances vs 3-month average")}</span><strong>{signed(pctChange(latestRemit?.total, remitAvg), '%')}</strong><small>{latestRemit?.date}</small></div>
+            <div><span>{tx("Trade balance vs 3-month average")}</span><strong>{signed((latestTrade?.balance || 0) - tradeAvg, 'M', 0)}</strong><small>less negative is better</small></div>
+            <div><span>{tx("Inflation direction")}</span><strong>{(latestInf?.value || 0) >= (priorInf?.value || 0) ? 'Rising' : 'Cooling'}</strong><small>latest official CPI print</small></div>
+            <div><span>{tx("Tax collection vs FYTD target")}</span><strong>{fbrGap >= 0 ? 'Ahead' : 'Behind'}</strong><small>source-attributed FYTD comparison</small></div>
           </div>
         </div>
       </div>
@@ -878,6 +889,7 @@ export function EconomicTimelineSection() {
 }
 
 export function LearningCenterSection() {
+  const { tx } = useI18n();
   const { data, loading, error } = useData('explainers.json');
   if (loading || !data) return <LoadingCard label="Loading learning center…" />;
   if (error) return <div className="card"><p>Error loading explainers: {error.message}</p></div>;
@@ -898,7 +910,7 @@ export function LearningCenterSection() {
                 <h4>{term.term}</h4>
                 <p>{term.plainEnglish}</p>
                 <div className="learning-card__read">
-                  <strong>How to read it:</strong> {term.howToRead}
+                  <strong>{tx("How to read it:")}</strong> {term.howToRead}
                 </div>
                 <a href={term.sourceUrl} target="_blank" rel="noreferrer">{term.officialSource} ↗</a>
               </article>
@@ -914,6 +926,14 @@ export function LearningCenterSection() {
 export function SourceTrustSection() {
   const { data, loading } = useData('data-freshness.json');
   const datasets = data?.datasets || [];
+  const tiers = data?.tiers || {};
+
+  const byTier = datasets.reduce((acc, dataset) => {
+    const key = dataset.sourceType || 'official-primary';
+    (acc[key] = acc[key] || []).push(dataset);
+    return acc;
+  }, {});
+
   const counts = datasets.reduce((acc, dataset) => {
     if (dataset.apiSeries?.length) acc.api += 1;
     else if (dataset.sourceFile) acc.files += 1;
@@ -922,20 +942,56 @@ export function SourceTrustSection() {
     return acc;
   }, { api: 0, files: 0, curated: 0, critical: 0 });
 
+  const tierOrder = ['official-primary', 'official-derived', 'secondary-attributed'];
+
   return (
     <section className="fade-in">
       <SectionHeader
         title="Source Confidence & Audit Trail"
-        description="A trust layer that shows which datasets come from official APIs, official files, or manually curated official documents, plus freshness metadata."
+        description="Not every number on this dashboard carries the same weight. This page states, dataset by dataset, whether a figure comes straight from the issuing institution, is derived here from official inputs, or is currently only available through press reporting of official figures."
         sourceLinks={SOURCE_LINKS}
       />
       {!loading && (
-        <div className="trust-grid">
-          <InsightCard title="Official APIs" value={counts.api} meta="machine-readable series" body="Fetched from SBP EasyData or other official APIs where available." source="Generated source manifest" tone="positive" />
-          <InsightCard title="Official files" value={counts.files} meta="Excel/PDF source files" body="Parsed from official SBP/FBR/Finance Division files with source-file metadata." source="Generated source manifest" tone="positive" />
-          <InsightCard title="Curated official documents" value={counts.curated} meta="event-driven datasets" body="Used only where no stable machine-readable feed exists; each card links to primary sources." source="Generated source manifest" tone="neutral" />
-          <InsightCard title="Critical datasets" value={counts.critical} meta="freshness-monitored" body="Core indicators are checked by the audit script before build/deploy." source="Generated source manifest" tone="positive" />
-        </div>
+        <>
+          <div className="trust-tier-list">
+            {tierOrder.filter((key) => byTier[key]?.length).map((key) => {
+              const tier = tiers[key] || {};
+              return (
+                <div key={key} className={`trust-tier trust-tier--${tier.tone || 'neutral'}`}>
+                  <div className="trust-tier__head">
+                    <h3>{tier.label || key}</h3>
+                    <span className="trust-tier__count">{byTier[key].length} datasets</span>
+                  </div>
+                  <p className="trust-tier__desc">{tier.description}</p>
+                  <ul className="trust-tier__items">
+                    {byTier[key].map((dataset) => (
+                      <li key={dataset.id}>
+                        <a href={dataset.sourceUrl} target="_blank" rel="noreferrer">{dataset.label}</a>
+                        <span>{dataset.sourceLabel || dataset.source}</span>
+                        {dataset.verifiedFrom?.length > 0 && (
+                          <small>
+                            Verified against {dataset.verifiedFrom.length} published report{dataset.verifiedFrom.length === 1 ? '' : 's'}:{' '}
+                            {dataset.verifiedFrom.map((url, index) => (
+                              <a key={url} href={url} target="_blank" rel="noreferrer">
+                                [{index + 1}]
+                              </a>
+                            ))}
+                          </small>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
+          <div className="trust-grid">
+            <InsightCard title="Official APIs" value={counts.api} meta="machine-readable series" body="Fetched from SBP EasyData or other official APIs where available." source="Generated source manifest" tone="positive" />
+            <InsightCard title="Official files" value={counts.files} meta="Excel/PDF source files" body="Parsed from official SBP/FBR/Finance Division files with source-file metadata." source="Generated source manifest" tone="positive" />
+            <InsightCard title="Curated official documents" value={counts.curated} meta="event-driven datasets" body="Used only where no stable machine-readable feed exists; each card links to primary sources." source="Generated source manifest" tone="neutral" />
+            <InsightCard title="Critical datasets" value={counts.critical} meta="freshness-monitored" body="Core indicators are checked by the audit script before build/deploy." source="Generated source manifest" tone="positive" />
+          </div>
+        </>
       )}
       <DataFreshnessPanel />
     </section>

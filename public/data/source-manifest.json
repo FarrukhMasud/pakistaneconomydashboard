@@ -1,8 +1,9 @@
 {
-  "generatedAt": "2026-07-24T18:35:54.827Z",
+  "generatedAt": "2026-07-24T21:29:32.329Z",
   "sources": [
     {
       "id": "reserves",
+      "sourceType": "official-primary",
       "label": "Foreign Exchange Reserves",
       "file": "reserves.json",
       "source": "State Bank of Pakistan",
@@ -11,10 +12,12 @@
       "parser": "parse-sbp-excel.mjs:updateReserves",
       "cadence": "Weekly",
       "expectedLag": "Usually published weekly; dashboard should advance after SBP updates forex.pdf.",
-      "critical": true
+      "critical": true,
+      "releaseCalendarUrl": "https://www.sbp.org.pk/ecodata/index2.asp"
     },
     {
       "id": "exchange-rates",
+      "sourceType": "official-primary",
       "label": "Monthly Average Exchange Rates",
       "file": "exchange-rates.json",
       "source": "State Bank of Pakistan",
@@ -23,10 +26,12 @@
       "parser": "parse-sbp-excel.mjs:updateExchangeRates",
       "cadence": "Monthly",
       "expectedLag": "Monthly archive usually updates after month-end. Daily/current SBP rates are not used in this monthly chart.",
-      "critical": true
+      "critical": true,
+      "releaseCalendarUrl": "https://www.sbp.org.pk/ecodata/index2.asp"
     },
     {
       "id": "remittances",
+      "sourceType": "official-primary",
       "label": "Workers' Remittances",
       "file": "remittances.json",
       "source": "SBP EasyData API",
@@ -43,10 +48,12 @@
       "parser": "update-data.mjs:updateRemittances",
       "cadence": "Monthly",
       "expectedLag": "Usually published monthly; April data is not expected until SBP releases the next workers remittance update.",
-      "critical": true
+      "critical": true,
+      "releaseCalendarUrl": "https://easydata.sbp.org.pk"
     },
     {
       "id": "trade",
+      "sourceType": "official-primary",
       "label": "Trade in Goods",
       "file": "trade.json",
       "source": "State Bank of Pakistan",
@@ -55,22 +62,31 @@
       "parser": "parse-sbp-excel.mjs:updateTrade",
       "cadence": "Monthly",
       "expectedLag": "Monthly BOP goods trade data.",
-      "critical": true
+      "critical": true,
+      "releaseCalendarUrl": "https://www.sbp.org.pk/ecodata/index2.asp"
     },
     {
       "id": "fdi",
+      "sourceType": "official-primary",
       "label": "Foreign Direct Investment",
       "file": "fdi.json",
       "source": "State Bank of Pakistan",
       "sourceUrl": "https://archive.sbp.org.pk/ecodata/NetinflowSummary.xls",
       "sourceFile": "NetinflowSummary.xls",
-      "parser": "parse-sbp-excel.mjs:updateFdi",
+      "apiSeries": [
+        "TS_GP_BOP_BPM6SUM_M.P00330",
+        "TS_GP_BOP_BPM6SUM_M.P00340",
+        "TS_GP_BOP_BPM6SUM_M.P00350"
+      ],
+      "parser": "parse-sbp-excel.mjs:updateFdi + update-data.mjs:updateFdiMonthly",
       "cadence": "Monthly/FYTD",
-      "expectedLag": "Monthly FDI tables are released after source files are updated by SBP.",
-      "critical": true
+      "expectedLag": "Monthly net FDI can lead the detailed sector, country, and FYTD workbooks.",
+      "critical": true,
+      "releaseCalendarUrl": "https://www.sbp.org.pk/ecodata/index2.asp"
     },
     {
       "id": "services",
+      "sourceType": "official-primary",
       "label": "IT & Services Trade",
       "file": "services.json",
       "source": "State Bank of Pakistan",
@@ -83,6 +99,7 @@
     },
     {
       "id": "inflation",
+      "sourceType": "official-primary",
       "label": "Inflation",
       "file": "inflation.json",
       "source": "SBP EasyData API / PBS",
@@ -93,10 +110,12 @@
       "parser": "update-data.mjs:updateInflation",
       "cadence": "Monthly",
       "expectedLag": "Monthly CPI/WPI series sourced through SBP EasyData.",
-      "critical": true
+      "critical": true,
+      "releaseCalendarUrl": "https://www.pbs.gov.pk/advance-release-calendar"
     },
     {
       "id": "monetary",
+      "sourceType": "official-primary",
       "label": "Monetary Sector",
       "file": "monetary.json",
       "source": "SBP EasyData API",
@@ -108,10 +127,12 @@
       "parser": "update-data.mjs:updateMonetary",
       "cadence": "Weekly/Monthly",
       "expectedLag": "SBP monetary series include weekly/monthly observations depending on the indicator.",
-      "critical": true
+      "critical": true,
+      "releaseCalendarUrl": "https://easydata.sbp.org.pk"
     },
     {
       "id": "fiscal",
+      "sourceType": "official-primary",
       "label": "Public Finance & GDP",
       "file": "fiscal.json",
       "source": "SBP EasyData API / SBP GDP table",
@@ -124,6 +145,7 @@
     },
     {
       "id": "fbr-tax",
+      "sourceType": "official-primary",
       "label": "FBR Tax Collection",
       "file": "fbr-tax.json",
       "source": "Federal Board of Revenue (FBR)",
@@ -131,10 +153,12 @@
       "parser": "manual-curation",
       "cadence": "Monthly (provisional)",
       "expectedLag": "FBR publishes provisional monthly net collection in a press release shortly after each month-end; figures are finalised later in the FBR Year Book.",
-      "critical": false
+      "critical": false,
+      "releaseCalendarUrl": "https://www.fbr.gov.pk"
     },
     {
       "id": "imf-tracker",
+      "sourceType": "official-primary",
       "label": "IMF Program Tracker",
       "file": "imf-tracker.json",
       "source": "IMF / official program documents",
@@ -142,10 +166,12 @@
       "parser": "manual-curation",
       "cadence": "Event-driven",
       "expectedLag": "Update when IMF publishes Board decisions, press releases, staff reports, or official schedule changes.",
-      "critical": true
+      "critical": true,
+      "releaseCalendarUrl": "https://www.imf.org/en/Countries/PAK"
     },
     {
       "id": "monetary-policy",
+      "sourceType": "official-primary",
       "label": "SBP Policy Rate Tracker",
       "file": "monetary-policy.json",
       "source": "State Bank of Pakistan — Monetary Policy Committee",
@@ -153,10 +179,12 @@
       "parser": "manual-curation",
       "cadence": "Event-driven",
       "expectedLag": "Update after each SBP Monetary Policy Committee decision (roughly every 6 weeks).",
-      "critical": false
+      "critical": false,
+      "releaseCalendarUrl": "https://www.sbp.org.pk/m_policy/index.asp"
     },
     {
       "id": "circular-debt",
+      "sourceType": "secondary-attributed",
       "label": "Power Circular Debt Tracker",
       "file": "circular-debt.json",
       "source": "Ministry of Energy / Power Division, IMF",
@@ -168,6 +196,7 @@
     },
     {
       "id": "external-debt",
+      "sourceType": "secondary-attributed",
       "label": "External Debt Repayment Tracker",
       "file": "external-debt.json",
       "source": "State Bank of Pakistan / IMF",
@@ -179,6 +208,7 @@
     },
     {
       "id": "reserves-adequacy",
+      "sourceType": "official-derived",
       "label": "Reserves Adequacy Tracker",
       "file": "reserves-adequacy.json",
       "source": "State Bank of Pakistan",
@@ -190,6 +220,7 @@
     },
     {
       "id": "budget-federal",
+      "sourceType": "official-primary",
       "label": "Federal Budget",
       "file": "budget-federal.json",
       "source": "Government of Pakistan, Finance Division — Budget in Brief",
@@ -201,6 +232,7 @@
     },
     {
       "id": "budget-provincial",
+      "sourceType": "secondary-attributed",
       "label": "Provincial Budgets",
       "file": "budget-provincial.json",
       "source": "Provincial Finance Departments — Budget White Papers",
@@ -212,6 +244,7 @@
     },
     {
       "id": "peer-comparison",
+      "sourceType": "official-primary",
       "label": "Peer Economy Comparison",
       "file": "peer-comparison.json",
       "source": "World Bank Open Data API",
@@ -223,6 +256,7 @@
     },
     {
       "id": "economic-events",
+      "sourceType": "official-primary",
       "label": "Official Economic Timeline",
       "file": "economic-events.json",
       "source": "IMF / SBP / Finance Division / NDMA",
@@ -234,6 +268,7 @@
     },
     {
       "id": "explainers",
+      "sourceType": "official-primary",
       "label": "Learning Center Explainers",
       "file": "explainers.json",
       "source": "Official methodology pages",

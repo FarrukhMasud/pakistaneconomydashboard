@@ -123,6 +123,7 @@ export default function ReservesSection() {
     <section className="fade-in">
       <SectionHeader
         title="Foreign Exchange Reserves"
+        datasetId="reserves"
         description="Pakistan's foreign currency reserves held by the State Bank of Pakistan and commercial banks. The canonical goods-import-cover measure below uses SBP-held reserves and trailing official goods imports. Reserves hit critically low levels in early 2023 before recovering under successive IMF-supported programs."
         sourceLinks={[
           { label: 'SBP Reserves Data', url: 'https://www.sbp.org.pk/ecodata/index2.asp' },
@@ -152,10 +153,12 @@ export default function ReservesSection() {
 
       <ChartCard
         title="Foreign Exchange Reserves"
-        description="SBP gross reserves (solid) and total reserves including commercial banks (dashed). The sharp decline in 2022–23 reflects the balance-of-payments crisis. Recovery since mid-2023 has been supported by successive IMF programs, bilateral rollovers, and the current-account adjustment."
+        description="SBP gross reserves (solid) and total reserves including commercial banks (dashed). Reserve cover is the single most-watched measure of Pakistan's ability to meet external obligations."
+        noteKey="reserves.recovery"
         dataSource={dataSource}
         lastUpdated={lastUpdated}
         dataCoverage={dataCoverage}
+        provenanceKeys={['reserves.weekly.total']}
       >
         <div style={{ height: 350 }}>
           <Line data={chartData} options={options} />

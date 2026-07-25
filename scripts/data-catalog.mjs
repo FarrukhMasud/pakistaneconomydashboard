@@ -45,6 +45,7 @@ function fiscalYearEndDate(value) {
 export const DATASETS = [
   {
     id: 'reserves',
+    sourceType: 'official-primary',
     label: 'Foreign Exchange Reserves',
     file: 'reserves.json',
     source: 'State Bank of Pakistan',
@@ -55,9 +56,12 @@ export const DATASETS = [
     expectedLag: 'Usually published weekly; dashboard should advance after SBP updates forex.pdf.',
     critical: true,
     latest: data => data.weekly?.at(-1)?.date,
+    observations: data => (data.weekly || []).map(row => row.date),
+    releaseCalendarUrl: 'https://www.sbp.org.pk/ecodata/index2.asp',
   },
   {
     id: 'exchange-rates',
+    sourceType: 'official-primary',
     label: 'Monthly Average Exchange Rates',
     file: 'exchange-rates.json',
     source: 'State Bank of Pakistan',
@@ -68,9 +72,12 @@ export const DATASETS = [
     expectedLag: 'Monthly archive usually updates after month-end. Daily/current SBP rates are not used in this monthly chart.',
     critical: true,
     latest: data => data.monthly?.at(-1)?.date,
+    observations: data => (data.monthly || []).map(row => row.date),
+    releaseCalendarUrl: 'https://www.sbp.org.pk/ecodata/index2.asp',
   },
   {
     id: 'remittances',
+    sourceType: 'official-primary',
     label: "Workers' Remittances",
     file: 'remittances.json',
     source: 'SBP EasyData API',
@@ -81,9 +88,12 @@ export const DATASETS = [
     expectedLag: 'Usually published monthly; April data is not expected until SBP releases the next workers remittance update.',
     critical: true,
     latest: data => data.monthly?.at(-1)?.date,
+    observations: data => (data.monthly || []).map(row => row.date),
+    releaseCalendarUrl: 'https://easydata.sbp.org.pk',
   },
   {
     id: 'trade',
+    sourceType: 'official-primary',
     label: 'Trade in Goods',
     file: 'trade.json',
     source: 'State Bank of Pakistan',
@@ -94,23 +104,31 @@ export const DATASETS = [
     expectedLag: 'Monthly BOP goods trade data.',
     critical: true,
     latest: data => data.monthly?.at(-1)?.date,
+    observations: data => (data.monthly || []).map(row => row.date),
+    releaseCalendarUrl: 'https://www.sbp.org.pk/ecodata/index2.asp',
   },
   {
     id: 'fdi',
+    sourceType: 'official-primary',
     label: 'Foreign Direct Investment',
     file: 'fdi.json',
     source: 'State Bank of Pakistan',
     sourceUrl: 'https://archive.sbp.org.pk/ecodata/NetinflowSummary.xls',
     sourceFile: 'NetinflowSummary.xls',
-    parser: 'parse-sbp-excel.mjs:updateFdi',
+    apiSeries: ['TS_GP_BOP_BPM6SUM_M.P00330', 'TS_GP_BOP_BPM6SUM_M.P00340', 'TS_GP_BOP_BPM6SUM_M.P00350'],
+    parser: 'parse-sbp-excel.mjs:updateFdi + update-data.mjs:updateFdiMonthly',
     cadence: 'Monthly/FYTD',
-    expectedLag: 'Monthly FDI tables are released after source files are updated by SBP.',
+    expectedLag: 'Monthly net FDI can lead the detailed sector, country, and FYTD workbooks.',
     critical: true,
-    latest: data => data.sectorPeriod || data.fytdComparison?.current?.period || data.annual?.at(-1)?.year,
-    latestDate: data => fiscalPeriodEndDate(data.sectorPeriod || `${data.fytdComparison?.period || ''} ${data.fytdComparison?.current?.label || ''}`),
+    latest: data => data.monthly?.at(-1)?.date || data.sectorPeriod || data.fytdComparison?.current?.period || data.annual?.at(-1)?.year,
+    latestDate: data => data.monthly?.at(-1)?.date
+      || fiscalPeriodEndDate(data.sectorPeriod || `${data.fytdComparison?.period || ''} ${data.fytdComparison?.current?.label || ''}`),
+    observations: data => (data.monthly || []).map(row => row.date),
+    releaseCalendarUrl: 'https://www.sbp.org.pk/ecodata/index2.asp',
   },
   {
     id: 'services',
+    sourceType: 'official-primary',
     label: 'IT & Services Trade',
     file: 'services.json',
     source: 'State Bank of Pakistan',
@@ -125,6 +143,7 @@ export const DATASETS = [
   },
   {
     id: 'inflation',
+    sourceType: 'official-primary',
     label: 'Inflation',
     file: 'inflation.json',
     source: 'SBP EasyData API / PBS',
@@ -135,9 +154,12 @@ export const DATASETS = [
     expectedLag: 'Monthly CPI/WPI series sourced through SBP EasyData.',
     critical: true,
     latest: data => data.national_cpi?.data?.at(-1)?.date,
+    observations: data => (data.national_cpi?.data || []).map(row => row.date),
+    releaseCalendarUrl: 'https://www.pbs.gov.pk/advance-release-calendar',
   },
   {
     id: 'monetary',
+    sourceType: 'official-primary',
     label: 'Monetary Sector',
     file: 'monetary.json',
     source: 'SBP EasyData API',
@@ -148,9 +170,12 @@ export const DATASETS = [
     expectedLag: 'SBP monetary series include weekly/monthly observations depending on the indicator.',
     critical: true,
     latest: data => data.m2?.data?.at(-1)?.date || data.reserve_money?.data?.at(-1)?.date,
+    observations: data => (data.m2?.data || data.reserve_money?.data || []).map(row => row.date),
+    releaseCalendarUrl: 'https://easydata.sbp.org.pk',
   },
   {
     id: 'fiscal',
+    sourceType: 'official-primary',
     label: 'Public Finance & GDP',
     file: 'fiscal.json',
     source: 'SBP EasyData API / SBP GDP table',
@@ -167,6 +192,7 @@ export const DATASETS = [
   },
   {
     id: 'fbr-tax',
+    sourceType: 'official-primary',
     label: 'FBR Tax Collection',
     file: 'fbr-tax.json',
     source: 'Federal Board of Revenue (FBR)',
@@ -176,9 +202,15 @@ export const DATASETS = [
     expectedLag: 'FBR publishes provisional monthly net collection in a press release shortly after each month-end; figures are finalised later in the FBR Year Book.',
     critical: false,
     latest: data => data.fytd?.asOf || [...(data.monthly || [])].reverse().find(row => typeof row.net === 'number')?.date,
+    observations: data => [
+      ...(data.monthly || []).filter(row => typeof row.net === 'number').map(row => row.date),
+      data.fytd?.asOf,
+    ].filter(Boolean),
+    releaseCalendarUrl: 'https://www.fbr.gov.pk',
   },
   {
     id: 'imf-tracker',
+    sourceType: 'official-primary',
     label: 'IMF Program Tracker',
     file: 'imf-tracker.json',
     source: 'IMF / official program documents',
@@ -188,9 +220,18 @@ export const DATASETS = [
     expectedLag: 'Update when IMF publishes Board decisions, press releases, staff reports, or official schedule changes.',
     critical: true,
     latest: data => data.upcomingDecision?.date || data.lastVerified,
+    announcedNext: data => (data.upcomingDecision
+      ? {
+        date: data.upcomingDecision.date || null,
+        dateText: data.upcomingDecision.dateText || null,
+        note: [data.upcomingDecision.label, data.upcomingDecision.note].filter(Boolean).join(' — '),
+      }
+      : null),
+    releaseCalendarUrl: 'https://www.imf.org/en/Countries/PAK',
   },
   {
     id: 'monetary-policy',
+    sourceType: 'official-primary',
     label: 'SBP Policy Rate Tracker',
     file: 'monetary-policy.json',
     source: 'State Bank of Pakistan — Monetary Policy Committee',
@@ -200,9 +241,18 @@ export const DATASETS = [
     expectedLag: 'Update after each SBP Monetary Policy Committee decision (roughly every 6 weeks).',
     critical: false,
     latest: data => data.asOf || data.lastVerified,
+    announcedNext: data => (data.nextMeeting
+      ? {
+        date: data.nextMeeting.date || null,
+        dateText: data.nextMeeting.dateText || null,
+        note: data.nextMeeting.note || null,
+      }
+      : null),
+    releaseCalendarUrl: 'https://www.sbp.org.pk/m_policy/index.asp',
   },
   {
     id: 'circular-debt',
+    sourceType: 'secondary-attributed',
     label: 'Power Circular Debt Tracker',
     file: 'circular-debt.json',
     source: 'Ministry of Energy / Power Division, IMF',
@@ -215,6 +265,7 @@ export const DATASETS = [
   },
   {
     id: 'external-debt',
+    sourceType: 'secondary-attributed',
     label: 'External Debt Repayment Tracker',
     file: 'external-debt.json',
     source: 'State Bank of Pakistan / IMF',
@@ -227,6 +278,7 @@ export const DATASETS = [
   },
   {
     id: 'reserves-adequacy',
+    sourceType: 'official-derived',
     label: 'Reserves Adequacy Tracker',
     file: 'reserves-adequacy.json',
     source: 'State Bank of Pakistan',
@@ -239,6 +291,7 @@ export const DATASETS = [
   },
   {
     id: 'budget-federal',
+    sourceType: 'official-primary',
     label: 'Federal Budget',
     file: 'budget-federal.json',
     source: 'Government of Pakistan, Finance Division — Budget in Brief',
@@ -251,6 +304,7 @@ export const DATASETS = [
   },
   {
     id: 'budget-provincial',
+    sourceType: 'secondary-attributed',
     label: 'Provincial Budgets',
     file: 'budget-provincial.json',
     source: 'Provincial Finance Departments — Budget White Papers',
@@ -263,6 +317,7 @@ export const DATASETS = [
   },
   {
     id: 'peer-comparison',
+    sourceType: 'official-primary',
     label: 'Peer Economy Comparison',
     file: 'peer-comparison.json',
     source: 'World Bank Open Data API',
@@ -275,6 +330,7 @@ export const DATASETS = [
   },
   {
     id: 'economic-events',
+    sourceType: 'official-primary',
     label: 'Official Economic Timeline',
     file: 'economic-events.json',
     source: 'IMF / SBP / Finance Division / NDMA',
@@ -287,6 +343,7 @@ export const DATASETS = [
   },
   {
     id: 'explainers',
+    sourceType: 'official-primary',
     label: 'Learning Center Explainers',
     file: 'explainers.json',
     source: 'Official methodology pages',
@@ -299,6 +356,27 @@ export const DATASETS = [
   },
 ];
 
+export const SOURCE_TIERS = {
+  'official-primary': {
+    label: 'Official primary',
+    short: 'Official',
+    tone: 'positive',
+    description: 'Published directly by the issuing institution (SBP, PBS, FBR, Finance Division, IMF or the World Bank).',
+  },
+  'official-derived': {
+    label: 'Derived on this dashboard',
+    short: 'Derived',
+    tone: 'neutral',
+    description: 'Computed here from official primary inputs. The formula is stated in the dataset’s methodology note.',
+  },
+  'secondary-attributed': {
+    label: 'Secondary reporting',
+    short: 'Press-sourced',
+    tone: 'warning',
+    description: 'Sourced from press reporting of official figures because no machine-readable official release exists yet. Treat as indicative until the issuing institution publishes.',
+  },
+};
+
 export function getDatasetFreshness(dataset, data) {
   const latestObservation = dataset.latest?.(data) || data.dataCoverage || data.lastUpdated || null;
   const freshnessDate = dataset.latestDate?.(data) || latestObservation;
@@ -307,6 +385,10 @@ export function getDatasetFreshness(dataset, data) {
   const stale = maxAgeDays != null && observationAge != null && observationAge > maxAgeDays;
   const undated = maxAgeDays != null && observationAge == null;
   const reviewRequired = data.reviewRequired === true;
+  // A data file may downgrade its own trust tier at runtime — the FBR dataset
+  // does exactly this whenever the latest month is only available through press
+  // reporting of provisional figures.
+  const sourceType = data.sourceType || data.fytd?.sourceType || dataset.sourceType || 'official-primary';
   return {
     id: dataset.id,
     label: dataset.label,
@@ -314,6 +396,9 @@ export function getDatasetFreshness(dataset, data) {
     source: dataset.source,
     sourceUrl: dataset.sourceUrl,
     sourceFile: dataset.sourceFile || null,
+    sourceType,
+    sourceLabel: data.sourceLabel || data.fytd?.sourceLabel || null,
+    verifiedFrom: Array.isArray(data.verifiedFrom) ? data.verifiedFrom : null,
     apiSeries: dataset.apiSeries || null,
     parser: dataset.parser,
     cadence: dataset.cadence,

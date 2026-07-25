@@ -7,8 +7,10 @@ import SummaryCard from './ui/SummaryCard';
 import ExpandableTile from './ui/ExpandableTile';
 import { pctChange, fmtUSD, buildYoYOverlay, formatMonthYear } from '../utils/periodHelpers';
 import { countryFlagPlugin, countryLabel } from '../utils/countryLabels';
+import useI18n from '../i18n/useI18n';
 
 export default function FdiSection() {
+  const { tx } = useI18n();
   const { data, loading, error } = useData('fdi.json');
 
   if (loading || !data) return <div className="card loading-card"><div className="spinner" /><span>Loading data…</span></div>;
@@ -24,8 +26,14 @@ export default function FdiSection() {
   // FYTD comparison
   const fytd = fytdComparison;
   const fytdChg = fytd?.prior ? pctChange(fytd.current.net_fdi, fytd.prior.net_fdi) : null;
-  const monthlyChg = monthlyComparison?.prior
-    ? pctChange(monthlyComparison.current.net_fdi, monthlyComparison.prior.net_fdi)
+  const latestMonthly = monthly.at(-1) || null;
+  const latestMonthlyYear = latestMonthly ? Number(latestMonthly.date.slice(0, 4)) : null;
+  const latestMonthlyMonth = latestMonthly?.date.slice(5, 7);
+  const yearAgoMonthly = latestMonthly
+    ? monthly.find((row) => row.date === `${latestMonthlyYear - 1}-${latestMonthlyMonth}`)
+    : null;
+  const latestMonthlyChg = yearAgoMonthly
+    ? pctChange(latestMonthly.net_fdi, yearAgoMonthly.net_fdi)
     : null;
   const positiveCountries = by_country.filter((d) => d.amount > 0 && d.country !== 'Others');
   const positiveCountryTotal = positiveCountries.reduce((sum, d) => sum + d.amount, 0);
@@ -264,7 +272,8 @@ export default function FdiSection() {
     <section className="fade-in">
       <SectionHeader
         title="Foreign Direct Investment"
-        description="FDI measures long-term international investment into Pakistan. Unlike portfolio flows, FDI involves lasting ownership interest (≥10% stake) — bringing capital, technology transfer, and jobs. CPEC-era power and infrastructure projects drove FDI to $2.8B (FY2018), but declining since. Key concerns: high concentration risk (China ~38%), rising disinvestment in some sectors (profit repatriation), and limited diversification beyond power/energy."
+        datasetId="fdi"
+        description="FDI measures long-term international investment into Pakistan. Unlike portfolio flows, FDI involves lasting ownership interest (≥10% stake) — bringing capital, technology transfer, and jobs. CPEC-era power and infrastructure projects drove FDI to $2.8B (FY2018), but declining since. Key concerns include high concentration in a few source countries, disinvestment in some sectors, and limited diversification beyond power and energy."
         sourceLinks={[
           { label: 'Board of Investment', url: 'https://invest.gov.pk' },
           { label: 'SBP FDI Data', url: 'https://www.sbp.org.pk/ecodata/index2.asp' },
@@ -291,23 +300,47 @@ export default function FdiSection() {
               ...(fytd.current.inflow ? [{ label: 'Gross Inflow', value: fmtUSD(fytd.current.inflow), color: COLORS.blue }] : []),
               ...(fytd.current.outflow ? [{ label: 'Outflow', value: fmtUSD(fytd.current.outflow), color: COLORS.coral }] : []),
             ]}
-            footnote={`Provisional fiscal-year-to-date data; full FY2026 will close after June 2026. ${fytd.prior ? `Prior: ${fytd.prior.label} ${fytd.period} $${Math.round(fytd.prior.net_fdi)}M` : ''}`}
+            footnote={`Detailed SBP summary is currently through ${fytd.period}; monthly net FDI is available through ${formatMonthYear(latestMonthly?.date)}. ${fytd.prior ? `Prior: ${fytd.prior.label} ${fytd.period} $${Math.round(fytd.prior.net_fdi)}M` : ''}`}
           />
         )}
       </div>
 
       <div className="insight-grid fdi-insights">
-        {fytd && (
+        {latestMonthly && (
           <ExpandableTile
             className="insight-card insight-card--hero"
+            title="Latest monthly FDI"
+            subtitle={formatMonthYear(latestMonthly.date)}
+            details={(
+              <div className="tile-detail-list">
+                <div className="tile-detail-row"><span>{tx("Net FDI")}</span><strong>{fmtUSD(latestMonthly.net_fdi)}</strong></div>
+                <div className="tile-detail-row"><span>{tx("Equity & reinvested earnings")}</span><strong>{fmtUSD(latestMonthly.equity)}</strong></div>
+                <div className="tile-detail-row"><span>{tx("Debt instruments")}</span><strong>{fmtUSD(latestMonthly.debt)}</strong></div>
+                {yearAgoMonthly && <div className="tile-detail-row"><span>{tx("Same month last year")}</span><strong>{fmtUSD(yearAgoMonthly.net_fdi)}</strong></div>}
+              </div>
+            )}
+          >
+            <span className="insight-kicker">Latest monthly FDI</span>
+            <strong>{fmtUSD(latestMonthly.net_fdi)}</strong>
+            <p>
+              {formatMonthYear(latestMonthly.date)}
+              {latestMonthlyChg?.pct != null
+                ? `, ${latestMonthlyChg.pct >= 0 ? '+' : ''}${latestMonthlyChg.pct}% vs a year ago`
+                : ''}
+            </p>
+          </ExpandableTile>
+        )}
+        {fytd && (
+          <ExpandableTile
+            className="insight-card"
             title="Latest SBP FDI pulse"
             subtitle={`${fytd.current.label} ${fytd.period}`}
             details={(
               <div className="tile-detail-list">
-                <div className="tile-detail-row"><span>Net FDI</span><strong>{fmtUSD(fytd.current.net_fdi)}</strong></div>
-                <div className="tile-detail-row"><span>Gross inflow</span><strong>{fmtUSD(fytd.current.inflow)}</strong></div>
-                <div className="tile-detail-row"><span>Outflow</span><strong>{fmtUSD(fytd.current.outflow)}</strong></div>
-                {fytdDelta != null && <div className="tile-detail-row"><span>YoY change</span><strong>{fytdDelta >= 0 ? '+' : ''}{fmtUSD(fytdDelta)} ({fytdChg?.pct >= 0 ? '+' : ''}{fytdChg?.pct}%)</strong></div>}
+                <div className="tile-detail-row"><span>{tx("Net FDI")}</span><strong>{fmtUSD(fytd.current.net_fdi)}</strong></div>
+                <div className="tile-detail-row"><span>{tx("Gross inflow")}</span><strong>{fmtUSD(fytd.current.inflow)}</strong></div>
+                <div className="tile-detail-row"><span>{tx("Outflow")}</span><strong>{fmtUSD(fytd.current.outflow)}</strong></div>
+                {fytdDelta != null && <div className="tile-detail-row"><span>{tx("YoY change")}</span><strong>{fytdDelta >= 0 ? '+' : ''}{fmtUSD(fytdDelta)} ({fytdChg?.pct >= 0 ? '+' : ''}{fytdChg?.pct}%)</strong></div>}
               </div>
             )}
           >
@@ -328,14 +361,14 @@ export default function FdiSection() {
             subtitle={sectorPeriod}
             details={(
               <div className="tile-detail-list">
-                <div className="tile-detail-row"><span>Sector</span><strong>{topSector.sector}</strong></div>
-                <div className="tile-detail-row"><span>Net FDI</span><strong>{fmtUSD(topSector.amount)}</strong></div>
-                <div className="tile-detail-row"><span>Inflow</span><strong>{fmtUSD(topSector.inflow)}</strong></div>
-                <div className="tile-detail-row"><span>Outflow</span><strong>{fmtUSD(topSector.outflow)}</strong></div>
+                <div className="tile-detail-row"><span>{tx("Sector")}</span><strong>{topSector.sector}</strong></div>
+                <div className="tile-detail-row"><span>{tx("Net FDI")}</span><strong>{fmtUSD(topSector.amount)}</strong></div>
+                <div className="tile-detail-row"><span>{tx("Inflow")}</span><strong>{fmtUSD(topSector.inflow)}</strong></div>
+                <div className="tile-detail-row"><span>{tx("Outflow")}</span><strong>{fmtUSD(topSector.outflow)}</strong></div>
               </div>
             )}
           >
-            <span className="insight-kicker">Strongest sector</span>
+            <span className="insight-kicker">{tx("Strongest sector")}</span>
             <strong>{topSector.sector}</strong>
             <p>{fmtUSD(topSector.amount)} net inflow in {sectorPeriod}</p>
           </ExpandableTile>
@@ -347,14 +380,14 @@ export default function FdiSection() {
             subtitle={data.countryPeriod}
             details={(
               <div className="tile-detail-list">
-                <div className="tile-detail-row"><span>Country</span><strong>{countryLabel(topCountry.country)}</strong></div>
-                <div className="tile-detail-row"><span>Net FDI</span><strong>{fmtUSD(topCountry.amount)}</strong></div>
-                {concentrationShare != null && <div className="tile-detail-row"><span>Share of named positive inflows</span><strong>{concentrationShare}%</strong></div>}
-                {topCountry.priorAmount != null && <div className="tile-detail-row"><span>Prior period</span><strong>{fmtUSD(topCountry.priorAmount)}</strong></div>}
+                <div className="tile-detail-row"><span>{tx("Country")}</span><strong>{countryLabel(topCountry.country)}</strong></div>
+                <div className="tile-detail-row"><span>{tx("Net FDI")}</span><strong>{fmtUSD(topCountry.amount)}</strong></div>
+                {concentrationShare != null && <div className="tile-detail-row"><span>{tx("Share of named positive inflows")}</span><strong>{concentrationShare}%</strong></div>}
+                {topCountry.priorAmount != null && <div className="tile-detail-row"><span>{tx("Prior period")}</span><strong>{fmtUSD(topCountry.priorAmount)}</strong></div>}
               </div>
             )}
           >
-            <span className="insight-kicker">Top source country</span>
+            <span className="insight-kicker">{tx("Top source country")}</span>
             <strong>{countryLabel(topCountry.country)}</strong>
             <p>
               {fmtUSD(topCountry.amount)} net inflow
@@ -369,13 +402,13 @@ export default function FdiSection() {
             subtitle={sectorPeriod}
             details={(
               <div className="tile-detail-list">
-                {countryOutflow?.amount < 0 && <div className="tile-detail-row"><span>Largest country outflow</span><strong>{countryLabel(countryOutflow.country)} {fmtUSD(countryOutflow.amount)}</strong></div>}
-                {sectorOutflow?.amount < 0 && <div className="tile-detail-row"><span>Largest sector outflow</span><strong>{sectorOutflow.sector} {fmtUSD(sectorOutflow.amount)}</strong></div>}
+                {countryOutflow?.amount < 0 && <div className="tile-detail-row"><span>{tx("Largest country outflow")}</span><strong>{countryLabel(countryOutflow.country)} {fmtUSD(countryOutflow.amount)}</strong></div>}
+                {sectorOutflow?.amount < 0 && <div className="tile-detail-row"><span>{tx("Largest sector outflow")}</span><strong>{sectorOutflow.sector} {fmtUSD(sectorOutflow.amount)}</strong></div>}
               </div>
             )}
           >
-            <span className="insight-kicker">Watchlist</span>
-            <strong>Disinvestment pockets</strong>
+            <span className="insight-kicker">{tx("Watchlist")}</span>
+            <strong>{tx("Disinvestment pockets")}</strong>
             <p>
               {countryOutflow?.amount < 0 ? `${countryLabel(countryOutflow.country)} ${fmtUSD(countryOutflow.amount)}` : ''}
               {countryOutflow?.amount < 0 && sectorOutflow?.amount < 0 ? ' · ' : ''}
@@ -388,7 +421,8 @@ export default function FdiSection() {
       <div className="section-grid">
         <ChartCard
           title="Annual Net FDI"
-          description="Annual net FDI in USD millions by completed fiscal year. Pakistan's FDI has been recovering since the 2023 economic crisis, with FY2025 showing the strongest performance since FY2018."
+          description="Annual net FDI in USD millions by completed fiscal year."
+          noteKey="fdi.annualContext"
           source="SBP / Board of Investment"
           dataSource="SBP"
           lastUpdated={fdiLU}
@@ -410,9 +444,9 @@ export default function FdiSection() {
             <div className="chart-container">
               <Bar data={monthlyFdiData} options={monthlyFdiOptions} />
             </div>
-            {monthlyComparison && monthlyChg?.pct != null && (
+            {latestMonthly && latestMonthlyChg?.pct != null && (
               <p className="chart-inline-note">
-                Latest month: {monthlyComparison.month} {monthlyComparison.current.label} net FDI was {fmtUSD(monthlyComparison.current.net_fdi)}, {monthlyChg.pct >= 0 ? '+' : ''}{monthlyChg.pct}% vs {monthlyComparison.month} {monthlyComparison.prior.label}.
+                Latest month: {formatMonthYear(latestMonthly.date)} net FDI was {fmtUSD(latestMonthly.net_fdi)}, {latestMonthlyChg.pct >= 0 ? '+' : ''}{latestMonthlyChg.pct}% vs {formatMonthYear(yearAgoMonthly.date)}.
               </p>
             )}
           </ChartCard>
@@ -452,6 +486,7 @@ export default function FdiSection() {
           dataSource="SBP"
           lastUpdated={fdiLU}
           dataCoverage={sectorPeriod}
+          provenanceKeys={['fdi.fytd.current']}
         >
           <div className="chart-container">
             <Bar data={sectorChartData} options={sectorOptions} />
@@ -459,7 +494,7 @@ export default function FdiSection() {
         </ChartCard>
         <ChartCard
           title="FDI by Country"
-          description={`Source countries of FDI for ${data.countryPeriod || 'current FYTD'}${data.countryPriorPeriod ? ` vs ${data.countryPriorPeriod}` : ''}. China leads through CPEC. Concentration risk: ~38% of FDI comes from a single country. Negative values = net capital outflow.`}
+          description={`Source countries of FDI for ${data.countryPeriod || 'current FYTD'}${data.countryPriorPeriod ? ` vs ${data.countryPriorPeriod}` : ''}. China leads through CPEC-related investment. Negative values indicate net capital outflow.`}
           source="SBP / Board of Investment"
           dataSource="SBP"
           lastUpdated={fdiLU}

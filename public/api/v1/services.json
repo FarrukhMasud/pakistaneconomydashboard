@@ -1,0 +1,254 @@
+{
+  "id": "services",
+  "label": "IT & Services Trade",
+  "source": "State Bank of Pakistan",
+  "sourceUrl": "https://archive.sbp.org.pk/ecodata/dt.xls",
+  "sourceType": "official-primary",
+  "cadence": "Monthly/FYTD",
+  "latestObservation": "Jul-May FY26",
+  "lastUpdated": "2026-07-24",
+  "lastChecked": "2026-07-24",
+  "licence": "Official public data, redistributed with attribution. Cite the original institution.",
+  "data": {
+    "categories": [
+      {
+        "name": "Transport",
+        "credit": 854.56,
+        "debit": 4548.33,
+        "net": -3693.77,
+        "priorCredit": 932.08,
+        "priorDebit": 4313.6,
+        "priorNet": -3381.53,
+        "period": "Jul-May FY26"
+      },
+      {
+        "name": "Travel",
+        "credit": 985.44,
+        "debit": 2781.05,
+        "net": -1795.62,
+        "priorCredit": 677.09,
+        "priorDebit": 2265.43,
+        "priorNet": -1588.34,
+        "period": "Jul-May FY26"
+      },
+      {
+        "name": "Insurance & Pension",
+        "credit": 64.06,
+        "debit": 293.33,
+        "net": -229.27,
+        "priorCredit": 98.38,
+        "priorDebit": 310.81,
+        "priorNet": -212.42,
+        "period": "Jul-May FY26"
+      },
+      {
+        "name": "Financial Services",
+        "credit": 67.85,
+        "debit": 646.17,
+        "net": -578.32,
+        "priorCredit": 54.54,
+        "priorDebit": 814.49,
+        "priorNet": -759.95,
+        "period": "Jul-May FY26"
+      },
+      {
+        "name": "IP Charges",
+        "credit": 9.54,
+        "debit": 235.6,
+        "net": -226.06,
+        "priorCredit": 11.12,
+        "priorDebit": 274.42,
+        "priorNet": -263.3,
+        "period": "Jul-May FY26"
+      },
+      {
+        "name": "IT & Telecom",
+        "credit": 4183.44,
+        "debit": 606.88,
+        "net": 3576.57,
+        "priorCredit": 3480.46,
+        "priorDebit": 461.11,
+        "priorNet": 3019.35,
+        "period": "Jul-May FY26"
+      },
+      {
+        "name": "Other Business",
+        "credit": 1937.79,
+        "debit": 1087.61,
+        "net": 850.18,
+        "priorCredit": 1556.75,
+        "priorDebit": 1199.28,
+        "priorNet": 357.47,
+        "period": "Jul-May FY26"
+      },
+      {
+        "name": "Personal/Cultural",
+        "credit": 75.23,
+        "debit": 122.55,
+        "net": -47.32,
+        "priorCredit": 46.58,
+        "priorDebit": 11.48,
+        "priorNet": 35.1,
+        "period": "Jul-May FY26"
+      }
+    ],
+    "itBreakdown": [
+      {
+        "name": "Telecom",
+        "credit": 640.18,
+        "priorCredit": 498.77
+      },
+      {
+        "name": "Software Consultancy",
+        "credit": 1159.58,
+        "priorCredit": 1011.73
+      },
+      {
+        "name": "Computer Software Export/Import",
+        "credit": 589.85,
+        "priorCredit": 539.65
+      },
+      {
+        "name": "Freelance IT",
+        "credit": 1060.79,
+        "priorCredit": 708.05
+      },
+      {
+        "name": "Information Services",
+        "credit": 4.25,
+        "priorCredit": 20.64
+      },
+      {
+        "name": "Other Computer Services",
+        "credit": 728.8,
+        "priorCredit": 701.62
+      }
+    ],
+    "summary": {
+      "totalServicesCredit": 9097.02,
+      "totalServicesDebit": 11099.73,
+      "totalServicesNet": -2002.71,
+      "itTelecomCredit": 4183.44,
+      "itTelecomNet": 3576.57,
+      "computerServicesCredit": 3539.02,
+      "period": "Jul-May FY26"
+    },
+    "comparison": {
+      "current": {
+        "totalCredit": 9097.02,
+        "itCredit": 4183.44,
+        "fy": 2026
+      },
+      "prior": {
+        "totalCredit": 7750.14,
+        "itCredit": 3480.46,
+        "fy": 2025
+      },
+      "fy25": {
+        "totalCredit": 7750.14,
+        "itCredit": 3480.46
+      },
+      "fy26": {
+        "totalCredit": 9097.02,
+        "itCredit": 4183.44
+      },
+      "period": "Jul-May",
+      "currentLabel": "FY26",
+      "priorLabel": "FY25"
+    },
+    "recentMonths": [
+      {
+        "month": "Apr-26",
+        "totalCredit": 904.09,
+        "itCredit": 422.26
+      },
+      {
+        "month": "May-26",
+        "totalCredit": 838.28,
+        "itCredit": 373.27
+      }
+    ],
+    "itMonthly": {
+      "latestMonth": "2026-05",
+      "prevMonth": "2026-04",
+      "yearAgoMonth": "2025-05",
+      "fytdLabel": "Jul-May FY26",
+      "fytdPriorLabel": "Jul-May FY25",
+      "note": "SBP's EBOPS services file publishes the latest month, prior month, the same month a year earlier, and fiscal-year-to-date totals. Values are exports (credit) in US$ million. \"Freelance IT\" is SBP's own line for individual freelancer earnings; total IT & freelancing exports are captured within IT & Telecom (Jul–May).",
+      "components": [
+        {
+          "key": "itTotal",
+          "name": "IT & Telecom (total)",
+          "latest": 373.27,
+          "prev": 422.26,
+          "yearAgo": 329.29,
+          "fytd": 4183.44,
+          "fytdPrior": 3480.46
+        },
+        {
+          "key": "telecom",
+          "name": "Telecommunications",
+          "latest": 49.05,
+          "prev": 75.49,
+          "yearAgo": 48.01,
+          "fytd": 640.18,
+          "fytdPrior": 498.77
+        },
+        {
+          "key": "softwareConsultancy",
+          "name": "Software Consultancy",
+          "latest": 112.01,
+          "prev": 110.99,
+          "yearAgo": 99.08,
+          "fytd": 1159.58,
+          "fytdPrior": 1011.73
+        },
+        {
+          "key": "softwareExports",
+          "name": "Computer Software Exports",
+          "latest": 47.72,
+          "prev": 68.56,
+          "yearAgo": 49.15,
+          "fytd": 589.85,
+          "fytdPrior": 539.65
+        },
+        {
+          "key": "freelance",
+          "name": "Freelance IT",
+          "latest": 101.51,
+          "prev": 102.91,
+          "yearAgo": 65.79,
+          "fytd": 1060.79,
+          "fytdPrior": 708.05
+        },
+        {
+          "key": "informationServices",
+          "name": "Information Services",
+          "latest": 0.32,
+          "prev": 0.4,
+          "yearAgo": 0.38,
+          "fytd": 4.25,
+          "fytdPrior": 20.64
+        }
+      ]
+    },
+    "monthlySeries": [
+      {
+        "month": "2026-04",
+        "totalCredit": 904.09,
+        "itCredit": 422.26,
+        "freelanceCredit": 102.91
+      },
+      {
+        "month": "2026-05",
+        "totalCredit": 838.28,
+        "itCredit": 373.27,
+        "freelanceCredit": 101.51
+      }
+    ],
+    "dataSource": "SBP",
+    "lastUpdated": "2026-07-24",
+    "dataCoverage": "Jul-May FY26",
+    "lastChecked": "2026-07-24"
+  }
+}

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import useI18n from '../../i18n/useI18n';
 
 export default function ExpandableTile({
   title,
@@ -11,6 +12,7 @@ export default function ExpandableTile({
   modalClassName = '',
 }) {
   const [open, setOpen] = useState(false);
+  const { t, tx } = useI18n();
   const expandRef = useRef(null);
   const closeRef = useRef(null);
   const modalRef = useRef(null);
@@ -61,8 +63,8 @@ export default function ExpandableTile({
         ref={expandRef}
         className="tile-expand-btn"
         onClick={() => setOpen(true)}
-        aria-label={`Expand ${title || 'tile'}`}
-        title="Expand tile"
+        aria-label={`${tx('Expand tile')}${title ? `: ${tx(title)}` : ''}`}
+        title={tx('Expand tile')}
       >
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="15 3 21 3 21 9" />
@@ -85,19 +87,19 @@ export default function ExpandableTile({
             className={`tile-modal ${modalClassName}`}
             role="dialog"
             aria-modal="true"
-            aria-label={title || 'Expanded tile'}
+            aria-label={title ? tx(title) : tx('Expand tile')}
           >
             <div className="chart-modal__header">
               <div>
-                {title && <h2>{title}</h2>}
-                {subtitle && <p>{subtitle}</p>}
+                {title && <h2>{tx(title)}</h2>}
+                {subtitle && <p>{tx(subtitle)}</p>}
               </div>
               <button
                 ref={closeRef}
                 className="chart-modal__close"
                 onClick={() => setOpen(false)}
-                aria-label="Close expanded tile"
-                title="Close"
+                aria-label={tx('Close expanded tile')}
+                title={t('common.close', 'Close')}
               >
                 ×
               </button>

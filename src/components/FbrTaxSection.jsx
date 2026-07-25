@@ -334,6 +334,7 @@ export default function FbrTaxSection() {
     <section className="fade-in">
       <SectionHeader
         title="FBR Tax Collection"
+        datasetId="fbr-tax"
         description="Federal tax collection reported by the Federal Board of Revenue (FBR), Pakistan's largest source of government revenue. Figures are net of refunds in PKR billion. Official FBR figures and secondary reports attributed to provisional FBR data are explicitly distinguished; missing months are never estimated or interpolated."
         sourceLinks={[
           { label: 'FBR Official Site', url: 'https://www.fbr.gov.pk' },
@@ -394,6 +395,7 @@ export default function FbrTaxSection() {
             dataSource={dataSource}
             dataCoverage={fytd.period}
             lastUpdated={lastUpdated}
+            provenanceKeys={['fbr.fytd.net']}
           >
             <div className="chart-container">
               <Bar data={runRateData} options={runRateOptions} />

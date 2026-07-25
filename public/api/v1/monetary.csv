@@ -1,0 +1,550 @@
+series,date,value,unit
+m2,2021-07,23234110.55,Million PKR
+m2,2021-08,23079550.61,Million PKR
+m2,2021-09,23296205.87,Million PKR
+m2,2021-10,23606750.33,Million PKR
+m2,2021-11,23394316.75,Million PKR
+m2,2021-12,23561013.54,Million PKR
+m2,2022-01,24123876.6,Million PKR
+m2,2022-02,23743708.21,Million PKR
+m2,2022-03,23855037.11,Million PKR
+m2,2022-04,24236357.46,Million PKR
+m2,2022-05,24992326.88,Million PKR
+m2,2022-06,25388537.45,Million PKR
+m2,2022-07,26774407.34,Million PKR
+m2,2022-08,26122542.38,Million PKR
+m2,2022-09,26384928.37,Million PKR
+m2,2022-10,26688632.46,Million PKR
+m2,2022-11,26872487.52,Million PKR
+m2,2022-12,26940388.73,Million PKR
+m2,2023-01,26760741.43,Million PKR
+m2,2023-02,27068191.22,Million PKR
+m2,2023-03,27376983.86,Million PKR
+m2,2023-04,28295354.17,Million PKR
+m2,2023-05,28993650.55,Million PKR
+m2,2023-06,29464882.71,Million PKR
+m2,2023-07,30455009.5,Million PKR
+m2,2023-08,30321066.43,Million PKR
+m2,2023-09,30494074.03,Million PKR
+m2,2023-10,30703298.39,Million PKR
+m2,2023-11,31008206.93,Million PKR
+m2,2023-12,31324307.66,Million PKR
+m2,2024-01,31814902.22,Million PKR
+m2,2024-02,31632664.36,Million PKR
+m2,2024-03,32095793.93,Million PKR
+m2,2024-04,32812328.51,Million PKR
+m2,2024-05,33121328.13,Million PKR
+m2,2024-06,33880082.44,Million PKR
+m2,2024-07,35153078.67,Million PKR
+m2,2024-08,34722428.53,Million PKR
+m2,2024-09,34942476.24,Million PKR
+m2,2024-10,35206554.74,Million PKR
+m2,2024-11,35291347.66,Million PKR
+m2,2024-12,35128481,Million PKR
+m2,2025-01,35249285.55,Million PKR
+m2,2025-02,35459731.37,Million PKR
+m2,2025-03,35920808.56,Million PKR
+m2,2025-04,37241638.63,Million PKR
+m2,2025-05,37238509.62,Million PKR
+m2,2025-06,38079966.83,Million PKR
+m2,2025-07,39781026.79,Million PKR
+m2,2025-08,39055284.59,Million PKR
+m2,2025-09,39444886,Million PKR
+m2,2025-10,39399445.19,Million PKR
+m2,2025-11,39587884.77,Million PKR
+m2,2025-12,40192492.3,Million PKR
+m2,2026-01,41639944.18,Million PKR
+m2,2026-02,41274294.68,Million PKR
+m2,2026-03,41917458.16,Million PKR
+m2,2026-04,42753284.09,Million PKR
+m2,2026-05,43044021.42,Million PKR
+m2,2026-06,43453936.16,Million PKR
+m2,2026-07,45004908.23,Million PKR
+m2_yoy,2021-07,14.94,Percent
+m2_yoy,2021-08,14.26,Percent
+m2_yoy,2021-09,15.39,Percent
+m2_yoy,2021-10,15.11,Percent
+m2_yoy,2021-11,14.48,Percent
+m2_yoy,2021-12,13.65,Percent
+m2_yoy,2022-01,13.8,Percent
+m2_yoy,2022-02,12.84,Percent
+m2_yoy,2022-03,12.02,Percent
+m2_yoy,2022-04,11.34,Percent
+m2_yoy,2022-05,14.23,Percent
+m2_yoy,2022-06,13.74,Percent
+m2_yoy,2022-07,13.67,Percent
+m2_yoy,2022-08,13.18,Percent
+m2_yoy,2022-09,13.26,Percent
+m2_yoy,2022-10,13.86,Percent
+m2_yoy,2022-11,14.87,Percent
+m2_yoy,2022-12,14.34,Percent
+m2_yoy,2023-01,10.93,Percent
+m2_yoy,2023-02,14,Percent
+m2_yoy,2023-03,14.76,Percent
+m2_yoy,2023-04,16.54,Percent
+m2_yoy,2023-05,16.01,Percent
+m2_yoy,2023-06,16.06,Percent
+m2_yoy,2023-07,15.78,Percent
+m2_yoy,2023-08,16.07,Percent
+m2_yoy,2023-09,15.57,Percent
+m2_yoy,2023-10,15.04,Percent
+m2_yoy,2023-11,15.39,Percent
+m2_yoy,2023-12,16.27,Percent
+m2_yoy,2024-01,18.89,Percent
+m2_yoy,2024-02,16.86,Percent
+m2_yoy,2024-03,17.24,Percent
+m2_yoy,2024-04,15.96,Percent
+m2_yoy,2024-05,14.24,Percent
+m2_yoy,2024-06,13.92,Percent
+m2_yoy,2024-07,15.43,Percent
+m2_yoy,2024-08,14.52,Percent
+m2_yoy,2024-09,13.81,Percent
+m2_yoy,2024-10,14.67,Percent
+m2_yoy,2024-11,13.81,Percent
+m2_yoy,2024-12,12.21,Percent
+m2_yoy,2025-01,10.79,Percent
+m2_yoy,2025-02,11.72,Percent
+m2_yoy,2025-03,12.64,Percent
+m2_yoy,2025-04,13.5,Percent
+m2_yoy,2025-05,12.43,Percent
+m2_yoy,2025-06,12.4,Percent
+m2_yoy,2025-07,-0.22,Percent
+m2_yoy,2025-08,12.48,Percent
+m2_yoy,2025-09,12.89,Percent
+m2_yoy,2025-10,11.91,Percent
+m2_yoy,2025-11,11.45,Percent
+m2_yoy,2025-12,14.42,Percent
+m2_yoy,2026-01,16.92,Percent
+m2_yoy,2026-02,16.4,Percent
+m2_yoy,2026-03,16.24,Percent
+m2_yoy,2026-04,15.69,Percent
+m2_yoy,2026-05,15.92,Percent
+m2_yoy,2026-06,13.08,Percent
+m2_yoy,2026-07,14.46,Percent
+credit_private,2021-07,6737425.75,Million PKR
+credit_private,2021-08,6747583.66,Million PKR
+credit_private,2021-09,6764597.08,Million PKR
+credit_private,2021-10,7030859.81,Million PKR
+credit_private,2021-11,7197592.61,Million PKR
+credit_private,2021-12,7387763.23,Million PKR
+credit_private,2022-01,7578237.45,Million PKR
+credit_private,2022-02,7632560.09,Million PKR
+credit_private,2022-03,7691002.03,Million PKR
+credit_private,2022-04,7948242.11,Million PKR
+credit_private,2022-05,8046425.27,Million PKR
+credit_private,2022-06,8142527.64,Million PKR
+credit_private,2022-07,8317881.45,Million PKR
+credit_private,2022-08,8159234.86,Million PKR
+credit_private,2022-09,8339768.72,Million PKR
+credit_private,2022-10,8394492.42,Million PKR
+credit_private,2022-11,8433677.84,Million PKR
+credit_private,2022-12,8341486.51,Million PKR
+credit_private,2023-01,8641895.17,Million PKR
+credit_private,2023-02,8675000.49,Million PKR
+credit_private,2023-03,8702722.99,Million PKR
+credit_private,2023-04,8397096.98,Million PKR
+credit_private,2023-05,8329631.09,Million PKR
+credit_private,2023-06,8211546.98,Million PKR
+credit_private,2023-07,8075674.46,Million PKR
+credit_private,2023-08,8170805.03,Million PKR
+credit_private,2023-09,8161293.65,Million PKR
+credit_private,2023-10,8143052.67,Million PKR
+credit_private,2023-11,8313290.25,Million PKR
+credit_private,2023-12,8474619.1,Million PKR
+credit_private,2024-01,8510379.81,Million PKR
+credit_private,2024-02,8593230.04,Million PKR
+credit_private,2024-03,8631491.6,Million PKR
+credit_private,2024-04,8504643.76,Million PKR
+credit_private,2024-05,8593806.43,Million PKR
+credit_private,2024-06,8552397.78,Million PKR
+credit_private,2024-07,8565358.15,Million PKR
+credit_private,2024-08,8520153.45,Million PKR
+credit_private,2024-09,8447113.11,Million PKR
+credit_private,2024-10,8569860.87,Million PKR
+credit_private,2024-11,9673166.52,Million PKR
+credit_private,2024-12,10217753.46,Million PKR
+credit_private,2025-01,10501036.86,Million PKR
+credit_private,2025-02,9630497.91,Million PKR
+credit_private,2025-03,9430226.3,Million PKR
+credit_private,2025-04,9531806.97,Million PKR
+credit_private,2025-05,9598354.19,Million PKR
+credit_private,2025-06,9610078.17,Million PKR
+credit_private,2025-07,9741903.34,Million PKR
+credit_private,2025-08,9761854.95,Million PKR
+credit_private,2025-09,9812262.42,Million PKR
+credit_private,2025-10,9871296.47,Million PKR
+credit_private,2025-11,9893840.82,Million PKR
+credit_private,2025-12,10062188.84,Million PKR
+credit_private,2026-01,10761598.5,Million PKR
+credit_private,2026-02,10575655.06,Million PKR
+credit_private,2026-03,10836234.9,Million PKR
+credit_private,2026-04,10797236.59,Million PKR
+credit_private,2026-05,10866055.62,Million PKR
+credit_private,2026-06,10842985.93,Million PKR
+credit_private,2026-07,11156239.12,Million PKR
+credit_pvt_yoy,2021-07,10.37,Percent
+credit_pvt_yoy,2021-08,11.14,Percent
+credit_pvt_yoy,2021-09,11.8,Percent
+credit_pvt_yoy,2021-10,15.35,Percent
+credit_pvt_yoy,2021-11,17.41,Percent
+credit_pvt_yoy,2021-12,18.92,Percent
+credit_pvt_yoy,2022-01,19.02,Percent
+credit_pvt_yoy,2022-02,18.13,Percent
+credit_pvt_yoy,2022-03,18.37,Percent
+credit_pvt_yoy,2022-04,21.49,Percent
+credit_pvt_yoy,2022-05,22.53,Percent
+credit_pvt_yoy,2022-06,24.2,Percent
+credit_pvt_yoy,2022-07,23.07,Percent
+credit_pvt_yoy,2022-08,20.92,Percent
+credit_pvt_yoy,2022-09,23.29,Percent
+credit_pvt_yoy,2022-10,19.73,Percent
+credit_pvt_yoy,2022-11,17.17,Percent
+credit_pvt_yoy,2022-12,12.91,Percent
+credit_pvt_yoy,2023-01,14.04,Percent
+credit_pvt_yoy,2023-02,13.66,Percent
+credit_pvt_yoy,2023-03,13.15,Percent
+credit_pvt_yoy,2023-04,5.75,Percent
+credit_pvt_yoy,2023-05,3.52,Percent
+credit_pvt_yoy,2023-06,0.85,Percent
+credit_pvt_yoy,2023-07,0.01,Percent
+credit_pvt_yoy,2023-08,0.14,Percent
+credit_pvt_yoy,2023-09,-2.14,Percent
+credit_pvt_yoy,2023-10,-3,Percent
+credit_pvt_yoy,2023-11,-1.43,Percent
+credit_pvt_yoy,2023-12,1.6,Percent
+credit_pvt_yoy,2024-01,-1.52,Percent
+credit_pvt_yoy,2024-02,-0.94,Percent
+credit_pvt_yoy,2024-03,-0.82,Percent
+credit_pvt_yoy,2024-04,1.28,Percent
+credit_pvt_yoy,2024-05,3.17,Percent
+credit_pvt_yoy,2024-06,4.3,Percent
+credit_pvt_yoy,2024-07,6.06,Percent
+credit_pvt_yoy,2024-08,4.28,Percent
+credit_pvt_yoy,2024-09,3.97,Percent
+credit_pvt_yoy,2024-10,5.24,Percent
+credit_pvt_yoy,2024-11,16.36,Percent
+credit_pvt_yoy,2024-12,21.25,Percent
+credit_pvt_yoy,2025-01,23.39,Percent
+credit_pvt_yoy,2025-02,12.39,Percent
+credit_pvt_yoy,2025-03,10.83,Percent
+credit_pvt_yoy,2025-04,12.08,Percent
+credit_pvt_yoy,2025-05,11.69,Percent
+credit_pvt_yoy,2025-06,12.37,Percent
+credit_pvt_yoy,2025-07,53.33,Percent
+credit_pvt_yoy,2025-08,14.57,Percent
+credit_pvt_yoy,2025-09,16.16,Percent
+credit_pvt_yoy,2025-10,15.19,Percent
+credit_pvt_yoy,2025-11,1.52,Percent
+credit_pvt_yoy,2025-12,-1.52,Percent
+credit_pvt_yoy,2026-01,-0.78,Percent
+credit_pvt_yoy,2026-02,9.81,Percent
+credit_pvt_yoy,2026-03,15.99,Percent
+credit_pvt_yoy,2026-04,13.64,Percent
+credit_pvt_yoy,2026-05,14.12,Percent
+credit_pvt_yoy,2026-06,13.62,Percent
+credit_pvt_yoy,2026-07,15.47,Percent
+deposits,2021-07,15926661.52,Million PKR
+deposits,2021-08,15793409.56,Million PKR
+deposits,2021-09,16168554.6,Million PKR
+deposits,2021-10,16536450.52,Million PKR
+deposits,2021-11,16208431.35,Million PKR
+deposits,2021-12,16404859.7,Million PKR
+deposits,2022-01,16964307.57,Million PKR
+deposits,2022-02,16552403.61,Million PKR
+deposits,2022-03,16596268.19,Million PKR
+deposits,2022-04,16884756.8,Million PKR
+deposits,2022-05,16942352.4,Million PKR
+deposits,2022-06,17692495.87,Million PKR
+deposits,2022-07,19153752.39,Million PKR
+deposits,2022-08,18180307.52,Million PKR
+deposits,2022-09,18611231.67,Million PKR
+deposits,2022-10,18816781.35,Million PKR
+deposits,2022-11,19053737.8,Million PKR
+deposits,2022-12,19272526.6,Million PKR
+deposits,2023-01,18892296.6,Million PKR
+deposits,2023-02,19040059.87,Million PKR
+deposits,2023-03,19187683.87,Million PKR
+deposits,2023-04,19701452.01,Million PKR
+deposits,2023-05,20000721.66,Million PKR
+deposits,2023-06,20736508.81,Million PKR
+deposits,2023-07,21336234.32,Million PKR
+deposits,2023-08,21540803.5,Million PKR
+deposits,2023-09,22082220.72,Million PKR
+deposits,2023-10,22164550.6,Million PKR
+deposits,2023-11,22404207.69,Million PKR
+deposits,2023-12,22835803.4,Million PKR
+deposits,2024-01,23162541.22,Million PKR
+deposits,2024-02,23052868.23,Million PKR
+deposits,2024-03,23631331.43,Million PKR
+deposits,2024-04,23802251.09,Million PKR
+deposits,2024-05,24206753.62,Million PKR
+deposits,2024-06,24779701.42,Million PKR
+deposits,2024-07,25826799.05,Million PKR
+deposits,2024-08,25631759.71,Million PKR
+deposits,2024-09,25805185.38,Million PKR
+deposits,2024-10,26124594.48,Million PKR
+deposits,2024-11,26261882.12,Million PKR
+deposits,2024-12,25788918.47,Million PKR
+deposits,2025-01,25955455.26,Million PKR
+deposits,2025-02,25920896.91,Million PKR
+deposits,2025-03,26102348.4,Million PKR
+deposits,2025-04,26864904.45,Million PKR
+deposits,2025-05,27123811.51,Million PKR
+deposits,2025-06,27199892.12,Million PKR
+deposits,2025-07,28880152.56,Million PKR
+deposits,2025-08,28329402.2,Million PKR
+deposits,2025-09,28701902.54,Million PKR
+deposits,2025-10,28709304.91,Million PKR
+deposits,2025-11,28592517.58,Million PKR
+deposits,2025-12,29138289.31,Million PKR
+deposits,2026-01,30673538.84,Million PKR
+deposits,2026-02,29913571.56,Million PKR
+deposits,2026-03,30278611.49,Million PKR
+deposits,2026-04,30774216.49,Million PKR
+deposits,2026-05,31343322.11,Million PKR
+deposits,2026-06,31203542.31,Million PKR
+deposits,2026-07,32867642.28,Million PKR
+deposits_yoy,2021-07,15.71,Percent
+deposits_yoy,2021-08,15.07,Percent
+deposits_yoy,2021-09,16.28,Percent
+deposits_yoy,2021-10,15.08,Percent
+deposits_yoy,2021-11,14.47,Percent
+deposits_yoy,2021-12,13.87,Percent
+deposits_yoy,2022-01,14.65,Percent
+deposits_yoy,2022-02,13.84,Percent
+deposits_yoy,2022-03,13.04,Percent
+deposits_yoy,2022-04,11.22,Percent
+deposits_yoy,2022-05,14.17,Percent
+deposits_yoy,2022-06,15.8,Percent
+deposits_yoy,2022-07,15.44,Percent
+deposits_yoy,2022-08,15.11,Percent
+deposits_yoy,2022-09,15.11,Percent
+deposits_yoy,2022-10,15.89,Percent
+deposits_yoy,2022-11,17.55,Percent
+deposits_yoy,2022-12,17.48,Percent
+deposits_yoy,2023-01,11.36,Percent
+deposits_yoy,2023-02,15.03,Percent
+deposits_yoy,2023-03,15.61,Percent
+deposits_yoy,2023-04,17.87,Percent
+deposits_yoy,2023-05,18.05,Percent
+deposits_yoy,2023-06,17.21,Percent
+deposits_yoy,2023-07,16.13,Percent
+deposits_yoy,2023-08,18.48,Percent
+deposits_yoy,2023-09,18.65,Percent
+deposits_yoy,2023-10,17.79,Percent
+deposits_yoy,2023-11,17.58,Percent
+deposits_yoy,2023-12,18.49,Percent
+deposits_yoy,2024-01,22.6,Percent
+deposits_yoy,2024-02,21.08,Percent
+deposits_yoy,2024-03,23.16,Percent
+deposits_yoy,2024-04,20.81,Percent
+deposits_yoy,2024-05,21.03,Percent
+deposits_yoy,2024-06,18.56,Percent
+deposits_yoy,2024-07,21.05,Percent
+deposits_yoy,2024-08,18.99,Percent
+deposits_yoy,2024-09,16.58,Percent
+deposits_yoy,2024-10,17.87,Percent
+deposits_yoy,2024-11,17.22,Percent
+deposits_yoy,2024-12,14.18,Percent
+deposits_yoy,2025-01,12.06,Percent
+deposits_yoy,2025-02,12.77,Percent
+deposits_yoy,2025-03,12.69,Percent
+deposits_yoy,2025-04,12.87,Percent
+deposits_yoy,2025-05,12.05,Percent
+deposits_yoy,2025-06,9.77,Percent
+deposits_yoy,2025-07,5.5,Percent
+deposits_yoy,2025-08,10.52,Percent
+deposits_yoy,2025-09,11.23,Percent
+deposits_yoy,2025-10,9.89,Percent
+deposits_yoy,2025-11,8.94,Percent
+deposits_yoy,2025-12,12.99,Percent
+deposits_yoy,2026-01,16.01,Percent
+deposits_yoy,2026-02,15.4,Percent
+deposits_yoy,2026-03,15.72,Percent
+deposits_yoy,2026-04,15.31,Percent
+deposits_yoy,2026-05,17.12,Percent
+deposits_yoy,2026-06,13.6,Percent
+deposits_yoy,2026-07,16.14,Percent
+nfa,2021-07,1390927.9,Million PKR
+nfa,2021-08,1358770.68,Million PKR
+nfa,2021-09,1300540.21,Million PKR
+nfa,2021-10,1182551.75,Million PKR
+nfa,2021-11,856052.11,Million PKR
+nfa,2021-12,1155699.82,Million PKR
+nfa,2022-01,1034398.59,Million PKR
+nfa,2022-02,990063.62,Million PKR
+nfa,2022-03,942944.97,Million PKR
+nfa,2022-04,112164.5,Million PKR
+nfa,2022-05,-48956.6,Million PKR
+nfa,2022-06,-417033.09,Million PKR
+nfa,2022-07,-192363.21,Million PKR
+nfa,2022-08,-792638.99,Million PKR
+nfa,2022-09,-601388,Million PKR
+nfa,2022-10,-846497.48,Million PKR
+nfa,2022-11,-710623.95,Million PKR
+nfa,2022-12,-1266591.57,Million PKR
+nfa,2023-01,-1534532.15,Million PKR
+nfa,2023-02,-2200457.63,Million PKR
+nfa,2023-03,-2075819.74,Million PKR
+nfa,2023-04,-1976819.15,Million PKR
+nfa,2023-05,-1888055.95,Million PKR
+nfa,2023-06,-2013841.83,Million PKR
+nfa,2023-07,-1738741.12,Million PKR
+nfa,2023-08,-1425721.05,Million PKR
+nfa,2023-09,-1534349.95,Million PKR
+nfa,2023-10,-1572802.55,Million PKR
+nfa,2023-11,-1473452.86,Million PKR
+nfa,2023-12,-1631061.91,Million PKR
+nfa,2024-01,-1171861.51,Million PKR
+nfa,2024-02,-1386925.55,Million PKR
+nfa,2024-03,-1251940.33,Million PKR
+nfa,2024-04,-1054993.98,Million PKR
+nfa,2024-05,-1207189.23,Million PKR
+nfa,2024-06,-1328239.87,Million PKR
+nfa,2024-07,-1135056.2,Million PKR
+nfa,2024-08,-1211336.12,Million PKR
+nfa,2024-09,-1101209.65,Million PKR
+nfa,2024-10,-949345.02,Million PKR
+nfa,2024-11,-813811.56,Million PKR
+nfa,2024-12,-668153,Million PKR
+nfa,2025-01,-486893.38,Million PKR
+nfa,2025-02,-447131.99,Million PKR
+nfa,2025-03,-282119.28,Million PKR
+nfa,2025-04,43199.86,Million PKR
+nfa,2025-05,80264.05,Million PKR
+nfa,2025-06,204140.25,Million PKR
+nfa,2025-07,547316.35,Million PKR
+nfa,2025-08,401737.93,Million PKR
+nfa,2025-09,541960.92,Million PKR
+nfa,2025-10,573304,Million PKR
+nfa,2025-11,541380.12,Million PKR
+nfa,2025-12,608799.04,Million PKR
+nfa,2026-01,874755.78,Million PKR
+nfa,2026-02,1212901.5,Million PKR
+nfa,2026-03,1500345.49,Million PKR
+nfa,2026-04,1304656.19,Million PKR
+nfa,2026-05,1886702.33,Million PKR
+nfa,2026-06,2075356.43,Million PKR
+nfa,2026-07,2178119.42,Million PKR
+budgetary,2021-07,15173559.88,Million PKR
+budgetary,2021-08,15052743.01,Million PKR
+budgetary,2021-09,15411179.5,Million PKR
+budgetary,2021-10,15354776.45,Million PKR
+budgetary,2021-11,15407573.35,Million PKR
+budgetary,2021-12,15193997.12,Million PKR
+budgetary,2022-01,15415044.07,Million PKR
+budgetary,2022-02,15282174.48,Million PKR
+budgetary,2022-03,15540919.65,Million PKR
+budgetary,2022-04,16301500.14,Million PKR
+budgetary,2022-05,16954556.33,Million PKR
+budgetary,2022-06,17711916.08,Million PKR
+budgetary,2022-07,18496395.22,Million PKR
+budgetary,2022-08,18844619.21,Million PKR
+budgetary,2022-09,18686252.4,Million PKR
+budgetary,2022-10,19196623.48,Million PKR
+budgetary,2022-11,18862778.99,Million PKR
+budgetary,2022-12,19646772.82,Million PKR
+budgetary,2023-01,19503518.12,Million PKR
+budgetary,2023-02,20388302.76,Million PKR
+budgetary,2023-03,20632510.96,Million PKR
+budgetary,2023-04,20819763.66,Million PKR
+budgetary,2023-05,21337520.49,Million PKR
+budgetary,2023-06,21434260.13,Million PKR
+budgetary,2023-07,22517735.82,Million PKR
+budgetary,2023-08,22378434.48,Million PKR
+budgetary,2023-09,23173116.67,Million PKR
+budgetary,2023-10,23767044.51,Million PKR
+budgetary,2023-11,23588503.65,Million PKR
+budgetary,2023-12,25138117.49,Million PKR
+budgetary,2024-01,24939446.31,Million PKR
+budgetary,2024-02,25094277.44,Million PKR
+budgetary,2024-03,25613618.11,Million PKR
+budgetary,2024-04,26766810.63,Million PKR
+budgetary,2024-05,27666321.21,Million PKR
+budgetary,2024-06,28607167.14,Million PKR
+budgetary,2024-07,29758410.99,Million PKR
+budgetary,2024-08,30028138.88,Million PKR
+budgetary,2024-09,30564139.59,Million PKR
+budgetary,2024-10,28441862.35,Million PKR
+budgetary,2024-11,28291552.45,Million PKR
+budgetary,2024-12,27376122.01,Million PKR
+budgetary,2025-01,27691720.91,Million PKR
+budgetary,2025-02,28936893.8,Million PKR
+budgetary,2025-03,29969467.07,Million PKR
+budgetary,2025-04,31231029.32,Million PKR
+budgetary,2025-05,31653188.14,Million PKR
+budgetary,2025-06,32555020.43,Million PKR
+budgetary,2025-07,33936551.88,Million PKR
+budgetary,2025-08,33903144.33,Million PKR
+budgetary,2025-09,31786166.51,Million PKR
+budgetary,2025-10,32036973.26,Million PKR
+budgetary,2025-11,32810220.8,Million PKR
+budgetary,2025-12,33443804.83,Million PKR
+budgetary,2026-01,33656638.89,Million PKR
+budgetary,2026-02,34077123.67,Million PKR
+budgetary,2026-03,34738936.69,Million PKR
+budgetary,2026-04,34902522.94,Million PKR
+budgetary,2026-05,34700560.58,Million PKR
+budgetary,2026-06,35252293.56,Million PKR
+budgetary,2026-07,35868740.98,Million PKR
+reserve_money,2021-07,8730359.75,Million PKR
+reserve_money,2021-08,8676216.04,Million PKR
+reserve_money,2021-09,8533646.92,Million PKR
+reserve_money,2021-10,8564398.32,Million PKR
+reserve_money,2021-11,8561443.94,Million PKR
+reserve_money,2021-12,8626057.12,Million PKR
+reserve_money,2022-01,8850812.96,Million PKR
+reserve_money,2022-02,8803240.08,Million PKR
+reserve_money,2022-03,8823861.36,Million PKR
+reserve_money,2022-04,9011333.3,Million PKR
+reserve_money,2022-05,9807500.52,Million PKR
+reserve_money,2022-06,9377297.11,Million PKR
+reserve_money,2022-07,9274881.87,Million PKR
+reserve_money,2022-08,9683617.68,Million PKR
+reserve_money,2022-09,9643367.91,Million PKR
+reserve_money,2022-10,9578622.06,Million PKR
+reserve_money,2022-11,9518396.38,Million PKR
+reserve_money,2022-12,9437020.78,Million PKR
+reserve_money,2023-01,9717045.62,Million PKR
+reserve_money,2023-02,9853010.04,Million PKR
+reserve_money,2023-03,10013762.58,Million PKR
+reserve_money,2023-04,10549732.08,Million PKR
+reserve_money,2023-05,11120067.01,Million PKR
+reserve_money,2023-06,10731969.77,Million PKR
+reserve_money,2023-07,11306671.39,Million PKR
+reserve_money,2023-08,11034913.43,Million PKR
+reserve_money,2023-09,10723585.85,Million PKR
+reserve_money,2023-10,10708470.27,Million PKR
+reserve_money,2023-11,10580235.02,Million PKR
+reserve_money,2023-12,10628150.01,Million PKR
+reserve_money,2024-01,10775879.21,Million PKR
+reserve_money,2024-02,10871533.4,Million PKR
+reserve_money,2024-03,10813865.07,Million PKR
+reserve_money,2024-04,11446488.72,Million PKR
+reserve_money,2024-05,11257737.2,Million PKR
+reserve_money,2024-06,11320546.79,Million PKR
+reserve_money,2024-07,11860679.53,Million PKR
+reserve_money,2024-08,11385826.72,Million PKR
+reserve_money,2024-09,11435926.5,Million PKR
+reserve_money,2024-10,11339214.47,Million PKR
+reserve_money,2024-11,11481830.35,Million PKR
+reserve_money,2024-12,11896130.33,Million PKR
+reserve_money,2025-01,11907658.97,Million PKR
+reserve_money,2025-02,12177549.91,Million PKR
+reserve_money,2025-03,12481760.11,Million PKR
+reserve_money,2025-04,13379949.89,Million PKR
+reserve_money,2025-05,12500717.05,Million PKR
+reserve_money,2025-06,13697088,Million PKR
+reserve_money,2025-07,13550576.6,Million PKR
+reserve_money,2025-08,13350477.38,Million PKR
+reserve_money,2025-09,13248053.26,Million PKR
+reserve_money,2025-10,13542549.07,Million PKR
+reserve_money,2025-11,13582118.98,Million PKR
+reserve_money,2025-12,13776506.33,Million PKR
+reserve_money,2026-01,13771894.89,Million PKR
+reserve_money,2026-02,13995409.88,Million PKR
+reserve_money,2026-03,14166549.12,Million PKR
+reserve_money,2026-04,14591385,Million PKR
+reserve_money,2026-05,14240147.72,Million PKR
+reserve_money,2026-06,14839392.26,Million PKR
+reserve_money,2026-07,14841652.74,Million PKR

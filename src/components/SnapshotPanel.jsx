@@ -1,6 +1,7 @@
 import { useData } from '../hooks/useData';
 import { COLORS } from '../utils/chartConfig';
 import './ui/SnapshotPanel.css';
+import useI18n from '../i18n/useI18n';
 
 function trendColor(trend) {
   if (trend === 'up') return COLORS.teal;
@@ -20,6 +21,7 @@ function trendArrow(trend) {
  * with an explicit as-of date and a link to its primary source.
  */
 export default function SnapshotPanel() {
+  const { tx } = useI18n();
   const { data, loading, error } = useData('indicators.json');
 
   if (loading || error || !data) return null;
@@ -31,7 +33,7 @@ export default function SnapshotPanel() {
     <div className="snapshot-panel">
       <div className="snapshot-panel__head">
         <h3>📌 Rates, Markets &amp; Fiscal Stress — at a glance</h3>
-        <span className="snapshot-panel__hint">Each figure links to its official source</span>
+        <span className="snapshot-panel__hint">{tx("Each figure links to its official source")}</span>
       </div>
 
       <div className="snapshot-grid">

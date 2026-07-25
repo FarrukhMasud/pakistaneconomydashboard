@@ -106,15 +106,19 @@ export default function ServicesSection() {
     },
   };
 
-  // Chart 3 — FY25 vs FY26 Comparison (grouped bar)
+  // Chart 3 — current vs prior fiscal-year-to-date comparison (grouped bar).
+  // Read the fiscal-year-neutral `current`/`prior` keys, falling back to the
+  // legacy FY-named keys only for older data files.
   const curLabel = comparison?.currentLabel || 'FY26';
   const priorLabel = comparison?.priorLabel || 'FY25';
   const compPeriod = comparison?.period || 'Jul-Feb';
+  const compCurrent = comparison?.current || comparison?.fy26;
+  const compPrior = comparison?.prior || comparison?.fy25;
   const comparisonBarData = {
     labels: ['Total Services', 'IT & Telecom'],
     datasets: [
-      { label: `${compPeriod} ${priorLabel}`, data: [comparison.fy25.totalCredit, comparison.fy25.itCredit], backgroundColor: COLORS.blue, borderRadius: 4 },
-      { label: `${compPeriod} ${curLabel}`, data: [comparison.fy26.totalCredit, comparison.fy26.itCredit], backgroundColor: COLORS.teal, borderRadius: 4 },
+      { label: `${compPeriod} ${priorLabel}`, data: [compPrior.totalCredit, compPrior.itCredit], backgroundColor: COLORS.blue, borderRadius: 4 },
+      { label: `${compPeriod} ${curLabel}`, data: [compCurrent.totalCredit, compCurrent.itCredit], backgroundColor: COLORS.teal, borderRadius: 4 },
     ],
   };
 
@@ -151,6 +155,7 @@ export default function ServicesSection() {
     <section className="fade-in">
       <SectionHeader
         title="IT & Services Exports"
+        datasetId="services"
         description="Pakistan's services trade classified by EBOPS (Extended Balance of Payments Services). IT & Telecom is the fastest-growing segment, with computer services (software consultancy, freelancing, and software exports) driving growth. This section includes a month-by-month view of IT and freelance exports with year-on-year momentum. Data from SBP's Balance of Payments detail tables."
         sourceLinks={[
           { label: 'SBP BOP Detail', url: 'https://www.sbp.org.pk/ecodata/index2.asp' },
@@ -182,8 +187,8 @@ export default function ServicesSection() {
       )}
 
       {summary && (() => {
-        const totalGrowth = comparison ? pctChange(comparison.fy26.totalCredit, comparison.fy25.totalCredit) : null;
-        const itGrowth = comparison ? pctChange(comparison.fy26.itCredit, comparison.fy25.itCredit) : null;
+        const totalGrowth = comparison ? pctChange(compCurrent.totalCredit, compPrior.totalCredit) : null;
+        const itGrowth = comparison ? pctChange(compCurrent.itCredit, compPrior.itCredit) : null;
         return (
           <div className="summary-pair">
             <SummaryCard
@@ -222,6 +227,7 @@ export default function ServicesSection() {
           dataSource="SBP"
           lastUpdated={data.lastUpdated}
           dataCoverage={data.dataCoverage}
+          provenanceKeys={['services.itTelecom.credit']}
         >
           <div className="chart-container">
             <Bar data={categoriesBarData} options={categoriesBarOptions} />

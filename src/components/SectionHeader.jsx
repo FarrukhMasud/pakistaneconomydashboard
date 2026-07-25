@@ -1,17 +1,24 @@
 import { useState } from 'react';
+import EditorialNote from './EditorialNote';
+import SourceBadge from './SourceBadge';
+import useI18n from '../i18n/useI18n';
 
-export default function SectionHeader({ title, description, sourceLinks }) {
+export default function SectionHeader({ title, description, sourceLinks, noteKey, datasetId }) {
   const [expanded, setExpanded] = useState(false);
+  const { t, tx } = useI18n();
 
   return (
     <div className="section-header-block">
-      <h2 className="section-title">{title}</h2>
+      <h2 className="section-title">
+        {tx(title)}
+        {datasetId && <SourceBadge datasetId={datasetId} />}
+      </h2>
       <div className="section-header-actions">
         <button
           className="section-intro-toggle"
           onClick={() => setExpanded(e => !e)}
         >
-          {expanded ? '▾ Hide overview' : '▸ About this section'}
+          {expanded ? `▾ ${t('section.hideOverview', 'Hide overview')}` : `▸ ${t('section.aboutSection', 'About this section')}`}
         </button>
         {sourceLinks?.length > 0 && (
           <div className="source-links">
@@ -36,7 +43,8 @@ export default function SectionHeader({ title, description, sourceLinks }) {
       </div>
       <div className={`section-intro-panel ${expanded ? 'expanded' : ''}`}>
         <div>
-          <p className="section-intro">{description}</p>
+          <p className="section-intro">{tx(description)}</p>
+          {noteKey && <EditorialNote noteKey={noteKey} />}
         </div>
       </div>
     </div>

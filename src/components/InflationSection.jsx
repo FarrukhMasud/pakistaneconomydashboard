@@ -296,6 +296,7 @@ export default function InflationSection() {
     <>
       <SectionHeader
         title="Inflation"
+        datasetId="inflation"
         description="Inflation measured Year-over-Year (base year 2015–16). SBP's medium-term inflation target is 5–7%. The CPI is the primary policy target — when CPI exceeds the target, SBP raises the policy rate to cool demand. Food prices (40%+ of CPI basket) disproportionately affect lower-income households. SPI tracks weekly-priced essentials; WPI measures wholesale/producer prices and often leads CPI trends."
         sourceLinks={[
           { label: 'PBS Price Statistics', url: 'https://www.pbs.gov.pk/cpi' },
@@ -339,10 +340,12 @@ export default function InflationSection() {
       <div className="chart-grid">
         <ChartCard
           title="National CPI — Year-over-Year"
-          description="Month-by-month headline inflation rate. CPI peaked at 38% in May 2023 during the economic crisis and has since fallen to single digits. This is the most widely tracked inflation measure in Pakistan."
+          description="Month-by-month headline inflation rate, measured against the same month a year earlier."
+          noteKey="inflation.cpiPath"
           dataSource={dataSource}
           dataCoverage={`${firstDate} – ${lastDate} (${national_cpi.data.length} months)`}
           lastUpdated={lastUpdated}
+          provenanceKeys={['inflation.nationalCpi.latest']}
         >
           <YoYToggle enabled={showYoY} onToggle={() => setShowYoY(v => !v)} />
           <div style={{ height: 320 }}>

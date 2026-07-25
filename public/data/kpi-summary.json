@@ -8,9 +8,12 @@
       "unit": "$ Billion",
       "period": "2026-07-17",
       "change": -0.01,
+      "changeUnit": "$B",
+      "changeBasis": "vs week ending 2026-07-10",
       "trend": "stable",
       "sentiment": "neutral",
       "source": "SBP",
+      "provenanceKey": "reserves.weekly.total",
       "sub": "SBP: $17.26B · Banks: $5.41B"
     },
     {
@@ -20,9 +23,12 @@
       "unit": "PKR",
       "period": "2026-06",
       "change": -0.26,
+      "changeUnit": "PKR",
+      "changeBasis": "vs 2026-05",
       "trend": "stable",
       "sentiment": "neutral",
-      "source": "SBP"
+      "source": "SBP",
+      "provenanceKey": "exchange-rates.monthly.usd"
     },
     {
       "id": "remittances",
@@ -31,31 +37,42 @@
       "unit": "$ Billion",
       "period": "2026-06",
       "change": -0.78,
+      "changeUnit": "$B",
+      "changeBasis": "vs 2026-05",
       "trend": "down",
       "sentiment": "negative",
-      "source": "SBP"
+      "source": "SBP",
+      "provenanceKey": "remittances.monthly.total"
     },
     {
       "id": "fdi",
       "label": "Net FDI",
-      "value": "2.27",
+      "value": 1.62,
       "unit": "$B",
+      "decimals": 2,
       "period": "Jul-May FY2026 (P)",
-      "change": 39.68,
-      "trend": "up",
-      "sentiment": "positive",
-      "source": "SBP"
+      "change": -28.41,
+      "changeUnit": "%",
+      "changeBasis": "vs Jul-May FY2025",
+      "trend": "down",
+      "sentiment": "negative",
+      "source": "SBP",
+      "provenanceKey": "fdi.fytd.current"
     },
     {
       "id": "it_exports",
       "label": "IT & Telecom Exports",
-      "value": "4.18",
+      "value": 4.18,
       "unit": "$B",
+      "decimals": 2,
       "period": "Jul-May FY26",
       "change": 20.11,
+      "changeUnit": "%",
+      "changeBasis": "vs Jul-May FY25",
       "trend": "up",
       "sentiment": "positive",
-      "source": "SBP"
+      "source": "SBP",
+      "provenanceKey": "services.itTelecom.credit"
     },
     {
       "id": "gdp-growth",
@@ -64,9 +81,12 @@
       "unit": "%",
       "period": "FY2026 (Est.)",
       "change": 0.52,
+      "changeUnit": "pp",
+      "changeBasis": "vs FY2025",
       "trend": "up",
       "sentiment": "positive",
-      "source": "PBS / IMF"
+      "source": "PBS / IMF",
+      "provenanceKey": "fiscal.gdpGrowth.latest"
     },
     {
       "id": "inflation",
@@ -75,9 +95,12 @@
       "unit": "%",
       "period": "2026-06",
       "change": -0.6,
+      "changeUnit": "pp",
+      "changeBasis": "vs 2026-05",
       "trend": "down",
       "sentiment": "positive",
       "source": "PBS",
+      "provenanceKey": "inflation.nationalCpi.latest",
       "sub": "SBP target: 5–7%"
     },
     {
@@ -87,9 +110,13 @@
       "unit": "T PKR",
       "period": "Jul–May FY2026",
       "change": 9.7,
+      "changeUnit": "%",
+      "changeBasis": "vs same period last year",
       "trend": "up",
       "sentiment": "negative",
       "source": "Business Recorder, citing provisional FBR data",
+      "sourceType": "secondary-attributed",
+      "provenanceKey": "fbr.fytd.net",
       "sub": "Target ₨12.10T · shortfall ₨868B"
     },
     {
@@ -97,14 +124,16 @@
       "label": "SBP Policy Rate",
       "value": 11.5,
       "unit": "%",
-      "period": "Jun 2026",
+      "period": "2026-06-15",
       "change": 0,
+      "changeUnit": "pp",
+      "changeBasis": "last MPC decision 2026-06-15",
       "trend": "stable",
-      "source": "SBP",
-      "dataSource": "SBP",
-      "dataCoverage": "Jun 2026",
-      "sub": "Held; last move +100 bps (Apr 2026)",
-      "sentiment": "neutral"
+      "sentiment": "neutral",
+      "source": "SBP Monetary Policy Committee",
+      "provenanceKey": "monetaryPolicy.currentRate",
+      "sub": "Next MPC: [object Object]"
     }
-  ]
+  ],
+  "lastChecked": "2026-07-24"
 }

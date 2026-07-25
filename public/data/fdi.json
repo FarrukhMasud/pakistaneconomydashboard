@@ -103,69 +103,69 @@
   "by_country": [
     {
       "country": "China",
-      "amount": 818.96,
+      "amount": 861.98,
       "flag": "🇨🇳",
-      "priorAmount": 1155.41
+      "priorAmount": 1204.82
     },
     {
       "country": "Norway",
-      "amount": -364.76,
+      "amount": -364.72,
       "flag": "🇳🇴",
-      "priorAmount": 9.46
+      "priorAmount": 14.07
     },
     {
       "country": "Hongkong",
-      "amount": 308.39,
+      "amount": 339.37,
       "flag": "🇭🇰",
-      "priorAmount": 428.85
+      "priorAmount": 470.04
     },
     {
       "country": "U.A.E",
-      "amount": 219.37,
+      "amount": 235.93,
       "flag": "🇦🇪",
-      "priorAmount": 244.38
+      "priorAmount": 294.26
     },
     {
       "country": "Switzerland",
-      "amount": 187.29,
+      "amount": 204.71,
       "flag": "🇨🇭",
-      "priorAmount": 151.19
+      "priorAmount": 168.34
+    },
+    {
+      "country": "United States",
+      "amount": -155.96,
+      "flag": "🇺🇸",
+      "priorAmount": 35.28
     },
     {
       "country": "United Kingdom",
-      "amount": 113.5,
+      "amount": 131.88,
       "flag": "🇬🇧",
-      "priorAmount": 60.94
-    },
-    {
-      "country": "Lebanon",
-      "amount": -93.96,
-      "flag": "🇱🇧",
-      "priorAmount": 9.77
+      "priorAmount": 68.2
     },
     {
       "country": "Kuwait",
-      "amount": 93.95,
+      "amount": 103.52,
       "flag": "🇰🇼",
-      "priorAmount": 27.68
+      "priorAmount": 30.39
     },
     {
       "country": "Korea (South)",
-      "amount": 88.47,
+      "amount": 96.48,
       "flag": "🇰🇷",
-      "priorAmount": 88.22
+      "priorAmount": 96.23
     },
     {
-      "country": "Malta",
-      "amount": -83.87,
-      "flag": "🏳️",
-      "priorAmount": -83.87
+      "country": "Lebanon",
+      "amount": -93.11,
+      "flag": "🇱🇧",
+      "priorAmount": 10.62
     },
     {
       "country": "Others",
-      "amount": 335.94,
+      "amount": 276.71,
       "flag": "🌍",
-      "priorAmount": 189.3
+      "priorAmount": 99.06
     }
   ],
   "annual": [
@@ -226,26 +226,26 @@
   ],
   "sectorPeriod": "July-May FY26",
   "sectorPriorPeriod": "July-May FY25",
-  "countryPeriod": "July-May FY26",
-  "countryPriorPeriod": "July-May FY25",
+  "countryPeriod": "July-June FY26",
+  "countryPriorPeriod": "July-June FY25",
   "source": "State Bank of Pakistan",
   "dataSource": "SBP",
   "lastUpdated": "2026-07-24",
-  "dataCoverage": "FY2026 Jul-May",
+  "dataCoverage": "monthly through 2026-06; sector July-May FY26; country July-June FY26; summary FY2026 Jul-May",
   "fytdComparison": {
     "period": "Jul-May",
     "current": {
       "label": "FY2026",
-      "net_fdi": 2267.33,
-      "inflow": 3953.11,
-      "outflow": 1685.79,
+      "net_fdi": 1623.28,
+      "inflow": 3273.51,
+      "outflow": 1650.23,
       "status": "provisional"
     },
     "prior": {
       "label": "FY2025",
-      "net_fdi": 1623.28,
-      "inflow": 3273.51,
-      "outflow": 1650.23
+      "net_fdi": 2267.33,
+      "inflow": 3953.11,
+      "outflow": 1685.79
     }
   },
   "monthlyComparison": {
@@ -641,5 +641,7 @@
       "key": "TS_GP_BOP_BPM6SUM_M.P00350",
       "name": "Debt Instruments"
     }
-  }
+  },
+  "monthlyDataCoverage": "2021-07 – 2026-06",
+  "lastChecked": "2026-07-24"
 }

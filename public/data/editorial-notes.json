@@ -1,0 +1,142 @@
+{
+  "description": "Narrative claims shown alongside charts. Every note is computed from the canonical dashboard data files listed in its sources, so no editorial number is hand-typed.",
+  "dataSource": "Derived from official SBP, PBS, FBR and Finance Division data",
+  "notes": {
+    "inflation.cpiPath": {
+      "text": "Headline CPI inflation peaked at 38.0% year-on-year in May 2023 and stood at 11.1% in June 2026. This is the most widely tracked inflation measure in Pakistan.",
+      "basis": "derived",
+      "derivation": "Maximum and latest observation of the national CPI year-on-year series across 60 months from July 2021.",
+      "sources": [
+        {
+          "id": "pbs-cpi",
+          "institution": "Pakistan Bureau of Statistics",
+          "label": "Consumer Price Index monthly review",
+          "url": "https://www.pbs.gov.pk/cpi",
+          "sourceType": "official-primary"
+        },
+        {
+          "id": "sbp-easydata",
+          "institution": "State Bank of Pakistan",
+          "label": "SBP EasyData statistical API",
+          "url": "https://easydata.sbp.org.pk/",
+          "sourceType": "official-primary"
+        }
+      ],
+      "asOf": "2026-06"
+    },
+    "exchange-rate.depreciation": {
+      "text": "The rupee's monthly average moved from ₨153.08/USD in April 2021 to its weakest monthly average of ₨297.75 in September 2023 — a 48.6% loss of value against the dollar. It averaged ₨278.58 in June 2026, 6.4% stronger than that low.",
+      "basis": "derived",
+      "derivation": "Strongest and weakest monthly average PKR/USD interbank rates in the published archive from January 2021; depreciation measured as the fall in dollar value of the rupee.",
+      "sources": [
+        {
+          "id": "sbp-ibf-arch",
+          "institution": "State Bank of Pakistan",
+          "label": "Interbank Exchange Rates - archive",
+          "url": "https://www.sbp.org.pk/assets/document/IBF_Arch.xls",
+          "sourceType": "official-primary"
+        }
+      ],
+      "asOf": "2026-06"
+    },
+    "reserves.recovery": {
+      "text": "Across the published window, total liquid reserves were lowest at $18.90bn at end-September 2025 and stood at $22.67bn at the week ending 2026-07-17, of which $17.26bn is held by the SBP.",
+      "basis": "derived",
+      "derivation": "Minimum and latest total (SBP plus commercial banks) across the 16 published observations from end-June 2025.",
+      "sources": [
+        {
+          "id": "sbp-forex-reserves",
+          "institution": "State Bank of Pakistan",
+          "label": "Foreign Exchange Reserves (weekly)",
+          "url": "https://www.sbp.org.pk/assets/document/forex.pdf",
+          "sourceType": "official-primary"
+        }
+      ],
+      "asOf": "2026-07-17"
+    },
+    "trade.deficit": {
+      "text": "The monthly goods trade deficit was widest at $4.07bn in June 2022. In June 2026 exports of $2.60bn against imports of $6.15bn left a deficit of $3.55bn.",
+      "basis": "derived",
+      "derivation": "Largest and latest monthly balance in the SBP balance-of-payments goods series covering 66 months.",
+      "sources": [
+        {
+          "id": "sbp-exp-import-bop",
+          "institution": "State Bank of Pakistan",
+          "label": "Exports and Imports (BOP basis) - archive series",
+          "url": "https://www.sbp.org.pk/assets/document/exp_import_BOP_Arch.xls",
+          "sourceType": "official-primary"
+        }
+      ],
+      "asOf": "2026-06"
+    },
+    "fdi.annualContext": {
+      "text": "Net FDI in FY2025 was $2.48bn ($4.27bn of inflows against $1.79bn of outflows) — below the series peak of $2.78bn in FY2018, and the strongest since FY2020.",
+      "basis": "derived",
+      "derivation": "Latest completed fiscal year compared against every other year in the annual net FDI series from FY2017.",
+      "sources": [
+        {
+          "id": "sbp-netinflow-summary",
+          "institution": "State Bank of Pakistan",
+          "label": "Foreign Investment Net Inflows - Summary",
+          "url": "https://archive.sbp.org.pk/ecodata/NetinflowSummary.xls",
+          "sourceType": "official-primary"
+        }
+      ],
+      "asOf": "FY2025"
+    },
+    "services.itShare": {
+      "text": "IT & telecom exports of $4.18bn in Jul-May FY26 were 46.0% of all services exports and up 20.2% on Jul-May FY25.",
+      "basis": "derived",
+      "derivation": "IT & telecom credit as a share of total services credit for the same fiscal-year-to-date window, compared with the same window a year earlier.",
+      "sources": [
+        {
+          "id": "sbp-ebops-services",
+          "institution": "State Bank of Pakistan",
+          "label": "Trade in Services (EBOPS classification)",
+          "url": "https://archive.sbp.org.pk/ecodata/dt.xls",
+          "sourceType": "official-primary"
+        }
+      ],
+      "asOf": "Jul-May FY26"
+    },
+    "fiscal.revenueGap": {
+      "text": "In FY25 total revenue of ₨18.0tn covered 74.5% of total expenditure of ₨24.2tn, leaving a primary surplus of ₨2.72tn. All fiscal figures are for Pakistan's July–June fiscal year.",
+      "basis": "derived",
+      "derivation": "Total revenue divided by total expenditure for the latest fiscal year in the SBP summary of public finance, with the reported primary balance for the same year.",
+      "sources": [
+        {
+          "id": "sbp-easydata",
+          "institution": "State Bank of Pakistan",
+          "label": "SBP EasyData statistical API",
+          "url": "https://easydata.sbp.org.pk/",
+          "sourceType": "official-primary"
+        },
+        {
+          "id": "finance-division",
+          "institution": "Ministry of Finance, Government of Pakistan",
+          "label": "Federal Budget and Fiscal Operations",
+          "url": "https://www.finance.gov.pk/",
+          "sourceType": "official-primary"
+        }
+      ],
+      "asOf": "FY25"
+    },
+    "fiscal.debtService": {
+      "text": "Debt servicing alone is budgeted at ₨8.05tn in FY2026-27 — 39.1% of gross federal revenue and 68.5% of the net revenue the federal government actually keeps after transfers to the provinces.",
+      "basis": "derived",
+      "derivation": "Budgeted interest (\"markup\") payments divided by budgeted gross and net federal revenue, as presented on 2026-06-12.",
+      "sources": [
+        {
+          "id": "finance-division",
+          "institution": "Ministry of Finance, Government of Pakistan",
+          "label": "Federal Budget and Fiscal Operations",
+          "url": "https://www.finance.gov.pk/",
+          "sourceType": "official-primary"
+        }
+      ],
+      "asOf": "2026-27"
+    }
+  },
+  "lastUpdated": "2026-07-24",
+  "lastChecked": "2026-07-24"
+}

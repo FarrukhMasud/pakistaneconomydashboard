@@ -123,6 +123,16 @@
     "period": "Jul-May FY26"
   },
   "comparison": {
+    "current": {
+      "totalCredit": 9097.02,
+      "itCredit": 4183.44,
+      "fy": 2026
+    },
+    "prior": {
+      "totalCredit": 7750.14,
+      "itCredit": 3480.46,
+      "fy": 2025
+    },
     "fy25": {
       "totalCredit": 7750.14,
       "itCredit": 3480.46
@@ -227,5 +237,6 @@
   ],
   "dataSource": "SBP",
   "lastUpdated": "2026-07-24",
-  "dataCoverage": "Jul-May FY26"
+  "dataCoverage": "Jul-May FY26",
+  "lastChecked": "2026-07-24"
 }

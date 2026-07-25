@@ -7,6 +7,7 @@ import SummaryCard from './ui/SummaryCard';
 import ChartCard from './ChartCard';
 import GoodBadUgly from './ui/GoodBadUgly';
 import './ui/Budget.css';
+import useI18n from '../i18n/useI18n';
 
 function fmtBn(val) {
   if (val == null || Number.isNaN(val)) return '—';
@@ -32,6 +33,7 @@ const CENSUS_2023_POP = {
 const PROVINCE_NAME = { punjab: 'Punjab', sindh: 'Sindh', kp: 'KP', balochistan: 'Balochistan' };
 
 export default function ProvincialBudgetSection() {
+  const { tx } = useI18n();
   const { data, loading, error } = useData('budget-provincial.json');
   const [fy, setFy] = useState(null);
   const [activeProvince, setActiveProvince] = useState(null);
@@ -40,7 +42,7 @@ export default function ProvincialBudgetSection() {
   if (error) return <p style={{ color: COLORS.coral }}>Error: {error.message}</p>;
 
   const { provinces = [], fiscalYears = [], lastUpdated, lastVerified, methodologyNote } = data;
-  if (provinces.length === 0) return <p>No provincial budget data available.</p>;
+  if (provinces.length === 0) return <p>{tx("No provincial budget data available.")}</p>;
 
   const selectedFy = fy || fiscalYears[0];
   const provinceId = activeProvince || provinces[0].id;
@@ -226,6 +228,7 @@ export default function ProvincialBudgetSection() {
     <section className="fade-in">
       <SectionHeader
         title="Provincial Budgets"
+        datasetId="budget-provincial"
         description="Annual budgets of Pakistan's four provinces — Punjab, Sindh, Khyber Pakhtunkhwa and Balochistan. Provinces receive the bulk of their resources as federal transfers under the NFC Award, raise their own taxes, and are expected to run cash surpluses to help the consolidated national fiscal position. Figures are budgeted estimates from each province's Finance Department White Paper, in PKR billion."
         sourceLinks={[
           { label: 'Punjab Finance', url: 'https://finance.punjab.gov.pk' },

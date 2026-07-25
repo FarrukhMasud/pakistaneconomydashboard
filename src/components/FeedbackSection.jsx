@@ -1,8 +1,10 @@
 import SectionHeader from './SectionHeader';
+import useI18n from '../i18n/useI18n';
 
 const FEEDBACK_EMAIL = ['feedback', 'economyofpakistan.com'].join('@');
 
 export default function FeedbackSection() {
+  const { tx } = useI18n();
   return (
     <section className="fade-in">
       <SectionHeader
@@ -25,9 +27,7 @@ export default function FeedbackSection() {
         <a className="feedback-email" href={`mailto:${FEEDBACK_EMAIL}`}>
           {FEEDBACK_EMAIL}
         </a>
-        <p className="feedback-note">
-          Please include the chart or tracker name and a source link when reporting data issues.
-        </p>
+        <p className="feedback-note">{tx("Please include the chart or tracker name and a source link when reporting data issues.")}</p>
       </div>
     </section>
   );

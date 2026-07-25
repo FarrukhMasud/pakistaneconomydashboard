@@ -3,7 +3,8 @@
 import { readFile, writeFile } from 'fs/promises';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { DATASETS, getDatasetFreshness } from './data-catalog.mjs';
+import { DATASETS, SOURCE_TIERS, getDatasetFreshness } from './data-catalog.mjs';
+import { buildReleaseRow, sortReleaseRows } from './lib/release-calendar.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = resolve(__dirname, '..', 'public', 'data');
@@ -18,12 +19,16 @@ async function writeJson(file, data) {
 
 async function main() {
   const generatedAt = new Date().toISOString();
+  const now = new Date();
   const datasets = [];
+  const releases = [];
 
   for (const dataset of DATASETS) {
     try {
       const data = await readJson(dataset.file);
-      datasets.push(getDatasetFreshness(dataset, data));
+      const freshness = getDatasetFreshness(dataset, data);
+      datasets.push(freshness);
+      releases.push(buildReleaseRow({ dataset, data, freshness, now }));
     } catch (err) {
       datasets.push({
         id: dataset.id,
@@ -31,6 +36,7 @@ async function main() {
         file: dataset.file,
         source: dataset.source,
         sourceUrl: dataset.sourceUrl,
+        sourceType: dataset.sourceType || 'official-primary',
         parser: dataset.parser,
         cadence: dataset.cadence,
         critical: dataset.critical,
@@ -47,13 +53,24 @@ async function main() {
     sources: DATASETS.map(({ latest, ...dataset }) => dataset),
   });
 
+  const sortedReleases = sortReleaseRows(releases);
+
+  await writeJson('release-calendar.json', {
+    generatedAt,
+    description: 'Expected next-release windows. Dates marked "estimated" are derived from the observed publication history of each series on this dashboard — they are projections, not an official release calendar. Dates marked "announced" come from the source institution itself.',
+    overdueCount: sortedReleases.filter(row => row.status === 'overdue').length,
+    dueCount: sortedReleases.filter(row => row.status === 'due').length,
+    releases: sortedReleases,
+  });
+
   await writeJson('data-freshness.json', {
     generatedAt,
     status: datasets.some(d => d.status !== 'fresh') ? 'needs-review' : 'fresh',
+    tiers: SOURCE_TIERS,
     datasets,
   });
 
-  console.log(`✅ Generated source-manifest.json and data-freshness.json for ${datasets.length} datasets`);
+  console.log(`✅ Generated source-manifest.json, data-freshness.json and release-calendar.json for ${datasets.length} datasets`);
 }
 
 main().catch((err) => {

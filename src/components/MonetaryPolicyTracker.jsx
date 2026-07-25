@@ -3,6 +3,7 @@ import { useData } from '../hooks/useData';
 import { COLORS, baseLineOptions } from '../utils/chartConfig';
 import TrackerFooter from './ui/TrackerFooter';
 import './ui/Trackers.css';
+import useI18n from '../i18n/useI18n';
 
 function fmtMonth(dateStr, opts = { month: 'short', year: 'numeric' }) {
   if (!dateStr) return '';
@@ -11,6 +12,7 @@ function fmtMonth(dateStr, opts = { month: 'short', year: 'numeric' }) {
 }
 
 export default function MonetaryPolicyTracker() {
+  const { tx } = useI18n();
   const { data, loading, error } = useData('monetary-policy.json');
   if (loading || !data || error) return null;
 
@@ -68,19 +70,19 @@ export default function MonetaryPolicyTracker() {
 
       <div className="tracker__stats">
         <div className="tracker-stat">
-          <span className="tracker-stat__label">Current rate</span>
+          <span className="tracker-stat__label">{tx("Current rate")}</span>
           <span className="tracker-stat__value">{currentRate}%</span>
           <span className="tracker-stat__sub">as of {fmtMonth(asOf, { month: 'short', day: 'numeric', year: 'numeric' })}</span>
         </div>
         <div className="tracker-stat">
-          <span className="tracker-stat__label">Real policy rate</span>
+          <span className="tracker-stat__label">{tx("Real policy rate")}</span>
           <span className="tracker-stat__value" style={{ color: (context.realRate ?? 0) < 0 ? COLORS.coral : COLORS.teal }}>
             {context.realRate > 0 ? '+' : ''}{context.realRate}%
           </span>
           <span className="tracker-stat__sub">vs {context.inflationYoY}% CPI ({context.inflationPeriod})</span>
         </div>
         <div className="tracker-stat">
-          <span className="tracker-stat__label">Last decision</span>
+          <span className="tracker-stat__label">{tx("Last decision")}</span>
           <span className="tracker-stat__value" style={{ color: lastDecision?.action === 'hike' ? COLORS.coral : lastDecision?.action === 'cut' ? COLORS.teal : COLORS.textPrimary }}>{actionWord}</span>
           <span className="tracker-stat__sub">{fmtMonth(lastDecision?.date, { month: 'short', day: 'numeric', year: 'numeric' })}</span>
         </div>
@@ -94,7 +96,7 @@ export default function MonetaryPolicyTracker() {
       {nextMeeting && (
         <div className="tracker__next">
           <div>
-            <span className="tracker__next-label">Next MPC decision</span>
+            <span className="tracker__next-label">{tx("Next MPC decision")}</span>
             <strong>{nextMeeting.dateText || fmtMonth(nextMeeting.date, { month: 'short', day: 'numeric', year: 'numeric' })}</strong>
           </div>
           <p>{nextMeeting.note}</p>

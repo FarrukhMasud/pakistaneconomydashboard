@@ -3,6 +3,7 @@ import { useData } from '../hooks/useData';
 import { COLORS, baseBarOptions } from '../utils/chartConfig';
 import TrackerFooter from './ui/TrackerFooter';
 import './ui/Trackers.css';
+import useI18n from '../i18n/useI18n';
 
 function fmtPkr(bn) {
   if (bn == null) return '—';
@@ -11,6 +12,7 @@ function fmtPkr(bn) {
 }
 
 export default function CircularDebtTracker() {
+  const { tx } = useI18n();
   const { data, loading, error } = useData('circular-debt.json');
   if (loading || !data || error) return null;
 
@@ -50,17 +52,17 @@ export default function CircularDebtTracker() {
 
       <div className="tracker__stats">
         <div className="tracker-stat">
-          <span className="tracker-stat__label">Current stock</span>
+          <span className="tracker-stat__label">{tx("Current stock")}</span>
           <span className="tracker-stat__value">{fmtPkr(current?.stock)}</span>
           <span className="tracker-stat__sub">end-Apr 2026 · IMF est. {fmtPkr(current?.imfEstimate)}</span>
         </div>
         <div className="tracker-stat">
-          <span className="tracker-stat__label">Year-on-year</span>
+          <span className="tracker-stat__label">{tx("Year-on-year")}</span>
           <span className="tracker-stat__value" style={{ color: COLORS.teal }}>{yoy?.changePct}%</span>
           <span className="tracker-stat__sub">from {fmtPkr(yoy?.priorStock)} (Apr 2025)</span>
         </div>
         <div className="tracker-stat">
-          <span className="tracker-stat__label">FYTD buildup</span>
+          <span className="tracker-stat__label">{tx("FYTD buildup")}</span>
           <span className="tracker-stat__value" style={{ color: COLORS.coral }}>+{fmtPkr(fytdBuildup?.value)}</span>
           <span className="tracker-stat__sub">vs +{fmtPkr(fytdBuildup?.priorValue)} a year earlier</span>
         </div>
@@ -93,7 +95,7 @@ export default function CircularDebtTracker() {
 
       {reforms.length > 0 && (
         <div className="tracker__list">
-          <h4>Reform levers</h4>
+          <h4>{tx("Reform levers")}</h4>
           <ul>{reforms.map((r, i) => <li key={i}>{r}</li>)}</ul>
         </div>
       )}

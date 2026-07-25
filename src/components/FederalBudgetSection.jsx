@@ -7,6 +7,7 @@ import SummaryCard from './ui/SummaryCard';
 import ChartCard from './ChartCard';
 import GoodBadUgly from './ui/GoodBadUgly';
 import './ui/Budget.css';
+import useI18n from '../i18n/useI18n';
 
 /** Format a PKR-billion value as ₨ X,XXX bn (or ₨ X.XX tn when large). */
 function fmtBn(val) {
@@ -30,6 +31,7 @@ function deltaSub(cur, prev) {
 }
 
 export default function FederalBudgetSection() {
+  const { tx } = useI18n();
   const { data, loading, error } = useData('budget-federal.json');
   const [fyIndex, setFyIndex] = useState(0);
 
@@ -37,7 +39,7 @@ export default function FederalBudgetSection() {
   if (error) return <p style={{ color: COLORS.coral }}>Error: {error.message}</p>;
 
   const { years = [], source, dataSource, lastUpdated, lastVerified, methodologyNote } = data;
-  if (years.length === 0) return <p>No budget data available.</p>;
+  if (years.length === 0) return <p>{tx("No budget data available.")}</p>;
 
   const year = years[fyIndex] || years[0];
   const prior = years[fyIndex + 1] || null;
@@ -231,6 +233,7 @@ export default function FederalBudgetSection() {
     <section className="fade-in">
       <SectionHeader
         title="Federal Budget"
+        datasetId="budget-federal"
         description="The Government of Pakistan's annual federal budget — total outlay, how money is raised (FBR taxes, non-tax revenue, borrowing), and how it is spent (debt servicing, defence, pensions, subsidies, development). Figures are the budgeted estimates from the Finance Division's 'Budget in Brief', in PKR billion. Pakistan's fiscal year runs July–June."
         sourceLinks={[
           { label: 'Finance Division — Budget', url: 'https://www.finance.gov.pk/budget_2026_27.html' },
@@ -307,8 +310,8 @@ export default function FederalBudgetSection() {
       {ex && (
         <div className="budget-exec">
           <div className="budget-exec-head card">
-            <h3>📊 Budget Execution — {ex.period || 'Year-to-date actuals'}</h3>
-            <p>How the government is <strong>actually</strong> performing against the budget it proposed. These are realised fiscal-operations figures (not budget estimates), so you can judge promises against delivery.</p>
+            <h3>📊 {tx('Budget Execution')} — {ex.period || tx('Year-to-date actuals')}</h3>
+            <p>{tx('How the government is actually performing against the budget it proposed. These are realised fiscal-operations figures (not budget estimates), so you can judge promises against delivery.')}</p>
           </div>
 
           {exItems.length > 0 && (

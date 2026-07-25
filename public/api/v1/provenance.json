@@ -1,0 +1,228 @@
+{
+  "generatedAt": "2026-07-24T20:57:02.589Z",
+  "description": "Machine-readable citation for every headline figure on the dashboard. Each entry names the publishing institution, the exact source document, the worksheet and the row/column it was read from.",
+  "sources": {
+    "fbr-collection": {
+      "id": "fbr-collection",
+      "institution": "Federal Board of Revenue",
+      "title": "FBR revenue collection statements",
+      "url": "https://www.fbr.gov.pk/",
+      "landingUrl": "https://www.fbr.gov.pk/",
+      "sourceType": "official-primary",
+      "cadence": "monthly"
+    },
+    "pbs-cpi": {
+      "id": "pbs-cpi",
+      "institution": "Pakistan Bureau of Statistics",
+      "title": "Consumer Price Index monthly review",
+      "url": "https://www.pbs.gov.pk/cpi",
+      "landingUrl": "https://www.pbs.gov.pk/",
+      "sourceType": "official-primary",
+      "cadence": "monthly"
+    },
+    "sbp-easydata": {
+      "id": "sbp-easydata",
+      "institution": "State Bank of Pakistan",
+      "title": "SBP EasyData statistical API",
+      "url": "https://easydata.sbp.org.pk/",
+      "landingUrl": "https://easydata.sbp.org.pk/",
+      "sourceType": "official-primary",
+      "cadence": "monthly"
+    },
+    "sbp-ebops-services": {
+      "id": "sbp-ebops-services",
+      "institution": "State Bank of Pakistan",
+      "title": "Trade in Services (EBOPS classification)",
+      "url": "https://archive.sbp.org.pk/ecodata/dt.xls",
+      "landingUrl": "https://www.sbp.org.pk/ecodata/index2.asp",
+      "sourceType": "official-primary",
+      "cadence": "monthly"
+    },
+    "sbp-exp-import-bop": {
+      "id": "sbp-exp-import-bop",
+      "institution": "State Bank of Pakistan",
+      "title": "Exports and Imports (BOP basis) - archive series",
+      "url": "https://www.sbp.org.pk/assets/document/exp_import_BOP_Arch.xls",
+      "landingUrl": "https://www.sbp.org.pk/ecodata/index2.asp",
+      "sourceType": "official-primary",
+      "cadence": "monthly"
+    },
+    "sbp-forex-reserves": {
+      "id": "sbp-forex-reserves",
+      "institution": "State Bank of Pakistan",
+      "title": "Foreign Exchange Reserves (weekly)",
+      "url": "https://www.sbp.org.pk/assets/document/forex.pdf",
+      "landingUrl": "https://www.sbp.org.pk/ecodata/index2.asp",
+      "sourceType": "official-primary",
+      "cadence": "weekly"
+    },
+    "sbp-gdp-table": {
+      "id": "sbp-gdp-table",
+      "institution": "State Bank of Pakistan / Pakistan Bureau of Statistics",
+      "title": "GDP and National Accounts Table",
+      "url": "https://www.sbp.org.pk/assets/document/GDP_table.xlsx",
+      "landingUrl": "https://www.sbp.org.pk/ecodata/index2.asp",
+      "sourceType": "official-primary",
+      "cadence": "annual"
+    },
+    "sbp-ibf-arch": {
+      "id": "sbp-ibf-arch",
+      "institution": "State Bank of Pakistan",
+      "title": "Interbank Exchange Rates - archive",
+      "url": "https://www.sbp.org.pk/assets/document/IBF_Arch.xls",
+      "landingUrl": "https://www.sbp.org.pk/ecodata/index2.asp",
+      "sourceType": "official-primary",
+      "cadence": "monthly"
+    },
+    "sbp-monetary-policy": {
+      "id": "sbp-monetary-policy",
+      "institution": "State Bank of Pakistan",
+      "title": "Monetary Policy Statements and decisions",
+      "url": "https://www.sbp.org.pk/m_policy/index.asp",
+      "landingUrl": "https://www.sbp.org.pk/m_policy/index.asp",
+      "sourceType": "official-primary",
+      "cadence": "per-meeting"
+    },
+    "sbp-netinflow-summary": {
+      "id": "sbp-netinflow-summary",
+      "institution": "State Bank of Pakistan",
+      "title": "Foreign Investment Net Inflows - Summary",
+      "url": "https://archive.sbp.org.pk/ecodata/NetinflowSummary.xls",
+      "landingUrl": "https://www.sbp.org.pk/ecodata/index2.asp",
+      "sourceType": "official-primary",
+      "cadence": "monthly"
+    }
+  },
+  "figures": {
+    "exchange-rates.monthly.usd": {
+      "label": "PKR/USD interbank closing rate, monthly average",
+      "sourceId": "sbp-ibf-arch",
+      "sheet": null,
+      "location": "Interbank rates archive, USD column",
+      "period": "2026-06",
+      "status": "final",
+      "unit": "PKR per USD",
+      "value": 278.58,
+      "derivedFrom": null,
+      "note": null,
+      "retrievedAt": "2026-07-24"
+    },
+    "fbr.fytd.net": {
+      "label": "FBR net tax collection, fiscal year to date",
+      "sourceId": "fbr-collection",
+      "sheet": null,
+      "location": "FBR revenue collection statement, net collection",
+      "period": "Jul–May FY2026",
+      "status": "provisional",
+      "unit": "PKR trillion",
+      "value": 11.23,
+      "derivedFrom": null,
+      "note": "Currently sourced from press reporting of provisional FBR figures, not an FBR publication.",
+      "retrievedAt": "2026-07-24"
+    },
+    "fdi.fytd.current": {
+      "label": "Net foreign direct investment, fiscal year to date",
+      "sourceId": "sbp-netinflow-summary",
+      "sheet": "Summary",
+      "location": "\"Direct Investment\" row, current fiscal-year-to-date column",
+      "period": "Jul-May FY2026 (P)",
+      "status": "provisional",
+      "unit": "US$ billion",
+      "value": 1.62,
+      "derivedFrom": null,
+      "note": null,
+      "retrievedAt": "2026-07-24"
+    },
+    "fiscal.gdpGrowth.latest": {
+      "label": "Real GDP growth rate at constant basic prices of 2015-16",
+      "sourceId": "sbp-gdp-table",
+      "sheet": "Annual",
+      "location": "\"GDP Growth Rate (%)\" row",
+      "period": "FY2026 (Est.)",
+      "status": "estimate",
+      "unit": "%",
+      "value": 3.7,
+      "derivedFrom": null,
+      "note": null,
+      "retrievedAt": "2026-07-24"
+    },
+    "inflation.nationalCpi.latest": {
+      "label": "National Consumer Price Index, year-on-year inflation",
+      "sourceId": "pbs-cpi",
+      "sheet": null,
+      "location": "Monthly CPI review, national year-on-year rate",
+      "period": "2026-06",
+      "status": "final",
+      "unit": "%",
+      "value": 11.1,
+      "derivedFrom": null,
+      "note": null,
+      "retrievedAt": "2026-07-24"
+    },
+    "monetaryPolicy.currentRate": {
+      "label": "SBP policy (target) rate set by the Monetary Policy Committee",
+      "sourceId": "sbp-monetary-policy",
+      "sheet": null,
+      "location": "Latest Monetary Policy Statement",
+      "period": "2026-06-15",
+      "status": "final",
+      "unit": "%",
+      "value": 11.5,
+      "derivedFrom": null,
+      "note": null,
+      "retrievedAt": "2026-07-24"
+    },
+    "remittances.monthly.total": {
+      "label": "Workers’ remittances, monthly total",
+      "sourceId": "sbp-easydata",
+      "sheet": null,
+      "location": "Workers’ remittances by country of origin, total",
+      "period": "2026-06",
+      "status": "final",
+      "unit": "US$ billion",
+      "value": 3.47,
+      "derivedFrom": null,
+      "note": null,
+      "retrievedAt": "2026-07-24"
+    },
+    "reserves.weekly.total": {
+      "label": "Total liquid foreign exchange reserves (SBP + scheduled banks)",
+      "sourceId": "sbp-forex-reserves",
+      "sheet": null,
+      "location": "Weekly reserves statement, \"Total Liquid Foreign Reserves\" line",
+      "period": "2026-07-17",
+      "status": "final",
+      "unit": "US$ billion",
+      "value": 22.67,
+      "derivedFrom": null,
+      "note": null,
+      "retrievedAt": "2026-07-24"
+    },
+    "services.itTelecom.credit": {
+      "label": "Telecommunications, computer and information services exports (credit)",
+      "sourceId": "sbp-ebops-services",
+      "sheet": null,
+      "location": "EBOPS line 9 \"Telecommunications, Computer and information services\", credit column",
+      "period": "Jul-May FY26",
+      "status": "provisional",
+      "unit": "US$ billion",
+      "value": 4.18,
+      "derivedFrom": null,
+      "note": null,
+      "retrievedAt": "2026-07-24"
+    },
+    "trade.monthly.balance": {
+      "label": "Monthly goods trade balance (BOP basis)",
+      "sourceId": "sbp-exp-import-bop",
+      "sheet": null,
+      "location": "Exports and imports of goods, monthly",
+      "period": "2026-06",
+      "status": "final",
+      "unit": "US$ million",
+      "value": -3552,
+      "derivedFrom": "Exports of $2595M less imports of $6147M as published by SBP",
+      "note": null,
+      "retrievedAt": "2026-07-24"
+    }
+  }
+}

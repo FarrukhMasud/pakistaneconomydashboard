@@ -110,6 +110,81 @@
   line-height: 1;
 }
 
+/* ===== Language Toggle ===== */
+.lang-toggle {
+  display: inline-flex;
+  margin-inline-start: 0.5rem;
+  margin-inline-end: 0.5rem;
+  background: var(--toggle-bg);
+  border: 1px solid var(--toggle-border);
+  border-radius: var(--radius-pill);
+  padding: 2px;
+  gap: 2px;
+}
+
+.lang-toggle-btn {
+  min-width: 38px;
+  height: 28px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0 0.5rem;
+}
+
+.lang-toggle-btn:hover { background: var(--toggle-hover); }
+
+.lang-toggle-btn.active {
+  background: rgba(0, 212, 170, 0.25);
+  box-shadow: 0 0 8px rgba(0, 212, 170, 0.2);
+  color: var(--text-primary);
+}
+
+.translation-notice {
+  margin: 0 0 1rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-md, 10px);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ===== RTL support =====
+   Layout mirrors for Urdu; charts and numeric tables stay LTR because their
+   axes and figures are published left-to-right. */
+[dir='rtl'] body,
+[dir='rtl'] .app {
+  text-align: right;
+}
+
+[dir='rtl'] .lang-toggle {
+  margin-inline-start: 0.5rem;
+  margin-inline-end: 0.5rem;
+}
+
+[dir='rtl'] .section-breadcrumb,
+[dir='rtl'] .release-row__meta,
+[dir='rtl'] .freshness-item__meta {
+  direction: rtl;
+}
+
+[dir='rtl'] .chart-card,
+[dir='rtl'] .chart-modal__body,
+[dir='rtl'] .chart-data-table,
+[dir='rtl'] .api-table,
+[dir='rtl'] table,
+[dir='rtl'] code,
+[dir='rtl'] .kpi-value,
+[dir='rtl'] .release-row__basis {
+  direction: ltr;
+  text-align: start;
+}
+
 .header-feedback-link {
   display: inline-flex;
   align-items: center;
@@ -279,6 +354,8 @@
 }
 
 .sub-tab-btn {
+  display: inline-block;
+  text-decoration: none;
   font-family: var(--font-sans);
   font-size: 0.8125rem;
   font-weight: 500;
@@ -312,6 +389,38 @@
   width: 100%;
   margin: 0 auto;
   padding: 2rem 1.5rem;
+}
+
+.section-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.section-breadcrumb {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.share-section-link {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-pill);
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.share-section-link:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-teal);
 }
 
 /* ===== KPI Grid ===== */
@@ -498,4 +607,167 @@
 
 @media (max-width: 420px) {
   .group-nav { grid-template-columns: 1fr; }
+}
+
+/* ===== Accessibility helpers ===== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  inset-inline-start: 0.75rem;
+  top: -3rem;
+  z-index: 200;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-pill);
+  background: var(--bg-card);
+  border: 1px solid rgba(0, 212, 170, 0.5);
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus-visible {
+  top: 0.75rem;
+  outline: 2px solid var(--accent-teal, #00d4aa);
+}
+
+.dashboard-content:focus {
+  outline: none;
+}
+
+/* ===== Command palette ===== */
+.palette-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-inline-start: auto;
+  border: 1px solid var(--toggle-border);
+  border-radius: var(--radius-pill);
+  background: var(--toggle-bg);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.32rem 0.7rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.palette-trigger:hover {
+  background: var(--toggle-hover);
+  color: var(--text-primary);
+}
+
+.palette-trigger__kbd {
+  font-family: inherit;
+  font-size: 0.65rem;
+  letter-spacing: 0.03em;
+  border: 1px solid var(--toggle-border);
+  border-radius: 5px;
+  padding: 0.05rem 0.3rem;
+  opacity: 0.75;
+  direction: ltr;
+}
+
+@media (max-width: 640px) {
+  .palette-trigger__text,
+  .palette-trigger__kbd { display: none; }
+}
+
+.palette-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(8, 10, 16, 0.62);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 12vh 1rem 1rem;
+}
+
+.palette {
+  width: min(620px, 100%);
+  max-height: 68vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+.palette__input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-family: inherit;
+  padding: 0.95rem 1.1rem;
+}
+
+.palette__input:focus { outline: none; }
+
+.palette__results {
+  list-style: none;
+  margin: 0;
+  padding: 0.35rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.palette__item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border: none;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 0.85rem;
+  text-align: start;
+  padding: 0.5rem 0.7rem;
+  cursor: pointer;
+}
+
+.palette__item.active {
+  background: rgba(0, 212, 170, 0.16);
+  color: var(--text-primary);
+}
+
+.palette__label { flex: 1; font-weight: 600; }
+
+.palette__group {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+.palette__empty {
+  padding: 1rem;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.palette__hint {
+  margin: 0;
+  padding: 0.5rem 1.1rem 0.7rem;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.7rem;
+  color: var(--text-secondary);
 }

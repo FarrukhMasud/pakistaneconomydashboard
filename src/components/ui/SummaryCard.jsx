@@ -1,6 +1,7 @@
 import React from 'react';
 import './SummaryCard.css';
 import ExpandableTile from './ExpandableTile';
+import useI18n from '../../i18n/useI18n';
 
 /**
  * Reusable summary card for section-level KPIs.
@@ -14,6 +15,7 @@ import ExpandableTile from './ExpandableTile';
  * @param {string}  accent   – CSS color for top border accent
  */
 export default function SummaryCard({ title, items = [], footnote, accent }) {
+  const { tx } = useI18n();
   const arrow = (dir) => {
     if (dir === 'up') return '▲';
     if (dir === 'down') return '▼';
@@ -36,20 +38,20 @@ export default function SummaryCard({ title, items = [], footnote, accent }) {
         <div className="tile-detail-list">
           {items.map((item, i) => (
             <div key={i} className="tile-detail-row">
-              <span>{item.label}</span>
+              <span>{tx(item.label)}</span>
               <strong style={item.color ? { color: item.color } : undefined}>{item.value}</strong>
-              {item.sub && <small>{item.sub}</small>}
+              {item.sub && <small>{tx(item.sub)}</small>}
             </div>
           ))}
-          {footnote && <p className="summary-card__footnote">{footnote}</p>}
+          {footnote && <p className="summary-card__footnote">{tx(footnote)}</p>}
         </div>
       )}
     >
-      {title && <h3 className="summary-card__title">{title}</h3>}
+      {title && <h3 className="summary-card__title">{tx(title)}</h3>}
       <div className="summary-card__grid">
         {items.map((item, i) => (
           <div key={i} className="summary-card__item">
-            <span className="summary-item__label">{item.label}</span>
+            <span className="summary-item__label">{tx(item.label)}</span>
             <span
               className="summary-item__value"
               style={item.color ? { color: item.color } : undefined}
@@ -61,13 +63,13 @@ export default function SummaryCard({ title, items = [], footnote, accent }) {
                 {item.direction && (
                   <span className="summary-item__arrow">{arrow(item.direction)}</span>
                 )}
-                {item.sub}
+                {tx(item.sub)}
               </span>
             )}
           </div>
         ))}
       </div>
-      {footnote && <p className="summary-card__footnote">{footnote}</p>}
+      {footnote && <p className="summary-card__footnote">{tx(footnote)}</p>}
     </ExpandableTile>
   );
 }

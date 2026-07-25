@@ -74,8 +74,8 @@ const DOWNLOADS = [
   },
   {
     name: 'Netinflow.xls',
-    url: 'https://archive.sbp.org.pk/ecodata/Netinflow.xls',
-    fallbackUrl: 'https://www.sbp.org.pk/assets/document/Netinflow.xls',
+    url: 'https://www.sbp.org.pk/assets/document/Netinflow.xls',
+    fallbackUrl: 'https://archive.sbp.org.pk/ecodata/Netinflow.xls',
     description: 'FDI by Country',
     required: true,
   },
@@ -260,6 +260,19 @@ async function main() {
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   const freshnessOk = runScript(resolve(__dirname, 'generate-data-freshness.mjs'), 'generate-data-freshness.mjs');
 
+  // Step 4b-ii: Recompute every narrative claim shown next to a chart so no
+  // sentence on the site can contradict the data it sits beside.
+  console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log('📝 Step 4b-ii: Recomputing sourced editorial claims...');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  const notesOk = runScript(resolve(__dirname, 'generate-editorial-notes.mjs'), 'generate-editorial-notes.mjs');
+
+  // Step 4b-iii: Republish the static JSON/CSV API from the refreshed data.
+  console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log('⬇️  Step 4b-iii: Publishing static data API...');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  const apiOkStatic = runScript(resolve(__dirname, 'generate-api.mjs'), 'generate-api.mjs');
+
   // Step 4c: Enforce critical source freshness before any deployment.
   console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   console.log('🔎 Step 4c: Auditing critical dataset freshness...');
@@ -268,7 +281,7 @@ async function main() {
 
   // Step 5: Commit and push — Cloudflare Pages auto-builds & deploys on push.
   const autoPush = !args.includes('--no-deploy');
-  const pipelineOk = parseOk && apiOk && fbrOk && peersOk && kpiOk && freshnessOk && auditOk;
+  const pipelineOk = parseOk && apiOk && fbrOk && peersOk && kpiOk && freshnessOk && notesOk && apiOkStatic && auditOk;
   let pushOk = false;
   if (autoPush && pipelineOk) {
     console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
@@ -313,6 +326,8 @@ async function main() {
   console.log(`  🌐 Peers:       ${peersOk ? '✅ Success' : '⚠️  Failed (kept existing peer data)'}`);
   console.log(`  📊 KPI regen:   ${kpiOk ? '✅ Success' : '⚠️  Failed'}`);
   console.log(`  🧾 Freshness:   ${freshnessOk ? '✅ Success' : '⚠️  Failed'}`);
+  console.log(`  📝 Claims:      ${notesOk ? '✅ Success' : '⚠️  Failed'}`);
+  console.log(`  ⬇️  Static API:  ${apiOkStatic ? '✅ Success' : '⚠️  Failed'}`);
   console.log(`  🔎 Data audit:  ${auditOk ? '✅ Success' : '❌ Failed'}`);
   if (autoPush) {
     console.log(`  📤 Git push:    ${pushOk ? '✅ Success (Cloudflare auto-deploys)' : '⚠️  Failed'}`);

@@ -38,6 +38,7 @@ import { readFileSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { createInterface } from 'readline';
+import { writeDataFile } from './lib/data-writer.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = resolve(__dirname, '..', 'public', 'data');
@@ -163,8 +164,10 @@ async function readJson(filename) {
 }
 
 async function writeJson(filename, data) {
-  await writeFile(resolve(DATA_DIR, filename), JSON.stringify(data, null, 2) + '\n');
-  console.log(`  ✅ Updated ${filename}`);
+  const { changed, revisions } = await writeDataFile(filename, data);
+  console.log(
+    `  ✅ Updated ${filename}${changed ? '' : ' (no change)'}${revisions ? ` · ${revisions} revision(s) logged` : ''}`,
+  );
 }
 
 const getValue = (item) => parseFloat(item?.value || item?.Value || item?.obs_value || 0);
@@ -396,14 +399,24 @@ async function updateFdiMonthly(apiKey) {
     const monthly = [...byDate.values()]
       .filter(row => typeof row.net_fdi === 'number')
       .sort((a, b) => a.date.localeCompare(b.date));
+    const monthlyDataCoverage = monthly.length ? `${monthly[0].date} – ${monthly.at(-1).date}` : null;
+    const coverageParts = [
+      monthly.at(-1)?.date ? `monthly through ${monthly.at(-1).date}` : null,
+      existing.sectorPeriod ? `sector ${existing.sectorPeriod}` : null,
+      existing.countryPeriod ? `country ${existing.countryPeriod}` : null,
+      existing.fytdComparison
+        ? `summary ${existing.fytdComparison.current.label} ${existing.fytdComparison.period}`
+        : null,
+    ].filter(Boolean);
 
     await writeJson('fdi.json', {
       ...existing,
       monthly,
       monthlyDataSource: 'SBP EasyData API - BOP BPM6',
       monthlySeries: FDI_MONTHLY_SERIES,
+      monthlyDataCoverage,
       lastUpdated: today(),
-      dataCoverage: existing.dataCoverage || (monthly.length ? `${monthly[0].date} – ${monthly.at(-1).date}` : existing.dataCoverage),
+      dataCoverage: coverageParts.join('; ') || existing.dataCoverage,
     });
     logResult('FDI Monthly', 'updated', `${monthly.length} monthly observations`);
   } catch (err) {

@@ -26,17 +26,75 @@ Finance. Any secondary reporting is explicitly identified and attributed.
 | **Federal Budget**   | Outlay, revenue, deficit, spending mix + Good/Bad/Ugly commentary | Finance Division (Budget in Brief) |
 | **Provincial Budgets** | Punjab/Sindh/KP/Balochistan outlay, ADP, transfers + commentary | Provincial Finance Depts |
 
-Navigation is grouped into **Overview**, **External Sector**, **Prices & Money**, and
-**Public Finance & Budget**, each drilling down to its sub-sections.
+Navigation is grouped into **Overview**, **External Sector**, **Prices & Money**,
+**Public Finance & Budget**, and **Insights & Learning**, each drilling down to its
+sub-sections. Navigation is hash-routed (`#/group/section`), so every section is a
+shareable deep link.
+
+## Accuracy & Traceability
+
+Accuracy is the product. The following guarantees are enforced by code, not by
+convention:
+
+| Guarantee | How it is enforced |
+| --------- | ------------------ |
+| **No positional guessing in parsers** | Every column, row and fiscal year in `parse-sbp-excel.mjs` is resolved by *label* through `scripts/lib/sheet-utils.mjs` / `sbp-resolvers.mjs`. When a workbook layout changes, the parser throws `SheetParseError` instead of silently publishing the wrong column. |
+| **Every headline figure is citable** | `public/data/provenance.json` records the source document, sheet, cell location, period, unit and retrieval date for each cited figure. The 🔍 **Cite** control on KPI cards and charts shows it in-place. |
+| **No hand-typed narrative numbers** | Every numeric claim in prose is computed by `scripts/generate-editorial-notes.mjs` from the same JSON the chart renders, so a sentence can never contradict the chart beneath it. |
+| **Restatements are visible** | `scripts/lib/data-writer.mjs` diffs each write; changed historical values are appended to `public/data/revisions.json`. `lastUpdated` only advances when numbers actually change (`lastChecked` records the run). |
+| **Source trust is never implied** | Every dataset declares a tier — *official primary*, *derived on this dashboard*, or *secondary reporting* — surfaced as a badge next to its numbers. A data file can downgrade its own tier at runtime (FBR does this when only press-reported provisional figures exist). |
+| **Reconciliation invariants** | `npm run audit:sanity` re-derives totals (trade balance, services credit/debit, reserves components, remittance corridors, fiscal series) and fails the build on any mismatch, plus cross-checks KPI ↔ provenance ↔ editorial notes. |
+| **Parser regression tests** | `npm test` runs golden-file tests over the real workbook layouts, including fiscal-year rollover cases that previously produced wrong FDI figures. |
+| **Projected dates are labelled** | `release-calendar.json` marks each expectation as *announced by the source* or *estimated from observed publication history*, and prints the derivation on every row. |
 
 ## Tech Stack
 
 - **Frontend:** React 19 + Vite 5 + Chart.js 4
+- **Routing:** Hash-based deep links (`#/group/section`) with per-section share links
+- **Loading:** Route-based code splitting (`React.lazy`) plus pinned `vendor-react` / `vendor-charts` chunks, so a data-only redeploy invalidates ~100 kB rather than the whole bundle
+- **Navigation:** `Ctrl`/`Cmd`+`K` (or `/`) command palette that searches all 30 sections in either language
+- **Accessibility:** Skip-to-content link, focusable `<main>`, `aria-live` section announcements, focus-trapped chart and tile modals
 - **Hosting:** Cloudflare Pages (auto-build & deploy on push)
 - **Data:** JSON files in `public/data/`, updated from SBP sources
-- **Data Trust:** Generated source manifest + freshness audit metadata
+- **Data Trust:** Generated source manifest + freshness audit + per-figure provenance + revision log
+- **Open data:** Static JSON/CSV API under `public/api/v1/` (no key, no rate limit)
+- **Languages:** English + اردو (Urdu) with RTL layout; figures stay in English as published
+- **Tests:** `node --test` golden-file parser, data-writer, release-calendar and i18n suites
 - **SEO:** `index.html` meta/Open Graph/Twitter tags + JSON-LD (`WebSite`/`Dataset`) structured data, a crawlable no-JS fallback, plus `public/robots.txt`, `public/sitemap.xml` and `public/og-image.svg`
 - **Theme:** Light / Dark / System (auto)
+
+---
+
+## Bilingual Interface (English / اردو)
+
+Translation uses two complementary layers, both under `src/i18n/`:
+
+| Layer | File | Keyed by | Used for |
+| ----- | ---- | -------- | -------- |
+| Keyed dictionary | `en.js` / `ur.js` | stable ids (`nav.section.trade`) | chrome that has no natural English "source string": nav, status words, control labels |
+| String dictionary | `strings-ur.js` | the exact English source string | section titles, chart titles, descriptions, tile labels — components just call `tx('Trade Overview')` |
+
+`tx()` normalises curly vs straight apostrophes and whitespace before lookup, and
+returns the English input unchanged when there is no translation, so an
+untranslated string degrades to readable English rather than to a raw key.
+
+**What deliberately stays in English:** figures, chart series names, axis units,
+period labels, institution names and provenance strings. A number on screen must
+read exactly as the issuing institution published it — translating a data label
+risks changing what the number means. The UI states this explicitly whenever a
+non-English language is active.
+
+`npm test` enforces the contract: every translatable prop literal and every
+inline `tx('…')` literal must have an Urdu string, no dictionary key may be a
+verbatim copy of its English source, and stale keys that no longer appear in
+`src/` fail the build.
+
+Adding UI text: write it in English as usual, wrap it in `tx('…')` (shared
+primitives such as `SectionHeader`, `ChartCard`, `SummaryCard` and
+`ExpandableTile` already do this for their props), then run `npm test` — the
+i18n suite prints exactly which strings still need an entry in `strings-ur.js`.
+Note that `strings-ur.js` uses CRLF line endings; scripted edits must preserve
+them.
 
 ---
 
@@ -80,7 +138,7 @@ These files are auto-downloaded by `npm run update`:
 
 - **exp_import_BOP_Arch.xls** → `trade.json` — <https://www.sbp.org.pk/assets/document/exp_import_BOP_Arch.xls>
 - **Foreign_Dir.xls** → `fdi.json` (by sector) — <https://archive.sbp.org.pk/ecodata/Foreign_Dir.xls>
-- **Netinflow.xls** → `fdi.json` (by country) — <https://archive.sbp.org.pk/ecodata/Netinflow.xls>
+- **Netinflow.xls** → `fdi.json` (by country) — <https://www.sbp.org.pk/assets/document/Netinflow.xls>
 - **NetinflowSummary.xls** → `fdi.json` (annual) — <https://archive.sbp.org.pk/ecodata/NetinflowSummary.xls>
 - **GDP_table.xlsx** → `fiscal.json` (GDP growth) — <https://www.sbp.org.pk/assets/document/GDP_table.xlsx>
 - **Balancepayment_BPM6.xls** → BOP summary — <https://www.sbp.org.pk/assets/document/Balancepayment_BPM6.xls>
@@ -165,8 +223,11 @@ This runs these steps:
 4. **FBR Update** — `update-fbr.mjs` downloads & parses FBR's official
    month-wise/tax-wise PDF → refreshes closed-FY rows in `fbr-tax.json`
 5. **KPI Regeneration** — rebuilds KPI summary from all data
-6. **Source/Freshness Metadata** — generates `source-manifest.json`
-   and `data-freshness.json`
+6. **Source/Freshness Metadata** — generates `source-manifest.json`,
+   `data-freshness.json` and `release-calendar.json`
+6b. **Editorial claims** — `generate-editorial-notes.mjs` recomputes every
+   narrative number from the refreshed data
+6c. **Static API** — `generate-api.mjs` republishes `public/api/v1/*.json|.csv`
 7. **Freshness Audit** — blocks deployment if a critical dataset is stale,
    missing, or requires review
 8. **Git Commit & Push** — commits data changes to GitHub. **Cloudflare Pages
@@ -206,8 +267,17 @@ node scripts/update-all.mjs --skip-download
 # Only regenerate KPIs from existing data files
 node scripts/parse-sbp-excel.mjs --kpi-only
 
-# Generate source manifest and freshness metadata
+# Generate source manifest, freshness metadata and release calendar
 npm run generate:freshness
+
+# Recompute the sourced narrative claims shown under section headers
+npm run generate:notes
+
+# Republish the static JSON/CSV API under public/api/v1
+npm run generate:api
+
+# Run the parser / data-writer / release-calendar / i18n test suites
+npm test
 
 # Audit local data freshness against official source metadata
 npm run audit:data
@@ -307,11 +377,19 @@ pak-eco/
 │       ├── indicators.json    # At-a-glance rates/markets/fiscal-stress snapshot
 │       ├── imf-tracker.json   # IMF EFF program tracker (curated)
 │       ├── kpi-summary.json   # Headline KPIs (auto-derived)
+│       ├── provenance.json    # Per-figure source document, sheet, cell, period
+│       ├── editorial-notes.json # Narrative claims computed from the data
+│       ├── revisions.json     # Log of restated historical values
+│       ├── release-calendar.json # Announced/estimated next-release windows
 │       ├── source-manifest.json # Source URLs, cadence, parser metadata
 │       └── data-freshness.json # Latest observation/status per dataset
+├── public/api/                # Static JSON/CSV API (generated)
+│   ├── index.json             # Endpoint index with trust tier + latest period
+│   └── v1/*.json|.csv         # One endpoint per dataset + metadata endpoints
 ├── src/
-│   ├── App.jsx                # Main app with tab navigation + theme toggle
+│   ├── App.jsx                # Main app with hash routing + theme/language toggles
 │   ├── index.css              # Styles (light/dark theme via CSS variables)
+│   ├── i18n/                  # en/ur key dictionaries, strings-ur string map, provider, useI18n hook
 │   ├── components/            # One component per dashboard section
 │   │   ├── KpiCards.jsx       # Overview KPI cards
 │   │   ├── TradeSection.jsx
@@ -325,19 +403,35 @@ pak-eco/
 │   │   ├── FiscalSection.jsx
 │   │   ├── FbrTaxSection.jsx  # Monthly FBR tax collection
 │   │   ├── SnapshotPanel.jsx  # At-a-glance indicators (Overview)
-│   │   └── ChartCard.jsx      # Reusable chart wrapper
+│   │   ├── CiteFigure.jsx     # Per-figure provenance popover
+│   │   ├── EditorialNote.jsx  # Renders a computed narrative claim
+│   │   ├── SourceBadge.jsx    # Trust-tier badge
+│   │   ├── ReleaseCalendarSection.jsx # Next-release expectations
+│   │   ├── DataApiSection.jsx # Download & API documentation
+│   │   ├── CommandPalette.jsx # Ctrl/Cmd+K jump-to-section search
+│   │   ├── LanguageToggle.jsx # EN / اردو switch
+│   │   └── ChartCard.jsx      # Reusable chart wrapper (+ CSV export)
 │   ├── hooks/
-│   │   └── useData.js         # Data loading hook
+│   │   ├── useData.js         # Data loading hook
+│   │   └── useHashRoute.js    # Deep-link routing
 │   └── utils/
+│       ├── download.js        # Chart → CSV export
 │       └── periodHelpers.js   # CY/FY period derivation from data
 ├── scripts/
 │   ├── update-all.mjs         # Master orchestrator
 │   ├── parse-sbp-excel.mjs    # Excel/PDF → JSON parser
 │   ├── update-data.mjs        # SBP EasyData API fetcher
-│   ├── data-catalog.mjs       # Dataset/source catalog
-│   ├── generate-data-freshness.mjs # Builds source/freshness JSON
+│   ├── data-catalog.mjs       # Dataset/source catalog (trust tiers, cadence)
+│   ├── generate-data-freshness.mjs # Builds source/freshness/release-calendar JSON
+│   ├── generate-editorial-notes.mjs # Computes narrative claims from data
+│   ├── generate-api.mjs       # Publishes the static JSON/CSV API
+│   ├── audit-sanity.mjs       # Reconciliation + provenance invariants
 │   ├── audit-data.mjs         # Local data freshness audit
 │   ├── verify-live.mjs        # Live site vs local JSON verification
+│   ├── lib/                   # sheet-utils, sbp-resolvers, data-writer,
+│   │                          # provenance-store, source-docs, release-calendar,
+│   │                          # i18n-scan (translation coverage scanner)
+│   ├── tests/                 # node --test suites
 │   └── sbp-raw/               # Downloaded Excel/PDF files (gitignored)
 ├── package.json
 ├── vite.config.js
@@ -372,8 +466,36 @@ SBP Website (Excel/PDF)          SBP EasyData API
         generate-data-freshness.mjs
                     │
                     ▼
- source-manifest.json + data-freshness.json
+ source-manifest.json + data-freshness.json + release-calendar.json
+                    │
+                    ▼
+        generate-editorial-notes.mjs → editorial-notes.json
+                    │
+                    ▼
+        generate-api.mjs → public/api/index.json + /api/v1/*
 ```
+
+Every write goes through `scripts/lib/data-writer.mjs`, which diffs the new
+content against the published file, appends any restated historical value to
+`revisions.json`, and only advances `lastUpdated` when a number actually
+changed.
+
+## Open Data API
+
+Everything the dashboard renders is published as static files, so there is no
+key, quota or scraping required:
+
+- `https://economyofpakistan.com/api/index.json` — endpoint index with each
+  dataset's source, trust tier, cadence and latest observation
+- `https://economyofpakistan.com/api/v1/<dataset>.json` — the full dataset
+- `https://economyofpakistan.com/api/v1/<dataset>.csv` — the primary series as CSV
+- `https://economyofpakistan.com/api/v1/provenance.json`,
+  `data-freshness.json`, `release-calendar.json`, `revisions.json`,
+  `editorial-notes.json` — the traceability metadata
+
+Individual charts also expose a **CSV** button that exports exactly the series
+drawn on screen. Please attribute the underlying issuing institution (SBP, PBS,
+FBR, Finance Division) rather than this dashboard.
 
 **Single source of truth:** Each JSON data file is written by
 exactly one script (except `fiscal.json` which merges GDP from

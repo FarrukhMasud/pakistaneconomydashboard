@@ -1,38 +1,49 @@
-import { useState, useEffect, useMemo } from 'react';
+import { Suspense, lazy, useEffect, useMemo } from 'react';
 import { Chart as ChartJS } from 'chart.js';
 import './App.css';
 import './utils/chartConfig';
 import { useTheme } from './hooks/useTheme';
+import { useHashRoute } from './hooks/useHashRoute';
 import ThemeToggle from './components/ThemeToggle';
+import LanguageToggle from './components/LanguageToggle';
+import CommandPalette from './components/CommandPalette';
+import { useI18n } from './i18n/useI18n';
+import ShareSectionLink from './components/ShareSectionLink';
 import KpiCards from './components/KpiCards';
-import TradeSection from './components/TradeSection';
-import ReservesSection from './components/ReservesSection';
-import ExchangeRateSection from './components/ExchangeRateSection';
-import RemittancesSection from './components/RemittancesSection';
-import FdiSection from './components/FdiSection';
-import ServicesSection from './components/ServicesSection';
-import CountryTrendsSection from './components/CountryTrendsSection';
-import FiscalSection from './components/FiscalSection';
-import FbrTaxSection from './components/FbrTaxSection';
-import InflationSection from './components/InflationSection';
-import MonetarySection from './components/MonetarySection';
-import FederalBudgetSection from './components/FederalBudgetSection';
-import ProvincialBudgetSection from './components/ProvincialBudgetSection';
-import FeedbackSection from './components/FeedbackSection';
-import {
-  EconomicBriefingSection,
-  EconomicTimelineSection,
-  ExternalFinancingWallSection,
-  GoodBadWatchSection,
-  ImfComplianceSection,
-  ItExportDeepDiveSection,
-  LearningCenterSection,
-  MacroRiskScorecardSection,
-  PeerComparisonSection,
-  RevenueTargetMeterSection,
-  RiskOutlookSection,
-  SourceTrustSection,
-} from './components/InsightsSections';
+import ReleaseCalendarSection from './components/ReleaseCalendarSection';
+
+const TradeSection = lazy(() => import('./components/TradeSection'));
+const ReservesSection = lazy(() => import('./components/ReservesSection'));
+const ExchangeRateSection = lazy(() => import('./components/ExchangeRateSection'));
+const RemittancesSection = lazy(() => import('./components/RemittancesSection'));
+const FdiSection = lazy(() => import('./components/FdiSection'));
+const ServicesSection = lazy(() => import('./components/ServicesSection'));
+const CountryTrendsSection = lazy(() => import('./components/CountryTrendsSection'));
+const FiscalSection = lazy(() => import('./components/FiscalSection'));
+const FbrTaxSection = lazy(() => import('./components/FbrTaxSection'));
+const InflationSection = lazy(() => import('./components/InflationSection'));
+const MonetarySection = lazy(() => import('./components/MonetarySection'));
+const FederalBudgetSection = lazy(() => import('./components/FederalBudgetSection'));
+const ProvincialBudgetSection = lazy(() => import('./components/ProvincialBudgetSection'));
+const FeedbackSection = lazy(() => import('./components/FeedbackSection'));
+const DataApiSection = lazy(() => import('./components/DataApiSection'));
+
+// The insight sections all live in one module, so they share a single chunk.
+const insightsModule = () => import('./components/InsightsSections');
+const insight = (name) => lazy(() => insightsModule().then((module) => ({ default: module[name] })));
+
+const EconomicBriefingSection = insight('EconomicBriefingSection');
+const EconomicTimelineSection = insight('EconomicTimelineSection');
+const ExternalFinancingWallSection = insight('ExternalFinancingWallSection');
+const GoodBadWatchSection = insight('GoodBadWatchSection');
+const ImfComplianceSection = insight('ImfComplianceSection');
+const ItExportDeepDiveSection = insight('ItExportDeepDiveSection');
+const LearningCenterSection = insight('LearningCenterSection');
+const MacroRiskScorecardSection = insight('MacroRiskScorecardSection');
+const PeerComparisonSection = insight('PeerComparisonSection');
+const RevenueTargetMeterSection = insight('RevenueTargetMeterSection');
+const RiskOutlookSection = insight('RiskOutlookSection');
+const SourceTrustSection = insight('SourceTrustSection');
 
 const NAV_GROUPS = [
   {
@@ -99,15 +110,21 @@ const NAV_GROUPS = [
       { id: 'timeline', label: '🕰️ Timeline', component: EconomicTimelineSection },
       { id: 'learning', label: '🎓 Learning Center', component: LearningCenterSection },
       { id: 'source-trust', label: '✅ Source Trust', component: SourceTrustSection },
+      { id: 'release-calendar', label: '📅 Release Calendar', component: ReleaseCalendarSection },
+      { id: 'data-api', label: '⬇️ Data & API', component: DataApiSection },
       { id: 'feedback', label: '✉️ Feedback', component: FeedbackSection },
     ],
   },
 ];
 
 function App() {
-  const [activeGroupId, setActiveGroupId] = useState('overview');
-  const [activeSectionId, setActiveSectionId] = useState('overview');
+  const { groupId: activeGroupId, sectionId: activeSectionId, navigate } = useHashRoute(NAV_GROUPS);
   const { theme, setTheme } = useTheme();
+  const { t, tx, lang } = useI18n();
+
+  const groupLabel = (group) => t(`nav.group.${group.id}`, group.label);
+  const groupBlurb = (group) => t(`nav.group.${group.id}.blurb`, group.blurb);
+  const sectionLabel = (section) => t(`nav.section.${section.id}`, section.label);
 
   const activeGroup = useMemo(
     () => NAV_GROUPS.find((g) => g.id === activeGroupId) || NAV_GROUPS[0],
@@ -120,10 +137,18 @@ function App() {
   const ActiveSection = activeSection.component;
   const showSubNav = activeGroup.sections.length > 1;
 
-  const selectGroup = (group) => {
-    setActiveGroupId(group.id);
-    setActiveSectionId(group.sections[0].id);
-  };
+  // Announce section changes to screen readers: hash routing swaps the whole
+  // <main> without a page load, which is otherwise silent for assistive tech.
+  // Derived during render so the live region only fires on an actual change.
+  const routeAnnouncement = t('a11y.sectionAnnounce', 'Now showing {name}')
+    .replace('{name}', t(`nav.section.${activeSection.id}`, activeSection.label).replace(/^\P{L}+/u, ''));
+
+  // Keep the document title in sync so browser history and shared links are
+  // self-describing rather than all reading "Pakistan Economic Dashboard".
+  useEffect(() => {
+    const label = t(`nav.section.${activeSection.id}`, activeSection.label);
+    document.title = `${label.replace(/^\P{L}+/u, '')} · ${t('app.title')} ${t('app.titleHighlight')}`;
+  }, [activeSection, t, lang]);
 
   // Update Chart.js defaults when theme changes
   useEffect(() => {
@@ -148,80 +173,100 @@ function App() {
 
   return (
     <div className="app">
+      <a className="skip-link" href="#main-content">{t('a11y.skipToContent', 'Skip to main content')}</a>
       <header className="app-header">
         <div className="flag-accent" />
         <div className="header-content">
           <div className="header-top-row">
             <a className="header-feedback-link" href="mailto:feedback@economyofpakistan.com">
-              ✉️ Feedback
+              {t('app.feedback')}
             </a>
+            <CommandPalette
+              groups={NAV_GROUPS}
+              onNavigate={navigate}
+              groupLabel={groupLabel}
+              sectionLabel={sectionLabel}
+            />
+            <LanguageToggle />
             <ThemeToggle theme={theme} setTheme={setTheme} />
           </div>
           <div className="header-emblem">☪</div>
-          <h1>Pakistan <span className="highlight">Economic Dashboard</span></h1>
+          <h1>{t('app.title')} <span className="highlight">{t('app.titleHighlight')}</span></h1>
           <p className="subtitle">
-            Authentic, officially-sourced data from SBP, PBS, FBR &amp; the Finance Division
+            {t('app.subtitle')}
           </p>
         </div>
       </header>
 
-      <nav className="group-nav" aria-label="Primary">
+      <nav className="group-nav" aria-label={t('app.primaryNav')}>
         {NAV_GROUPS.map((group) => (
           <button
             key={group.id}
             className={`group-btn ${activeGroupId === group.id ? 'active' : ''}`}
-            onClick={() => selectGroup(group)}
+            onClick={() => navigate(group.id, group.sections[0].id)}
             aria-current={activeGroupId === group.id ? 'page' : undefined}
           >
             <span className="group-btn__icon">{group.icon}</span>
             <span className="group-btn__text">
-              <span className="group-btn__label">{group.label}</span>
-              <span className="group-btn__blurb">{group.blurb}</span>
+              <span className="group-btn__label">{groupLabel(group)}</span>
+              <span className="group-btn__blurb">{groupBlurb(group)}</span>
             </span>
           </button>
         ))}
       </nav>
 
       {showSubNav && (
-        <nav className="sub-nav" aria-label={activeGroup.label}>
+        <nav className="sub-nav" aria-label={groupLabel(activeGroup)}>
           {activeGroup.sections.map((section) => (
-            <button
+            <a
               key={section.id}
+              href={`#/${activeGroup.id}/${section.id}`}
               className={`sub-tab-btn ${activeSectionId === section.id ? 'active' : ''}`}
-              onClick={() => setActiveSectionId(section.id)}
+              aria-current={activeSectionId === section.id ? 'page' : undefined}
+              onClick={(event) => {
+                if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
+                event.preventDefault();
+                navigate(activeGroup.id, section.id);
+              }}
             >
-              {section.label}
-            </button>
+              {sectionLabel(section)}
+            </a>
           ))}
         </nav>
       )}
 
-      <main className="dashboard-content">
+      <main className="dashboard-content" id="main-content" tabIndex={-1}>
+        <p className="sr-only" role="status" aria-live="polite">{routeAnnouncement}</p>
+        <div className="section-toolbar">
+          <span className="section-breadcrumb">
+            {activeGroup.icon} {groupLabel(activeGroup)} <span aria-hidden="true">›</span> {sectionLabel(activeSection)}
+          </span>
+          <ShareSectionLink groupId={activeGroup.id} sectionId={activeSection.id} label={sectionLabel(activeSection)} />
+        </div>
+        {lang !== 'en' && <p className="translation-notice">{t('app.translationNotice')}</p>}
         <div className="fade-in" key={`${activeSectionId}-${theme}`}>
-          <ActiveSection />
+          <Suspense fallback={<div className="card loading-card"><div className="spinner" /><span>{t('common.loading', 'Loading…')}</span></div>}>
+            <ActiveSection />
+          </Suspense>
         </div>
       </main>
 
       <footer className="app-footer">
-        <p>Pakistan Economic Dashboard &mdash; Built with authentic open government data</p>
+        <p>{t('app.footer')}</p>
         <div className="footer-sources">
           <button
             type="button"
             className="footer-feedback-link"
-            onClick={() => {
-              setActiveGroupId('insights');
-              setActiveSectionId('feedback');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
+            onClick={() => navigate('insights', 'feedback')}
           >
-            Feedback: feedback@economyofpakistan.com
+            {t('app.footerFeedback')}
           </button>
-          <a href="https://www.sbp.org.pk" target="_blank" rel="noreferrer">State Bank of Pakistan</a>
-          <a href="https://www.pbs.gov.pk" target="_blank" rel="noreferrer">Pakistan Bureau of Statistics</a>
-          <a href="https://www.finance.gov.pk" target="_blank" rel="noreferrer">Ministry of Finance</a>
-          <a href="https://www.fbr.gov.pk" target="_blank" rel="noreferrer">Federal Board of Revenue</a>
-          <a href="https://invest.gov.pk" target="_blank" rel="noreferrer">Board of Investment</a>
-          <a href="https://www.imf.org/en/Countries/PAK" target="_blank" rel="noreferrer">IMF Pakistan</a>
+          <a href="https://www.sbp.org.pk" target="_blank" rel="noreferrer">{tx("State Bank of Pakistan")}</a>
+          <a href="https://www.pbs.gov.pk" target="_blank" rel="noreferrer">{tx("Pakistan Bureau of Statistics")}</a>
+          <a href="https://www.finance.gov.pk" target="_blank" rel="noreferrer">{tx("Ministry of Finance")}</a>
+          <a href="https://www.fbr.gov.pk" target="_blank" rel="noreferrer">{tx("Federal Board of Revenue")}</a>
+          <a href="https://invest.gov.pk" target="_blank" rel="noreferrer">{tx("Board of Investment")}</a>
+          <a href="https://www.imf.org/en/Countries/PAK" target="_blank" rel="noreferrer">{tx("IMF Pakistan")}</a>
         </div>
       </footer>
     </div>

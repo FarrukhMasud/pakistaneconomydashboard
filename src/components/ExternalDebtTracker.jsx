@@ -3,10 +3,12 @@ import { useData } from '../hooks/useData';
 import { COLORS, baseDoughnutOptions } from '../utils/chartConfig';
 import TrackerFooter from './ui/TrackerFooter';
 import './ui/Trackers.css';
+import useI18n from '../i18n/useI18n';
 
 const fmtUsd = (v) => (v == null ? '—' : `$${v}B`);
 
 export default function ExternalDebtTracker() {
+  const { tx } = useI18n();
   const { data, loading, error } = useData('external-debt.json');
   if (loading || !data || error) return null;
 
@@ -48,22 +50,22 @@ export default function ExternalDebtTracker() {
 
       <div className="tracker__stats">
         <div className="tracker-stat">
-          <span className="tracker-stat__label">FY26 gross repayment</span>
+          <span className="tracker-stat__label">{tx("FY26 gross repayment")}</span>
           <span className="tracker-stat__value">{fmtUsd(fy26?.grossRepayment)}</span>
           <span className="tracker-stat__sub">range ${fy26?.grossRange}B</span>
         </div>
         <div className="tracker-stat">
-          <span className="tracker-stat__label">Expected rollovers</span>
+          <span className="tracker-stat__label">{tx("Expected rollovers")}</span>
           <span className="tracker-stat__value" style={{ color: COLORS.purple }}>~{fmtUsd(fy26?.expectedRollovers)}</span>
           <span className="tracker-stat__sub">re-financed by creditors</span>
         </div>
         <div className="tracker-stat">
-          <span className="tracker-stat__label">Hard-cash outflow</span>
+          <span className="tracker-stat__label">{tx("Hard-cash outflow")}</span>
           <span className="tracker-stat__value" style={{ color: COLORS.coral }}>~{fmtUsd(fy26?.hardRepayment)}</span>
           <span className="tracker-stat__sub">${fy26?.interest}B interest + ${fy26?.principalNonRolled}B principal</span>
         </div>
         <div className="tracker-stat">
-          <span className="tracker-stat__label">Total external debt</span>
+          <span className="tracker-stat__label">{tx("Total external debt")}</span>
           <span className="tracker-stat__value">{fmtUsd(stock?.totalExternalDebtAndLiabilities)}</span>
           <span className="tracker-stat__sub">{stock?.asOf} · IMF {fmtUsd(stock?.imfOutstanding)}</span>
         </div>
