@@ -10,7 +10,7 @@ import { pctChange, formatMonthYear } from '../utils/periodHelpers';
 // monthly trade and reserves releases, so this section can sit one month behind
 // the rest of the dashboard. Say so rather than leaving readers to guess.
 const SERVICES_COVERAGE_NOTE =
-  'This is the latest period SBP has published in its EBOPS services table. SBP releases this table after the monthly trade and reserves data, so it can lag the rest of the dashboard by a month.';
+  'This is the latest period SBP has published in its EBOPS services table. SBP releases this table after the monthly trade and reserves data, so it can lag the rest of the dashboard by a month. The headline totals at the top of this section come from the Balance of Payments summary, which SBP publishes one release earlier.';
 
 export default function ServicesSection() {
   const { data, loading, error } = useData('services.json');
@@ -18,7 +18,13 @@ export default function ServicesSection() {
   if (loading || !data) return <div className="card loading-card"><div className="spinner" /><span>Loading data…</span></div>;
   if (error) return <p style={{ color: COLORS.coral }}>Error: {error.message}</p>;
 
-  const { categories, itBreakdown, summary, comparison, recentMonths, itMonthly, monthlySeries } = data;
+  const { categories, itBreakdown, summary, comparison, recentMonths, itMonthly, monthlySeries, bopSummary } = data;
+
+  // SBP's Balance of Payments summary carries the headline services aggregate a
+  // release ahead of the detailed EBOPS table, so it can cover a later month
+  // than every other chart in this section. Show it, and say where it came from.
+  const bopCumulative = bopSummary?.cumulative || null;
+  const bopMonth = bopSummary?.latestMonth || null;
 
   // ── Monthly IT & Freelance exports (accumulating series + momentum snapshot) ──
   const mseries = monthlySeries || [];
@@ -168,6 +174,31 @@ export default function ServicesSection() {
           { label: 'PSEB', url: 'https://www.pseb.org.pk' },
         ]}
       />
+
+      {bopCumulative && (
+        <SummaryCard
+          title={`Services trade headline — ${bopCumulative.period} ${bopCumulative.fiscalYear}`}
+          accent={COLORS.purple}
+          items={[
+            { label: 'Exports of services (credit)', value: `$${bopCumulative.credit}M`, color: COLORS.teal },
+            { label: 'Imports of services (debit)', value: `$${bopCumulative.debit}M`, color: COLORS.coral },
+            {
+              label: 'Balance on trade in services',
+              value: `$${bopCumulative.net}M`,
+              sentiment: bopCumulative.net >= 0 ? 'positive' : 'negative',
+              color: bopCumulative.net >= 0 ? COLORS.teal : COLORS.coral,
+            },
+            ...(bopMonth ? [{
+              label: `${bopMonth.period} ${bopMonth.fiscalYear} exports`,
+              value: `$${bopMonth.credit}M`,
+              sub: `Net $${bopMonth.net}M`,
+              color: COLORS.blue,
+            }] : []),
+          ]}
+          footnote={`SBP Balance of Payments (BPM6) summary, "Exports/Imports of Services" and "Balance on Trade in Services" rows${bopCumulative.status ? ` · ${bopCumulative.status}` : ''}. SBP publishes this aggregate a release ahead of the detailed EBOPS table, so it covers ${bopMonth ? `${bopMonth.period} ${bopMonth.fiscalYear}` : 'a later month'} while the category and IT breakdowns below stop at ${summary?.period || 'the previous month'}.`}
+          provenanceKeys={['services.bop.cumulative', 'services.bop.latestMonth']}
+        />
+      )}
 
       {itMonthly && (
         <div className="monthly-it-spotlight">

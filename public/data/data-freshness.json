@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-27T17:55:20.640Z",
+  "generatedAt": "2026-07-27T18:50:29.751Z",
   "status": "needs-review",
   "tiers": {
     "official-primary": {
@@ -162,7 +162,7 @@
       "latestObservation": "Jul-May FY26",
       "freshnessDate": "2026-05-31",
       "dataCoverage": "Jul-May FY26",
-      "dashboardUpdated": "2026-07-24",
+      "dashboardUpdated": "2026-07-27",
       "reviewReason": null,
       "status": "fresh"
     },

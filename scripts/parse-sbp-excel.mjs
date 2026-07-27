@@ -15,7 +15,7 @@
  *   - Netinflow.xls             → fdi.json (by country)
  *   - NetinflowSummary.xls      → fdi.json (annual)
  *   - GDP_table.xlsx            → fiscal.json
- *   - Balancepayment_BPM6.xls   → kpi-summary.json
+ *   - Balancepayment_BPM6.xls   → services.json (BOP services aggregate)
  *
  * Also attempts to download IBF_Arch.xls for exchange rate history.
  */
@@ -30,6 +30,7 @@ import {
   requireColumn,
   requireRowIndex,
   findRowIndex,
+  forwardFill,
   latestFiscalYear,
   parseFiscalYear as parseFullFy,
 } from './lib/sheet-utils.mjs';
@@ -82,12 +83,14 @@ function targetBandSentiment(value, trend, min, max) {
   return trend === 'up' ? 'positive' : 'negative';
 }
 
+/** Months in fiscal-year order, so July sorts before January. */
+const FISCAL_MONTH_ORDER = ['jul', 'aug', 'sep', 'oct', 'nov', 'dec', 'jan', 'feb', 'mar', 'apr', 'may', 'jun'];
+
 function fiscalPeriodEndIndex(period) {
   const match = String(period || '').match(/jul(?:y)?[-\s]+([a-z]+)/i);
   if (!match) return null;
-  const order = ['jul', 'aug', 'sep', 'oct', 'nov', 'dec', 'jan', 'feb', 'mar', 'apr', 'may', 'jun'];
   const end = match[1].slice(0, 3).toLowerCase();
-  const index = order.indexOf(end);
+  const index = FISCAL_MONTH_ORDER.indexOf(end);
   return index >= 0 ? index : null;
 }
 
@@ -766,16 +769,126 @@ async function updateGdpFiscal() {
 // ═══════════════════════════════════════════════════
 // 4. BALANCE OF PAYMENTS (Balancepayment_BPM6.xls)
 //
-// Removed. The previous implementation read fixed cells (row 24, row 38,
-// row 79 …) from BPM6_Summary and printed them as if they were authoritative,
-// but it never wrote a JSON file — nothing it produced ever reached the
-// dashboard. Because the reads were positional and the labels were stale
-// ("Jul-Mar FY26" regardless of the actual period), the console output was
-// actively misleading during data reviews. Current-account, remittance, FDI
-// and reserve figures all come from their own dedicated, label-resolved
-// parsers instead. If BOP aggregates are needed later, add a real parser that
-// resolves rows by label and writes a canonical JSON file with provenance.
+// A previous implementation read fixed cells (row 24, row 38, row 79 …) from
+// BPM6_Summary and printed them as if they were authoritative, but it never
+// wrote a JSON file and its labels were stale. It was removed.
+//
+// This replacement exists for one reason: SBP refreshes the BOP summary a
+// month ahead of the detailed EBOPS services table, so the headline services
+// aggregate for the newest month is published here first. Every row and
+// column below is resolved by its printed label.
 // ═══════════════════════════════════════════════════
+
+async function updateBopServices() {
+  console.log('\n🧾 Parsing BOP services aggregate (Balancepayment_BPM6.xls)...');
+
+  const wb = readExcel('Balancepayment_BPM6.xls');
+  const rows = getSheet(wb, 'BPM6_Summary');
+  const ctx = { file: 'Balancepayment_BPM6.xls', sheet: 'BPM6_Summary' };
+
+  const headerIdx = requireRowIndex(rows, /^items$/i, { labelCol: 0, to: 20, ...ctx });
+  const width = Math.max(rows[headerIdx]?.length || 0, rows[headerIdx + 1]?.length || 0);
+  // "Jul-Jun" is a merged cell spanning the prior and current fiscal year.
+  const periodRow = forwardFill(rows[headerIdx], width);
+  const fyRow = rows[headerIdx + 1] || [];
+
+  const maxFy = latestFiscalYear(fyRow);
+  if (maxFy === null) {
+    throw new Error('No fiscal year found in the BPM6_Summary header row');
+  }
+
+  const creditIdx = requireRowIndex(rows, /^exports of services$/i, { labelCol: 0, ...ctx });
+  const debitIdx = requireRowIndex(rows, /^imports of services$/i, { labelCol: 0, ...ctx });
+  const netIdx = requireRowIndex(rows, /^balance on trade in services$/i, { labelCol: 0, ...ctx });
+
+  let cumulative = null;
+  let latestMonth = null;
+  for (let col = 1; col < width; col++) {
+    if (parseFullFy(fyRow[col]) !== maxFy) continue;
+    const period = (periodRow[col] || '').trim();
+    if (!period) continue;
+    const status = /R\s*$/i.test(String(fyRow[col])) ? 'revised'
+      : /P\s*$/i.test(String(fyRow[col])) ? 'provisional' : null;
+
+    const cumulativeEnd = fiscalPeriodEndIndex(period);
+    if (cumulativeEnd != null) {
+      if (!cumulative || cumulativeEnd > cumulative.endIndex) {
+        cumulative = { col, period, status, endIndex: cumulativeEnd };
+      }
+      continue;
+    }
+
+    const monthIndex = FISCAL_MONTH_ORDER.indexOf(period.slice(0, 3).toLowerCase());
+    if (monthIndex >= 0 && period.length <= 9 && !period.includes('-')) {
+      if (!latestMonth || monthIndex > latestMonth.endIndex) {
+        latestMonth = { col, period, status, endIndex: monthIndex };
+      }
+    }
+  }
+
+  const readBlock = (entry) => {
+    if (!entry) return null;
+    const num = (rowIdx) => (typeof rows[rowIdx]?.[entry.col] === 'number' ? round2(rows[rowIdx][entry.col]) : null);
+    const credit = num(creditIdx);
+    if (credit === null) return null;
+    return {
+      period: entry.period,
+      fiscalYear: `FY${maxFy}`,
+      status: entry.status,
+      credit,
+      debit: num(debitIdx),
+      net: num(netIdx),
+    };
+  };
+
+  const cumulativeBlock = readBlock(cumulative);
+  const monthBlock = readBlock(latestMonth);
+  if (!cumulativeBlock && !monthBlock) {
+    throw new Error(`No FY${maxFy} services columns resolved in BPM6_Summary`);
+  }
+
+  const existing = await readJson('services.json').catch(() => ({}));
+  const bopSummary = {
+    source: 'SBP Balance of Payments (BPM6) summary',
+    sourceFile: 'Balancepayment_BPM6.xls',
+    sourceSheet: 'BPM6_Summary',
+    fiscalYear: `FY${maxFy}`,
+    unit: 'US$ million',
+    cumulative: cumulativeBlock,
+    latestMonth: monthBlock,
+    note: 'SBP publishes this aggregate before the detailed EBOPS table, so it can cover a later month than the category and IT breakdowns in this section.',
+  };
+
+  await writeJson('services.json', { ...existing, bopSummary });
+
+  if (cumulativeBlock) {
+    await recordProvenance('services.bop.cumulative', {
+      label: 'Balance on trade in services, fiscal year to date',
+      sourceKey: 'Balancepayment_BPM6.xls',
+      sheet: 'BPM6_Summary',
+      location: `"Balance on Trade in Services" row, "${cumulativeBlock.period} ${cumulativeBlock.fiscalYear}" column`,
+      period: `${cumulativeBlock.period} ${cumulativeBlock.fiscalYear}`,
+      status: cumulativeBlock.status || 'final',
+      unit: 'US$ million',
+      value: cumulativeBlock.net,
+    });
+    console.log(`  📊 Services ${cumulativeBlock.period} FY${maxFy}: credit $${cumulativeBlock.credit}M, debit $${cumulativeBlock.debit}M, net $${cumulativeBlock.net}M`);
+  }
+  if (monthBlock) {
+    await recordProvenance('services.bop.latestMonth', {
+      label: 'Exports of services, latest published month',
+      sourceKey: 'Balancepayment_BPM6.xls',
+      sheet: 'BPM6_Summary',
+      location: `"Exports of Services" row, "${monthBlock.period} ${monthBlock.fiscalYear}" column`,
+      period: `${monthBlock.period} ${monthBlock.fiscalYear}`,
+      status: monthBlock.status || 'final',
+      unit: 'US$ million',
+      value: monthBlock.credit,
+    });
+    console.log(`  📊 Latest month ${monthBlock.period} FY${maxFy}: credit $${monthBlock.credit}M, net $${monthBlock.net}M`);
+  }
+  return bopSummary;
+}
 
 // ═══════════════════════════════════════════════════
 // 5. EXCHANGE RATES — attempt archive download
@@ -2052,6 +2165,10 @@ async function main() {
 
   // 8. Services (dt.xls — EBOPS)
   summary.services = await updateServices();
+
+  // 8b. Services headline from the BOP summary. Runs after updateServices()
+  // because it augments the same file, and SBP refreshes it a month earlier.
+  summary.bopServices = await updateBopServices();
 
   // 9. Trade by country
   summary.tradeCountries = await updateTradeCountries();

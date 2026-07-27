@@ -509,10 +509,15 @@ const stringsUr = {
   'Primary balance': 'بنیادی توازن',
 
   // ===== Source coverage notes =====
-  "This is the latest period SBP has published in its EBOPS services table. SBP releases this table after the monthly trade and reserves data, so it can lag the rest of the dashboard by a month.":
-    "یہ تازہ ترین مدت ہے جو اسٹیٹ بینک نے اپنے EBOPS خدمات کے جدول میں شائع کی ہے۔ اسٹیٹ بینک یہ جدول ماہانہ تجارت اور ذخائر کے اعداد و شمار کے بعد جاری کرتا ہے، اس لیے یہ بقیہ ڈیش بورڈ سے ایک ماہ پیچھے ہو سکتا ہے۔",
+  "This is the latest period SBP has published in its EBOPS services table. SBP releases this table after the monthly trade and reserves data, so it can lag the rest of the dashboard by a month. The headline totals at the top of this section come from the Balance of Payments summary, which SBP publishes one release earlier.":
+    "یہ تازہ ترین مدت ہے جو اسٹیٹ بینک نے اپنے EBOPS خدمات کے جدول میں شائع کی ہے۔ اسٹیٹ بینک یہ جدول ماہانہ تجارت اور ذخائر کے اعداد و شمار کے بعد جاری کرتا ہے، اس لیے یہ بقیہ ڈیش بورڈ سے ایک ماہ پیچھے ہو سکتا ہے۔ اس حصے کے شروع میں دیے گئے مجموعے ادائیگی واجبات کے خلاصے سے لیے گئے ہیں، جو اسٹیٹ بینک ایک اشاعت پہلے جاری کرتا ہے۔",
   "This is the latest period SBP has published in its country-level trade tables. They are released after the headline monthly trade figures, so this chart can stop one month short of the totals above.":
     "یہ تازہ ترین مدت ہے جو اسٹیٹ بینک نے ملک وار تجارتی جدول میں شائع کی ہے۔ یہ جدول ماہانہ مجموعی تجارتی اعداد کے بعد جاری ہوتے ہیں، اس لیے یہ چارٹ اوپر دیے گئے مجموعوں سے ایک ماہ پیچھے رہ سکتا ہے۔",
+
+  // ===== BOP services headline =====
+  'Exports of services (credit)': 'خدمات کی برآمدات (کریڈٹ)',
+  'Imports of services (debit)': 'خدمات کی درآمدات (ڈیبٹ)',
+  'Balance on trade in services': 'خدمات کے تجارتی توازن کا خلاصہ',
 };
 
 export default stringsUr;

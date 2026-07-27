@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-27T17:46:42.122Z",
+  "generatedAt": "2026-07-27T18:42:08.154Z",
   "description": "Machine-readable citation for every headline figure on the dashboard. Each entry names the publishing institution, the exact source document, the worksheet and the row/column it was read from.",
   "sources": {
     "fbr-collection": {
@@ -17,6 +17,15 @@
       "title": "Consumer Price Index monthly review",
       "url": "https://www.pbs.gov.pk/cpi",
       "landingUrl": "https://www.pbs.gov.pk/",
+      "sourceType": "official-primary",
+      "cadence": "monthly"
+    },
+    "sbp-bop-bpm6": {
+      "id": "sbp-bop-bpm6",
+      "institution": "State Bank of Pakistan",
+      "title": "Balance of Payments (BPM6)",
+      "url": "https://www.sbp.org.pk/assets/document/Balancepayment_BPM6.xls",
+      "landingUrl": "https://www.sbp.org.pk/ecodata/index2.asp",
       "sourceType": "official-primary",
       "cadence": "monthly"
     },
@@ -194,6 +203,32 @@
       "status": "final",
       "unit": "US$ billion",
       "value": 22.67,
+      "derivedFrom": null,
+      "note": null,
+      "retrievedAt": "2026-07-27"
+    },
+    "services.bop.cumulative": {
+      "label": "Balance on trade in services, fiscal year to date",
+      "sourceId": "sbp-bop-bpm6",
+      "sheet": "BPM6_Summary",
+      "location": "\"Balance on Trade in Services\" row, \"Jul-Jun FY2026\" column",
+      "period": "Jul-Jun FY2026",
+      "status": "provisional",
+      "unit": "US$ million",
+      "value": -1891,
+      "derivedFrom": null,
+      "note": null,
+      "retrievedAt": "2026-07-27"
+    },
+    "services.bop.latestMonth": {
+      "label": "Exports of services, latest published month",
+      "sourceId": "sbp-bop-bpm6",
+      "sheet": "BPM6_Summary",
+      "location": "\"Exports of Services\" row, \"Jun FY2026\" column",
+      "period": "Jun FY2026",
+      "status": "provisional",
+      "unit": "US$ million",
+      "value": 956,
       "derivedFrom": null,
       "note": null,
       "retrievedAt": "2026-07-27"

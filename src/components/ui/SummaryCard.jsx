@@ -1,6 +1,7 @@
 import React from 'react';
 import './SummaryCard.css';
 import ExpandableTile from './ExpandableTile';
+import CiteFigure from '../CiteFigure';
 import useI18n from '../../i18n/useI18n';
 
 /**
@@ -13,9 +14,10 @@ import useI18n from '../../i18n/useI18n';
  *   color     : optional override color string
  * @param {string}  footnote – small italic note below the grid
  * @param {string}  accent   – CSS color for top border accent
+ * @param {string[]} provenanceKeys – provenance.json ids to expose "cite this figure" links for
  */
-export default function SummaryCard({ title, items = [], footnote, accent }) {
-  const { tx } = useI18n();
+export default function SummaryCard({ title, items = [], footnote, accent, provenanceKeys }) {
+  const { t, tx } = useI18n();
   const arrow = (dir) => {
     if (dir === 'up') return '▲';
     if (dir === 'down') return '▼';
@@ -70,6 +72,12 @@ export default function SummaryCard({ title, items = [], footnote, accent }) {
         ))}
       </div>
       {footnote && <p className="summary-card__footnote">{tx(footnote)}</p>}
+      {Array.isArray(provenanceKeys) && provenanceKeys.length > 0 && (
+        <div className="chart-provenance">
+          <span>{t('chart.traceFigure', 'Trace a headline figure:')}</span>
+          {provenanceKeys.map((key) => <CiteFigure key={key} figureKey={key} />)}
+        </div>
+      )}
     </ExpandableTile>
   );
 }

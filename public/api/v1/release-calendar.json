@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-27T17:55:20.640Z",
+  "generatedAt": "2026-07-27T18:50:29.751Z",
   "description": "Expected next-release windows. Dates marked \"estimated\" are derived from the observed publication history of each series on this dashboard — they are projections, not an official release calendar. Dates marked \"announced\" come from the source institution itself.",
   "overdueCount": 0,
   "dueCount": 0,
@@ -277,7 +277,7 @@
       "sourceType": "official-primary",
       "critical": true,
       "latestObservation": "Jul-May FY26",
-      "dashboardUpdated": "2026-07-24",
+      "dashboardUpdated": "2026-07-27",
       "releaseCalendarUrl": null,
       "schedule": "event-driven",
       "expectedNextObservation": null,

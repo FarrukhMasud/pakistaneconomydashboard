@@ -236,7 +236,31 @@
     }
   ],
   "dataSource": "SBP",
-  "lastUpdated": "2026-07-24",
+  "lastUpdated": "2026-07-27",
   "dataCoverage": "Jul-May FY26",
-  "lastChecked": "2026-07-27"
+  "lastChecked": "2026-07-27",
+  "bopSummary": {
+    "source": "SBP Balance of Payments (BPM6) summary",
+    "sourceFile": "Balancepayment_BPM6.xls",
+    "sourceSheet": "BPM6_Summary",
+    "fiscalYear": "FY2026",
+    "unit": "US$ million",
+    "cumulative": {
+      "period": "Jul-Jun",
+      "fiscalYear": "FY2026",
+      "status": "provisional",
+      "credit": 10034,
+      "debit": 11925,
+      "net": -1891
+    },
+    "latestMonth": {
+      "period": "Jun",
+      "fiscalYear": "FY2026",
+      "status": "provisional",
+      "credit": 956,
+      "debit": 931,
+      "net": 25
+    },
+    "note": "SBP publishes this aggregate before the detailed EBOPS table, so it can cover a later month than the category and IT breakdowns in this section."
+  }
 }

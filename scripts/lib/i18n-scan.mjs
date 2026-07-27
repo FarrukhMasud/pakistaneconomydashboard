@@ -35,6 +35,18 @@ function walk(dir, out = []) {
 export function extractTranslatableStrings(source) {
   const found = new Set();
   const propList = TRANSLATABLE_PROPS.join('|');
+
+  // Long prose is often hoisted into a module-level const and passed by name
+  // (`coverageNote={SERVICES_COVERAGE_NOTE}`). Resolve those so the value is
+  // still checked for a translation - otherwise the string silently renders in
+  // English when the interface is switched to Urdu.
+  const constants = new Map();
+  const constPattern = /\bconst\s+([A-Za-z_$][\w$]*)\s*=\s*(["'])((?:(?!\2)[^\\]|\\.)*)\2\s*;/g;
+  let constMatch;
+  while ((constMatch = constPattern.exec(source)) !== null) {
+    constants.set(constMatch[1], constMatch[3]);
+  }
+
   const patterns = [
     new RegExp(`\\b(?:${propList})\\s*=\\s*"([^"\\n]+)"`, 'g'),
     new RegExp(`\\b(?:${propList})\\s*=\\s*'([^'\\n]+)'`, 'g'),
@@ -42,18 +54,28 @@ export function extractTranslatableStrings(source) {
     new RegExp(`\\b(?:${propList})\\s*=\\s*\\{\\s*'([^'\\n]+)'\\s*\\}`, 'g'),
   ];
 
+  const candidates = [];
   for (const pattern of patterns) {
     let match;
-    while ((match = pattern.exec(source)) !== null) {
-      const value = match[1].trim();
-      if (!value) continue;
-      if (NEVER_TRANSLATE.test(value)) continue;
-      // Skip anything that is not prose (class names, urls, keys).
-      if (/^[a-z0-9-]+$/.test(value)) continue;
-      if (/^https?:/.test(value)) continue;
-      if (!/[A-Za-z]{3,}/.test(value)) continue;
-      found.add(value);
-    }
+    while ((match = pattern.exec(source)) !== null) candidates.push(match[1]);
+  }
+
+  const identifierPattern = new RegExp(`\\b(?:${propList})\\s*=\\s*\\{\\s*([A-Za-z_$][\\w$]*)\\s*\\}`, 'g');
+  let identifierMatch;
+  while ((identifierMatch = identifierPattern.exec(source)) !== null) {
+    const resolved = constants.get(identifierMatch[1]);
+    if (resolved) candidates.push(resolved);
+  }
+
+  for (const candidate of candidates) {
+    const value = candidate.trim();
+    if (!value) continue;
+    if (NEVER_TRANSLATE.test(value)) continue;
+    // Skip anything that is not prose (class names, urls, keys).
+    if (/^[a-z0-9-]+$/.test(value)) continue;
+    if (/^https?:/.test(value)) continue;
+    if (!/[A-Za-z]{3,}/.test(value)) continue;
+    found.add(value);
   }
 
   return found;
