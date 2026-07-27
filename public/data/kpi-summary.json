@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-24",
+  "lastUpdated": "2026-07-27",
   "indicators": [
     {
       "id": "reserves",
@@ -47,13 +47,13 @@
     {
       "id": "fdi",
       "label": "Net FDI",
-      "value": 1.62,
+      "value": 1.64,
       "unit": "$B",
       "decimals": 2,
-      "period": "Jul-May FY2026 (P)",
-      "change": -28.41,
+      "period": "Jul-Jun FY2026 (P)",
+      "change": -33.93,
       "changeUnit": "%",
-      "changeBasis": "vs Jul-May FY2025",
+      "changeBasis": "vs Jul-Jun FY2025",
       "trend": "down",
       "sentiment": "negative",
       "source": "SBP",
@@ -135,5 +135,5 @@
       "sub": "Next MPC: [object Object]"
     }
   ],
-  "lastChecked": "2026-07-24"
+  "lastChecked": "2026-07-27"
 }

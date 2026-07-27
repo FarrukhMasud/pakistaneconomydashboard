@@ -1157,6 +1157,15 @@ a:hover {
 }
 .chart-footnote span { white-space: nowrap; }
 
+.chart-coverage-note {
+  margin: 0.4rem 0 0;
+  padding-inline-start: 0.55rem;
+  border-inline-start: 2px solid var(--border-subtle);
+  font-size: 0.68rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
 .chart-provenance {
   display: flex;
   flex-wrap: wrap;

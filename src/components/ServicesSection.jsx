@@ -6,6 +6,12 @@ import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import { pctChange, formatMonthYear } from '../utils/periodHelpers';
 
+// SBP publishes the cumulative EBOPS services table later in the month than the
+// monthly trade and reserves releases, so this section can sit one month behind
+// the rest of the dashboard. Say so rather than leaving readers to guess.
+const SERVICES_COVERAGE_NOTE =
+  'This is the latest period SBP has published in its EBOPS services table. SBP releases this table after the monthly trade and reserves data, so it can lag the rest of the dashboard by a month.';
+
 export default function ServicesSection() {
   const { data, loading, error } = useData('services.json');
 
@@ -227,6 +233,7 @@ export default function ServicesSection() {
           dataSource="SBP"
           lastUpdated={data.lastUpdated}
           dataCoverage={data.dataCoverage}
+          coverageNote={SERVICES_COVERAGE_NOTE}
           provenanceKeys={['services.itTelecom.credit']}
         >
           <div className="chart-container">
@@ -240,6 +247,7 @@ export default function ServicesSection() {
           dataSource="SBP"
           lastUpdated={data.lastUpdated}
           dataCoverage={data.dataCoverage}
+          coverageNote={SERVICES_COVERAGE_NOTE}
         >
           <div className="chart-container">
             <Doughnut data={itDoughnutData} options={itDoughnutOptions} />
@@ -255,6 +263,7 @@ export default function ServicesSection() {
           dataSource="SBP"
           lastUpdated={data.lastUpdated}
           dataCoverage={`${compPeriod} ${priorLabel} vs ${curLabel}`}
+          coverageNote={SERVICES_COVERAGE_NOTE}
         >
           <div className="chart-container">
             <Bar data={comparisonBarData} options={comparisonOptions} />
@@ -267,6 +276,7 @@ export default function ServicesSection() {
           dataSource="SBP"
           lastUpdated={data.lastUpdated}
           dataCoverage={data.dataCoverage}
+          coverageNote={SERVICES_COVERAGE_NOTE}
         >
           <div className="chart-container">
             <Bar data={balanceBarData} options={balanceBarOptions} />

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-24T20:57:02.589Z",
+  "generatedAt": "2026-07-27T17:46:42.122Z",
   "description": "Machine-readable citation for every headline figure on the dashboard. Each entry names the publishing institution, the exact source document, the worksheet and the row/column it was read from.",
   "sources": {
     "fbr-collection": {
@@ -83,11 +83,11 @@
       "sourceType": "official-primary",
       "cadence": "per-meeting"
     },
-    "sbp-netinflow-summary": {
-      "id": "sbp-netinflow-summary",
+    "sbp-netinflow-country": {
+      "id": "sbp-netinflow-country",
       "institution": "State Bank of Pakistan",
-      "title": "Foreign Investment Net Inflows - Summary",
-      "url": "https://archive.sbp.org.pk/ecodata/NetinflowSummary.xls",
+      "title": "Foreign Investment Net Inflows by Country",
+      "url": "https://www.sbp.org.pk/assets/document/Netinflow.xls",
       "landingUrl": "https://www.sbp.org.pk/ecodata/index2.asp",
       "sourceType": "official-primary",
       "cadence": "monthly"
@@ -105,7 +105,7 @@
       "value": 278.58,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-07-24"
+      "retrievedAt": "2026-07-27"
     },
     "fbr.fytd.net": {
       "label": "FBR net tax collection, fiscal year to date",
@@ -118,20 +118,20 @@
       "value": 11.23,
       "derivedFrom": null,
       "note": "Currently sourced from press reporting of provisional FBR figures, not an FBR publication.",
-      "retrievedAt": "2026-07-24"
+      "retrievedAt": "2026-07-27"
     },
     "fdi.fytd.current": {
       "label": "Net foreign direct investment, fiscal year to date",
-      "sourceId": "sbp-netinflow-summary",
-      "sheet": "Summary",
-      "location": "\"Direct Investment\" row, current fiscal-year-to-date column",
-      "period": "Jul-May FY2026 (P)",
+      "sourceId": "sbp-netinflow-country",
+      "sheet": "Country",
+      "location": "\"Total\" row, net FDI column of the current fiscal-year-to-date block",
+      "period": "Jul-Jun FY2026 (P)",
       "status": "provisional",
       "unit": "US$ billion",
-      "value": 1.62,
+      "value": 1.64,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-07-24"
+      "retrievedAt": "2026-07-27"
     },
     "fiscal.gdpGrowth.latest": {
       "label": "Real GDP growth rate at constant basic prices of 2015-16",
@@ -144,7 +144,7 @@
       "value": 3.7,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-07-24"
+      "retrievedAt": "2026-07-27"
     },
     "inflation.nationalCpi.latest": {
       "label": "National Consumer Price Index, year-on-year inflation",
@@ -157,7 +157,7 @@
       "value": 11.1,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-07-24"
+      "retrievedAt": "2026-07-27"
     },
     "monetaryPolicy.currentRate": {
       "label": "SBP policy (target) rate set by the Monetary Policy Committee",
@@ -170,7 +170,7 @@
       "value": 11.5,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-07-24"
+      "retrievedAt": "2026-07-27"
     },
     "remittances.monthly.total": {
       "label": "Workers’ remittances, monthly total",
@@ -183,7 +183,7 @@
       "value": 3.47,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-07-24"
+      "retrievedAt": "2026-07-27"
     },
     "reserves.weekly.total": {
       "label": "Total liquid foreign exchange reserves (SBP + scheduled banks)",
@@ -196,7 +196,7 @@
       "value": 22.67,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-07-24"
+      "retrievedAt": "2026-07-27"
     },
     "services.itTelecom.credit": {
       "label": "Telecommunications, computer and information services exports (credit)",
@@ -209,7 +209,7 @@
       "value": 4.18,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-07-24"
+      "retrievedAt": "2026-07-27"
     },
     "trade.monthly.balance": {
       "label": "Monthly goods trade balance (BOP basis)",
@@ -222,7 +222,7 @@
       "value": -3552,
       "derivedFrom": "Exports of $2595M less imports of $6147M as published by SBP",
       "note": null,
-      "retrievedAt": "2026-07-24"
+      "retrievedAt": "2026-07-27"
     }
   }
 }

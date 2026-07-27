@@ -72,7 +72,7 @@ function ChartDataTable({ chartData }) {
   );
 }
 
-export default function ChartCard({ title, description, source, dataSource, lastUpdated, dataCoverage, provenanceKeys, noteKey, children }) {
+export default function ChartCard({ title, description, source, dataSource, lastUpdated, dataCoverage, coverageNote, provenanceKeys, noteKey, children }) {
   const [infoOpen, setInfoOpen] = useState(false);
   const [chartOpen, setChartOpen] = useState(false);
   const [tableOpen, setTableOpen] = useState(false);
@@ -134,6 +134,7 @@ export default function ChartCard({ title, description, source, dataSource, last
           {lastUpdated && <span>{t('chart.updatedLabel', 'Updated:')} {lastUpdated}</span>}
         </div>
       )}
+      {coverageNote && <p className="chart-coverage-note">{tx(coverageNote)}</p>}
       {Array.isArray(provenanceKeys) && provenanceKeys.length > 0 && (
         <div className="chart-provenance">
           <span>{t('chart.traceFigure', 'Trace a headline figure:')}</span>

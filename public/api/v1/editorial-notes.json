@@ -70,7 +70,7 @@
       "asOf": "2026-06"
     },
     "fdi.annualContext": {
-      "text": "Net FDI in FY2025 was $2.48bn ($4.27bn of inflows against $1.79bn of outflows) — below the series peak of $2.78bn in FY2018, and the strongest since FY2020.",
+      "text": "Net FDI in FY2026 was $1.64bn ($3.57bn of inflows against $1.93bn of outflows) — below the series peak of $2.78bn in FY2018, and the strongest since FY2025.",
       "basis": "derived",
       "derivation": "Latest completed fiscal year compared against every other year in the annual net FDI series from FY2017.",
       "sources": [
@@ -82,7 +82,7 @@
           "sourceType": "official-primary"
         }
       ],
-      "asOf": "FY2025"
+      "asOf": "FY2026"
     },
     "services.itShare": {
       "text": "IT & telecom exports of $4.18bn in Jul-May FY26 were 46.0% of all services exports and up 20.2% on Jul-May FY25.",
@@ -137,6 +137,6 @@
       "asOf": "2026-27"
     }
   },
-  "lastUpdated": "2026-07-24",
-  "lastChecked": "2026-07-24"
+  "lastUpdated": "2026-07-27",
+  "lastChecked": "2026-07-27"
 }

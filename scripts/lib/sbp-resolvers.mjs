@@ -155,6 +155,17 @@ export function resolveFdiCountryColumns(hdr3 = [], hdr4 = [], hdr5 = [], contex
     return -1;
   };
 
+  // Inflow / outflow are resolved by their own sub-header label rather than by
+  // an assumed offset from the net column, so a reordered block cannot swap them.
+  const findSubCol = (start, pattern) => {
+    const limit = Math.max(hdr4.length, hdr5.length);
+    for (let sc = start; sc < start + 6 && sc < limit; sc++) {
+      if (pattern.test((hdr5[sc] || '').toString().trim())) return sc;
+      if (pattern.test((hdr4[sc] || '').toString().trim())) return sc;
+    }
+    return -1;
+  };
+
   let current = null;
   let prior = null;
   for (let c = 2; c < hdr3.length; c++) {
@@ -162,8 +173,12 @@ export function resolveFdiCountryColumns(hdr3 = [], hdr4 = [], hdr5 = [], contex
     if (!/^july/i.test(h3)) continue;
     const fy = parseFiscalYear(h3);
     if (fy === null) continue;
+    const inflow = findSubCol(c, /^inflow$/i);
+    const outflow = findSubCol(c, /^outflow$/i);
     const group = {
       net: findNetSubCol(c),
+      inflow: inflow >= 0 ? inflow : null,
+      outflow: outflow >= 0 ? outflow : null,
       period: h3.replace(/\s*\(P\)\s*/i, '').trim(),
       fiscalYear: fy,
       status: /\(\s*P\s*\)/i.test(h3) ? 'provisional' : 'final',

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-24T21:29:32.329Z",
+  "generatedAt": "2026-07-27T17:55:20.640Z",
   "status": "needs-review",
   "tiers": {
     "official-primary": {
@@ -139,8 +139,8 @@
       "critical": true,
       "latestObservation": "2026-06",
       "freshnessDate": null,
-      "dataCoverage": "monthly through 2026-06; sector July-May FY26; country July-June FY26; summary FY2026 Jul-May",
-      "dashboardUpdated": "2026-07-24",
+      "dataCoverage": "monthly through 2026-06; sector Jul-Jun FY26; country Jul-Jun FY26; headline FY2026 Jul-Jun (Netinflow.xls)",
+      "dashboardUpdated": "2026-07-27",
       "reviewReason": null,
       "status": "fresh"
     },

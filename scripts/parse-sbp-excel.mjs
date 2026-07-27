@@ -11,7 +11,7 @@
  *
  * Expects these files in scripts/sbp-raw/:
  *   - exp_import_BOP.xls        → trade.json
- *   - Foreign_Dir.xls           → fdi.json (by sector)
+ *   - Foreign_Dir.xls           → (broad ISIC sector cut, superseded by Netinflow.xls)
  *   - Netinflow.xls             → fdi.json (by country)
  *   - NetinflowSummary.xls      → fdi.json (annual)
  *   - GDP_table.xlsx            → fiscal.json
@@ -29,6 +29,7 @@ import { parsePdfTextItems } from './pdf-text.mjs';
 import {
   requireColumn,
   requireRowIndex,
+  findRowIndex,
   latestFiscalYear,
   parseFiscalYear as parseFullFy,
 } from './lib/sheet-utils.mjs';
@@ -36,7 +37,6 @@ import { recordProvenance, flushProvenance } from './lib/provenance-store.mjs';
 import { writeDataFile } from './lib/data-writer.mjs';
 import {
   classifyCountryColumns,
-  resolveFdiSectorColumns,
   resolveFdiCountryColumns,
   resolveServicesColumns,
   fyMonthToYearMonth,
@@ -89,6 +89,32 @@ function fiscalPeriodEndIndex(period) {
   const end = match[1].slice(0, 3).toLowerCase();
   const index = order.indexOf(end);
   return index >= 0 ? index : null;
+}
+
+/**
+ * SBP spells the same cumulative span differently per workbook ("Jul-May",
+ * "July-June FY26", "July-June-FY26"). Render one consistent label.
+ */
+function formatFyPeriodLabel(period) {
+  const raw = String(period || '').trim();
+  const match = raw.match(/jul(?:y)?[-\s]+([a-z]+)/i);
+  if (!match) return raw;
+  const cap = (s) => `${s.charAt(0).toUpperCase()}${s.slice(1)}`;
+  const span = `Jul-${cap(match[1].slice(0, 3).toLowerCase())}`;
+  const fy = raw.match(/FY\s*-?\s*(\d{2,4})/i);
+  return fy ? `${span} FY${fy[1]}` : span;
+}
+
+/**
+ * SBP spells the same cumulative span differently per workbook ("Jul-May",
+ * "July-June FY26"). Reduce it to a bare month span so the fiscal year is
+ * carried once, by the label, and never printed twice in the UI.
+ */
+function normaliseFytdPeriod(period) {
+  const match = String(period || '').match(/jul(?:y)?[-\s]+([a-z]+)/i);
+  if (!match) return String(period || '').trim();
+  const end = match[1].slice(0, 3).toLowerCase();
+  return `Jul-${end.charAt(0).toUpperCase()}${end.slice(1)}`;
 }
 
 function isLegacyExcel(buffer) {
@@ -181,6 +207,14 @@ const SECTOR_SHORT = {
   'human health and social work activities': 'Healthcare',
   'arts, entertainment and recreation': 'Entertainment',
   'other service activities': 'Other Services',
+  // Netinflow.xls publishes its own, more detailed sector list.
+  'transport equipment(automobiles)': 'Automobiles',
+  'oil & gas explorations': 'Oil & Gas Exploration',
+  'financial business': 'Financial Business',
+  'machinery other than electrical': 'Machinery (non-electrical)',
+  'pharmaceuticals & otc products': 'Pharmaceuticals',
+  'leather & leather products': 'Leather Products',
+  'rubber & rubber products': 'Rubber Products',
 };
 
 function shortenSector(name) {
@@ -255,24 +289,29 @@ async function updateTrade() {
 }
 
 // ═══════════════════════════════════════════════════
-// 2. FDI (Foreign_Dir, Netinflow, NetinflowSummary)
+// 2. FDI (Netinflow sector/country, NetinflowSummary annual)
 // ═══════════════════════════════════════════════════
 
 async function updateFdi() {
   console.log('\n💰 Parsing FDI Data...');
 
-  // --- By Sector (Foreign_Dir.xls / BS_M sheet) ---
-  // Row 2: period labels, Row 3: Inflow/Outflow/Net sub-headers
-  // Columns resolved from headers for robustness
-  console.log('  📋 FDI by sector (Foreign_Dir.xls)...');
-  const wbS = readExcel('Foreign_Dir.xls');
-  const sRows = getSheet(wbS, 'BS_M');
+  // --- By Sector (Netinflow.xls / Sector sheet) ---
+  // SBP publishes two sector cuts: Foreign_Dir.xls carries broad ISIC letter
+  // sections, Netinflow.xls carries its own detailed sector list. The detailed
+  // sheet is refreshed earlier in the month and its rows sum exactly to the
+  // published total, so it is the source of record here. Row 5 = period block,
+  // row 6 = Inflow/Outflow/Net FDI sub-headers, rows 7+ = data.
+  console.log('  📋 FDI by sector (Netinflow.xls)...');
+  const wbS = readExcel('Netinflow.xls');
+  const sRows = getSheet(wbS, 'Sector');
 
-  // Resolve column indices from header row 2. There are deliberately no
-  // positional fallbacks: if SBP moves these columns we must fail loudly
-  // instead of silently publishing a different period's numbers.
-  const sHdr = sRows[2] || [];
-  const sectorCols = resolveFdiSectorColumns(sHdr, { file: 'Foreign_Dir.xls', sheet: 'BS_M' });
+  // Columns are resolved from the printed fiscal year, never by position: if
+  // SBP moves these columns we must fail loudly instead of silently publishing
+  // a different period's numbers.
+  const sectorCols = resolveFdiCountryColumns(sRows[5] || [], sRows[6] || [], sRows[6] || [], {
+    file: 'Netinflow.xls',
+    sheet: 'Sector',
+  });
   const sCurrentInCol = sectorCols.current.inflow;
   const sCurrentOutCol = sectorCols.current.outflow;
   const sCurrentNetCol = sectorCols.current.net;
@@ -283,15 +322,19 @@ async function updateFdi() {
   const sPriorPeriod = sectorCols.prior.period;
   console.log(`  Sector columns: current ${sCurrentPeriod} @${sCurrentNetCol}, prior ${sPriorPeriod} @${sPriorNetCol}`);
 
+  // The sheet nests breakdowns under their parent ("Power" is followed by
+  // "I) Thermal", "II) Hydel"). Only top-level rows are summed, otherwise the
+  // sector table would double-count and stop reconciling with the total.
+  const SECTOR_SUBROW = /^(?:[IVX]+\)|\d+\)|of which)/i;
   const allSectors = [];
-  for (let i = 4; i <= 27; i++) {
+  for (let i = 7; i < sRows.length; i++) {
     const row = sRows[i];
     if (!row) continue;
-    let sector = (row[0] || '').toString().trim();
+    const sector = (row[2] || '').toString().trim();
     if (!sector) continue;
-    if (/privatisation|total/i.test(sector)) continue;
+    if (/^total/i.test(sector)) break;
+    if (SECTOR_SUBROW.test(sector)) continue;
 
-    sector = sector.replace(/^[A-Z]\.\s+/, '');
     const netFdi = row[sCurrentNetCol];
     if (typeof netFdi !== 'number') continue;
 
@@ -317,9 +360,13 @@ async function updateFdi() {
     const magB = Math.max(Math.abs(b.amount), Math.abs(b.priorAmount || 0));
     return magB - magA;
   });
+  // The sheet already publishes its own "Others" line; fold it into the
+  // remainder bucket so the chart cannot show two rows with the same name.
+  const rawOtherSectorIdx = allSectors.findIndex((s) => /^others$/i.test(s.sector));
+  const rawOtherSector = rawOtherSectorIdx >= 0 ? allSectors.splice(rawOtherSectorIdx, 1)[0] : null;
   const topSectors = allSectors.slice(0, 10);
-  const otherSectorAmt = allSectors.slice(10).reduce((s, x) => s + x.amount, 0);
-  const otherSectorPrior = allSectors.slice(10).reduce((s, x) => s + (x.priorAmount || 0), 0);
+  const otherSectorAmt = allSectors.slice(10).reduce((s, x) => s + x.amount, 0) + (rawOtherSector?.amount || 0);
+  const otherSectorPrior = allSectors.slice(10).reduce((s, x) => s + (x.priorAmount || 0), 0) + (rawOtherSector?.priorAmount || 0);
   if (Math.abs(otherSectorAmt) > 0.01 || Math.abs(otherSectorPrior) > 0.01) {
     topSectors.push({
       sector: 'Others',
@@ -369,6 +416,41 @@ async function updateFdi() {
   }
 
   allCountries.sort((a, b) => Math.abs(b.amount) - Math.abs(a.amount));
+
+  // The country sheet's own "Total" line is the same measure the summary
+  // workbook publishes (net FDI for the fiscal year to date), but SBP refreshes
+  // Netinflow.xls earlier in the month than NetinflowSummary.xls. Capture it so
+  // the headline can prefer whichever official file covers the later period.
+  let countryFytd = null;
+  const totalRowIdx = findRowIndex(cRows, /^total$/i, { labelCol: 0, from: 6 });
+  if (totalRowIdx >= 0) {
+    const totalRow = cRows[totalRowIdx];
+    const readCol = (col) => (typeof col === 'number' && typeof totalRow[col] === 'number' ? round2(totalRow[col]) : null);
+    const currentNet = readCol(cCurrentNetCol);
+    const priorNet = readCol(cPriorNetCol);
+    if (currentNet != null) {
+      countryFytd = {
+        period: normaliseFytdPeriod(cCurrentPeriod),
+        current: {
+          label: `FY${countryCols.current.fiscalYear}`,
+          net_fdi: currentNet,
+          inflow: readCol(countryCols.current.inflow),
+          outflow: readCol(countryCols.current.outflow),
+          status: countryCols.current.status === 'provisional' ? 'provisional' : null,
+        },
+        prior: priorNet != null ? {
+          label: `FY${countryCols.prior.fiscalYear}`,
+          net_fdi: priorNet,
+          inflow: readCol(countryCols.prior.inflow),
+          outflow: readCol(countryCols.prior.outflow),
+        } : null,
+        sourceFile: 'Netinflow.xls',
+        sourceSheet: 'Country',
+        sourceLocation: '"Total" row, net FDI column of the current fiscal-year-to-date block',
+      };
+      console.log(`  Country totals: ${cCurrentPeriod} net $${currentNet}M (prior ${cPriorPeriod} $${priorNet}M)`);
+    }
+  }
 
   // Separate raw "Others" from named countries, then aggregate remainder into "Others"
   const rawOthersIdx = allCountries.findIndex(c => c.country.toLowerCase() === 'others');
@@ -455,7 +537,7 @@ async function updateFdi() {
         fytdCurrentCol = col;
         fytdPriorCol = col + 1;
       }
-      fytdPeriod = hdr.replace(/\s*\([RP]\)\s*/i, '').trim();
+      fytdPeriod = normaliseFytdPeriod(hdr.replace(/\s*\([RP]\)\s*/i, '').trim());
     }
 
     if (!monthlyComparison && /^(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)$/i.test(hdr)) {
@@ -521,7 +603,50 @@ async function updateFdi() {
         inflow: typeof inflowRow?.[fytdPriorCol] === 'number' ? round2(inflowRow[fytdPriorCol]) : null,
         outflow: typeof outflowRow?.[fytdPriorCol] === 'number' ? round2(outflowRow[fytdPriorCol]) : null,
       } : null,
+      sourceFile: 'NetinflowSummary.xls',
+      sourceSheet: 'Summary',
+      sourceLocation: '"Direct Investment" row, current fiscal-year-to-date column',
     };
+  }
+
+  // SBP publishes the same fiscal-year-to-date net FDI figure in two workbooks
+  // on different schedules. Whichever covers the later month is the current
+  // official figure, so the headline follows the period, never a fixed file.
+  if (countryFytd) {
+    const summaryEnd = fiscalPeriodEndIndex(fytdComparison?.period);
+    const countryEnd = fiscalPeriodEndIndex(countryFytd.period);
+    const sameFy = fytdComparison?.current?.label === countryFytd.current.label;
+    if (
+      !fytdComparison ||
+      (sameFy && countryEnd != null && (summaryEnd == null || countryEnd > summaryEnd))
+    ) {
+      if (fytdComparison) {
+        console.log(
+          `  ↪ Headline FDI switched to ${countryFytd.sourceFile} (${countryFytd.period}) — ` +
+          `${fytdComparison.sourceFile} still publishes ${fytdComparison.period}`,
+        );
+      }
+      fytdComparison = countryFytd;
+    }
+  }
+
+  // Once the fiscal year has closed, its Jul–Jun cumulative *is* the annual
+  // figure. Publish it as soon as an official file carries the complete year
+  // rather than waiting for the annual summary column to appear.
+  if (fytdComparison && fiscalPeriodEndIndex(fytdComparison.period) === 11) {
+    const year = fytdComparison.current.label;
+    const entry = {
+      year,
+      net_fdi: Math.round(fytdComparison.current.net_fdi),
+      status: fytdComparison.current.status || 'provisional',
+    };
+    if (fytdComparison.current.inflow != null) entry.inflow = Math.round(fytdComparison.current.inflow);
+    if (fytdComparison.current.outflow != null) entry.outflow = Math.round(fytdComparison.current.outflow);
+    const existingIdx = annual.findIndex((a) => a.year === year);
+    if (existingIdx >= 0) annual[existingIdx] = { ...annual[existingIdx], ...entry };
+    else annual.push(entry);
+    annual.sort((a, b) => parseInt(a.year.replace('FY', '')) - parseInt(b.year.replace('FY', '')));
+    console.log(`  📊 Completed fiscal year ${year} published as annual: $${entry.net_fdi}M (${entry.status})`);
   }
 
   const existing = await readJson('fdi.json').catch(() => ({}));
@@ -544,10 +669,10 @@ async function updateFdi() {
     by_sector: topSectors,
     by_country: topCountries,
     annual,
-    sectorPeriod: sCurrentPeriod,
-    sectorPriorPeriod: sPriorPeriod,
-    countryPeriod: cCurrentPeriod,
-    countryPriorPeriod: cPriorPeriod,
+    sectorPeriod: formatFyPeriodLabel(sCurrentPeriod),
+    sectorPriorPeriod: formatFyPeriodLabel(sPriorPeriod),
+    countryPeriod: formatFyPeriodLabel(cCurrentPeriod),
+    countryPriorPeriod: formatFyPeriodLabel(cPriorPeriod),
     source: 'State Bank of Pakistan',
     dataSource: 'SBP',
     lastUpdated: new Date().toISOString().split('T')[0],
@@ -557,10 +682,10 @@ async function updateFdi() {
 
   const coverageParts = [
     existing.monthly?.at(-1)?.date ? `monthly through ${existing.monthly.at(-1).date}` : null,
-    `sector ${sCurrentPeriod}`,
-    `country ${cCurrentPeriod}`,
+    `sector ${formatFyPeriodLabel(sCurrentPeriod)}`,
+    `country ${formatFyPeriodLabel(cCurrentPeriod)}`,
     fytdComparison
-      ? `summary ${fytdComparison.current.label} ${fytdComparison.period}`
+      ? `headline ${fytdComparison.current.label} ${fytdComparison.period} (${fytdComparison.sourceFile})`
       : `annual ${annual[0]?.year} – ${annual.at(-1)?.year}`,
   ].filter(Boolean);
   result.dataCoverage = coverageParts.join('; ');
@@ -1796,11 +1921,13 @@ async function recordKpiProvenance(indicators) {
     });
   }
   if (byId.fdi) {
+    const fdiJson = await readJson('fdi.json').catch(() => ({}));
+    const fytd = fdiJson.fytdComparison || {};
     await cite('fdi.fytd.current', {
       label: 'Net foreign direct investment, fiscal year to date',
-      sourceKey: 'NetinflowSummary.xls',
-      sheet: 'Summary',
-      location: '"Direct Investment" row, current fiscal-year-to-date column',
+      sourceKey: fytd.sourceFile || 'NetinflowSummary.xls',
+      sheet: fytd.sourceSheet || 'Summary',
+      location: fytd.sourceLocation || '"Direct Investment" row, current fiscal-year-to-date column',
       period: byId.fdi.period,
       status: /\(P\)/.test(byId.fdi.period || '') ? 'provisional' : 'final',
       unit: 'US$ billion',

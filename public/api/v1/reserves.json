@@ -7,7 +7,7 @@
   "cadence": "Weekly",
   "latestObservation": "2026-07-17",
   "lastUpdated": "2026-07-24",
-  "lastChecked": "2026-07-24",
+  "lastChecked": "2026-07-27",
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",
   "data": {
     "weekly": [
@@ -111,6 +111,6 @@
     "dataSource": "SBP",
     "lastUpdated": "2026-07-24",
     "dataCoverage": "2025-06 – 2026-07-17",
-    "lastChecked": "2026-07-24"
+    "lastChecked": "2026-07-27"
   }
 }

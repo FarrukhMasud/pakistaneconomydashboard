@@ -507,6 +507,12 @@ const stringsUr = {
   'Hard-cash burden': 'نقد ادائیگی کا بوجھ',
   'Reserve cushion': 'ذخائر کا سہارا',
   'Primary balance': 'بنیادی توازن',
+
+  // ===== Source coverage notes =====
+  "This is the latest period SBP has published in its EBOPS services table. SBP releases this table after the monthly trade and reserves data, so it can lag the rest of the dashboard by a month.":
+    "یہ تازہ ترین مدت ہے جو اسٹیٹ بینک نے اپنے EBOPS خدمات کے جدول میں شائع کی ہے۔ اسٹیٹ بینک یہ جدول ماہانہ تجارت اور ذخائر کے اعداد و شمار کے بعد جاری کرتا ہے، اس لیے یہ بقیہ ڈیش بورڈ سے ایک ماہ پیچھے ہو سکتا ہے۔",
+  "This is the latest period SBP has published in its country-level trade tables. They are released after the headline monthly trade figures, so this chart can stop one month short of the totals above.":
+    "یہ تازہ ترین مدت ہے جو اسٹیٹ بینک نے ملک وار تجارتی جدول میں شائع کی ہے۔ یہ جدول ماہانہ مجموعی تجارتی اعداد کے بعد جاری ہوتے ہیں، اس لیے یہ چارٹ اوپر دیے گئے مجموعوں سے ایک ماہ پیچھے رہ سکتا ہے۔",
 };
 
 export default stringsUr;

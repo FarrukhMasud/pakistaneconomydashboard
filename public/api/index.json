@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-24T21:30:18.858Z",
+  "generatedAt": "2026-07-27T17:55:21.742Z",
   "version": "v1",
   "title": "economyofpakistan.com static data API",
   "description": "Every dataset the dashboard renders, published as stable JSON and CSV. No key, no rate limit, no scraping required. Please cite the issuing institution listed on each endpoint.",
@@ -315,6 +315,19 @@
       "id": "release-calendar",
       "label": "Metadata: release calendar",
       "json": "/api/v1/release-calendar.json",
+      "csv": null,
+      "rows": 0,
+      "seriesKey": null,
+      "source": "economyofpakistan.com",
+      "sourceUrl": "https://economyofpakistan.com",
+      "sourceType": "official-derived",
+      "cadence": "Per update",
+      "latestObservation": null
+    },
+    {
+      "id": "revisions",
+      "label": "Metadata: revisions",
+      "json": "/api/v1/revisions.json",
       "csv": null,
       "rows": 0,
       "seriesKey": null,

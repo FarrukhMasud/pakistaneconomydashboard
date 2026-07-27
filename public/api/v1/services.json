@@ -7,7 +7,7 @@
   "cadence": "Monthly/FYTD",
   "latestObservation": "Jul-May FY26",
   "lastUpdated": "2026-07-24",
-  "lastChecked": "2026-07-24",
+  "lastChecked": "2026-07-27",
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",
   "data": {
     "categories": [
@@ -249,6 +249,6 @@
     "dataSource": "SBP",
     "lastUpdated": "2026-07-24",
     "dataCoverage": "Jul-May FY26",
-    "lastChecked": "2026-07-24"
+    "lastChecked": "2026-07-27"
   }
 }

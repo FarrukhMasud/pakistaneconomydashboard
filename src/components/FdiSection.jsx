@@ -481,7 +481,7 @@ export default function FdiSection() {
       <div className="section-grid" style={{ marginTop: '1.5rem' }}>
         <ChartCard
           title="FDI by Sector"
-          description={`Sector-level FDI for ${sectorPeriod || 'current FYTD'}${sectorPriorPeriod ? ` compared with ${sectorPriorPeriod}` : ''}. Negative values indicate net disinvestment (outflow > inflow). Power & Energy dominates due to CPEC-era projects; IT disinvestment may reflect profit repatriation.`}
+          description={`Sector-level FDI for ${sectorPeriod || 'current FYTD'}${sectorPriorPeriod ? ` compared with ${sectorPriorPeriod}` : ''}. Negative values indicate net disinvestment (outflow > inflow).${topSector ? ` ${topSector.sector} leads with ${fmtUSD(topSector.amount)} net inflow.` : ''}`}
           source="SBP / Board of Investment"
           dataSource="SBP"
           lastUpdated={fdiLU}
@@ -494,7 +494,7 @@ export default function FdiSection() {
         </ChartCard>
         <ChartCard
           title="FDI by Country"
-          description={`Source countries of FDI for ${data.countryPeriod || 'current FYTD'}${data.countryPriorPeriod ? ` vs ${data.countryPriorPeriod}` : ''}. China leads through CPEC-related investment. Negative values indicate net capital outflow.`}
+          description={`Source countries of FDI for ${data.countryPeriod || 'current FYTD'}${data.countryPriorPeriod ? ` vs ${data.countryPriorPeriod}` : ''}. Negative values indicate net capital outflow.${topCountry ? ` ${countryLabel(topCountry.country)} is the largest source at ${fmtUSD(topCountry.amount)}${concentrationShare ? ` (${concentrationShare}% of all positive inflows)` : ''}.` : ''}`}
           source="SBP / Board of Investment"
           dataSource="SBP"
           lastUpdated={fdiLU}

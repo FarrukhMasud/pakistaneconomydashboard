@@ -15,6 +15,12 @@ import YoYToggle from './ui/YoYToggle';
 import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, sumField, buildYoYOverlay, formatMonthYear } from '../utils/periodHelpers';
 import { countryFlagPlugin, countryLabel } from '../utils/countryLabels';
 
+// SBP's country-level export receipt and import payment tables are published
+// after the headline monthly trade figures, so these two charts can stop one
+// month short of the trade balance chart above.
+const COUNTRY_COVERAGE_NOTE =
+  'This is the latest period SBP has published in its country-level trade tables. They are released after the headline monthly trade figures, so this chart can stop one month short of the totals above.';
+
 export default function TradeSection() {
   const [showYoY, setShowYoY] = useState(true);
   const { data, loading, error } = useData('trade.json');
@@ -370,6 +376,7 @@ export default function TradeSection() {
             dataSource="SBP"
             lastUpdated={tradeLU}
             dataCoverage={exportCountryPeriod || tradeDC}
+            coverageNote={COUNTRY_COVERAGE_NOTE}
           >
             <div className="chart-container tall">
               <Bar
@@ -394,6 +401,7 @@ export default function TradeSection() {
             dataSource="SBP"
             lastUpdated={tradeLU}
             dataCoverage={importCountryPeriod || tradeDC}
+            coverageNote={COUNTRY_COVERAGE_NOTE}
           >
             <div className="chart-container tall">
               <Bar

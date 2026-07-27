@@ -1,0 +1,167 @@
+{
+  "generatedAt": "2026-07-27T17:49:21.231Z",
+  "description": "Every restatement of a previously published figure. Pakistani official statistics are routinely revised from provisional to final; this log preserves what changed, when, and by how much.",
+  "entryCount": 20,
+  "entries": [
+    {
+      "date": "2026-07-27",
+      "dataset": "fdi",
+      "path": "fytdComparison.current.net_fdi",
+      "from": 1623.28,
+      "to": 1636.81,
+      "changePct": 0.8
+    },
+    {
+      "date": "2026-07-27",
+      "dataset": "fdi",
+      "path": "fytdComparison.current.inflow",
+      "from": 3273.51,
+      "to": 3567.91,
+      "changePct": 9
+    },
+    {
+      "date": "2026-07-27",
+      "dataset": "fdi",
+      "path": "fytdComparison.current.outflow",
+      "from": 1650.23,
+      "to": 1931.1,
+      "changePct": 17
+    },
+    {
+      "date": "2026-07-27",
+      "dataset": "fdi",
+      "path": "fytdComparison.prior.net_fdi",
+      "from": 2267.33,
+      "to": 2477.31,
+      "changePct": 9.3
+    },
+    {
+      "date": "2026-07-27",
+      "dataset": "fdi",
+      "path": "fytdComparison.prior.inflow",
+      "from": 3953.11,
+      "to": 4267.9,
+      "changePct": 8
+    },
+    {
+      "date": "2026-07-27",
+      "dataset": "fdi",
+      "path": "fytdComparison.prior.outflow",
+      "from": 1685.79,
+      "to": 1790.59,
+      "changePct": 6.2
+    },
+    {
+      "date": "2026-07-27",
+      "dataset": "kpi-summary",
+      "path": "indicators[id=fdi].value",
+      "from": 1.62,
+      "to": 1.64,
+      "changePct": 1.2
+    },
+    {
+      "date": "2026-07-27",
+      "dataset": "kpi-summary",
+      "path": "indicators[id=fdi].change",
+      "from": -28.41,
+      "to": -33.93,
+      "changePct": -19.4
+    },
+    {
+      "date": "2026-07-27",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Mining & Quarrying].amount",
+      "from": -147.32,
+      "to": -116.77,
+      "changePct": 20.7
+    },
+    {
+      "date": "2026-07-27",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Mining & Quarrying].inflow",
+      "from": 228.34,
+      "to": 134.4,
+      "changePct": -41.1
+    },
+    {
+      "date": "2026-07-27",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Mining & Quarrying].outflow",
+      "from": 375.66,
+      "to": 251.17,
+      "changePct": -33.1
+    },
+    {
+      "date": "2026-07-27",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Mining & Quarrying].priorAmount",
+      "from": -97.1,
+      "to": -152.03,
+      "changePct": -56.6
+    },
+    {
+      "date": "2026-07-27",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Mining & Quarrying].priorInflow",
+      "from": 389.15,
+      "to": 161.74,
+      "changePct": -58.4
+    },
+    {
+      "date": "2026-07-27",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Mining & Quarrying].priorOutflow",
+      "from": 486.24,
+      "to": 313.78,
+      "changePct": -35.5
+    },
+    {
+      "date": "2026-07-27",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Others].amount",
+      "from": 40.51,
+      "to": 241.57,
+      "changePct": 496.3
+    },
+    {
+      "date": "2026-07-27",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Others].priorAmount",
+      "from": 7.87,
+      "to": 191.35,
+      "changePct": 2331.4
+    },
+    {
+      "date": "2026-07-27",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Others].amount",
+      "from": 144.78,
+      "to": 309.88,
+      "changePct": 114
+    },
+    {
+      "date": "2026-07-27",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Others].priorAmount",
+      "from": 157.88,
+      "to": 272.67,
+      "changePct": 72.7
+    },
+    {
+      "date": "2026-07-27",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Others].amount",
+      "from": 241.57,
+      "to": 309.88,
+      "changePct": 28.3
+    },
+    {
+      "date": "2026-07-27",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Others].priorAmount",
+      "from": 191.35,
+      "to": 272.67,
+      "changePct": 42.5
+    }
+  ]
+}
