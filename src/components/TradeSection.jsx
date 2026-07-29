@@ -11,8 +11,9 @@ import {
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
-import YoYToggle from './ui/YoYToggle';
-import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, sumField, buildYoYOverlay, formatMonthYear } from '../utils/periodHelpers';
+import PeriodCompare from './ui/PeriodCompare';
+import { LoadingCard, ErrorCard } from './ui/DataState';
+import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, sumField, buildYoYOverlay, buildFytdSeries, formatMonthYear } from '../utils/periodHelpers';
 import { countryFlagPlugin, countryLabel } from '../utils/countryLabels';
 
 // SBP's country-level export receipt and import payment tables are published
@@ -22,99 +23,151 @@ const COUNTRY_COVERAGE_NOTE =
   'This is the latest period SBP has published in its country-level trade tables. They are released after the headline monthly trade figures, so this chart can stop one month short of the totals above.';
 
 export default function TradeSection() {
-  const [showYoY, setShowYoY] = useState(true);
-  const { data, loading, error } = useData('trade.json');
+  const [compareMode, setCompareMode] = useState('yoy');
+    const showYoY = compareMode === 'yoy';
+    const showFytd = compareMode === 'fytd';
+    const { data, loading, error, retry } = useData('trade.json');
 
-  if (loading || !data) return <div className="card loading-card"><div className="spinner" /><span>Loading data…</span></div>;
-  if (error) return <p style={{ color: COLORS.coral }}>Error: {error.message}</p>;
+    if (loading) return <LoadingCard label="Loading trade data…" />;
+    if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load trade data" />;
 
-  const {
-    monthly,
-    topExportCountries,
-    topImportCountries,
-    exportCountryPeriod,
-    importCountryPeriod,
-    lastUpdated: tradeLU,
-    dataCoverage: tradeDC,
-  } = data;
+    const {
+      monthly,
+      topExportCountries,
+      topImportCountries,
+      exportCountryPeriod,
+      importCountryPeriod,
+      lastUpdated: tradeLU,
+      dataCoverage: tradeDC,
+    } = data;
 
-  // Current year summary
-  const cy = currentCalendarYear(monthly);
-  const fy = currentFiscalYear(monthly);
+    if (!monthly?.length) {
+      return <ErrorCard error={new Error('Trade series is empty')} onRetry={retry} label="Could not load trade data" />;
+    }
 
-  const labels = monthly.map((d) => formatMonthYear(d.date));
-  const tickCallback = (_val, idx) => (idx % 3 === 0 || idx === labels.length - 1 ? labels[idx] : '');
+    // Current year summary
+    const cy = currentCalendarYear(monthly);
+    const fy = currentFiscalYear(monthly);
+    const fytdBalance = buildFytdSeries(monthly, 'balance');
+    const fytdImports = buildFytdSeries(monthly, 'imports');
+    const fytdExports = buildFytdSeries(monthly, 'exports');
 
-  // --- Imports vs Exports Line ---
-  const lineData = {
-    labels,
-    datasets: [
-      {
-        label: 'Imports',
-        data: monthly.map((d) => d.imports),
-        borderColor: COLORS.coral,
-        backgroundColor: COLORS.coralAlpha,
-        fill: true,
+    const labels = showFytd && fytdBalance
+      ? fytdBalance.labels
+      : monthly.map((d) => formatMonthYear(d.date));
+    const tickCallback = (_val, idx) => (idx % 3 === 0 || idx === labels.length - 1 ? labels[idx] : '');
+
+    // --- Imports vs Exports Line ---
+    const lineData = {
+      labels,
+      datasets: showFytd && fytdImports && fytdExports
+        ? [
+            {
+              label: `${fytdImports.currentLabel} imports`,
+              data: fytdImports.current,
+              borderColor: COLORS.coral,
+              backgroundColor: COLORS.coralAlpha,
+              fill: true,
+            },
+            {
+              label: `${fytdExports.currentLabel} exports`,
+              data: fytdExports.current,
+              borderColor: COLORS.teal,
+              backgroundColor: COLORS.tealAlpha,
+              fill: true,
+            },
+            ...(fytdImports.prior.some((v) => v != null) ? [{
+              label: `${fytdImports.priorLabel} imports`,
+              data: fytdImports.prior,
+              borderColor: COLORS.coral,
+              backgroundColor: 'transparent',
+              borderDash: [6, 3],
+              pointRadius: 2,
+              fill: false,
+            }] : []),
+            ...(fytdExports.prior.some((v) => v != null) ? [{
+              label: `${fytdExports.priorLabel} exports`,
+              data: fytdExports.prior,
+              borderColor: COLORS.teal,
+              backgroundColor: 'transparent',
+              borderDash: [6, 3],
+              pointRadius: 2,
+              fill: false,
+            }] : []),
+          ]
+        : [
+            {
+              label: 'Imports',
+              data: monthly.map((d) => d.imports),
+              borderColor: COLORS.coral,
+              backgroundColor: COLORS.coralAlpha,
+              fill: true,
+            },
+            {
+              label: 'Exports',
+              data: monthly.map((d) => d.exports),
+              borderColor: COLORS.teal,
+              backgroundColor: COLORS.tealAlpha,
+              fill: true,
+            },
+          ],
+    };
+
+    const lineOptions = {
+      ...baseLineOptions,
+      scales: {
+        ...baseLineOptions.scales,
+        x: { ...baseLineOptions.scales.x, ticks: { ...baseLineOptions.scales.x.ticks, callback: tickCallback } },
+        y: { ...baseLineOptions.scales.y, title: { display: true, text: 'USD Millions', color: COLORS.text } },
       },
-      {
-        label: 'Exports',
-        data: monthly.map((d) => d.exports),
-        borderColor: COLORS.teal,
-        backgroundColor: COLORS.tealAlpha,
-        fill: true,
+      plugins: {
+        ...baseLineOptions.plugins,
+        tooltip: {
+          ...baseLineOptions.plugins.tooltip,
+          callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatCurrency(ctx.raw * 1e6)}` },
+        },
       },
-    ],
-  };
+    };
 
-  const lineOptions = {
-    ...baseLineOptions,
-    scales: {
-      ...baseLineOptions.scales,
-      x: { ...baseLineOptions.scales.x, ticks: { ...baseLineOptions.scales.x.ticks, callback: tickCallback } },
-      y: { ...baseLineOptions.scales.y, title: { display: true, text: 'USD Millions', color: COLORS.text } },
-    },
-    plugins: {
-      ...baseLineOptions.plugins,
-      tooltip: {
-        ...baseLineOptions.plugins.tooltip,
-        callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatCurrency(ctx.raw * 1e6)}` },
-      },
-    },
-  };
+    // --- Trade Balance Bar ---
+    const balanceValues = showFytd && fytdBalance ? fytdBalance.current : monthly.map((d) => d.balance);
+    const balanceColors = balanceValues.map((v) => (v == null ? COLORS.text : v >= 0 ? COLORS.teal : COLORS.coral));
+    const { priorData: balPrior, priorLabel: balPriorLabel } = buildYoYOverlay(monthly, 'balance');
+    const balancePrior = showFytd && fytdBalance ? fytdBalance.prior : balPrior;
+    const balancePriorLabel = showFytd && fytdBalance
+      ? `${fytdBalance.priorLabel} same months`
+      : balPriorLabel;
+    const showBalancePrior = showYoY || (showFytd && balancePrior.some((v) => v != null));
 
-  // --- Trade Balance Bar ---
-  const balanceColors = monthly.map((d) => (d.balance >= 0 ? COLORS.teal : COLORS.coral));
-  const { priorData: balPrior, priorLabel: balPriorLabel } = buildYoYOverlay(monthly, 'balance');
-
-  const barData = {
-    labels,
-    datasets: [
-      {
-        label: 'Trade Balance',
-        data: monthly.map((d) => d.balance),
-        backgroundColor: balanceColors,
-        borderColor: balanceColors,
-        borderWidth: 1,
-      },
-      ...(showYoY ? [{
-        label: balPriorLabel,
-        data: balPrior,
-        type: 'line',
-        borderColor: COLORS.amber,
-        backgroundColor: COLORS.amber,
-        pointBackgroundColor: COLORS.amber,
-        pointBorderColor: '#1a1d27',
-        pointBorderWidth: 2,
-        borderWidth: 3,
-        borderDash: [6, 3],
-        pointRadius: 3,
-        pointHoverRadius: 6,
-        fill: false,
-        spanGaps: true,
-        order: -10,
-      }] : []),
-    ],
-  };
+    const barData = {
+      labels,
+      datasets: [
+        {
+          label: showFytd && fytdBalance ? `${fytdBalance.currentLabel} trade balance` : 'Trade Balance',
+          data: balanceValues,
+          backgroundColor: balanceColors,
+          borderColor: balanceColors,
+          borderWidth: 1,
+        },
+        ...(showBalancePrior ? [{
+          label: balancePriorLabel,
+          data: balancePrior,
+          type: 'line',
+          borderColor: COLORS.amber,
+          backgroundColor: COLORS.amber,
+          pointBackgroundColor: COLORS.amber,
+          pointBorderColor: '#1a1d27',
+          pointBorderWidth: 2,
+          borderWidth: 3,
+          borderDash: [6, 3],
+          pointRadius: 3,
+          pointHoverRadius: 6,
+          fill: false,
+          spanGaps: true,
+          order: -10,
+        }] : []),
+      ],
+    };
 
   const barOptions = {
     ...baseBarOptions,
@@ -331,7 +384,7 @@ export default function TradeSection() {
           lastUpdated={tradeLU}
           dataCoverage={tradeDC}
         >
-          <YoYToggle enabled={showYoY} onToggle={() => setShowYoY(v => !v)} />
+          <PeriodCompare mode={compareMode} onChange={setCompareMode} modes={['yoy', 'fytd']} />
           <div className="chart-container">
             <Bar data={barData} options={barOptions} />
           </div>

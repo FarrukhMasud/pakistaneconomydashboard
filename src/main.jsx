@@ -11,3 +11,12 @@ createRoot(document.getElementById('root')).render(
     </I18nProvider>
   </StrictMode>,
 )
+
+// Light PWA shell — caches app shell + last-fetched data for offline reading.
+if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {
+      /* non-fatal */
+    });
+  });
+}

@@ -5,48 +5,50 @@ import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import MonetaryPolicyTracker from './MonetaryPolicyTracker';
-import { currentCalendarYear, currentFiscalYear, fmtPKR, fmtPct, formatMonthYear } from '../utils/periodHelpers';
+import { LoadingCard, ErrorCard } from './ui/DataState';
+import { currentCalendarYear, currentFiscalYear, fmtPKR, fmtPct, formatMonthYear, latestRow } from '../utils/periodHelpers';
 
 const formatDate = formatMonthYear;
 
 function formatTrillion(val) {
+  if (val == null) return '—';
   if (Math.abs(val) >= 1e6) return (val / 1e6).toFixed(1) + 'T';
   if (Math.abs(val) >= 1e3) return (val / 1e3).toFixed(0) + 'B';
   return val.toFixed(0) + 'M';
 }
 
 export default function MonetarySection() {
-  const { data, loading, error } = useData('monetary.json');
+  const { data, loading, error, retry } = useData('monetary.json');
 
-  if (loading || !data)
-    return (
-      <div className="card loading-card">
-        <div className="spinner" />
-        <span>Loading data…</span>
-      </div>
-    );
-  if (error)
-    return <p style={{ color: COLORS.coral }}>Error: {error.message}</p>;
+  if (loading) return <LoadingCard label="Loading monetary data…" />;
+  if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load monetary data" />;
 
   const { m2, m2_yoy, credit_private, credit_pvt_yoy, deposits, deposits_yoy, dataSource, lastUpdated } = data;
 
-  const latestM2 = m2.data[m2.data.length - 1];
-  const latestCredit = credit_private.data[credit_private.data.length - 1];
-  const latestDeposits = deposits.data[deposits.data.length - 1];
-  const latestM2Yoy = m2_yoy.data[m2_yoy.data.length - 1];
-  const latestCreditYoy = credit_pvt_yoy.data[credit_pvt_yoy.data.length - 1];
-  const latestDepYoy = deposits_yoy.data[deposits_yoy.data.length - 1];
-  const cy = currentCalendarYear(m2.data);
-  const fy = currentFiscalYear(m2.data);
+  const m2Series = m2?.data || [];
+  const m2YoySeries = m2_yoy?.data || [];
+  const creditSeries = credit_private?.data || [];
+  const creditYoySeries = credit_pvt_yoy?.data || [];
+  const depositsSeries = deposits?.data || [];
+  const depositsYoySeries = deposits_yoy?.data || [];
+
+  const latestM2 = latestRow(m2Series);
+  const latestCredit = latestRow(creditSeries);
+  const latestDeposits = latestRow(depositsSeries);
+  const latestM2Yoy = latestRow(m2YoySeries);
+  const latestCreditYoy = latestRow(creditYoySeries);
+  const latestDepYoy = latestRow(depositsYoySeries);
+  const cy = currentCalendarYear(m2Series);
+  const fy = currentFiscalYear(m2Series);
 
   // Chart 1 — M2 Growth Rate (line)
-  const m2Labels = m2_yoy.data.map((d) => formatDate(d.date));
+  const m2Labels = m2YoySeries.map((d) => formatDate(d.date));
   const m2GrowthData = {
     labels: m2Labels,
     datasets: [
       {
         label: 'M2 Growth YoY (%)',
-        data: m2_yoy.data.map((d) => d.value),
+        data: m2YoySeries.map((d) => d.value),
         borderColor: COLORS.teal,
         backgroundColor: COLORS.tealAlpha,
         fill: true,
@@ -80,13 +82,13 @@ export default function MonetarySection() {
   };
 
   // Chart 2 — Credit to Private Sector vs Deposits (dual axis)
-  const creditLabels = credit_pvt_yoy.data.map((d) => formatDate(d.date));
+  const creditLabels = creditYoySeries.map((d) => formatDate(d.date));
   const creditDepositsData = {
     labels: creditLabels,
     datasets: [
       {
         label: 'Private Sector Credit YoY (%)',
-        data: credit_pvt_yoy.data.map((d) => d.value),
+        data: creditYoySeries.map((d) => d.value),
         borderColor: COLORS.blue,
         backgroundColor: COLORS.blueAlpha,
         fill: false,
@@ -94,7 +96,7 @@ export default function MonetarySection() {
       },
       {
         label: 'Deposits YoY Growth (%)',
-        data: deposits_yoy.data.map((d) => d.value),
+        data: depositsYoySeries.map((d) => d.value),
         borderColor: COLORS.amber,
         backgroundColor: COLORS.amberAlpha,
         fill: false,
@@ -127,13 +129,13 @@ export default function MonetarySection() {
   };
 
   // Chart 3 — Broad Money (M2) absolute levels
-  const m2AbsLabels = m2.data.map((d) => formatDate(d.date));
+  const m2AbsLabels = m2Series.map((d) => formatDate(d.date));
   const m2AbsData = {
     labels: m2AbsLabels,
     datasets: [
       {
         label: 'Broad Money M2',
-        data: m2.data.map((d) => d.value),
+        data: m2Series.map((d) => d.value),
         borderColor: COLORS.purple,
         backgroundColor: COLORS.purpleAlpha,
         fill: true,
@@ -141,7 +143,7 @@ export default function MonetarySection() {
       },
       {
         label: 'Credit to Private Sector',
-        data: credit_private.data.map((d) => d.value),
+        data: creditSeries.map((d) => d.value),
         borderColor: COLORS.blue,
         backgroundColor: COLORS.blueAlpha,
         fill: false,
@@ -149,7 +151,7 @@ export default function MonetarySection() {
       },
       {
         label: 'Total Deposits',
-        data: deposits.data.map((d) => d.value),
+        data: depositsSeries.map((d) => d.value),
         borderColor: COLORS.amber,
         backgroundColor: COLORS.amberAlpha,
         fill: false,
@@ -181,8 +183,8 @@ export default function MonetarySection() {
     },
   };
 
-  const firstDate = formatDate(m2.data[0].date);
-  const lastDate = formatDate(m2.data[m2.data.length - 1].date);
+  const firstDate = latestRow(m2Series) ? formatDate(m2Series[0].date) : '—';
+  const lastDate = latestM2 ? formatDate(latestM2.date) : '—';
 
   return (
     <>
@@ -203,8 +205,8 @@ export default function MonetarySection() {
           title={cy ? `${cy.rangeLabel} — Calendar YTD` : 'Latest Monetary Indicators'}
           accent={COLORS.purple}
           items={[
-            { label: 'Broad Money (M2)', value: fmtPKR(latestM2.value), sub: formatDate(latestM2.date), color: COLORS.purple },
-            { label: 'M2 Growth', value: fmtPct(latestM2Yoy.value), sub: `YoY`, direction: latestM2Yoy.value > 0 ? 'up' : 'down', sentiment: 'neutral', color: COLORS.teal },
+            { label: 'Broad Money (M2)', value: fmtPKR(latestM2?.value), sub: latestM2 ? formatDate(latestM2.date) : '—', color: COLORS.purple },
+            { label: 'M2 Growth', value: fmtPct(latestM2Yoy?.value), sub: `YoY`, direction: (latestM2Yoy?.value ?? 0) > 0 ? 'up' : 'down', sentiment: 'neutral', color: COLORS.teal },
           ]}
           footnote={`Source: ${dataSource || 'SBP EasyData API'}`}
         />
@@ -213,8 +215,8 @@ export default function MonetarySection() {
             title={`${fy.fyLabel} (${fy.rangeLabel}) — Fiscal YTD`}
             accent={COLORS.blue}
             items={[
-              { label: 'Private Credit', value: fmtPKR(latestCredit.value), sub: `${fmtPct(latestCreditYoy?.value)} YoY`, color: COLORS.blue },
-              { label: 'Bank Deposits', value: fmtPKR(latestDeposits.value), sub: `${fmtPct(latestDepYoy?.value)} YoY`, color: COLORS.amber },
+              { label: 'Private Credit', value: fmtPKR(latestCredit?.value), sub: `${fmtPct(latestCreditYoy?.value)} YoY`, color: COLORS.blue },
+              { label: 'Bank Deposits', value: fmtPKR(latestDeposits?.value), sub: `${fmtPct(latestDepYoy?.value)} YoY`, color: COLORS.amber },
             ]}
             footnote={`${fy.months} month${fy.months > 1 ? 's' : ''} · Last updated: ${lastUpdated || 'N/A'}`}
           />
@@ -226,7 +228,7 @@ export default function MonetarySection() {
           title="M2 Money Supply Growth"
           description="Year-over-year growth in broad money (M2). M2 includes currency in circulation, demand deposits, and time deposits. High M2 growth can be inflationary; SBP targets M2 growth consistent with GDP and inflation objectives."
           dataSource={dataSource}
-          dataCoverage={`${firstDate} – ${lastDate} (${m2_yoy.data.length} months)`}
+          dataCoverage={`${firstDate} – ${lastDate} (${m2YoySeries.length} months)`}
           lastUpdated={lastUpdated}
         >
           <div style={{ height: 300 }}>
@@ -238,7 +240,7 @@ export default function MonetarySection() {
           title="Credit & Deposit Growth"
           description="YoY growth rates for private sector credit and bank deposits. Rising credit growth signals economic expansion and business confidence. Deposit growth reflects savings mobilization and banking sector health."
           dataSource={dataSource}
-          dataCoverage={`${firstDate} – ${lastDate} (${credit_pvt_yoy.data.length} months)`}
+          dataCoverage={`${firstDate} – ${lastDate} (${creditYoySeries.length} months)`}
           lastUpdated={lastUpdated}
         >
           <div style={{ height: 300 }}>
@@ -250,7 +252,7 @@ export default function MonetarySection() {
           title="Monetary Aggregates"
           description="Absolute levels of M2, private sector credit, and total bank deposits in PKR. The growing gap between M2 and credit reflects government borrowing absorbing a large share of money supply."
           dataSource={dataSource}
-          dataCoverage={`${firstDate} – ${lastDate} (${m2.data.length} months)`}
+          dataCoverage={`${firstDate} – ${lastDate} (${m2Series.length} months)`}
           lastUpdated={lastUpdated}
         >
           <div style={{ height: 320 }}>

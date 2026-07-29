@@ -35,7 +35,7 @@ function formatTableValue(value) {
   return String(value);
 }
 
-function ChartDataTable({ chartData }) {
+function ChartDataTable({ chartData, caption }) {
   const { t, tx } = useI18n();
   if (!chartData) return null;
 
@@ -43,13 +43,14 @@ function ChartDataTable({ chartData }) {
   if (!datasets.length) return null;
 
   return (
-    <div className="chart-data-table-wrap">
-      <table className="chart-data-table">
+    <div className="chart-data-table-wrap" tabIndex={-1}>
+      <table className="chart-data-table" role="table">
+        {caption && <caption className="chart-data-table__caption">{caption}</caption>}
         <thead>
           <tr>
-            <th>{t('chart.periodCategory', 'Period / Category')}</th>
+            <th scope="col">{t('chart.periodCategory', 'Period / Category')}</th>
             {datasets.map((dataset, index) => (
-              <th key={`${dataset.label || 'Series'}-${index}`}>
+              <th scope="col" key={`${dataset.label || 'Series'}-${index}`}>
                 {dataset.label ? tx(dataset.label) : `${t('chart.series', 'Series')} ${index + 1}`}
               </th>
             ))}
@@ -58,7 +59,7 @@ function ChartDataTable({ chartData }) {
         <tbody>
           {chartData.labels.map((label, rowIndex) => (
             <tr key={`${label}-${rowIndex}`}>
-              <td>{label}</td>
+              <th scope="row">{label}</th>
               {datasets.map((dataset, colIndex) => (
                 <td key={`${dataset.label || colIndex}-${rowIndex}`}>
                   {formatTableValue(dataset.data[rowIndex])}
@@ -172,14 +173,16 @@ export default function ChartCard({ title, description, source, dataSource, last
             <button
               className={`chart-action-btn chart-action-btn--text ${tableOpen ? 'active' : ''}`}
               onClick={() => setTableOpen((value) => !value)}
-              aria-label={(tableOpen
-                ? t('chart.hideTableNamed', 'Hide data table for {name}')
-                : t('chart.showTableNamed', 'Show data table for {name}')).replace('{name}', localTitle)}
-              title={t('chart.showTable', 'Show table')}
-            >
-              {t('chart.data', 'Data')}
-            </button>
-          )}
+                        aria-expanded={tableOpen}
+                        aria-controls={`chart-table-${slugify(title)}`}
+                        aria-label={(tableOpen
+                          ? t('chart.hideTableNamed', 'Hide data table for {name}')
+                          : t('chart.showTableNamed', 'Show data table for {name}')).replace('{name}', localTitle)}
+                        title={t('chart.showTable', 'Show table')}
+                      >
+                        {t('chart.data', 'Data')}
+                      </button>
+                    )}
           {tableData && (
             <button
               className="chart-action-btn chart-action-btn--text"
@@ -217,8 +220,15 @@ export default function ChartCard({ title, description, source, dataSource, last
       ) : (
         children
       )}
-      {tableOpen && <ChartDataTable chartData={tableData} />}
-      {renderMeta()}
+      {tableOpen && (
+              <div id={`chart-table-${slugify(title)}`}>
+                <ChartDataTable
+                  chartData={tableData}
+                  caption={t('chart.tabularDataFor', 'Tabular data for {name}').replace('{name}', localTitle)}
+                />
+              </div>
+            )}
+            {renderMeta()}
       {chartOpen && createPortal(
         <div
           className="chart-modal-backdrop"

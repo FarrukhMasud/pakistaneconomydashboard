@@ -8,61 +8,70 @@ import {
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
-import YoYToggle from './ui/YoYToggle';
-import { currentCalendarYear, currentFiscalYear, fmtPct, avgField, buildYoYOverlay, formatMonthYear } from '../utils/periodHelpers';
+import PeriodCompare from './ui/PeriodCompare';
+import { LoadingCard, ErrorCard, UnavailableCard } from './ui/DataState';
+import { currentCalendarYear, currentFiscalYear, fmtPct, avgField, buildYoYOverlay, buildFytdSeries, formatMonthYear, latestRow } from '../utils/periodHelpers';
 
 const formatDate = formatMonthYear;
 
 export default function InflationSection() {
-  const [showYoY, setShowYoY] = useState(false);
-  const { data, loading, error } = useData('inflation.json');
+  const [compareMode, setCompareMode] = useState('off');
+  const showYoY = compareMode === 'yoy';
+  const showFytd = compareMode === 'fytd';
+  const { data, loading, error, retry } = useData('inflation.json');
 
-  if (loading || !data)
-    return (
-      <div className="card loading-card">
-        <div className="spinner" />
-        <span>Loading data…</span>
-      </div>
-    );
-  if (error)
-    return <p style={{ color: COLORS.coral }}>Error: {error.message}</p>;
+  if (loading) return <LoadingCard label="Loading inflation data…" />;
+  if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load inflation data" />;
 
   const { national_cpi, urban_cpi, rural_cpi, spi, urban_food, rural_food, urban_nonfood, rural_nonfood, wpi, dataSource, lastUpdated } = data;
 
-  const latestCpi = national_cpi.data[national_cpi.data.length - 1];
-  const latestUrban = urban_cpi.data[urban_cpi.data.length - 1];
-  const latestRural = rural_cpi.data[rural_cpi.data.length - 1];
-  const latestSpi = spi.data[spi.data.length - 1];
+  if (!national_cpi?.data?.length) {
+    return <UnavailableCard label="Could not load inflation data" reason="National CPI series is empty." />;
+  }
+
+  const latestCpi = latestRow(national_cpi?.data);
+  const latestUrban = latestRow(urban_cpi?.data);
+  const latestRural = latestRow(rural_cpi?.data);
+  const latestSpi = latestRow(spi?.data);
 
   const cy = currentCalendarYear(national_cpi.data);
   const fy = currentFiscalYear(national_cpi.data);
+  const fytdCpi = buildFytdSeries(national_cpi.data, 'value');
 
-  const cpiLabels = national_cpi.data.map((d) => formatDate(d.date));
-  const tickCallback = (_val, idx) => (idx % 6 === 0 ? cpiLabels[idx] : '');
+  const cpiLabels = showFytd && fytdCpi
+    ? fytdCpi.labels
+    : national_cpi.data.map((d) => formatDate(d.date));
+  const tickCallback = (_val, idx) => (idx % 6 === 0 || idx === cpiLabels.length - 1 ? cpiLabels[idx] : '');
 
   // --- Chart 1: National CPI Headline ---
   const { priorData: cpiPrior, priorLabel: cpiPriorLabel } = buildYoYOverlay(national_cpi.data, 'value');
+  const cpiValues = showFytd && fytdCpi ? fytdCpi.current : national_cpi.data.map((d) => d.value);
+  const cpiCompare = showFytd && fytdCpi ? fytdCpi.prior : cpiPrior;
+  const cpiCompareLabel = showFytd && fytdCpi ? `${fytdCpi.priorLabel} same months` : cpiPriorLabel;
+  const showCpiCompare = showYoY || (showFytd && cpiCompare.some((v) => v != null));
+
   const cpiLineData = {
     labels: cpiLabels,
     datasets: [
       {
-        label: 'National CPI YoY (%)',
-        data: national_cpi.data.map((d) => d.value),
+        label: showFytd && fytdCpi ? `${fytdCpi.currentLabel} National CPI YoY (%)` : 'National CPI YoY (%)',
+        data: cpiValues,
         borderColor: COLORS.coral,
         backgroundColor: COLORS.coralAlpha,
         fill: true,
         pointRadius: 1,
         pointHoverRadius: 5,
       },
-      ...(showYoY ? [{
-        label: cpiPriorLabel,
-        data: cpiPrior,
+      ...(showCpiCompare ? [{
+        label: cpiCompareLabel,
+        data: cpiCompare,
         borderColor: COLORS.amber,
         backgroundColor: 'transparent',
         borderDash: [6, 3],
         pointRadius: 0,
         pointHoverRadius: 4,
         fill: false,
+        spanGaps: true,
       }] : []),
     ],
   };
@@ -347,7 +356,7 @@ export default function InflationSection() {
           lastUpdated={lastUpdated}
           provenanceKeys={['inflation.nationalCpi.latest']}
         >
-          <YoYToggle enabled={showYoY} onToggle={() => setShowYoY(v => !v)} />
+          <PeriodCompare mode={compareMode} onChange={setCompareMode} modes={['yoy', 'fytd']} />
           <div style={{ height: 320 }}>
             <Line data={cpiLineData} options={cpiLineOptions} />
           </div>

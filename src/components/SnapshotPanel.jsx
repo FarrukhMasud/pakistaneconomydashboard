@@ -1,5 +1,6 @@
 import { useData } from '../hooks/useData';
 import { COLORS } from '../utils/chartConfig';
+import { LoadingCard, ErrorCard } from './ui/DataState';
 import './ui/SnapshotPanel.css';
 import useI18n from '../i18n/useI18n';
 
@@ -22,9 +23,10 @@ function trendArrow(trend) {
  */
 export default function SnapshotPanel() {
   const { tx } = useI18n();
-  const { data, loading, error } = useData('indicators.json');
+  const { data, loading, error, retry } = useData('indicators.json');
 
-  if (loading || error || !data) return null;
+  if (loading) return <LoadingCard label="Loading snapshot…" />;
+  if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load snapshot" compact />;
 
   const { indicators = [], lastVerified, methodologyNote } = data;
   if (indicators.length === 0) return null;

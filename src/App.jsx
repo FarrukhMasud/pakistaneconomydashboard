@@ -11,6 +11,10 @@ import { useI18n } from './i18n/useI18n';
 import ShareSectionLink from './components/ShareSectionLink';
 import KpiCards from './components/KpiCards';
 import ReleaseCalendarSection from './components/ReleaseCalendarSection';
+import ErrorBoundary from './components/ErrorBoundary';
+import ConsentBanner from './components/ConsentBanner';
+import UpdateToast from './components/UpdateToast';
+import NotFoundSection from './components/NotFoundSection';
 
 const TradeSection = lazy(() => import('./components/TradeSection'));
 const ReservesSection = lazy(() => import('./components/ReservesSection'));
@@ -28,22 +32,25 @@ const ProvincialBudgetSection = lazy(() => import('./components/ProvincialBudget
 const FeedbackSection = lazy(() => import('./components/FeedbackSection'));
 const DataApiSection = lazy(() => import('./components/DataApiSection'));
 
-// The insight sections all live in one module, so they share a single chunk.
-const insightsModule = () => import('./components/InsightsSections');
-const insight = (name) => lazy(() => insightsModule().then((module) => ({ default: module[name] })));
+// Insight sections share helpers; split into briefing vs deep-dive chunks.
+const briefingModule = () => import('./components/insights/BriefingBundle.jsx');
+const deepModule = () => import('./components/insights/DeepDiveBundle.jsx');
+const briefing = (name) => lazy(() => briefingModule().then((m) => ({ default: m[name] })));
+const deep = (name) => lazy(() => deepModule().then((m) => ({ default: m[name] })));
 
-const EconomicBriefingSection = insight('EconomicBriefingSection');
-const EconomicTimelineSection = insight('EconomicTimelineSection');
-const ExternalFinancingWallSection = insight('ExternalFinancingWallSection');
-const GoodBadWatchSection = insight('GoodBadWatchSection');
-const ImfComplianceSection = insight('ImfComplianceSection');
-const ItExportDeepDiveSection = insight('ItExportDeepDiveSection');
-const LearningCenterSection = insight('LearningCenterSection');
-const MacroRiskScorecardSection = insight('MacroRiskScorecardSection');
-const PeerComparisonSection = insight('PeerComparisonSection');
-const RevenueTargetMeterSection = insight('RevenueTargetMeterSection');
-const RiskOutlookSection = insight('RiskOutlookSection');
-const SourceTrustSection = insight('SourceTrustSection');
+const EconomicBriefingSection = briefing('EconomicBriefingSection');
+const GoodBadWatchSection = briefing('GoodBadWatchSection');
+const LearningCenterSection = briefing('LearningCenterSection');
+const SourceTrustSection = briefing('SourceTrustSection');
+const EconomicTimelineSection = briefing('EconomicTimelineSection');
+const RiskOutlookSection = briefing('RiskOutlookSection');
+
+const ExternalFinancingWallSection = deep('ExternalFinancingWallSection');
+const ImfComplianceSection = deep('ImfComplianceSection');
+const ItExportDeepDiveSection = deep('ItExportDeepDiveSection');
+const MacroRiskScorecardSection = deep('MacroRiskScorecardSection');
+const PeerComparisonSection = deep('PeerComparisonSection');
+const RevenueTargetMeterSection = deep('RevenueTargetMeterSection');
 
 const NAV_GROUPS = [
   {
@@ -118,7 +125,13 @@ const NAV_GROUPS = [
 ];
 
 function App() {
-  const { groupId: activeGroupId, sectionId: activeSectionId, navigate } = useHashRoute(NAV_GROUPS);
+  const {
+    groupId: activeGroupId,
+    sectionId: activeSectionId,
+    known: routeKnown,
+    navigate,
+    path: routePath,
+  } = useHashRoute(NAV_GROUPS);
   const { theme, setTheme } = useTheme();
   const { t, tx, lang } = useI18n();
 
@@ -134,8 +147,8 @@ function App() {
     () => activeGroup.sections.find((s) => s.id === activeSectionId) || activeGroup.sections[0],
     [activeGroup, activeSectionId],
   );
-  const ActiveSection = activeSection.component;
-  const showSubNav = activeGroup.sections.length > 1;
+  const ActiveSection = routeKnown ? activeSection.component : NotFoundSection;
+    const showSubNav = routeKnown && activeGroup.sections.length > 1;
 
   // Announce section changes to screen readers: hash routing swaps the whole
   // <main> without a page load, which is otherwise silent for assistive tech.
@@ -150,7 +163,7 @@ function App() {
     document.title = `${label.replace(/^\P{L}+/u, '')} · ${t('app.title')} ${t('app.titleHighlight')}`;
   }, [activeSection, t, lang]);
 
-  // Update Chart.js defaults when theme changes
+  // Update Chart.js defaults when theme changes (no section remount required).
   useEffect(() => {
     const update = () => {
       const style = getComputedStyle(document.documentElement);
@@ -167,9 +180,11 @@ function App() {
       ChartJS.defaults.plugins.tooltip.titleColor = textPrimary;
       ChartJS.defaults.plugins.tooltip.bodyColor = textSecondary;
     };
-    const timer = setTimeout(update, 50);
-    return () => clearTimeout(timer);
-  }, [theme]);
+      update();
+      // One rAF so CSS variables from data-theme are applied first.
+      const id = requestAnimationFrame(update);
+      return () => cancelAnimationFrame(id);
+    }, [theme]);
 
   return (
     <div className="app">
@@ -220,7 +235,7 @@ function App() {
           {activeGroup.sections.map((section) => (
             <a
               key={section.id}
-              href={`#/${activeGroup.id}/${section.id}`}
+                          href={`/${activeGroup.id}/${section.id}`}
               className={`sub-tab-btn ${activeSectionId === section.id ? 'active' : ''}`}
               aria-current={activeSectionId === section.id ? 'page' : undefined}
               onClick={(event) => {
@@ -244,14 +259,30 @@ function App() {
           <ShareSectionLink groupId={activeGroup.id} sectionId={activeSection.id} label={sectionLabel(activeSection)} />
         </div>
         {lang !== 'en' && <p className="translation-notice">{t('app.translationNotice')}</p>}
-        <div className="fade-in" key={`${activeSectionId}-${theme}`}>
-          <Suspense fallback={<div className="card loading-card"><div className="spinner" /><span>{t('common.loading', 'Loading…')}</span></div>}>
-            <ActiveSection />
-          </Suspense>
-        </div>
-      </main>
+        <div className="fade-in" key={routeKnown ? activeSectionId : `missing:${routePath}`}>
+                  <ErrorBoundary
+                            resetKey={routeKnown ? activeSectionId : routePath}
+                    title={t('common.sectionError', 'Something went wrong in this section')}
+                    retryLabel={t('common.retry', 'Try again')}
+                  >
+                    <Suspense fallback={<div className="card loading-card"><div className="spinner" /><span>{t('common.loading', 'Loading…')}</span></div>}>
+                              {routeKnown ? (
+                                <ActiveSection />
+                              ) : (
+                                <NotFoundSection
+                                  path={routePath}
+                                  onGoHome={() => navigate('overview', 'overview')}
+                                />
+                              )}
+                            </Suspense>
+                          </ErrorBoundary>
+                        </div>
+                      </main>
 
-      <footer className="app-footer">
+                      <UpdateToast />
+                      <ConsentBanner />
+
+              <footer className="app-footer">
         <p>{t('app.footer')}</p>
         <div className="footer-sources">
           <button

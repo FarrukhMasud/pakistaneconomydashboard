@@ -2,6 +2,7 @@ import { Line } from 'react-chartjs-2';
 import { useData } from '../hooks/useData';
 import { COLORS, baseLineOptions } from '../utils/chartConfig';
 import TrackerFooter from './ui/TrackerFooter';
+import { LoadingCard, ErrorCard } from './ui/DataState';
 import './ui/Trackers.css';
 import useI18n from '../i18n/useI18n';
 
@@ -13,8 +14,9 @@ function fmtMonth(dateStr, opts = { month: 'short', year: 'numeric' }) {
 
 export default function MonetaryPolicyTracker() {
   const { tx } = useI18n();
-  const { data, loading, error } = useData('monetary-policy.json');
-  if (loading || !data || error) return null;
+  const { data, loading, error, retry } = useData('monetary-policy.json');
+  if (loading) return <LoadingCard label="Loading monetary policy tracker…" />;
+  if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load monetary policy tracker" compact />;
 
   const { currentRate, asOf, lastDecision, nextMeeting, context = {}, decisions = [], sourceUrl, lastVerified, verifiedFrom, methodologyNote } = data;
 

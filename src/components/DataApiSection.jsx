@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import SectionHeader from './SectionHeader';
 import SourceBadge from './SourceBadge';
+import ExportPackSection from './ExportPackSection';
 import useI18n from '../i18n/useI18n';
 
 const SOURCE_LINKS = [
@@ -62,9 +63,11 @@ export default function DataApiSection() {
         sourceLinks={SOURCE_LINKS}
       />
 
-      {loading && <div className="card loading-card"><div className="spinner" /><span>{tx('Loading endpoint index\u2026')}</span></div>}
+      <ExportPackSection />
 
-      {!loading && endpoints.length === 0 && (
+            {loading && <div className="card loading-card"><div className="spinner" /><span>{tx('Loading endpoint index\u2026')}</span></div>}
+
+            {!loading && endpoints.length === 0 && (
         <p className="insight-note">
           {tx('The static API has not been generated for this build. Run')} <code>npm run generate:api</code>.
         </p>

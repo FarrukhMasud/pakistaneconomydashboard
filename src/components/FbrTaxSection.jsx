@@ -1,10 +1,13 @@
+import { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { useData } from '../hooks/useData';
 import { COLORS, baseBarOptions } from '../utils/chartConfig';
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
-import { formatMonthYear, pctChange } from '../utils/periodHelpers';
+import PeriodCompare from './ui/PeriodCompare';
+import { LoadingCard, ErrorCard, UnavailableCard } from './ui/DataState';
+import { formatMonthYear, pctChange, buildYoYOverlay, buildFytdSeries } from '../utils/periodHelpers';
 import './ui/FbrTax.css';
 
 const TAX_HEADS = [
@@ -38,10 +41,13 @@ function provenanceLabel(row) {
 }
 
 export default function FbrTaxSection() {
-  const { data, loading, error } = useData('fbr-tax.json');
+  const [compareMode, setCompareMode] = useState('off');
+  const showYoY = compareMode === 'yoy';
+  const showFytd = compareMode === 'fytd';
+  const { data, loading, error, retry } = useData('fbr-tax.json');
 
-  if (loading || !data) return <div className="card loading-card"><div className="spinner" /><span>Loading FBR tax data…</span></div>;
-  if (error) return <p style={{ color: COLORS.coral }}>Error: {error.message}</p>;
+  if (loading) return <LoadingCard label="Loading FBR tax data…" />;
+  if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load FBR tax data" />;
 
   const {
     monthly = [],
@@ -57,7 +63,12 @@ export default function FbrTaxSection() {
   } = data;
 
   const sorted = [...monthly].sort((a, b) => a.date.localeCompare(b.date));
-  const labels = sorted.map((d) => formatMonthYear(d.date));
+  if (!sorted.length && !annualTargets.length && !fyTotals.length) {
+    return <UnavailableCard label="Could not load FBR tax data" reason="FBR series is empty." />;
+  }
+  const fytdNet = buildFytdSeries(sorted, 'net');
+  const { priorData: netPrior, priorLabel: netPriorLabel } = buildYoYOverlay(sorted, 'net');
+  const labels = showFytd && fytdNet ? fytdNet.labels : sorted.map((d) => formatMonthYear(d.date));
   const tickCallback = (_v, idx) => (idx % 2 === 0 || idx === labels.length - 1 ? labels[idx] : '');
 
   // ── Latest month summary ──
@@ -69,16 +80,31 @@ export default function FbrTaxSection() {
   const latestYoY = latest && priorYearMonth ? pctChange(latest.net, priorYearMonth.net) : { pct: null, direction: 'flat' };
   const latestVsTarget = latest?.target ? latest.net - latest.target : null;
 
+  const netValues = showFytd && fytdNet ? fytdNet.current : sorted.map((d) => d.net ?? null);
+  const netCompare = showFytd && fytdNet ? fytdNet.prior : netPrior;
+  const netCompareLabel = showFytd && fytdNet ? `${fytdNet.priorLabel} same months` : netPriorLabel;
+  const showNetCompare = showYoY || (showFytd && netCompare.some((v) => v != null));
+
   // ── Monthly net collection (bars coloured by provisional status) ──
   const netData = {
     labels,
     datasets: [
       {
-        label: 'Net collection',
-        data: sorted.map((d) => d.net ?? null),
-        backgroundColor: sorted.map((d) => (d.provisional ? COLORS.amber : COLORS.teal)),
+        label: showFytd && fytdNet ? `${fytdNet.currentLabel} net collection` : 'Net collection',
+        data: netValues,
+        backgroundColor: showFytd
+          ? COLORS.teal
+          : sorted.map((d) => (d.provisional ? COLORS.amber : COLORS.teal)),
         borderRadius: 4,
       },
+      ...(showNetCompare ? [{
+        label: netCompareLabel,
+        data: netCompare,
+        backgroundColor: 'rgba(255, 167, 38, 0.3)',
+        borderColor: COLORS.amber,
+        borderWidth: 1,
+        borderRadius: 4,
+      }] : []),
     ],
   };
 
@@ -356,7 +382,7 @@ export default function FbrTaxSection() {
         {hasTargets && (
           <ChartCard
             title="Tax Targets vs Reported Collection"
-            description="The original budget target (blue), revised target (amber), and reported collection (teal). FY2025-26's Rs12.983T is a pre-year-end budget-speech estimate, not an FBR year-end actual; the chart and notes label it accordingly."
+            description={`The original budget target (blue), revised target (amber), and reported collection (teal).${latestEstimate ? ` ${latestEstimate.fyLabel || latestEstimate.fy}'s ${fmtBn(latestEstimate.estimate)} is a pre-year-end estimate, not an FBR year-end actual; the chart and notes label it accordingly.` : ' Estimates are labelled separately from final actuals.'}`}
             source="FBR / Finance Division; secondary references identified below"
             dataSource={dataSource}
             lastUpdated={lastUpdated}
@@ -405,18 +431,19 @@ export default function FbrTaxSection() {
 
         <ChartCard
           title="Monthly Net Collection vs Target"
-          description="Available monthly net FBR collection in PKR billion. FY2024-25 comes from FBR's official table; for FY2025-26 only July 2025 (secondary-attributed) and January 2026 (official FBR release) are shown. Missing months are intentionally left absent rather than estimated."
+          description={`Available monthly net FBR collection in PKR billion.${sorted.length ? ` Coverage currently runs ${formatMonthYear(sorted[0].date)} – ${formatMonthYear(sorted.at(-1).date)}.` : ''} Official FBR figures and secondary-attributed provisional months are distinguished in the chart notes. Missing months are intentionally left absent rather than estimated.`}
           source="FBR official publications / identified secondary-attributed reports"
           dataSource={dataSource}
           dataCoverage={latest ? fmtDate(latest.date) : undefined}
           lastUpdated={lastUpdated}
         >
-          <div className="chart-container">
-            <Bar data={netData} options={netOptions} />
-          </div>
-        </ChartCard>
+                    <PeriodCompare mode={compareMode} onChange={setCompareMode} modes={['yoy', 'fytd']} />
+                    <div className="chart-container">
+                      <Bar data={netData} options={netOptions} />
+                    </div>
+                  </ChartCard>
 
-        {hasBreakdown && (
+                  {hasBreakdown && (
           <ChartCard
             title="Collection by Tax Head"
             description="Monthly net collection split across the four federal tax heads: Income/Direct Tax, Sales Tax, Federal Excise Duty (FED) and Customs Duty. Only months for which FBR published a complete four-way breakdown are shown."

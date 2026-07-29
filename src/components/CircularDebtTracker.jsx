@@ -2,6 +2,7 @@ import { Bar } from 'react-chartjs-2';
 import { useData } from '../hooks/useData';
 import { COLORS, baseBarOptions } from '../utils/chartConfig';
 import TrackerFooter from './ui/TrackerFooter';
+import { LoadingCard, ErrorCard } from './ui/DataState';
 import './ui/Trackers.css';
 import useI18n from '../i18n/useI18n';
 
@@ -13,8 +14,9 @@ function fmtPkr(bn) {
 
 export default function CircularDebtTracker() {
   const { tx } = useI18n();
-  const { data, loading, error } = useData('circular-debt.json');
-  if (loading || !data || error) return null;
+  const { data, loading, error, retry } = useData('circular-debt.json');
+  if (loading) return <LoadingCard label="Loading circular debt tracker…" />;
+  if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load circular debt tracker" compact />;
 
   const { current, yoy, fytdBuildup, powerVsGas, stockTrend = [], targets = [], reforms = [], sourceUrl, lastVerified, verifiedFrom, methodologyNote } = data;
 

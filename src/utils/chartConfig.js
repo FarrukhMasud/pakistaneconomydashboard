@@ -44,6 +44,22 @@ ChartJS.defaults.elements.point.radius = 3;
 ChartJS.defaults.elements.point.hoverRadius = 6;
 ChartJS.defaults.elements.line.tension = 0.3;
 
+// Honour reduced-motion preferences for chart animations.
+const prefersReducedMotion = typeof window !== 'undefined'
+  && window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+if (prefersReducedMotion) {
+  ChartJS.defaults.animation = false;
+  ChartJS.defaults.transitions = { active: { animation: { duration: 0 } } };
+}
+
+if (typeof window !== 'undefined' && window.matchMedia) {
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const syncMotion = () => {
+    ChartJS.defaults.animation = mq.matches ? false : { duration: 800, easing: 'easeOutQuart' };
+  };
+  mq.addEventListener?.('change', syncMotion);
+}
+
 // ─── Color Palette ───
 export const COLORS = {
   teal: '#00d4aa',
@@ -89,10 +105,26 @@ export function formatPercent(val) {
   return `${val >= 0 ? '+' : ''}${val.toFixed(1)}%`;
 }
 
+function toRgba(color, alpha) {
+  if (!color) return `rgba(0, 212, 170, ${alpha})`;
+  if (color.startsWith('rgba')) return color.replace(/rgba\(([^)]+),\s*[\d.]+\)/, `rgba($1, ${alpha})`);
+  if (color.startsWith('rgb(')) return color.replace('rgb(', 'rgba(').replace(')', `, ${alpha})`);
+  if (color.startsWith('#')) {
+    const hex = color.slice(1);
+    const full = hex.length === 3 ? hex.split('').map((c) => c + c).join('') : hex;
+    const n = parseInt(full, 16);
+    const r = (n >> 16) & 255;
+    const g = (n >> 8) & 255;
+    const b = n & 255;
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+  return color;
+}
+
 export function createGradient(ctx, color) {
-  const gradient = ctx.createLinearGradient(0, 0, 0, ctx.canvas.clientHeight);
-  gradient.addColorStop(0, color.replace(')', ', 0.35)').replace('rgb', 'rgba'));
-  gradient.addColorStop(1, color.replace(')', ', 0.0)').replace('rgb', 'rgba'));
+  const gradient = ctx.createLinearGradient(0, 0, 0, ctx.canvas.clientHeight || 200);
+  gradient.addColorStop(0, toRgba(color, 0.35));
+  gradient.addColorStop(1, toRgba(color, 0));
   return gradient;
 }
 

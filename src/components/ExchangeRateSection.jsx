@@ -4,6 +4,7 @@ import { COLORS, baseLineOptions } from '../utils/chartConfig';
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
+import { LoadingCard, ErrorCard } from './ui/DataState';
 import { currentCalendarYear, currentFiscalYear, pctChange, fmtRate } from '../utils/periodHelpers';
 
 function formatDate(dateStr) {
@@ -13,10 +14,10 @@ function formatDate(dateStr) {
 }
 
 export default function ExchangeRateSection() {
-  const { data, loading, error } = useData('exchange-rates.json');
+  const { data, loading, error, retry } = useData('exchange-rates.json');
 
-  if (loading || !data) return <div className="card loading-card"><div className="spinner" /><span>Loading data…</span></div>;
-  if (error) return <div className="card fade-in"><p>Error loading exchange rates: {error.message}</p></div>;
+  if (loading) return <LoadingCard label="Loading exchange rates…" />;
+  if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load exchange rates" />;
 
   const { monthly, lastUpdated: exLU, dataCoverage: exDC } = data;
   const cy = currentCalendarYear(monthly);

@@ -1,5 +1,6 @@
 import { useData } from '../hooks/useData';
 import { COLORS } from '../utils/chartConfig';
+import { LoadingCard, ErrorCard } from './ui/DataState';
 import './ui/ImfTracker.css';
 import useI18n from '../i18n/useI18n';
 
@@ -11,10 +12,10 @@ function formatDate(dateStr, options = { month: 'short', year: 'numeric' }) {
 
 export default function ImfTracker() {
   const { tx } = useI18n();
-  const { data, loading, error } = useData('imf-tracker.json');
+  const { data, loading, error, retry } = useData('imf-tracker.json');
 
-  if (loading || !data) return null;
-  if (error) return null;
+  if (loading) return <LoadingCard label="Loading IMF tracker…" />;
+  if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load IMF tracker" compact />;
 
   const {
     program,

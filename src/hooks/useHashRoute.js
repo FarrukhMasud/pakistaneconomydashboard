@@ -1,64 +1,131 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 /**
- * Parses `#/group/section` into a validated route. Anything unrecognised falls
- * back to the first group/section so a stale bookmark can never render blank.
+ * Parses path or hash routes into a validated { groupId, sectionId, known }.
+ * Supports:
+ *   #/group/section  (legacy + share links)
+ *   /group/section   (path-based SEO-friendly URLs)
+ *
+ * Unknown paths keep known=false so the shell can show a not-found state
+ * without silently rewriting the URL to overview.
  */
-export function parseHash(hash, groups) {
-  const parts = String(hash || '')
-    .replace(/^#\/?/, '')
+export function parseRoute(locationLike, groups) {
+  const hash = String(locationLike?.hash || '');
+  const pathname = String(locationLike?.pathname || '/');
+  const fallback = {
+    groupId: groups[0].id,
+    sectionId: groups[0].sections[0].id,
+    known: true,
+    assetLike: false,
+  };
+
+  let raw = '';
+  if (hash && hash !== '#' && hash !== '#/') {
+    raw = hash.replace(/^#\/?/, '');
+  } else {
+    raw = pathname.replace(/^\//, '');
+  }
+
+  const parts = raw
     .split('/')
-    .map((part) => decodeURIComponent(part.trim()))
+    .map((part) => {
+      try {
+        return decodeURIComponent(part.trim());
+      } catch {
+        return part.trim();
+      }
+    })
     .filter(Boolean);
 
-  const group = groups.find((g) => g.id === parts[0]) || groups[0];
-  const section = group.sections.find((s) => s.id === parts[1]) || group.sections[0];
-  return { groupId: group.id, sectionId: section.id };
+  // Root / empty → default overview (known).
+  if (!parts.length) {
+    return fallback;
+  }
+
+  // Asset-like first segments are not app routes; leave URL alone.
+  if (parts[0] === 'assets' || parts[0] === 'data' || parts[0] === 'api') {
+    return { ...fallback, known: false, assetLike: true };
+  }
+
+  const group = groups.find((g) => g.id === parts[0]);
+  if (!group) {
+    return { ...fallback, known: false, assetLike: false };
+  }
+
+  // /group alone → first section of that group (canonical).
+  if (!parts[1]) {
+    return { groupId: group.id, sectionId: group.sections[0].id, known: true, assetLike: false };
+  }
+
+  const section = group.sections.find((s) => s.id === parts[1]);
+  if (!section) {
+    return { groupId: group.id, sectionId: group.sections[0].id, known: false, assetLike: false };
+  }
+
+  return { groupId: group.id, sectionId: section.id, known: true, assetLike: false };
+}
+
+/** @deprecated use parseRoute */
+export function parseHash(hash, groups) {
+  return parseRoute({ hash, pathname: '/' }, groups);
+}
+
+export function routeToPath(groupId, sectionId) {
+  return `/${groupId}/${sectionId}`;
 }
 
 export function routeToHash(groupId, sectionId) {
   return `#/${groupId}/${sectionId}`;
 }
 
+function readLocation() {
+  if (typeof window === 'undefined') return { hash: '', pathname: '/' };
+  return { hash: window.location.hash, pathname: window.location.pathname };
+}
+
 /**
- * Hash-based routing so every section is deep-linkable, shareable and
- * navigable with the browser's back/forward buttons.
+ * Path-based routing with hash fallback. Browser back/forward work for both.
+ * Canonical form written to the address bar is /group/section (path) — only for known routes.
  */
 export function useHashRoute(groups) {
-  const [hash, setHash] = useState(() => (typeof window === 'undefined' ? '' : window.location.hash));
+  const [loc, setLoc] = useState(readLocation);
 
   useEffect(() => {
-    const onHashChange = () => setHash(window.location.hash);
-    window.addEventListener('hashchange', onHashChange);
-    window.addEventListener('popstate', onHashChange);
+    const sync = () => setLoc(readLocation());
+    window.addEventListener('hashchange', sync);
+    window.addEventListener('popstate', sync);
     return () => {
-      window.removeEventListener('hashchange', onHashChange);
-      window.removeEventListener('popstate', onHashChange);
+      window.removeEventListener('hashchange', sync);
+      window.removeEventListener('popstate', sync);
     };
   }, []);
 
-  const route = useMemo(() => parseHash(hash, groups), [hash, groups]);
+  const route = useMemo(() => parseRoute(loc, groups), [loc, groups]);
 
-  // Canonicalise the address bar so a bare "/" or a bad hash becomes a real,
-  // copyable deep link. The derived route is already correct, so this only
-  // rewrites the URL — it deliberately does not re-set state.
+  // Canonicalise known routes only — never rewrite unknown paths to overview.
   useEffect(() => {
-    const canonical = routeToHash(route.groupId, route.sectionId);
-    if (window.location.hash !== canonical) {
-      window.history.replaceState(null, '', canonical);
+    if (!route.known || route.assetLike) return;
+    const canonical = routeToPath(route.groupId, route.sectionId);
+    const { pathname, hash, search } = window.location;
+    if (pathname !== canonical || hash) {
+      window.history.replaceState(null, '', `${canonical}${search || ''}`);
     }
-  }, [route.groupId, route.sectionId]);
+  }, [route.groupId, route.sectionId, route.known, route.assetLike]);
 
   const navigate = useCallback((groupId, sectionId, { scrollToTop = true } = {}) => {
     const group = groups.find((g) => g.id === groupId) || groups[0];
     const section = group.sections.find((s) => s.id === sectionId) || group.sections[0];
-    const next = routeToHash(group.id, section.id);
-    if (window.location.hash !== next) {
+    const next = routeToPath(group.id, section.id);
+    if (window.location.pathname !== next || window.location.hash) {
       window.history.pushState(null, '', next);
-      setHash(next);
+      setLoc(readLocation());
     }
     if (scrollToTop) window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [groups]);
 
-  return { ...route, navigate };
+  return {
+    ...route,
+    navigate,
+    path: route.known ? routeToPath(route.groupId, route.sectionId) : (loc.pathname || '/'),
+  };
 }

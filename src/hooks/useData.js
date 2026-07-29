@@ -1,40 +1,46 @@
-import { useState, useEffect } from 'react';
+import { useCallback, useEffect, useSyncExternalStore } from 'react';
+import {
+  getDataSnapshot,
+  loadData,
+  retryData,
+  subscribeData,
+} from './dataCache';
 
+/**
+ * Shared data hook for /data/*.json files.
+ * Dedupes fetches, supports retry, and uses build-time cache busting.
+ *
+ * Uses useSyncExternalStore with a cached snapshot reference per cache entry
+ * (see dataCache.getDataSnapshot) so React does not infinite-loop on identity churn.
+ */
 export function useData(filename) {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const getSnapshot = useCallback(() => getDataSnapshot(filename), [filename]);
+  const subscribe = useCallback(
+    (onStoreChange) => subscribeData(filename, onStoreChange),
+    [filename],
+  );
+
+  const state = useSyncExternalStore(subscribe, getSnapshot, getSnapshot);
 
   useEffect(() => {
-    const controller = new AbortController();
-    let cancelled = false;
-
-    const cacheBuster = import.meta.env?.VITE_DATA_VERSION || Date.now();
-    const url = `/data/${filename}?v=${encodeURIComponent(cacheBuster)}`;
-
-    fetch(url, { cache: 'no-store', signal: controller.signal })
-      .then((res) => {
-        if (!res.ok) throw new Error(`Failed to load ${filename}: ${res.status}`);
-        return res.json();
-      })
-      .then((json) => {
-        if (!cancelled) {
-          setData(json);
-          setLoading(false);
-        }
-      })
-      .catch((err) => {
-        if (!cancelled && err.name !== 'AbortError') {
-          setError(err);
-          setLoading(false);
-        }
-      });
-
-    return () => {
-      cancelled = true;
-      controller.abort();
-    };
+    loadData(filename);
   }, [filename]);
 
-  return { data, loading, error };
+  const retry = useCallback(() => {
+    retryData(filename);
+  }, [filename]);
+
+  return { ...state, retry };
+}
+
+/**
+ * Imperative multi-file loader for export packs etc.
+ */
+export async function loadMany(filenames) {
+  const results = await Promise.all(filenames.map((f) => loadData(f)));
+  const out = {};
+  filenames.forEach((f, i) => {
+    out[f] = results[i];
+  });
+  return out;
 }

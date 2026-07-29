@@ -5,23 +5,29 @@ import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import ExpandableTile from './ui/ExpandableTile';
-import { pctChange, fmtUSD, buildYoYOverlay, formatMonthYear } from '../utils/periodHelpers';
+import { LoadingCard, ErrorCard, UnavailableCard } from './ui/DataState';
+import { pctChange, fmtUSD, buildYoYOverlay, formatMonthYear, deriveFiscalLabels } from '../utils/periodHelpers';
 import { countryFlagPlugin, countryLabel } from '../utils/countryLabels';
 import useI18n from '../i18n/useI18n';
 
 export default function FdiSection() {
   const { tx } = useI18n();
-  const { data, loading, error } = useData('fdi.json');
+  const { data, loading, error, retry } = useData('fdi.json');
 
-  if (loading || !data) return <div className="card loading-card"><div className="spinner" /><span>Loading data…</span></div>;
-  if (error) return <p style={{ color: COLORS.coral }}>Error: {error.message}</p>;
+  if (loading) return <LoadingCard label="Loading FDI data…" />;
+  if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load FDI data" />;
 
   const { annual, by_sector, by_country, fytdComparison, monthlyComparison, monthly = [], sectorPeriod, sectorPriorPeriod, lastUpdated: fdiLU } = data;
 
-  // Latest full-year summary
-  const latest = annual[annual.length - 1];
-  const prev = annual.length >= 2 ? annual[annual.length - 2] : null;
-  const chg = prev ? pctChange(latest.net_fdi, prev.net_fdi) : { pct: null, direction: 'flat' };
+    if (!Array.isArray(annual) || !annual.length) {
+      return <UnavailableCard label="Could not load FDI data" reason="Annual FDI series is empty." />;
+    }
+
+    // Latest full-year summary
+    const latest = annual[annual.length - 1];
+    const prev = annual.length >= 2 ? annual[annual.length - 2] : null;
+    const chg = prev ? pctChange(latest.net_fdi, prev.net_fdi) : { pct: null, direction: 'flat' };
+    const fyLabels = deriveFiscalLabels(monthly.length ? monthly : null);
 
   // FYTD comparison
   const fytd = fytdComparison;
@@ -453,7 +459,7 @@ export default function FdiSection() {
         ) : monthlyComparison && (
           <ChartCard
             title="Latest Monthly FDI"
-            description={`${monthlyComparison.month} FDI in Pakistan compared with the same month in the prior fiscal year. This is the latest monthly SBP snapshot; the FY2026 annual figure is not final until the fiscal year closes after June 2026.`}
+            description={`${monthlyComparison.month} FDI in Pakistan compared with the same month in the prior fiscal year. This is the latest monthly SBP snapshot; the ${fyLabels?.fyLabel || monthlyComparison.current?.label || 'current FY'} annual figure is not final until that fiscal year closes.`}
             source="SBP"
             dataSource="SBP"
             lastUpdated={fdiLU}

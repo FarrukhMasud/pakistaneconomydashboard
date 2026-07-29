@@ -1,9 +1,23 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { execSync } from 'node:child_process'
+import process from 'node:process'
+
+function dataVersion() {
+  if (process.env.VITE_DATA_VERSION) return process.env.VITE_DATA_VERSION
+  try {
+    return execSync('git rev-parse --short HEAD', { encoding: 'utf8' }).trim()
+  } catch {
+    return String(Date.now())
+  }
+}
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  define: {
+    'import.meta.env.VITE_DATA_VERSION': JSON.stringify(dataVersion()),
+  },
   build: {
     rollupOptions: {
       output: {

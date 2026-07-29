@@ -69,8 +69,47 @@ const ur = {
   'common.latestPublished': 'آخری شائع شدہ',
   'common.loading': 'لوڈ ہو رہا ہے…',
   'common.close': 'بند کریں',
+    'common.retry': 'دوبارہ کوشش کریں',
+    'common.loadFailed': 'ڈیٹا لوڈ نہیں ہو سکا',
+    'common.unavailable': 'ڈیٹا دستیاب نہیں',
+    'common.partialFailure': 'کچھ ڈیٹا سیٹ لوڈ نہیں ہو سکے',
+    'common.sectionError': 'اس حصے میں کچھ غلط ہو گیا',
 
-  'section.aboutSection': 'اس حصے کے بارے میں',
+    'consent.title': 'تجزیاتی کوکیز',
+    'consent.body': 'ہم ڈیش بورڈ بہتر بنانے کے لیے اختیاری گمنام تجزیات (Microsoft Clarity) استعمال کرتے ہیں۔ کوئی اشتہار نہیں۔ قبول یا مسترد کا انتخاب کریں۔',
+    'consent.accept': 'تجزیات قبول کریں',
+    'consent.decline': 'مسترد کریں',
+
+    'compare.label': 'مدتوں کا موازنہ',
+  'overview.whatMoved': 'کیا بدلا',
+  'overview.whatMovedHint': 'پانچ اہم سلسلوں میں تازہ ترین مشاہدہ بمقابلہ پچھلی مدت۔',
+  'watchlist.title': 'آپ کی واچ لسٹ',
+  'watchlist.empty': '★ بٹن سے KPI پن کریں، یا کمانڈ پیلیٹ (Ctrl/Cmd+K) سے اشارے پن کریں۔ پن اس ڈیوائس پر رہتے ہیں۔',
+  'watchlist.clear': 'سب صاف کریں',
+  'watchlist.pin': 'واچ لسٹ میں پن کریں',
+  'watchlist.unpin': 'پن ہٹائیں',
+  'update.available': 'نئے اعداد دستیاب ہیں',
+  'update.refresh': 'تازہ کریں',
+  'route.notFound': 'صفحہ نہیں ملا',
+  'route.notFoundBody': 'یہ لنک ڈیش بورڈ کا سیکشن نہیں ہے۔ URL چیک کریں یا جائزہ پر واپس جائیں۔',
+  'route.notFoundHome': 'جائزے پر واپس',
+  'chart.focusSeries': 'سیریز پر توجہ',
+  'chart.focusAll': 'تمام سیریز',
+  'chart.tabularDataFor': '{name} کا جدول',
+  'provenance.missing': 'اس KPI کی کوئی حوالہ کلید نہیں',
+    'compare.off': 'تازہ ترین سلسلہ',
+    'compare.yoy': 'سالانہ موازنہ',
+    'compare.fytd': 'مالی سال تا حال بمقابلہ گزشتہ',
+
+    'export.building': 'پیک تیار ہو رہا ہے…',
+    'export.ready': 'ڈاؤن لوڈ شروع ہو گیا',
+    'export.buildingBrief': 'بریفنگ تیار ہو رہی ہے…',
+    'export.briefReady': 'بریفنگ کھل گئی — پی ڈی ایف کے لیے پرنٹ استعمال کریں',
+
+    'palette.indicator': 'اشاریہ',
+    'palette.section': 'حصہ',
+
+    'section.aboutSection': 'اس حصے کے بارے میں',
   'section.hideOverview': 'تعارف چھپائیں',
 
   'chart.data': 'اعداد و شمار',
@@ -127,3 +166,4 @@ const ur = {
 };
 
 export default ur;
+

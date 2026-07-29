@@ -1,0 +1,18 @@
+{
+  "name": "Pakistan Economic Dashboard",
+  "short_name": "PakEco",
+  "description": "Official-source dashboard of Pakistan's key economic indicators",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f1117",
+  "theme_color": "#01411c",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

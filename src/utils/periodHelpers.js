@@ -135,6 +135,90 @@ export function latestValue(dataArr) {
   return dataArr[dataArr.length - 1].value;
 }
 
+/** Safe last row — never throws on empty/missing series. */
+export function latestRow(rows) {
+  if (!Array.isArray(rows) || rows.length === 0) return null;
+  return rows[rows.length - 1];
+}
+
+/** Previous row (n-2), or null. */
+export function previousRow(rows) {
+  if (!Array.isArray(rows) || rows.length < 2) return null;
+  return rows[rows.length - 2];
+}
+
+/**
+ * Derive the current / prior FY labels from any monthly-ish series
+ * so insight sections never hardcode "FY2026".
+ * @returns {{ fy: number, fyLabel: string, fyFull: string, priorFy: number, priorLabel: string, priorFull: string } | null}
+ */
+export function deriveFiscalLabels(rowsOrDate) {
+  let year;
+  let month;
+  if (typeof rowsOrDate === 'string') {
+    ({ year, month } = parseYM(rowsOrDate));
+  } else if (Array.isArray(rowsOrDate) && rowsOrDate.length) {
+    const sorted = [...rowsOrDate].sort((a, b) => String(a.date).localeCompare(String(b.date)));
+    ({ year, month } = parseYM(sorted[sorted.length - 1].date));
+  } else {
+    return null;
+  }
+  if (!year || !month) return null;
+  const fy = month >= 7 ? year + 1 : year;
+  const priorFy = fy - 1;
+  return {
+    fy,
+    fyLabel: `FY${String(fy).slice(-2)}`,
+    fyFull: `FY${fy}`,
+    priorFy,
+    priorLabel: `FY${String(priorFy).slice(-2)}`,
+    priorFull: `FY${priorFy}`,
+  };
+}
+
+/** True when value is a usable finite number. */
+export function isFiniteNumber(value) {
+  return typeof value === 'number' && Number.isFinite(value);
+}
+
+/**
+ * Build a fiscal-year-to-date series with prior-FY months aligned by calendar month.
+ * Used by PeriodCompare "fytd" mode so charts show Jul→latest vs same months last FY.
+ *
+ * @param {Array} rows
+ * @param {string} field
+ * @returns {{ labels: string[], current: Array, prior: Array, currentLabel: string, priorLabel: string, rangeLabel: string, fy: object } | null}
+ */
+export function buildFytdSeries(rows, field) {
+  const fy = currentFiscalYear(rows);
+  if (!fy?.rows?.length) return null;
+
+  const priorByMonth = {};
+  for (const row of fy.prior || []) {
+    const { month } = parseYM(row.date);
+    const value = row[field];
+    priorByMonth[month] = value == null || value === '' ? null : value;
+  }
+
+  return {
+    labels: fy.rows.map((row) => formatMonthYear(row.date)),
+    current: fy.rows.map((row) => {
+      const value = row[field];
+      return value == null || value === '' ? null : value;
+    }),
+    prior: fy.rows.map((row) => {
+      const { month } = parseYM(row.date);
+      return Object.prototype.hasOwnProperty.call(priorByMonth, month)
+        ? priorByMonth[month]
+        : null;
+    }),
+    currentLabel: fy.fyLabel,
+    priorLabel: fy.priorLabel,
+    rangeLabel: fy.rangeLabel,
+    fy,
+  };
+}
+
 /**
  * Build a year-over-year overlay dataset from monthly data.
  * Returns prior-year values aligned to the same month positions.
@@ -194,15 +278,22 @@ export function currentFiscalYear(rows) {
 
   if (!fyRows.length) return null;
 
-  // Prior FY: same number of months in the previous FY
-  const priorFY = fy - 1;
-  const priorStartYear = priorFY - 1;
-  const priorRows = sorted.filter(r => {
-    const p = parseYM(r.date);
-    if (p.year === priorStartYear && p.month >= fyStartMonth) return true;
-    if (p.year === priorFY && p.month <= latest.month) return true;
-    return false;
-  });
+  // Prior FYTD: same calendar months in the previous fiscal year.
+    // e.g. current through Sep 2025 (FY26) → prior Jul–Sep 2024 (FY25).
+    const priorFY = fy - 1;
+    const priorStartYear = priorFY - 1;
+    const priorRows = sorted.filter((r) => {
+      const p = parseYM(r.date);
+      if (p.year === priorStartYear && p.month >= fyStartMonth) {
+        // Jul–Dec of the year the prior FY starts
+        return latest.month >= 7 ? p.month <= latest.month : true;
+      }
+      if (p.year === priorFY && p.month <= 6) {
+        // Jan–Jun of the year the prior FY ends
+        return latest.month >= 7 ? false : p.month <= latest.month;
+      }
+      return false;
+    });
 
   const rangeLabel = `Jul ${fyStartYear} – ${MONTH_NAMES[latest.month - 1]} ${latest.year}`;
 

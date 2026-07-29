@@ -6,6 +6,7 @@ import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import ChartCard from './ChartCard';
 import GoodBadUgly from './ui/GoodBadUgly';
+import { LoadingCard, ErrorCard } from './ui/DataState';
 import './ui/Budget.css';
 import useI18n from '../i18n/useI18n';
 
@@ -34,12 +35,12 @@ const PROVINCE_NAME = { punjab: 'Punjab', sindh: 'Sindh', kp: 'KP', balochistan:
 
 export default function ProvincialBudgetSection() {
   const { tx } = useI18n();
-  const { data, loading, error } = useData('budget-provincial.json');
+  const { data, loading, error, retry } = useData('budget-provincial.json');
   const [fy, setFy] = useState(null);
   const [activeProvince, setActiveProvince] = useState(null);
 
-  if (loading || !data) return <div className="card loading-card"><div className="spinner" /><span>Loading provincial budgets…</span></div>;
-  if (error) return <p style={{ color: COLORS.coral }}>Error: {error.message}</p>;
+  if (loading) return <LoadingCard label="Loading provincial budgets…" />;
+  if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load provincial budgets" />;
 
   const { provinces = [], fiscalYears = [], lastUpdated, lastVerified, methodologyNote } = data;
   if (provinces.length === 0) return <p>{tx("No provincial budget data available.")}</p>;
@@ -314,7 +315,7 @@ export default function ProvincialBudgetSection() {
 
           <ChartCard
             title="Cash Surplus Delivered by Province"
-            description={`Cash surplus each province actually ran in the first nine months of FY2025-26, in PKR billion. The combined Rs${ps.actualTotal?.toLocaleString()}bn already exceeded the full-year IMF target of Rs${ps.fullYearTarget?.toLocaleString()}bn — though this partly reflects provinces under-spending their development budgets early in the year, which typically accelerates in the final quarter.`}
+            description={`Cash surplus each province actually ran in ${ps.period || 'the latest reported period'}, in PKR billion. The combined Rs${ps.actualTotal?.toLocaleString()}bn ${ps.actualTotal != null && ps.fullYearTarget != null && ps.actualTotal > ps.fullYearTarget ? 'already exceeded' : 'is measured against'} the full-year IMF target of Rs${ps.fullYearTarget?.toLocaleString()}bn — early-year surpluses can partly reflect provinces under-spending development budgets, which typically accelerate later.`}
             source={ps.sources?.[0]?.label || 'Ministry of Finance — Fiscal Operations'}
             dataSource="Ministry of Finance — Fiscal Operations"
             dataCoverage={ps.period}

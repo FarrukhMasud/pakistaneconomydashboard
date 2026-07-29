@@ -6,6 +6,7 @@ import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import ChartCard from './ChartCard';
 import GoodBadUgly from './ui/GoodBadUgly';
+import { LoadingCard, ErrorCard } from './ui/DataState';
 import './ui/Budget.css';
 import useI18n from '../i18n/useI18n';
 
@@ -32,11 +33,11 @@ function deltaSub(cur, prev) {
 
 export default function FederalBudgetSection() {
   const { tx } = useI18n();
-  const { data, loading, error } = useData('budget-federal.json');
+  const { data, loading, error, retry } = useData('budget-federal.json');
   const [fyIndex, setFyIndex] = useState(0);
 
-  if (loading || !data) return <div className="card loading-card"><div className="spinner" /><span>Loading federal budget…</span></div>;
-  if (error) return <p style={{ color: COLORS.coral }}>Error: {error.message}</p>;
+  if (loading) return <LoadingCard label="Loading federal budget…" />;
+  if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load federal budget" />;
 
   const { years = [], source, dataSource, lastUpdated, lastVerified, methodologyNote } = data;
   if (years.length === 0) return <p>{tx("No budget data available.")}</p>;

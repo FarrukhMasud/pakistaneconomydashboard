@@ -1,5 +1,6 @@
 import { useData } from '../hooks/useData';
 import SourceBadge from './SourceBadge';
+import { LoadingCard, ErrorCard } from './ui/DataState';
 import { useI18n } from '../i18n/useI18n';
 
 const SOURCE_LINKS = [
@@ -33,13 +34,23 @@ function expectedText(row, lang, t) {
  * printed on every row so a reader can tell a projection from an announcement.
  */
 export default function ReleaseCalendarSection({ compact = false }) {
-  const { data, loading, error } = useData('release-calendar.json');
+  const { data, loading, error, retry } = useData('release-calendar.json');
   const { t, lang } = useI18n();
 
-  if (loading) {
-    return <div className="card loading-card"><div className="spinner" /><span>{t('release.title')}…</span></div>;
+  if (loading) return <LoadingCard label={`${t('release.title')}…`} />;
+  if (error || !data?.releases?.length) {
+    if (error || !data) {
+      return (
+        <ErrorCard
+          error={error}
+          onRetry={retry}
+          label="Could not load release calendar"
+          compact={compact}
+        />
+      );
+    }
+    return null;
   }
-  if (error || !data?.releases?.length) return null;
 
   const rows = compact
     ? data.releases.filter(row => row.status === 'overdue' || row.status === 'due' || row.critical).slice(0, 8)

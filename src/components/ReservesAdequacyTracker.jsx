@@ -2,13 +2,15 @@ import { Line } from 'react-chartjs-2';
 import { useData } from '../hooks/useData';
 import { COLORS, baseLineOptions } from '../utils/chartConfig';
 import TrackerFooter from './ui/TrackerFooter';
+import { LoadingCard, ErrorCard } from './ui/DataState';
 import './ui/Trackers.css';
 import useI18n from '../i18n/useI18n';
 
 export default function ReservesAdequacyTracker() {
   const { tx } = useI18n();
-  const { data, loading, error } = useData('reserves-adequacy.json');
-  if (loading || !data || error) return null;
+  const { data, loading, error, retry } = useData('reserves-adequacy.json');
+  if (loading) return <LoadingCard label="Loading reserves adequacy…" />;
+  if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load reserves adequacy" compact />;
 
   const { current, benchmark, imfTarget, trajectory = [], drivers = [], context, sourceUrl, lastVerified, verifiedFrom, methodologyNote } = data;
 

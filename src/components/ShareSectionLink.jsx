@@ -9,10 +9,10 @@ import { useI18n } from '../i18n/useI18n';
 export default function ShareSectionLink({ groupId, sectionId, label }) {
   const [copied, setCopied] = useState(false);
   const { t } = useI18n();
-  const href = `#/${groupId}/${sectionId}`;
+  const href = `/${groupId}/${sectionId}`;
 
   const copy = async () => {
-    const url = `${window.location.origin}${window.location.pathname}${href}`;
+      const url = `${window.location.origin}${href}`;
     try {
       await navigator.clipboard.writeText(url);
       setCopied(true);

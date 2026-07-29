@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import useI18n from '../i18n/useI18n';
+import { INDICATOR_CATALOG } from '../utils/indicatorCatalog';
+import { useWatchlist } from '../hooks/useWatchlist';
 
 function isTypingTarget(target) {
   if (!target) return false;
@@ -14,7 +16,6 @@ function score(haystack, needle) {
   const index = text.indexOf(query);
   if (index === 0) return 3;
   if (index > 0) return 2;
-  // Fall back to a loose subsequence match so "fbrtax" still finds "FBR Tax".
   let cursor = 0;
   for (const char of query) {
     cursor = text.indexOf(char, cursor);
@@ -25,44 +26,59 @@ function score(haystack, needle) {
 }
 
 /**
- * Ctrl/Cmd+K jump-to-section palette.
- *
- * With 30 sections across 5 groups, hunting through two rows of tabs is the
- * slowest part of using the dashboard. The palette searches the translated
- * labels, the English labels and the group names at once, so it works in either
- * language and still matches on the source term a user may have read elsewhere.
+ * Ctrl/Cmd+K jump-to-section + indicator palette.
  */
 export default function CommandPalette({ groups, onNavigate, groupLabel, sectionLabel }) {
   const { t } = useI18n();
+  const { isPinned, toggle } = useWatchlist();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
   const inputRef = useRef(null);
   const listRef = useRef(null);
+  const dialogRef = useRef(null);
 
-  const entries = useMemo(() => groups.flatMap((group) => group.sections.map((section) => ({
-    key: `${group.id}/${section.id}`,
+  const sectionEntries = useMemo(() => groups.flatMap((group) => group.sections.map((section) => ({
+    key: `section:${group.id}/${section.id}`,
+    kind: 'section',
     groupId: group.id,
     sectionId: section.id,
     icon: group.icon,
     group: groupLabel(group),
     label: sectionLabel(section),
-    // Keep the untranslated labels searchable so an English search term still
-    // works while the interface is in Urdu.
     haystack: [sectionLabel(section), section.label, groupLabel(group), group.label, section.id].join(' '),
   }))), [groups, groupLabel, sectionLabel]);
 
+  const indicatorEntries = useMemo(() => INDICATOR_CATALOG.map((item) => ({
+    key: `indicator:${item.id}`,
+    kind: 'indicator',
+    groupId: item.groupId,
+    sectionId: item.sectionId,
+    icon: '📌',
+    group: t('palette.indicator', 'Indicator'),
+    label: item.label,
+    haystack: [item.label, item.id, ...(item.terms || [])].join(' '),
+  })), [t]);
+
+  const entries = useMemo(
+    () => [...sectionEntries, ...indicatorEntries],
+    [sectionEntries, indicatorEntries],
+  );
+
   const results = useMemo(() => {
-    if (!query.trim()) return entries;
+    if (!query.trim()) return sectionEntries;
     return entries
       .map((entry) => ({ entry, rank: score(entry.haystack, query.trim()) }))
       .filter((item) => item.rank > 0)
-      .sort((a, b) => b.rank - a.rank)
+      .sort((a, b) => {
+        if (b.rank !== a.rank) return b.rank - a.rank;
+        // Prefer exact section matches slightly over indicators at same rank
+        if (a.entry.kind !== b.entry.kind) return a.entry.kind === 'section' ? -1 : 1;
+        return 0;
+      })
       .map((item) => item.entry);
-  }, [entries, query]);
+  }, [entries, sectionEntries, query]);
 
-  // Clamp during render rather than in an effect so a shrinking result list
-  // never leaves the highlight pointing past the end.
   const selectedIndex = results.length ? Math.min(activeIndex, results.length - 1) : 0;
 
   const openPalette = () => {
@@ -95,8 +111,27 @@ export default function CommandPalette({ groups, onNavigate, groupLabel, section
   }, [open]);
 
   useEffect(() => {
-    if (!open) return;
+    if (!open) return undefined;
     inputRef.current?.focus();
+
+    const onKeyDown = (event) => {
+      if (event.key !== 'Tab' || !dialogRef.current) return;
+      const focusable = dialogRef.current.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      );
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
   }, [open]);
 
   useEffect(() => {
@@ -152,7 +187,7 @@ export default function CommandPalette({ groups, onNavigate, groupLabel, section
             if (event.target === event.currentTarget) setOpen(false);
           }}
         >
-          <div className="palette" role="dialog" aria-modal="true" aria-label={t('palette.label', 'Section search')}>
+          <div ref={dialogRef} className="palette" role="dialog" aria-modal="true" aria-label={t('palette.label', 'Section search')}>
             <input
               ref={inputRef}
               className="palette__input"
@@ -165,14 +200,17 @@ export default function CommandPalette({ groups, onNavigate, groupLabel, section
               aria-autocomplete="list"
             />
             <ul className="palette__results" id="palette-results" role="listbox" ref={listRef}>
-              {results.map((entry, index) => (
-                <li key={entry.key}>
+              {results.map((entry, index) => {
+                const pinId = entry.kind === 'indicator' ? entry.key.replace(/^indicator:/, '') : null;
+                const pinned = pinId ? isPinned(pinId) : false;
+                return (
+                <li key={entry.key} className="palette__row">
                   <button
                     type="button"
                     role="option"
                     aria-selected={index === selectedIndex}
                     data-active={index === selectedIndex}
-                    className={`palette__item ${index === selectedIndex ? 'active' : ''}`}
+                    className={`palette__item ${index === selectedIndex ? 'active' : ''} ${entry.kind === 'indicator' ? 'palette__item--indicator' : ''}`}
                     onMouseEnter={() => setActiveIndex(index)}
                     onClick={() => choose(entry)}
                   >
@@ -180,8 +218,24 @@ export default function CommandPalette({ groups, onNavigate, groupLabel, section
                     <span className="palette__label">{entry.label}</span>
                     <span className="palette__group">{entry.group}</span>
                   </button>
+                  {pinId && (
+                    <button
+                      type="button"
+                      className={`palette__pin ${pinned ? 'is-pinned' : ''}`}
+                      aria-pressed={pinned}
+                      aria-label={pinned ? t('watchlist.unpin', 'Unpin') : t('watchlist.pin', 'Pin to watchlist')}
+                      title={pinned ? t('watchlist.unpin', 'Unpin') : t('watchlist.pin', 'Pin to watchlist')}
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        toggle(pinId);
+                      }}
+                    >
+                      {pinned ? '★' : '☆'}
+                    </button>
+                  )}
                 </li>
-              ))}
+                );
+              })}
               {results.length === 0 && (
                 <li className="palette__empty">{t('palette.noResults', 'No matching section')}</li>
               )}

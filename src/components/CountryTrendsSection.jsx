@@ -4,6 +4,7 @@ import { useData } from '../hooks/useData';
 import { COLORS, baseLineOptions } from '../utils/chartConfig';
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
+import { LoadingCard, ErrorCard } from './ui/DataState';
 import { fmtUSD, formatMonthYear } from '../utils/periodHelpers';
 import './ui/CountryTrends.css';
 import useI18n from '../i18n/useI18n';
@@ -67,7 +68,7 @@ function FlowRow({ icon, label, snap, latestMonth, goodWhenUp }) {
 
 export default function CountryTrendsSection() {
   const { tx } = useI18n();
-  const { data: trade, loading: tLoading } = useData('trade.json');
+  const { data: trade, loading: tLoading, error: tError, retry: tRetry } = useData('trade.json');
   const { data: remit, loading: rLoading } = useData('remittances.json');
 
   const remitByCountry = useMemo(() => {
@@ -105,9 +106,8 @@ export default function CountryTrendsSection() {
     };
   }, [remit]);
 
-  if (tLoading || rLoading || !trade) {
-    return <div className="card loading-card"><div className="spinner" /><span>Loading data…</span></div>;
-  }
+  if (tLoading || rLoading) return <LoadingCard label="Loading country trends…" />;
+  if (tError || !trade) return <ErrorCard error={tError} onRetry={tRetry} label="Could not load country trends" />;
 
   const cm = trade.countryMonthly;
   if (!cm || !cm.countries?.length) {
@@ -167,8 +167,16 @@ export default function CountryTrendsSection() {
 
       <div className="country-cards">
         {cm.countries.map((c) => {
-          const balance = (c.exports?.fytd || 0) - (c.imports?.fytd || 0);
-          const surplus = balance >= 0;
+          const expFytd = c.exports?.fytd;
+                    const impFytd = c.imports?.fytd;
+                    const balance = expFytd != null && impFytd != null
+                      ? expFytd - impFytd
+                      : expFytd != null
+                        ? expFytd
+                        : impFytd != null
+                          ? -impFytd
+                          : null;
+                    const surplus = balance == null ? null : balance >= 0;
           const rem = remitByCountry[c.country];
           const expGrowth = pct(c.exports?.fytd, c.exports?.fytdPrior);
           const impGrowth = pct(c.imports?.fytd, c.imports?.fytdPrior);
@@ -177,9 +185,11 @@ export default function CountryTrendsSection() {
               <div className="country-card__head">
                 <span className="country-card__flag">{c.flag}</span>
                 <h3 className="country-card__name">{c.country}</h3>
-                <span className={`balance-badge ${surplus ? 'surplus' : 'deficit'}`}>
-                  {surplus ? 'Surplus' : 'Deficit'} ${fmtUSD(Math.abs(balance))}
-                </span>
+                {balance != null && (
+                                  <span className={`balance-badge ${surplus ? 'surplus' : 'deficit'}`}>
+                                    {surplus ? 'Surplus' : 'Deficit'} ${fmtUSD(Math.abs(balance))}
+                                  </span>
+                                )}
               </div>
 
               <FlowRow icon="🚢" label="Exports to" snap={c.exports} latestMonth={cm.latestMonth} goodWhenUp />

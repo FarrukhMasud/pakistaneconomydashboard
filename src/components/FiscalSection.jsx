@@ -7,6 +7,7 @@ import SummaryCard from './ui/SummaryCard';
 import ImfTracker from './ImfTracker';
 import CircularDebtTracker from './CircularDebtTracker';
 import ExternalDebtTracker from './ExternalDebtTracker';
+import { LoadingCard, ErrorCard } from './ui/DataState';
 import { fmtPKR, fmtPct } from '../utils/periodHelpers';
 
 function formatTrillion(val) {
@@ -14,10 +15,10 @@ function formatTrillion(val) {
 }
 
 export default function FiscalSection() {
-  const { data, loading, error } = useData('fiscal.json');
+  const { data, loading, error, retry } = useData('fiscal.json');
 
-  if (loading || !data) return <div className="card loading-card"><div className="spinner" /><span>Loading data…</span></div>;
-  if (error) return <div className="card fade-in"><p>Error loading fiscal data: {error.message}</p></div>;
+  if (loading) return <LoadingCard label="Loading fiscal data…" />;
+  if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load fiscal data" />;
 
   const { annual, publicFinance, dataSource, lastUpdated, dataCoverage: fiscDC } = data;
 

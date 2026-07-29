@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { useData } from '../hooks/useData';
 import {
@@ -8,54 +9,119 @@ import {
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
+import PeriodCompare from './ui/PeriodCompare';
+import SeriesFocus from './ui/SeriesFocus';
+import { applySeriesFocus } from '../utils/seriesFocus';
 import ReservesAdequacyTracker from './ReservesAdequacyTracker';
-import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, formatMonthYear, formatDayMonthYear } from '../utils/periodHelpers';
+import { LoadingCard, ErrorCard, UnavailableCard } from './ui/DataState';
+import {
+  currentCalendarYear,
+  currentFiscalYear,
+  pctChange,
+  fmtUSD,
+  formatMonthYear,
+  formatDayMonthYear,
+  buildYoYOverlay,
+  buildFytdSeries,
+} from '../utils/periodHelpers';
 
 function formatDate(dateStr) {
   if (!dateStr) return '';
-  // Handle both YYYY-MM (monthly) and YYYY-MM-DD (weekly) formats
-  if (dateStr.length <= 7) {
-    return formatMonthYear(dateStr);
-  }
+  if (dateStr.length <= 7) return formatMonthYear(dateStr);
   return formatDayMonthYear(dateStr);
 }
 
 export default function ReservesSection() {
-  const { data, loading, error } = useData('reserves.json');
+  const [compareMode, setCompareMode] = useState('off');
+  const [focus, setFocus] = useState(null);
+  const showYoY = compareMode === 'yoy';
+  const showFytd = compareMode === 'fytd';
+  const { data, loading, error, retry } = useData('reserves.json');
   const adequacy = useData('reserves-adequacy.json');
 
-  if (loading || !data) return <div className="card loading-card"><div className="spinner" /><span>Loading data…</span></div>;
-  if (error) return <p style={{ color: COLORS.coral }}>Error: {error.message}</p>;
+  if (loading) return <LoadingCard label="Loading reserves data…" />;
+  if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load reserves data" />;
 
   const timeSeries = data.weekly || data.monthly || [];
   const { dataSource, lastUpdated, dataCoverage } = data;
 
-  const labels = timeSeries.map((d) => formatDate(d.date));
-  const tickInterval = Math.max(1, Math.floor(timeSeries.length / 12));
+  if (!timeSeries.length) {
+    return <UnavailableCard label="Could not load reserves data" reason="Reserves series is empty." />;
+  }
+
+  const cy = currentCalendarYear(timeSeries);
+  const fy = currentFiscalYear(timeSeries);
+  const fytdSbp = buildFytdSeries(timeSeries, 'sbp');
+  const fytdTotal = buildFytdSeries(timeSeries, 'total');
+  const { priorData: sbpPrior, priorLabel: sbpPriorLabel } = buildYoYOverlay(timeSeries, 'sbp');
+
+  const labels = showFytd && fytdSbp ? fytdSbp.labels : timeSeries.map((d) => formatDate(d.date));
+  const tickInterval = Math.max(1, Math.floor(labels.length / 12));
   const tickCallback = (_val, idx) => (idx % tickInterval === 0 ? labels[idx] : '');
+
+  const baseDatasets = showFytd && fytdSbp && fytdTotal
+    ? [
+        {
+          label: `${fytdSbp.currentLabel} SBP reserves`,
+          data: fytdSbp.current,
+          borderColor: COLORS.teal,
+          backgroundColor: COLORS.tealAlpha,
+          fill: true,
+          pointRadius: 1,
+          pointHoverRadius: 5,
+        },
+        {
+          label: `${fytdTotal.currentLabel} total`,
+          data: fytdTotal.current,
+          borderColor: COLORS.blue,
+          backgroundColor: 'transparent',
+          borderDash: [5, 3],
+          pointRadius: 0,
+          pointHoverRadius: 4,
+        },
+        ...(fytdSbp.prior.some((v) => v != null) ? [{
+          label: `${fytdSbp.priorLabel} SBP (same months)`,
+          data: fytdSbp.prior,
+          borderColor: COLORS.amber,
+          backgroundColor: 'transparent',
+          borderDash: [4, 3],
+          pointRadius: 0,
+          pointHoverRadius: 3,
+        }] : []),
+      ]
+    : [
+        {
+          label: 'SBP Reserves (USD M)',
+          data: timeSeries.map((d) => d.sbp),
+          borderColor: COLORS.teal,
+          backgroundColor: COLORS.tealAlpha,
+          fill: true,
+          pointRadius: 1,
+          pointHoverRadius: 5,
+        },
+        {
+          label: 'Total (SBP + Banks)',
+          data: timeSeries.map((d) => d.total),
+          borderColor: COLORS.blue,
+          backgroundColor: 'transparent',
+          borderDash: [5, 3],
+          pointRadius: 0,
+          pointHoverRadius: 4,
+        },
+        ...(showYoY && sbpPrior.some((v) => v != null) ? [{
+          label: sbpPriorLabel || 'Prior year SBP',
+          data: sbpPrior,
+          borderColor: COLORS.amber,
+          backgroundColor: 'transparent',
+          borderDash: [4, 3],
+          pointRadius: 0,
+          pointHoverRadius: 3,
+        }] : []),
+      ];
 
   const chartData = {
     labels,
-    datasets: [
-      {
-        label: 'SBP Reserves (USD M)',
-        data: timeSeries.map((d) => d.sbp),
-        borderColor: COLORS.teal,
-        backgroundColor: COLORS.tealAlpha,
-        fill: true,
-        pointRadius: 1,
-        pointHoverRadius: 5,
-      },
-      {
-        label: 'Total (SBP + Banks)',
-        data: timeSeries.map((d) => d.total),
-        borderColor: COLORS.blue,
-        backgroundColor: 'transparent',
-        borderDash: [5, 3],
-        pointRadius: 0,
-        pointHoverRadius: 4,
-      },
-    ],
+    datasets: applySeriesFocus(baseDatasets, focus),
   };
 
   const options = {
@@ -86,14 +152,11 @@ export default function ReservesSection() {
   };
 
   const latest = timeSeries[timeSeries.length - 1];
-  const lowest = timeSeries.reduce((min, d) => d.sbp < min.sbp ? d : min, timeSeries[0]);
-  const cy = currentCalendarYear(timeSeries);
-  const fy = currentFiscalYear(timeSeries);
+  const lowest = timeSeries.reduce((min, d) => (d.sbp < min.sbp ? d : min), timeSeries[0]);
 
   const importCoverMonths = adequacy.data?.current?.importCoverMonths;
   const importCoverLabel = adequacy.data?.current?.importCoverLabel || 'Goods-import cover';
 
-  // Build summary items for CY
   const cyItems = [];
   if (cy) {
     const startVal = cy.rows[0]?.sbp;
@@ -106,7 +169,6 @@ export default function ReservesSection() {
     );
   }
 
-  // Build summary items for FY
   const fyItems = [];
   if (fy && fy.rows.length > 0) {
     const fyStart = fy.rows[0]?.sbp;
@@ -118,6 +180,8 @@ export default function ReservesSection() {
       { label: 'Lowest in Period', value: fmtUSD(lowest.sbp), sub: formatDate(lowest.date), color: COLORS.coral },
     );
   }
+
+  const seriesLabels = baseDatasets.map((d) => d.label);
 
   return (
     <section className="fade-in">
@@ -138,6 +202,7 @@ export default function ReservesSection() {
               accent={COLORS.teal}
               items={cyItems}
               footnote={`${cy.months} data points · Source: ${dataSource || 'SBP'}`}
+              provenanceKeys={['reserves.weekly.total']}
             />
           )}
           {fyItems.length > 0 && (
@@ -153,13 +218,15 @@ export default function ReservesSection() {
 
       <ChartCard
         title="Foreign Exchange Reserves"
-        description="SBP gross reserves (solid) and total reserves including commercial banks (dashed). Reserve cover is the single most-watched measure of Pakistan's ability to meet external obligations."
+        description="SBP gross reserves (solid) and total reserves including commercial banks (dashed). Use YoY overlay or FYTD vs prior FY to compare the recovery path. Reserve cover is the single most-watched measure of Pakistan's ability to meet external obligations."
         noteKey="reserves.recovery"
         dataSource={dataSource}
         lastUpdated={lastUpdated}
         dataCoverage={dataCoverage}
         provenanceKeys={['reserves.weekly.total']}
       >
+        <PeriodCompare mode={compareMode} onChange={setCompareMode} modes={['yoy', 'fytd']} />
+        <SeriesFocus labels={seriesLabels.slice(0, 2)} focus={focus} onChange={setFocus} />
         <div style={{ height: 350 }}>
           <Line data={chartData} options={options} />
         </div>

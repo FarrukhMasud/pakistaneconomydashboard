@@ -65,8 +65,8 @@ const stringsUr = {
   'Foreign Exchange Reserves': 'زرِ مبادلہ کے ذخائر',
   'Pakistan\u2019s foreign currency reserves held by the State Bank of Pakistan and commercial banks. The canonical goods-import-cover measure below uses SBP-held reserves and trailing official goods imports. Reserves hit critically low levels in early 2023 before recovering under successive IMF-supported programs.':
     'اسٹیٹ بینک اور تجارتی بینکوں کے پاس موجود غیر ملکی کرنسی کے ذخائر۔ نیچے دیا گیا درآمدی کور کا معیاری پیمانہ اسٹیٹ بینک کے ذخائر اور گزشتہ بارہ ماہ کی سرکاری درآمدات پر مبنی ہے۔ ذخائر 2023 کے اوائل میں شدید کمی کا شکار ہوئے اور بعد ازاں آئی ایم ایف پروگراموں کے تحت بحال ہوئے۔',
-  'SBP gross reserves (solid) and total reserves including commercial banks (dashed). Reserve cover is the single most-watched measure of Pakistan\u2019s ability to meet external obligations.':
-    'اسٹیٹ بینک کے مجموعی ذخائر (مسلسل لکیر) اور تجارتی بینکوں سمیت کل ذخائر (نقطہ دار)۔ ذخائر کا کور پاکستان کی بیرونی ذمہ داریاں پوری کرنے کی صلاحیت کا سب سے اہم پیمانہ ہے۔',
+  'SBP gross reserves (solid) and total reserves including commercial banks (dashed). Use YoY overlay or FYTD vs prior FY to compare the recovery path. Reserve cover is the single most-watched measure of Pakistan\'s ability to meet external obligations.':
+      'اسٹیٹ بینک کے مجموعی ذخائر (مسلسل لکیر) اور تجارتی بینکوں سمیت کل ذخائر (نقطہ دار)۔ سالانہ موازنہ یا مالی سال تا حال بمقابلہ گزشتہ مالی سال سے بحالی کا موازنہ کریں۔ ذخائر کا کور پاکستان کی بیرونی ذمہ داریاں پوری کرنے کی صلاحیت کا سب سے اہم پیمانہ ہے۔',
 
   // ===== Exchange rate =====
   'Exchange Rates': 'شرحِ مبادلہ',
@@ -296,12 +296,7 @@ const stringsUr = {
   YoY: 'سالانہ',
   'Expand tile': 'خانہ بڑا کریں',
   'Close expanded tile': 'بڑا خانہ بند کریں',
-  'Loading official data\u2026': 'سرکاری اعداد و شمار لوڈ ہو رہے ہیں\u2026',
   'The Good, the Bad & the Ugly': 'بہتر، خراب اور تشویشناک',
-  'The original budget target (blue), revised target (amber), and reported collection (teal). FY2025-26\u2019s Rs12.983T is a pre-year-end budget-speech estimate, not an FBR year-end actual; the chart and notes label it accordingly.':
-    'اصل بجٹ ہدف (نیلا)، نظرثانی شدہ ہدف (کہرُبائی) اور رپورٹ شدہ وصولی (سبزی مائل)۔ مالی سال 2025-26 کا 12.983 کھرب روپے کا عدد سال ختم ہونے سے پہلے بجٹ تقریر کا تخمینہ ہے، ایف بی آر کا سال کے اختتام کا حتمی عدد نہیں؛ چارٹ اور نوٹس میں اسے اسی طرح واضح کیا گیا ہے۔',
-  'Available monthly net FBR collection in PKR billion. FY2024-25 comes from FBR\u2019s official table; for FY2025-26 only July 2025 (secondary-attributed) and January 2026 (official FBR release) are shown. Missing months are intentionally left absent rather than estimated.':
-    'دستیاب ماہانہ خالص ایف بی آر وصولی، ارب روپے میں۔ مالی سال 2024-25 کے اعداد ایف بی آر کے سرکاری جدول سے ہیں؛ مالی سال 2025-26 کے لیے صرف جولائی 2025 (ثانوی حوالہ) اور جنوری 2026 (ایف بی آر کی سرکاری اشاعت) دکھائے گئے ہیں۔ غائب مہینوں کا تخمینہ لگانے کے بجائے انہیں جان بوجھ کر خالی چھوڑا گیا ہے۔',
   // ===== Inline labels, tiles, badges & table headers =====
   'State Bank of Pakistan': 'اسٹیٹ بینک آف پاکستان',
   'Pakistan Bureau of Statistics': 'ادارہ شماریات پاکستان',
@@ -518,6 +513,81 @@ const stringsUr = {
   'Exports of services (credit)': 'خدمات کی برآمدات (کریڈٹ)',
   'Imports of services (debit)': 'خدمات کی درآمدات (ڈیبٹ)',
   'Balance on trade in services': 'خدمات کے تجارتی توازن کا خلاصہ',
-};
 
-export default stringsUr;
+    // ===== Loading / error labels =====
+    'Loading circular debt tracker…': 'سرکلر ڈیٹ ٹریکر لوڈ ہو رہا ہے…',
+    'Could not load circular debt tracker': 'سرکلر ڈیٹ ٹریکر لوڈ نہیں ہو سکا',
+    'Loading country trends…': 'ملکی رجحانات لوڈ ہو رہے ہیں…',
+    'Could not load country trends': 'ملکی رجحانات لوڈ نہیں ہو سکے',
+    'Could not load source audit': 'ماخذ آڈٹ لوڈ نہیں ہو سکا',
+    'Something went wrong in this section': 'اس حصے میں کچھ غلط ہو گیا',
+    'Loading exchange rates…': 'زرِ مبادلہ کی شرحیں لوڈ ہو رہی ہیں…',
+    'Could not load exchange rates': 'زرِ مبادلہ کی شرحیں لوڈ نہیں ہو سکیں',
+    'Loading external debt tracker…': 'بیرونی قرض ٹریکر لوڈ ہو رہا ہے…',
+    'Could not load external debt tracker': 'بیرونی قرض ٹریکر لوڈ نہیں ہو سکا',
+    'Loading FBR tax data…': 'ایف بی آر ٹیکس ڈیٹا لوڈ ہو رہا ہے…',
+    'Could not load FBR tax data': 'ایف بی آر ٹیکس ڈیٹا لوڈ نہیں ہو سکا',
+    'Loading FDI data…': 'ایف ڈی آئی ڈیٹا لوڈ ہو رہا ہے…',
+    'Could not load FDI data': 'ایف ڈی آئی ڈیٹا لوڈ نہیں ہو سکا',
+    'Loading federal budget…': 'وفاقی بجٹ لوڈ ہو رہا ہے…',
+    'Could not load federal budget': 'وفاقی بجٹ لوڈ نہیں ہو سکا',
+    'Loading fiscal data…': 'مالیاتی ڈیٹا لوڈ ہو رہا ہے…',
+    'Could not load fiscal data': 'مالیاتی ڈیٹا لوڈ نہیں ہو سکا',
+    'Loading IMF tracker…': 'آئی ایم ایف ٹریکر لوڈ ہو رہا ہے…',
+    'Could not load IMF tracker': 'آئی ایم ایف ٹریکر لوڈ نہیں ہو سکا',
+    'Loading inflation data…': 'مہنگائی کا ڈیٹا لوڈ ہو رہا ہے…',
+    'Could not load inflation data': 'مہنگائی کا ڈیٹا لوڈ نہیں ہو سکا',
+    'Revenue target meter': 'محصولاتی ہدف میٹر',
+    'IT export deep dive': 'آئی ٹی برآمدات کی تفصیل',
+    'Peer comparison': 'ہم مرتبہ ممالک کا موازنہ',
+    'Economic timeline': 'معاشی ٹائم لائن',
+    'Learning center': 'تعلیمی مرکز',
+    'Loading source trust audit…': 'ماخذ اعتبار آڈٹ لوڈ ہو رہا ہے…',
+    'Source trust': 'ماخذ اعتبار',
+    'Loading overview…': 'جائزہ لوڈ ہو رہا ہے…',
+    'Could not load economic overview': 'معاشی جائزہ لوڈ نہیں ہو سکا',
+    'Loading monetary policy tracker…': 'زری پالیسی ٹریکر لوڈ ہو رہا ہے…',
+    'Could not load monetary policy tracker': 'زری پالیسی ٹریکر لوڈ نہیں ہو سکا',
+    'Loading monetary data…': 'زری ڈیٹا لوڈ ہو رہا ہے…',
+    'Could not load monetary data': 'زری ڈیٹا لوڈ نہیں ہو سکا',
+    'Loading provincial budgets…': 'صوبائی بجٹ لوڈ ہو رہے ہیں…',
+    'Could not load provincial budgets': 'صوبائی بجٹ لوڈ نہیں ہو سکے',
+    'Could not load release calendar': 'اشاعت شیڈول لوڈ نہیں ہو سکا',
+    'Loading remittances…': 'ترسیلات لوڈ ہو رہی ہیں…',
+    'Could not load remittances': 'ترسیلات لوڈ نہیں ہو سکیں',
+    'Loading reserves adequacy…': 'ذخائر کی کفایت لوڈ ہو رہی ہے…',
+    'Could not load reserves adequacy': 'ذخائر کی کفایت لوڈ نہیں ہو سکی',
+    'Loading reserves data…': 'ذخائر کا ڈیٹا لوڈ ہو رہا ہے…',
+    'Could not load reserves data': 'ذخائر کا ڈیٹا لوڈ نہیں ہو سکا',
+    'Loading services data…': 'خدمات کا ڈیٹا لوڈ ہو رہا ہے…',
+    'Could not load services data': 'خدمات کا ڈیٹا لوڈ نہیں ہو سکا',
+    'Loading snapshot…': 'اسنیپ شاٹ لوڈ ہو رہا ہے…',
+    'Could not load snapshot': 'اسنیپ شاٹ لوڈ نہیں ہو سکا',
+    'Loading trade data…': 'تجارتی ڈیٹا لوڈ ہو رہا ہے…',
+    'Could not load trade data': 'تجارتی ڈیٹا لوڈ نہیں ہو سکا',
+
+    // ===== Export pack =====
+    'Export pack & printable briefing': 'ایکسپورٹ پیک اور پرنٹ ایبل بریفنگ',
+    'Download a ZIP of headline CSVs and source JSON, or open a one-page briefing you can print to PDF.':
+      'اہم CSV اور ماخذ JSON کا ZIP ڈاؤن لوڈ کریں، یا ایک صفحے کی بریفنگ کھولیں جسے پی ڈی ایف میں پرنٹ کر سکتے ہیں۔',
+    'Download data pack (ZIP)': 'ڈیٹا پیک ڈاؤن لوڈ کریں (ZIP)',
+    'Open printable briefing': 'پرنٹ ایبل بریفنگ کھولیں',
+    'Critical series RSS': 'اہم سلسلوں کی آر ایس ایس',
+
+    // ===== Overview polish (P2) =====
+    'Reserves': 'ذخائر',
+    'CPI': 'سی پی آئی',
+    'FBR FYTD': 'ایف بی آر مالی سال تا حال',
+    'Trade balance': 'تجارتی توازن',
+    'Remittances': 'ترسیلات زر',
+    'What moved': 'کیا بدلا',
+    'Your watchlist': 'آپ کی واچ لسٹ',
+    'Page not found': 'صفحہ نہیں ملا',
+    'Back to overview': 'جائزے پر واپس',
+    'All series': 'تمام سیریز',
+    'IT & Telecom': 'آئی ٹی اور ٹیلی کام',
+    'Freelance IT': 'فری لانس آئی ٹی',
+    'Citation': 'حوالہ',
+  };
+
+  export default stringsUr;

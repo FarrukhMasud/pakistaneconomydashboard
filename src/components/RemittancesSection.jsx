@@ -5,8 +5,9 @@ import { COLORS, COLOR_LIST, baseBarOptions } from '../utils/chartConfig';
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
-import YoYToggle from './ui/YoYToggle';
-import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, sumField, avgField, buildYoYOverlay } from '../utils/periodHelpers';
+import PeriodCompare from './ui/PeriodCompare';
+import { LoadingCard, ErrorCard, UnavailableCard } from './ui/DataState';
+import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, sumField, avgField, buildYoYOverlay, buildFytdSeries } from '../utils/periodHelpers';
 
 const CORRIDORS = [
   { field: 'saudiArabia', label: 'Saudi Arabia', color: COLORS.teal },
@@ -34,57 +35,70 @@ function withOtherCountries(row) {
 }
 
 export default function RemittancesSection() {
-  const [showYoY, setShowYoY] = useState(false);
-  const { data, loading, error } = useData('remittances.json');
+  const [compareMode, setCompareMode] = useState('off');
+    const showYoY = compareMode === 'yoy';
+    const showFytd = compareMode === 'fytd';
+    const { data, loading, error, retry } = useData('remittances.json');
 
-  if (loading || !data) return <div className="card loading-card"><div className="spinner" /><span>Loading data…</span></div>;
-  if (error) return <div className="card fade-in"><p>Error loading remittances: {error.message}</p></div>;
+    if (loading) return <LoadingCard label="Loading remittances…" />;
+    if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load remittances" />;
 
-  const { monthly, sourceCountries, lastUpdated: remLU, dataCoverage: remDC } = data;
-  const cy = currentCalendarYear(monthly);
-  const fy = currentFiscalYear(monthly);
-  const corridorRows = monthly.slice(-36).map(withOtherCountries);
-  const latestCorridor = corridorRows.at(-1);
-  const corridorSummary = latestCorridor ? CORRIDORS
-    .map((corridor) => ({
-      label: corridor.label,
-      value: latestCorridor[corridor.field],
-      share: latestCorridor.total ? (latestCorridor[corridor.field] / latestCorridor.total) * 100 : 0,
-      color: corridor.color,
-    }))
-    .sort((a, b) => b.value - a.value) : [];
+    const { monthly, sourceCountries, lastUpdated: remLU, dataCoverage: remDC } = data;
+    if (!monthly?.length) {
+      return <UnavailableCard label="Could not load remittances" reason="Remittance series is empty." />;
+    }
 
-  // Chart 1 — Monthly total remittances (vertical bar)
-  const { priorData: remPrior, priorLabel: remPriorLabel } = buildYoYOverlay(monthly, 'total');
-  const monthlyData = {
-    labels: monthly.map((d) => formatDate(d.date)),
-    datasets: [
-      {
-        label: 'Total Remittances',
-        data: monthly.map((d) => d.total),
-        backgroundColor: COLORS.teal,
-        borderColor: COLORS.teal,
-        borderWidth: 1,
-        borderRadius: 4,
+    const cy = currentCalendarYear(monthly);
+    const fy = currentFiscalYear(monthly);
+    const fytdTotal = buildFytdSeries(monthly, 'total');
+    const corridorRows = monthly.slice(-36).map(withOtherCountries);
+    const latestCorridor = corridorRows.at(-1);
+    const corridorSummary = latestCorridor ? CORRIDORS
+      .map((corridor) => ({
+        label: corridor.label,
+        value: latestCorridor[corridor.field],
+        share: latestCorridor.total ? (latestCorridor[corridor.field] / latestCorridor.total) * 100 : null,
+        color: corridor.color,
+      }))
+      .sort((a, b) => (b.value ?? -Infinity) - (a.value ?? -Infinity)) : [];
+
+    // Chart 1 — Monthly total remittances (vertical bar)
+    const { priorData: remPrior, priorLabel: remPriorLabel } = buildYoYOverlay(monthly, 'total');
+    const remLabels = showFytd && fytdTotal ? fytdTotal.labels : monthly.map((d) => formatDate(d.date));
+    const remValues = showFytd && fytdTotal ? fytdTotal.current : monthly.map((d) => d.total);
+    const remCompare = showFytd && fytdTotal ? fytdTotal.prior : remPrior;
+    const remCompareLabel = showFytd && fytdTotal ? `${fytdTotal.priorLabel} same months` : remPriorLabel;
+    const showRemCompare = showYoY || (showFytd && remCompare.some((v) => v != null));
+
+    const monthlyData = {
+      labels: remLabels,
+      datasets: [
+        {
+          label: showFytd && fytdTotal ? `${fytdTotal.currentLabel} remittances` : 'Total Remittances',
+          data: remValues,
+          backgroundColor: COLORS.teal,
+          borderColor: COLORS.teal,
+          borderWidth: 1,
+          borderRadius: 4,
+        },
+        ...(showRemCompare ? [{
+          label: remCompareLabel,
+          data: remCompare,
+          backgroundColor: 'rgba(255, 167, 38, 0.25)',
+          borderColor: COLORS.amber,
+          borderWidth: 1,
+          borderRadius: 4,
+          borderDash: [4, 3],
+        }] : []),
+      ],
+    };
+
+    const monthlyOptions = {
+      ...baseBarOptions,
+      plugins: {
+        ...baseBarOptions.plugins,
+        legend: { display: showRemCompare },
       },
-      ...(showYoY ? [{
-        label: remPriorLabel,
-        data: remPrior,
-        backgroundColor: 'rgba(255, 167, 38, 0.25)',
-        borderColor: COLORS.amber,
-        borderWidth: 1,
-        borderRadius: 4,
-        borderDash: [4, 3],
-      }] : []),
-    ],
-  };
-
-  const monthlyOptions = {
-    ...baseBarOptions,
-    plugins: {
-      ...baseBarOptions.plugins,
-      legend: { display: showYoY },
-    },
     scales: {
       ...baseBarOptions.scales,
       x: {
@@ -237,7 +251,7 @@ export default function RemittancesSection() {
             items={corridorSummary.map((corridor) => ({
               label: corridor.label,
               value: fmtUSD(corridor.value),
-              sub: `${corridor.share.toFixed(1)}% of total`,
+              sub: corridor.share != null ? `${corridor.share.toFixed(1)}% of total` : '',
               color: corridor.color,
             }))}
             footnote="Official SBP country/corridor buckets; Other countries is total remittances minus the published corridor buckets."
@@ -255,7 +269,7 @@ export default function RemittancesSection() {
           dataCoverage={remDC}
           provenanceKeys={['remittances.monthly.total']}
         >
-          <YoYToggle enabled={showYoY} onToggle={() => setShowYoY(v => !v)} />
+          <PeriodCompare mode={compareMode} onChange={setCompareMode} modes={['yoy', 'fytd']} />
           <div className="chart-container">
             <Bar data={monthlyData} options={monthlyOptions} />
           </div>

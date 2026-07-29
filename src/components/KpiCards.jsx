@@ -1,11 +1,15 @@
 import { useData } from '../hooks/useData';
+import { useWatchlist } from '../hooks/useWatchlist';
 import { COLORS } from '../utils/chartConfig';
 import SectionHeader from './SectionHeader';
 import DataFreshnessPanel from './DataFreshnessPanel';
 import ReleaseCalendarSection from './ReleaseCalendarSection';
 import SnapshotPanel from './SnapshotPanel';
 import CiteFigure from './CiteFigure';
+import WhatMovedStrip from './WhatMovedStrip';
+import WatchlistPanel from './WatchlistPanel';
 import ExpandableTile from './ui/ExpandableTile';
+import { LoadingCard, ErrorCard } from './ui/DataState';
 import useI18n from '../i18n/useI18n';
 
 function sentimentColor(sentiment) {
@@ -40,11 +44,18 @@ function formatChange(kpi) {
 }
 
 export default function KpiCards() {
-  const { tx } = useI18n();
-  const { data, loading, error } = useData('kpi-summary.json');
+  const { t, tx } = useI18n();
+  const { data, loading, error, retry } = useData('kpi-summary.json');
+  const { isPinned, toggle } = useWatchlist();
+  // navigate only — NAV_GROUPS not needed here; use window history via custom helper
+  const navigate = (groupId, sectionId) => {
+    const path = `/${groupId}/${sectionId}`;
+    window.history.pushState(null, '', path);
+    window.dispatchEvent(new PopStateEvent('popstate'));
+  };
 
-  if (loading || !data) return <div className="card loading-card"><div className="spinner" /><span>Loading overview…</span></div>;
-  if (error) return <p style={{ color: COLORS.coral }}>Error: {error.message}</p>;
+  if (loading) return <LoadingCard label="Loading overview…" />;
+  if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load economic overview" />;
 
   const { lastUpdated, indicators } = data;
 
@@ -61,11 +72,14 @@ export default function KpiCards() {
       <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
         Data refreshed: {lastUpdated} · All values derived from source datasets
       </p>
+      <WhatMovedStrip onNavigate={navigate} />
+      <WatchlistPanel onNavigate={navigate} />
       <div className="kpi-grid">
         {indicators.map((kpi) => {
           const sentiment = kpi.sentiment || 'neutral';
           const color = sentimentColor(sentiment);
           const changeLabel = formatChange(kpi);
+          const pinned = isPinned(kpi.id);
           return (
             <ExpandableTile
               key={kpi.id}
@@ -75,37 +89,58 @@ export default function KpiCards() {
               details={(
                 <div className="tile-detail-list">
                   <div className="tile-detail-row">
-                    <span>{tx("Latest value")}</span>
+                    <span>{tx('Latest value')}</span>
                     <strong style={{ color }}>{formatValue(kpi)}{kpi.unit}</strong>
                   </div>
                   <div className="tile-detail-row">
-                    <span>{tx("Period")}</span>
+                    <span>{tx('Period')}</span>
                     <strong>{kpi.period}</strong>
                   </div>
                   <div className="tile-detail-row">
-                    <span>{tx("Change")}</span>
+                    <span>{tx('Change')}</span>
                     <strong>{trendArrow(kpi.trend)} {changeLabel ?? 'n/a'}</strong>
                   </div>
                   {kpi.changeBasis && (
                     <div className="tile-detail-row">
-                      <span>{tx("Compared with")}</span>
+                      <span>{tx('Compared with')}</span>
                       <strong>{kpi.changeBasis}</strong>
                     </div>
                   )}
                   {kpi.sub && (
                     <div className="tile-detail-row">
-                      <span>{tx("Context")}</span>
+                      <span>{tx('Context')}</span>
                       <strong>{kpi.sub}</strong>
                     </div>
                   )}
                   <div className="tile-detail-row">
-                    <span>{tx("Source")}</span>
+                    <span>{tx('Source')}</span>
                     <strong>{kpi.source}</strong>
                   </div>
+                  {kpi.provenanceKey && (
+                    <div className="tile-detail-row">
+                      <span>{tx('Citation')}</span>
+                      <CiteFigure figureKey={kpi.provenanceKey} />
+                    </div>
+                  )}
                 </div>
               )}
             >
-              <div className="kpi-label">{kpi.label}</div>
+              <div className="kpi-label-row">
+                <div className="kpi-label">{kpi.label}</div>
+                <button
+                  type="button"
+                  className={`kpi-pin ${pinned ? 'is-pinned' : ''}`}
+                  aria-pressed={pinned}
+                  aria-label={pinned ? t('watchlist.unpin', 'Unpin') : t('watchlist.pin', 'Pin to watchlist')}
+                  title={pinned ? t('watchlist.unpin', 'Unpin') : t('watchlist.pin', 'Pin to watchlist')}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    toggle(kpi.id);
+                  }}
+                >
+                  {pinned ? '★' : '☆'}
+                </button>
+              </div>
               <div className="kpi-value" style={{ color }}>
                 {formatValue(kpi)}<span className="kpi-unit">{kpi.unit}</span>
               </div>
@@ -117,7 +152,9 @@ export default function KpiCards() {
               </div>
               <div className="kpi-source">
                 Source: {kpi.source}
-                {kpi.provenanceKey && <CiteFigure figureKey={kpi.provenanceKey} compact />}
+                {kpi.provenanceKey
+                  ? <CiteFigure figureKey={kpi.provenanceKey} compact />
+                  : <span className="kpi-source-missing" title={t('provenance.missing', 'No provenance key for this KPI')}>ⓘ</span>}
               </div>
             </ExpandableTile>
           );

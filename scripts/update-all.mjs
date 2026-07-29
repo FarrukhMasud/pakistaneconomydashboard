@@ -273,6 +273,12 @@ async function main() {
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   const apiOkStatic = runScript(resolve(__dirname, 'generate-api.mjs'), 'generate-api.mjs');
 
+  // Step 4b-iv: Critical-series RSS feed for subscribers / aggregators.
+  console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log('📡 Step 4b-iv: Generating critical-series RSS feed...');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  const rssOk = runScript(resolve(__dirname, 'generate-rss.mjs'), 'generate-rss.mjs');
+
   // Step 4c: Enforce critical source freshness before any deployment.
   console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   console.log('🔎 Step 4c: Auditing critical dataset freshness...');
@@ -281,7 +287,7 @@ async function main() {
 
   // Step 5: Commit and push — Cloudflare Pages auto-builds & deploys on push.
   const autoPush = !args.includes('--no-deploy');
-  const pipelineOk = parseOk && apiOk && fbrOk && peersOk && kpiOk && freshnessOk && notesOk && apiOkStatic && auditOk;
+  const pipelineOk = parseOk && apiOk && fbrOk && peersOk && kpiOk && freshnessOk && notesOk && apiOkStatic && rssOk && auditOk;
   let pushOk = false;
   if (autoPush && pipelineOk) {
     console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
@@ -289,8 +295,8 @@ async function main() {
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     try {
       const date = new Date().toISOString().split('T')[0];
-      execSync('git add public/data/', { cwd: resolve(__dirname, '..'), stdio: 'inherit' });
-      const status = execSync('git status --porcelain public/data/', {
+      execSync('git add public/data/ public/feed.xml public/api/', { cwd: resolve(__dirname, '..'), stdio: 'inherit' });
+      const status = execSync('git status --porcelain public/data/ public/feed.xml public/api/', {
         cwd: resolve(__dirname, '..'), encoding: 'utf-8',
       }).trim();
       if (status) {
@@ -328,6 +334,7 @@ async function main() {
   console.log(`  🧾 Freshness:   ${freshnessOk ? '✅ Success' : '⚠️  Failed'}`);
   console.log(`  📝 Claims:      ${notesOk ? '✅ Success' : '⚠️  Failed'}`);
   console.log(`  ⬇️  Static API:  ${apiOkStatic ? '✅ Success' : '⚠️  Failed'}`);
+  console.log(`  📡 RSS feed:   ${rssOk ? '✅ Success' : '⚠️  Failed'}`);
   console.log(`  🔎 Data audit:  ${auditOk ? '✅ Success' : '❌ Failed'}`);
   if (autoPush) {
     console.log(`  📤 Git push:    ${pushOk ? '✅ Success (Cloudflare auto-deploys)' : '⚠️  Failed'}`);

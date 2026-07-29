@@ -1,5 +1,6 @@
 import { useData } from '../hooks/useData';
 import SourceBadge from './SourceBadge';
+import { LoadingCard, ErrorCard } from './ui/DataState';
 import { useI18n } from '../i18n/useI18n';
 
 function statusKey(status) {
@@ -9,14 +10,12 @@ function statusKey(status) {
 }
 
 export default function DataFreshnessPanel() {
-  const { data, loading, error } = useData('data-freshness.json');
+  const { data, loading, error, retry } = useData('data-freshness.json');
   const { t, tx } = useI18n();
   const statusLabel = (status) => t(statusKey(status));
 
-  if (loading || !data) {
-    return <div className="card loading-card"><div className="spinner" /><span>{tx('Loading source audit\u2026')}</span></div>;
-  }
-  if (error) return null;
+  if (loading) return <LoadingCard label="Loading source audit…" />;
+  if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load source audit" />;
 
   const datasets = data.datasets || [];
 

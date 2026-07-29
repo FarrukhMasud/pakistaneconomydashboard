@@ -28,8 +28,8 @@ Finance. Any secondary reporting is explicitly identified and attributed.
 
 Navigation is grouped into **Overview**, **External Sector**, **Prices & Money**,
 **Public Finance & Budget**, and **Insights & Learning**, each drilling down to its
-sub-sections. Navigation is hash-routed (`#/group/section`), so every section is a
-shareable deep link.
+sub-sections. Routes are path-based (`/group/section`) with hash fallback, so every
+section is a shareable deep link.
 
 ## Accuracy & Traceability
 
@@ -50,12 +50,12 @@ convention:
 ## Tech Stack
 
 - **Frontend:** React 19 + Vite 5 + Chart.js 4
-- **Routing:** Hash-based deep links (`#/group/section`) with per-section share links
-- **Loading:** Route-based code splitting (`React.lazy`) plus pinned `vendor-react` / `vendor-charts` chunks, so a data-only redeploy invalidates ~100 kB rather than the whole bundle
-- **Navigation:** `Ctrl`/`Cmd`+`K` (or `/`) command palette that searches all 30 sections in either language
-- **Accessibility:** Skip-to-content link, focusable `<main>`, `aria-live` section announcements, focus-trapped chart and tile modals
-- **Hosting:** Cloudflare Pages (auto-build & deploy on push)
-- **Data:** JSON files in `public/data/`, updated from SBP sources
+- **Routing:** Path-based deep links (`/group/section`, hash fallback) with per-section share links; unknown paths show a not-found page instead of silently rewriting to Overview
+- **Loading:** Route-based code splitting (`React.lazy`) plus pinned `vendor-react` / `vendor-charts` chunks; insight briefing vs deep-dive bundles are separate so Briefing does not pull every scorecard
+- **Navigation:** `Ctrl`/`Cmd`+`K` (or `/`) command palette that searches all sections/indicators; pin KPIs to a local watchlist
+- **Accessibility:** Skip-to-content link, focusable `<main>`, `aria-live` section announcements, focus-trapped chart and tile modals, keyboard-discoverable chart data tables
+- **Hosting:** Cloudflare Pages (auto-build & deploy on push). Deploys inject `VITE_DATA_VERSION` from the git SHA so clients bust cached JSON after publish.
+- **Data:** JSON files in `public/data/`, updated from SBP sources. PWA shell shows a “New data available — refresh” toast when the service worker or data stamp changes.
 - **Data Trust:** Generated source manifest + freshness audit + per-figure provenance + revision log
 - **Open data:** Static JSON/CSV API under `public/api/v1/` (no key, no rate limit)
 - **Languages:** English + اردو (Urdu) with RTL layout; figures stay in English as published
