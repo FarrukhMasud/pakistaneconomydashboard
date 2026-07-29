@@ -4,9 +4,12 @@ import './App.css';
 import './utils/chartConfig';
 import { useTheme } from './hooks/useTheme';
 import { useHashRoute } from './hooks/useHashRoute';
+import { useDensity } from './hooks/useDensity';
 import ThemeToggle from './components/ThemeToggle';
 import LanguageToggle from './components/LanguageToggle';
+import DensityToggle from './components/DensityToggle';
 import CommandPalette from './components/CommandPalette';
+import CoachMarks from './components/CoachMarks';
 import { useI18n } from './i18n/useI18n';
 import ShareSectionLink from './components/ShareSectionLink';
 import KpiCards from './components/KpiCards';
@@ -133,6 +136,7 @@ function App() {
     path: routePath,
   } = useHashRoute(NAV_GROUPS);
   const { theme, setTheme } = useTheme();
+  const { density } = useDensity();
   const { t, tx, lang } = useI18n();
 
   const groupLabel = (group) => t(`nav.group.${group.id}`, group.label);
@@ -187,12 +191,26 @@ function App() {
     }, [theme]);
 
   return (
-    <div className="app">
+    <div className="app" data-section-group={activeGroupId} data-density={density}>
       <a className="skip-link" href="#main-content">{t('a11y.skipToContent', 'Skip to main content')}</a>
-      <header className="app-header">
-        <div className="flag-accent" />
-        <div className="header-content">
-          <div className="header-top-row">
+
+      <div className="app-chrome">
+        <div className="chrome-bar">
+          <button
+            type="button"
+            className="chrome-brand"
+            onClick={() => navigate('overview', 'overview')}
+            aria-label={t('app.home', 'Home — overview')}
+          >
+            <span className="chrome-brand__mark" aria-hidden="true">☪</span>
+            <span className="chrome-brand__text">
+              <span className="chrome-brand__title">
+                {t('app.title')} {t('app.titleHighlight')}
+              </span>
+              <span className="chrome-brand__sub">{t('app.chromeTag', 'Official-source terminal')}</span>
+            </span>
+          </button>
+          <div className="chrome-actions">
             <a className="header-feedback-link" href="mailto:feedback@economyofpakistan.com">
               {t('app.feedback')}
             </a>
@@ -202,52 +220,60 @@ function App() {
               groupLabel={groupLabel}
               sectionLabel={sectionLabel}
             />
+            <DensityToggle />
             <LanguageToggle />
             <ThemeToggle theme={theme} setTheme={setTheme} />
           </div>
-          <div className="header-emblem">☪</div>
-          <h1>{t('app.title')} <span className="highlight">{t('app.titleHighlight')}</span></h1>
-          <p className="subtitle">
-            {t('app.subtitle')}
-          </p>
         </div>
-      </header>
 
-      <nav className="group-nav" aria-label={t('app.primaryNav')}>
-        {NAV_GROUPS.map((group) => (
-          <button
-            key={group.id}
-            className={`group-btn ${activeGroupId === group.id ? 'active' : ''}`}
-            onClick={() => navigate(group.id, group.sections[0].id)}
-            aria-current={activeGroupId === group.id ? 'page' : undefined}
-          >
-            <span className="group-btn__icon">{group.icon}</span>
-            <span className="group-btn__text">
-              <span className="group-btn__label">{groupLabel(group)}</span>
-              <span className="group-btn__blurb">{groupBlurb(group)}</span>
-            </span>
-          </button>
-        ))}
-      </nav>
-
-      {showSubNav && (
-        <nav className="sub-nav" aria-label={groupLabel(activeGroup)}>
-          {activeGroup.sections.map((section) => (
-            <a
-              key={section.id}
-                          href={`/${activeGroup.id}/${section.id}`}
-              className={`sub-tab-btn ${activeSectionId === section.id ? 'active' : ''}`}
-              aria-current={activeSectionId === section.id ? 'page' : undefined}
-              onClick={(event) => {
-                if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
-                event.preventDefault();
-                navigate(activeGroup.id, section.id);
-              }}
+        <nav className="group-nav" aria-label={t('app.primaryNav')}>
+          {NAV_GROUPS.map((group) => (
+            <button
+              key={group.id}
+              className={`group-btn ${activeGroupId === group.id ? 'active' : ''}`}
+              onClick={() => navigate(group.id, group.sections[0].id)}
+              aria-current={activeGroupId === group.id ? 'page' : undefined}
             >
-              {sectionLabel(section)}
-            </a>
+              <span className="group-btn__icon">{group.icon}</span>
+              <span className="group-btn__text">
+                <span className="group-btn__label">{groupLabel(group)}</span>
+                <span className="group-btn__blurb">{groupBlurb(group)}</span>
+              </span>
+            </button>
           ))}
         </nav>
+
+        {showSubNav && (
+          <nav className="sub-nav" aria-label={groupLabel(activeGroup)}>
+            {activeGroup.sections.map((section) => (
+              <a
+                key={section.id}
+                href={`/${activeGroup.id}/${section.id}`}
+                className={`sub-tab-btn ${activeSectionId === section.id ? 'active' : ''}`}
+                aria-current={activeSectionId === section.id ? 'page' : undefined}
+                onClick={(event) => {
+                  if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
+                  event.preventDefault();
+                  navigate(activeGroup.id, section.id);
+                }}
+              >
+                {sectionLabel(section)}
+              </a>
+            ))}
+          </nav>
+        )}
+      </div>
+
+      {routeKnown && activeGroupId === 'overview' && activeSectionId === 'overview' && (
+        <header className="app-header">
+          <div className="flag-accent" />
+          <div className="header-crescent-watermark" aria-hidden="true" />
+          <div className="header-content">
+            <div className="header-emblem">☪</div>
+            <h1>{t('app.title')} <span className="highlight">{t('app.titleHighlight')}</span></h1>
+            <p className="subtitle">{t('app.subtitle')}</p>
+          </div>
+        </header>
       )}
 
       <main className="dashboard-content" id="main-content" tabIndex={-1}>
@@ -260,29 +286,41 @@ function App() {
         </div>
         {lang !== 'en' && <p className="translation-notice">{t('app.translationNotice')}</p>}
         <div className="fade-in" key={routeKnown ? activeSectionId : `missing:${routePath}`}>
-                  <ErrorBoundary
-                            resetKey={routeKnown ? activeSectionId : routePath}
-                    title={t('common.sectionError', 'Something went wrong in this section')}
-                    retryLabel={t('common.retry', 'Try again')}
-                  >
-                    <Suspense fallback={<div className="card loading-card"><div className="spinner" /><span>{t('common.loading', 'Loading…')}</span></div>}>
-                              {routeKnown ? (
-                                <ActiveSection />
-                              ) : (
-                                <NotFoundSection
-                                  path={routePath}
-                                  onGoHome={() => navigate('overview', 'overview')}
-                                />
-                              )}
-                            </Suspense>
-                          </ErrorBoundary>
-                        </div>
-                      </main>
+          <ErrorBoundary
+            resetKey={routeKnown ? activeSectionId : routePath}
+            title={t('common.sectionError', 'Something went wrong in this section')}
+            retryLabel={t('common.retry', 'Try again')}
+          >
+            <Suspense
+              fallback={(
+                <div className="card loading-card">
+                  <div className="skeleton-lines" aria-hidden="true">
+                    <div className="skeleton-line skeleton-line--lg" />
+                    <div className="skeleton-line skeleton-line--md" />
+                    <div className="skeleton-line skeleton-line--sm" />
+                  </div>
+                  <span>{t('common.loading', 'Loading…')}</span>
+                </div>
+              )}
+            >
+              {routeKnown ? (
+                <ActiveSection />
+              ) : (
+                <NotFoundSection
+                  path={routePath}
+                  onGoHome={() => navigate('overview', 'overview')}
+                />
+              )}
+            </Suspense>
+          </ErrorBoundary>
+        </div>
+      </main>
 
-                      <UpdateToast />
-                      <ConsentBanner />
+      <UpdateToast />
+      <ConsentBanner />
+      <CoachMarks />
 
-              <footer className="app-footer">
+      <footer className="app-footer">
         <p>{t('app.footer')}</p>
         <div className="footer-sources">
           <button
@@ -292,12 +330,12 @@ function App() {
           >
             {t('app.footerFeedback')}
           </button>
-          <a href="https://www.sbp.org.pk" target="_blank" rel="noreferrer">{tx("State Bank of Pakistan")}</a>
-          <a href="https://www.pbs.gov.pk" target="_blank" rel="noreferrer">{tx("Pakistan Bureau of Statistics")}</a>
-          <a href="https://www.finance.gov.pk" target="_blank" rel="noreferrer">{tx("Ministry of Finance")}</a>
-          <a href="https://www.fbr.gov.pk" target="_blank" rel="noreferrer">{tx("Federal Board of Revenue")}</a>
-          <a href="https://invest.gov.pk" target="_blank" rel="noreferrer">{tx("Board of Investment")}</a>
-          <a href="https://www.imf.org/en/Countries/PAK" target="_blank" rel="noreferrer">{tx("IMF Pakistan")}</a>
+          <a href="https://www.sbp.org.pk" target="_blank" rel="noreferrer">{tx('State Bank of Pakistan')}</a>
+          <a href="https://www.pbs.gov.pk" target="_blank" rel="noreferrer">{tx('Pakistan Bureau of Statistics')}</a>
+          <a href="https://www.finance.gov.pk" target="_blank" rel="noreferrer">{tx('Ministry of Finance')}</a>
+          <a href="https://www.fbr.gov.pk" target="_blank" rel="noreferrer">{tx('Federal Board of Revenue')}</a>
+          <a href="https://invest.gov.pk" target="_blank" rel="noreferrer">{tx('Board of Investment')}</a>
+          <a href="https://www.imf.org/en/Countries/PAK" target="_blank" rel="noreferrer">{tx('IMF Pakistan')}</a>
         </div>
       </footer>
     </div>

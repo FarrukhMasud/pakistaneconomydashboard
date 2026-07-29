@@ -8,7 +8,9 @@ import SnapshotPanel from './SnapshotPanel';
 import CiteFigure from './CiteFigure';
 import WhatMovedStrip from './WhatMovedStrip';
 import WatchlistPanel from './WatchlistPanel';
+import EconomyPulse from './EconomyPulse';
 import ExpandableTile from './ui/ExpandableTile';
+import AnimatedNumber from './ui/AnimatedNumber';
 import { LoadingCard, ErrorCard } from './ui/DataState';
 import useI18n from '../i18n/useI18n';
 
@@ -72,9 +74,10 @@ export default function KpiCards() {
       <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
         Data refreshed: {lastUpdated} · All values derived from source datasets
       </p>
+      <EconomyPulse onNavigate={navigate} />
       <WhatMovedStrip onNavigate={navigate} />
       <WatchlistPanel onNavigate={navigate} />
-      <div className="kpi-grid">
+      <div className="kpi-grid stagger-children">
         {indicators.map((kpi) => {
           const sentiment = kpi.sentiment || 'neutral';
           const color = sentimentColor(sentiment);
@@ -142,7 +145,13 @@ export default function KpiCards() {
                 </button>
               </div>
               <div className="kpi-value" style={{ color }}>
-                {formatValue(kpi)}<span className="kpi-unit">{kpi.unit}</span>
+                {Number.isFinite(kpi.value) ? (
+                  <AnimatedNumber
+                    value={kpi.value}
+                    decimals={Number.isFinite(kpi.decimals) ? kpi.decimals : 0}
+                  />
+                ) : formatValue(kpi)}
+                <span className="kpi-unit">{kpi.unit}</span>
               </div>
               <div className="kpi-period">{kpi.period}</div>
               {kpi.sub && <div className="kpi-sub">{kpi.sub}</div>}

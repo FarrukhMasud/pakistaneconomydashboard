@@ -24,6 +24,11 @@ export default function ServicesSection() {
   const showFytd = compareMode === 'fytd';
   const { data, loading, error, retry } = useData('services.json');
 
+  const setCompare = (mode) => {
+    setCompareMode(mode);
+    setFocus(null);
+  };
+
   if (loading) return <LoadingCard label="Loading services data…" />;
   if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load services data" />;
 
@@ -40,57 +45,182 @@ export default function ServicesSection() {
   const bopMonth = bopSummary?.latestMonth || null;
 
   // ── Monthly IT & Freelance exports (accumulating series + momentum snapshot) ──
+  // SBP EBOPS only accumulates a short monthly series in our pipeline; YoY/FYTD
+  // overlays need prior-year months that are often missing. When the series is
+  // too thin, fall back to itMonthly point comparisons (latest vs year-ago /
+  // FYTD vs prior FY) so PeriodCompare still changes the chart.
   const mseries = monthlySeries || [];
   const mseriesRows = mseries.map((m) => ({ date: m.month, itCredit: m.itCredit, freelanceCredit: m.freelanceCredit }));
   const fytdIt = buildFytdSeries(mseriesRows, 'itCredit');
   const fytdFreelance = buildFytdSeries(mseriesRows, 'freelanceCredit');
   const { priorData: itPrior, priorLabel: itPriorLabel } = buildYoYOverlay(mseriesRows, 'itCredit');
+  const { priorData: freelancePrior, priorLabel: freelancePriorLabel } = buildYoYOverlay(mseriesRows, 'freelanceCredit');
+  const seriesHasYoY = itPrior.some((v) => v != null) || freelancePrior.some((v) => v != null);
+  const seriesHasFytdPrior = Boolean(
+    fytdIt?.prior?.some((v) => v != null) || fytdFreelance?.prior?.some((v) => v != null),
+  );
 
-  const monthlyItData = mseries.length ? {
-    labels: showFytd && fytdIt ? fytdIt.labels : mseries.map((m) => formatMonthYear(m.month)),
-    datasets: applySeriesFocus(
-      showFytd && fytdIt && fytdFreelance
-        ? [
-            {
-              label: `${fytdIt.currentLabel} IT & Telecom`,
-              data: fytdIt.current,
-              backgroundColor: COLORS.teal,
-              borderRadius: 4,
-            },
-            {
-              label: `${fytdFreelance.currentLabel} Freelance IT`,
-              data: fytdFreelance.current,
-              backgroundColor: COLORS.amber,
-              borderRadius: 4,
-            },
-            ...(fytdIt.prior.some((v) => v != null) ? [{
-              label: `${fytdIt.priorLabel} IT (same months)`,
-              data: fytdIt.prior,
-              backgroundColor: 'rgba(255, 167, 38, 0.35)',
-              borderRadius: 4,
-            }] : []),
-          ]
-        : [
-            { label: 'IT & Telecom', data: mseries.map((m) => m.itCredit), backgroundColor: COLORS.teal, borderRadius: 4 },
-            { label: 'Freelance IT', data: mseries.map((m) => m.freelanceCredit), backgroundColor: COLORS.amber, borderRadius: 4 },
-            ...(showYoY && itPrior.some((v) => v != null) ? [{
-              label: itPriorLabel || 'Prior year IT',
-              data: itPrior,
-              backgroundColor: 'rgba(255, 167, 38, 0.35)',
-              borderRadius: 4,
-            }] : []),
-          ],
-      focus,
-    ),
-  } : null;
+  const itComp = itMonthly?.components?.find((c) => c.key === 'itTotal') || null;
+  const freelanceComp = itMonthly?.components?.find((c) => c.key === 'freelance') || null;
+  const pointYoYReady = Boolean(
+    itComp?.latest != null && itComp?.yearAgo != null,
+  );
+  const pointFytdReady = Boolean(
+    itComp?.fytd != null && itComp?.fytdPrior != null,
+  );
+
+  let monthlyItData = null;
+  let monthlyItYTitle = 'USD Millions / month';
+  let monthlyItCompareNote = null;
+
+  if (showYoY && !seriesHasYoY && pointYoYReady) {
+    // Point comparison: latest month vs same month last year (SBP EBOPS columns).
+    const labels = ['IT & Telecom', 'Freelance IT'].filter((_, i) => {
+      if (i === 0) return true;
+      return freelanceComp?.latest != null || freelanceComp?.yearAgo != null;
+    });
+    const latestVals = labels.map((name) => (
+      name === 'IT & Telecom' ? itComp.latest : freelanceComp?.latest
+    ));
+    const priorVals = labels.map((name) => (
+      name === 'IT & Telecom' ? itComp.yearAgo : freelanceComp?.yearAgo
+    ));
+    const latestLabel = itMonthly.latestMonth
+      ? formatMonthYear(itMonthly.latestMonth)
+      : 'Latest month';
+    const priorLabel = itMonthly.yearAgoMonth
+      ? formatMonthYear(itMonthly.yearAgoMonth)
+      : 'Year ago';
+    monthlyItData = {
+      labels,
+      datasets: applySeriesFocus([
+        {
+          label: priorLabel,
+          data: priorVals,
+          backgroundColor: 'rgba(66, 165, 245, 0.45)',
+          borderRadius: 4,
+        },
+        {
+          label: latestLabel,
+          data: latestVals,
+          backgroundColor: COLORS.teal,
+          borderRadius: 4,
+        },
+      ], focus),
+    };
+    monthlyItYTitle = 'USD Millions';
+    monthlyItCompareNote = `YoY uses SBP’s published same-month-last-year columns (${priorLabel} vs ${latestLabel}), because the accumulating monthly series does not yet include a full prior year.`;
+  } else if (showFytd && !seriesHasFytdPrior && pointFytdReady) {
+    const labels = ['IT & Telecom', 'Freelance IT'].filter((_, i) => {
+      if (i === 0) return true;
+      return freelanceComp?.fytd != null || freelanceComp?.fytdPrior != null;
+    });
+    const currentVals = labels.map((name) => (
+      name === 'IT & Telecom' ? itComp.fytd : freelanceComp?.fytd
+    ));
+    const priorVals = labels.map((name) => (
+      name === 'IT & Telecom' ? itComp.fytdPrior : freelanceComp?.fytdPrior
+    ));
+    monthlyItData = {
+      labels,
+      datasets: applySeriesFocus([
+        {
+          label: itMonthly.fytdPriorLabel || 'Prior FYTD',
+          data: priorVals,
+          backgroundColor: 'rgba(66, 165, 245, 0.45)',
+          borderRadius: 4,
+        },
+        {
+          label: itMonthly.fytdLabel || 'Current FYTD',
+          data: currentVals,
+          backgroundColor: COLORS.teal,
+          borderRadius: 4,
+        },
+      ], focus),
+    };
+    monthlyItYTitle = 'USD Millions (cumulative)';
+    monthlyItCompareNote = `FYTD compares SBP’s cumulative totals (${itMonthly.fytdLabel || 'current'} vs ${itMonthly.fytdPriorLabel || 'prior'}), not month-by-month history.`;
+  } else if (mseries.length) {
+    monthlyItData = {
+      labels: showFytd && fytdIt ? fytdIt.labels : mseries.map((m) => formatMonthYear(m.month)),
+      datasets: applySeriesFocus(
+        showFytd && fytdIt && fytdFreelance
+          ? [
+              {
+                label: `${fytdIt.currentLabel} IT & Telecom`,
+                data: fytdIt.current,
+                backgroundColor: COLORS.teal,
+                borderRadius: 4,
+              },
+              {
+                label: `${fytdFreelance.currentLabel} Freelance IT`,
+                data: fytdFreelance.current,
+                backgroundColor: COLORS.amber,
+                borderRadius: 4,
+              },
+              ...(fytdIt.prior.some((v) => v != null) ? [{
+                label: `${fytdIt.priorLabel} IT (same months)`,
+                data: fytdIt.prior,
+                backgroundColor: 'rgba(66, 165, 245, 0.35)',
+                borderRadius: 4,
+              }] : []),
+              ...(fytdFreelance.prior.some((v) => v != null) ? [{
+                label: `${fytdFreelance.priorLabel} Freelance (same months)`,
+                data: fytdFreelance.prior,
+                backgroundColor: 'rgba(255, 167, 38, 0.35)',
+                borderRadius: 4,
+              }] : []),
+            ]
+          : [
+              {
+                label: 'IT & Telecom',
+                data: mseries.map((m) => m.itCredit),
+                backgroundColor: COLORS.teal,
+                borderRadius: 4,
+              },
+              {
+                label: 'Freelance IT',
+                data: mseries.map((m) => m.freelanceCredit),
+                backgroundColor: COLORS.amber,
+                borderRadius: 4,
+              },
+              ...(showYoY && itPrior.some((v) => v != null) ? [{
+                label: itPriorLabel || 'Prior year IT',
+                data: itPrior,
+                backgroundColor: 'rgba(66, 165, 245, 0.35)',
+                borderRadius: 4,
+              }] : []),
+              ...(showYoY && freelancePrior.some((v) => v != null) ? [{
+                label: freelancePriorLabel || 'Prior year Freelance',
+                data: freelancePrior,
+                backgroundColor: 'rgba(255, 167, 38, 0.35)',
+                borderRadius: 4,
+              }] : []),
+            ],
+        focus,
+      ),
+    };
+    if (showYoY && !seriesHasYoY) {
+      monthlyItCompareNote = 'YoY overlay needs a prior-year month in the series; only the latest months are published so far.';
+    } else if (showFytd && !seriesHasFytdPrior && !pointFytdReady) {
+      monthlyItCompareNote = 'FYTD prior-year months are not yet available in the accumulating series.';
+    }
+  }
+
   const monthlyItOptions = {
     ...baseBarOptions,
     plugins: { ...baseBarOptions.plugins },
     scales: {
       ...baseBarOptions.scales,
-      y: { ...baseBarOptions.scales.y, title: { display: true, text: 'USD Millions / month', color: COLORS.text } },
+      y: { ...baseBarOptions.scales.y, title: { display: true, text: monthlyItYTitle, color: COLORS.text } },
     },
   };
+
+  // SeriesFocus labels differ between monthly trend and point-compare modes.
+  const monthlyFocusLabels = (showYoY && !seriesHasYoY && pointYoYReady)
+    || (showFytd && !seriesHasFytdPrior && pointFytdReady)
+    ? (monthlyItData?.datasets || []).map((d) => d.label).filter(Boolean)
+    : ['IT & Telecom', 'Freelance IT'];
   const itMomentum = itMonthly ? itMonthly.components.filter((c) => c.latest != null).map((c) => {
     const yoy = c.yearAgo ? pctChange(c.latest, c.yearAgo) : { pct: null, direction: 'flat' };
     const fy = c.fytdPrior ? pctChange(c.fytd, c.fytdPrior) : { pct: null };
@@ -269,14 +399,29 @@ export default function ServicesSection() {
             lastUpdated={data.lastUpdated}
             dataCoverage={itMonthly.latestMonth ? `latest ${formatMonthYear(itMonthly.latestMonth)}` : data.dataCoverage}
           >
-                      <PeriodCompare mode={compareMode} onChange={setCompareMode} modes={['yoy', 'fytd']} />
+                      <PeriodCompare mode={compareMode} onChange={setCompare} modes={['yoy', 'fytd']} />
                       <SeriesFocus
-                        labels={['IT & Telecom', 'Freelance IT']}
+                        labels={monthlyFocusLabels}
                         focus={focus}
                         onChange={setFocus}
                       />
+                      {monthlyItCompareNote && (
+                        <p className="muted-note" style={{ margin: '0.35rem 0 0.65rem', fontSize: '0.78rem' }}>
+                          {monthlyItCompareNote}
+                        </p>
+                      )}
                       <div className="chart-container tall">
-                        {monthlyItData && <Bar data={monthlyItData} options={monthlyItOptions} />}
+                        {monthlyItData
+                          ? (
+                            <Bar
+                              key={`monthly-it-${compareMode}-${focus || 'all'}`}
+                              data={monthlyItData}
+                              options={monthlyItOptions}
+                            />
+                          )
+                          : (
+                            <p className="muted-note">No monthly IT series available for this release.</p>
+                          )}
                       </div>
                     </ChartCard>
           <SummaryCard

@@ -5,8 +5,13 @@ export function LoadingCard({ label }) {
   const text = label ? tx(label) : t('common.loading', 'Loading…');
   return (
     <div className="card loading-card" role="status" aria-live="polite">
-      <div className="spinner" />
-      <span>{text}</span>
+      <div className="skeleton-lines" aria-hidden="true">
+        <div className="skeleton-line skeleton-line--lg" />
+        <div className="skeleton-line skeleton-line--md" />
+        <div className="skeleton-line skeleton-line--sm" />
+      </div>
+      <span className="sr-only">{text}</span>
+      <span aria-hidden="true" style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>{text}</span>
     </div>
   );
 }

@@ -30,32 +30,39 @@ ChartJS.register(
 // Global dark-theme defaults
 ChartJS.defaults.color = '#8b8d97';
 ChartJS.defaults.borderColor = '#2a2d37';
-ChartJS.defaults.font.family = "'Inter', -apple-system, sans-serif";
+ChartJS.defaults.font.family = "'Inter', 'IBM Plex Sans', -apple-system, sans-serif";
 ChartJS.defaults.font.size = 12;
 ChartJS.defaults.plugins.legend.labels.usePointStyle = true;
 ChartJS.defaults.plugins.legend.labels.padding = 16;
 ChartJS.defaults.plugins.tooltip.backgroundColor = '#1a1d27';
 ChartJS.defaults.plugins.tooltip.borderColor = '#2a2d37';
 ChartJS.defaults.plugins.tooltip.borderWidth = 1;
-ChartJS.defaults.plugins.tooltip.cornerRadius = 8;
-ChartJS.defaults.plugins.tooltip.padding = 10;
-ChartJS.defaults.plugins.tooltip.titleFont = { weight: '600' };
-ChartJS.defaults.elements.point.radius = 3;
+ChartJS.defaults.plugins.tooltip.cornerRadius = 10;
+ChartJS.defaults.plugins.tooltip.padding = 12;
+ChartJS.defaults.plugins.tooltip.titleFont = { weight: '600', family: "'IBM Plex Sans', Inter, sans-serif" };
+ChartJS.defaults.elements.point.radius = 2.5;
 ChartJS.defaults.elements.point.hoverRadius = 6;
-ChartJS.defaults.elements.line.tension = 0.3;
+ChartJS.defaults.elements.line.tension = 0.35;
+ChartJS.defaults.elements.line.borderWidth = 2.25;
 
 // Honour reduced-motion preferences for chart animations.
 const prefersReducedMotion = typeof window !== 'undefined'
   && window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+const drawInAnimation = {
+  duration: 950,
+  easing: 'easeOutQuart',
+};
 if (prefersReducedMotion) {
   ChartJS.defaults.animation = false;
   ChartJS.defaults.transitions = { active: { animation: { duration: 0 } } };
+} else {
+  ChartJS.defaults.animation = drawInAnimation;
 }
 
 if (typeof window !== 'undefined' && window.matchMedia) {
   const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
   const syncMotion = () => {
-    ChartJS.defaults.animation = mq.matches ? false : { duration: 800, easing: 'easeOutQuart' };
+    ChartJS.defaults.animation = mq.matches ? false : { ...drawInAnimation };
   };
   mq.addEventListener?.('change', syncMotion);
 }
@@ -122,8 +129,10 @@ function toRgba(color, alpha) {
 }
 
 export function createGradient(ctx, color) {
-  const gradient = ctx.createLinearGradient(0, 0, 0, ctx.canvas.clientHeight || 200);
-  gradient.addColorStop(0, toRgba(color, 0.35));
+  const h = ctx.canvas?.clientHeight || 220;
+  const gradient = ctx.createLinearGradient(0, 0, 0, h);
+  gradient.addColorStop(0, toRgba(color, 0.42));
+  gradient.addColorStop(0.55, toRgba(color, 0.14));
   gradient.addColorStop(1, toRgba(color, 0));
   return gradient;
 }
