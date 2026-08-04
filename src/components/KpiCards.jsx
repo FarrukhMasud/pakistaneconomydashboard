@@ -1,12 +1,15 @@
 import { useData } from '../hooks/useData';
 import { useWatchlist } from '../hooks/useWatchlist';
 import { COLORS } from '../utils/chartConfig';
+import {
+  formatIndicatorChange,
+  formatIndicatorPeriod,
+  formatIndicatorValue,
+  indicatorDecimals,
+  indicatorValueParts,
+} from '../utils/formatIndicator';
 import SectionHeader from './SectionHeader';
-import DataFreshnessPanel from './DataFreshnessPanel';
-import ReleaseCalendarSection from './ReleaseCalendarSection';
-import SnapshotPanel from './SnapshotPanel';
 import CiteFigure from './CiteFigure';
-import WhatMovedStrip from './WhatMovedStrip';
 import WatchlistPanel from './WatchlistPanel';
 import EconomyPulse from './EconomyPulse';
 import ExpandableTile from './ui/ExpandableTile';
@@ -24,25 +27,6 @@ function trendArrow(trend) {
   if (trend === 'up') return '▲';
   if (trend === 'down') return '▼';
   return '►';
-}
-
-function formatValue(kpi) {
-  if (!Number.isFinite(kpi.value)) return String(kpi.value ?? '—');
-  return Number.isFinite(kpi.decimals) ? kpi.value.toFixed(kpi.decimals) : String(kpi.value);
-}
-
-/**
- * KPI changes are not all the same kind of number — some are percentage-point
- * moves, some are absolute $bn moves, some are percent growth. Render the unit
- * the parser recorded rather than a bare, ambiguous figure.
- */
-function formatChange(kpi) {
-  if (!Number.isFinite(kpi.change)) return null;
-  const sign = kpi.change > 0 ? '+' : '';
-  const unit = kpi.changeUnit || '';
-  if (unit === '%' || unit === 'pp') return `${sign}${kpi.change}${unit}`;
-  if (unit) return `${sign}${kpi.change} ${unit}`;
-  return `${sign}${kpi.change}`;
 }
 
 export default function KpiCards() {
@@ -75,29 +59,30 @@ export default function KpiCards() {
         Data refreshed: {lastUpdated} · All values derived from source datasets
       </p>
       <EconomyPulse onNavigate={navigate} />
-      <WhatMovedStrip onNavigate={navigate} />
       <WatchlistPanel onNavigate={navigate} />
       <div className="kpi-grid stagger-children">
         {indicators.map((kpi) => {
           const sentiment = kpi.sentiment || 'neutral';
           const color = sentimentColor(sentiment);
-          const changeLabel = formatChange(kpi);
+          const changeLabel = formatIndicatorChange(kpi);
+          const valueParts = indicatorValueParts(kpi);
+          const period = formatIndicatorPeriod(kpi.period);
           const pinned = isPinned(kpi.id);
           return (
             <ExpandableTile
               key={kpi.id}
               className={`card kpi-card sentiment-${sentiment}`}
               title={kpi.label}
-              subtitle={`${kpi.period} · Source: ${kpi.source}`}
+              subtitle={`${period} · Source: ${kpi.source}`}
               details={(
                 <div className="tile-detail-list">
                   <div className="tile-detail-row">
                     <span>{tx('Latest value')}</span>
-                    <strong style={{ color }}>{formatValue(kpi)}{kpi.unit}</strong>
+                    <strong style={{ color }}>{formatIndicatorValue(kpi)}</strong>
                   </div>
                   <div className="tile-detail-row">
                     <span>{tx('Period')}</span>
-                    <strong>{kpi.period}</strong>
+                    <strong>{period}</strong>
                   </div>
                   <div className="tile-detail-row">
                     <span>{tx('Change')}</span>
@@ -145,15 +130,16 @@ export default function KpiCards() {
                 </button>
               </div>
               <div className="kpi-value" style={{ color }}>
+                {valueParts.prefix && <span className="kpi-unit">{valueParts.prefix}</span>}
                 {Number.isFinite(kpi.value) ? (
                   <AnimatedNumber
                     value={kpi.value}
-                    decimals={Number.isFinite(kpi.decimals) ? kpi.decimals : 0}
+                    decimals={indicatorDecimals(kpi)}
                   />
-                ) : formatValue(kpi)}
-                <span className="kpi-unit">{kpi.unit}</span>
+                ) : valueParts.value}
+                {valueParts.suffix && <span className="kpi-unit">{valueParts.suffix}</span>}
               </div>
-              <div className="kpi-period">{kpi.period}</div>
+              <div className="kpi-period">{period}</div>
               {kpi.sub && <div className="kpi-sub">{kpi.sub}</div>}
               <div className={`kpi-trend ${sentiment}`} title={kpi.changeBasis || undefined}>
                 {trendArrow(kpi.trend)} {changeLabel ?? 'n/a'}
@@ -169,9 +155,6 @@ export default function KpiCards() {
           );
         })}
       </div>
-      <SnapshotPanel />
-      <ReleaseCalendarSection compact />
-      <DataFreshnessPanel />
     </section>
   );
 }

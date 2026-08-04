@@ -137,7 +137,7 @@ const ur = {
   'chart.data': 'اعداد و شمار',
   'chart.csv': 'CSV',
   'chart.expand': 'چارٹ بڑا کریں',
-  'chart.expandNamed': '{name} بڑا کریں',
+  'chart.expandNamed': 'چارٹ بڑا کریں: {name}',
   'chart.showTable': 'جدول دکھائیں',
   'chart.showTableNamed': '{name} کا جدول دکھائیں',
   'chart.hideTableNamed': '{name} کا جدول چھپائیں',

@@ -4,7 +4,12 @@ import useI18n from '../i18n/useI18n';
 import { COLORS } from '../utils/chartConfig';
 import MiniSparkline from './ui/MiniSparkline';
 import AnimatedNumber from './ui/AnimatedNumber';
-import { formatMonthYear, formatDayMonthYear, isFiniteNumber } from '../utils/periodHelpers';
+import { isFiniteNumber } from '../utils/periodHelpers';
+import {
+  formatIndicatorChange,
+  formatIndicatorPeriod,
+  indicatorValueParts,
+} from '../utils/formatIndicator';
 
 const PULSE = [
   { id: 'reserves', label: 'Reserves', groupId: 'external', sectionId: 'reserves', sparkKey: 'reserves' },
@@ -13,13 +18,6 @@ const PULSE = [
   { id: 'fbr-tax', label: 'FBR FYTD', groupId: 'fiscal', sectionId: 'fbr', sparkKey: 'fbr' },
   { id: 'remittances', label: 'Remittances', groupId: 'external', sectionId: 'remittances', sparkKey: 'remittances' },
 ];
-
-function formatPeriod(period) {
-  if (!period) return '';
-  if (/^\d{4}-\d{2}-\d{2}$/.test(period)) return formatDayMonthYear(period);
-  if (/^\d{4}-\d{2}$/.test(period)) return formatMonthYear(period);
-  return period;
-}
 
 function sentimentClass(sentiment) {
   if (sentiment === 'positive') return 'positive';
@@ -94,7 +92,7 @@ export default function EconomyPulse({ onNavigate }) {
         value: row.value,
         decimals: Number.isFinite(row.decimals) ? row.decimals : 1,
         unit: row.unit || '',
-        period: formatPeriod(row.period),
+        period: formatIndicatorPeriod(row.period),
         change: row.change,
         changeUnit: row.changeUnit,
         sentiment: row.sentiment || 'neutral',
@@ -121,9 +119,8 @@ export default function EconomyPulse({ onNavigate }) {
       <div className="economy-pulse__chips stagger-children">
         {chips.map((chip) => {
           const color = sentimentColor(chip.sentiment);
-          const delta = Number.isFinite(chip.change)
-            ? `${chip.change > 0 ? '+' : ''}${chip.change}${chip.changeUnit || ''}`
-            : '—';
+          const valueParts = indicatorValueParts(chip);
+          const delta = formatIndicatorChange(chip) || '—';
           return (
             <button
               key={chip.id}
@@ -135,8 +132,9 @@ export default function EconomyPulse({ onNavigate }) {
                 <span className="pulse-chip__label">{tx(chip.label)}</span>
               </div>
               <span className="pulse-chip__value" style={{ color }}>
+                {valueParts.prefix}
                 <AnimatedNumber value={chip.value} decimals={chip.decimals} />
-                <span style={{ fontSize: '0.72em', marginLeft: 2 }}>{chip.unit}</span>
+                <span style={{ fontSize: '0.72em', marginLeft: 2 }}>{valueParts.suffix}</span>
               </span>
               <span className={`pulse-chip__delta ${sentimentClass(chip.sentiment)}`}>
                 {delta}

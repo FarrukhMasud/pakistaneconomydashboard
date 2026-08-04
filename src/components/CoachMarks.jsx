@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import useI18n from '../i18n/useI18n';
 
 const STORAGE_KEY = 'pak-eco-coach-v1';
+const CONSENT_KEY = 'pak-eco-analytics-consent';
+const CONSENT_EVENT = 'pak-eco:consent-decided';
 
 function readDone() {
   try {
@@ -39,8 +41,24 @@ export default function CoachMarks() {
 
   useEffect(() => {
     if (readDone()) return undefined;
-    const id = window.setTimeout(() => setOpen(true), 900);
-    return () => window.clearTimeout(id);
+
+    let timer;
+    const schedule = () => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => setOpen(true), 5000);
+    };
+
+    const consent = window.localStorage.getItem(CONSENT_KEY);
+    if (consent === 'accepted' || consent === 'declined') {
+      schedule();
+    } else {
+      window.addEventListener(CONSENT_EVENT, schedule, { once: true });
+    }
+
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener(CONSENT_EVENT, schedule);
+    };
   }, []);
 
   const finish = () => {

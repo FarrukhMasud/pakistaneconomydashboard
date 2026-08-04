@@ -135,7 +135,7 @@ const en = {
   'chart.data': 'Data',
   'chart.csv': 'CSV',
   'chart.expand': 'Expand chart',
-  'chart.expandNamed': 'Expand {name}',
+  'chart.expandNamed': 'Expand chart: {name}',
   'chart.showTable': 'Show table',
   'chart.showTableNamed': 'Show data table for {name}',
   'chart.hideTableNamed': 'Hide data table for {name}',

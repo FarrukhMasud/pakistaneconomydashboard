@@ -244,23 +244,39 @@ function App() {
         </nav>
 
         {showSubNav && (
-          <nav className="sub-nav" aria-label={groupLabel(activeGroup)}>
-            {activeGroup.sections.map((section) => (
-              <a
-                key={section.id}
-                href={`/${activeGroup.id}/${section.id}`}
-                className={`sub-tab-btn ${activeSectionId === section.id ? 'active' : ''}`}
-                aria-current={activeSectionId === section.id ? 'page' : undefined}
-                onClick={(event) => {
-                  if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
-                  event.preventDefault();
-                  navigate(activeGroup.id, section.id);
-                }}
+          <>
+            <nav className="sub-nav" aria-label={groupLabel(activeGroup)}>
+              {activeGroup.sections.map((section) => (
+                <a
+                  key={section.id}
+                  href={`/${activeGroup.id}/${section.id}`}
+                  className={`sub-tab-btn ${activeSectionId === section.id ? 'active' : ''}`}
+                  aria-current={activeSectionId === section.id ? 'page' : undefined}
+                  onClick={(event) => {
+                    if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
+                    event.preventDefault();
+                    navigate(activeGroup.id, section.id);
+                  }}
+                >
+                  {sectionLabel(section)}
+                </a>
+              ))}
+            </nav>
+            <label className="sub-nav-select">
+              <span className="sr-only">{groupLabel(activeGroup)}</span>
+              <select
+                value={activeSectionId}
+                aria-label={groupLabel(activeGroup)}
+                onChange={(event) => navigate(activeGroup.id, event.target.value)}
               >
-                {sectionLabel(section)}
-              </a>
-            ))}
-          </nav>
+                {activeGroup.sections.map((section) => (
+                  <option key={section.id} value={section.id}>
+                    {sectionLabel(section)}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </>
         )}
       </div>
 

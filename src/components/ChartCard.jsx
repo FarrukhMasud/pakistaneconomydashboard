@@ -157,9 +157,9 @@ export default function ChartCard({ title, description, source, dataSource, last
           )}
           <button
             ref={expandButtonRef}
-            className="chart-action-btn"
+            className="chart-action-btn chart-action-btn--expand"
             onClick={() => setChartOpen(true)}
-            aria-label={t('chart.expandNamed', 'Expand {name}').replace('{name}', localTitle)}
+            aria-label={t('chart.expandNamed', 'Expand chart: {name}').replace('{name}', localTitle)}
             title={t('chart.expand', 'Expand chart')}
           >
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -168,6 +168,7 @@ export default function ChartCard({ title, description, source, dataSource, last
               <line x1="21" y1="3" x2="14" y2="10" />
               <line x1="3" y1="21" x2="10" y2="14" />
             </svg>
+            <span className="chart-action-label">{t('chart.expand', 'Expand chart')}</span>
           </button>
           {tableData && (
             <button

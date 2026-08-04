@@ -131,8 +131,7 @@
       "trend": "stable",
       "sentiment": "neutral",
       "source": "SBP Monetary Policy Committee",
-      "provenanceKey": "monetaryPolicy.currentRate",
-      "sub": "Next MPC: [object Object]"
+      "provenanceKey": "monetaryPolicy.currentRate"
     }
   ],
   "lastChecked": "2026-08-04"

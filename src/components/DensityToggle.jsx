@@ -6,8 +6,8 @@ export default function DensityToggle() {
   const { density, setDensity } = useDensity();
 
   const options = [
-    { value: 'comfortable', label: t('density.comfortable', 'Roomy'), short: 'R' },
-    { value: 'compact', label: t('density.compact', 'Compact'), short: 'C' },
+    { value: 'comfortable', label: t('density.comfortable', 'Roomy'), icon: '↔' },
+    { value: 'compact', label: t('density.compact', 'Compact'), icon: '≡' },
   ];
 
   return (
@@ -19,9 +19,10 @@ export default function DensityToggle() {
           className={`density-toggle-btn ${density === opt.value ? 'active' : ''}`}
           onClick={() => setDensity(opt.value)}
           aria-pressed={density === opt.value}
+          aria-label={opt.label}
           title={opt.label}
         >
-          {opt.short}
+          <span aria-hidden="true">{opt.icon}</span>
         </button>
       ))}
     </div>

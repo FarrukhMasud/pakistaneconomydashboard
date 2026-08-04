@@ -16,9 +16,10 @@ export default function ThemeToggle({ theme, setTheme }) {
           className={`theme-toggle-btn ${theme === opt.value ? 'active' : ''}`}
           onClick={() => setTheme(opt.value)}
           aria-pressed={theme === opt.value}
+          aria-label={`${tx(opt.label)} — ${tx('Theme')}`}
           title={`${tx(opt.label)} — ${tx('Theme')}`}
         >
-          <span className="theme-toggle-icon">{opt.icon}</span>
+          <span className="theme-toggle-icon" aria-hidden="true">{opt.icon}</span>
         </button>
       ))}
     </div>

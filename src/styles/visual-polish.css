@@ -304,4 +304,27 @@ body::before {
   .card:hover, .what-moved__card:hover, .watchlist__card:hover, .pulse-chip:hover { transform: none; }
   body { background-attachment: scroll; }
 }
-@media (max-width: 720px) { .chrome-bar { padding: 0.45rem 0.75rem; } }
+@media (max-width: 720px) {
+  .chrome-bar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: 0.45rem 0.75rem;
+  }
+  .chrome-brand { grid-column: 1; }
+  .chrome-actions {
+    grid-column: 1 / -1;
+    flex-wrap: nowrap;
+  }
+  .header-feedback-link { display: none; }
+  .app-chrome .group-nav {
+    display: flex;
+    padding: 0.45rem 0.75rem;
+  }
+  .app-chrome .sub-nav-select { padding: 0.45rem 0.75rem; }
+  .what-moved__grid {
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow-x: visible;
+  }
+}

@@ -19,11 +19,7 @@
       "changeBps": 0,
       "note": "Held at 11.5%. Headline inflation rose to 11.7% in May 2026 (highest since Jun 2024), above the 5–7% target; the MPC cited global oil prices and possible fiscal slippages as upside risks."
     },
-    "nextMeeting": {
-      "date": null,
-      "dateText": "Expected late-July 2026",
-      "note": "The FY2025-26 MPC calendar ended with the 15 Jun 2026 meeting. SBP typically announces the FY2026-27 calendar in July; the next decision is expected at end-July 2026."
-    },
+    "nextMeeting": null,
     "context": {
       "inflationYoY": 11.7,
       "inflationPeriod": "May 2026",

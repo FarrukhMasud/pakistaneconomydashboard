@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import useI18n from '../i18n/useI18n';
 
 const STORAGE_KEY = 'pak-eco-analytics-consent';
+const CONSENT_EVENT = 'pak-eco:consent-decided';
 const CLARITY_ID = 'wf9unpmskv';
 
 function loadClarity(id) {
@@ -33,6 +34,7 @@ export default function ConsentBanner() {
   const decide = (value) => {
     window.localStorage.setItem(STORAGE_KEY, value);
     setChoice(value);
+    window.dispatchEvent(new CustomEvent(CONSENT_EVENT, { detail: value }));
   };
 
   return (

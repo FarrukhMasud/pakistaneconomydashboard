@@ -4,12 +4,8 @@ import { useWatchlist } from '../hooks/useWatchlist';
 import useI18n from '../i18n/useI18n';
 import { INDICATOR_CATALOG } from '../utils/indicatorCatalog';
 import { COLORS } from '../utils/chartConfig';
+import { formatIndicatorPeriod, formatIndicatorValue } from '../utils/formatIndicator';
 import CiteFigure from './CiteFigure';
-
-function formatValue(kpi) {
-  if (!Number.isFinite(kpi?.value)) return String(kpi?.value ?? '—');
-  return Number.isFinite(kpi.decimals) ? kpi.value.toFixed(kpi.decimals) : String(kpi.value);
-}
 
 /**
  * Pinned indicators on Overview (localStorage). Empty state explains how to pin.
@@ -31,8 +27,8 @@ export default function WatchlistPanel({ onNavigate }) {
           id,
           kind: 'kpi',
           label: kpiRow.label,
-          value: `${formatValue(kpiRow)}${kpiRow.unit || ''}`,
-          period: kpiRow.period,
+          value: formatIndicatorValue(kpiRow),
+          period: formatIndicatorPeriod(kpiRow.period),
           sentiment: kpiRow.sentiment || 'neutral',
           provenanceKey: kpiRow.provenanceKey,
           groupId: resolveGroup(kpiRow.id),
