@@ -54,7 +54,7 @@ convention:
 - **Loading:** Route-based code splitting (`React.lazy`) plus pinned `vendor-react` / `vendor-charts` chunks; insight briefing vs deep-dive bundles are separate so Briefing does not pull every scorecard
 - **Navigation:** `Ctrl`/`Cmd`+`K` (or `/`) command palette that searches all sections/indicators; pin KPIs to a local watchlist
 - **Accessibility:** Skip-to-content link, focusable `<main>`, `aria-live` section announcements, focus-trapped chart and tile modals, keyboard-discoverable chart data tables
-- **Hosting:** Cloudflare Pages (auto-build & deploy on push). Deploys inject `VITE_DATA_VERSION` from the git SHA so clients bust cached JSON after publish.
+- **Hosting:** Cloudflare Workers static assets (auto-build & deploy on push). Deploys inject `VITE_DATA_VERSION` from the git SHA so clients bust cached JSON after publish.
 - **Data:** JSON files in `public/data/`, updated from SBP sources. PWA shell shows a “New data available — refresh” toast when the service worker or data stamp changes.
 - **Data Trust:** Generated source manifest + freshness audit + per-figure provenance + revision log
 - **Open data:** Static JSON/CSV API under `public/api/v1/` (no key, no rate limit)
@@ -323,14 +323,16 @@ source metadata, set `AUDIT_SKIP_SOURCE=1`; the local data sanity checks still r
 
 ---
 
-## Deployment (Cloudflare Pages)
+## Deployment (Cloudflare Workers)
 
-The dashboard is hosted on **Cloudflare Pages**, connected to this GitHub repo.
+The dashboard is hosted on **Cloudflare Workers static assets**, connected to this GitHub repo.
 **Every push to `main` triggers an automatic build (`npm run build`) and deploy** —
 so refreshing data (`npm run update`, which commits & pushes) ships the site with
 no separate upload step.
 
 - Build command: `npm run build` · Output directory: `dist`
+- Deploy command: `npx wrangler deploy`
+- `wrangler.jsonc` enables Workers' native single-page-application fallback
 - Node version pinned via `.nvmrc` (Node 22; Vite 6 requires Node ≥ 18)
 - `public/_headers` keeps `index.html` and `/data/*` `no-store` (always-fresh data)
   and caches hashed `/assets/*` immutably.

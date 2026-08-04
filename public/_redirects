@@ -1,9 +1,0 @@
-# Cloudflare Pages SPA fallback (Netlify-compatible _redirects syntax).
-# More-specific rules first; splat catch-all last.
-/api/*       /api/:splat        200
-/data/*      /data/:splat       200
-/assets/*    /assets/:splat     200
-/feed.xml    /feed.xml          200
-/manifest.webmanifest /manifest.webmanifest 200
-/sw.js       /sw.js             200
-/*           /index.html        200
