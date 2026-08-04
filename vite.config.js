@@ -7,7 +7,8 @@ function dataVersion() {
   if (process.env.VITE_DATA_VERSION) return process.env.VITE_DATA_VERSION
   try {
     return execSync('git rev-parse --short HEAD', { encoding: 'utf8' }).trim()
-  } catch {
+  } catch (error) {
+    console.warn('Unable to resolve git data version; using timestamp fallback.', error)
     return String(Date.now())
   }
 }
