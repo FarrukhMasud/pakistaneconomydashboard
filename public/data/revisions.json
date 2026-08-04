@@ -1,8 +1,64 @@
 {
-  "generatedAt": "2026-07-27T17:49:21.231Z",
+  "generatedAt": "2026-08-04T19:22:28.957Z",
   "description": "Every restatement of a previously published figure. Pakistani official statistics are routinely revised from provisional to final; this log preserves what changed, when, and by how much.",
-  "entryCount": 20,
+  "entryCount": 27,
   "entries": [
+    {
+      "date": "2026-08-04",
+      "dataset": "reserves-adequacy",
+      "path": "current.sbpReserves",
+      "from": 17.26,
+      "to": 17.03,
+      "changePct": -1.3
+    },
+    {
+      "date": "2026-08-04",
+      "dataset": "reserves-adequacy",
+      "path": "current.totalReserves",
+      "from": 22.67,
+      "to": 22.44,
+      "changePct": -1
+    },
+    {
+      "date": "2026-08-04",
+      "dataset": "reserves-adequacy",
+      "path": "trajectory[date=2026-07].sbpReserves",
+      "from": 17.26,
+      "to": 17.03,
+      "changePct": -1.3
+    },
+    {
+      "date": "2026-08-04",
+      "dataset": "kpi-summary",
+      "path": "indicators[id=reserves].value",
+      "from": 22.67,
+      "to": 22.44,
+      "changePct": -1
+    },
+    {
+      "date": "2026-08-04",
+      "dataset": "kpi-summary",
+      "path": "indicators[id=reserves].change",
+      "from": -0.01,
+      "to": -0.23,
+      "changePct": -2200
+    },
+    {
+      "date": "2026-08-04",
+      "dataset": "kpi-summary",
+      "path": "indicators[id=inflation].value",
+      "from": 11.1,
+      "to": 9.2,
+      "changePct": -17.1
+    },
+    {
+      "date": "2026-08-04",
+      "dataset": "kpi-summary",
+      "path": "indicators[id=inflation].change",
+      "from": -0.6,
+      "to": -1.9,
+      "changePct": -216.7
+    },
     {
       "date": "2026-07-27",
       "dataset": "fdi",

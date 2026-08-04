@@ -3,9 +3,9 @@
   "dataSource": "Derived from official SBP, PBS, FBR and Finance Division data",
   "notes": {
     "inflation.cpiPath": {
-      "text": "Headline CPI inflation peaked at 38.0% year-on-year in May 2023 and stood at 11.1% in June 2026. This is the most widely tracked inflation measure in Pakistan.",
+      "text": "Headline CPI inflation peaked at 38.0% year-on-year in May 2023 and stood at 9.2% in July 2026. This is the most widely tracked inflation measure in Pakistan.",
       "basis": "derived",
-      "derivation": "Maximum and latest observation of the national CPI year-on-year series across 60 months from July 2021.",
+      "derivation": "Maximum and latest observation of the national CPI year-on-year series across 60 months from August 2021.",
       "sources": [
         {
           "id": "pbs-cpi",
@@ -22,7 +22,7 @@
           "sourceType": "official-primary"
         }
       ],
-      "asOf": "2026-06"
+      "asOf": "2026-07"
     },
     "exchange-rate.depreciation": {
       "text": "The rupee's monthly average moved from ₨153.08/USD in April 2021 to its weakest monthly average of ₨297.75 in September 2023 — a 48.6% loss of value against the dollar. It averaged ₨278.58 in June 2026, 6.4% stronger than that low.",
@@ -40,9 +40,9 @@
       "asOf": "2026-06"
     },
     "reserves.recovery": {
-      "text": "Across the published window, total liquid reserves were lowest at $18.90bn at end-September 2025 and stood at $22.67bn at the week ending 2026-07-17, of which $17.26bn is held by the SBP.",
+      "text": "Across the published window, total liquid reserves were lowest at $18.90bn at end-September 2025 and stood at $22.44bn at the week ending 2026-07-24, of which $17.03bn is held by the SBP.",
       "basis": "derived",
-      "derivation": "Minimum and latest total (SBP plus commercial banks) across the 16 published observations from end-June 2025.",
+      "derivation": "Minimum and latest total (SBP plus commercial banks) across the 17 published observations from end-June 2025.",
       "sources": [
         {
           "id": "sbp-forex-reserves",
@@ -52,7 +52,7 @@
           "sourceType": "official-primary"
         }
       ],
-      "asOf": "2026-07-17"
+      "asOf": "2026-07-24"
     },
     "trade.deficit": {
       "text": "The monthly goods trade deficit was widest at $4.07bn in June 2022. In June 2026 exports of $2.60bn against imports of $6.15bn left a deficit of $3.55bn.",
@@ -137,6 +137,6 @@
       "asOf": "2026-27"
     }
   },
-  "lastUpdated": "2026-07-27",
-  "lastChecked": "2026-07-27"
+  "lastUpdated": "2026-08-04",
+  "lastChecked": "2026-08-04"
 }

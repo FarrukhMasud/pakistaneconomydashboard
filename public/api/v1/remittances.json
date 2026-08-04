@@ -6,21 +6,11 @@
   "sourceType": "official-primary",
   "cadence": "Monthly",
   "latestObservation": "2026-06",
-  "lastUpdated": "2026-07-24",
-  "lastChecked": null,
+  "lastUpdated": "2026-08-04",
+  "lastChecked": "2026-08-04",
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",
   "data": {
     "monthly": [
-      {
-        "date": "2021-07",
-        "total": 2736.077681,
-        "saudiArabia": 659.8738655,
-        "uae": 547.6830148,
-        "uk": 397.9441676,
-        "usa": 277.2210866,
-        "otherGcc": 300.3415686,
-        "eu": 301.1338597
-      },
       {
         "date": "2021-08",
         "total": 2682.62743,
@@ -639,7 +629,8 @@
       }
     ],
     "dataSource": "SBP EasyData API",
-    "lastUpdated": "2026-07-24",
-    "dataCoverage": "2021-07 – 2026-06"
+    "lastUpdated": "2026-08-04",
+    "dataCoverage": "2021-08 – 2026-06",
+    "lastChecked": "2026-08-04"
   }
 }

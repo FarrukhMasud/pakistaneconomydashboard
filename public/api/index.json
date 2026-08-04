@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-27T18:50:30.764Z",
+  "generatedAt": "2026-08-04T19:23:14.006Z",
   "version": "v1",
   "title": "economyofpakistan.com static data API",
   "description": "Every dataset the dashboard renders, published as stable JSON and CSV. No key, no rate limit, no scraping required. Please cite the issuing institution listed on each endpoint.",
@@ -30,13 +30,13 @@
       "label": "Foreign Exchange Reserves",
       "json": "/api/v1/reserves.json",
       "csv": "/api/v1/reserves.csv",
-      "rows": 16,
+      "rows": 17,
       "seriesKey": "weekly",
       "source": "State Bank of Pakistan",
       "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
       "sourceType": "official-primary",
       "cadence": "Weekly",
-      "latestObservation": "2026-07-17"
+      "latestObservation": "2026-07-24"
     },
     {
       "id": "exchange-rates",
@@ -56,7 +56,7 @@
       "label": "Workers' Remittances",
       "json": "/api/v1/remittances.json",
       "csv": "/api/v1/remittances.csv",
-      "rows": 60,
+      "rows": 59,
       "seriesKey": "monthly",
       "source": "SBP EasyData API",
       "sourceUrl": "https://easydata.sbp.org.pk",
@@ -82,7 +82,7 @@
       "label": "Foreign Direct Investment",
       "json": "/api/v1/fdi.json",
       "csv": "/api/v1/fdi.csv",
-      "rows": 60,
+      "rows": 59,
       "seriesKey": "monthly",
       "source": "State Bank of Pakistan",
       "sourceUrl": "https://archive.sbp.org.pk/ecodata/NetinflowSummary.xls",
@@ -114,14 +114,14 @@
       "sourceUrl": "https://easydata.sbp.org.pk",
       "sourceType": "official-primary",
       "cadence": "Monthly",
-      "latestObservation": "2026-06"
+      "latestObservation": "2026-07"
     },
     {
       "id": "monetary",
       "label": "Monetary Sector",
       "json": "/api/v1/monetary.json",
       "csv": "/api/v1/monetary.csv",
-      "rows": 549,
+      "rows": 540,
       "seriesKey": "series",
       "source": "SBP EasyData API",
       "sourceUrl": "https://easydata.sbp.org.pk",
@@ -218,7 +218,7 @@
       "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
       "sourceType": "official-derived",
       "cadence": "Weekly",
-      "latestObservation": "2026-07-17"
+      "latestObservation": "2026-07-24"
     },
     {
       "id": "budget-federal",

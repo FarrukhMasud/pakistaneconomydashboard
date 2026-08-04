@@ -237,8 +237,8 @@
   "countryPriorPeriod": "Jul-Jun FY25",
   "source": "State Bank of Pakistan",
   "dataSource": "SBP",
-  "lastUpdated": "2026-07-27",
-  "dataCoverage": "monthly through 2026-06; sector Jul-Jun FY26; country Jul-Jun FY26; headline FY2026 Jul-Jun (Netinflow.xls)",
+  "lastUpdated": "2026-08-04",
+  "dataCoverage": "monthly through 2026-06; sector Jul-Jun FY26; country Jul-Jun FY26; summary FY2026 Jul-Jun",
   "fytdComparison": {
     "period": "Jul-Jun",
     "current": {
@@ -276,12 +276,6 @@
     }
   },
   "monthly": [
-    {
-      "date": "2021-07",
-      "net_fdi": 117,
-      "equity": 129,
-      "debt": -12
-    },
     {
       "date": "2021-08",
       "net_fdi": 137,
@@ -652,6 +646,6 @@
       "name": "Debt Instruments"
     }
   },
-  "monthlyDataCoverage": "2021-07 – 2026-06",
-  "lastChecked": "2026-07-27"
+  "monthlyDataCoverage": "2021-08 – 2026-06",
+  "lastChecked": "2026-08-04"
 }

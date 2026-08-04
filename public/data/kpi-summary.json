@@ -1,20 +1,20 @@
 {
-  "lastUpdated": "2026-07-27",
+  "lastUpdated": "2026-08-04",
   "indicators": [
     {
       "id": "reserves",
       "label": "Foreign Reserves (Total)",
-      "value": 22.67,
+      "value": 22.44,
       "unit": "$ Billion",
-      "period": "2026-07-17",
-      "change": -0.01,
+      "period": "2026-07-24",
+      "change": -0.23,
       "changeUnit": "$B",
-      "changeBasis": "vs week ending 2026-07-10",
+      "changeBasis": "vs week ending 2026-07-17",
       "trend": "stable",
       "sentiment": "neutral",
       "source": "SBP",
       "provenanceKey": "reserves.weekly.total",
-      "sub": "SBP: $17.26B · Banks: $5.41B"
+      "sub": "SBP: $17.03B · Banks: $5.41B"
     },
     {
       "id": "exchange-rate",
@@ -91,12 +91,12 @@
     {
       "id": "inflation",
       "label": "CPI Inflation (YoY)",
-      "value": 11.1,
+      "value": 9.2,
       "unit": "%",
-      "period": "2026-06",
-      "change": -0.6,
+      "period": "2026-07",
+      "change": -1.9,
       "changeUnit": "pp",
-      "changeBasis": "vs 2026-05",
+      "changeBasis": "vs 2026-06",
       "trend": "down",
       "sentiment": "positive",
       "source": "PBS",
@@ -135,5 +135,5 @@
       "sub": "Next MPC: [object Object]"
     }
   ],
-  "lastChecked": "2026-07-27"
+  "lastChecked": "2026-08-04"
 }
