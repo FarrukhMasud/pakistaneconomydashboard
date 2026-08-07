@@ -115,6 +115,7 @@ const stringsUr = {
 
   // ===== Services / IT =====
   'IT & Services Exports': 'آئی ٹی و خدمات کی برآمدات',
+  'IT Export Momentum': 'آئی ٹی برآمدات کی رفتار',
   'Pakistan\u2019s services trade classified by EBOPS (Extended Balance of Payments Services). IT & Telecom is the fastest-growing segment, with computer services (software consultancy, freelancing, and software exports) driving growth. This section includes a month-by-month view of IT and freelance exports with year-on-year momentum. Data from SBP\u2019s Balance of Payments detail tables.':
     'پاکستان کی خدمات کی تجارت، EBOPS درجہ بندی کے مطابق۔ آئی ٹی و ٹیلی کام سب سے تیزی سے بڑھنے والا شعبہ ہے، جس میں کمپیوٹر خدمات (سافٹ ویئر کنسلٹنسی، فری لانسنگ اور سافٹ ویئر برآمدات) نمو کی بنیاد ہیں۔ اس حصے میں آئی ٹی اور فری لانس برآمدات کا ماہ بہ ماہ اور سال بہ سال جائزہ شامل ہے۔ اعداد و شمار اسٹیٹ بینک کی ادائیگیوں کے توازن کی تفصیلی جداول سے ہیں۔',
   'Monthly IT & Freelance Exports': 'ماہانہ آئی ٹی و فری لانس برآمدات',
@@ -248,8 +249,8 @@ const stringsUr = {
   'FY26 actual vs budget target': 'مالی سال 2026 حقیقی بمقابلہ بجٹ ہدف',
   'Loading IT export deep dive…': 'آئی ٹی برآمدات کا تفصیلی جائزہ لوڈ ہو رہا ہے…',
   'IT Export Deep Dive': 'آئی ٹی برآمدات کا تفصیلی جائزہ',
-  'A focused view of monthly IT & Telecom exports, formal freelance receipts, and the composition of computer-services exports from SBP EBOPS data.':
-    'اسٹیٹ بینک کے EBOPS اعداد سے ماہانہ آئی ٹی و ٹیلی کام برآمدات، رسمی فری لانس وصولیوں اور کمپیوٹر خدمات کی برآمدی ساخت کا مرکوز جائزہ۔',
+  'A focused view of monthly IT & Telecom exports from SBP’s headline services table, with formal freelance receipts and computer-services composition from the detailed EBOPS release.':
+    'اسٹیٹ بینک کی خدمات کی مرکزی جدول سے ماہانہ آئی ٹی و ٹیلی کام برآمدات، اور تفصیلی EBOPS اجرا سے رسمی فری لانس وصولیوں اور کمپیوٹر خدمات کی ساخت کا مرکوز جائزہ۔',
   'Latest IT & Telecom exports': 'تازہ ترین آئی ٹی و ٹیلی کام برآمدات',
   'Latest Freelance IT exports': 'تازہ ترین فری لانس آئی ٹی برآمدات',
   'Software consultancy': 'سافٹ ویئر کنسلٹنسی',

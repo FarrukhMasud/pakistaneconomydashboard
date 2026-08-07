@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-07T18:30:00.919Z",
+  "generatedAt": "2026-08-07T19:24:47.429Z",
   "description": "Expected next-release windows. Dates marked \"estimated\" are derived from the observed publication history of each series on this dashboard — they are projections, not an official release calendar. Dates marked \"announced\" come from the source institution itself.",
   "overdueCount": 0,
   "dueCount": 0,
@@ -273,10 +273,10 @@
       "label": "IT & Services Trade",
       "cadence": "Monthly/FYTD",
       "source": "State Bank of Pakistan",
-      "sourceUrl": "https://archive.sbp.org.pk/ecodata/dt.xls",
+      "sourceUrl": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf",
       "sourceType": "official-primary",
       "critical": true,
-      "latestObservation": "Jul-May FY26",
+      "latestObservation": "2026-06",
       "dashboardUpdated": "2026-08-07",
       "releaseCalendarUrl": null,
       "schedule": "event-driven",
@@ -286,7 +286,7 @@
       "windowEnd": null,
       "status": "event-driven",
       "daysLate": 0,
-      "basis": "Detailed services trade data from SBP EBOPS file."
+      "basis": "Headline IT and total-services data can lead the detailed EBOPS category and freelance breakdown."
     },
     {
       "id": "explainers",

@@ -407,7 +407,14 @@ export function ItExportDeepDiveSection() {
 
   const itMonthly = services.data.itMonthly;
   const components = itMonthly?.components || [];
-  const itTotal = components.find((item) => item.key === 'itTotal');
+  const detailItTotal = components.find((item) => item.key === 'itTotal');
+  const itTotal = services.data.itHeadline
+    ? {
+        ...services.data.itHeadline,
+        key: 'itTotal',
+        name: 'IT & Telecom (total)',
+      }
+    : detailItTotal;
   const freelance = components.find((item) => item.key === 'freelance');
   const softwareConsultancy = components.find((item) => item.key === 'softwareConsultancy');
   const softwareExports = components.find((item) => item.key === 'softwareExports');
@@ -417,7 +424,16 @@ export function ItExportDeepDiveSection() {
     datasets: [
       { label: 'IT & Telecom exports', data: monthly.map((row) => row.itCredit), backgroundColor: COLORS.teal, borderRadius: 6 },
       { label: 'Freelance IT exports', data: monthly.map((row) => row.freelanceCredit), backgroundColor: COLORS.amber, borderRadius: 6 },
-      { label: 'Non-freelance IT exports', data: monthly.map((row) => Math.max(0, row.itCredit - row.freelanceCredit)), backgroundColor: COLORS.blue, borderRadius: 6 },
+      {
+        label: 'Non-freelance IT exports',
+        data: monthly.map((row) => (
+          row.itCredit == null || row.freelanceCredit == null
+            ? null
+            : Math.max(0, row.itCredit - row.freelanceCredit)
+        )),
+        backgroundColor: COLORS.blue,
+        borderRadius: 6,
+      },
     ],
   };
   const options = {
@@ -427,21 +443,26 @@ export function ItExportDeepDiveSection() {
       y: { ...baseBarOptions.scales.y, title: { display: true, text: 'US$ million', color: COLORS.text } },
     },
   };
-  const freelanceShare = itTotal?.latest ? (freelance?.latest / itTotal.latest) * 100 : null;
-  const fytdFreelanceShare = itTotal?.fytd ? (freelance?.fytd / itTotal.fytd) * 100 : null;
+  const sameLatestMonth = freelance?.latestMonth === itTotal?.latestMonth;
+  const sameFytdPeriod = freelance?.fytdLabel === itTotal?.fytdLabel;
+  const freelanceShare = sameLatestMonth && itTotal?.latest ? (freelance?.latest / itTotal.latest) * 100 : null;
+  const fytdFreelanceShare = sameFytdPeriod && itTotal?.fytd ? (freelance?.fytd / itTotal.fytd) * 100 : null;
 
   return (
     <section className="fade-in">
       <SectionHeader
         title="IT Export Deep Dive"
-        description="A focused view of monthly IT & Telecom exports, formal freelance receipts, and the composition of computer-services exports from SBP EBOPS data."
-        sourceLinks={[{ label: 'SBP BOP Detail', url: 'https://www.sbp.org.pk/ecodata/index2.asp' }]}
+        description="A focused view of monthly IT & Telecom exports from SBP’s headline services table, with formal freelance receipts and computer-services composition from the detailed EBOPS release."
+        sourceLinks={[
+          { label: 'SBP Services Headline', url: 'https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf' },
+          { label: 'SBP BOP Detail', url: 'https://www.sbp.org.pk/ecodata/index2.asp' },
+        ]}
       />
       <div className="insight-grid">
-        {itTotal && <InsightCard title="Latest IT & Telecom exports" value={`$${fmt(itTotal.latest)}M`} meta={itMonthly.latestMonth} body={`FYTD exports are $${fmt(itTotal.fytd)}M, ${fmtPct(pctChange(itTotal.fytd, itTotal.fytdPrior))} versus ${itMonthly.fytdPriorLabel}.`} source="SBP EBOPS" sourceUrl="https://www.sbp.org.pk/ecodata/index2.asp" tone="positive" />}
-        {freelance && <InsightCard title="Latest Freelance IT exports" value={`$${fmt(freelance.latest)}M`} meta={`${fmt(freelanceShare)}% of latest IT exports`} body={`FYTD freelance IT exports are $${fmt(freelance.fytd)}M, ${fmt(fytdFreelanceShare)}% of IT & Telecom exports.`} source="SBP EBOPS" sourceUrl="https://www.sbp.org.pk/ecodata/index2.asp" tone="positive" />}
-        {softwareConsultancy && <InsightCard title="Software consultancy" value={`$${fmt(softwareConsultancy.latest)}M`} meta={`${fmtPct(pctChange(softwareConsultancy.latest, softwareConsultancy.yearAgo))} YoY`} body={`FYTD software consultancy exports are $${fmt(softwareConsultancy.fytd)}M.`} source="SBP EBOPS" sourceUrl="https://www.sbp.org.pk/ecodata/index2.asp" tone="neutral" />}
-        {softwareExports && <InsightCard title="Computer software exports" value={`$${fmt(softwareExports.latest)}M`} meta={`${fmtPct(pctChange(softwareExports.latest, softwareExports.yearAgo))} YoY`} body={`FYTD computer software exports are $${fmt(softwareExports.fytd)}M.`} source="SBP EBOPS" sourceUrl="https://www.sbp.org.pk/ecodata/index2.asp" tone="neutral" />}
+        {itTotal && <InsightCard title="Latest IT & Telecom exports" value={`$${fmt(itTotal.latest)}M`} meta={itTotal.latestMonth || itMonthly.latestMonth} body={`FYTD exports are $${fmt(itTotal.fytd)}M, ${fmtPct(pctChange(itTotal.fytd, itTotal.fytdPrior))} versus ${itTotal.fytdPriorLabel || itMonthly.fytdPriorLabel}.`} source="SBP Services Headline" sourceUrl="https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf" tone="positive" />}
+        {freelance && <InsightCard title="Latest Freelance IT exports" value={`$${fmt(freelance.latest)}M`} meta={freelanceShare == null ? freelance.latestMonth : `${fmt(freelanceShare)}% of latest IT exports`} body={fytdFreelanceShare == null ? `FYTD freelance IT exports are $${fmt(freelance.fytd)}M through ${freelance.fytdLabel}.` : `FYTD freelance IT exports are $${fmt(freelance.fytd)}M, ${fmt(fytdFreelanceShare)}% of IT & Telecom exports.`} source="SBP EBOPS" sourceUrl="https://www.sbp.org.pk/ecodata/index2.asp" tone="positive" />}
+        {softwareConsultancy && <InsightCard title="Software consultancy" value={`$${fmt(softwareConsultancy.latest)}M`} meta={`${softwareConsultancy.latestMonth} · ${fmtPct(pctChange(softwareConsultancy.latest, softwareConsultancy.yearAgo))} YoY`} body={`FYTD software consultancy exports are $${fmt(softwareConsultancy.fytd)}M through ${softwareConsultancy.fytdLabel}.`} source="SBP EBOPS" sourceUrl="https://www.sbp.org.pk/ecodata/index2.asp" tone="neutral" />}
+        {softwareExports && <InsightCard title="Computer software exports" value={`$${fmt(softwareExports.latest)}M`} meta={`${softwareExports.latestMonth} · ${fmtPct(pctChange(softwareExports.latest, softwareExports.yearAgo))} YoY`} body={`FYTD computer software exports are $${fmt(softwareExports.fytd)}M through ${softwareExports.fytdLabel}.`} source="SBP EBOPS" sourceUrl="https://www.sbp.org.pk/ecodata/index2.asp" tone="neutral" />}
       </div>
       <div className="card chart-card">
         <div className="chart-card-header"><h3>{tx("Monthly IT and freelance export receipts")}</h3></div>
@@ -539,4 +560,3 @@ export function PeerComparisonSection() {
     </section>
   );
 }
-

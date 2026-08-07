@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-07T18:30:01.774Z",
+  "generatedAt": "2026-08-07T19:24:47.744Z",
   "version": "v1",
   "title": "economyofpakistan.com static data API",
   "description": "Every dataset the dashboard renders, published as stable JSON and CSV. No key, no rate limit, no scraping required. Please cite the issuing institution listed on each endpoint.",
@@ -95,13 +95,13 @@
       "label": "IT & Services Trade",
       "json": "/api/v1/services.json",
       "csv": "/api/v1/services.csv",
-      "rows": 2,
+      "rows": 3,
       "seriesKey": "monthlySeries",
       "source": "State Bank of Pakistan",
-      "sourceUrl": "https://archive.sbp.org.pk/ecodata/dt.xls",
+      "sourceUrl": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf",
       "sourceType": "official-primary",
       "cadence": "Monthly/FYTD",
-      "latestObservation": "Jul-May FY26"
+      "latestObservation": "2026-06"
     },
     {
       "id": "inflation",

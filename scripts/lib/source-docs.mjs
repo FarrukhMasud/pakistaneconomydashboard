@@ -95,6 +95,15 @@ export const SOURCE_DOCS = {
     sourceType: 'official-primary',
     cadence: 'monthly',
   },
+  'ExportsImports-Goods.pdf': {
+    id: 'sbp-services-headline',
+    institution: 'State Bank of Pakistan',
+    title: 'Exports and Imports of Goods & Services',
+    url: 'https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf',
+    landingUrl: 'https://www.sbp.org.pk/ecodata/index2.asp',
+    sourceType: 'official-primary',
+    cadence: 'monthly',
+  },
   'Export_Receipts_by_all_Countries.xls': {
     id: 'sbp-export-by-country',
     institution: 'State Bank of Pakistan',

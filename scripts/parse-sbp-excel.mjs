@@ -16,6 +16,8 @@
  *   - NetinflowSummary.xls      → fdi.json (annual)
  *   - GDP_table.xlsx            → fiscal.json
  *   - Balancepayment_BPM6.xls   → services.json (BOP services aggregate)
+ *   - dt.xls                    → services.json (detailed EBOPS categories)
+ *   - ExportsImports-Goods.pdf  → services.json (latest IT headline)
  *
  * Also attempts to download IBF_Arch.xls for exchange rate history.
  */
@@ -43,6 +45,7 @@ import {
   fyMonthToYearMonth,
   EBOPS_ROW_PATTERNS,
 } from './lib/sbp-resolvers.mjs';
+import { parseServicesHeadline } from './lib/services-headline.mjs';
 
 XLSX.set_fs(fs);
 
@@ -1411,6 +1414,85 @@ async function updateServices() {
   return servicesData;
 }
 
+async function updateServicesHeadline() {
+  console.log('\n💻 Parsing Services Headline (ExportsImports-Goods.pdf)...');
+
+  const pdfItems = await parsePdfTextItems(resolve(RAW_DIR, 'ExportsImports-Goods.pdf'));
+  const headline = parseServicesHeadline(pdfItems);
+  const existing = await readJson('services.json');
+  const detail = existing.itMonthly || {};
+  const detailLatestMonth = detail.detailLatestMonth || detail.latestMonth || null;
+  const detailYearAgoMonth = detail.detailYearAgoMonth || detail.yearAgoMonth || null;
+  const detailFytdLabel = detail.detailFytdLabel || detail.fytdLabel || null;
+  const detailFytdPriorLabel = detail.detailFytdPriorLabel || detail.fytdPriorLabel || null;
+  const components = (detail.components || []).map((component) => ({
+    ...component,
+    latestMonth: component.latestMonth || detailLatestMonth,
+    yearAgoMonth: component.yearAgoMonth || detailYearAgoMonth,
+    fytdLabel: component.fytdLabel || detailFytdLabel,
+    fytdPriorLabel: component.fytdPriorLabel || detailFytdPriorLabel,
+  }));
+  if (!components.some((component) => component.key === 'itTotal')) {
+    throw new Error('Services detail is missing the IT total component');
+  }
+
+  const seriesMap = new Map((existing.monthlySeries || []).map((row) => [row.month, row]));
+  seriesMap.set(headline.latestMonth, {
+    month: headline.latestMonth,
+    totalCredit: headline.totalServicesLatest,
+    itCredit: headline.latest,
+    freelanceCredit: seriesMap.get(headline.latestMonth)?.freelanceCredit ?? null,
+  });
+
+  const recentMonths = [...(existing.recentMonths || [])];
+  const shortMonth = new Intl.DateTimeFormat('en', { month: 'short', timeZone: 'UTC' })
+    .format(new Date(`${headline.latestMonth}-01T00:00:00Z`));
+  const recentLabel = `${shortMonth}-${headline.latestMonth.slice(2, 4)}`;
+  const recentIndex = recentMonths.findIndex((row) => row.month === recentLabel);
+  const recentHeadline = {
+    month: recentLabel,
+    totalCredit: headline.totalServicesLatest,
+    itCredit: headline.latest,
+  };
+  if (recentIndex >= 0) recentMonths[recentIndex] = recentHeadline;
+  else recentMonths.push(recentHeadline);
+
+  const updated = {
+    ...existing,
+    recentMonths,
+    itHeadline: {
+      ...headline,
+      source: 'State Bank of Pakistan',
+      sourceFile: 'ExportsImports-Goods.pdf',
+      sourceUrl: 'https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf',
+      status: 'provisional',
+    },
+    itMonthly: {
+      ...detail,
+      detailLatestMonth,
+      detailYearAgoMonth,
+      detailFytdLabel,
+      detailFytdPriorLabel,
+      note: `SBP's headline services table publishes total IT & Telecom through ${headline.latestMonth}, while the detailed EBOPS workbook currently publishes subcomponents through ${detailLatestMonth}. Values are exports (credit) in US$ million; component cards retain their own coverage dates.`,
+      components,
+    },
+    monthlySeries: [...seriesMap.values()].sort((a, b) => a.month.localeCompare(b.month)),
+    headlineCoverage: headline.latestMonth,
+    lastUpdated: new Date().toISOString().slice(0, 10),
+  };
+
+  await writeJson('services.json', updated);
+  await recordProvenance('services.itTelecom.headline', {
+    label: 'Telecommunications, computer and information services exports (credit), latest month',
+    value: headline.latest,
+    unit: 'US$ million',
+    sourceKey: 'ExportsImports-Goods.pdf',
+    location: `Row 9 "Telecommunications, Computer, and Information Services", ${headline.latestMonth} column`,
+  });
+  console.log(`  📊 IT & Telecom headline: $${headline.latest}M in ${headline.latestMonth}; detailed EBOPS through ${detailLatestMonth}`);
+  return headline;
+}
+
 // ═══════════════════════════════════════════════════
 // 8. TRADE BY COUNTRY (Export/Import by country files)
 // ═══════════════════════════════════════════════════
@@ -2169,6 +2251,10 @@ async function main() {
   // 8b. Services headline from the BOP summary. Runs after updateServices()
   // because it augments the same file, and SBP refreshes it a month earlier.
   summary.bopServices = await updateBopServices();
+
+  // 8c. Newer IT headline from SBP's monthly goods-and-services table. This
+  // advances the aggregate without relabelling lagging EBOPS subcomponents.
+  summary.servicesHeadline = await updateServicesHeadline();
 
   // 9. Trade by country
   summary.tradeCountries = await updateTradeCountries();

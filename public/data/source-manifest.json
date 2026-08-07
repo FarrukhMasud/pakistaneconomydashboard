@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-07T18:30:00.919Z",
+  "generatedAt": "2026-08-07T19:24:47.429Z",
   "sources": [
     {
       "id": "reserves",
@@ -90,11 +90,11 @@
       "label": "IT & Services Trade",
       "file": "services.json",
       "source": "State Bank of Pakistan",
-      "sourceUrl": "https://archive.sbp.org.pk/ecodata/dt.xls",
-      "sourceFile": "dt.xls",
-      "parser": "parse-sbp-excel.mjs:updateServices",
+      "sourceUrl": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf",
+      "sourceFile": "ExportsImports-Goods.pdf",
+      "parser": "parse-sbp-excel.mjs:updateServices + updateServicesHeadline",
       "cadence": "Monthly/FYTD",
-      "expectedLag": "Detailed services trade data from SBP EBOPS file.",
+      "expectedLag": "Headline IT and total-services data can lead the detailed EBOPS category and freelance breakdown.",
       "critical": true
     },
     {

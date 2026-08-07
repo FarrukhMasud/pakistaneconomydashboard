@@ -60,8 +60,39 @@ export default function ServicesSection() {
     fytdIt?.prior?.some((v) => v != null) || fytdFreelance?.prior?.some((v) => v != null),
   );
 
-  const itComp = itMonthly?.components?.find((c) => c.key === 'itTotal') || null;
+  const detailItComp = itMonthly?.components?.find((c) => c.key === 'itTotal') || null;
+  const itComp = data.itHeadline
+    ? {
+        key: 'itTotal',
+        name: 'IT & Telecom (total)',
+        latest: data.itHeadline.latest,
+        prev: data.itHeadline.prev,
+        yearAgo: data.itHeadline.yearAgo,
+        fytd: data.itHeadline.fytd,
+        fytdPrior: data.itHeadline.fytdPrior,
+        latestMonth: data.itHeadline.latestMonth,
+        yearAgoMonth: data.itHeadline.yearAgoMonth,
+        fytdLabel: data.itHeadline.fytdLabel,
+        fytdPriorLabel: data.itHeadline.fytdPriorLabel,
+      }
+    : detailItComp;
   const freelanceComp = itMonthly?.components?.find((c) => c.key === 'freelance') || null;
+  const componentMonth = (component) => component?.latestMonth || itMonthly?.detailLatestMonth || itMonthly?.latestMonth;
+  const componentYearAgoMonth = (component) => component?.yearAgoMonth || itMonthly?.detailYearAgoMonth || itMonthly?.yearAgoMonth;
+  const componentFytdLabel = (component) => component?.fytdLabel || itMonthly?.detailFytdLabel || itMonthly?.fytdLabel;
+  const componentFytdPriorLabel = (component) => component?.fytdPriorLabel || itMonthly?.detailFytdPriorLabel || itMonthly?.fytdPriorLabel;
+  const pointComponents = [itComp, freelanceComp].filter((component) => (
+    component?.latest != null
+    && component?.yearAgo != null
+    && componentMonth(component) === componentMonth(itComp)
+    && componentYearAgoMonth(component) === componentYearAgoMonth(itComp)
+  ));
+  const fytdComponents = [itComp, freelanceComp].filter((component) => (
+    component?.fytd != null
+    && component?.fytdPrior != null
+    && componentFytdLabel(component) === componentFytdLabel(itComp)
+    && componentFytdPriorLabel(component) === componentFytdPriorLabel(itComp)
+  ));
   const pointYoYReady = Boolean(
     itComp?.latest != null && itComp?.yearAgo != null,
   );
@@ -74,22 +105,14 @@ export default function ServicesSection() {
   let monthlyItCompareNote = null;
 
   if (showYoY && !seriesHasYoY && pointYoYReady) {
-    // Point comparison: latest month vs same month last year (SBP EBOPS columns).
-    const labels = ['IT & Telecom', 'Freelance IT'].filter((_, i) => {
-      if (i === 0) return true;
-      return freelanceComp?.latest != null || freelanceComp?.yearAgo != null;
-    });
-    const latestVals = labels.map((name) => (
-      name === 'IT & Telecom' ? itComp.latest : freelanceComp?.latest
-    ));
-    const priorVals = labels.map((name) => (
-      name === 'IT & Telecom' ? itComp.yearAgo : freelanceComp?.yearAgo
-    ));
-    const latestLabel = itMonthly.latestMonth
-      ? formatMonthYear(itMonthly.latestMonth)
+    const labels = pointComponents.map((component) => component.name);
+    const latestVals = pointComponents.map((component) => component.latest);
+    const priorVals = pointComponents.map((component) => component.yearAgo);
+    const latestLabel = componentMonth(itComp)
+      ? formatMonthYear(componentMonth(itComp))
       : 'Latest month';
-    const priorLabel = itMonthly.yearAgoMonth
-      ? formatMonthYear(itMonthly.yearAgoMonth)
+    const priorLabel = componentYearAgoMonth(itComp)
+      ? formatMonthYear(componentYearAgoMonth(itComp))
       : 'Year ago';
     monthlyItData = {
       labels,
@@ -109,29 +132,22 @@ export default function ServicesSection() {
       ], focus),
     };
     monthlyItYTitle = 'USD Millions';
-    monthlyItCompareNote = `YoY uses SBP’s published same-month-last-year columns (${priorLabel} vs ${latestLabel}), because the accumulating monthly series does not yet include a full prior year.`;
+    monthlyItCompareNote = `YoY uses SBP’s published same-month-last-year headline (${priorLabel} vs ${latestLabel}). Lagging EBOPS subcomponents are excluded when their coverage period differs.`;
   } else if (showFytd && !seriesHasFytdPrior && pointFytdReady) {
-    const labels = ['IT & Telecom', 'Freelance IT'].filter((_, i) => {
-      if (i === 0) return true;
-      return freelanceComp?.fytd != null || freelanceComp?.fytdPrior != null;
-    });
-    const currentVals = labels.map((name) => (
-      name === 'IT & Telecom' ? itComp.fytd : freelanceComp?.fytd
-    ));
-    const priorVals = labels.map((name) => (
-      name === 'IT & Telecom' ? itComp.fytdPrior : freelanceComp?.fytdPrior
-    ));
+    const labels = fytdComponents.map((component) => component.name);
+    const currentVals = fytdComponents.map((component) => component.fytd);
+    const priorVals = fytdComponents.map((component) => component.fytdPrior);
     monthlyItData = {
       labels,
       datasets: applySeriesFocus([
         {
-          label: itMonthly.fytdPriorLabel || 'Prior FYTD',
+          label: componentFytdPriorLabel(itComp) || 'Prior FYTD',
           data: priorVals,
           backgroundColor: 'rgba(66, 165, 245, 0.45)',
           borderRadius: 4,
         },
         {
-          label: itMonthly.fytdLabel || 'Current FYTD',
+          label: componentFytdLabel(itComp) || 'Current FYTD',
           data: currentVals,
           backgroundColor: COLORS.teal,
           borderRadius: 4,
@@ -139,7 +155,7 @@ export default function ServicesSection() {
       ], focus),
     };
     monthlyItYTitle = 'USD Millions (cumulative)';
-    monthlyItCompareNote = `FYTD compares SBP’s cumulative totals (${itMonthly.fytdLabel || 'current'} vs ${itMonthly.fytdPriorLabel || 'prior'}), not month-by-month history.`;
+    monthlyItCompareNote = `FYTD compares SBP’s cumulative headline totals (${componentFytdLabel(itComp) || 'current'} vs ${componentFytdPriorLabel(itComp) || 'prior'}). Lagging detailed components are excluded.`;
   } else if (mseries.length) {
     monthlyItData = {
       labels: showFytd && fytdIt ? fytdIt.labels : mseries.map((m) => formatMonthYear(m.month)),
@@ -221,10 +237,15 @@ export default function ServicesSection() {
     || (showFytd && !seriesHasFytdPrior && pointFytdReady)
     ? (monthlyItData?.datasets || []).map((d) => d.label).filter(Boolean)
     : ['IT & Telecom', 'Freelance IT'];
-  const itMomentum = itMonthly ? itMonthly.components.filter((c) => c.latest != null).map((c) => {
+  const momentumComponents = [
+    itComp,
+    ...(itMonthly?.components || []).filter((component) => component.key !== 'itTotal'),
+  ].filter((component) => component?.latest != null);
+  const itMomentum = itMonthly ? momentumComponents.map((c) => {
     const yoy = c.yearAgo ? pctChange(c.latest, c.yearAgo) : { pct: null, direction: 'flat' };
     const fy = c.fytdPrior ? pctChange(c.fytd, c.fytdPrior) : { pct: null };
     const sub = [
+      componentMonth(c) ? `as of ${formatMonthYear(componentMonth(c))}` : null,
       yoy.pct != null ? `${yoy.pct >= 0 ? '+' : ''}${yoy.pct}% YoY` : null,
       fy.pct != null ? `FYTD ${fy.pct >= 0 ? '+' : ''}${fy.pct}%` : null,
     ].filter(Boolean).join(' · ');
@@ -393,11 +414,11 @@ export default function ServicesSection() {
         <div className="monthly-it-spotlight">
           <ChartCard
             title="Monthly IT & Freelance Exports"
-            description={`Monthly IT & Telecom and Freelance IT export earnings (US$ million), as SBP releases each month. ${mseries.length < 4 ? 'This series accumulates a new month with every SBP release and will lengthen into a fuller trend over time. ' : ''}Freelance IT is SBP's dedicated line for individual freelancer earnings repatriated through formal channels.`}
-            source="SBP — EBOPS services detail"
+            description={`Monthly IT & Telecom export earnings use SBP’s latest headline table; Freelance IT uses the detailed EBOPS release and can lag by one month. ${mseries.length < 4 ? 'This series accumulates a new month with every SBP release and will lengthen into a fuller trend over time. ' : ''}Missing freelance bars indicate that SBP has not yet published that month’s detailed breakdown.`}
+            source="SBP — services headline and EBOPS detail"
             dataSource="SBP"
             lastUpdated={data.lastUpdated}
-            dataCoverage={itMonthly.latestMonth ? `latest ${formatMonthYear(itMonthly.latestMonth)}` : data.dataCoverage}
+            dataCoverage={componentMonth(itComp) ? `latest ${formatMonthYear(componentMonth(itComp))}` : data.dataCoverage}
           >
                       <PeriodCompare mode={compareMode} onChange={setCompare} modes={['yoy', 'fytd']} />
                       <SeriesFocus
@@ -425,10 +446,10 @@ export default function ServicesSection() {
                       </div>
                     </ChartCard>
           <SummaryCard
-            title={`IT Exports — ${itMonthly.latestMonth ? formatMonthYear(itMonthly.latestMonth) : 'Latest month'} (vs a year ago)`}
+            title="IT Export Momentum"
             accent={COLORS.teal}
             items={itMomentum}
-            footnote={`Latest-month export value with year-on-year change and fiscal-year-to-date growth (${itMonthly.fytdLabel} vs ${itMonthly.fytdPriorLabel}). Source: SBP EBOPS services detail.`}
+            footnote={`IT & Telecom headline: ${componentFytdLabel(itComp)} vs ${componentFytdPriorLabel(itComp)} from SBP’s Exports and Imports of Goods & Services table. Subcomponents retain the latest available EBOPS coverage shown on each item.`}
           />
         </div>
       )}

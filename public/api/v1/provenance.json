@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-07T18:28:26.088Z",
+  "generatedAt": "2026-08-07T19:24:47.233Z",
   "description": "Machine-readable citation for every headline figure on the dashboard. Each entry names the publishing institution, the exact source document, the worksheet and the row/column it was read from.",
   "sources": {
     "fbr-collection": {
@@ -97,6 +97,15 @@
       "institution": "State Bank of Pakistan",
       "title": "Foreign Investment Net Inflows by Country",
       "url": "https://www.sbp.org.pk/assets/document/Netinflow.xls",
+      "landingUrl": "https://www.sbp.org.pk/ecodata/index2.asp",
+      "sourceType": "official-primary",
+      "cadence": "monthly"
+    },
+    "sbp-services-headline": {
+      "id": "sbp-services-headline",
+      "institution": "State Bank of Pakistan",
+      "title": "Exports and Imports of Goods & Services",
+      "url": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf",
       "landingUrl": "https://www.sbp.org.pk/ecodata/index2.asp",
       "sourceType": "official-primary",
       "cadence": "monthly"
@@ -242,6 +251,19 @@
       "status": "provisional",
       "unit": "US$ billion",
       "value": 4.18,
+      "derivedFrom": null,
+      "note": null,
+      "retrievedAt": "2026-08-07"
+    },
+    "services.itTelecom.headline": {
+      "label": "Telecommunications, computer and information services exports (credit), latest month",
+      "sourceId": "sbp-services-headline",
+      "sheet": null,
+      "location": "Row 9 \"Telecommunications, Computer, and Information Services\", 2026-06 column",
+      "period": null,
+      "status": "final",
+      "unit": "US$ million",
+      "value": 416,
       "derivedFrom": null,
       "note": null,
       "retrievedAt": "2026-08-07"

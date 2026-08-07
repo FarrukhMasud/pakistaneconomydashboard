@@ -2,10 +2,10 @@
   "id": "services",
   "label": "IT & Services Trade",
   "source": "State Bank of Pakistan",
-  "sourceUrl": "https://archive.sbp.org.pk/ecodata/dt.xls",
+  "sourceUrl": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf",
   "sourceType": "official-primary",
   "cadence": "Monthly/FYTD",
-  "latestObservation": "Jul-May FY26",
+  "latestObservation": "2026-06",
   "lastUpdated": "2026-08-07",
   "lastChecked": "2026-08-07",
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",
@@ -166,6 +166,11 @@
         "month": "May-26",
         "totalCredit": 838.28,
         "itCredit": 373.27
+      },
+      {
+        "month": "Jun-26",
+        "totalCredit": 956,
+        "itCredit": 416
       }
     ],
     "itMonthly": {
@@ -174,7 +179,7 @@
       "yearAgoMonth": "2025-05",
       "fytdLabel": "Jul-May FY26",
       "fytdPriorLabel": "Jul-May FY25",
-      "note": "SBP's EBOPS services file publishes the latest month, prior month, the same month a year earlier, and fiscal-year-to-date totals. Values are exports (credit) in US$ million. \"Freelance IT\" is SBP's own line for individual freelancer earnings; total IT & freelancing exports are captured within IT & Telecom (Jul–May).",
+      "note": "SBP's headline services table publishes total IT & Telecom through 2026-06, while the detailed EBOPS workbook currently publishes subcomponents through 2026-05. Values are exports (credit) in US$ million; component cards retain their own coverage dates.",
       "components": [
         {
           "key": "itTotal",
@@ -183,7 +188,11 @@
           "prev": 422.26,
           "yearAgo": 329.29,
           "fytd": 4183.44,
-          "fytdPrior": 3480.46
+          "fytdPrior": 3480.46,
+          "latestMonth": "2026-05",
+          "yearAgoMonth": "2025-05",
+          "fytdLabel": "Jul-May FY26",
+          "fytdPriorLabel": "Jul-May FY25"
         },
         {
           "key": "telecom",
@@ -192,7 +201,11 @@
           "prev": 75.49,
           "yearAgo": 48.01,
           "fytd": 640.18,
-          "fytdPrior": 498.77
+          "fytdPrior": 498.77,
+          "latestMonth": "2026-05",
+          "yearAgoMonth": "2025-05",
+          "fytdLabel": "Jul-May FY26",
+          "fytdPriorLabel": "Jul-May FY25"
         },
         {
           "key": "softwareConsultancy",
@@ -201,7 +214,11 @@
           "prev": 110.99,
           "yearAgo": 99.08,
           "fytd": 1159.58,
-          "fytdPrior": 1011.73
+          "fytdPrior": 1011.73,
+          "latestMonth": "2026-05",
+          "yearAgoMonth": "2025-05",
+          "fytdLabel": "Jul-May FY26",
+          "fytdPriorLabel": "Jul-May FY25"
         },
         {
           "key": "softwareExports",
@@ -210,7 +227,11 @@
           "prev": 68.56,
           "yearAgo": 49.15,
           "fytd": 589.85,
-          "fytdPrior": 539.65
+          "fytdPrior": 539.65,
+          "latestMonth": "2026-05",
+          "yearAgoMonth": "2025-05",
+          "fytdLabel": "Jul-May FY26",
+          "fytdPriorLabel": "Jul-May FY25"
         },
         {
           "key": "freelance",
@@ -219,7 +240,11 @@
           "prev": 102.91,
           "yearAgo": 65.79,
           "fytd": 1060.79,
-          "fytdPrior": 708.05
+          "fytdPrior": 708.05,
+          "latestMonth": "2026-05",
+          "yearAgoMonth": "2025-05",
+          "fytdLabel": "Jul-May FY26",
+          "fytdPriorLabel": "Jul-May FY25"
         },
         {
           "key": "informationServices",
@@ -228,9 +253,17 @@
           "prev": 0.4,
           "yearAgo": 0.38,
           "fytd": 4.25,
-          "fytdPrior": 20.64
+          "fytdPrior": 20.64,
+          "latestMonth": "2026-05",
+          "yearAgoMonth": "2025-05",
+          "fytdLabel": "Jul-May FY26",
+          "fytdPriorLabel": "Jul-May FY25"
         }
-      ]
+      ],
+      "detailLatestMonth": "2026-05",
+      "detailYearAgoMonth": "2025-05",
+      "detailFytdLabel": "Jul-May FY26",
+      "detailFytdPriorLabel": "Jul-May FY25"
     },
     "monthlySeries": [
       {
@@ -244,6 +277,12 @@
         "totalCredit": 838.28,
         "itCredit": 373.27,
         "freelanceCredit": 101.51
+      },
+      {
+        "month": "2026-06",
+        "totalCredit": 956,
+        "itCredit": 416,
+        "freelanceCredit": null
       }
     ],
     "dataSource": "SBP",
@@ -273,6 +312,25 @@
         "net": 25
       },
       "note": "SBP publishes this aggregate before the detailed EBOPS table, so it can cover a later month than the category and IT breakdowns in this section."
-    }
+    },
+    "itHeadline": {
+      "latestMonth": "2026-06",
+      "latest": 416,
+      "prevMonth": "2026-05",
+      "prev": 373,
+      "yearAgoMonth": "2025-06",
+      "yearAgo": 339,
+      "fytd": 4600,
+      "fytdPrior": 3814,
+      "fytdLabel": "Jul-Jun FY26",
+      "fytdPriorLabel": "Jul-Jun FY25",
+      "totalServicesLatest": 956,
+      "fiscalYear": 2026,
+      "source": "State Bank of Pakistan",
+      "sourceFile": "ExportsImports-Goods.pdf",
+      "sourceUrl": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf",
+      "status": "provisional"
+    },
+    "headlineCoverage": "2026-06"
   }
 }

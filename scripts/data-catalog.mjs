@@ -132,14 +132,16 @@ export const DATASETS = [
     label: 'IT & Services Trade',
     file: 'services.json',
     source: 'State Bank of Pakistan',
-    sourceUrl: 'https://archive.sbp.org.pk/ecodata/dt.xls',
-    sourceFile: 'dt.xls',
-    parser: 'parse-sbp-excel.mjs:updateServices',
+    sourceUrl: 'https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf',
+    sourceFile: 'ExportsImports-Goods.pdf',
+    parser: 'parse-sbp-excel.mjs:updateServices + updateServicesHeadline',
     cadence: 'Monthly/FYTD',
-    expectedLag: 'Detailed services trade data from SBP EBOPS file.',
+    expectedLag: 'Headline IT and total-services data can lead the detailed EBOPS category and freelance breakdown.',
     critical: true,
-    latest: data => data.dataCoverage,
-    latestDate: data => fiscalPeriodEndDate(data.dataCoverage),
+    latest: data => data.itHeadline?.latestMonth || data.itMonthly?.latestMonth || data.dataCoverage,
+    latestDate: data => data.itHeadline?.latestMonth
+      || data.itMonthly?.latestMonth
+      || fiscalPeriodEndDate(data.dataCoverage),
   },
   {
     id: 'inflation',

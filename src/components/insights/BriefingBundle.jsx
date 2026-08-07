@@ -48,7 +48,8 @@ export function GoodBadWatchSection() {
       ? fbr.data.fytd.net - fbr.data.fytd.target
       : null;
     const latestTrade = latest(trade.data?.monthly);
-    const itTotal = services.data?.itMonthly?.components?.find((item) => item.key === 'itTotal');
+    const itTotal = services.data?.itHeadline
+      || services.data?.itMonthly?.components?.find((item) => item.key === 'itTotal');
     const freelance = services.data?.itMonthly?.components?.find((item) => item.key === 'freelance');
     const circularTarget = circularDebt.data?.targets?.find(
       (target) => target.label === fy.fyFull || target.label === fy.fyLabel || target.label === `FY${fy.fy}`,
@@ -60,7 +61,7 @@ export function GoodBadWatchSection() {
       tone: 'positive',
       items: [
         remitGrowth != null && remitGrowth > 0 && `Remittances rose ${fmtPct(remitGrowth)} YoY in ${latestRemit.date}.`,
-        itTotal?.fytd != null && itTotal?.fytdPrior != null && `IT & Telecom exports are ${fmtPct(pctChange(itTotal.fytd, itTotal.fytdPrior))} higher FYTD (${services.data.itMonthly.fytdLabel}).`,
+        itTotal?.fytd != null && itTotal?.fytdPrior != null && `IT & Telecom exports are ${fmtPct(pctChange(itTotal.fytd, itTotal.fytdPrior))} higher FYTD (${itTotal.fytdLabel || services.data.itMonthly.fytdLabel}).`,
         freelance?.fytd != null && freelance?.fytdPrior != null && `Freelance IT exports are ${fmtPct(pctChange(freelance.fytd, freelance.fytdPrior))} higher FYTD.`,
         circularDebt.data?.yoy?.changePct < 0 && `Power circular debt stock is down ${Math.abs(circularDebt.data.yoy.changePct)}% YoY as of ${circularDebt.data.current.asOf}.`,
       ].filter(Boolean),
@@ -85,7 +86,7 @@ export function GoodBadWatchSection() {
                   const next = fbr.data?.annualTargets?.find((row) => row.fyLabel === `FY${fy.fy + 1}` || row.fyLabel === `FY${String(fy.fy + 1).slice(-2)}`);
                   return next?.budgetTarget != null && `${next.fyLabel || `FY${fy.fy + 1}`} FBR target is ${fmtPkrBn(next.budgetTarget)}.`;
                 })(),
-                services.data?.itMonthly?.latestMonth && `Track whether IT/freelance exports extend the latest monthly trend after ${services.data.itMonthly.latestMonth}.`,
+                (services.data?.itHeadline?.latestMonth || services.data?.itMonthly?.latestMonth) && `Track whether IT/freelance exports extend the latest monthly trend after ${services.data?.itHeadline?.latestMonth || services.data.itMonthly.latestMonth}.`,
               ].filter(Boolean),
             },
           ];

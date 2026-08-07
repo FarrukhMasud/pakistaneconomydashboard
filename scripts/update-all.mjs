@@ -121,6 +121,13 @@ const DOWNLOADS = [
     required: true,
   },
   {
+    name: 'ExportsImports-Goods.pdf',
+    url: 'https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf',
+    fallbackUrl: 'https://archive.sbp.org.pk/ecodata/ExportsImports-Goods.pdf',
+    description: 'Services Trade Headline',
+    required: true,
+  },
+  {
     name: 'Export_Receipts_by_all_Countries.xls',
     url: 'https://archive.sbp.org.pk/ecodata/Export_Receipts_by_all_Countries.xls',
     description: 'Export by Country',

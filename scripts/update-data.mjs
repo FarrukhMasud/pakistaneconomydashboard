@@ -20,14 +20,14 @@
  *
  * Coverage:
  *   ✅ Auto (SBP API):  Workers' Remittances (monthly, by country)
- *   📝 Manual update:   All other data (reserves, exchange rates, trade, FDI,
- *                        IT/services, inflation, fiscal, defence)
+ *   📄 File update:     Reserves, exchange rates, trade, detailed FDI,
+ *                        IT/services and fiscal data via parse-sbp-excel.mjs
  *
  * Manual data sources:
  *   - Reserves & Exchange Rates: SBP (https://www.sbp.org.pk)
  *   - Trade:       PBS (https://www.pbs.gov.pk/content/external-trade-statistics)
  *   - FDI:         Board of Investment (https://invest.gov.pk)
- *   - IT/Services: PSEB (https://pseb.org.pk)
+ *   - IT/Services: SBP EBOPS + Exports and Imports of Goods & Services
  *   - Inflation:   PBS (https://www.pbs.gov.pk/price-statistics)
  *   - Fiscal:      Ministry of Finance (https://www.finance.gov.pk)
  *   - Defence:     Ministry of Defence / SIPRI
@@ -653,7 +653,7 @@ To use this script, get a free API key from SBP EasyData:
      • Exchange Rates          → IBF_Arch.xls
      • Trade (imports/exports) → exp_import_BOP.xls
      • FDI (sector/country)    → Foreign_Dir.xls, Netinflow.xls
-     • IT/Services exports     → dt.xls (EBOPS)
+     • IT/Services exports     → ExportsImports-Goods.pdf + dt.xls (EBOPS)
      • Fiscal (GDP growth)     → GDP_table.xlsx
 
   🚀 To redeploy after updates:
