@@ -13,12 +13,12 @@
     "note": "Pakistan owes about $25.9bn in external debt servicing in FY2025-26. Roughly $16bn is expected to be rolled over by friendly creditors (China, Saudi Arabia, UAE, Qatar, Kuwait), leaving about $10bn of hard cash outflow (~$6bn interest + ~$4bn principal). Around $9bn of the servicing sits on the SBP's books."
   },
   "stock": {
-    "totalExternalDebtAndLiabilities": 134.5,
-    "asOf": "Q1 FY2026",
+    "totalExternalDebtAndLiabilities": 136,
+    "asOf": "End-Jun 2026",
     "imfOutstanding": 9.3,
     "imfOutstandingSDR": 7.1,
     "imfAsOf": "2026-03-31",
-    "note": "Total external debt & liabilities reached about $134.5bn by Q1 FY2026. Outstanding credit to the IMF was SDR 7.1bn (~$9.3bn) at end-March 2026."
+    "note": "Total external debt and liabilities reached about $136bn at end-June 2026. Outstanding credit to the IMF was SDR 7.1bn (~$9.3bn) at end-March 2026."
   },
   "repaymentSplit": [
     { "label": "Expected rollovers", "value": 16, "color": "#a78bfa", "note": "Re-financed / rolled over with creditors' consent." },
@@ -31,13 +31,20 @@
   ],
   "fy27": {
     "label": "FY2026-27",
-    "estimate": "24–26",
-    "note": "Detailed FY2026-27 maturities are not yet fully public, but obligations are expected to remain at a similar scale ($24–26bn), keeping rollover support critical."
+    "estimate": "21.5",
+    "grossRepayment": 21.5,
+    "principal": 18,
+    "interest": 3.5,
+    "expectedRollovers": "10–11",
+    "note": "SBP projected $21.5bn of FY2026-27 external debt servicing: $18bn principal and $3.5bn interest. Around $10–11bn of principal is expected to be rolled over or refinanced."
   },
   "riskNote": "Pakistan's external position depends heavily on rollovers of bilateral deposits and loans. Any failure to secure rollovers would sharply increase the hard-cash repayment burden and pressure reserves.",
   "sourceUrl": "https://www.imf.org/en/Countries/PAK",
-  "lastVerified": "2026-06-17",
+  "lastVerified": "2026-08-07",
   "verifiedFrom": [
+    "https://www.sbp.org.pk/assets/document/pakdebt.pdf",
+    "https://www.brecorder.com/news/40432030",
+    "https://www.brecorder.com/news/40432106",
     "https://thestandard.com.pk/pakistan-faces-external-debt-repayments-of-25-9bn-in-fy26/",
     "https://www.geo.tv/latest/614559-pakistan-to-repay-over-23-billion-in-external-debt-in-fy26",
     "https://nukta.com/pakistan-external-debt-obligations-in-fy26",

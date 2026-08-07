@@ -6,8 +6,8 @@
   "sourceType": "official-primary",
   "cadence": "Monthly/FYTD",
   "latestObservation": "2026-06",
-  "lastUpdated": "2026-08-04",
-  "lastChecked": "2026-08-04",
+  "lastUpdated": "2026-08-07",
+  "lastChecked": "2026-08-07",
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",
   "data": {
     "by_sector": [
@@ -248,8 +248,8 @@
     "countryPriorPeriod": "Jul-Jun FY25",
     "source": "State Bank of Pakistan",
     "dataSource": "SBP",
-    "lastUpdated": "2026-08-04",
-    "dataCoverage": "monthly through 2026-06; sector Jul-Jun FY26; country Jul-Jun FY26; summary FY2026 Jul-Jun",
+    "lastUpdated": "2026-08-07",
+    "dataCoverage": "monthly through 2026-06; sector Jul-Jun FY26; country Jul-Jun FY26; headline FY2026 Jul-Jun (Netinflow.xls)",
     "fytdComparison": {
       "period": "Jul-Jun",
       "current": {
@@ -658,6 +658,6 @@
       }
     },
     "monthlyDataCoverage": "2021-08 – 2026-06",
-    "lastChecked": "2026-08-04"
+    "lastChecked": "2026-08-07"
   }
 }

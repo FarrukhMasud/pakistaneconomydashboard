@@ -75,7 +75,8 @@ function todayIso() {
 
 async function fetchWorldBankIndicator(indicator) {
   const countryCodes = COUNTRIES.map((c) => c.code).join(';');
-  const url = `https://api.worldbank.org/v2/country/${countryCodes}/indicator/${indicator.code}?format=json&per_page=20000`;
+  const encodedCountryCodes = encodeURIComponent(countryCodes);
+  const url = `https://api.worldbank.org/v2/country/${encodedCountryCodes}/indicator/${indicator.code}?format=json&per_page=20000`;
   const res = await fetch(url, {
     headers: { Accept: 'application/json', 'User-Agent': 'pakistan-economic-dashboard/1.0' },
   });

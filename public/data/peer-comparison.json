@@ -1,7 +1,7 @@
 {
   "dataSource": "World Bank Open Data API (official WDI indicators)",
   "sourceUrl": "https://data.worldbank.org",
-  "lastUpdated": "2026-08-04",
+  "lastUpdated": "2026-08-07",
   "latestObservation": "2025",
   "countries": [
     {

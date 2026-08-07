@@ -6,8 +6,8 @@
   "sourceType": "official-primary",
   "cadence": "Monthly/FYTD",
   "latestObservation": "Jul-May FY26",
-  "lastUpdated": "2026-08-04",
-  "lastChecked": "2026-08-04",
+  "lastUpdated": "2026-08-07",
+  "lastChecked": "2026-08-07",
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",
   "data": {
     "categories": [
@@ -247,9 +247,9 @@
       }
     ],
     "dataSource": "SBP",
-    "lastUpdated": "2026-08-04",
+    "lastUpdated": "2026-08-07",
     "dataCoverage": "Jul-May FY26",
-    "lastChecked": "2026-08-04",
+    "lastChecked": "2026-08-07",
     "bopSummary": {
       "source": "SBP Balance of Payments (BPM6) summary",
       "sourceFile": "Balancepayment_BPM6.xls",

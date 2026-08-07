@@ -1,9 +1,9 @@
 {
   "dataSource": "Official IMF, SBP, PBS, Finance Division, and NDMA publications",
   "sourceUrl": "https://www.imf.org/en/Countries/PAK",
-  "lastUpdated": "2026-06-26",
-  "lastVerified": "2026-06-26",
-  "latestObservation": "2026-06-15",
+  "lastUpdated": "2026-08-07",
+  "lastVerified": "2026-08-07",
+  "latestObservation": "2026-07-27",
   "methodologyNote": "Events are included only when they can be tied to an official or primary institutional source. They are meant as chart context, not as causal claims.",
   "events": [
     {
@@ -61,6 +61,14 @@
       "whyItMatters": "The decision reflects the balance between inflation risks and growth/financial conditions.",
       "officialSource": "State Bank of Pakistan",
       "sourceUrl": "https://www.sbp.org.pk/m_policy/index.asp"
+    },
+    {
+      "date": "2026-07-27",
+      "category": "Monetary policy",
+      "title": "SBP held the policy rate at 11.5% for a second consecutive meeting",
+      "whyItMatters": "The decision kept policy restrictive as inflation moderated, while stronger reserves and an improved external outlook reduced near-term balance-of-payments pressure.",
+      "officialSource": "State Bank of Pakistan",
+      "sourceUrl": "https://www.sbp.org.pk/assets/document/publications/MPS-July-2026-Eng.pdf"
     }
   ]
 }

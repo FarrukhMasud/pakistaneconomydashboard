@@ -1,30 +1,30 @@
 {
-  "lastUpdated": "2026-08-04",
+  "lastUpdated": "2026-08-07",
   "indicators": [
     {
       "id": "reserves",
       "label": "Foreign Reserves (Total)",
-      "value": 22.44,
+      "value": 22.47,
       "unit": "$ Billion",
-      "period": "2026-07-24",
-      "change": -0.23,
+      "period": "2026-07-31",
+      "change": 0.03,
       "changeUnit": "$B",
-      "changeBasis": "vs week ending 2026-07-17",
+      "changeBasis": "vs week ending 2026-07-24",
       "trend": "stable",
       "sentiment": "neutral",
       "source": "SBP",
       "provenanceKey": "reserves.weekly.total",
-      "sub": "SBP: $17.03B · Banks: $5.41B"
+      "sub": "SBP: $17.04B · Banks: $5.43B"
     },
     {
       "id": "exchange-rate",
       "label": "PKR / USD",
-      "value": 278.58,
+      "value": 278.24,
       "unit": "PKR",
-      "period": "2026-06",
-      "change": -0.26,
+      "period": "2026-07",
+      "change": -0.34,
       "changeUnit": "PKR",
-      "changeBasis": "vs 2026-05",
+      "changeBasis": "vs 2026-06",
       "trend": "stable",
       "sentiment": "neutral",
       "source": "SBP",
@@ -124,10 +124,10 @@
       "label": "SBP Policy Rate",
       "value": 11.5,
       "unit": "%",
-      "period": "2026-06-15",
+      "period": "2026-07-27",
       "change": 0,
       "changeUnit": "pp",
-      "changeBasis": "last MPC decision 2026-06-15",
+      "changeBasis": "last MPC decision 2026-07-27",
       "trend": "stable",
       "sentiment": "neutral",
       "source": "SBP Monetary Policy Committee",
@@ -135,5 +135,5 @@
       "sub": "Next MPC: [object Object]"
     }
   ],
-  "lastChecked": "2026-08-04"
+  "lastChecked": "2026-08-07"
 }

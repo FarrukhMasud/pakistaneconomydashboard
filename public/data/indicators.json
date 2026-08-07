@@ -1,15 +1,15 @@
 {
   "dataSource": "SBP, Finance Division (Pakistan Economic Survey 2025-26), PSX, OGRA, Power Division",
-  "lastUpdated": "2026-06-16",
-  "lastVerified": "2026-06-16",
-  "methodologyNote": "Manually curated headline indicators, each verified against an official or primary-corroborated source on the date shown. Market and fuel-price figures are point-in-time snapshots and should be refreshed periodically; they are clearly dated. Public-debt, current-account and growth figures are from the Pakistan Economic Survey 2025-26 (released 11 Jun 2026).",
+  "lastUpdated": "2026-08-07",
+  "lastVerified": "2026-08-07",
+  "methodologyNote": "Manually curated headline indicators, each verified against an official or primary-corroborated source on the date shown. Market and fuel-price figures are point-in-time snapshots and are clearly dated. Public debt is from the Pakistan Economic Survey 2025-26; the current account is from the latest SBP balance-of-payments release.",
   "indicators": [
     {
       "id": "policy-rate",
       "label": "SBP Policy Rate",
       "value": "11.5",
       "unit": "%",
-      "asOf": "MPC, Jun 2026",
+      "asOf": "MPC, 27 Jul 2026",
       "trend": "stable",
       "sentiment": "neutral",
       "change": "Held",
@@ -20,12 +20,12 @@
     {
       "id": "kse-100",
       "label": "KSE-100 Index",
-      "value": "177,039",
+      "value": "181,430",
       "unit": "pts",
-      "asOf": "16 Jun 2026",
-      "trend": "up",
-      "sentiment": "positive",
-      "change": "+2.7% (day)",
+      "asOf": "7 Aug 2026",
+      "trend": "down",
+      "sentiment": "neutral",
+      "change": "−0.19% (day)",
       "note": "Pakistan Stock Exchange benchmark close.",
       "source": "Pakistan Stock Exchange",
       "sourceUrl": "https://www.psx.com.pk/psx/resources-and-tools/indices/kse100"
@@ -33,15 +33,15 @@
     {
       "id": "current-account",
       "label": "Current Account (FYTD)",
-      "value": "−$252",
+      "value": "−$139",
       "unit": "M",
-      "asOf": "Jul–Apr FY2026",
+      "asOf": "Jul–Jun FY2026",
       "trend": "down",
       "sentiment": "negative",
       "change": "Deficit",
-      "note": "Small deficit vs $1.7bn surplus a year earlier.",
-      "source": "SBP / Economic Survey 2025-26",
-      "sourceUrl": "https://www.finance.gov.pk/survey_2026.html"
+      "note": "Full-year deficit equal to about 0.03% of GDP, versus a $1.84bn surplus in FY2025.",
+      "source": "State Bank of Pakistan",
+      "sourceUrl": "https://www.sbp.org.pk/ecodata/index2.asp"
     },
     {
       "id": "public-debt",
@@ -72,13 +72,13 @@
     {
       "id": "petrol-price",
       "label": "Petrol (MS-92)",
-      "value": "₨373.78",
+      "value": "₨331.95",
       "unit": "/L",
-      "asOf": "13 Jun 2026",
+      "asOf": "4 Aug 2026",
       "trend": "down",
       "sentiment": "positive",
       "change": "Reduced",
-      "note": "OGRA-notified retail price; diesel ₨378.78/L.",
+      "note": "Government-notified retail price; high-speed diesel ₨389.93/L.",
       "source": "OGRA / Finance Division",
       "sourceUrl": "https://www.ogra.org.pk"
     }

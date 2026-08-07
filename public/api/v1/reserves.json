@@ -5,9 +5,9 @@
   "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
   "sourceType": "official-primary",
   "cadence": "Weekly",
-  "latestObservation": "2026-07-24",
-  "lastUpdated": "2026-08-04",
-  "lastChecked": "2026-08-04",
+  "latestObservation": "2026-07-31",
+  "lastUpdated": "2026-08-07",
+  "lastChecked": "2026-08-07",
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",
   "data": {
     "weekly": [
@@ -84,12 +84,6 @@
         "total": 22109.5
       },
       {
-        "date": "2026-06",
-        "sbp": 18376.2,
-        "banks": 4857.4,
-        "total": 23233.6
-      },
-      {
         "date": "2026-07-03",
         "sbp": 18471,
         "banks": 5517.7,
@@ -112,11 +106,17 @@
         "sbp": 17029.9,
         "banks": 5412.2,
         "total": 22442.1
+      },
+      {
+        "date": "2026-07-31",
+        "sbp": 17043,
+        "banks": 5431.6,
+        "total": 22474.6
       }
     ],
     "dataSource": "SBP",
-    "lastUpdated": "2026-08-04",
-    "dataCoverage": "2025-06 – 2026-07-24",
-    "lastChecked": "2026-08-04"
+    "lastUpdated": "2026-08-07",
+    "dataCoverage": "2025-06 – 2026-07-31",
+    "lastChecked": "2026-08-07"
   }
 }

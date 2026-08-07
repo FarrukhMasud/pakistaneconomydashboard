@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-04T19:23:14.006Z",
+  "generatedAt": "2026-08-07T18:30:01.774Z",
   "version": "v1",
   "title": "economyofpakistan.com static data API",
   "description": "Every dataset the dashboard renders, published as stable JSON and CSV. No key, no rate limit, no scraping required. Please cite the issuing institution listed on each endpoint.",
@@ -36,20 +36,20 @@
       "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
       "sourceType": "official-primary",
       "cadence": "Weekly",
-      "latestObservation": "2026-07-24"
+      "latestObservation": "2026-07-31"
     },
     {
       "id": "exchange-rates",
       "label": "Monthly Average Exchange Rates",
       "json": "/api/v1/exchange-rates.json",
       "csv": "/api/v1/exchange-rates.csv",
-      "rows": 66,
+      "rows": 67,
       "seriesKey": "monthly",
       "source": "State Bank of Pakistan",
       "sourceUrl": "https://www.sbp.org.pk/assets/document/IBF_Arch.xls",
       "sourceType": "official-primary",
       "cadence": "Monthly",
-      "latestObservation": "2026-06"
+      "latestObservation": "2026-07"
     },
     {
       "id": "remittances",
@@ -166,7 +166,7 @@
       "sourceUrl": "https://www.imf.org/en/Countries/PAK",
       "sourceType": "official-primary",
       "cadence": "Event-driven",
-      "latestObservation": "2026-06-17"
+      "latestObservation": "2026-08-07"
     },
     {
       "id": "monetary-policy",
@@ -179,7 +179,7 @@
       "sourceUrl": "https://www.sbp.org.pk/m_policy/index.asp",
       "sourceType": "official-primary",
       "cadence": "Event-driven",
-      "latestObservation": "2026-06-15"
+      "latestObservation": "2026-07-27"
     },
     {
       "id": "circular-debt",
@@ -205,7 +205,7 @@
       "sourceUrl": "https://www.imf.org/en/Countries/PAK",
       "sourceType": "secondary-attributed",
       "cadence": "Event-driven",
-      "latestObservation": "2026-06-17"
+      "latestObservation": "2026-08-07"
     },
     {
       "id": "reserves-adequacy",
@@ -218,7 +218,7 @@
       "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
       "sourceType": "official-derived",
       "cadence": "Weekly",
-      "latestObservation": "2026-07-24"
+      "latestObservation": "2026-07-31"
     },
     {
       "id": "budget-federal",
@@ -264,13 +264,13 @@
       "label": "Official Economic Timeline",
       "json": "/api/v1/economic-events.json",
       "csv": "/api/v1/economic-events.csv",
-      "rows": 7,
+      "rows": 8,
       "seriesKey": "events",
       "source": "IMF / SBP / Finance Division / NDMA",
       "sourceUrl": "https://www.imf.org/en/Countries/PAK",
       "sourceType": "official-primary",
       "cadence": "Event-driven",
-      "latestObservation": "2026-06-15"
+      "latestObservation": "2026-07-27"
     },
     {
       "id": "explainers",

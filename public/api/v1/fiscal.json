@@ -7,7 +7,7 @@
   "cadence": "Quarterly/Annual",
   "latestObservation": "FY2026",
   "lastUpdated": "2026-07-24",
-  "lastChecked": "2026-08-04",
+  "lastChecked": "2026-08-07",
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",
   "data": {
     "annual": [
@@ -745,6 +745,6 @@
         ]
       }
     },
-    "lastChecked": "2026-08-04"
+    "lastChecked": "2026-08-07"
   }
 }

@@ -1,8 +1,72 @@
 {
-  "generatedAt": "2026-08-04T19:22:28.957Z",
+  "generatedAt": "2026-08-07T18:19:34.189Z",
   "description": "Every restatement of a previously published figure. Pakistani official statistics are routinely revised from provisional to final; this log preserves what changed, when, and by how much.",
-  "entryCount": 27,
+  "entryCount": 35,
   "entries": [
+    {
+      "date": "2026-08-07",
+      "dataset": "reserves-adequacy",
+      "path": "current.sbpReserves",
+      "from": 17.03,
+      "to": 17.04,
+      "changePct": 0.1
+    },
+    {
+      "date": "2026-08-07",
+      "dataset": "reserves-adequacy",
+      "path": "current.totalReserves",
+      "from": 22.44,
+      "to": 22.47,
+      "changePct": 0.1
+    },
+    {
+      "date": "2026-08-07",
+      "dataset": "reserves-adequacy",
+      "path": "current.bankReserves",
+      "from": 5.41,
+      "to": 5.43,
+      "changePct": 0.4
+    },
+    {
+      "date": "2026-08-07",
+      "dataset": "reserves-adequacy",
+      "path": "trajectory[date=2026-07].sbpReserves",
+      "from": 17.03,
+      "to": 17.04,
+      "changePct": 0.1
+    },
+    {
+      "date": "2026-08-07",
+      "dataset": "kpi-summary",
+      "path": "indicators[id=reserves].value",
+      "from": 22.44,
+      "to": 22.47,
+      "changePct": 0.1
+    },
+    {
+      "date": "2026-08-07",
+      "dataset": "kpi-summary",
+      "path": "indicators[id=reserves].change",
+      "from": -0.23,
+      "to": 0.03,
+      "changePct": 113
+    },
+    {
+      "date": "2026-08-07",
+      "dataset": "kpi-summary",
+      "path": "indicators[id=exchange-rate].value",
+      "from": 278.58,
+      "to": 278.24,
+      "changePct": -0.1
+    },
+    {
+      "date": "2026-08-07",
+      "dataset": "kpi-summary",
+      "path": "indicators[id=exchange-rate].change",
+      "from": -0.26,
+      "to": -0.34,
+      "changePct": -30.8
+    },
     {
       "date": "2026-08-04",
       "dataset": "reserves-adequacy",
