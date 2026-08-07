@@ -2,10 +2,12 @@ import { useState } from 'react';
 import EditorialNote from './EditorialNote';
 import SourceBadge from './SourceBadge';
 import useI18n from '../i18n/useI18n';
+import { SECTION_GUIDANCE } from '../utils/sectionGuidance';
 
 export default function SectionHeader({ title, description, sourceLinks, noteKey, datasetId }) {
   const [expanded, setExpanded] = useState(false);
   const { t, tx } = useI18n();
+  const guidance = SECTION_GUIDANCE[datasetId];
 
   return (
     <div className="section-header-block">
@@ -41,12 +43,21 @@ export default function SectionHeader({ title, description, sourceLinks, noteKey
           </div>
         )}
       </div>
-      <div className={`section-intro-panel ${expanded ? 'expanded' : ''}`}>
+      <div
+        className={`section-intro-panel ${expanded ? 'expanded' : ''}`}
+        aria-hidden={!expanded}
+      >
         <div>
           <p className="section-intro">{tx(description)}</p>
           {noteKey && <EditorialNote noteKey={noteKey} />}
         </div>
       </div>
+      {guidance && (
+        <div className="section-decision-guide">
+          <p><strong>{t('section.whyItMatters', 'Why it matters')}</strong>{guidance.why}</p>
+          <p><strong>{t('section.watchNext', 'Watch next')}</strong>{guidance.watch}</p>
+        </div>
+      )}
     </div>
   );
 }

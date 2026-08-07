@@ -610,6 +610,7 @@ const stringsUr = {
     'KPI movements': 'اہم اشاریوں میں تبدیلی',
     'Revisions': 'نظرثانیاں',
     'Needs review': 'جائزہ درکار',
+    'Provisional': 'عبوری',
   };
 
   export default stringsUr;

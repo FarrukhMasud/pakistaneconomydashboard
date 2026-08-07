@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Line, Bar } from 'react-chartjs-2';
 import { useData } from '../hooks/useData';
+import { useShareableChartState } from '../hooks/useShareableChartState';
 import {
   COLORS,
   baseLineOptions,
@@ -15,7 +15,7 @@ import { currentCalendarYear, currentFiscalYear, fmtPct, avgField, buildYoYOverl
 const formatDate = formatMonthYear;
 
 export default function InflationSection() {
-  const [compareMode, setCompareMode] = useState('off');
+  const { compareMode, setCompareMode } = useShareableChartState();
   const showYoY = compareMode === 'yoy';
   const showFytd = compareMode === 'fytd';
   const { data, loading, error, retry } = useData('inflation.json');

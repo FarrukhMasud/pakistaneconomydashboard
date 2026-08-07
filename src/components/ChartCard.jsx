@@ -185,7 +185,7 @@ export default function ChartCard({ title, description, source, dataSource, last
                     )}
           {tableData && (
             <button
-              className="chart-action-btn chart-action-btn--text"
+              className="chart-action-btn chart-action-btn--text chart-action-btn--csv"
               onClick={() => downloadTextFile(
                 `${slugify(title)}.csv`,
                 'text/csv',

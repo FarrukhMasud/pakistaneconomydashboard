@@ -10,10 +10,10 @@ function readDensity() {
   } catch {
     /* ignore */
   }
-  return 'comfortable';
+  return 'compact';
 }
 
-let density = typeof window !== 'undefined' ? readDensity() : 'comfortable';
+let density = typeof window !== 'undefined' ? readDensity() : 'compact';
 
 function emit() {
   listeners.forEach((listener) => listener());
@@ -46,11 +46,11 @@ function getSnapshot() {
 }
 
 function getServerSnapshot() {
-  return 'comfortable';
+  return 'compact';
 }
 
 /**
- * Comfortable vs compact density mode (persisted).
+ * Brief vs analyst detail mode (persisted using the legacy density values).
  */
 export function useDensity() {
   const value = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);

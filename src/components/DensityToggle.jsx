@@ -6,12 +6,12 @@ export default function DensityToggle() {
   const { density, setDensity } = useDensity();
 
   const options = [
-    { value: 'comfortable', label: t('density.comfortable', 'Roomy'), short: 'R' },
-    { value: 'compact', label: t('density.compact', 'Compact'), short: 'C' },
+    { value: 'compact', label: t('density.compact', 'Brief view'), short: 'B' },
+    { value: 'comfortable', label: t('density.comfortable', 'Analyst view'), short: 'A' },
   ];
 
   return (
-    <div className="density-toggle" role="radiogroup" aria-label={t('density.label', 'Density')}>
+    <div className="density-toggle" role="radiogroup" aria-label={t('density.label', 'Detail level')}>
       {options.map((opt) => (
         <button
           key={opt.value}
@@ -21,7 +21,8 @@ export default function DensityToggle() {
           aria-pressed={density === opt.value}
           title={opt.label}
         >
-          {opt.short}
+          <span className="density-toggle-btn__short" aria-hidden="true">{opt.short}</span>
+          <span className="density-toggle-btn__label">{opt.label}</span>
         </button>
       ))}
     </div>

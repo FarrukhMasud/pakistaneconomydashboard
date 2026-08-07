@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Bar, Doughnut } from 'react-chartjs-2';
 import { useData } from '../hooks/useData';
+import { useShareableChartState } from '../hooks/useShareableChartState';
 import { COLORS, COLOR_LIST, baseBarOptions, baseDoughnutOptions } from '../utils/chartConfig';
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
@@ -21,15 +21,13 @@ const SERVICES_COVERAGE_NOTE =
 
 export default function ServicesSection() {
   const { tx } = useI18n();
-  const [compareMode, setCompareMode] = useState('off');
-  const [focus, setFocus] = useState(null);
+  const { compareMode, focus, setCompareMode, setFocus } = useShareableChartState();
   const showYoY = compareMode === 'yoy';
   const showFytd = compareMode === 'fytd';
   const { data, loading, error, retry } = useData('services.json');
 
   const setCompare = (mode) => {
     setCompareMode(mode);
-    setFocus(null);
   };
 
   if (loading) return <LoadingCard label="Loading services data…" />;

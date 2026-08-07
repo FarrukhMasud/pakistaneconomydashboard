@@ -44,6 +44,16 @@
 [data-density="compact"] .app-header { padding: 1rem 1.25rem 0.85rem; }
 [data-density="compact"] .app-header h1 { font-size: 1.35rem; }
 [data-density="compact"] .header-emblem { font-size: 1.2rem; margin-bottom: 0.15rem; }
+[data-density="compact"] .chart-card > .chart-meta,
+[data-density="compact"] .summary-card > .summary-card__footnote,
+[data-density="compact"] .summary-card > .chart-provenance,
+[data-density="compact"] .source-links,
+[data-density="compact"] .chart-action-btn--csv,
+[data-density="compact"] .kpi-source,
+[data-density="compact"] .kpi-change-basis {
+  display: none;
+}
+[data-density="compact"] .chart-container.tall { height: 320px; }
 body {
   background:
     radial-gradient(ellipse 80% 50% at 10% -10%, rgba(0, 212, 170, 0.14), transparent 50%),
@@ -233,6 +243,7 @@ body::before {
 .density-toggle-btn.active {
   background: rgba(0, 212, 170, 0.25); box-shadow: 0 0 8px rgba(0, 212, 170, 0.2); color: var(--text-primary);
 }
+.density-toggle-btn__short { display: none; }
 .loading-card { position: relative; overflow: hidden; min-height: 120px; display: flex; flex-direction: column; gap: 0.75rem; justify-content: center; }
 .skeleton-lines { display: grid; gap: 0.55rem; width: 100%; }
 .skeleton-line {
@@ -304,4 +315,27 @@ body::before {
   .card:hover, .what-moved__card:hover, .watchlist__card:hover, .pulse-chip:hover { transform: none; }
   body { background-attachment: scroll; }
 }
-@media (max-width: 720px) { .chrome-bar { padding: 0.45rem 0.75rem; } }
+@media (max-width: 720px) {
+  .app-chrome { position: static; }
+  .app-chrome .sub-nav {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: var(--glass-bg);
+    backdrop-filter: blur(18px);
+  }
+  .chrome-bar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: 0.4rem 0.75rem;
+  }
+  .chrome-actions {
+    grid-column: 1 / -1;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+  }
+  .header-feedback-link,
+  .chrome-brand__sub { display: none; }
+  .density-toggle-btn__label { display: none; }
+  .density-toggle-btn__short { display: inline; }
+}

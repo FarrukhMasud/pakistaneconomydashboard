@@ -14,6 +14,7 @@ import ExpandableTile from './ui/ExpandableTile';
 import AnimatedNumber from './ui/AnimatedNumber';
 import { LoadingCard, ErrorCard } from './ui/DataState';
 import useI18n from '../i18n/useI18n';
+import { formatKpiNumber, formatKpiPeriod, formatKpiUnit, isProvisionalPeriod } from '../utils/kpiFormat';
 
 function sentimentColor(sentiment) {
   if (sentiment === 'positive') return COLORS.teal;
@@ -25,11 +26,6 @@ function trendArrow(trend) {
   if (trend === 'up') return '▲';
   if (trend === 'down') return '▼';
   return '►';
-}
-
-function formatValue(kpi) {
-  if (!Number.isFinite(kpi.value)) return String(kpi.value ?? '—');
-  return Number.isFinite(kpi.decimals) ? kpi.value.toFixed(kpi.decimals) : String(kpi.value);
 }
 
 /**
@@ -90,16 +86,16 @@ export default function KpiCards() {
               key={kpi.id}
               className={`card kpi-card sentiment-${sentiment}`}
               title={kpi.label}
-              subtitle={`${kpi.period} · Source: ${kpi.source}`}
+              subtitle={`${formatKpiPeriod(kpi.period)} · Source: ${kpi.source}`}
               details={(
                 <div className="tile-detail-list">
                   <div className="tile-detail-row">
                     <span>{tx('Latest value')}</span>
-                    <strong style={{ color }}>{formatValue(kpi)}{kpi.unit}</strong>
+                    <strong style={{ color }}>{formatKpiNumber(kpi)} {formatKpiUnit(kpi.unit)}</strong>
                   </div>
                   <div className="tile-detail-row">
                     <span>{tx('Period')}</span>
-                    <strong>{kpi.period}</strong>
+                    <strong>{formatKpiPeriod(kpi.period)}</strong>
                   </div>
                   <div className="tile-detail-row">
                     <span>{tx('Change')}</span>
@@ -152,10 +148,13 @@ export default function KpiCards() {
                     value={kpi.value}
                     decimals={Number.isFinite(kpi.decimals) ? kpi.decimals : 0}
                   />
-                ) : formatValue(kpi)}
-                <span className="kpi-unit">{kpi.unit}</span>
+                ) : formatKpiNumber(kpi)}
+                <span className="kpi-unit">{formatKpiUnit(kpi.unit)}</span>
               </div>
-              <div className="kpi-period">{kpi.period}</div>
+              <div className="kpi-period">
+                {formatKpiPeriod(kpi.period)}
+                {isProvisionalPeriod(kpi.period) && <span className="provisional-badge">{tx('Provisional')}</span>}
+              </div>
               {kpi.sub && <div className="kpi-sub">{kpi.sub}</div>}
               <div className={`kpi-trend ${sentiment}`} title={kpi.changeBasis || undefined}>
                 {trendArrow(kpi.trend)} {changeLabel ?? 'n/a'}

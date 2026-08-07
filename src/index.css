@@ -1628,7 +1628,67 @@ a:hover {
 }
 
 .section-intro-panel > div {
+  min-height: 0;
   overflow: hidden;
+}
+
+.section-decision-guide {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin-top: 0.75rem;
+}
+
+.section-decision-guide p {
+  display: grid;
+  gap: 0.22rem;
+  margin: 0;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.section-decision-guide strong {
+  color: var(--accent-teal);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.provisional-badge {
+  display: inline-flex;
+  margin-left: 0.4rem;
+  padding: 0.08rem 0.35rem;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  border-radius: 999px;
+  color: var(--accent-amber, #f59e0b);
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+button:focus-visible,
+a:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--accent-blue, #42a5f5);
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .section-decision-guide { grid-template-columns: 1fr; }
+  .chart-action-btn,
+  .info-toggle {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .chart-title-row { align-items: flex-start; }
+  .chart-card { padding: 0.85rem; }
+  .chart-data-table { font-size: 0.7rem; }
 }
 
 .section-intro {

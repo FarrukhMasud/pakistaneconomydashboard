@@ -19,9 +19,11 @@ const ur = {
   'app.chromeTag': 'سرکاری ماخذ ٹرمینل',
   'app.translationNotice': 'انٹرفیس، عنوانات اور وضاحتیں ترجمہ شدہ ہیں۔ اعداد و شمار، چارٹ کی سیریز کے نام، پیمانے کی اکائیاں، اداروں کے نام اور حوالہ جات انگریزی میں ہیں تاکہ وہ سرکاری اشاعت سے بالکل مطابقت رکھیں۔',
 
-  'density.label': 'کثافت',
-  'density.comfortable': 'کشادہ',
-  'density.compact': 'کمپیکٹ',
+  'density.label': 'تفصیل کی سطح',
+  'density.comfortable': 'تجزیاتی منظر',
+  'density.compact': 'مختصر منظر',
+  'section.whyItMatters': 'یہ کیوں اہم ہے',
+  'section.watchNext': 'اگلی نظر',
 
   'pulse.title': 'معیشت کی نبض',
   'pulse.kicker': 'لائیو نبض',
@@ -34,8 +36,8 @@ const ur = {
   'coach.done': 'سمجھ گیا',
   'coach.searchTitle': 'کہیں بھی جائیں',
   'coach.searchBody': 'سیکشنز اور اشارے فوراً تلاش کرنے کے لیے Ctrl/Cmd+K دبائیں۔',
-  'coach.densityTitle': 'کشادہ یا کمپیکٹ',
-  'coach.densityBody': 'لیپ ٹاپ پر گنجان چارٹس کے لیے اوپر کثافت بدلیں۔',
+  'coach.densityTitle': 'مختصر یا تجزیاتی منظر',
+  'coach.densityBody': 'صاف خلاصے کے لیے مختصر منظر اور ماخذ و تفصیل کے لیے تجزیاتی منظر منتخب کریں۔',
   'coach.pinsTitle': 'واچ لسٹ بنائیں',
   'coach.pinsBody': 'جائزے پر ★ سے KPI پن کریں — وہ اسی ڈیوائس پر رہتے ہیں۔',
 
@@ -158,7 +160,7 @@ const ur = {
   'chart.latestBadgeHint': 'اس چارٹ میں آخری دستیاب مدت',
   'chart.traceFigure': 'کسی اہم عدد کا ماخذ دیکھیں:',
 
-  'palette.open': 'حصے تلاش کریں',
+  'palette.open': 'ڈیش بورڈ تلاش کریں',
   'palette.placeholder': 'حصے، اشاریے یا اعداد و شمار تلاش کریں…',
   'palette.hint': 'لکھ کر تلاش کریں · ↑↓ سے منتخب کریں · Enter سے کھولیں · Esc سے بند کریں',
   'palette.noResults': 'کوئی حصہ نہیں ملا',
@@ -188,4 +190,3 @@ const ur = {
 };
 
 export default ur;
-

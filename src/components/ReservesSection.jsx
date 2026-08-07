@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { useData } from '../hooks/useData';
+import { useShareableChartState } from '../hooks/useShareableChartState';
 import {
   COLORS,
   baseLineOptions,
@@ -32,8 +32,7 @@ function formatDate(dateStr) {
 }
 
 export default function ReservesSection() {
-  const [compareMode, setCompareMode] = useState('off');
-  const [focus, setFocus] = useState(null);
+  const { compareMode, focus, setCompareMode, setFocus } = useShareableChartState();
   const showYoY = compareMode === 'yoy';
   const showFytd = compareMode === 'fytd';
   const { data, loading, error, retry } = useData('reserves.json');

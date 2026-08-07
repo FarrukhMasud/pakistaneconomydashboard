@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { useData } from '../hooks/useData';
+import { useShareableChartState } from '../hooks/useShareableChartState';
 import { COLORS, COLOR_LIST, baseBarOptions } from '../utils/chartConfig';
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
@@ -35,7 +35,7 @@ function withOtherCountries(row) {
 }
 
 export default function RemittancesSection() {
-  const [compareMode, setCompareMode] = useState('off');
+  const { compareMode, setCompareMode } = useShareableChartState();
     const showYoY = compareMode === 'yoy';
     const showFytd = compareMode === 'fytd';
     const { data, loading, error, retry } = useData('remittances.json');

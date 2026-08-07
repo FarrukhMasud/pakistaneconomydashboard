@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Line, Bar } from 'react-chartjs-2';
 import { useData } from '../hooks/useData';
+import { useShareableChartState } from '../hooks/useShareableChartState';
 import {
   COLORS,
   COLOR_LIST,
@@ -23,7 +23,7 @@ const COUNTRY_COVERAGE_NOTE =
   'This is the latest period SBP has published in its country-level trade tables. They are released after the headline monthly trade figures, so this chart can stop one month short of the totals above.';
 
 export default function TradeSection() {
-  const [compareMode, setCompareMode] = useState('yoy');
+  const { compareMode, setCompareMode } = useShareableChartState('yoy');
     const showYoY = compareMode === 'yoy';
     const showFytd = compareMode === 'fytd';
     const { data, loading, error, retry } = useData('trade.json');

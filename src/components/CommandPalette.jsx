@@ -172,10 +172,10 @@ export default function CommandPalette({ groups, onNavigate, groupLabel, section
         className="palette-trigger"
         onClick={openPalette}
         aria-haspopup="dialog"
-        title={t('palette.open', 'Search sections')}
+        title={t('palette.open', 'Search dashboard')}
       >
         <span aria-hidden="true">🔍</span>
-        <span className="palette-trigger__text">{t('palette.open', 'Search sections')}</span>
+        <span className="palette-trigger__text">{t('palette.open', 'Search dashboard')}</span>
         <kbd className="palette-trigger__kbd">Ctrl K</kbd>
       </button>
 
@@ -187,7 +187,7 @@ export default function CommandPalette({ groups, onNavigate, groupLabel, section
             if (event.target === event.currentTarget) setOpen(false);
           }}
         >
-          <div ref={dialogRef} className="palette" role="dialog" aria-modal="true" aria-label={t('palette.label', 'Section search')}>
+          <div ref={dialogRef} className="palette" role="dialog" aria-modal="true" aria-label={t('palette.label', 'Dashboard search')}>
             <input
               ref={inputRef}
               className="palette__input"

@@ -12,7 +12,8 @@ export default function ShareSectionLink({ groupId, sectionId, label }) {
   const href = `/${groupId}/${sectionId}`;
 
   const copy = async () => {
-      const url = `${window.location.origin}${href}`;
+      const state = window.location.pathname === href ? window.location.search : '';
+      const url = `${window.location.origin}${href}${state}`;
     try {
       await navigator.clipboard.writeText(url);
       setCopied(true);

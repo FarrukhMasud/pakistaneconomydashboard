@@ -16,9 +16,9 @@ const en = {
   'app.chromeTag': 'Official-source terminal',
   'app.translationNotice': 'Interface text, headings and explanations are translated. Figures, chart series names, axis units, institution names and source citations stay in English exactly as the issuing institution published them.',
 
-  'density.label': 'Density',
-  'density.comfortable': 'Roomy',
-  'density.compact': 'Compact',
+  'density.label': 'Detail level',
+  'density.comfortable': 'Analyst view',
+  'density.compact': 'Brief view',
 
   'pulse.title': 'Economy pulse',
   'pulse.kicker': 'Live pulse',
@@ -31,8 +31,8 @@ const en = {
   'coach.done': 'Got it',
   'coach.searchTitle': 'Jump anywhere',
   'coach.searchBody': 'Press Ctrl/Cmd+K to search sections and indicators instantly.',
-  'coach.densityTitle': 'Roomy or compact',
-  'coach.densityBody': 'Toggle density in the top bar when you want denser charts on a laptop.',
+  'coach.densityTitle': 'Brief or analyst view',
+  'coach.densityBody': 'Use Brief for a clean summary or Analyst to reveal provenance and supporting detail.',
   'coach.pinsTitle': 'Build a watchlist',
   'coach.pinsBody': 'Pin KPIs with ★ on Overview — they stay on this device for quick checks.',
 
@@ -131,6 +131,8 @@ const en = {
 
     'section.aboutSection': 'About this section',
   'section.hideOverview': 'Hide overview',
+  'section.whyItMatters': 'Why it matters',
+  'section.watchNext': 'Watch next',
 
   'chart.data': 'Data',
   'chart.csv': 'CSV',
