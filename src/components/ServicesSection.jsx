@@ -5,11 +5,13 @@ import { COLORS, COLOR_LIST, baseBarOptions, baseDoughnutOptions } from '../util
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
+import SeriesCoverageNote from './ui/SeriesCoverageNote';
 import PeriodCompare from './ui/PeriodCompare';
 import SeriesFocus from './ui/SeriesFocus';
 import { applySeriesFocus } from '../utils/seriesFocus';
 import { LoadingCard, ErrorCard, UnavailableCard } from './ui/DataState';
 import { pctChange, formatMonthYear, buildYoYOverlay, buildFytdSeries } from '../utils/periodHelpers';
+import useI18n from '../i18n/useI18n';
 
 // SBP publishes the cumulative EBOPS services table later in the month than the
 // monthly trade and reserves releases, so this section can sit one month behind
@@ -18,6 +20,7 @@ const SERVICES_COVERAGE_NOTE =
   'This is the latest period SBP has published in its EBOPS services table. SBP releases this table after the monthly trade and reserves data, so it can lag the rest of the dashboard by a month. The headline totals at the top of this section come from the Balance of Payments summary, which SBP publishes one release earlier.';
 
 export default function ServicesSection() {
+  const { tx } = useI18n();
   const [compareMode, setCompareMode] = useState('off');
   const [focus, setFocus] = useState(null);
   const showYoY = compareMode === 'yoy';
@@ -382,6 +385,14 @@ export default function ServicesSection() {
         sourceLinks={[
           { label: 'SBP BOP Detail', url: 'https://www.sbp.org.pk/ecodata/index2.asp' },
           { label: 'PSEB', url: 'https://www.pseb.org.pk' },
+        ]}
+      />
+
+      <SeriesCoverageNote
+        items={[
+          { label: tx('IT headline'), period: data.itHeadline?.fytdLabel || data.itHeadline?.latestMonth, source: 'SBP headline release' },
+          { label: tx('Detailed IT and freelance breakdown'), period: summary?.period, source: 'SBP EBOPS detail' },
+          { label: tx('Total services headline'), period: bopMonth?.period, source: 'SBP BOP summary' },
         ]}
       />
 

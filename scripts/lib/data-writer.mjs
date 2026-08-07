@@ -46,6 +46,14 @@ function rowKeyOf(item) {
   return null;
 }
 
+function representsNewObservation(before, after, rowKey) {
+  if (!rowKey.startsWith('id=')) return false;
+  for (const key of ['date', 'month', 'period', 'asOf', 'latestMonth']) {
+    if (before[key] != null && after[key] != null && before[key] !== after[key]) return true;
+  }
+  return false;
+}
+
 /**
  * Walk two JSON trees together and collect changes to numeric values that
  * already existed in the previous version. Additions are not revisions.
@@ -69,7 +77,10 @@ function collectRevisions(before, after, path = '', out = []) {
       const afterByKey = new Map(after.map((x) => [rowKeyOf(x), x]));
       for (const item of before) {
         const k = rowKeyOf(item);
-        if (afterByKey.has(k)) collectRevisions(item, afterByKey.get(k), `${path}[${k}]`, out);
+        const next = afterByKey.get(k);
+        if (next && !representsNewObservation(item, next, k)) {
+          collectRevisions(item, next, `${path}[${k}]`, out);
+        }
       }
     } else {
       const n = Math.min(before.length, after.length);

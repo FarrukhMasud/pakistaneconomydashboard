@@ -16,6 +16,20 @@ function observationAgeDays(value) {
   return Math.floor((Date.now() - date.getTime()) / 86_400_000);
 }
 
+function explicitPublicationDate(data) {
+  return data.publicationDate
+    || data.sourcePublicationDate
+    || data.publishedAt
+    || null;
+}
+
+function verificationDate(data) {
+  return data.verificationDate
+    || data.lastChecked
+    || data.lastVerified
+    || null;
+}
+
 function fiscalPeriodEndDate(value) {
   const match = String(value || '').match(/jul(?:y)?[-\s]+([a-z]+).*?fy\s*(\d{2,4})/i);
   if (!match) return null;
@@ -208,6 +222,7 @@ export const DATASETS = [
       ...(data.monthly || []).filter(row => typeof row.net === 'number').map(row => row.date),
       data.fytd?.asOf,
     ].filter(Boolean),
+    published: explicitPublicationDate,
     releaseCalendarUrl: 'https://www.fbr.gov.pk',
   },
   {
@@ -221,7 +236,10 @@ export const DATASETS = [
     cadence: 'Event-driven',
     expectedLag: 'Update when IMF publishes Board decisions, press releases, staff reports, or official schedule changes.',
     critical: true,
-    latest: data => data.upcomingDecision?.date || data.lastVerified,
+    latest: data => data.observationDate
+      || data.programScorecard?.asOf
+      || [...(data.reviews || [])].reverse().find(review => review.status === 'completed')?.date,
+    published: explicitPublicationDate,
     announcedNext: data => (data.upcomingDecision
       ? {
         date: data.upcomingDecision.date || null,
@@ -237,12 +255,13 @@ export const DATASETS = [
     label: 'SBP Policy Rate Tracker',
     file: 'monetary-policy.json',
     source: 'State Bank of Pakistan — Monetary Policy Committee',
-    sourceUrl: 'https://www.sbp.org.pk/m_policy/index.asp',
+    sourceUrl: 'https://www.sbp.org.pk/our-operations/monetary-policy',
     parser: 'manual-curation',
     cadence: 'Event-driven',
     expectedLag: 'Update after each SBP Monetary Policy Committee decision (roughly every 6 weeks).',
     critical: false,
-    latest: data => data.asOf || data.lastVerified,
+    latest: data => data.observationDate || data.asOf,
+    published: explicitPublicationDate,
     announcedNext: data => (data.nextMeeting
       ? {
         date: data.nextMeeting.date || null,
@@ -258,12 +277,12 @@ export const DATASETS = [
     label: 'Power Circular Debt Tracker',
     file: 'circular-debt.json',
     source: 'Ministry of Energy / Power Division, IMF',
-    sourceUrl: 'https://www.imf.org/en/Countries/PAK',
+    sourceUrl: 'https://www.sbp.org.pk/assets/document/pakdebt.pdf',
     parser: 'manual-curation',
     cadence: 'Event-driven',
     expectedLag: 'Update when the Power Division / IMF publish new circular-debt figures (typically monthly/quarterly).',
     critical: false,
-    latest: data => data.current?.asOf || data.lastVerified,
+    latest: data => data.current?.asOf || data.observationDate,
   },
   {
     id: 'external-debt',
@@ -276,7 +295,9 @@ export const DATASETS = [
     cadence: 'Event-driven',
     expectedLag: 'Update when SBP/MoF disclose revised external-debt servicing or stock figures.',
     critical: false,
-    latest: data => data.lastVerified,
+    latest: data => data.observationDate || data.stock?.asOf,
+    latestDate: data => data.observationDate || data.stock?.asOf,
+    published: explicitPublicationDate,
   },
   {
     id: 'reserves-adequacy',
@@ -289,7 +310,7 @@ export const DATASETS = [
     cadence: 'Weekly',
     expectedLag: 'Derived from the latest SBP weekly reserves and trailing 12 months of official SBP goods imports.',
     critical: false,
-    latest: data => data.current?.asOf || data.lastVerified,
+    latest: data => data.current?.asOf || data.observationDate,
   },
   {
     id: 'budget-federal',
@@ -354,7 +375,7 @@ export const DATASETS = [
     cadence: 'Event-driven',
     expectedLag: 'Update when dashboard terminology changes or official methodology pages change.',
     critical: false,
-    latest: data => data.lastVerified || data.lastUpdated,
+    latest: data => data.contentAsOf || data.lastUpdated,
   },
 ];
 
@@ -381,9 +402,11 @@ export const SOURCE_TIERS = {
 
 export function getDatasetFreshness(dataset, data) {
   const latestObservation = dataset.latest?.(data) || data.dataCoverage || data.lastUpdated || null;
-  const freshnessDate = dataset.latestDate?.(data) || latestObservation;
+  const observationDate = dataset.latestDate?.(data) || latestObservation;
+  const publicationDate = dataset.published?.(data) || explicitPublicationDate(data);
+  const verifiedAt = verificationDate(data);
   const maxAgeDays = MAX_AGE_DAYS[dataset.cadence];
-  const observationAge = observationAgeDays(freshnessDate);
+  const observationAge = observationAgeDays(observationDate);
   const stale = maxAgeDays != null && observationAge != null && observationAge > maxAgeDays;
   const undated = maxAgeDays != null && observationAge == null;
   const reviewRequired = data.reviewRequired === true;
@@ -407,9 +430,12 @@ export function getDatasetFreshness(dataset, data) {
     expectedLag: dataset.expectedLag,
     critical: dataset.critical,
     latestObservation,
-    freshnessDate: freshnessDate !== latestObservation ? freshnessDate : null,
+    observationDate,
+    publicationDate,
+    verificationDate: verifiedAt,
+    freshnessDate: observationDate !== latestObservation ? observationDate : null,
     dataCoverage: data.dataCoverage || null,
-    dashboardUpdated: data.lastUpdated || data.lastVerified || null,
+    dashboardUpdated: data.lastUpdated || null,
     reviewReason: data.reviewReason || null,
     status: latestObservation && !stale && !undated && !reviewRequired ? 'fresh' : 'needs-review',
   };

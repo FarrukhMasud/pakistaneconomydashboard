@@ -589,6 +589,27 @@ const stringsUr = {
     'IT & Telecom': 'آئی ٹی اور ٹیلی کام',
     'Freelance IT': 'فری لانس آئی ٹی',
     'Citation': 'حوالہ',
+    'Observation:': 'مشاہدہ:',
+    'Published:': 'شائع شدہ:',
+    'Verified:': 'تصدیق شدہ:',
+    'Dashboard changed:': 'ڈیش بورڈ میں تبدیلی:',
+    'Not stated by source': 'ماخذ میں درج نہیں',
+    'Coverage by series': 'سیریز کے لحاظ سے کوریج',
+    'Different official tables can be published on different schedules; comparisons only use matching periods.':
+      'مختلف سرکاری جدول مختلف اوقات میں شائع ہو سکتے ہیں؛ موازنہ صرف یکساں مدت کے درمیان کیا جاتا ہے۔',
+    'IT headline': 'آئی ٹی کی سرخی',
+    'Detailed IT and freelance breakdown': 'آئی ٹی اور فری لانس کی تفصیلی تقسیم',
+    'Total services headline': 'کل خدمات کی سرخی',
+    'Monthly net FDI': 'ماہانہ خالص ایف ڈی آئی',
+    'Sector breakdown': 'شعبہ وار تقسیم',
+    'Country breakdown': 'ملک وار تقسیم',
+    'Latest refresh': 'تازہ ترین اپ ڈیٹ',
+    'What changed in the data': 'ڈیٹا میں کیا بدلا',
+    'New observations': 'نئے مشاہدات',
+    'New series': 'نئی سیریز',
+    'KPI movements': 'اہم اشاریوں میں تبدیلی',
+    'Revisions': 'نظرثانیاں',
+    'Needs review': 'جائزہ درکار',
   };
 
   export default stringsUr;

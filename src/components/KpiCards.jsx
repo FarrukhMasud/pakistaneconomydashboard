@@ -7,6 +7,7 @@ import ReleaseCalendarSection from './ReleaseCalendarSection';
 import SnapshotPanel from './SnapshotPanel';
 import CiteFigure from './CiteFigure';
 import WhatMovedStrip from './WhatMovedStrip';
+import LatestChangesPanel from './LatestChangesPanel';
 import WatchlistPanel from './WatchlistPanel';
 import EconomyPulse from './EconomyPulse';
 import ExpandableTile from './ui/ExpandableTile';
@@ -76,6 +77,7 @@ export default function KpiCards() {
       </p>
       <EconomyPulse onNavigate={navigate} />
       <WhatMovedStrip onNavigate={navigate} />
+      <LatestChangesPanel />
       <WatchlistPanel onNavigate={navigate} />
       <div className="kpi-grid stagger-children">
         {indicators.map((kpi) => {

@@ -5,7 +5,7 @@
     <link>https://economyofpakistan.com</link>
     <description>Updates for reserves, inflation, FBR tax, trade, remittances and headline KPIs from official sources.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 07 Aug 2026 19:24:47 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 07 Aug 2026 19:44:59 GMT</lastBuildDate>
     <item>
       <title>Foreign Exchange Reserves: 2026-07-31 (fresh)</title>
       <link>https://economyofpakistan.com/external/reserves</link>
@@ -70,18 +70,18 @@
       <description>Source: SBP EasyData API / SBP GDP table. Latest observation: FY2026. Coverage: FY2017 – FY2026. GDP/fiscal data is lower frequency than external-sector data.</description>
     </item>
     <item>
-      <title>FBR Tax Collection: 2026-05 (needs-review)</title>
+      <title>FBR Tax Collection: 2026-06 (needs-review)</title>
       <link>https://economyofpakistan.com/fiscal/fbr</link>
-      <guid isPermaLink="false">fbr-tax-2026-05</guid>
-      <pubDate>Thu, 09 Jul 2026 00:00:00 GMT</pubDate>
-      <description>Source: Federal Board of Revenue (FBR). Latest observation: 2026-05. FBR has not yet published a numeric FY2025-26 year-end release or its official month-wise/tax-wise table. The latest official numeric monthly release is January 2026; the Jul-May aggregate is secondary-attributed provisional reporting.. FBR publishes provisional monthly net collection in a press release shortly after each month-end; figures are finalised later in the FBR Year Book.</description>
+      <guid isPermaLink="false">fbr-tax-2026-06</guid>
+      <pubDate>Fri, 07 Aug 2026 00:00:00 GMT</pubDate>
+      <description>Source: Federal Board of Revenue (FBR). Latest observation: 2026-06. FBR's official 1 July release confirms target achievement and Rs599bn of refunds but omits the numeric collection total. The Rs13,003bn FY2025-26 net collection is therefore retained as explicitly attributed provisional reporting until FBR publishes its official month-wise/tax-wise table or year book.. FBR publishes provisional monthly net collection in a press release shortly after each month-end; figures are finalised later in the FBR Year Book.</description>
     </item>
     <item>
-      <title>IMF Program Tracker: 2026-08-07 (fresh)</title>
+      <title>IMF Program Tracker: 2026-05-08 (fresh)</title>
       <link>https://economyofpakistan.com/overview/overview</link>
-      <guid isPermaLink="false">imf-tracker-2026-08-07</guid>
+      <guid isPermaLink="false">imf-tracker-2026-05-08</guid>
       <pubDate>Fri, 07 Aug 2026 00:00:00 GMT</pubDate>
-      <description>Source: IMF / official program documents. Latest observation: 2026-08-07. Update when IMF publishes Board decisions, press releases, staff reports, or official schedule changes.</description>
+      <description>Source: IMF / official program documents. Latest observation: 2026-05-08. Update when IMF publishes Board decisions, press releases, staff reports, or official schedule changes.</description>
     </item>
     <item>
       <title>KPI · Foreign Reserves (Total): 22.47 $ Billion (2026-07-31)</title>
@@ -112,11 +112,11 @@
       <description>vs Jul-Jun FY2025 · SBP</description>
     </item>
     <item>
-      <title>KPI · IT &amp; Telecom Exports: 4.18 $B (Jul-May FY26)</title>
+      <title>KPI · IT &amp; Telecom Exports: 4.6 $B (Jul-Jun FY26)</title>
       <link>https://economyofpakistan.com/overview/overview</link>
-      <guid isPermaLink="false">kpi-it_exports-Jul-May FY26-4.18</guid>
+      <guid isPermaLink="false">kpi-it_exports-Jul-Jun FY26-4.6</guid>
       <pubDate>Fri, 07 Aug 2026 00:00:00 GMT</pubDate>
-      <description>vs Jul-May FY25 · SBP</description>
+      <description>vs Jul-Jun FY25 · SBP</description>
     </item>
     <item>
       <title>KPI · GDP Growth Rate: 3.7 % (FY2026 (Est.))</title>
@@ -133,11 +133,11 @@
       <description>vs 2026-06 · PBS · SBP target: 5–7%</description>
     </item>
     <item>
-      <title>KPI · FBR Tax Collection (FYTD): 11.23 T PKR (Jul–May FY2026)</title>
+      <title>KPI · FBR Tax Collection (FYTD): 13 T PKR (Jul–Jun FY2026)</title>
       <link>https://economyofpakistan.com/overview/overview</link>
-      <guid isPermaLink="false">kpi-fbr-tax-Jul–May FY2026-11.23</guid>
+      <guid isPermaLink="false">kpi-fbr-tax-Jul–Jun FY2026-13</guid>
       <pubDate>Fri, 07 Aug 2026 00:00:00 GMT</pubDate>
-      <description>vs same period last year · Business Recorder, citing provisional FBR data · Target ₨12.10T · shortfall ₨868B</description>
+      <description>vs same period last year · Pakistani financial reporting citing provisional FBR figures · Target ₨12.98T · surplus ₨20B</description>
     </item>
   </channel>
 </rss>

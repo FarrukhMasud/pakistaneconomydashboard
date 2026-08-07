@@ -274,15 +274,21 @@ async function main() {
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   const notesOk = runScript(resolve(__dirname, 'generate-editorial-notes.mjs'), 'generate-editorial-notes.mjs');
 
-  // Step 4b-iii: Republish the static JSON/CSV API from the refreshed data.
+  // Step 4b-iii: Compare refreshed data to HEAD before publishing or committing it.
   console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  console.log('⬇️  Step 4b-iii: Publishing static data API...');
+  console.log('🔬 Step 4b-iii: Generating pre-commit update preview...');
+  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  const previewOk = runScript(resolve(__dirname, 'generate-update-preview.mjs'), 'generate-update-preview.mjs');
+
+  // Step 4b-iv: Republish the static JSON/CSV API from the refreshed data.
+  console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  console.log('⬇️  Step 4b-iv: Publishing static data API...');
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   const apiOkStatic = runScript(resolve(__dirname, 'generate-api.mjs'), 'generate-api.mjs');
 
-  // Step 4b-iv: Critical-series RSS feed for subscribers / aggregators.
+  // Step 4b-v: Critical-series RSS feed for subscribers / aggregators.
   console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  console.log('📡 Step 4b-iv: Generating critical-series RSS feed...');
+  console.log('📡 Step 4b-v: Generating critical-series RSS feed...');
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   const rssOk = runScript(resolve(__dirname, 'generate-rss.mjs'), 'generate-rss.mjs');
 
@@ -294,7 +300,7 @@ async function main() {
 
   // Step 5: Commit and push — Cloudflare Pages auto-builds & deploys on push.
   const autoPush = !args.includes('--no-deploy');
-  const pipelineOk = parseOk && apiOk && fbrOk && peersOk && kpiOk && freshnessOk && notesOk && apiOkStatic && rssOk && auditOk;
+  const pipelineOk = parseOk && apiOk && fbrOk && peersOk && kpiOk && freshnessOk && notesOk && previewOk && apiOkStatic && rssOk && auditOk;
   let pushOk = false;
   if (autoPush && pipelineOk) {
     console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
@@ -340,6 +346,7 @@ async function main() {
   console.log(`  📊 KPI regen:   ${kpiOk ? '✅ Success' : '⚠️  Failed'}`);
   console.log(`  🧾 Freshness:   ${freshnessOk ? '✅ Success' : '⚠️  Failed'}`);
   console.log(`  📝 Claims:      ${notesOk ? '✅ Success' : '⚠️  Failed'}`);
+  console.log(`  🔬 Preview:     ${previewOk ? '✅ Success' : '⚠️  Failed'}`);
   console.log(`  ⬇️  Static API:  ${apiOkStatic ? '✅ Success' : '⚠️  Failed'}`);
   console.log(`  📡 RSS feed:   ${rssOk ? '✅ Success' : '⚠️  Failed'}`);
   console.log(`  🔎 Data audit:  ${auditOk ? '✅ Success' : '❌ Failed'}`);

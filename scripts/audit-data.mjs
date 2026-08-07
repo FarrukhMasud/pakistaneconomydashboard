@@ -58,14 +58,14 @@ async function main() {
   }
 
   console.log('\nPakistan Economic Dashboard — Data Freshness Audit\n');
-  console.log(`${pad('Dataset', 27)} ${pad('Latest', 18)} ${pad('Dashboard', 12)} ${pad('Source updated', 16)} Status`);
-  console.log('-'.repeat(92));
+  console.log(`${pad('Dataset', 27)} ${pad('Observed', 14)} ${pad('Published', 12)} ${pad('Verified', 12)} Status`);
+  console.log('-'.repeat(84));
 
   let failures = 0;
   for (const row of rows) {
     const ok = row.status === 'fresh';
     if (!ok && row.critical) failures++;
-    console.log(`${pad(row.label, 27)} ${pad(row.latestObservation || 'N/A', 18)} ${pad(row.dashboardUpdated || 'N/A', 12)} ${pad(row.sourceUpdated || 'API/manual', 16)} ${ok ? 'OK' : 'REVIEW'}`);
+    console.log(`${pad(row.label, 27)} ${pad(row.observationDate || row.latestObservation || 'N/A', 14)} ${pad(row.publicationDate || 'N/A', 12)} ${pad(row.verificationDate || 'N/A', 12)} ${ok ? 'OK' : 'REVIEW'}`);
   }
 
   if (failures > 0) {

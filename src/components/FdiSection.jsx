@@ -5,6 +5,7 @@ import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import ExpandableTile from './ui/ExpandableTile';
+import SeriesCoverageNote from './ui/SeriesCoverageNote';
 import { LoadingCard, ErrorCard, UnavailableCard } from './ui/DataState';
 import { pctChange, fmtUSD, buildYoYOverlay, formatMonthYear, deriveFiscalLabels } from '../utils/periodHelpers';
 import { countryFlagPlugin, countryLabel } from '../utils/countryLabels';
@@ -283,6 +284,14 @@ export default function FdiSection() {
         sourceLinks={[
           { label: 'Board of Investment', url: 'https://invest.gov.pk' },
           { label: 'SBP FDI Data', url: 'https://www.sbp.org.pk/ecodata/index2.asp' },
+        ]}
+      />
+
+      <SeriesCoverageNote
+        items={[
+          { label: tx('Monthly net FDI'), period: formatMonthYear(latestMonthly?.date), source: 'SBP EasyData' },
+          { label: tx('Sector breakdown'), period: sectorPeriod, source: 'SBP detailed workbook' },
+          { label: tx('Country breakdown'), period: data.countryPeriod, source: 'SBP detailed workbook' },
         ]}
       />
 

@@ -41,6 +41,9 @@ async function main() {
         cadence: dataset.cadence,
         critical: dataset.critical,
         latestObservation: null,
+        observationDate: null,
+        publicationDate: null,
+        verificationDate: null,
         dashboardUpdated: null,
         status: 'missing',
         error: err.message,
@@ -65,6 +68,12 @@ async function main() {
 
   await writeJson('data-freshness.json', {
     generatedAt,
+    dateSemantics: {
+      observationDate: 'When the measured economic period ended.',
+      publicationDate: 'When the issuing institution published the source, when known.',
+      verificationDate: 'When this dashboard last checked the source.',
+      dashboardUpdated: 'When the dashboard data content last changed.',
+    },
     status: datasets.some(d => d.status !== 'fresh') ? 'needs-review' : 'fresh',
     tiers: SOURCE_TIERS,
     datasets,

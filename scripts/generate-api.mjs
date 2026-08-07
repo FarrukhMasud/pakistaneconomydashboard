@@ -89,6 +89,12 @@ async function main() {
         sourceType: freshness.sourceType,
         cadence: dataset.cadence,
         latestObservation: freshness.latestObservation,
+        dates: {
+          observation: freshness.observationDate,
+          publication: freshness.publicationDate,
+          verification: freshness.verificationDate,
+          dashboardUpdated: freshness.dashboardUpdated,
+        },
         lastUpdated: data.lastUpdated || null,
         lastChecked: data.lastChecked || null,
         licence: 'Official public data, redistributed with attribution. Cite the original institution.',
@@ -108,6 +114,12 @@ async function main() {
       sourceType: freshness.sourceType,
       cadence: dataset.cadence,
       latestObservation: freshness.latestObservation,
+      dates: {
+        observation: freshness.observationDate,
+        publication: freshness.publicationDate,
+        verification: freshness.verificationDate,
+        dashboardUpdated: freshness.dashboardUpdated,
+      },
     };
 
     if (series) {
@@ -119,7 +131,7 @@ async function main() {
   }
 
   // Meta endpoints so a consumer can discover provenance without scraping.
-  for (const file of ['provenance.json', 'data-freshness.json', 'release-calendar.json', 'revisions.json', 'editorial-notes.json']) {
+  for (const file of ['provenance.json', 'data-freshness.json', 'release-calendar.json', 'revisions.json', 'editorial-notes.json', 'update-preview.json']) {
     try {
       const raw = await readFile(resolve(DATA_DIR, file), 'utf-8');
       await writeFile(resolve(API_DIR, VERSION, file), raw);

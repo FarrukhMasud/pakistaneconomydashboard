@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-07T19:24:47.233Z",
+  "generatedAt": "2026-08-07T19:42:42.666Z",
   "description": "Machine-readable citation for every headline figure on the dashboard. Each entry names the publishing institution, the exact source document, the worksheet and the row/column it was read from.",
   "sources": {
     "fbr-collection": {
@@ -130,10 +130,10 @@
       "sourceId": "fbr-collection",
       "sheet": null,
       "location": "FBR revenue collection statement, net collection",
-      "period": "Jul–May FY2026",
+      "period": "Jul–Jun FY2026",
       "status": "provisional",
       "unit": "PKR trillion",
-      "value": 11.23,
+      "value": 13,
       "derivedFrom": null,
       "note": "Currently sourced from press reporting of provisional FBR figures, not an FBR publication.",
       "retrievedAt": "2026-08-07"
@@ -238,6 +238,19 @@
       "status": "provisional",
       "unit": "US$ million",
       "value": 956,
+      "derivedFrom": null,
+      "note": null,
+      "retrievedAt": "2026-08-07"
+    },
+    "services.itHeadline.fytd": {
+      "label": "Telecommunications, computer and information services exports (credit)",
+      "sourceId": "sbp-services-headline",
+      "sheet": null,
+      "location": "IT & Telecommunication Services, current fiscal-year cumulative column",
+      "period": "Jul-Jun FY26",
+      "status": "provisional",
+      "unit": "US$ billion",
+      "value": 4.6,
       "derivedFrom": null,
       "note": null,
       "retrievedAt": "2026-08-07"

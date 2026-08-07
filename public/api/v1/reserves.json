@@ -6,6 +6,12 @@
   "sourceType": "official-primary",
   "cadence": "Weekly",
   "latestObservation": "2026-07-31",
+  "dates": {
+    "observation": "2026-07-31",
+    "publication": null,
+    "verification": "2026-08-07",
+    "dashboardUpdated": "2026-08-07"
+  },
   "lastUpdated": "2026-08-07",
   "lastChecked": "2026-08-07",
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",
@@ -82,6 +88,12 @@
         "sbp": 17189.3,
         "banks": 4920.2,
         "total": 22109.5
+      },
+      {
+        "date": "2026-06",
+        "sbp": 18376.2,
+        "banks": 4857.4,
+        "total": 23233.6
       },
       {
         "date": "2026-07-03",

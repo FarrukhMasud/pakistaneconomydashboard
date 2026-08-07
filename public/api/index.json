@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-07T19:24:47.744Z",
+  "generatedAt": "2026-08-07T19:45:02.975Z",
   "version": "v1",
   "title": "economyofpakistan.com static data API",
   "description": "Every dataset the dashboard renders, published as stable JSON and CSV. No key, no rate limit, no scraping required. Please cite the issuing institution listed on each endpoint.",
@@ -30,13 +30,19 @@
       "label": "Foreign Exchange Reserves",
       "json": "/api/v1/reserves.json",
       "csv": "/api/v1/reserves.csv",
-      "rows": 17,
+      "rows": 18,
       "seriesKey": "weekly",
       "source": "State Bank of Pakistan",
       "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
       "sourceType": "official-primary",
       "cadence": "Weekly",
-      "latestObservation": "2026-07-31"
+      "latestObservation": "2026-07-31",
+      "dates": {
+        "observation": "2026-07-31",
+        "publication": null,
+        "verification": "2026-08-07",
+        "dashboardUpdated": "2026-08-07"
+      }
     },
     {
       "id": "exchange-rates",
@@ -49,7 +55,13 @@
       "sourceUrl": "https://www.sbp.org.pk/assets/document/IBF_Arch.xls",
       "sourceType": "official-primary",
       "cadence": "Monthly",
-      "latestObservation": "2026-07"
+      "latestObservation": "2026-07",
+      "dates": {
+        "observation": "2026-07",
+        "publication": null,
+        "verification": "2026-08-07",
+        "dashboardUpdated": "2026-08-07"
+      }
     },
     {
       "id": "remittances",
@@ -62,7 +74,13 @@
       "sourceUrl": "https://easydata.sbp.org.pk",
       "sourceType": "official-primary",
       "cadence": "Monthly",
-      "latestObservation": "2026-06"
+      "latestObservation": "2026-06",
+      "dates": {
+        "observation": "2026-06",
+        "publication": null,
+        "verification": "2026-08-04",
+        "dashboardUpdated": "2026-08-04"
+      }
     },
     {
       "id": "trade",
@@ -75,7 +93,13 @@
       "sourceUrl": "https://www.sbp.org.pk/assets/document/exp_import_BOP_Arch.xls",
       "sourceType": "official-primary",
       "cadence": "Monthly",
-      "latestObservation": "2026-06"
+      "latestObservation": "2026-06",
+      "dates": {
+        "observation": "2026-06",
+        "publication": null,
+        "verification": "2026-08-07",
+        "dashboardUpdated": "2026-07-24"
+      }
     },
     {
       "id": "fdi",
@@ -88,7 +112,13 @@
       "sourceUrl": "https://archive.sbp.org.pk/ecodata/NetinflowSummary.xls",
       "sourceType": "official-primary",
       "cadence": "Monthly/FYTD",
-      "latestObservation": "2026-06"
+      "latestObservation": "2026-06",
+      "dates": {
+        "observation": "2026-06",
+        "publication": null,
+        "verification": "2026-08-07",
+        "dashboardUpdated": "2026-08-07"
+      }
     },
     {
       "id": "services",
@@ -101,7 +131,13 @@
       "sourceUrl": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf",
       "sourceType": "official-primary",
       "cadence": "Monthly/FYTD",
-      "latestObservation": "2026-06"
+      "latestObservation": "2026-06",
+      "dates": {
+        "observation": "2026-06",
+        "publication": null,
+        "verification": "2026-08-07",
+        "dashboardUpdated": "2026-08-07"
+      }
     },
     {
       "id": "inflation",
@@ -114,7 +150,13 @@
       "sourceUrl": "https://easydata.sbp.org.pk",
       "sourceType": "official-primary",
       "cadence": "Monthly",
-      "latestObservation": "2026-07"
+      "latestObservation": "2026-07",
+      "dates": {
+        "observation": "2026-07",
+        "publication": null,
+        "verification": "2026-08-04",
+        "dashboardUpdated": "2026-08-04"
+      }
     },
     {
       "id": "monetary",
@@ -127,7 +169,13 @@
       "sourceUrl": "https://easydata.sbp.org.pk",
       "sourceType": "official-primary",
       "cadence": "Weekly/Monthly",
-      "latestObservation": "2026-07"
+      "latestObservation": "2026-07",
+      "dates": {
+        "observation": "2026-07",
+        "publication": null,
+        "verification": "2026-08-04",
+        "dashboardUpdated": "2026-08-04"
+      }
     },
     {
       "id": "fiscal",
@@ -140,7 +188,13 @@
       "sourceUrl": "https://www.sbp.org.pk/assets/document/GDP_table.xlsx",
       "sourceType": "official-primary",
       "cadence": "Quarterly/Annual",
-      "latestObservation": "FY2026"
+      "latestObservation": "FY2026",
+      "dates": {
+        "observation": "2026-06-30",
+        "publication": null,
+        "verification": "2026-08-07",
+        "dashboardUpdated": "2026-07-24"
+      }
     },
     {
       "id": "fbr-tax",
@@ -153,7 +207,13 @@
       "sourceUrl": "https://www.fbr.gov.pk",
       "sourceType": "secondary-attributed",
       "cadence": "Monthly (provisional)",
-      "latestObservation": "2026-05"
+      "latestObservation": "2026-06",
+      "dates": {
+        "observation": "2026-06",
+        "publication": "2026-07-02",
+        "verification": "2026-08-07",
+        "dashboardUpdated": "2026-08-07"
+      }
     },
     {
       "id": "imf-tracker",
@@ -166,7 +226,13 @@
       "sourceUrl": "https://www.imf.org/en/Countries/PAK",
       "sourceType": "official-primary",
       "cadence": "Event-driven",
-      "latestObservation": "2026-08-07"
+      "latestObservation": "2026-05-08",
+      "dates": {
+        "observation": "2026-05-08",
+        "publication": "2026-05-08",
+        "verification": "2026-08-07",
+        "dashboardUpdated": "2026-08-07"
+      }
     },
     {
       "id": "monetary-policy",
@@ -176,10 +242,16 @@
       "rows": 0,
       "seriesKey": null,
       "source": "State Bank of Pakistan — Monetary Policy Committee",
-      "sourceUrl": "https://www.sbp.org.pk/m_policy/index.asp",
+      "sourceUrl": "https://www.sbp.org.pk/our-operations/monetary-policy",
       "sourceType": "official-primary",
       "cadence": "Event-driven",
-      "latestObservation": "2026-07-27"
+      "latestObservation": "2026-07-27",
+      "dates": {
+        "observation": "2026-07-27",
+        "publication": "2026-07-27",
+        "verification": "2026-08-07",
+        "dashboardUpdated": "2026-08-07"
+      }
     },
     {
       "id": "circular-debt",
@@ -189,10 +261,16 @@
       "rows": 0,
       "seriesKey": null,
       "source": "Ministry of Energy / Power Division, IMF",
-      "sourceUrl": "https://www.imf.org/en/Countries/PAK",
+      "sourceUrl": "https://www.sbp.org.pk/assets/document/pakdebt.pdf",
       "sourceType": "secondary-attributed",
       "cadence": "Event-driven",
-      "latestObservation": "2026-04-30"
+      "latestObservation": "2026-04-30",
+      "dates": {
+        "observation": "2026-04-30",
+        "publication": null,
+        "verification": "2026-08-07",
+        "dashboardUpdated": "2026-08-07"
+      }
     },
     {
       "id": "external-debt",
@@ -205,7 +283,13 @@
       "sourceUrl": "https://www.imf.org/en/Countries/PAK",
       "sourceType": "secondary-attributed",
       "cadence": "Event-driven",
-      "latestObservation": "2026-08-07"
+      "latestObservation": "2026-03-31",
+      "dates": {
+        "observation": "2026-03-31",
+        "publication": "2026-05-12",
+        "verification": "2026-08-07",
+        "dashboardUpdated": "2026-08-07"
+      }
     },
     {
       "id": "reserves-adequacy",
@@ -218,7 +302,13 @@
       "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
       "sourceType": "official-derived",
       "cadence": "Weekly",
-      "latestObservation": "2026-07-31"
+      "latestObservation": "2026-07-31",
+      "dates": {
+        "observation": "2026-07-31",
+        "publication": null,
+        "verification": "2026-08-07",
+        "dashboardUpdated": "2026-08-07"
+      }
     },
     {
       "id": "budget-federal",
@@ -231,7 +321,13 @@
       "sourceUrl": "https://www.finance.gov.pk",
       "sourceType": "official-primary",
       "cadence": "Quarterly/Annual",
-      "latestObservation": "2026-06-12"
+      "latestObservation": "2026-06-12",
+      "dates": {
+        "observation": "2026-06-12",
+        "publication": null,
+        "verification": "2026-06-17",
+        "dashboardUpdated": "2026-06-17"
+      }
     },
     {
       "id": "budget-provincial",
@@ -244,7 +340,13 @@
       "sourceUrl": "https://www.finance.gov.pk",
       "sourceType": "secondary-attributed",
       "cadence": "Quarterly/Annual",
-      "latestObservation": "2026-06-22"
+      "latestObservation": "2026-06-22",
+      "dates": {
+        "observation": "2026-06-22",
+        "publication": null,
+        "verification": "2026-06-22",
+        "dashboardUpdated": "2026-06-22"
+      }
     },
     {
       "id": "peer-comparison",
@@ -257,7 +359,13 @@
       "sourceUrl": "https://data.worldbank.org",
       "sourceType": "official-primary",
       "cadence": "Annual",
-      "latestObservation": "2025"
+      "latestObservation": "2025",
+      "dates": {
+        "observation": "2025",
+        "publication": null,
+        "verification": null,
+        "dashboardUpdated": "2026-08-07"
+      }
     },
     {
       "id": "economic-events",
@@ -270,7 +378,13 @@
       "sourceUrl": "https://www.imf.org/en/Countries/PAK",
       "sourceType": "official-primary",
       "cadence": "Event-driven",
-      "latestObservation": "2026-07-27"
+      "latestObservation": "2026-07-27",
+      "dates": {
+        "observation": "2026-07-27",
+        "publication": null,
+        "verification": "2026-08-07",
+        "dashboardUpdated": "2026-08-07"
+      }
     },
     {
       "id": "explainers",
@@ -283,7 +397,13 @@
       "sourceUrl": "https://www.sbp.org.pk/ecodata/index2.asp",
       "sourceType": "official-primary",
       "cadence": "Event-driven",
-      "latestObservation": "2026-06-26"
+      "latestObservation": "2026-06-26",
+      "dates": {
+        "observation": "2026-06-26",
+        "publication": null,
+        "verification": "2026-06-26",
+        "dashboardUpdated": "2026-06-26"
+      }
     },
     {
       "id": "provenance",
@@ -341,6 +461,19 @@
       "id": "editorial-notes",
       "label": "Metadata: editorial notes",
       "json": "/api/v1/editorial-notes.json",
+      "csv": null,
+      "rows": 0,
+      "seriesKey": null,
+      "source": "economyofpakistan.com",
+      "sourceUrl": "https://economyofpakistan.com",
+      "sourceType": "official-derived",
+      "cadence": "Per update",
+      "latestObservation": null
+    },
+    {
+      "id": "update-preview",
+      "label": "Metadata: update preview",
+      "json": "/api/v1/update-preview.json",
       "csv": null,
       "rows": 0,
       "seriesKey": null,

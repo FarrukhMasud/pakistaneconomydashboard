@@ -42,6 +42,8 @@ convention:
 | **Every headline figure is citable** | `public/data/provenance.json` records the source document, sheet, cell location, period, unit and retrieval date for each cited figure. The 🔍 **Cite** control on KPI cards and charts shows it in-place. |
 | **No hand-typed narrative numbers** | Every numeric claim in prose is computed by `scripts/generate-editorial-notes.mjs` from the same JSON the chart renders, so a sentence can never contradict the chart beneath it. |
 | **Restatements are visible** | `scripts/lib/data-writer.mjs` diffs each write; changed historical values are appended to `public/data/revisions.json`. `lastUpdated` only advances when numbers actually change (`lastChecked` records the run). |
+| **Dates have explicit meanings** | Freshness metadata separates the economic `observationDate`, source `publicationDate`, dashboard `verificationDate`, and `dashboardUpdated` timestamp. Staleness is calculated from the observation only. |
+| **Refreshes are previewed** | `scripts/generate-update-preview.mjs` compares working data with `HEAD` and records new observations, KPI movements, revisions, source changes, review flags, and suspicious date jumps before an automated commit. |
 | **Source trust is never implied** | Every dataset declares a tier — *official primary*, *derived on this dashboard*, or *secondary reporting* — surfaced as a badge next to its numbers. A data file can downgrade its own tier at runtime (FBR does this when only press-reported provisional figures exist). |
 | **Reconciliation invariants** | `npm run audit:sanity` re-derives totals (trade balance, services credit/debit, reserves components, remittance corridors, fiscal series) and fails the build on any mismatch, plus cross-checks KPI ↔ provenance ↔ editorial notes. |
 | **Parser regression tests** | `npm test` runs golden-file tests over the real workbook layouts, including fiscal-year rollover cases that previously produced wrong FDI figures. |
@@ -227,7 +229,8 @@ This runs these steps:
    `data-freshness.json` and `release-calendar.json`
 6b. **Editorial claims** — `generate-editorial-notes.mjs` recomputes every
    narrative number from the refreshed data
-6c. **Static API** — `generate-api.mjs` republishes `public/api/v1/*.json|.csv`
+6c. **Update preview** — `generate-update-preview.mjs` compares refreshed data with `HEAD`
+6d. **Static API** — `generate-api.mjs` republishes `public/api/v1/*.json|.csv`
 7. **Freshness Audit** — blocks deployment if a critical dataset is stale,
    missing, or requires review
 8. **Git Commit & Push** — commits data changes to GitHub. **Cloudflare Pages
@@ -275,6 +278,7 @@ npm run generate:notes
 
 # Republish the static JSON/CSV API under public/api/v1
 npm run generate:api
+npm run generate:preview
 
 # Run the parser / data-writer / release-calendar / i18n test suites
 npm test
@@ -384,7 +388,8 @@ pak-eco/
 │       ├── revisions.json     # Log of restated historical values
 │       ├── release-calendar.json # Announced/estimated next-release windows
 │       ├── source-manifest.json # Source URLs, cadence, parser metadata
-│       └── data-freshness.json # Latest observation/status per dataset
+│       ├── data-freshness.json # Observation/publication/verification dates and status
+│       └── update-preview.json # Pre-commit changes and review flags
 ├── public/api/                # Static JSON/CSV API (generated)
 │   ├── index.json             # Endpoint index with trust tier + latest period
 │   └── v1/*.json|.csv         # One endpoint per dataset + metadata endpoints

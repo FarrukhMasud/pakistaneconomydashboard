@@ -2,10 +2,12 @@
   "unit": "PKR Billion",
   "basis": "Net collection (after refunds)",
   "dataSource": "FBR official tables/releases, with separately identified secondary provisional reporting where no official numeric release exists",
-  "lastUpdated": "2026-07-09",
+  "lastUpdated": "2026-08-07",
   "lastVerified": "2026-08-07",
   "reviewRequired": true,
-  "reviewReason": "FBR has not yet published a numeric FY2025-26 year-end release or its official month-wise/tax-wise table. The latest official numeric monthly release is January 2026; the Jul-May aggregate is secondary-attributed provisional reporting.",
+  "reviewReason": "FBR's official 1 July release confirms target achievement and Rs599bn of refunds but omits the numeric collection total. The Rs13,003bn FY2025-26 net collection is therefore retained as explicitly attributed provisional reporting until FBR publishes its official month-wise/tax-wise table or year book.",
+  "observationDate": "2026-06-30",
+  "publicationDate": "2026-07-02",
   "sourceUrl": "https://www.fbr.gov.pk",
   "monthly": [
     {
@@ -175,15 +177,16 @@
   ],
   "fytd": {
     "fyLabel": "FY2026",
-    "period": "Jul–May FY2026",
-    "asOf": "2026-05",
-    "net": 11227,
-    "target": 12095,
-    "priorNet": 10233.9,
+    "period": "Jul–Jun FY2026",
+    "asOf": "2026-06",
+    "net": 13003,
+    "target": 12983,
+    "priorNet": 11744.3,
     "provisional": true,
     "sourceType": "secondary-attributed",
-    "sourceLabel": "Business Recorder, citing provisional FBR data",
-    "source": "https://www.brecorder.com/news/40423269"
+    "sourceLabel": "Pakistani financial reporting citing provisional FBR figures",
+    "source": "https://dailytimes.com.pk/1516044/fbr-achieves-fy2025-26-tax-target-with-rs13-6-trillion-collection/",
+    "note": "Reported gross collection was Rs13,601bn and refunds were about Rs598bn, yielding provisional net collection of approximately Rs13,003bn. FBR's official release confirms target achievement and Rs599bn refunds but does not state the collection total."
   },
   "annualTargets": [
     {
@@ -228,11 +231,10 @@
       "fy": "FY2025-26",
       "fyLabel": "FY2026",
       "budgetTarget": 14131,
-      "revisedTarget": 13980,
-      "actual": null,
-      "estimate": 12983,
-      "status": "budget-speech estimate",
-      "note": "The Rs12,983bn figure was stated in the 12 June 2026 budget speech before fiscal year-end. It is retained as an estimate, not presented as FBR's final or provisional year-end actual. FBR's 1 July release claims the annual target was achieved but gives no collection figure.",
+      "revisedTarget": 12983,
+      "actual": 13003,
+      "status": "secondary provisional",
+      "note": "Financial reporting citing provisional FBR figures places FY2025-26 net collection at Rs13,003bn, slightly above the Rs12,983bn revised target. FBR's official 1 July release confirms target achievement and Rs599bn refunds but does not state the numeric collection total.",
       "sources": [
         {
           "label": "ProPakistani — IMF lowers FY26 FBR target to Rs13.98tr",
@@ -245,6 +247,10 @@
         {
           "label": "FBR — 1 July release claims target achieved but states no collection amount",
           "url": "https://www.fbr.gov.pk/pr/finance-minister-visits-fbr-headquarters-comm/174643/2026"
+        },
+        {
+          "label": "Daily Times — provisional FY2025-26 gross and net collection",
+          "url": "https://dailytimes.com.pk/1516044/fbr-achieves-fy2025-26-tax-target-with-rs13-6-trillion-collection/"
         }
       ]
     },
@@ -282,9 +288,16 @@
       "net": 11744.3,
       "provisional": true,
       "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
+    },
+    {
+      "fy": "FY2026",
+      "net": 13003,
+      "provisional": true,
+      "sourceType": "secondary-attributed",
+      "source": "https://dailytimes.com.pk/1516044/fbr-achieves-fy2025-26-tax-target-with-rs13-6-trillion-collection/"
     }
   ],
-  "methodologyNote": "FY2024-25 monthly figures come verbatim from FBR's official month-wise/tax-wise table, which FBR labels provisional subject to reconciliation. For FY2025-26, January 2026 is the latest individual month with a numeric official FBR release; missing months are not estimated or interpolated. The Jul-May aggregate is retained as secondary reporting explicitly attributed to provisional FBR data. The Rs12,983bn budget-speech figure is an estimate made before fiscal year-end and is not presented as an actual. All figures are NET collection in PKR billion unless stated otherwise.",
+  "methodologyNote": "FY2024-25 monthly figures come verbatim from FBR's official month-wise/tax-wise table. For FY2025-26, January 2026 remains the latest individual month with a numeric official FBR release; missing monthly rows are not estimated or interpolated. The full-year Rs13,003bn net aggregate is explicitly marked secondary provisional because FBR's official target-achievement release omits the numeric collection total. All figures are NET collection in PKR billion unless stated otherwise.",
   "verifiedFrom": [
     {
       "label": "FBR — Month-wise/Tax-wise Net Collection FY2024-25 (official table)",
@@ -311,6 +324,10 @@
       "url": "https://www.fbr.gov.pk/pr/finance-minister-visits-fbr-headquarters-comm/174643/2026"
     },
     {
+      "label": "Daily Times — FY2025-26 gross Rs13,601bn and provisional net Rs13,003bn",
+      "url": "https://dailytimes.com.pk/1516044/fbr-achieves-fy2025-26-tax-target-with-rs13-6-trillion-collection/"
+    },
+    {
       "label": "FY2025-26 Jul–May provisional Rs11,227bn vs Rs12,095bn target (shortfall ~Rs868bn)",
       "url": "https://www.brecorder.com/news/40423269"
     },
@@ -322,5 +339,57 @@
       "label": "H1 FY2025-26 (Jul-Dec 2025) Rs6,154bn vs Rs6,490bn target",
       "url": "https://www.brecorder.com/news/40400131"
     }
-  ]
+  ],
+  "releaseDiscovery": {
+    "checkedAt": "2026-08-07",
+    "archiveUrl": "https://www.fbr.gov.pk/pr/2026",
+    "candidates": [
+      {
+        "title": "Finance Minister Visits FBR Headquarters, Commends Historic Revenue Achievement",
+        "url": "https://www.fbr.gov.pk/pr/finance-minister-visits-fbr-headquarters-comm/174643/2026",
+        "numericMentions": [
+          "rs, ",
+          "rs, ",
+          "rs, ",
+          "rs, ",
+          "Rs. 599 billion",
+          "Rs. 13.5 billion",
+          "rs. "
+        ]
+      },
+      {
+        "title": "FBR revenue collection picks up momentum in January 2026",
+        "url": "https://www.fbr.gov.pk/pr/fbr-revenue-collection-picks-up-momentum-in-j/174566/2026",
+        "numericMentions": [
+          "Rs.1015 billion",
+          "Rs.873 billion",
+          "Rs. 7,176 billion",
+          "Rs.6,490 "
+        ]
+      },
+      {
+        "title": "53rd CTP Probationary Officers of IRS Visit Federal Board of Revenue",
+        "url": "https://www.fbr.gov.pk/pr/53rd-ctp-probationary-officers-of-irs-visit-f/174527/2026",
+        "numericMentions": [
+          "rs, ",
+          "rs, "
+        ]
+      },
+      {
+        "title": "MCMC Participants Visit Federal Board of Revenue",
+        "url": "https://www.fbr.gov.pk/pr/mcmc-participants-visit-federal-board-of-reve/174512/2026",
+        "numericMentions": [
+          "rs. "
+        ]
+      },
+      {
+        "title": "Federal Board of Revenue",
+        "url": "http://www.fbr.gov.pk/",
+        "numericMentions": [
+          "rs, ",
+          "rs, "
+        ]
+      }
+    ]
+  }
 }

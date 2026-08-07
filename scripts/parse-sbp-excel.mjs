@@ -46,6 +46,7 @@ import {
   EBOPS_ROW_PATTERNS,
 } from './lib/sbp-resolvers.mjs';
 import { parseServicesHeadline } from './lib/services-headline.mjs';
+import { parseReserveObservations } from './lib/reserves-parser.mjs';
 
 XLSX.set_fs(fs);
 
@@ -1048,117 +1049,13 @@ function parseForexPdf() {
   return parsePdfTextItems(resolve(RAW_DIR, 'forex.pdf'));
 }
 
-const MONTH_NAMES_SHORT = {
-  jan: '01', feb: '02', mar: '03', apr: '04', may: '05', jun: '06',
-  jul: '07', aug: '08', sep: '09', oct: '10', nov: '11', dec: '12',
-};
-
-function parseReservesDate(raw) {
-  if (!raw) return null;
-  let s = raw.replace(/\s*\(?\s*[RP]\s*\)?\s*$/i, '').replace(/^1\/\s*/, '').trim();
-
-  // Annual: "2020-21" → FY2021
-  if (/^\d{4}-\d{2}$/.test(s)) {
-    const fy = parseInt(s.split('-')[1]);
-    const year = fy >= 90 ? 1900 + fy : 2000 + fy;
-    return { type: 'annual', date: `FY${year}` };
-  }
-
-  // Weekly: "6-Mar-26", "13-Mar-26", "27-Mar-26" → DD-Mon-YY
-  const weeklyMatch = s.match(/^(\d{1,2})-(\w{3})-(\d{2})$/);
-  if (weeklyMatch) {
-    const day = String(weeklyMatch[1]).padStart(2, '0');
-    const mm = MONTH_NAMES_SHORT[weeklyMatch[2].toLowerCase()];
-    const yr = parseInt(weeklyMatch[3]);
-    const year = yr >= 90 ? 1900 + yr : 2000 + yr;
-    if (mm) return { type: 'weekly', date: `${year}-${mm}-${day}` };
-  }
-
-  // Monthly: "Feb 25" → month + 2-digit year
-  const monthlyMatch = s.match(/^(\w{3})\s+(\d{2})$/);
-  if (monthlyMatch) {
-    const mm = MONTH_NAMES_SHORT[monthlyMatch[1].toLowerCase()];
-    const yr = parseInt(monthlyMatch[2]);
-    const year = yr >= 90 ? 1900 + yr : 2000 + yr;
-    if (mm) return { type: 'monthly', date: `${year}-${mm}` };
-  }
-
-  return null;
-}
-
 async function updateReserves() {
   console.log('\n🏦 Parsing Reserves Data (forex.pdf)...');
 
   const pdfItems = await parseForexPdf();
   console.log(`  📋 Extracted ${pdfItems.length} text items from PDF`);
 
-  // Group items by page + y-coordinate (rounded to nearest integer)
-  const rowMap = new Map();
-  for (const item of pdfItems) {
-    const key = `${item.page}-${Math.round(item.y)}`;
-    if (!rowMap.has(key)) rowMap.set(key, { page: item.page, y: Math.round(item.y), cells: [] });
-    rowMap.get(key).cells.push({ x: item.x, text: item.text.trim() });
-  }
-
-  // Sort rows by page then y
-  const rows = Array.from(rowMap.values()).sort((a, b) => a.page - b.page || a.y - b.y);
-
-  // Sort cells within each row by x
-  for (const row of rows) {
-    row.cells.sort((a, b) => a.x - b.x);
-  }
-
-  const weekly = [];
-
-  for (const row of rows) {
-    // Filter out whitespace-only and annotation cells like "R", "1/", "Provisonal"
-    const texts = row.cells.map(c => c.text).filter(t => t.trim() && !/^\s*$/.test(t));
-    if (texts.length < 2) continue;
-
-    // Skip header/label rows
-    if (texts.some(t => /END\s+PERIOD|NET\s+RESERVES|TOTAL\s+LIQUID|Million|MONTH-END|Provisonal/i.test(t))) continue;
-
-    // Find the date — it may be preceded by "1/" or followed by "R"
-    let dateStr = null;
-    let dateIdx = 0;
-    for (let i = 0; i < Math.min(3, texts.length); i++) {
-      const candidate = texts[i].replace(/^1\/\s*/, '').replace(/\s*R\s*$/, '').trim();
-      if (candidate === 'R' || candidate === '1/' || candidate === '') continue;
-      const parsed = parseReservesDate(candidate);
-      if (parsed) {
-        dateStr = candidate;
-        dateIdx = i;
-        break;
-      }
-    }
-    if (!dateStr) continue;
-
-    const parsed = parseReservesDate(dateStr);
-    if (!parsed) continue;
-
-    // Extract numeric values from remaining cells
-    const nums = [];
-    for (let i = dateIdx + 1; i < texts.length; i++) {
-      const cleaned = texts[i].replace(/,/g, '').replace(/\s*R\s*$/i, '').replace(/^\s*R\s*$/, '').trim();
-      if (cleaned === '' || cleaned === 'R' || cleaned === '1/') continue;
-      const n = parseFloat(cleaned);
-      if (!isNaN(n) && n > 0) nums.push(n);
-    }
-
-    if (nums.length < 2) continue;
-
-    // Skip annual summary rows — only keep monthly and weekly data
-    if (parsed.type === 'annual') continue;
-
-    const sbp = round2(nums[0]);
-    const banks = round2(nums[1]);
-    const total = nums.length >= 3 ? round2(nums[2]) : round2(sbp + banks);
-
-    weekly.push({ date: parsed.date, sbp, banks, total });
-  }
-
-  // Sort by date
-  weekly.sort((a, b) => a.date.localeCompare(b.date));
+  const weekly = parseReserveObservations(pdfItems);
 
   await writeJson('reserves.json', {
     weekly,
@@ -1919,21 +1816,30 @@ async function generateKpiFromData() {
   // --- IT & Services (from services.json) ---
   try {
     const svc = await readJson('services.json');
-    if (svc.comparison) {
-      const itBn = round2((svc.comparison.current?.itCredit ?? svc.comparison.fy26.itCredit) / 1000);
-      const priorBn = round2((svc.comparison.prior?.itCredit ?? svc.comparison.fy25.itCredit) / 1000);
+    if (svc.itHeadline || svc.comparison) {
+      const current = svc.itHeadline?.fytd
+        ?? svc.comparison.current?.itCredit
+        ?? svc.comparison.fy26.itCredit;
+      const prior = svc.itHeadline?.fytdPrior
+        ?? svc.comparison.prior?.itCredit
+        ?? svc.comparison.fy25.itCredit;
+      const itBn = round2(current / 1000);
+      const priorBn = round2(prior / 1000);
       const changePct = priorBn ? round2(((itBn - priorBn) / priorBn) * 100) : null;
       const trend = changePct == null ? 'stable' : changePct > 0 ? 'up' : 'down';
       indicators.push({
         id: 'it_exports', label: 'IT & Telecom Exports',
         value: itBn, unit: '$B', decimals: 2,
-        period: `${svc.comparison.period} ${svc.comparison.currentLabel || 'FY26'}`,
+        period: svc.itHeadline?.fytdLabel
+          || `${svc.comparison.period} ${svc.comparison.currentLabel || 'FY26'}`,
         change: changePct, changeUnit: '%',
-        changeBasis: `vs ${svc.comparison.period} ${svc.comparison.priorLabel || 'FY25'}`,
+        changeBasis: svc.itHeadline?.fytdPriorLabel
+          ? `vs ${svc.itHeadline.fytdPriorLabel}`
+          : `vs ${svc.comparison.period} ${svc.comparison.priorLabel || 'FY25'}`,
         trend,
         sentiment: directionalSentiment(trend),
         source: 'SBP',
-        provenanceKey: 'services.itTelecom.credit',
+        provenanceKey: svc.itHeadline ? 'services.itHeadline.fytd' : 'services.itTelecom.credit',
       });
     }
   } catch (err) {
@@ -2130,10 +2036,14 @@ async function recordKpiProvenance(indicators) {
     });
   }
   if (byId.it_exports) {
-    await cite('services.itTelecom.credit', {
+    const servicesJson = await readJson('services.json');
+    const headline = servicesJson.itHeadline;
+    await cite(byId.it_exports.provenanceKey, {
       label: 'Telecommunications, computer and information services exports (credit)',
-      sourceKey: 'dt.xls',
-      location: 'EBOPS line 9 "Telecommunications, Computer and information services", credit column',
+      sourceKey: headline ? 'ExportsImports-Goods.pdf' : 'dt.xls',
+      location: headline
+        ? 'IT & Telecommunication Services, current fiscal-year cumulative column'
+        : 'EBOPS line 9 "Telecommunications, Computer and information services", credit column',
       period: byId.it_exports.period,
       status: 'provisional',
       unit: 'US$ billion',

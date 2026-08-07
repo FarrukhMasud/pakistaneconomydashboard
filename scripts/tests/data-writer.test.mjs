@@ -42,6 +42,16 @@ test('collectRevisions matches observations by date, not by array position', () 
   ]);
 });
 
+test('collectRevisions treats a KPI period advance as a new observation', () => {
+  const before = {
+    indicators: [{ id: 'fbr-tax', period: 'Jul–May FY2026', value: 11.23 }],
+  };
+  const after = {
+    indicators: [{ id: 'fbr-tax', period: 'Jul–Jun FY2026', value: 13 }],
+  };
+  assert.deepEqual(collectRevisions(before, after), []);
+});
+
 test('collectRevisions ignores floating-point noise', () => {
   const before = { x: 100 };
   const after = { x: 100.00001 };

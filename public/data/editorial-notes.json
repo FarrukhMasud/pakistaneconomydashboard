@@ -42,7 +42,7 @@
     "reserves.recovery": {
       "text": "Across the published window, total liquid reserves were lowest at $18.90bn at end-September 2025 and stood at $22.47bn at the week ending 2026-07-31, of which $17.04bn is held by the SBP.",
       "basis": "derived",
-      "derivation": "Minimum and latest total (SBP plus commercial banks) across the 17 published observations from end-June 2025.",
+      "derivation": "Minimum and latest total (SBP plus commercial banks) across the 18 published observations from end-June 2025.",
       "sources": [
         {
           "id": "sbp-forex-reserves",

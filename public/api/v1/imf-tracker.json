@@ -5,8 +5,14 @@
   "sourceUrl": "https://www.imf.org/en/Countries/PAK",
   "sourceType": "official-primary",
   "cadence": "Event-driven",
-  "latestObservation": "2026-08-07",
-  "lastUpdated": null,
+  "latestObservation": "2026-05-08",
+  "dates": {
+    "observation": "2026-05-08",
+    "publication": "2026-05-08",
+    "verification": "2026-08-07",
+    "dashboardUpdated": "2026-08-07"
+  },
+  "lastUpdated": "2026-08-07",
   "lastChecked": null,
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",
   "data": {
@@ -140,7 +146,10 @@
       "Establish Pakistan Regulatory Registry by Jun 2027"
     ],
     "sourceUrl": "https://www.imf.org/en/Countries/PAK",
+    "observationDate": "2026-05-08",
+    "publicationDate": "2026-05-08",
     "lastVerified": "2026-08-07",
+    "lastUpdated": "2026-08-07",
     "verifiedFrom": [
       "https://www.imf.org/en/News/Articles/2024/09/25/pr24362-imf-exec-board-approves-us7b-37-month-eff-for-pakistan",
       "https://www.imf.org/en/news/articles/2025/12/08/pr-25411-pakistan-imf-completes-2nd-rev-of-ext-arrange-eff-and-1st-rev-of-arrange-rsf",

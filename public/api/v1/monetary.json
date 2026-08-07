@@ -6,6 +6,12 @@
   "sourceType": "official-primary",
   "cadence": "Weekly/Monthly",
   "latestObservation": "2026-07",
+  "dates": {
+    "observation": "2026-07",
+    "publication": null,
+    "verification": "2026-08-04",
+    "dashboardUpdated": "2026-08-04"
+  },
   "lastUpdated": "2026-08-04",
   "lastChecked": "2026-08-04",
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",

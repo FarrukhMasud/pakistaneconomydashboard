@@ -1,0 +1,84 @@
+{
+  "generatedAt": "2026-08-07T19:45:02.755Z",
+  "comparisonBase": "541ebebd3e3f5cb3199aea2e3a9f61bc07ef5fcb",
+  "description": "Pre-commit comparison of working-tree dashboard data against HEAD.",
+  "summary": {
+    "newObservations": 2,
+    "majorMovements": 2,
+    "newRevisions": 0,
+    "sourceChanges": 2,
+    "suspiciousDateJumps": 1,
+    "reviewRequired": 1,
+    "overdueReleases": 0
+  },
+  "newObservations": [
+    {
+      "dataset": "fbr-tax",
+      "label": "FBR Tax Collection",
+      "from": "2026-05",
+      "to": "2026-06",
+      "cadence": "Monthly (provisional)"
+    },
+    {
+      "dataset": "external-debt",
+      "label": "External Debt Repayment Tracker",
+      "from": "End-Jun 2026",
+      "to": "2026-03-31",
+      "cadence": "Event-driven"
+    }
+  ],
+  "majorMovements": [
+    {
+      "id": "fbr-tax",
+      "label": "FBR Tax Collection (FYTD)",
+      "from": 11.23,
+      "to": 13,
+      "unit": "T PKR",
+      "period": "Jul–Jun FY2026",
+      "percent": 15.8
+    },
+    {
+      "id": "it_exports",
+      "label": "IT & Telecom Exports",
+      "from": 4.18,
+      "to": 4.6,
+      "unit": "$B",
+      "period": "Jul-Jun FY26",
+      "percent": 10
+    }
+  ],
+  "newRevisions": [],
+  "sourceChanges": [
+    {
+      "dataset": "monetary-policy",
+      "label": "SBP Policy Rate Tracker",
+      "from": "https://www.sbp.org.pk/m_policy/index.asp",
+      "to": "https://www.sbp.org.pk/our-operations/monetary-policy"
+    },
+    {
+      "dataset": "external-debt",
+      "label": "External Debt Repayment Tracker",
+      "from": "https://www.imf.org/en/Countries/PAK",
+      "to": "https://www.sbp.org.pk/assets/document/pakdebt.pdf"
+    }
+  ],
+  "suspiciousDateJumps": [
+    {
+      "dataset": "external-debt",
+      "label": "External Debt Repayment Tracker",
+      "type": "backward",
+      "from": "End-Jun 2026",
+      "to": "2026-03-31"
+    }
+  ],
+  "reviewRequired": [
+    {
+      "dataset": "fbr-tax",
+      "label": "FBR Tax Collection",
+      "status": "needs-review",
+      "reason": "FBR's official 1 July release confirms target achievement and Rs599bn of refunds but omits the numeric collection total. The Rs13,003bn FY2025-26 net collection is therefore retained as explicitly attributed provisional reporting until FBR publishes its official month-wise/tax-wise table or year book.",
+      "observationDate": "2026-06"
+    }
+  ],
+  "overdueReleases": []
+}

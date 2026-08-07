@@ -50,8 +50,10 @@ export default function DataFreshnessPanel() {
             </div>
             <div className="freshness-item__meta">
               <SourceBadge sourceType={item.sourceType} compact />
-              <span>{t('common.latest')}: {item.latestObservation || 'N/A'}</span>
-              <span>{t('common.updated')}: {item.dashboardUpdated || 'N/A'}</span>
+              <span>{tx('Observation:')} {item.observationDate || item.latestObservation || 'N/A'}</span>
+              <span>{tx('Published:')} {item.publicationDate || tx('Not stated by source')}</span>
+              <span>{tx('Verified:')} {item.verificationDate || 'N/A'}</span>
+              <span>{tx('Dashboard changed:')} {item.dashboardUpdated || 'N/A'}</span>
               {item.sourceFile && <span>{tx('Source file:')} {item.sourceFile}</span>}
               {item.apiSeries?.length > 0 && <span>{tx('API series:')} {item.apiSeries.length}</span>}
               <span>{item.sourceLabel || item.source}</span>

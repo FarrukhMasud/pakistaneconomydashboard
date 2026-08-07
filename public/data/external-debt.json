@@ -13,12 +13,13 @@
     "note": "Pakistan owes about $25.9bn in external debt servicing in FY2025-26. Roughly $16bn is expected to be rolled over by friendly creditors (China, Saudi Arabia, UAE, Qatar, Kuwait), leaving about $10bn of hard cash outflow (~$6bn interest + ~$4bn principal). Around $9bn of the servicing sits on the SBP's books."
   },
   "stock": {
-    "totalExternalDebtAndLiabilities": 136,
-    "asOf": "End-Jun 2026",
+    "totalExternalDebtAndLiabilities": 137.558,
+    "asOf": "2026-03-31",
+    "publicationDate": "2026-05-12",
     "imfOutstanding": 9.3,
     "imfOutstandingSDR": 7.1,
     "imfAsOf": "2026-03-31",
-    "note": "Total external debt and liabilities reached about $136bn at end-June 2026. Outstanding credit to the IMF was SDR 7.1bn (~$9.3bn) at end-March 2026."
+    "note": "SBP reports total external debt and liabilities of $137.558bn at end-March 2026. The $136.027bn figure in the preceding column is for end-June 2025, not June 2026. Outstanding credit to the IMF was SDR 7.1bn (~$9.3bn) at end-March 2026."
   },
   "repaymentSplit": [
     { "label": "Expected rollovers", "value": 16, "color": "#a78bfa", "note": "Re-financed / rolled over with creditors' consent." },
@@ -39,8 +40,11 @@
     "note": "SBP projected $21.5bn of FY2026-27 external debt servicing: $18bn principal and $3.5bn interest. Around $10–11bn of principal is expected to be rolled over or refinanced."
   },
   "riskNote": "Pakistan's external position depends heavily on rollovers of bilateral deposits and loans. Any failure to secure rollovers would sharply increase the hard-cash repayment burden and pressure reserves.",
-  "sourceUrl": "https://www.imf.org/en/Countries/PAK",
+  "observationDate": "2026-03-31",
+  "publicationDate": "2026-05-12",
+  "sourceUrl": "https://www.sbp.org.pk/assets/document/pakdebt.pdf",
   "lastVerified": "2026-08-07",
+  "lastUpdated": "2026-08-07",
   "verifiedFrom": [
     "https://www.sbp.org.pk/assets/document/pakdebt.pdf",
     "https://www.brecorder.com/news/40432030",
@@ -50,5 +54,5 @@
     "https://nukta.com/pakistan-external-debt-obligations-in-fy26",
     "https://bloompakistan.com/pakistan-external-debt-2026-repayment-risk/"
   ],
-  "methodologyNote": "External debt servicing figures are gross obligations for the fiscal year, compiled from SBP briefings and Pakistani financial media. The rollover vs hard-cash split is an estimate disclosed to analysts (with the IMF present) and is subject to change as rollovers are secured."
+  "methodologyNote": "The external-debt stock is taken directly from SBP's Pakistan Debt and Liabilities table. Fiscal-year servicing and rollover figures are gross obligations compiled from SBP briefings and attributed Pakistani financial reporting; the rollover vs hard-cash split remains an estimate subject to change."
 }

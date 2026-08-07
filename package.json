@@ -20,8 +20,9 @@
     "verify:live": "node scripts/verify-live.mjs",
     "generate:freshness": "node scripts/generate-data-freshness.mjs",
     "generate:notes": "node scripts/generate-editorial-notes.mjs",
-        "generate:api": "node scripts/generate-api.mjs",
-        "generate:rss": "node scripts/generate-rss.mjs"
+    "generate:preview": "node scripts/generate-update-preview.mjs",
+    "generate:api": "node scripts/generate-api.mjs",
+    "generate:rss": "node scripts/generate-rss.mjs"
   },
   "dependencies": {
     "chart.js": "^4.5.1",

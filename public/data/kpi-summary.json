@@ -62,17 +62,17 @@
     {
       "id": "it_exports",
       "label": "IT & Telecom Exports",
-      "value": 4.18,
+      "value": 4.6,
       "unit": "$B",
       "decimals": 2,
-      "period": "Jul-May FY26",
-      "change": 20.11,
+      "period": "Jul-Jun FY26",
+      "change": 20.73,
       "changeUnit": "%",
-      "changeBasis": "vs Jul-May FY25",
+      "changeBasis": "vs Jul-Jun FY25",
       "trend": "up",
       "sentiment": "positive",
       "source": "SBP",
-      "provenanceKey": "services.itTelecom.credit"
+      "provenanceKey": "services.itHeadline.fytd"
     },
     {
       "id": "gdp-growth",
@@ -106,18 +106,18 @@
     {
       "id": "fbr-tax",
       "label": "FBR Tax Collection (FYTD)",
-      "value": 11.23,
+      "value": 13,
       "unit": "T PKR",
-      "period": "Jul–May FY2026",
-      "change": 9.7,
+      "period": "Jul–Jun FY2026",
+      "change": 10.72,
       "changeUnit": "%",
       "changeBasis": "vs same period last year",
       "trend": "up",
-      "sentiment": "negative",
-      "source": "Business Recorder, citing provisional FBR data",
+      "sentiment": "positive",
+      "source": "Pakistani financial reporting citing provisional FBR figures",
       "sourceType": "secondary-attributed",
       "provenanceKey": "fbr.fytd.net",
-      "sub": "Target ₨12.10T · shortfall ₨868B"
+      "sub": "Target ₨12.98T · surplus ₨20B"
     },
     {
       "id": "policy-rate",

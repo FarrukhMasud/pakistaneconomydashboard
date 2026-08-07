@@ -42,6 +42,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = resolve(__dirname, '..', 'public', 'data');
 const RAW_DIR = resolve(__dirname, 'sbp-raw');
 const FBR_FILE = resolve(DATA_DIR, 'fbr-tax.json');
+const FBR_RELEASE_ARCHIVE = 'https://www.fbr.gov.pk/pr/2026';
 
 // Official FBR month-wise / tax-wise net-collection PDFs, one per fiscal year.
 // fyStartYear = the calendar year the FY starts in (FY2024-25 starts in 2024).
@@ -81,6 +82,53 @@ async function downloadPdf(url, file) {
   await mkdir(RAW_DIR, { recursive: true });
   await writeFile(dest, buf);
   return dest;
+}
+
+function stripHtml(value) {
+  return String(value || '')
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&#39;|&apos;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+async function discoverOfficialReleases() {
+  const response = await fetch(FBR_RELEASE_ARCHIVE, {
+    signal: AbortSignal.timeout(30000),
+    headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' },
+  });
+  if (!response.ok) throw new Error(`release archive HTTP ${response.status}`);
+  const html = await response.text();
+  const candidates = [];
+  for (const match of html.matchAll(/href="([^"]+)"[^>]*>([^<]{1,240})</gi)) {
+    const title = stripHtml(match[2]);
+    if (!/revenue|collection|target achievement|tax collection/i.test(title)) continue;
+    const url = new URL(match[1], FBR_RELEASE_ARCHIVE).toString();
+    if (candidates.some((candidate) => candidate.url === url)) continue;
+    candidates.push({ title, url });
+  }
+
+  const releases = [];
+  for (const candidate of candidates.slice(0, 8)) {
+    try {
+      const releaseResponse = await fetch(candidate.url, {
+        signal: AbortSignal.timeout(15000),
+        headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' },
+      });
+      const text = stripHtml(await releaseResponse.text());
+      const numericMentions = [...text.matchAll(/(?:Rs\.?|PKR)\s*([\d,.]+)\s*(billion|trillion|bn|tn)?/gi)]
+        .slice(0, 8)
+        .map((match) => match[0]);
+      releases.push({ ...candidate, numericMentions });
+    } catch {
+      releases.push({ ...candidate, numericMentions: [] });
+    }
+  }
+  return releases;
 }
 
 // Parse the PDF into ordered text lines: [{ text, nums:[...] }, ...]
@@ -170,6 +218,17 @@ async function main() {
   });
   let updated = 0;
   const today = new Date().toISOString().split('T')[0];
+
+  try {
+    fbr.releaseDiscovery = {
+      checkedAt: today,
+      archiveUrl: FBR_RELEASE_ARCHIVE,
+      candidates: await discoverOfficialReleases(),
+    };
+    console.log(`  🔎 Checked ${fbr.releaseDiscovery.candidates.length} relevant official FBR release(s)`);
+  } catch (err) {
+    console.log(`  ⚠️  Official release discovery failed: ${err.message}`);
+  }
 
   for (const source of FBR_MONTHWISE_SOURCES) {
     try {

@@ -2,11 +2,17 @@
   "id": "monetary-policy",
   "label": "SBP Policy Rate Tracker",
   "source": "State Bank of Pakistan — Monetary Policy Committee",
-  "sourceUrl": "https://www.sbp.org.pk/m_policy/index.asp",
+  "sourceUrl": "https://www.sbp.org.pk/our-operations/monetary-policy",
   "sourceType": "official-primary",
   "cadence": "Event-driven",
   "latestObservation": "2026-07-27",
-  "lastUpdated": null,
+  "dates": {
+    "observation": "2026-07-27",
+    "publication": "2026-07-27",
+    "verification": "2026-08-07",
+    "dashboardUpdated": "2026-08-07"
+  },
+  "lastUpdated": "2026-08-07",
   "lastChecked": null,
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",
   "data": {
@@ -20,10 +26,40 @@
       "note": "Held at 11.5%. The MPC noted that headline and core inflation moderated in June but remained elevated, while the external outlook and FX reserves improved."
     },
     "nextMeeting": {
-      "date": "2026-10-26",
-      "dateText": "26 October 2026",
+      "date": "2026-09-14",
+      "dateText": "14 September 2026",
       "note": "Scheduled in SBP's advance MPC calendar for FY2026-27."
     },
+    "calendar": [
+      {
+        "date": "2026-09-14",
+        "status": "scheduled"
+      },
+      {
+        "date": "2026-10-26",
+        "status": "scheduled"
+      },
+      {
+        "date": "2026-12-14",
+        "status": "scheduled"
+      },
+      {
+        "date": "2027-01-25",
+        "status": "scheduled"
+      },
+      {
+        "date": "2027-03-08",
+        "status": "scheduled"
+      },
+      {
+        "date": "2027-04-26",
+        "status": "scheduled"
+      },
+      {
+        "date": "2027-06-14",
+        "status": "scheduled"
+      }
+    ],
     "context": {
       "inflationYoY": 9.2,
       "inflationPeriod": "July 2026",
@@ -152,8 +188,12 @@
         "note": "SBP maintained the policy rate as inflation moderated and the external outlook improved."
       }
     ],
-    "sourceUrl": "https://www.sbp.org.pk/m_policy/index.asp",
+    "observationDate": "2026-07-27",
+    "publicationDate": "2026-07-27",
+    "calendarPublicationDate": "2026-06-23",
+    "sourceUrl": "https://www.sbp.org.pk/our-operations/monetary-policy",
     "lastVerified": "2026-08-07",
+    "lastUpdated": "2026-08-07",
     "verifiedFrom": [
       "https://www.sbp.org.pk/assets/document/publications/MPS-July-2026-Eng.pdf",
       "https://www.sbp.org.pk/assets/documents/press-release/Pr-23-Jun-2026-1.pdf",
