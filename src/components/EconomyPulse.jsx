@@ -5,6 +5,7 @@ import { COLORS } from '../utils/chartConfig';
 import MiniSparkline from './ui/MiniSparkline';
 import AnimatedNumber from './ui/AnimatedNumber';
 import { formatMonthYear, formatDayMonthYear, isFiniteNumber } from '../utils/periodHelpers';
+import { formatKpiUnit, getKpiDecimals } from '../utils/kpiFormat';
 
 const PULSE = [
   { id: 'reserves', label: 'Reserves', groupId: 'external', sectionId: 'reserves', sparkKey: 'reserves' },
@@ -36,6 +37,13 @@ function sentimentColor(sentiment) {
 function takeTail(series, n = 12) {
   if (!Array.isArray(series)) return [];
   return series.slice(-n);
+}
+
+function formatDelta(value, unit) {
+  if (!Number.isFinite(value)) return '—';
+  const sign = value > 0 ? '+' : '';
+  if (unit === '%' || unit === 'pp') return `${sign}${value}${unit}`;
+  return `${sign}${value}${unit ? ` ${formatKpiUnit(unit)}` : ''}`;
 }
 
 /**
@@ -92,8 +100,8 @@ export default function EconomyPulse({ onNavigate }) {
       return {
         ...spec,
         value: row.value,
-        decimals: Number.isFinite(row.decimals) ? row.decimals : 1,
-        unit: row.unit || '',
+        decimals: getKpiDecimals(row),
+        unit: formatKpiUnit(row.unit),
         period: formatPeriod(row.period),
         change: row.change,
         changeUnit: row.changeUnit,
@@ -121,9 +129,7 @@ export default function EconomyPulse({ onNavigate }) {
       <div className="economy-pulse__chips stagger-children">
         {chips.map((chip) => {
           const color = sentimentColor(chip.sentiment);
-          const delta = Number.isFinite(chip.change)
-            ? `${chip.change > 0 ? '+' : ''}${chip.change}${chip.changeUnit || ''}`
-            : '—';
+          const delta = formatDelta(chip.change, chip.changeUnit);
           return (
             <button
               key={chip.id}
@@ -136,7 +142,8 @@ export default function EconomyPulse({ onNavigate }) {
               </div>
               <span className="pulse-chip__value" style={{ color }}>
                 <AnimatedNumber value={chip.value} decimals={chip.decimals} />
-                <span style={{ fontSize: '0.72em', marginLeft: 2 }}>{chip.unit}</span>
+                {' '}
+                <span className="pulse-chip__unit">{chip.unit}</span>
               </span>
               <span className={`pulse-chip__delta ${sentimentClass(chip.sentiment)}`}>
                 {delta}

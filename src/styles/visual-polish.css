@@ -316,7 +316,7 @@ body::before {
   body { background-attachment: scroll; }
 }
 @media (max-width: 720px) {
-  .app-chrome { position: static; }
+  .app-chrome { position: sticky; }
   .app-chrome .sub-nav {
     position: sticky;
     top: 0;
@@ -325,17 +325,24 @@ body::before {
     backdrop-filter: blur(18px);
   }
   .chrome-bar {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+    display: flex;
+    justify-content: space-between;
     padding: 0.4rem 0.75rem;
   }
   .chrome-actions {
-    grid-column: 1 / -1;
     flex-wrap: nowrap;
     justify-content: flex-end;
   }
   .header-feedback-link,
+  .density-toggle,
   .chrome-brand__sub { display: none; }
+  .chrome-brand__text { display: none; }
+  .chrome-brand { flex: 0 0 auto; }
+  .lang-toggle { margin-inline: 0; }
+  .what-moved__grid {
+    grid-template-columns: none;
+    grid-auto-columns: minmax(150px, 82%);
+  }
   .density-toggle-btn__label { display: none; }
   .density-toggle-btn__short { display: inline; }
 }

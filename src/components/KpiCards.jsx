@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useData } from '../hooks/useData';
 import { useWatchlist } from '../hooks/useWatchlist';
 import { COLORS } from '../utils/chartConfig';
@@ -10,11 +11,56 @@ import WhatMovedStrip from './WhatMovedStrip';
 import LatestChangesPanel from './LatestChangesPanel';
 import WatchlistPanel from './WatchlistPanel';
 import EconomyPulse from './EconomyPulse';
+import SourceBadge from './SourceBadge';
 import ExpandableTile from './ui/ExpandableTile';
 import AnimatedNumber from './ui/AnimatedNumber';
 import { LoadingCard, ErrorCard } from './ui/DataState';
 import useI18n from '../i18n/useI18n';
-import { formatKpiNumber, formatKpiPeriod, formatKpiUnit, isProvisionalPeriod } from '../utils/kpiFormat';
+import {
+  formatKpiNumber,
+  formatKpiPeriod,
+  formatKpiUnit,
+  getKpiDecimals,
+  isProvisionalPeriod,
+} from '../utils/kpiFormat';
+
+const KPI_DATASETS = {
+  reserves: 'reserves',
+  'exchange-rate': 'exchange-rates',
+  remittances: 'remittances',
+  fdi: 'fdi',
+  it_exports: 'services',
+  'gdp-growth': 'fiscal',
+  inflation: 'inflation',
+  'fbr-tax': 'fbr-tax',
+  'policy-rate': 'monetary-policy',
+};
+
+function useOverviewLayout() {
+  const [layout, setLayout] = useState(() => {
+    const mobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 720px)').matches;
+    return { mobile, detailsOpen: !mobile };
+  });
+
+  useEffect(() => {
+    const query = window.matchMedia('(max-width: 720px)');
+    const update = (event) => {
+      setLayout({ mobile: event.matches, detailsOpen: !event.matches });
+    };
+    if (query.addEventListener) query.addEventListener('change', update);
+    else query.addListener(update);
+    return () => {
+      if (query.removeEventListener) query.removeEventListener('change', update);
+      else query.removeListener(update);
+    };
+  }, []);
+
+  const setDetailsOpen = (detailsOpen) => {
+    setLayout((current) => ({ ...current, detailsOpen }));
+  };
+
+  return { ...layout, setDetailsOpen };
+}
 
 function sentimentColor(sentiment) {
   if (sentiment === 'positive') return COLORS.teal;
@@ -46,6 +92,9 @@ export default function KpiCards() {
   const { t, tx } = useI18n();
   const { data, loading, error, retry } = useData('kpi-summary.json');
   const { isPinned, toggle } = useWatchlist();
+  const { mobile: isMobile, detailsOpen, setDetailsOpen } = useOverviewLayout();
+  const [showAllIndicators, setShowAllIndicators] = useState(false);
+
   // navigate only — NAV_GROUPS not needed here; use window history via custom helper
   const navigate = (groupId, sectionId) => {
     const path = `/${groupId}/${sectionId}`;
@@ -57,6 +106,7 @@ export default function KpiCards() {
   if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load economic overview" />;
 
   const { lastUpdated, indicators } = data;
+  const visibleIndicators = isMobile && !showAllIndicators ? indicators.slice(0, 6) : indicators;
 
   return (
     <section className="fade-in">
@@ -73,10 +123,8 @@ export default function KpiCards() {
       </p>
       <EconomyPulse onNavigate={navigate} />
       <WhatMovedStrip onNavigate={navigate} />
-      <LatestChangesPanel />
-      <WatchlistPanel onNavigate={navigate} />
       <div className="kpi-grid stagger-children">
-        {indicators.map((kpi) => {
+        {visibleIndicators.map((kpi) => {
           const sentiment = kpi.sentiment || 'neutral';
           const color = sentimentColor(sentiment);
           const changeLabel = formatChange(kpi);
@@ -127,7 +175,14 @@ export default function KpiCards() {
               )}
             >
               <div className="kpi-label-row">
-                <div className="kpi-label">{kpi.label}</div>
+                <div className="kpi-label-meta">
+                  <div className="kpi-label">{kpi.label}</div>
+                  <SourceBadge
+                    datasetId={KPI_DATASETS[kpi.id]}
+                    sourceType={kpi.sourceType}
+                    compact
+                  />
+                </div>
                 <button
                   type="button"
                   className={`kpi-pin ${pinned ? 'is-pinned' : ''}`}
@@ -146,9 +201,10 @@ export default function KpiCards() {
                 {Number.isFinite(kpi.value) ? (
                   <AnimatedNumber
                     value={kpi.value}
-                    decimals={Number.isFinite(kpi.decimals) ? kpi.decimals : 0}
+                    decimals={getKpiDecimals(kpi)}
                   />
                 ) : formatKpiNumber(kpi)}
+                {' '}
                 <span className="kpi-unit">{formatKpiUnit(kpi.unit)}</span>
               </div>
               <div className="kpi-period">
@@ -170,9 +226,40 @@ export default function KpiCards() {
           );
         })}
       </div>
-      <SnapshotPanel />
-      <ReleaseCalendarSection compact />
-      <DataFreshnessPanel />
+      {isMobile && indicators.length > 6 && (
+        <button
+          type="button"
+          className="overview-more-kpis"
+          onClick={() => setShowAllIndicators((value) => !value)}
+          aria-expanded={showAllIndicators}
+        >
+          {showAllIndicators
+            ? t('overview.showFewer', 'Show fewer indicators')
+            : t('overview.showMore', 'Show {count} more indicators')
+              .replace('{count}', String(indicators.length - 6))}
+        </button>
+      )}
+      <details
+        className="overview-details"
+        open={detailsOpen}
+        onToggle={(event) => {
+          if (event.currentTarget.open !== detailsOpen) {
+            setDetailsOpen(event.currentTarget.open);
+          }
+        }}
+      >
+        <summary>
+          <span>{t('overview.details', 'More context, releases and source details')}</span>
+          <small>{t('overview.detailsHint', 'Watchlist, changes, calendar and audit')}</small>
+        </summary>
+        <div className="overview-details__body">
+          <LatestChangesPanel />
+          <WatchlistPanel onNavigate={navigate} />
+          <SnapshotPanel />
+          <ReleaseCalendarSection compact />
+          <DataFreshnessPanel />
+        </div>
+      </details>
     </section>
   );
 }

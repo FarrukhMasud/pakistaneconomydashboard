@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-07T19:45:02.975Z",
+  "generatedAt": "2026-08-12T17:48:51.098Z",
   "version": "v1",
   "title": "economyofpakistan.com static data API",
   "description": "Every dataset the dashboard renders, published as stable JSON and CSV. No key, no rate limit, no scraping required. Please cite the issuing institution listed on each endpoint.",
@@ -306,7 +306,7 @@
       "dates": {
         "observation": "2026-07-31",
         "publication": null,
-        "verification": "2026-08-07",
+        "verification": "2026-08-12",
         "dashboardUpdated": "2026-08-07"
       }
     },

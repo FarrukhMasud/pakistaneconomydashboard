@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useMemo } from 'react';
+import { Suspense, lazy, useEffect, useMemo, useState } from 'react';
 import { Chart as ChartJS } from 'chart.js';
 import './App.css';
 import './utils/chartConfig';
@@ -18,6 +18,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 import ConsentBanner from './components/ConsentBanner';
 import UpdateToast from './components/UpdateToast';
 import NotFoundSection from './components/NotFoundSection';
+import { isCoachPending, isConsentPending } from './utils/startupState';
 
 const TradeSection = lazy(() => import('./components/TradeSection'));
 const ReservesSection = lazy(() => import('./components/ReservesSection'));
@@ -138,6 +139,8 @@ function App() {
   const { theme, setTheme } = useTheme();
   const { density } = useDensity();
   const { t, tx, lang } = useI18n();
+  const [consentPending, setConsentPending] = useState(isConsentPending);
+  const [coachPending, setCoachPending] = useState(isCoachPending);
 
   const groupLabel = (group) => t(`nav.group.${group.id}`, group.label);
   const groupBlurb = (group) => t(`nav.group.${group.id}.blurb`, group.blurb);
@@ -152,7 +155,7 @@ function App() {
     [activeGroup, activeSectionId],
   );
   const ActiveSection = routeKnown ? activeSection.component : NotFoundSection;
-    const showSubNav = routeKnown && activeGroup.sections.length > 1;
+  const showSubNav = routeKnown && activeGroup.sections.length > 1;
 
   // Announce section changes to screen readers: hash routing swaps the whole
   // <main> without a page load, which is otherwise silent for assistive tech.
@@ -243,6 +246,24 @@ function App() {
           ))}
         </nav>
 
+        <label className="mobile-group-nav">
+          <span className="sr-only">{t('app.primaryNav')}</span>
+          <select
+            value={activeGroupId}
+            aria-label={t('app.primaryNav')}
+            onChange={(event) => {
+              const group = NAV_GROUPS.find((item) => item.id === event.target.value);
+              if (group) navigate(group.id, group.sections[0].id);
+            }}
+          >
+            {NAV_GROUPS.map((group) => (
+              <option key={group.id} value={group.id}>
+                {group.icon} {groupLabel(group)}
+              </option>
+            ))}
+          </select>
+        </label>
+
         {showSubNav && (
           <nav className="sub-nav" aria-label={groupLabel(activeGroup)}>
             {activeGroup.sections.map((section) => (
@@ -263,18 +284,6 @@ function App() {
           </nav>
         )}
       </div>
-
-      {routeKnown && activeGroupId === 'overview' && activeSectionId === 'overview' && (
-        <header className="app-header">
-          <div className="flag-accent" />
-          <div className="header-crescent-watermark" aria-hidden="true" />
-          <div className="header-content">
-            <div className="header-emblem">☪</div>
-            <h1>{t('app.title')} <span className="highlight">{t('app.titleHighlight')}</span></h1>
-            <p className="subtitle">{t('app.subtitle')}</p>
-          </div>
-        </header>
-      )}
 
       <main className="dashboard-content" id="main-content" tabIndex={-1}>
         <p className="sr-only" role="status" aria-live="polite">{routeAnnouncement}</p>
@@ -316,9 +325,9 @@ function App() {
         </div>
       </main>
 
-      <UpdateToast />
-      <ConsentBanner />
-      <CoachMarks />
+      <UpdateToast blocked={consentPending || coachPending} />
+      <ConsentBanner onResolved={() => setConsentPending(false)} />
+      <CoachMarks enabled={!consentPending} onFinished={() => setCoachPending(false)} />
 
       <footer className="app-footer">
         <p>{t('app.footer')}</p>

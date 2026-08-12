@@ -1960,7 +1960,9 @@ async function generateKpiFromData() {
       sentiment: 'neutral',
       source: 'SBP Monetary Policy Committee',
       provenanceKey: 'monetaryPolicy.currentRate',
-      sub: mp.nextMeeting ? `Next MPC: ${mp.nextMeeting}` : undefined,
+      sub: mp.nextMeeting
+        ? `Next MPC: ${mp.nextMeeting.dateText || mp.nextMeeting.date || 'date to be announced'}`
+        : undefined,
     });
   } catch (err) {
     throw new Error(`Could not generate policy-rate KPI: ${err.message}`, { cause: err });

@@ -99,6 +99,11 @@ const ur = {
     'common.partialFailure': 'کچھ ڈیٹا سیٹ لوڈ نہیں ہو سکے',
     'common.sectionError': 'اس حصے میں کچھ غلط ہو گیا',
 
+  'overview.showFewer': 'کم اشارے دکھائیں',
+  'overview.showMore': 'مزید {count} اشارے دکھائیں',
+  'overview.details': 'مزید سیاق، اشاعتیں اور ماخذ کی تفصیل',
+  'overview.detailsHint': 'واچ لسٹ، تبدیلیاں، کیلنڈر اور آڈٹ',
+
     'consent.title': 'تجزیاتی کوکیز',
     'consent.body': 'ہم ڈیش بورڈ بہتر بنانے کے لیے اختیاری گمنام تجزیات (Microsoft Clarity) استعمال کرتے ہیں۔ کوئی اشتہار نہیں۔ قبول یا مسترد کا انتخاب کریں۔',
     'consent.accept': 'تجزیات قبول کریں',

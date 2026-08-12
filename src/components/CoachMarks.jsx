@@ -1,11 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import useI18n from '../i18n/useI18n';
-
-const STORAGE_KEY = 'pak-eco-coach-v1';
+import { COACH_STORAGE_KEY } from '../utils/startupState';
 
 function readDone() {
   try {
-    return localStorage.getItem(STORAGE_KEY) === '1';
+    return localStorage.getItem(COACH_STORAGE_KEY) === '1';
   } catch {
     return true;
   }
@@ -14,7 +13,7 @@ function readDone() {
 /**
  * Lightweight first-visit coach marks for search, density, and pins.
  */
-export default function CoachMarks() {
+export default function CoachMarks({ enabled = true, onFinished }) {
   const { t } = useI18n();
   const steps = useMemo(() => [
     {
@@ -38,18 +37,19 @@ export default function CoachMarks() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    if (readDone()) return undefined;
+    if (!enabled || readDone()) return undefined;
     const id = window.setTimeout(() => setOpen(true), 900);
     return () => window.clearTimeout(id);
-  }, []);
+  }, [enabled]);
 
   const finish = () => {
     try {
-      localStorage.setItem(STORAGE_KEY, '1');
+      localStorage.setItem(COACH_STORAGE_KEY, '1');
     } catch {
       /* ignore */
     }
     setOpen(false);
+    onFinished?.();
   };
 
   if (!open) return null;

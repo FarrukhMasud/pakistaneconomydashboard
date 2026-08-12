@@ -1,8 +1,14 @@
+export function getKpiDecimals(kpi) {
+  if (!Number.isFinite(kpi?.value)) return 0;
+  if (Number.isFinite(kpi.decimals)) return kpi.decimals;
+  if (Number.isInteger(kpi.value)) return 0;
+  const fraction = String(kpi.value).split('.')[1] || '';
+  return Math.min(fraction.length, 2);
+}
+
 export function formatKpiNumber(kpi) {
   if (!Number.isFinite(kpi?.value)) return String(kpi?.value ?? '—');
-  const decimals = Number.isFinite(kpi.decimals)
-    ? kpi.decimals
-    : Number.isInteger(kpi.value) ? 0 : 2;
+  const decimals = getKpiDecimals(kpi);
   return kpi.value.toLocaleString(undefined, {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,

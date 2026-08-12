@@ -103,6 +103,10 @@ const en = {
 
   'overview.whatMoved': 'What moved',
   'overview.whatMovedHint': 'Latest observation vs prior period for five critical series.',
+  'overview.showFewer': 'Show fewer indicators',
+  'overview.showMore': 'Show {count} more indicators',
+  'overview.details': 'More context, releases and source details',
+  'overview.detailsHint': 'Watchlist, changes, calendar and audit',
   'watchlist.title': 'Your watchlist',
   'watchlist.empty': 'Pin KPIs with the ★ button, or pin indicators from the command palette (Ctrl/Cmd+K). Pins stay on this device.',
   'watchlist.clear': 'Clear all',

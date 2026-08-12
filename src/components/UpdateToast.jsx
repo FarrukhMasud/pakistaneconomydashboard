@@ -5,7 +5,7 @@ import useI18n from '../i18n/useI18n';
  * Shows a refresh prompt when a new service worker takes control
  * or the build data version changes while the tab stays open.
  */
-export default function UpdateToast() {
+export default function UpdateToast({ blocked = false }) {
   const { t } = useI18n();
   const [visible, setVisible] = useState(false);
 
@@ -61,7 +61,7 @@ export default function UpdateToast() {
     };
   }, []);
 
-  if (!visible) return null;
+  if (!visible || blocked) return null;
 
   return (
     <div className="update-toast" role="status" aria-live="polite">

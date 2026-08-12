@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-07",
+  "lastUpdated": "2026-08-12",
   "indicators": [
     {
       "id": "reserves",
@@ -132,8 +132,8 @@
       "sentiment": "neutral",
       "source": "SBP Monetary Policy Committee",
       "provenanceKey": "monetaryPolicy.currentRate",
-      "sub": "Next MPC: [object Object]"
+      "sub": "Next MPC: 14 September 2026"
     }
   ],
-  "lastChecked": "2026-08-07"
+  "lastChecked": "2026-08-12"
 }

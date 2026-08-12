@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import useI18n from '../i18n/useI18n';
+import { CONSENT_STORAGE_KEY } from '../utils/startupState';
 
-const STORAGE_KEY = 'pak-eco-analytics-consent';
 const CLARITY_ID = 'wf9unpmskv';
 
 function loadClarity(id) {
@@ -17,11 +17,15 @@ function loadClarity(id) {
  * Gates Microsoft Clarity behind an explicit consent choice.
  * Prior accept/decline is remembered in localStorage.
  */
-export default function ConsentBanner() {
+export default function ConsentBanner({ onResolved }) {
   const { t } = useI18n();
   const [choice, setChoice] = useState(() => {
     if (typeof window === 'undefined') return 'unknown';
-    return window.localStorage.getItem(STORAGE_KEY) || 'pending';
+    try {
+      return window.localStorage.getItem(CONSENT_STORAGE_KEY) || 'pending';
+    } catch {
+      return 'declined';
+    }
   });
 
   useEffect(() => {
@@ -31,8 +35,13 @@ export default function ConsentBanner() {
   if (choice !== 'pending') return null;
 
   const decide = (value) => {
-    window.localStorage.setItem(STORAGE_KEY, value);
+    try {
+      window.localStorage.setItem(CONSENT_STORAGE_KEY, value);
+    } catch {
+      /* Continue without persistence when storage is unavailable. */
+    }
     setChoice(value);
+    onResolved?.(value);
   };
 
   return (
