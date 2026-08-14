@@ -28,8 +28,10 @@ test('default chart state is omitted from the URL', () => {
 
 test('KPI presentation standardizes periods, units, and provisional labels', () => {
   assert.equal(formatKpiPeriod('2026-07'), 'Jul 2026');
+  assert.equal(formatKpiPeriod('2026-07-31'), '31 Jul 2026');
   assert.equal(formatKpiPeriod('Jul-Jun FY26 (P)'), 'Jul-Jun FY2026 (P)');
   assert.equal(formatKpiUnit('$B'), 'USD bn');
+  assert.equal(formatKpiUnit('T PKR'), 'Rs tn');
   assert.equal(isProvisionalPeriod('Jul-Jun FY26 (P)'), true);
   assert.equal(getKpiDecimals({ value: 22.47 }), 2);
   assert.equal(getKpiDecimals({ value: 3.7 }), 1);

@@ -1,51 +1,47 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useData } from '../hooks/useData';
 import { useWatchlist } from '../hooks/useWatchlist';
 import { COLORS } from '../utils/chartConfig';
 import SectionHeader from './SectionHeader';
-import DataFreshnessPanel from './DataFreshnessPanel';
-import ReleaseCalendarSection from './ReleaseCalendarSection';
 import SnapshotPanel from './SnapshotPanel';
 import CiteFigure from './CiteFigure';
 import WhatMovedStrip from './WhatMovedStrip';
+import OverviewBriefing from './OverviewBriefing';
 import LatestChangesPanel from './LatestChangesPanel';
 import WatchlistPanel from './WatchlistPanel';
-import EconomyPulse from './EconomyPulse';
 import SourceBadge from './SourceBadge';
 import ExpandableTile from './ui/ExpandableTile';
 import AnimatedNumber from './ui/AnimatedNumber';
 import { LoadingCard, ErrorCard } from './ui/DataState';
 import useI18n from '../i18n/useI18n';
+import { routeToPath } from '../hooks/useHashRoute';
 import {
+  formatCompareBasis,
+  formatKpiChange,
   formatKpiNumber,
   formatKpiPeriod,
   formatKpiUnit,
   getKpiDecimals,
   isProvisionalPeriod,
 } from '../utils/kpiFormat';
-
-const KPI_DATASETS = {
-  reserves: 'reserves',
-  'exchange-rate': 'exchange-rates',
-  remittances: 'remittances',
-  fdi: 'fdi',
-  it_exports: 'services',
-  'gdp-growth': 'fiscal',
-  inflation: 'inflation',
-  'fbr-tax': 'fbr-tax',
-  'policy-rate': 'monetary-policy',
-};
+import {
+  buildSnapshotKpi,
+  buildTradeKpi,
+  decorateOverviewKpis,
+  kpiRoute,
+  mergeOverviewIndicators,
+} from '../utils/overviewModel';
 
 function useOverviewLayout() {
   const [layout, setLayout] = useState(() => {
     const mobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 720px)').matches;
-    return { mobile, detailsOpen: !mobile };
+    return { mobile, detailsOpen: false };
   });
 
   useEffect(() => {
     const query = window.matchMedia('(max-width: 720px)');
     const update = (event) => {
-      setLayout({ mobile: event.matches, detailsOpen: !event.matches });
+      setLayout((current) => ({ ...current, mobile: event.matches }));
     };
     if (query.addEventListener) query.addEventListener('change', update);
     else query.addListener(update);
@@ -74,38 +70,38 @@ function trendArrow(trend) {
   return '►';
 }
 
-/**
- * KPI changes are not all the same kind of number — some are percentage-point
- * moves, some are absolute $bn moves, some are percent growth. Render the unit
- * the parser recorded rather than a bare, ambiguous figure.
- */
-function formatChange(kpi) {
-  if (!Number.isFinite(kpi.change)) return null;
-  const sign = kpi.change > 0 ? '+' : '';
-  const unit = kpi.changeUnit || '';
-  if (unit === '%' || unit === 'pp') return `${sign}${kpi.change}${unit}`;
-  if (unit) return `${sign}${kpi.change} ${unit}`;
-  return `${sign}${kpi.change}`;
+function navigate(groupId, sectionId) {
+  const path = routeToPath(groupId, sectionId);
+  window.history.pushState(null, '', path);
+  window.dispatchEvent(new PopStateEvent('popstate'));
 }
 
 export default function KpiCards() {
   const { t, tx } = useI18n();
   const { data, loading, error, retry } = useData('kpi-summary.json');
+  const trade = useData('trade.json');
+  const remittances = useData('remittances.json');
+  const snapshot = useData('indicators.json');
   const { isPinned, toggle } = useWatchlist();
   const { mobile: isMobile, detailsOpen, setDetailsOpen } = useOverviewLayout();
   const [showAllIndicators, setShowAllIndicators] = useState(false);
 
-  // navigate only — NAV_GROUPS not needed here; use window history via custom helper
-  const navigate = (groupId, sectionId) => {
-    const path = `/${groupId}/${sectionId}`;
-    window.history.pushState(null, '', path);
-    window.dispatchEvent(new PopStateEvent('popstate'));
-  };
+  const indicators = useMemo(() => {
+    const extras = [
+      buildTradeKpi(trade.data),
+      buildSnapshotKpi(snapshot.data?.indicators?.find((row) => row.id === 'current-account')),
+      buildSnapshotKpi(snapshot.data?.indicators?.find((row) => row.id === 'public-debt')),
+      buildSnapshotKpi(snapshot.data?.indicators?.find((row) => row.id === 'circular-debt')),
+    ];
+    return decorateOverviewKpis(
+      mergeOverviewIndicators(data?.indicators, extras),
+      { remittances: remittances.data },
+    );
+  }, [data, trade.data, remittances.data, snapshot.data]);
 
   if (loading) return <LoadingCard label="Loading overview…" />;
   if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load economic overview" />;
 
-  const { lastUpdated, indicators } = data;
   const visibleIndicators = isMobile && !showAllIndicators ? indicators.slice(0, 6) : indicators;
 
   return (
@@ -118,111 +114,141 @@ export default function KpiCards() {
           { label: 'PBS Statistics', url: 'https://www.pbs.gov.pk' },
         ]}
       />
-      <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
-        Data refreshed: {lastUpdated} · All values derived from source datasets
+      <p className="overview-refreshed">
+        {t('overview.refreshed', 'Data refreshed {date} · Official sources only')
+          .replace('{date}', formatKpiPeriod(data.lastUpdated))}
       </p>
-      <EconomyPulse onNavigate={navigate} />
+      <OverviewBriefing onNavigate={navigate} />
       <WhatMovedStrip onNavigate={navigate} />
+      <p className="overview-legend">{t('overview.legend', 'Teal is favorable, coral is unfavorable, amber is little changed — not simply whether the number rose.')}</p>
       <div className="kpi-grid stagger-children">
         {visibleIndicators.map((kpi) => {
           const sentiment = kpi.sentiment || 'neutral';
           const color = sentimentColor(sentiment);
-          const changeLabel = formatChange(kpi);
+          const changeLabel = formatKpiChange(kpi);
+          const compareBasis = formatCompareBasis(kpi.changeBasis);
           const pinned = isPinned(kpi.id);
+          const route = kpiRoute(kpi.id);
+          const openSection = () => navigate(route.groupId, route.sectionId);
           return (
-            <ExpandableTile
+            <div
               key={kpi.id}
-              className={`card kpi-card sentiment-${sentiment}`}
-              title={kpi.label}
-              subtitle={`${formatKpiPeriod(kpi.period)} · Source: ${kpi.source}`}
-              details={(
-                <div className="tile-detail-list">
-                  <div className="tile-detail-row">
-                    <span>{tx('Latest value')}</span>
-                    <strong style={{ color }}>{formatKpiNumber(kpi)} {formatKpiUnit(kpi.unit)}</strong>
-                  </div>
-                  <div className="tile-detail-row">
-                    <span>{tx('Period')}</span>
-                    <strong>{formatKpiPeriod(kpi.period)}</strong>
-                  </div>
-                  <div className="tile-detail-row">
-                    <span>{tx('Change')}</span>
-                    <strong>{trendArrow(kpi.trend)} {changeLabel ?? 'n/a'}</strong>
-                  </div>
-                  {kpi.changeBasis && (
-                    <div className="tile-detail-row">
-                      <span>{tx('Compared with')}</span>
-                      <strong>{kpi.changeBasis}</strong>
-                    </div>
-                  )}
-                  {kpi.sub && (
-                    <div className="tile-detail-row">
-                      <span>{tx('Context')}</span>
-                      <strong>{kpi.sub}</strong>
-                    </div>
-                  )}
-                  <div className="tile-detail-row">
-                    <span>{tx('Source')}</span>
-                    <strong>{kpi.source}</strong>
-                  </div>
-                  {kpi.provenanceKey && (
-                    <div className="tile-detail-row">
-                      <span>{tx('Citation')}</span>
-                      <CiteFigure figureKey={kpi.provenanceKey} />
-                    </div>
-                  )}
-                </div>
-              )}
+              className="kpi-card-hit"
+              onClick={(event) => {
+                if (event.target.closest('button, a')) return;
+                openSection();
+              }}
             >
-              <div className="kpi-label-row">
-                <div className="kpi-label-meta">
-                  <div className="kpi-label">{kpi.label}</div>
-                  <SourceBadge
-                    datasetId={KPI_DATASETS[kpi.id]}
-                    sourceType={kpi.sourceType}
-                    compact
-                  />
+              <ExpandableTile
+                className={`card kpi-card kpi-card--link sentiment-${sentiment}`}
+                title={kpi.label}
+                subtitle={`${formatKpiPeriod(kpi.period)} · Source: ${kpi.source}`}
+                details={(
+                  <div className="tile-detail-list">
+                    <div className="tile-detail-row">
+                      <span>{tx('Latest value')}</span>
+                      <strong style={{ color }}>
+                        {kpi.displayValue || `${formatKpiNumber(kpi)} ${formatKpiUnit(kpi.unit)}`.trim()}
+                      </strong>
+                    </div>
+                    <div className="tile-detail-row">
+                      <span>{tx('Period')}</span>
+                      <strong>{formatKpiPeriod(kpi.period)}</strong>
+                    </div>
+                    <div className="tile-detail-row">
+                      <span>{tx('Change')}</span>
+                      <strong>{trendArrow(kpi.trend)} {changeLabel ?? 'n/a'}</strong>
+                    </div>
+                    {compareBasis && (
+                      <div className="tile-detail-row">
+                        <span>{tx('Compared with')}</span>
+                        <strong>{compareBasis}</strong>
+                      </div>
+                    )}
+                    {kpi.momChangeLabel && (
+                      <div className="tile-detail-row">
+                        <span>{t('overview.monthOnMonth', 'Month-on-month')}</span>
+                        <strong>{kpi.momChangeLabel}</strong>
+                      </div>
+                    )}
+                    {kpi.sub && (
+                      <div className="tile-detail-row">
+                        <span>{tx('Context')}</span>
+                        <strong>{kpi.sub}</strong>
+                      </div>
+                    )}
+                    <div className="tile-detail-row">
+                      <span>{tx('Source')}</span>
+                      <strong>{kpi.source}</strong>
+                    </div>
+                    {kpi.provenanceKey && (
+                      <div className="tile-detail-row">
+                        <span>{tx('Citation')}</span>
+                        <CiteFigure figureKey={kpi.provenanceKey} />
+                      </div>
+                    )}
+                    <div className="tile-detail-row">
+                      <span>{t('overview.section', 'Section')}</span>
+                      <a href={routeToPath(route.groupId, route.sectionId)}>{t('overview.openSection', 'Open section')}</a>
+                    </div>
+                  </div>
+                )}
+              >
+                <div className="kpi-label-row">
+                  <div className="kpi-label-meta">
+                    <div className="kpi-label">{kpi.label}</div>
+                    <SourceBadge
+                      datasetId={route.datasetId}
+                      sourceType={kpi.sourceType}
+                      compact
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    className={`kpi-pin ${pinned ? 'is-pinned' : ''}`}
+                    aria-pressed={pinned}
+                    aria-label={pinned ? t('watchlist.unpin', 'Unpin') : t('watchlist.pin', 'Pin to watchlist')}
+                    title={pinned ? t('watchlist.unpin', 'Unpin') : t('watchlist.pin', 'Pin to watchlist')}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      toggle(kpi.id);
+                    }}
+                  >
+                    {pinned ? '★' : '☆'}
+                  </button>
                 </div>
-                <button
-                  type="button"
-                  className={`kpi-pin ${pinned ? 'is-pinned' : ''}`}
-                  aria-pressed={pinned}
-                  aria-label={pinned ? t('watchlist.unpin', 'Unpin') : t('watchlist.pin', 'Pin to watchlist')}
-                  title={pinned ? t('watchlist.unpin', 'Unpin') : t('watchlist.pin', 'Pin to watchlist')}
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    toggle(kpi.id);
-                  }}
-                >
-                  {pinned ? '★' : '☆'}
-                </button>
-              </div>
-              <div className="kpi-value" style={{ color }}>
-                {Number.isFinite(kpi.value) ? (
-                  <AnimatedNumber
-                    value={kpi.value}
-                    decimals={getKpiDecimals(kpi)}
-                  />
-                ) : formatKpiNumber(kpi)}
-                {' '}
-                <span className="kpi-unit">{formatKpiUnit(kpi.unit)}</span>
-              </div>
-              <div className="kpi-period">
-                {formatKpiPeriod(kpi.period)}
-                {isProvisionalPeriod(kpi.period) && <span className="provisional-badge">{tx('Provisional')}</span>}
-              </div>
-              {kpi.sub && <div className="kpi-sub">{kpi.sub}</div>}
-              <div className={`kpi-trend ${sentiment}`} title={kpi.changeBasis || undefined}>
-                {trendArrow(kpi.trend)} {changeLabel ?? 'n/a'}
-                {kpi.changeBasis && <span className="kpi-change-basis"> {kpi.changeBasis}</span>}
-              </div>
-              <div className="kpi-source">
-                Source: {kpi.source}
-                {kpi.provenanceKey
-                  ? <CiteFigure figureKey={kpi.provenanceKey} compact />
-                  : <span className="kpi-source-missing" title={t('provenance.missing', 'No provenance key for this KPI')}>ⓘ</span>}
-              </div>
-            </ExpandableTile>
+                <div className="kpi-value" style={{ color }}>
+                  {Number.isFinite(kpi.value) ? (
+                    <>
+                      <AnimatedNumber
+                        value={kpi.value}
+                        decimals={getKpiDecimals(kpi)}
+                      />
+                      {' '}
+                      <span className="kpi-unit">{formatKpiUnit(kpi.unit)}</span>
+                    </>
+                  ) : (
+                    <span>{kpi.displayValue || formatKpiNumber(kpi)}</span>
+                  )}
+                </div>
+                <div className="kpi-period">
+                  {formatKpiPeriod(kpi.period)}
+                  {isProvisionalPeriod(kpi.period) && <span className="provisional-badge">{tx('Provisional')}</span>}
+                </div>
+                {kpi.sub && <div className="kpi-sub">{kpi.sub}</div>}
+                <div className={`kpi-trend ${sentiment}`} title={compareBasis || undefined}>
+                  {trendArrow(kpi.trend)} {changeLabel ?? 'n/a'}
+                  {compareBasis && <span className="kpi-change-basis"> {compareBasis}</span>}
+                </div>
+                <div className="kpi-source">
+                  Source: {kpi.source}
+                  {kpi.provenanceKey
+                    ? <CiteFigure figureKey={kpi.provenanceKey} compact />
+                    : <span className="kpi-source-missing" title={t('provenance.missing', 'No provenance key for this KPI')}>ⓘ</span>}
+                </div>
+                <span className="kpi-open-section">{t('overview.openSection', 'Open section')} →</span>
+              </ExpandableTile>
+            </div>
           );
         })}
       </div>
@@ -250,14 +276,12 @@ export default function KpiCards() {
       >
         <summary>
           <span>{t('overview.details', 'More context, releases and source details')}</span>
-          <small>{t('overview.detailsHint', 'Watchlist, changes, calendar and audit')}</small>
+          <small>{t('overview.detailsHint', 'Watchlist and latest data changes')}</small>
         </summary>
         <div className="overview-details__body">
           <LatestChangesPanel />
           <WatchlistPanel onNavigate={navigate} />
           <SnapshotPanel />
-          <ReleaseCalendarSection compact />
-          <DataFreshnessPanel />
         </div>
       </details>
     </section>

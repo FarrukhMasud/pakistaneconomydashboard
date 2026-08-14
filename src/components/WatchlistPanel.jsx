@@ -5,11 +5,8 @@ import useI18n from '../i18n/useI18n';
 import { INDICATOR_CATALOG } from '../utils/indicatorCatalog';
 import { COLORS } from '../utils/chartConfig';
 import CiteFigure from './CiteFigure';
-
-function formatValue(kpi) {
-  if (!Number.isFinite(kpi?.value)) return String(kpi?.value ?? '—');
-  return Number.isFinite(kpi.decimals) ? kpi.value.toFixed(kpi.decimals) : String(kpi.value);
-}
+import { formatKpiDisplay, formatKpiPeriod } from '../utils/kpiFormat';
+import { kpiRoute } from '../utils/overviewModel';
 
 /**
  * Pinned indicators on Overview (localStorage). Empty state explains how to pin.
@@ -31,12 +28,12 @@ export default function WatchlistPanel({ onNavigate }) {
           id,
           kind: 'kpi',
           label: kpiRow.label,
-          value: `${formatValue(kpiRow)}${kpiRow.unit || ''}`,
-          period: kpiRow.period,
+          value: formatKpiDisplay(kpiRow),
+          period: formatKpiPeriod(kpiRow.period),
           sentiment: kpiRow.sentiment || 'neutral',
           provenanceKey: kpiRow.provenanceKey,
-          groupId: resolveGroup(kpiRow.id),
-          sectionId: resolveSection(kpiRow.id),
+          groupId: kpiRoute(kpiRow.id).groupId,
+          sectionId: kpiRoute(kpiRow.id).sectionId,
         };
       }
       const cat = byCatalog[id];
@@ -127,32 +124,4 @@ export default function WatchlistPanel({ onNavigate }) {
   );
 }
 
-function resolveGroup(kpiId) {
-  const map = {
-    reserves: 'external',
-    'exchange-rate': 'external',
-    remittances: 'external',
-    fdi: 'external',
-    it_exports: 'external',
-    inflation: 'prices',
-    'policy-rate': 'prices',
-    'gdp-growth': 'fiscal',
-    'fbr-tax': 'fiscal',
-  };
-  return map[kpiId] || 'overview';
-}
 
-function resolveSection(kpiId) {
-  const map = {
-    reserves: 'reserves',
-    'exchange-rate': 'exchange',
-    remittances: 'remittances',
-    fdi: 'fdi',
-    it_exports: 'services',
-    inflation: 'inflation',
-    'policy-rate': 'monetary',
-    'gdp-growth': 'fiscal',
-    'fbr-tax': 'fbr',
-  };
-  return map[kpiId] || 'overview';
-}

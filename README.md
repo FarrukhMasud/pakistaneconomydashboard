@@ -11,7 +11,7 @@ Finance. Any secondary reporting is explicitly identified and attributed.
 
 | Section              | Key Metrics                                    | Source              |
 | -------------------- | ---------------------------------------------- | ------------------- |
-| **Overview**         | 8 KPI cards (reserves, exchange rate, etc.)    | All data files      |
+| **Overview**         | Briefing sentence, what-moved strip, unique KPI cards (incl. trade, current account, debt) | All data files      |
 | **Trade**            | Monthly imports/exports, top 15 countries       | SBP Excel           |
 | **Country Trends**   | Per-partner exports, imports & remittance corridors with MoM/YoY momentum & FYTD | SBP Excel + EasyData API |
 | **Foreign Reserves** | Weekly SBP + bank reserves, import cover        | SBP forex.pdf       |

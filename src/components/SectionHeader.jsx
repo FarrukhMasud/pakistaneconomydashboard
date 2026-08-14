@@ -19,6 +19,7 @@ export default function SectionHeader({ title, description, sourceLinks, noteKey
         <button
           className="section-intro-toggle"
           onClick={() => setExpanded(e => !e)}
+          aria-expanded={expanded}
         >
           {expanded ? `▾ ${t('section.hideOverview', 'Hide overview')}` : `▸ ${t('section.aboutSection', 'About this section')}`}
         </button>

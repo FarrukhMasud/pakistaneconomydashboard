@@ -2,61 +2,21 @@ import { useMemo } from 'react';
 import { useData } from '../hooks/useData';
 import useI18n from '../i18n/useI18n';
 import { COLORS } from '../utils/chartConfig';
-import { formatMonthYear, formatDayMonthYear, pctChange, isFiniteNumber } from '../utils/periodHelpers';
+import { formatCompareBasis, formatKpiChange, formatKpiDisplay, formatKpiPeriod } from '../utils/kpiFormat';
+import { buildTradeKpi, decorateOverviewKpis, kpiRoute } from '../utils/overviewModel';
 
 const CRITICAL = [
-  { id: 'reserves', label: 'Reserves', groupId: 'external', sectionId: 'reserves', goodWhenUp: true },
-  { id: 'inflation', label: 'CPI', groupId: 'prices', sectionId: 'inflation', goodWhenUp: false },
-  { id: 'fbr-tax', label: 'FBR FYTD', groupId: 'fiscal', sectionId: 'fbr', goodWhenUp: true },
-  { id: 'trade', label: 'Trade balance', groupId: 'external', sectionId: 'trade', goodWhenUp: true },
-  { id: 'remittances', label: 'Remittances', groupId: 'external', sectionId: 'remittances', goodWhenUp: true },
+  { id: 'reserves', label: 'Reserves' },
+  { id: 'inflation', label: 'CPI' },
+  { id: 'fbr-tax', label: 'FBR FYTD' },
+  { id: 'trade', label: 'Trade balance' },
+  { id: 'remittances', label: 'Remittances' },
 ];
-
-function formatPeriod(period) {
-  if (!period) return '';
-  if (/^\d{4}-\d{2}-\d{2}$/.test(period)) return formatDayMonthYear(period);
-  if (/^\d{4}-\d{2}$/.test(period)) return formatMonthYear(period);
-  return period;
-}
 
 function arrow(trend) {
   if (trend === 'up') return '▲';
   if (trend === 'down') return '▼';
   return '►';
-}
-
-function formatChange(kpi) {
-  if (!isFiniteNumber(kpi?.change)) return null;
-  const sign = kpi.change > 0 ? '+' : '';
-  const unit = kpi.changeUnit || '';
-  if (unit === '%' || unit === 'pp') return `${sign}${kpi.change}${unit}`;
-  if (unit) return `${sign}${kpi.change} ${unit}`;
-  return `${sign}${kpi.change}`;
-}
-
-function buildTradeMove(trade) {
-  const monthly = trade?.monthly;
-  if (!monthly?.length) return null;
-  const latest = monthly.at(-1);
-  const prior = monthly.at(-2);
-  if (!latest || latest.balance == null) return null;
-  const mom = prior?.balance != null ? pctChange(latest.balance, prior.balance) : null;
-  const yoyDate = `${Number(latest.date.slice(0, 4)) - 1}${latest.date.slice(4)}`;
-  const yearAgo = monthly.find((row) => row.date === yoyDate);
-  const yoy = yearAgo?.balance != null ? pctChange(latest.balance, yearAgo.balance) : null;
-  const sentiment = latest.balance >= 0 ? 'positive' : 'negative';
-  return {
-    id: 'trade',
-    label: 'Trade balance',
-    value: `$${(latest.balance / 1000).toFixed(2)}B`,
-    period: formatMonthYear(latest.date),
-    changeLabel: mom?.pct != null ? `${mom.pct > 0 ? '+' : ''}${mom.pct}% MoM` : null,
-    secondary: yoy?.pct != null ? `${yoy.pct > 0 ? '+' : ''}${yoy.pct}% YoY` : null,
-    trend: mom?.direction || 'flat',
-    sentiment,
-    groupId: 'external',
-    sectionId: 'trade',
-  };
 }
 
 /**
@@ -66,32 +26,31 @@ export default function WhatMovedStrip({ onNavigate }) {
   const { t, tx } = useI18n();
   const kpi = useData('kpi-summary.json');
   const trade = useData('trade.json');
+  const remittances = useData('remittances.json');
 
   const moves = useMemo(() => {
-    const byId = Object.fromEntries((kpi.data?.indicators || []).map((row) => [row.id, row]));
-    const tradeMove = buildTradeMove(trade.data);
+    const decorated = decorateOverviewKpis(kpi.data?.indicators || [], { remittances: remittances.data });
+    const byId = Object.fromEntries(decorated.map((row) => [row.id, row]));
+    const tradeKpi = buildTradeKpi(trade.data);
 
     return CRITICAL.map((spec) => {
-      if (spec.id === 'trade') return tradeMove;
-      const row = byId[spec.id];
+      const row = spec.id === 'trade' ? tradeKpi : byId[spec.id];
       if (!row) return null;
-      const changeLabel = formatChange(row);
+      const route = kpiRoute(row.id);
       return {
         id: row.id,
         label: spec.label,
-        value: `${Number.isFinite(row.value)
-          ? (Number.isFinite(row.decimals) ? row.value.toFixed(row.decimals) : String(row.value))
-          : '—'}${row.unit ? ` ${row.unit}` : ''}`,
-        period: formatPeriod(row.period),
-        changeLabel: changeLabel ? `${changeLabel}` : null,
-        secondary: row.changeBasis || null,
+        value: formatKpiDisplay(row),
+        period: formatKpiPeriod(row.period),
+        changeLabel: formatKpiChange(row),
+        secondary: row.momChangeLabel || formatCompareBasis(row.changeBasis),
         trend: row.trend || 'flat',
         sentiment: row.sentiment || 'neutral',
-        groupId: spec.groupId,
-        sectionId: spec.sectionId,
+        groupId: route.groupId,
+        sectionId: route.sectionId,
       };
     }).filter(Boolean);
-  }, [kpi.data, trade.data]);
+  }, [kpi.data, trade.data, remittances.data]);
 
   if (kpi.loading && !kpi.data) return null;
   if (!moves.length) return null;
@@ -100,7 +59,7 @@ export default function WhatMovedStrip({ onNavigate }) {
     <section className="what-moved" aria-label={t('overview.whatMoved', 'What moved')}>
       <div className="what-moved__head">
         <h3>{t('overview.whatMoved', 'What moved')}</h3>
-        <p>{t('overview.whatMovedHint', 'Latest observation vs prior period for five critical series.')}</p>
+        <p>{t('overview.whatMovedHint', 'Latest move for five critical series. Seasonal series show the year-on-year change.')}</p>
       </div>
       <div className="what-moved__grid">
         {moves.map((move) => {
