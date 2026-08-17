@@ -1,76 +1,71 @@
 {
-  "generatedAt": "2026-08-07T19:45:02.755Z",
-  "comparisonBase": "541ebebd3e3f5cb3199aea2e3a9f61bc07ef5fcb",
+  "generatedAt": "2026-08-17T17:59:54.938Z",
+  "comparisonBase": "6fe559ad7d02bfca2937e19db1f6351762dff208",
   "description": "Pre-commit comparison of working-tree dashboard data against HEAD.",
   "summary": {
     "newObservations": 2,
-    "majorMovements": 2,
-    "newRevisions": 0,
-    "sourceChanges": 2,
-    "suspiciousDateJumps": 1,
+    "majorMovements": 1,
+    "newRevisions": 3,
+    "sourceChanges": 0,
+    "suspiciousDateJumps": 0,
     "reviewRequired": 1,
     "overdueReleases": 0
   },
   "newObservations": [
     {
-      "dataset": "fbr-tax",
-      "label": "FBR Tax Collection",
-      "from": "2026-05",
-      "to": "2026-06",
-      "cadence": "Monthly (provisional)"
+      "dataset": "reserves",
+      "label": "Foreign Exchange Reserves",
+      "from": "2026-07-31",
+      "to": "2026-08-07",
+      "cadence": "Weekly"
     },
     {
-      "dataset": "external-debt",
-      "label": "External Debt Repayment Tracker",
-      "from": "End-Jun 2026",
-      "to": "2026-03-31",
-      "cadence": "Event-driven"
+      "dataset": "reserves-adequacy",
+      "label": "Reserves Adequacy Tracker",
+      "from": "2026-07-31",
+      "to": "2026-08-07",
+      "cadence": "Weekly"
     }
   ],
   "majorMovements": [
     {
-      "id": "fbr-tax",
-      "label": "FBR Tax Collection (FYTD)",
-      "from": 11.23,
-      "to": 13,
-      "unit": "T PKR",
-      "period": "Jul–Jun FY2026",
-      "percent": 15.8
+      "id": "reserves",
+      "label": "Foreign Reserves (Total)",
+      "from": 22.47,
+      "to": 22.5,
+      "unit": "$ Billion",
+      "period": "2026-08-07",
+      "percent": 0.1
+    }
+  ],
+  "newRevisions": [
+    {
+      "date": "2026-08-17",
+      "dataset": "reserves-adequacy",
+      "path": "current.sbpReserves",
+      "from": 17.04,
+      "to": 17.06,
+      "changePct": 0.1
     },
     {
-      "id": "it_exports",
-      "label": "IT & Telecom Exports",
-      "from": 4.18,
-      "to": 4.6,
-      "unit": "$B",
-      "period": "Jul-Jun FY26",
-      "percent": 10
-    }
-  ],
-  "newRevisions": [],
-  "sourceChanges": [
-    {
-      "dataset": "monetary-policy",
-      "label": "SBP Policy Rate Tracker",
-      "from": "https://www.sbp.org.pk/m_policy/index.asp",
-      "to": "https://www.sbp.org.pk/our-operations/monetary-policy"
+      "date": "2026-08-17",
+      "dataset": "reserves-adequacy",
+      "path": "current.totalReserves",
+      "from": 22.47,
+      "to": 22.5,
+      "changePct": 0.1
     },
     {
-      "dataset": "external-debt",
-      "label": "External Debt Repayment Tracker",
-      "from": "https://www.imf.org/en/Countries/PAK",
-      "to": "https://www.sbp.org.pk/assets/document/pakdebt.pdf"
+      "date": "2026-08-17",
+      "dataset": "reserves-adequacy",
+      "path": "current.bankReserves",
+      "from": 5.43,
+      "to": 5.44,
+      "changePct": 0.2
     }
   ],
-  "suspiciousDateJumps": [
-    {
-      "dataset": "external-debt",
-      "label": "External Debt Repayment Tracker",
-      "type": "backward",
-      "from": "End-Jun 2026",
-      "to": "2026-03-31"
-    }
-  ],
+  "sourceChanges": [],
+  "suspiciousDateJumps": [],
   "reviewRequired": [
     {
       "dataset": "fbr-tax",

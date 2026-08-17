@@ -9,11 +9,11 @@
   "dates": {
     "observation": "2026-06",
     "publication": null,
-    "verification": "2026-08-07",
+    "verification": "2026-08-17",
     "dashboardUpdated": "2026-07-24"
   },
   "lastUpdated": "2026-07-24",
-  "lastChecked": "2026-08-07",
+  "lastChecked": "2026-08-17",
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",
   "data": {
     "monthly": [
@@ -573,7 +573,7 @@
     "dataSource": "SBP",
     "lastUpdated": "2026-07-24",
     "dataCoverage": "2021-01 – 2026-06",
-    "lastChecked": "2026-08-07",
+    "lastChecked": "2026-08-17",
     "countryMonthly": {
       "latestMonth": "2026-05",
       "prevMonth": "2026-04",

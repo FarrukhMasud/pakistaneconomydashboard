@@ -10,15 +10,15 @@
     "observation": "2025",
     "publication": null,
     "verification": null,
-    "dashboardUpdated": "2026-08-07"
+    "dashboardUpdated": "2026-08-17"
   },
-  "lastUpdated": "2026-08-07",
+  "lastUpdated": "2026-08-17",
   "lastChecked": null,
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",
   "data": {
     "dataSource": "World Bank Open Data API (official WDI indicators)",
     "sourceUrl": "https://data.worldbank.org",
-    "lastUpdated": "2026-08-07",
+    "lastUpdated": "2026-08-17",
     "latestObservation": "2025",
     "countries": [
       {

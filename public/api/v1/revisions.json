@@ -1,8 +1,32 @@
 {
-  "generatedAt": "2026-08-07T19:39:59.802Z",
+  "generatedAt": "2026-08-17T17:59:17.761Z",
   "description": "Every restatement of a previously published figure. Pakistani official statistics are routinely revised from provisional to final; this log preserves what changed, when, and by how much.",
-  "entryCount": 35,
+  "entryCount": 38,
   "entries": [
+    {
+      "date": "2026-08-17",
+      "dataset": "reserves-adequacy",
+      "path": "current.sbpReserves",
+      "from": 17.04,
+      "to": 17.06,
+      "changePct": 0.1
+    },
+    {
+      "date": "2026-08-17",
+      "dataset": "reserves-adequacy",
+      "path": "current.totalReserves",
+      "from": 22.47,
+      "to": 22.5,
+      "changePct": 0.1
+    },
+    {
+      "date": "2026-08-17",
+      "dataset": "reserves-adequacy",
+      "path": "current.bankReserves",
+      "from": 5.43,
+      "to": 5.44,
+      "changePct": 0.2
+    },
     {
       "date": "2026-08-07",
       "dataset": "reserves-adequacy",

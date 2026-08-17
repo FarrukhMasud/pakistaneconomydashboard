@@ -40,9 +40,9 @@
       "asOf": "2026-07"
     },
     "reserves.recovery": {
-      "text": "Across the published window, total liquid reserves were lowest at $18.90bn at end-September 2025 and stood at $22.47bn at the week ending 2026-07-31, of which $17.04bn is held by the SBP.",
+      "text": "Across the published window, total liquid reserves were lowest at $18.90bn at end-September 2025 and stood at $22.50bn at the week ending 2026-08-07, of which $17.06bn is held by the SBP.",
       "basis": "derived",
-      "derivation": "Minimum and latest total (SBP plus commercial banks) across the 18 published observations from end-June 2025.",
+      "derivation": "Minimum and latest total (SBP plus commercial banks) across the 19 published observations from end-June 2025.",
       "sources": [
         {
           "id": "sbp-forex-reserves",
@@ -52,7 +52,7 @@
           "sourceType": "official-primary"
         }
       ],
-      "asOf": "2026-07-31"
+      "asOf": "2026-08-07"
     },
     "trade.deficit": {
       "text": "The monthly goods trade deficit was widest at $4.07bn in June 2022. In June 2026 exports of $2.60bn against imports of $6.15bn left a deficit of $3.55bn.",
@@ -137,6 +137,6 @@
       "asOf": "2026-27"
     }
   },
-  "lastUpdated": "2026-08-07",
-  "lastChecked": "2026-08-07"
+  "lastUpdated": "2026-08-17",
+  "lastChecked": "2026-08-17"
 }

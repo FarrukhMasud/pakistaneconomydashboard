@@ -9,11 +9,11 @@
   "dates": {
     "observation": "2026-06",
     "publication": null,
-    "verification": "2026-08-07",
+    "verification": "2026-08-17",
     "dashboardUpdated": "2026-08-07"
   },
   "lastUpdated": "2026-08-07",
-  "lastChecked": "2026-08-07",
+  "lastChecked": "2026-08-17",
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",
   "data": {
     "by_sector": [
@@ -664,6 +664,6 @@
       }
     },
     "monthlyDataCoverage": "2021-08 – 2026-06",
-    "lastChecked": "2026-08-07"
+    "lastChecked": "2026-08-17"
   }
 }

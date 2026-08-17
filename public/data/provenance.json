@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-12T17:48:50.986Z",
+  "generatedAt": "2026-08-17T17:59:51.334Z",
   "description": "Machine-readable citation for every headline figure on the dashboard. Each entry names the publishing institution, the exact source document, the worksheet and the row/column it was read from.",
   "sources": {
     "fbr-collection": {
@@ -123,7 +123,7 @@
       "value": 278.24,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-08-12"
+      "retrievedAt": "2026-08-17"
     },
     "fbr.fytd.net": {
       "label": "FBR net tax collection, fiscal year to date",
@@ -136,7 +136,7 @@
       "value": 13,
       "derivedFrom": null,
       "note": "Currently sourced from press reporting of provisional FBR figures, not an FBR publication.",
-      "retrievedAt": "2026-08-12"
+      "retrievedAt": "2026-08-17"
     },
     "fdi.fytd.current": {
       "label": "Net foreign direct investment, fiscal year to date",
@@ -149,7 +149,7 @@
       "value": 1.64,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-08-12"
+      "retrievedAt": "2026-08-17"
     },
     "fiscal.gdpGrowth.latest": {
       "label": "Real GDP growth rate at constant basic prices of 2015-16",
@@ -162,7 +162,7 @@
       "value": 3.7,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-08-12"
+      "retrievedAt": "2026-08-17"
     },
     "inflation.nationalCpi.latest": {
       "label": "National Consumer Price Index, year-on-year inflation",
@@ -175,7 +175,7 @@
       "value": 9.2,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-08-12"
+      "retrievedAt": "2026-08-17"
     },
     "monetaryPolicy.currentRate": {
       "label": "SBP policy (target) rate set by the Monetary Policy Committee",
@@ -188,7 +188,7 @@
       "value": 11.5,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-08-12"
+      "retrievedAt": "2026-08-17"
     },
     "remittances.monthly.total": {
       "label": "Workers’ remittances, monthly total",
@@ -201,20 +201,20 @@
       "value": 3.47,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-08-12"
+      "retrievedAt": "2026-08-17"
     },
     "reserves.weekly.total": {
       "label": "Total liquid foreign exchange reserves (SBP + scheduled banks)",
       "sourceId": "sbp-forex-reserves",
       "sheet": null,
       "location": "Weekly reserves statement, \"Total Liquid Foreign Reserves\" line",
-      "period": "2026-07-31",
+      "period": "2026-08-07",
       "status": "final",
       "unit": "US$ billion",
-      "value": 22.47,
+      "value": 22.5,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-08-12"
+      "retrievedAt": "2026-08-17"
     },
     "services.bop.cumulative": {
       "label": "Balance on trade in services, fiscal year to date",
@@ -227,7 +227,7 @@
       "value": -1891,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-08-07"
+      "retrievedAt": "2026-08-17"
     },
     "services.bop.latestMonth": {
       "label": "Exports of services, latest published month",
@@ -240,7 +240,7 @@
       "value": 956,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-08-07"
+      "retrievedAt": "2026-08-17"
     },
     "services.itHeadline.fytd": {
       "label": "Telecommunications, computer and information services exports (credit)",
@@ -253,7 +253,7 @@
       "value": 4.6,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-08-12"
+      "retrievedAt": "2026-08-17"
     },
     "services.itTelecom.credit": {
       "label": "Telecommunications, computer and information services exports (credit)",
@@ -279,7 +279,7 @@
       "value": 416,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-08-07"
+      "retrievedAt": "2026-08-17"
     },
     "trade.monthly.balance": {
       "label": "Monthly goods trade balance (BOP basis)",
@@ -292,7 +292,7 @@
       "value": -3552,
       "derivedFrom": "Exports of $2595M less imports of $6147M as published by SBP",
       "note": null,
-      "retrievedAt": "2026-08-12"
+      "retrievedAt": "2026-08-17"
     }
   }
 }

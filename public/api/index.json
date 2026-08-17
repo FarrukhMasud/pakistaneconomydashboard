@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-12T17:48:51.098Z",
+  "generatedAt": "2026-08-17T17:59:55.223Z",
   "version": "v1",
   "title": "economyofpakistan.com static data API",
   "description": "Every dataset the dashboard renders, published as stable JSON and CSV. No key, no rate limit, no scraping required. Please cite the issuing institution listed on each endpoint.",
@@ -30,18 +30,18 @@
       "label": "Foreign Exchange Reserves",
       "json": "/api/v1/reserves.json",
       "csv": "/api/v1/reserves.csv",
-      "rows": 18,
+      "rows": 19,
       "seriesKey": "weekly",
       "source": "State Bank of Pakistan",
       "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
       "sourceType": "official-primary",
       "cadence": "Weekly",
-      "latestObservation": "2026-07-31",
+      "latestObservation": "2026-08-07",
       "dates": {
-        "observation": "2026-07-31",
+        "observation": "2026-08-07",
         "publication": null,
-        "verification": "2026-08-07",
-        "dashboardUpdated": "2026-08-07"
+        "verification": "2026-08-17",
+        "dashboardUpdated": "2026-08-17"
       }
     },
     {
@@ -59,7 +59,7 @@
       "dates": {
         "observation": "2026-07",
         "publication": null,
-        "verification": "2026-08-07",
+        "verification": "2026-08-17",
         "dashboardUpdated": "2026-08-07"
       }
     },
@@ -97,7 +97,7 @@
       "dates": {
         "observation": "2026-06",
         "publication": null,
-        "verification": "2026-08-07",
+        "verification": "2026-08-17",
         "dashboardUpdated": "2026-07-24"
       }
     },
@@ -116,7 +116,7 @@
       "dates": {
         "observation": "2026-06",
         "publication": null,
-        "verification": "2026-08-07",
+        "verification": "2026-08-17",
         "dashboardUpdated": "2026-08-07"
       }
     },
@@ -135,8 +135,8 @@
       "dates": {
         "observation": "2026-06",
         "publication": null,
-        "verification": "2026-08-07",
-        "dashboardUpdated": "2026-08-07"
+        "verification": "2026-08-17",
+        "dashboardUpdated": "2026-08-17"
       }
     },
     {
@@ -192,7 +192,7 @@
       "dates": {
         "observation": "2026-06-30",
         "publication": null,
-        "verification": "2026-08-07",
+        "verification": "2026-08-17",
         "dashboardUpdated": "2026-07-24"
       }
     },
@@ -211,7 +211,7 @@
       "dates": {
         "observation": "2026-06",
         "publication": "2026-07-02",
-        "verification": "2026-08-07",
+        "verification": "2026-08-17",
         "dashboardUpdated": "2026-08-07"
       }
     },
@@ -302,12 +302,12 @@
       "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
       "sourceType": "official-derived",
       "cadence": "Weekly",
-      "latestObservation": "2026-07-31",
+      "latestObservation": "2026-08-07",
       "dates": {
-        "observation": "2026-07-31",
+        "observation": "2026-08-07",
         "publication": null,
-        "verification": "2026-08-12",
-        "dashboardUpdated": "2026-08-07"
+        "verification": "2026-08-17",
+        "dashboardUpdated": "2026-08-17"
       }
     },
     {
@@ -364,7 +364,7 @@
         "observation": "2025",
         "publication": null,
         "verification": null,
-        "dashboardUpdated": "2026-08-07"
+        "dashboardUpdated": "2026-08-17"
       }
     },
     {
