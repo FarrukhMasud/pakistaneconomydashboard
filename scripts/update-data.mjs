@@ -39,6 +39,7 @@ import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { createInterface } from 'readline';
 import { writeDataFile } from './lib/data-writer.mjs';
+import { buildMonthlyComparisonFromSeries, preferNewerMonthlyComparison } from '../src/utils/periodHelpers.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = resolve(__dirname, '..', 'public', 'data');
@@ -414,9 +415,15 @@ async function updateFdiMonthly(apiKey) {
         : null,
     ].filter(Boolean);
 
+    const monthlyComparison = preferNewerMonthlyComparison(
+      existing.monthlyComparison,
+      buildMonthlyComparisonFromSeries(monthly, 'net_fdi'),
+    );
+
     await writeJson('fdi.json', {
       ...existing,
       monthly,
+      monthlyComparison,
       monthlyDataSource: 'SBP EasyData API - BOP BPM6',
       monthlySeries: FDI_MONTHLY_SERIES,
       monthlyDataCoverage,

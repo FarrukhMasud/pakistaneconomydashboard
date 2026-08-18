@@ -7,7 +7,7 @@ import SummaryCard from './ui/SummaryCard';
 import ExpandableTile from './ui/ExpandableTile';
 import SeriesCoverageNote from './ui/SeriesCoverageNote';
 import { LoadingCard, ErrorCard, UnavailableCard } from './ui/DataState';
-import { pctChange, fmtUSD, buildYoYOverlay, formatMonthYear, deriveFiscalLabels } from '../utils/periodHelpers';
+import { pctChange, fmtUSD, buildYoYOverlay, formatMonthYear, deriveFiscalLabels, buildMonthlyComparisonFromSeries, preferNewerMonthlyComparison, isClosedFiscalPeriod } from '../utils/periodHelpers';
 import { countryFlagPlugin, countryLabel } from '../utils/countryLabels';
 import useI18n from '../i18n/useI18n';
 
@@ -18,7 +18,7 @@ export default function FdiSection() {
   if (loading) return <LoadingCard label="Loading FDI data…" />;
   if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load FDI data" />;
 
-  const { annual, by_sector, by_country, fytdComparison, monthlyComparison, monthly = [], sectorPeriod, sectorPriorPeriod, lastUpdated: fdiLU } = data;
+  const { annual, by_sector, by_country, fytdComparison, monthlyComparison: workbookMonthlyComparison, monthly = [], sectorPeriod, sectorPriorPeriod, lastUpdated: fdiLU } = data;
 
     if (!Array.isArray(annual) || !annual.length) {
       return <UnavailableCard label="Could not load FDI data" reason="Annual FDI series is empty." />;
@@ -32,6 +32,11 @@ export default function FdiSection() {
 
   // FYTD comparison
   const fytd = fytdComparison;
+  const monthlyComparison = preferNewerMonthlyComparison(
+    workbookMonthlyComparison,
+    buildMonthlyComparisonFromSeries(monthly, 'net_fdi'),
+  );
+  const fytdClosed = isClosedFiscalPeriod(fytd?.period);
   const fytdChg = fytd?.prior ? pctChange(fytd.current.net_fdi, fytd.prior.net_fdi) : null;
   const latestMonthly = monthly.at(-1) || null;
   const latestMonthlyYear = latestMonthly ? Number(latestMonthly.date.slice(0, 4)) : null;
@@ -88,18 +93,18 @@ export default function FdiSection() {
         backgroundColor: [COLORS.blue, COLORS.teal],
         borderRadius: 4,
       },
-      {
+      ...(monthlyComparison.prior.inflow != null || monthlyComparison.current.inflow != null ? [{
         label: 'Gross Inflow',
         data: [monthlyComparison.prior.inflow, monthlyComparison.current.inflow],
         backgroundColor: 'rgba(66, 165, 245, 0.35)',
         borderRadius: 4,
-      },
-      {
+      }] : []),
+      ...(monthlyComparison.prior.outflow != null || monthlyComparison.current.outflow != null ? [{
         label: 'Outflow',
         data: [monthlyComparison.prior.outflow, monthlyComparison.current.outflow],
         backgroundColor: 'rgba(239, 83, 80, 0.45)',
         borderRadius: 4,
-      },
+      }] : []),
     ],
   } : null;
 
@@ -308,7 +313,7 @@ export default function FdiSection() {
         />
         {fytd && (
           <SummaryCard
-            title={`${fytd.current.label} (${fytd.period}) — Fiscal YTD`}
+            title={`${fytd.current.label} (${fytd.period}) — ${fytdClosed ? 'Full year' : 'Fiscal YTD'}`}
             accent={COLORS.blue}
             items={[
               { label: 'Net FDI', value: fmtUSD(fytd.current.net_fdi), sub: fytdChg ? `${fytdChg.pct > 0 ? '+' : ''}${fytdChg.pct}% vs ${fytd.prior.label}` : '', direction: fytdChg?.direction, sentiment: fytdChg?.direction === 'up' ? 'positive' : 'negative', color: COLORS.teal },

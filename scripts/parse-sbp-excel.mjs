@@ -47,6 +47,7 @@ import {
 } from './lib/sbp-resolvers.mjs';
 import { parseServicesHeadline } from './lib/services-headline.mjs';
 import { parseReserveObservations } from './lib/reserves-parser.mjs';
+import { fbrCollectionLabel } from '../src/utils/periodHelpers.js';
 
 XLSX.set_fs(fs);
 
@@ -1363,18 +1364,19 @@ async function updateServicesHeadline() {
     freelanceCredit: seriesMap.get(headline.latestMonth)?.freelanceCredit ?? null,
   });
 
-  const recentMonths = [...(existing.recentMonths || [])];
-  const shortMonth = new Intl.DateTimeFormat('en', { month: 'short', timeZone: 'UTC' })
-    .format(new Date(`${headline.latestMonth}-01T00:00:00Z`));
-  const recentLabel = `${shortMonth}-${headline.latestMonth.slice(2, 4)}`;
-  const recentIndex = recentMonths.findIndex((row) => row.month === recentLabel);
-  const recentHeadline = {
-    month: recentLabel,
-    totalCredit: headline.totalServicesLatest,
-    itCredit: headline.latest,
-  };
-  if (recentIndex >= 0) recentMonths[recentIndex] = recentHeadline;
-  else recentMonths.push(recentHeadline);
+  const recentMonths = [...seriesMap.values()]
+    .sort((a, b) => a.month.localeCompare(b.month))
+    .slice(-4)
+    .map((row) => {
+      const [year, month] = String(row.month).split('-');
+      const names = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const label = month ? `${names[Number(month) - 1]}-${String(year).slice(-2)}` : row.month;
+      return {
+        month: label,
+        totalCredit: row.totalCredit,
+        itCredit: row.itCredit,
+      };
+    });
 
   const updated = {
     ...existing,
@@ -1931,7 +1933,7 @@ async function generateKpiFromData() {
         ? `Target ₨${(f.target / 1000).toFixed(2)}T · ${gap >= 0 ? 'surplus' : 'shortfall'} ₨${Math.abs(gap)}B`
         : `Latest: ₨${Math.round(latest.net)}B (${latest.date})`;
       indicators.push({
-        id: 'fbr-tax', label: 'FBR Tax Collection (FYTD)',
+        id: 'fbr-tax', label: fbrCollectionLabel(f),
         value: round2(f.net / 1000), unit: 'T PKR',
         period: f.period,
         change: growthPct, changeUnit: '%',

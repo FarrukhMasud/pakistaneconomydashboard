@@ -7,7 +7,7 @@ import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import PeriodCompare from './ui/PeriodCompare';
 import { LoadingCard, ErrorCard, UnavailableCard } from './ui/DataState';
-import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, sumField, avgField, buildYoYOverlay, buildFytdSeries } from '../utils/periodHelpers';
+import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, sumField, avgField, buildYoYOverlay, buildFytdSeries, formatFySummaryTitle, fytdViewReady, resolveCompareMode, fytdDisabledReason } from '../utils/periodHelpers';
 
 const CORRIDORS = [
   { field: 'saudiArabia', label: 'Saudi Arabia', color: COLORS.teal },
@@ -35,9 +35,7 @@ function withOtherCountries(row) {
 }
 
 export default function RemittancesSection() {
-  const { compareMode, setCompareMode } = useShareableChartState();
-    const showYoY = compareMode === 'yoy';
-    const showFytd = compareMode === 'fytd';
+  const { compareMode, setCompareMode } = useShareableChartState('yoy');
     const { data, loading, error, retry } = useData('remittances.json');
 
     if (loading) return <LoadingCard label="Loading remittances…" />;
@@ -50,6 +48,11 @@ export default function RemittancesSection() {
 
     const cy = currentCalendarYear(monthly);
     const fy = currentFiscalYear(monthly);
+    const fyReady = fytdViewReady(fy);
+    const fytdReason = fytdDisabledReason(fy);
+    const effectiveCompare = resolveCompareMode(compareMode, fy);
+    const showYoY = effectiveCompare === 'yoy';
+    const showFytd = effectiveCompare === 'fytd';
     const fytdTotal = buildFytdSeries(monthly, 'total');
     const corridorRows = monthly.slice(-36).map(withOtherCountries);
     const latestCorridor = corridorRows.at(-1);
@@ -221,7 +224,7 @@ export default function RemittancesSection() {
             )}
             {fy && (
               <SummaryCard
-                title={`${fy.fyLabel} (${fy.rangeLabel}) — Fiscal YTD`}
+                title={formatFySummaryTitle(fy)}
                 accent={COLORS.blue}
                 items={buildItems(fy, `vs ${fy.priorLabel}`)}
                 footnote={`${fy.months} month${fy.months > 1 ? 's' : ''} · Source: SBP EasyData API`}
@@ -269,7 +272,13 @@ export default function RemittancesSection() {
           dataCoverage={remDC}
           provenanceKeys={['remittances.monthly.total']}
         >
-          <PeriodCompare mode={compareMode} onChange={setCompareMode} modes={['yoy', 'fytd']} />
+          <PeriodCompare
+            mode={effectiveCompare}
+            onChange={setCompareMode}
+            modes={['yoy', 'fytd']}
+            disabledModes={fytdReason ? { fytd: fytdReason } : {}}
+            note={!fyReady && compareMode === 'fytd' ? fytdReason : null}
+          />
           <div className="chart-container">
             <Bar data={monthlyData} options={monthlyOptions} />
           </div>

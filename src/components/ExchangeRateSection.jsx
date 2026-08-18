@@ -5,7 +5,7 @@ import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import { LoadingCard, ErrorCard } from './ui/DataState';
-import { currentCalendarYear, currentFiscalYear, pctChange, fmtRate } from '../utils/periodHelpers';
+import { currentCalendarYear, currentFiscalYear, pctChange, fmtRate, formatFySummaryTitle } from '../utils/periodHelpers';
 
 function formatDate(dateStr) {
   const [y, m] = dateStr.split('-');
@@ -100,8 +100,9 @@ export default function ExchangeRateSection() {
           if (!period || !period.rows.length) return [];
           const start = period.rows[0];
           const end = period.rows[period.rows.length - 1];
+          const canCompare = period.rows.length >= 2;
           return currencies.map(c => {
-            const chg = pctChange(end[c], start[c]);
+            const chg = canCompare ? pctChange(end[c], start[c]) : { pct: null, direction: 'flat' };
             return {
               label: `PKR / ${c}`,
               value: fmtRate(end[c]),
@@ -127,10 +128,10 @@ export default function ExchangeRateSection() {
             )}
             {fyItems.length > 0 && (
               <SummaryCard
-                title={`${fy.fyLabel} (${fy.rangeLabel}) — Fiscal YTD`}
+                title={formatFySummaryTitle(fy)}
                 accent={COLORS.blue}
                 items={fyItems}
-                footnote={`${fy.months} month${fy.months > 1 ? 's' : ''} · Source: SBP`}
+                footnote={`${fy.months} month${fy.months > 1 ? 's' : ''} · Source: SBP${fy.months < 2 ? ' · FY change appears after a second month' : ''}`}
               />
             )}
           </div>

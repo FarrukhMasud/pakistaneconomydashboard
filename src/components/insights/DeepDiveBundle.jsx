@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { baseBarOptions } from '../../utils/chartConfig';
-import { isFiniteNumber } from '../../utils/periodHelpers';
+import { isFiniteNumber, isClosedFiscalPeriod } from '../../utils/periodHelpers';
 import SectionHeader from '../SectionHeader';
 import { LoadingCard, ErrorCard } from '../ui/DataState';
 import {
@@ -385,7 +385,7 @@ export function RevenueTargetMeterSection() {
         }]}
       />
       <div className="insight-grid">
-        {fytd && isFiniteNumber(fytd.net) && isFiniteNumber(fytd.target) && <InsightCard title="FYTD pace" value={`${fmtPkrBn(fytd.net)} collected`} meta={`${fmtPkrBn(Math.abs(fytd.net - fytd.target))} ${fytd.net >= fytd.target ? 'ahead' : 'short'} vs target`} body={`${fytd.period}; prior-year same-period collection was ${fmtPkrBn(fytd.priorNet)}.`} source={fytd.sourceLabel || 'FBR'} sourceUrl={fytd.source} tone={fytd.net >= fytd.target ? 'positive' : 'negative'} />}
+        {fytd && isFiniteNumber(fytd.net) && isFiniteNumber(fytd.target) && <InsightCard title={isClosedFiscalPeriod(fytd.period) ? `${fytd.fyLabel || 'Full year'} result` : 'FYTD pace'} value={`${fmtPkrBn(fytd.net)} collected`} meta={`${fmtPkrBn(Math.abs(fytd.net - fytd.target))} ${fytd.net >= fytd.target ? 'ahead' : 'short'} vs target`} body={`${fytd.period}; prior-year same-period collection was ${fmtPkrBn(fytd.priorNet)}.`} source={fytd.sourceLabel || 'FBR'} sourceUrl={fytd.source} tone={fytd.net >= fytd.target ? 'positive' : 'negative'} />}
                 {fy26BudgetGap != null && <InsightCard title={`${currentLabel} budget target gap`} value={`${fmtPkrBn(Math.abs(fy26BudgetGap))} ${fy26BudgetGap >= 0 ? 'ahead' : 'short'}`} meta={`Actual ${fmtPkrBn(fy26.actual)} vs budget ${fmtPkrBn(fy26.budgetTarget)}`} body={fy26.note} source="FBR / budget documents" sourceUrl={fy26.sources?.[0]?.url} tone={fy26BudgetGap >= 0 ? 'positive' : 'negative'} />}
                 {fy26RevisedGap != null && <InsightCard title={`${currentLabel} revised target gap`} value={`${fmtPkrBn(Math.abs(fy26RevisedGap))} ${fy26RevisedGap >= 0 ? 'ahead' : 'short'}`} meta={`Revised target ${fmtPkrBn(fy26.revisedTarget)}`} body="Shows whether the year ended above or below the revised IMF/FBR target in the source data." source="FBR / IMF reporting" sourceUrl={fy26.sources?.[0]?.url} tone={fy26RevisedGap >= 0 ? 'positive' : 'negative'} />}
                 {fy27Increase != null && <InsightCard title={`${nextLabel} required uplift`} value={fmtPct(fy27Increase)} meta={`${fmtPkrBn(fy27.budgetTarget)} target`} body={`Increase implied by the ${nextLabel} budget target compared with the ${currentLabel} ${fy26ReferenceLabel}.`} source="Finance Division / FBR" sourceUrl={fy27.sources?.[0]?.url} tone="neutral" />}

@@ -7,7 +7,17 @@ import {
   deriveFiscalLabels,
   currentFiscalYear,
   buildFytdSeries,
+  buildYoYOverlay,
+  buildMonthlyComparisonFromSeries,
+  preferNewerMonthlyComparison,
   formatMonthYear,
+  formatFySummaryTitle,
+  isClosedFiscalPeriod,
+  isThinFiscalYear,
+  isSparseFiscalYear,
+  fytdViewReady,
+  resolveCompareMode,
+  fbrCollectionLabel,
 } from '../../src/utils/periodHelpers.js';
 
 test('latestRow and previousRow handle empty and short arrays', () => {
@@ -54,7 +64,76 @@ test('currentFiscalYear builds FYTD windows from data', () => {
   const fy = currentFiscalYear(rows);
   assert.equal(fy.fyLabel, 'FY26');
   assert.equal(fy.months, 3);
+  assert.equal(fy.elapsedMonths, 3);
   assert.equal(fy.prior.length, 2);
+  assert.equal(fy.rangeLabel, 'Jul 2025 – Sep 2025');
+});
+
+test('July-only FY is labelled as a first month and treated as too thin for FYTD charts', () => {
+  const fy = currentFiscalYear([
+    { date: '2025-07', net: 10 },
+    { date: '2026-07', net: 12 },
+  ]);
+  assert.equal(fy.fyLabel, 'FY27');
+  assert.equal(fy.elapsedMonths, 1);
+  assert.equal(fy.months, 1);
+  assert.equal(fy.rangeLabel, 'Jul 2026');
+  assert.equal(isThinFiscalYear(fy), true);
+  assert.equal(fytdViewReady(fy), false);
+  assert.equal(resolveCompareMode('fytd', fy), 'yoy');
+  assert.equal(formatFySummaryTitle(fy), 'FY27 · Jul 2026 only — First month');
+});
+
+test('sparse FY windows are not chart-ready even when the calendar span is long', () => {
+  const fy = currentFiscalYear([
+    { date: '2025-07', net: 754 },
+    { date: '2026-01', net: 1015 },
+  ]);
+  assert.equal(fy.fyLabel, 'FY26');
+  assert.equal(fy.elapsedMonths, 7);
+  assert.equal(fy.months, 2);
+  assert.equal(isSparseFiscalYear(fy), true);
+  assert.equal(fytdViewReady(fy), false);
+  assert.equal(resolveCompareMode('fytd', fy), 'yoy');
+});
+
+test('closed Jul–Jun periods are not labelled FYTD', () => {
+  assert.equal(isClosedFiscalPeriod('Jul–Jun FY2026'), true);
+  assert.equal(isClosedFiscalPeriod('Jul-Jun FY26'), true);
+  assert.equal(isClosedFiscalPeriod('Jul–Jan FY2027'), false);
+  assert.equal(
+    fbrCollectionLabel({ period: 'Jul–Jun FY2026', fyLabel: 'FY2026' }),
+    'FBR Tax Collection (FY2026)',
+  );
+});
+
+test('monthly comparison prefers the later monthly-series month over a stale workbook cut', () => {
+  const derived = buildMonthlyComparisonFromSeries([
+    { date: '2025-07', net_fdi: 223 },
+    { date: '2026-07', net_fdi: 179 },
+  ], 'net_fdi');
+  assert.equal(derived.month, 'Jul');
+  assert.equal(derived.current.net_fdi, 179);
+  assert.equal(derived.prior.net_fdi, 223);
+
+  const chosen = preferNewerMonthlyComparison({
+    month: 'May',
+    current: { label: 'FY2026', net_fdi: 214 },
+    prior: { label: 'FY2025', net_fdi: 232 },
+  }, derived);
+  assert.equal(chosen.month, 'Jul');
+  assert.equal(chosen.source, 'monthly-series');
+});
+
+test('YoY overlay does not pair weekly dates with a prior monthly stamp when matchGrain is on', () => {
+  const rows = [
+    { date: '2025-07', sbp: 14000 },
+    { date: '2026-07-10', sbp: 17200 },
+  ];
+  const loose = buildYoYOverlay(rows, 'sbp');
+  assert.equal(loose.priorData[1], 14000);
+  const strict = buildYoYOverlay(rows, 'sbp', { matchGrain: true });
+  assert.equal(strict.priorData[1], null);
 });
 
 test('formatMonthYear is timezone-safe', () => {

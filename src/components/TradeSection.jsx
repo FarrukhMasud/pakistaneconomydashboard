@@ -13,8 +13,9 @@ import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import PeriodCompare from './ui/PeriodCompare';
 import { LoadingCard, ErrorCard } from './ui/DataState';
-import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, sumField, buildYoYOverlay, buildFytdSeries, formatMonthYear } from '../utils/periodHelpers';
+import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, sumField, buildYoYOverlay, buildFytdSeries, formatMonthYear, formatFySummaryTitle, fytdViewReady, resolveCompareMode, fytdDisabledReason } from '../utils/periodHelpers';
 import { countryFlagPlugin, countryLabel } from '../utils/countryLabels';
+import SeriesCoverageNote from './ui/SeriesCoverageNote';
 
 // SBP's country-level export receipt and import payment tables are published
 // after the headline monthly trade figures, so these two charts can stop one
@@ -24,8 +25,6 @@ const COUNTRY_COVERAGE_NOTE =
 
 export default function TradeSection() {
   const { compareMode, setCompareMode } = useShareableChartState('yoy');
-    const showYoY = compareMode === 'yoy';
-    const showFytd = compareMode === 'fytd';
     const { data, loading, error, retry } = useData('trade.json');
 
     if (loading) return <LoadingCard label="Loading trade data…" />;
@@ -48,6 +47,11 @@ export default function TradeSection() {
     // Current year summary
     const cy = currentCalendarYear(monthly);
     const fy = currentFiscalYear(monthly);
+    const fyReady = fytdViewReady(fy);
+    const fytdReason = fytdDisabledReason(fy);
+    const effectiveCompare = resolveCompareMode(compareMode, fy);
+    const showYoY = effectiveCompare === 'yoy';
+    const showFytd = effectiveCompare === 'fytd';
     const fytdBalance = buildFytdSeries(monthly, 'balance');
     const fytdImports = buildFytdSeries(monthly, 'imports');
     const fytdExports = buildFytdSeries(monthly, 'exports');
@@ -314,6 +318,14 @@ export default function TradeSection() {
         ]}
       />
 
+      <SeriesCoverageNote
+        items={[
+          { label: 'Headline goods trade', period: tradeDC, source: 'SBP BOP goods' },
+          { label: 'Export destinations', period: exportCountryPeriod, source: 'SBP country tables' },
+          { label: 'Import sources', period: importCountryPeriod, source: 'SBP country tables' },
+        ]}
+      />
+
       {(cy || fy) && (
         <div className="summary-pair">
           {cy && (
@@ -339,7 +351,7 @@ export default function TradeSection() {
           )}
           {fy && (
             <SummaryCard
-              title={`${fy.fyLabel} (${fy.rangeLabel}) — Fiscal YTD`}
+              title={formatFySummaryTitle(fy)}
               accent={COLORS.blue}
               items={(() => {
                 const fytdExports = sumField(fy.rows, 'exports');
@@ -384,14 +396,20 @@ export default function TradeSection() {
           lastUpdated={tradeLU}
           dataCoverage={tradeDC}
         >
-          <PeriodCompare mode={compareMode} onChange={setCompareMode} modes={['yoy', 'fytd']} />
+          <PeriodCompare
+            mode={effectiveCompare}
+            onChange={setCompareMode}
+            modes={['yoy', 'fytd']}
+            disabledModes={fytdReason ? { fytd: fytdReason } : {}}
+            note={!fyReady && compareMode === 'fytd' ? fytdReason : null}
+          />
           <div className="chart-container">
             <Bar data={barData} options={barOptions} />
           </div>
         </ChartCard>
       </div>
 
-      {cumulativeFlowData && cumulativeBalanceData && (
+      {fyReady && cumulativeFlowData && cumulativeBalanceData && (
         <div className="section-grid" style={{ marginTop: '1.5rem' }}>
           <ChartCard
             title="Cumulative Imports & Exports (FYTD)"

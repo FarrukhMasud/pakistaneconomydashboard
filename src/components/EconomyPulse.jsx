@@ -99,6 +99,7 @@ export default function EconomyPulse({ onNavigate }) {
       if (!row) return null;
       return {
         ...spec,
+        label: row.label || spec.label,
         value: row.value,
         decimals: getKpiDecimals(row),
         unit: formatKpiUnit(row.unit),

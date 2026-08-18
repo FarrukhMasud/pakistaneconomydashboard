@@ -10,14 +10,13 @@ import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import PeriodCompare from './ui/PeriodCompare';
 import { LoadingCard, ErrorCard, UnavailableCard } from './ui/DataState';
-import { currentCalendarYear, currentFiscalYear, fmtPct, avgField, buildYoYOverlay, buildFytdSeries, formatMonthYear, latestRow } from '../utils/periodHelpers';
+import { currentCalendarYear, currentFiscalYear, fmtPct, avgField, buildYoYOverlay, formatMonthYear, latestRow, formatFySummaryTitle } from '../utils/periodHelpers';
 
 const formatDate = formatMonthYear;
 
 export default function InflationSection() {
-  const { compareMode, setCompareMode } = useShareableChartState();
+  const { compareMode, setCompareMode } = useShareableChartState('yoy');
   const showYoY = compareMode === 'yoy';
-  const showFytd = compareMode === 'fytd';
   const { data, loading, error, retry } = useData('inflation.json');
 
   if (loading) return <LoadingCard label="Loading inflation data…" />;
@@ -36,25 +35,22 @@ export default function InflationSection() {
 
   const cy = currentCalendarYear(national_cpi.data);
   const fy = currentFiscalYear(national_cpi.data);
-  const fytdCpi = buildFytdSeries(national_cpi.data, 'value');
 
-  const cpiLabels = showFytd && fytdCpi
-    ? fytdCpi.labels
-    : national_cpi.data.map((d) => formatDate(d.date));
+  const cpiLabels = national_cpi.data.map((d) => formatDate(d.date));
   const tickCallback = (_val, idx) => (idx % 6 === 0 || idx === cpiLabels.length - 1 ? cpiLabels[idx] : '');
 
   // --- Chart 1: National CPI Headline ---
   const { priorData: cpiPrior, priorLabel: cpiPriorLabel } = buildYoYOverlay(national_cpi.data, 'value');
-  const cpiValues = showFytd && fytdCpi ? fytdCpi.current : national_cpi.data.map((d) => d.value);
-  const cpiCompare = showFytd && fytdCpi ? fytdCpi.prior : cpiPrior;
-  const cpiCompareLabel = showFytd && fytdCpi ? `${fytdCpi.priorLabel} same months` : cpiPriorLabel;
-  const showCpiCompare = showYoY || (showFytd && cpiCompare.some((v) => v != null));
+  const cpiValues = national_cpi.data.map((d) => d.value);
+  const cpiCompare = cpiPrior;
+  const cpiCompareLabel = cpiPriorLabel;
+  const showCpiCompare = showYoY && cpiCompare.some((v) => v != null);
 
   const cpiLineData = {
     labels: cpiLabels,
     datasets: [
       {
-        label: showFytd && fytdCpi ? `${fytdCpi.currentLabel} National CPI YoY (%)` : 'National CPI YoY (%)',
+        label: 'National CPI YoY (%)',
         data: cpiValues,
         borderColor: COLORS.coral,
         backgroundColor: COLORS.coralAlpha,
@@ -332,7 +328,7 @@ export default function InflationSection() {
             />
             {fy && (
               <SummaryCard
-                title={`${fy.fyLabel} (${fy.rangeLabel}) — Fiscal YTD`}
+                title={formatFySummaryTitle(fy)}
                 accent={COLORS.blue}
                 items={[
                   { label: 'SPI', value: fmtPct(latestSpi.value), sub: formatDate(latestSpi.date), color: COLORS.teal },
@@ -356,7 +352,7 @@ export default function InflationSection() {
           lastUpdated={lastUpdated}
           provenanceKeys={['inflation.nationalCpi.latest']}
         >
-          <PeriodCompare mode={compareMode} onChange={setCompareMode} modes={['yoy', 'fytd']} />
+          <PeriodCompare mode={compareMode} onChange={setCompareMode} modes={['yoy']} />
           <div style={{ height: 320 }}>
             <Line data={cpiLineData} options={cpiLineOptions} />
           </div>

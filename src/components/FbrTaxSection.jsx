@@ -7,7 +7,7 @@ import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import PeriodCompare from './ui/PeriodCompare';
 import { LoadingCard, ErrorCard, UnavailableCard } from './ui/DataState';
-import { formatMonthYear, pctChange, buildYoYOverlay, buildFytdSeries } from '../utils/periodHelpers';
+import { formatMonthYear, pctChange, buildYoYOverlay, buildFytdSeries, currentFiscalYear, resolveCompareMode, fytdDisabledReason, fytdViewReady, isClosedFiscalPeriod } from '../utils/periodHelpers';
 import './ui/FbrTax.css';
 
 const TAX_HEADS = [
@@ -41,9 +41,7 @@ function provenanceLabel(row) {
 }
 
 export default function FbrTaxSection() {
-  const { compareMode, setCompareMode } = useShareableChartState();
-  const showYoY = compareMode === 'yoy';
-  const showFytd = compareMode === 'fytd';
+  const { compareMode, setCompareMode } = useShareableChartState('yoy');
   const { data, loading, error, retry } = useData('fbr-tax.json');
 
   if (loading) return <LoadingCard label="Loading FBR tax data…" />;
@@ -66,6 +64,13 @@ export default function FbrTaxSection() {
   if (!sorted.length && !annualTargets.length && !fyTotals.length) {
     return <UnavailableCard label="Could not load FBR tax data" reason="FBR series is empty." />;
   }
+  const fyWindow = currentFiscalYear(sorted);
+  const fyReady = fytdViewReady(fyWindow);
+  const fytdReason = fytdDisabledReason(fyWindow);
+  const effectiveCompare = resolveCompareMode(compareMode, fyWindow);
+  const showYoY = effectiveCompare === 'yoy';
+  const showFytd = effectiveCompare === 'fytd';
+  const closedFytd = isClosedFiscalPeriod(fytd?.period);
   const fytdNet = buildFytdSeries(sorted, 'net');
   const { priorData: netPrior, priorLabel: netPriorLabel } = buildYoYOverlay(sorted, 'net');
   const labels = showFytd && fytdNet ? fytdNet.labels : sorted.map((d) => formatMonthYear(d.date));
@@ -315,7 +320,7 @@ export default function FbrTaxSection() {
   if (fytd) {
     const fytdGrowth = fytd.priorNet ? pctChange(fytd.net, fytd.priorNet) : { pct: null, direction: 'flat' };
     summaryItems.push({
-      label: `FYTD · ${fytd.period}`,
+      label: `${closedFytd ? 'Full year' : 'FYTD'} · ${fytd.period}`,
       value: fmtBn(fytd.net),
       sub: fytdGrowth.pct != null ? `${fytdGrowth.pct >= 0 ? '+' : ''}${fytdGrowth.pct}% vs prior FY` : undefined,
       direction: fytdGrowth.direction,
@@ -324,7 +329,7 @@ export default function FbrTaxSection() {
     if (fytd.target != null) {
       const diff = fytd.net - fytd.target;
       summaryItems.push({
-        label: 'FYTD vs target',
+        label: closedFytd ? `${fytd.fyLabel || 'Full year'} vs target` : 'FYTD vs target',
         value: `${diff >= 0 ? '+' : '−'}${fmtBn(Math.abs(diff))}`,
         sub: diff >= 0 ? 'Ahead of target' : 'Behind target',
         sentiment: diff >= 0 ? 'positive' : 'negative',
@@ -365,7 +370,7 @@ export default function FbrTaxSection() {
         sourceLinks={[
           { label: 'FBR Official Site', url: 'https://www.fbr.gov.pk' },
           { label: 'FBR Press Releases', url: 'https://www.fbr.gov.pk/categ/press-releases/51147/131163' },
-          ...(fytd?.source ? [{ label: fytd.sourceLabel || 'FYTD source', url: fytd.source }] : []),
+          ...(fytd?.source ? [{ label: fytd.sourceLabel || (closedFytd ? 'Full-year source' : 'FYTD source'), url: fytd.source }] : []),
         ]}
       />
 
@@ -415,8 +420,8 @@ export default function FbrTaxSection() {
 
         {hasRunRate && (
           <ChartCard
-            title="Run-Rate Tracker — Is FBR On Pace?"
-            description={`Cumulative collection so far this fiscal year (${fytd.period}) against the run-rate needed to hit its target by this point, with the same period a year earlier for context. ${runRateGap != null && runRateGap < 0 ? `Reported collection is ₨${Math.abs(runRateGap).toLocaleString()}bn behind the required pace` : 'Reported collection is ahead of the required pace'}${annualForFytd?.budgetTarget ? `; the full-year target is ₨${annualForFytd.budgetTarget.toLocaleString()}bn` : ''}.`}
+            title={closedFytd ? `${fytd.fyLabel} Collection vs Target` : 'Run-Rate Tracker — Is FBR On Pace?'}
+            description={`${closedFytd ? `Full-year collection for ${fytd.period}` : `Cumulative collection so far this fiscal year (${fytd.period})`} against the ${closedFytd ? 'full-year target' : 'run-rate needed to hit its target by this point'}, with the same period a year earlier for context. ${runRateGap != null && runRateGap < 0 ? `Reported collection is ₨${Math.abs(runRateGap).toLocaleString()}bn behind the required pace` : 'Reported collection is ahead of the required pace'}${annualForFytd?.budgetTarget ? `; the full-year target is ₨${annualForFytd.budgetTarget.toLocaleString()}bn` : ''}.`}
             source={fytd.sourceLabel || 'Provisional FBR reporting'}
             dataSource={dataSource}
             dataCoverage={fytd.period}
@@ -437,7 +442,13 @@ export default function FbrTaxSection() {
           dataCoverage={latest ? fmtDate(latest.date) : undefined}
           lastUpdated={lastUpdated}
         >
-                    <PeriodCompare mode={compareMode} onChange={setCompareMode} modes={['yoy', 'fytd']} />
+                    <PeriodCompare
+                      mode={effectiveCompare}
+                      onChange={setCompareMode}
+                      modes={['yoy', 'fytd']}
+                      disabledModes={fytdReason ? { fytd: fytdReason } : {}}
+                      note={!fyReady && compareMode === 'fytd' ? fytdReason : null}
+                    />
                     <div className="chart-container">
                       <Bar data={netData} options={netOptions} />
                     </div>

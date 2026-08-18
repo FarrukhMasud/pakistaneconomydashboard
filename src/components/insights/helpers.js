@@ -1,6 +1,6 @@
 import { useData } from '../../hooks/useData';
 import { COLORS } from '../../utils/chartConfig';
-import { deriveFiscalLabels } from '../../utils/periodHelpers';
+import { deriveFiscalLabels, isClosedFiscalPeriod } from '../../utils/periodHelpers';
 
 export const SOURCE_LINKS = [
   { label: 'SBP', url: 'https://www.sbp.org.pk' },
@@ -13,7 +13,8 @@ export const SOURCE_LINKS = [
 
 export function sourceLinksWithFytd(fytd) {
   if (!fytd?.source) return SOURCE_LINKS;
-  return [...SOURCE_LINKS, { label: fytd.sourceLabel || 'FBR FYTD source', url: fytd.source }];
+  const closed = isClosedFiscalPeriod(fytd.period);
+  return [...SOURCE_LINKS, { label: fytd.sourceLabel || (closed ? 'FBR full-year source' : 'FBR FYTD source'), url: fytd.source }];
 }
 
 export function fmt(value, digits = 1) {

@@ -227,22 +227,28 @@ export function buildFytdSeries(rows, field) {
  * @param {string} field – field name to extract (e.g. 'total', 'sbp')
  * @returns {{ priorData: Array, priorLabel: string }} – array aligned to rows, null where no prior data
  */
-export function buildYoYOverlay(rows, field) {
+export function buildYoYOverlay(rows, field, { matchGrain = false } = {}) {
   if (!rows?.length) return { priorData: [], priorLabel: '' };
 
+  const byDate = {};
   const byYM = {};
-  rows.forEach(r => {
+  rows.forEach((r) => {
     const { year, month } = parseYM(r.date);
+    byDate[r.date] = r[field];
     byYM[`${year}-${month}`] = r[field];
   });
 
   const latest = parseYM(rows[rows.length - 1].date);
   const priorYear = latest.year - 1;
 
-  const priorData = rows.map(r => {
+  const priorData = rows.map((r) => {
     const { year, month } = parseYM(r.date);
-    const pKey = `${year - 1}-${month}`;
-    return byYM[pKey] ?? null;
+    if (String(r.date).length > 7) {
+      const exact = String(r.date).replace(/^\d{4}/, String(year - 1));
+      if (Object.prototype.hasOwnProperty.call(byDate, exact)) return byDate[exact];
+      if (matchGrain) return null;
+    }
+    return byYM[`${year - 1}-${month}`] ?? null;
   });
 
   return {
@@ -295,7 +301,10 @@ export function currentFiscalYear(rows) {
       return false;
     });
 
-  const rangeLabel = `Jul ${fyStartYear} – ${MONTH_NAMES[latest.month - 1]} ${latest.year}`;
+  const elapsedMonths = latest.month >= 7 ? latest.month - 6 : latest.month + 6;
+  const rangeLabel = elapsedMonths === 1
+    ? `${MONTH_NAMES[latest.month - 1]} ${latest.year}`
+    : `Jul ${fyStartYear} – ${MONTH_NAMES[latest.month - 1]} ${latest.year}`;
 
   return {
     fy,
@@ -305,5 +314,124 @@ export function currentFiscalYear(rows) {
     priorLabel: `FY${String(priorFY).slice(-2)}`,
     rangeLabel,
     months: fyRows.length,
+    elapsedMonths,
   };
+}
+
+/** Calendar months elapsed in the current FY (Jul = 1 … Jun = 12). */
+export const MIN_FYTD_CHART_MONTHS = 3;
+
+export function isThinFiscalYear(fy, minMonths = MIN_FYTD_CHART_MONTHS) {
+  if (!fy) return true;
+  const elapsed = fy.elapsedMonths ?? fy.months ?? 0;
+  return elapsed < minMonths;
+}
+
+/** True when the FY window is long but most months are missing. */
+export function isSparseFiscalYear(fy) {
+  if (!fy?.rows?.length) return true;
+  const elapsed = fy.elapsedMonths ?? fy.months ?? fy.rows.length;
+  if (elapsed <= 1) return false;
+  return fy.rows.length < Math.max(2, Math.ceil(elapsed * 0.5));
+}
+
+export function fytdViewReady(fy, minMonths = MIN_FYTD_CHART_MONTHS) {
+  return Boolean(fy?.rows?.length) && !isThinFiscalYear(fy, minMonths) && !isSparseFiscalYear(fy);
+}
+
+/** If FYTD was requested but the window is too thin or gappy, fall back to YoY. */
+export function resolveCompareMode(requested, fy, minMonths = MIN_FYTD_CHART_MONTHS) {
+  if (requested !== 'fytd') return requested;
+  if (!fytdViewReady(fy, minMonths)) return 'yoy';
+  return 'fytd';
+}
+
+export function fytdDisabledReason(fy, minMonths = MIN_FYTD_CHART_MONTHS) {
+  if (!fy?.rows?.length) return 'FYTD comparison needs fiscal-year data.';
+  if (isThinFiscalYear(fy, minMonths)) {
+    return 'FYTD charts need at least 3 months of the new fiscal year.';
+  }
+  if (isSparseFiscalYear(fy)) {
+    return 'FYTD view needs a more complete monthly path for this fiscal year.';
+  }
+  return null;
+}
+
+export function formatFySummaryTitle(fy, { closed = false } = {}) {
+  if (!fy) return '';
+  if (closed) return `${fy.fyLabel} (${fy.rangeLabel}) — Full year`;
+  if ((fy.elapsedMonths ?? fy.months) === 1) {
+    return `${fy.fyLabel} · ${fy.rangeLabel} only — First month`;
+  }
+  return `${fy.fyLabel} (${fy.rangeLabel}) — Fiscal YTD`;
+}
+
+/** Jul–Jun (any dash) is a completed fiscal year, not an in-progress FYTD. */
+export function isClosedFiscalPeriod(period) {
+  return /jul\s*[–-]\s*jun/i.test(String(period || ''));
+}
+
+export function fbrCollectionLabel(fytd) {
+  if (!fytd) return 'FBR Tax Collection';
+  if (isClosedFiscalPeriod(fytd.period)) {
+    return `FBR Tax Collection (${fytd.fyLabel || 'full year'})`;
+  }
+  return 'FBR Tax Collection (FYTD)';
+}
+
+function monthNameToNumber(name) {
+  if (!name) return null;
+  const idx = MONTH_NAMES.findIndex((m) => m.toLowerCase() === String(name).slice(0, 3).toLowerCase());
+  return idx >= 0 ? idx + 1 : null;
+}
+
+/** Build a same-month YoY snapshot from a monthly series (latest vs year-ago). */
+export function buildMonthlyComparisonFromSeries(rows, field = 'net_fdi') {
+  if (!rows?.length) return null;
+  const sorted = [...rows].sort((a, b) => String(a.date).localeCompare(String(b.date)));
+  const latest = sorted[sorted.length - 1];
+  const { year, month } = parseYM(latest.date);
+  if (!year || !month || latest[field] == null) return null;
+  const priorDate = `${year - 1}-${String(month).padStart(2, '0')}`;
+  const prior = sorted.find((row) => String(row.date).startsWith(priorDate));
+  if (!prior || prior[field] == null) return null;
+  const currentLabels = deriveFiscalLabels(latest.date);
+  const priorLabels = deriveFiscalLabels(prior.date);
+  return {
+    month: MONTH_NAMES[month - 1],
+    current: {
+      label: currentLabels?.fyFull || `FY${year}`,
+      net_fdi: latest.net_fdi ?? latest[field],
+      inflow: latest.inflow ?? null,
+      outflow: latest.outflow ?? null,
+      equity: latest.equity ?? null,
+      debt: latest.debt ?? null,
+      date: latest.date,
+    },
+    prior: {
+      label: priorLabels?.fyFull || `FY${year - 1}`,
+      net_fdi: prior.net_fdi ?? prior[field],
+      inflow: prior.inflow ?? null,
+      outflow: prior.outflow ?? null,
+      date: prior.date,
+    },
+    source: 'monthly-series',
+  };
+}
+
+/** Prefer the monthly-series snapshot when it covers a later month/FY than the workbook cut. */
+export function preferNewerMonthlyComparison(workbook, seriesDerived) {
+  if (!seriesDerived) return workbook || null;
+  if (!workbook) return seriesDerived;
+  const seriesDate = seriesDerived.current?.date;
+  if (!seriesDate) return workbook;
+  const series = parseYM(seriesDate);
+  const wbMonth = monthNameToNumber(workbook.month);
+  const wbFy = parseInt(String(workbook.current?.label || '').replace(/\D/g, ''), 10);
+  const seriesFy = deriveFiscalLabels(seriesDate)?.fy;
+  if (seriesFy && wbFy && seriesFy > wbFy) return seriesDerived;
+  if (seriesFy && wbFy && seriesFy === wbFy && wbMonth != null && series.month > wbMonth) {
+    return seriesDerived;
+  }
+  return workbook;
 }

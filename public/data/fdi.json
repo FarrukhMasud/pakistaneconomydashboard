@@ -259,21 +259,22 @@
     "sourceLocation": "\"Total\" row, net FDI column of the current fiscal-year-to-date block"
   },
   "monthlyComparison": {
-    "month": "May",
+    "month": "Jul",
     "current": {
-      "label": "FY2026",
-      "net_fdi": 214.29,
-      "inflow": 295.07,
-      "outflow": 80.78,
-      "status": "provisional"
+      "label": "FY2027",
+      "net_fdi": 179,
+      "inflow": null,
+      "outflow": null,
+      "date": "2026-07"
     },
     "prior": {
-      "label": "FY2025",
-      "net_fdi": 231.91,
-      "inflow": 320.85,
-      "outflow": 88.94,
-      "status": null
-    }
+      "label": "FY2026",
+      "net_fdi": 224,
+      "inflow": null,
+      "outflow": null,
+      "date": "2025-07"
+    },
+    "source": "monthly-series"
   },
   "monthly": [
     {

@@ -10,7 +10,7 @@ import PeriodCompare from './ui/PeriodCompare';
 import SeriesFocus from './ui/SeriesFocus';
 import { applySeriesFocus } from '../utils/seriesFocus';
 import { LoadingCard, ErrorCard, UnavailableCard } from './ui/DataState';
-import { pctChange, formatMonthYear, buildYoYOverlay, buildFytdSeries } from '../utils/periodHelpers';
+import { pctChange, formatMonthYear, buildYoYOverlay, buildFytdSeries, currentFiscalYear, resolveCompareMode, fytdDisabledReason, fytdViewReady } from '../utils/periodHelpers';
 import useI18n from '../i18n/useI18n';
 
 // SBP publishes the cumulative EBOPS services table later in the month than the
@@ -21,9 +21,7 @@ const SERVICES_COVERAGE_NOTE =
 
 export default function ServicesSection() {
   const { tx } = useI18n();
-  const { compareMode, focus, setCompareMode, setFocus } = useShareableChartState();
-  const showYoY = compareMode === 'yoy';
-  const showFytd = compareMode === 'fytd';
+  const { compareMode, focus, setCompareMode, setFocus } = useShareableChartState('yoy');
   const { data, loading, error, retry } = useData('services.json');
 
   const setCompare = (mode) => {
@@ -52,6 +50,19 @@ export default function ServicesSection() {
   // FYTD vs prior FY) so PeriodCompare still changes the chart.
   const mseries = monthlySeries || [];
   const mseriesRows = mseries.map((m) => ({ date: m.month, itCredit: m.itCredit, freelanceCredit: m.freelanceCredit }));
+  const fyWindow = currentFiscalYear(mseriesRows);
+  const fyReady = fytdViewReady(fyWindow);
+  const fytdReason = fytdDisabledReason(fyWindow);
+  const effectiveCompare = resolveCompareMode(compareMode, fyWindow);
+  const showYoY = effectiveCompare === 'yoy';
+  const showFytd = effectiveCompare === 'fytd';
+  const recentMonthsDisplay = mseries.length
+    ? mseries.slice(-4).map((m) => ({
+        month: formatMonthYear(m.month),
+        totalCredit: m.totalCredit,
+        itCredit: m.itCredit,
+      }))
+    : (recentMonths || []);
   const fytdIt = buildFytdSeries(mseriesRows, 'itCredit');
   const fytdFreelance = buildFytdSeries(mseriesRows, 'freelanceCredit');
   const { priorData: itPrior, priorLabel: itPriorLabel } = buildYoYOverlay(mseriesRows, 'itCredit');
@@ -429,7 +440,13 @@ export default function ServicesSection() {
             lastUpdated={data.lastUpdated}
             dataCoverage={componentMonth(itComp) ? `latest ${formatMonthYear(componentMonth(itComp))}` : data.dataCoverage}
           >
-                      <PeriodCompare mode={compareMode} onChange={setCompare} modes={['yoy', 'fytd']} />
+                      <PeriodCompare
+                        mode={effectiveCompare}
+                        onChange={setCompare}
+                        modes={['yoy', 'fytd']}
+                        disabledModes={fytdReason ? { fytd: fytdReason } : {}}
+                        note={!fyReady && compareMode === 'fytd' ? fytdReason : null}
+                      />
                       <SeriesFocus
                         labels={monthlyFocusLabels}
                         focus={focus}
@@ -479,11 +496,11 @@ export default function ServicesSection() {
               ]}
               footnote={`Source: SBP Balance of Payments · Last updated: ${data.lastUpdated || 'N/A'}`}
             />
-            {recentMonths && recentMonths.length > 0 && (
+            {recentMonthsDisplay.length > 0 && (
               <SummaryCard
                 title="Recent Monthly Performance"
                 accent={COLORS.blue}
-                items={recentMonths.map((m, i) => ({
+                items={recentMonthsDisplay.map((m, i) => ({
                   label: m.month,
                   value: `$${m.totalCredit}M`,
                   sub: `IT: $${m.itCredit}M`,

@@ -6,7 +6,7 @@ import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import MonetaryPolicyTracker from './MonetaryPolicyTracker';
 import { LoadingCard, ErrorCard } from './ui/DataState';
-import { currentCalendarYear, currentFiscalYear, fmtPKR, fmtPct, formatMonthYear, latestRow } from '../utils/periodHelpers';
+import { currentCalendarYear, currentFiscalYear, fmtPKR, fmtPct, formatMonthYear, latestRow, formatFySummaryTitle } from '../utils/periodHelpers';
 
 const formatDate = formatMonthYear;
 
@@ -212,7 +212,7 @@ export default function MonetarySection() {
         />
         {fy && (
           <SummaryCard
-            title={`${fy.fyLabel} (${fy.rangeLabel}) — Fiscal YTD`}
+            title={formatFySummaryTitle(fy)}
             accent={COLORS.blue}
             items={[
               { label: 'Private Credit', value: fmtPKR(latestCredit?.value), sub: `${fmtPct(latestCreditYoy?.value)} YoY`, color: COLORS.blue },

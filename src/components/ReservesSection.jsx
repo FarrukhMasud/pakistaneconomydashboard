@@ -23,6 +23,10 @@ import {
   formatDayMonthYear,
   buildYoYOverlay,
   buildFytdSeries,
+  formatFySummaryTitle,
+  fytdViewReady,
+  resolveCompareMode,
+  fytdDisabledReason,
 } from '../utils/periodHelpers';
 
 function formatDate(dateStr) {
@@ -32,9 +36,7 @@ function formatDate(dateStr) {
 }
 
 export default function ReservesSection() {
-  const { compareMode, focus, setCompareMode, setFocus } = useShareableChartState();
-  const showYoY = compareMode === 'yoy';
-  const showFytd = compareMode === 'fytd';
+  const { compareMode, focus, setCompareMode, setFocus } = useShareableChartState('yoy');
   const { data, loading, error, retry } = useData('reserves.json');
   const adequacy = useData('reserves-adequacy.json');
 
@@ -50,9 +52,14 @@ export default function ReservesSection() {
 
   const cy = currentCalendarYear(timeSeries);
   const fy = currentFiscalYear(timeSeries);
+  const fyReady = fytdViewReady(fy);
+  const fytdReason = fytdDisabledReason(fy);
+  const effectiveCompare = resolveCompareMode(compareMode, fy);
+  const showYoY = effectiveCompare === 'yoy';
+  const showFytd = effectiveCompare === 'fytd';
   const fytdSbp = buildFytdSeries(timeSeries, 'sbp');
   const fytdTotal = buildFytdSeries(timeSeries, 'total');
-  const { priorData: sbpPrior, priorLabel: sbpPriorLabel } = buildYoYOverlay(timeSeries, 'sbp');
+  const { priorData: sbpPrior, priorLabel: sbpPriorLabel } = buildYoYOverlay(timeSeries, 'sbp', { matchGrain: true });
 
   const labels = showFytd && fytdSbp ? fytdSbp.labels : timeSeries.map((d) => formatDate(d.date));
   const tickInterval = Math.max(1, Math.floor(labels.length / 12));
@@ -172,10 +179,17 @@ export default function ReservesSection() {
   if (fy && fy.rows.length > 0) {
     const fyStart = fy.rows[0]?.sbp;
     const fyEnd = fy.rows[fy.rows.length - 1]?.sbp;
-    const fyChg = pctChange(fyEnd, fyStart);
+    const canCompare = fy.rows.length >= 2;
+    const fyChg = canCompare ? pctChange(fyEnd, fyStart) : { pct: null, direction: 'flat' };
     fyItems.push(
-      { label: `Start of ${fy.fyLabel}`, value: fmtUSD(fyStart), sub: formatDate(fy.rows[0].date), color: COLORS.blue },
-      { label: 'FYTD Change', value: `${(fyEnd - fyStart) >= 0 ? '+' : ''}${fmtUSD(fyEnd - fyStart)}`, direction: fyChg.direction, sentiment: fyChg.direction === 'up' ? 'positive' : 'negative', sub: `${fyChg.pct > 0 ? '+' : ''}${fyChg.pct}%` },
+      { label: canCompare ? `Start of ${fy.fyLabel}` : `Latest · ${fy.fyLabel}`, value: fmtUSD(canCompare ? fyStart : fyEnd), sub: formatDate(canCompare ? fy.rows[0].date : fy.rows[fy.rows.length - 1].date), color: COLORS.blue },
+    );
+    if (canCompare) {
+      fyItems.push(
+        { label: 'FY change', value: `${(fyEnd - fyStart) >= 0 ? '+' : ''}${fmtUSD(fyEnd - fyStart)}`, direction: fyChg.direction, sentiment: fyChg.direction === 'up' ? 'positive' : 'negative', sub: `${fyChg.pct > 0 ? '+' : ''}${fyChg.pct}%` },
+      );
+    }
+    fyItems.push(
       { label: 'Lowest in Period', value: fmtUSD(lowest.sbp), sub: formatDate(lowest.date), color: COLORS.coral },
     );
   }
@@ -206,7 +220,7 @@ export default function ReservesSection() {
           )}
           {fyItems.length > 0 && (
             <SummaryCard
-              title={`${fy.fyLabel} (${fy.rangeLabel}) — Fiscal YTD`}
+              title={formatFySummaryTitle(fy)}
               accent={COLORS.blue}
               items={fyItems}
               footnote={`${fy.months} data points · ${dataCoverage || 'Available period'}`}
@@ -224,7 +238,13 @@ export default function ReservesSection() {
         dataCoverage={dataCoverage}
         provenanceKeys={['reserves.weekly.total']}
       >
-        <PeriodCompare mode={compareMode} onChange={setCompareMode} modes={['yoy', 'fytd']} />
+        <PeriodCompare
+          mode={effectiveCompare}
+          onChange={setCompareMode}
+          modes={['yoy', 'fytd']}
+          disabledModes={fytdReason ? { fytd: fytdReason } : {}}
+          note={!fyReady && compareMode === 'fytd' ? fytdReason : null}
+        />
         <SeriesFocus labels={seriesLabels.slice(0, 2)} focus={focus} onChange={setFocus} />
         <div style={{ height: 350 }}>
           <Line data={chartData} options={options} />

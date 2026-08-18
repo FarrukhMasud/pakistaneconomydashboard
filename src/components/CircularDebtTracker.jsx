@@ -64,9 +64,9 @@ export default function CircularDebtTracker() {
           <span className="tracker-stat__sub">from {fmtPkr(yoy?.priorStock)} (Apr 2025)</span>
         </div>
         <div className="tracker-stat">
-          <span className="tracker-stat__label">{tx("FYTD buildup")}</span>
+          <span className="tracker-stat__label">{fytdBuildup?.period ? `Buildup · ${fytdBuildup.period}` : tx("FYTD buildup")}</span>
           <span className="tracker-stat__value" style={{ color: COLORS.coral }}>+{fmtPkr(fytdBuildup?.value)}</span>
-          <span className="tracker-stat__sub">vs +{fmtPkr(fytdBuildup?.priorValue)} a year earlier</span>
+          <span className="tracker-stat__sub">vs +{fmtPkr(fytdBuildup?.priorValue)} same period a year earlier</span>
         </div>
         <div className="tracker-stat">
           <span className="tracker-stat__label">Power + gas combined</span>
