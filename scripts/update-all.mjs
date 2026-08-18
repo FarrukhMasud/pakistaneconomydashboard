@@ -15,7 +15,7 @@
  *   node scripts/update-all.mjs --skip-download   # skip downloading, use existing files
  */
 
-import { writeFile, mkdir } from 'fs/promises';
+import { writeFile, mkdir, stat } from 'fs/promises';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
@@ -61,7 +61,7 @@ const DOWNLOADS = [
   {
     name: 'exp_import_BOP.xls',
     url: 'https://www.sbp.org.pk/assets/document/exp_import_BOP_Arch.xls',
-    fallbackUrl: 'https://archive.sbp.org.pk/ecodata/exp_import_BOP.xls',
+    fallbackUrl: 'https://archive.sbp.org.pk/ecodata/exp_import_BOP_Arch.xls',
     description: 'Trade (Imports/Exports BOP)',
     required: true,
   },
@@ -167,6 +167,18 @@ async function downloadFile(name, url, fallbackUrl, description) {
       if (validationError) {
         console.log(`  ⚠️  ${description}: ${validationError} from ${sourceUrl}`);
         continue;
+      }
+
+      try {
+        const existing = await stat(filepath);
+        if (existing.size > buffer.length * 1.2 && existing.size - buffer.length > 20_000) {
+          console.log(
+            `  ⚠️  ${description}: keeping existing ${(existing.size / 1024).toFixed(0)} KB file; ${sourceUrl} is only ${(buffer.length / 1024).toFixed(0)} KB`,
+          );
+          return true;
+        }
+      } catch {
+        // No existing file to compare against.
       }
 
       await writeFile(filepath, buffer);

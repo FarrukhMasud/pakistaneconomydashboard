@@ -5,15 +5,15 @@
   "sourceUrl": "https://easydata.sbp.org.pk",
   "sourceType": "official-primary",
   "cadence": "Monthly",
-  "latestObservation": "2026-06",
+  "latestObservation": "2026-07",
   "dates": {
-    "observation": "2026-06",
+    "observation": "2026-07",
     "publication": null,
-    "verification": "2026-08-04",
-    "dashboardUpdated": "2026-08-04"
+    "verification": "2026-08-18",
+    "dashboardUpdated": "2026-08-18"
   },
-  "lastUpdated": "2026-08-04",
-  "lastChecked": "2026-08-04",
+  "lastUpdated": "2026-08-18",
+  "lastChecked": "2026-08-18",
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",
   "data": {
     "monthly": [
@@ -599,44 +599,54 @@
       },
       {
         "date": "2026-06",
-        "total": 3474.529933,
-        "saudiArabia": 829.6129138,
-        "uae": 792.2467235,
-        "uk": 514.8659817,
-        "usa": 296.7873482,
+        "total": 3474.556764,
+        "saudiArabia": 829.7294508,
+        "uae": 792.1692577,
+        "uk": 514.8749946,
+        "usa": 296.4482152,
         "otherGcc": 320.6886041,
-        "eu": 415.3712113
+        "eu": 415.3626751
+      },
+      {
+        "date": "2026-07",
+        "total": 3631.044564,
+        "saudiArabia": 913.9245799,
+        "uae": 737.3017269,
+        "uk": 555.4947521,
+        "usa": 317.1692527,
+        "otherGcc": 336.099176,
+        "eu": 462.1006894
       }
     ],
     "sourceCountries": [
       {
         "country": "Saudi Arabia",
-        "value": 9783
+        "value": 9873
       },
       {
         "country": "UAE",
-        "value": 8807
+        "value": 8879
       },
       {
         "country": "United Kingdom",
-        "value": 6326
+        "value": 6431
       },
       {
         "country": "EU Countries",
-        "value": 5227
+        "value": 5264
       },
       {
         "country": "Other GCC Countries",
-        "value": 3934
+        "value": 3974
       },
       {
         "country": "United States",
-        "value": 3624
+        "value": 3671
       }
     ],
     "dataSource": "SBP EasyData API",
-    "lastUpdated": "2026-08-04",
-    "dataCoverage": "2021-08 – 2026-06",
-    "lastChecked": "2026-08-04"
+    "lastUpdated": "2026-08-18",
+    "dataCoverage": "2021-08 – 2026-07",
+    "lastChecked": "2026-08-18"
   }
 }

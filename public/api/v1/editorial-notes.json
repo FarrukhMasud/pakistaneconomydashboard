@@ -55,9 +55,9 @@
       "asOf": "2026-08-07"
     },
     "trade.deficit": {
-      "text": "The monthly goods trade deficit was widest at $4.07bn in June 2022. In June 2026 exports of $2.60bn against imports of $6.15bn left a deficit of $3.55bn.",
+      "text": "The monthly goods trade deficit was widest at $4.07bn in June 2022. In July 2026 exports of $3.01bn against imports of $6.15bn left a deficit of $3.15bn.",
       "basis": "derived",
-      "derivation": "Largest and latest monthly balance in the SBP balance-of-payments goods series covering 66 months.",
+      "derivation": "Largest and latest monthly balance in the SBP balance-of-payments goods series covering 67 months.",
       "sources": [
         {
           "id": "sbp-exp-import-bop",
@@ -67,7 +67,7 @@
           "sourceType": "official-primary"
         }
       ],
-      "asOf": "2026-06"
+      "asOf": "2026-07"
     },
     "fdi.annualContext": {
       "text": "Net FDI in FY2026 was $1.64bn ($3.57bn of inflows against $1.93bn of outflows) — below the series peak of $2.78bn in FY2018, and the strongest since FY2025.",
@@ -137,6 +137,6 @@
       "asOf": "2026-27"
     }
   },
-  "lastUpdated": "2026-08-17",
-  "lastChecked": "2026-08-17"
+  "lastUpdated": "2026-08-18",
+  "lastChecked": "2026-08-18"
 }

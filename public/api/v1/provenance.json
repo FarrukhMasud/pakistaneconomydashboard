@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T17:59:51.334Z",
+  "generatedAt": "2026-08-18T17:26:51.261Z",
   "description": "Machine-readable citation for every headline figure on the dashboard. Each entry names the publishing institution, the exact source document, the worksheet and the row/column it was read from.",
   "sources": {
     "fbr-collection": {
@@ -123,7 +123,7 @@
       "value": 278.24,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-08-17"
+      "retrievedAt": "2026-08-18"
     },
     "fbr.fytd.net": {
       "label": "FBR net tax collection, fiscal year to date",
@@ -136,20 +136,20 @@
       "value": 13,
       "derivedFrom": null,
       "note": "Currently sourced from press reporting of provisional FBR figures, not an FBR publication.",
-      "retrievedAt": "2026-08-17"
+      "retrievedAt": "2026-08-18"
     },
     "fdi.fytd.current": {
       "label": "Net foreign direct investment, fiscal year to date",
       "sourceId": "sbp-netinflow-country",
       "sheet": "Country",
       "location": "\"Total\" row, net FDI column of the current fiscal-year-to-date block",
-      "period": "Jul-Jun FY2026 (P)",
+      "period": "Jul-Jul FY2027 (P)",
       "status": "provisional",
       "unit": "US$ billion",
-      "value": 1.64,
+      "value": 0.18,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-08-17"
+      "retrievedAt": "2026-08-18"
     },
     "fiscal.gdpGrowth.latest": {
       "label": "Real GDP growth rate at constant basic prices of 2015-16",
@@ -162,7 +162,7 @@
       "value": 3.7,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-08-17"
+      "retrievedAt": "2026-08-18"
     },
     "inflation.nationalCpi.latest": {
       "label": "National Consumer Price Index, year-on-year inflation",
@@ -175,7 +175,7 @@
       "value": 9.2,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-08-17"
+      "retrievedAt": "2026-08-18"
     },
     "monetaryPolicy.currentRate": {
       "label": "SBP policy (target) rate set by the Monetary Policy Committee",
@@ -188,20 +188,20 @@
       "value": 11.5,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-08-17"
+      "retrievedAt": "2026-08-18"
     },
     "remittances.monthly.total": {
       "label": "Workers’ remittances, monthly total",
       "sourceId": "sbp-easydata",
       "sheet": null,
       "location": "Workers’ remittances by country of origin, total",
-      "period": "2026-06",
+      "period": "2026-07",
       "status": "final",
       "unit": "US$ billion",
-      "value": 3.47,
+      "value": 3.63,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-08-17"
+      "retrievedAt": "2026-08-18"
     },
     "reserves.weekly.total": {
       "label": "Total liquid foreign exchange reserves (SBP + scheduled banks)",
@@ -214,7 +214,7 @@
       "value": 22.5,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-08-17"
+      "retrievedAt": "2026-08-18"
     },
     "services.bop.cumulative": {
       "label": "Balance on trade in services, fiscal year to date",
@@ -233,27 +233,27 @@
       "label": "Exports of services, latest published month",
       "sourceId": "sbp-bop-bpm6",
       "sheet": "BPM6_Summary",
-      "location": "\"Exports of Services\" row, \"Jun FY2026\" column",
-      "period": "Jun FY2026",
+      "location": "\"Exports of Services\" row, \"Jul FY2027\" column",
+      "period": "Jul FY2027",
       "status": "provisional",
       "unit": "US$ million",
-      "value": 956,
+      "value": 927,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-08-17"
+      "retrievedAt": "2026-08-18"
     },
     "services.itHeadline.fytd": {
       "label": "Telecommunications, computer and information services exports (credit)",
       "sourceId": "sbp-services-headline",
       "sheet": null,
       "location": "IT & Telecommunication Services, current fiscal-year cumulative column",
-      "period": "Jul-Jun FY26",
+      "period": "Jul FY27",
       "status": "provisional",
       "unit": "US$ billion",
-      "value": 4.6,
+      "value": 0.42,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-08-17"
+      "retrievedAt": "2026-08-18"
     },
     "services.itTelecom.credit": {
       "label": "Telecommunications, computer and information services exports (credit)",
@@ -272,27 +272,27 @@
       "label": "Telecommunications, computer and information services exports (credit), latest month",
       "sourceId": "sbp-services-headline",
       "sheet": null,
-      "location": "Row 9 \"Telecommunications, Computer, and Information Services\", 2026-06 column",
+      "location": "Row 9 \"Telecommunications, Computer, and Information Services\", 2026-07 column",
       "period": null,
       "status": "final",
       "unit": "US$ million",
-      "value": 416,
+      "value": 417,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-08-17"
+      "retrievedAt": "2026-08-18"
     },
     "trade.monthly.balance": {
       "label": "Monthly goods trade balance (BOP basis)",
       "sourceId": "sbp-exp-import-bop",
       "sheet": null,
       "location": "Exports and imports of goods, monthly",
-      "period": "2026-06",
+      "period": "2026-07",
       "status": "final",
       "unit": "US$ million",
-      "value": -3552,
-      "derivedFrom": "Exports of $2595M less imports of $6147M as published by SBP",
+      "value": -3146,
+      "derivedFrom": "Exports of $3008M less imports of $6154M as published by SBP",
       "note": null,
-      "retrievedAt": "2026-08-17"
+      "retrievedAt": "2026-08-18"
     }
   }
 }

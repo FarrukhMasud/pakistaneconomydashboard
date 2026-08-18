@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-17",
+  "lastUpdated": "2026-08-18",
   "indicators": [
     {
       "id": "reserves",
@@ -33,27 +33,27 @@
     {
       "id": "remittances",
       "label": "Remittances (Monthly)",
-      "value": 3.47,
+      "value": 3.63,
       "unit": "$ Billion",
-      "period": "2026-06",
-      "change": -0.78,
+      "period": "2026-07",
+      "change": 0.16,
       "changeUnit": "$B",
-      "changeBasis": "vs 2026-05",
-      "trend": "down",
-      "sentiment": "negative",
+      "changeBasis": "vs 2026-06",
+      "trend": "stable",
+      "sentiment": "neutral",
       "source": "SBP",
       "provenanceKey": "remittances.monthly.total"
     },
     {
       "id": "fdi",
       "label": "Net FDI",
-      "value": 1.64,
+      "value": 0.18,
       "unit": "$B",
       "decimals": 2,
-      "period": "Jul-Jun FY2026 (P)",
-      "change": -33.93,
+      "period": "Jul-Jul FY2027 (P)",
+      "change": -20.08,
       "changeUnit": "%",
-      "changeBasis": "vs Jul-Jun FY2025",
+      "changeBasis": "vs Jul-Jul FY2026",
       "trend": "down",
       "sentiment": "negative",
       "source": "SBP",
@@ -62,13 +62,13 @@
     {
       "id": "it_exports",
       "label": "IT & Telecom Exports",
-      "value": 4.6,
+      "value": 0.42,
       "unit": "$B",
       "decimals": 2,
-      "period": "Jul-Jun FY26",
-      "change": 20.73,
+      "period": "Jul FY27",
+      "change": 20,
       "changeUnit": "%",
-      "changeBasis": "vs Jul-Jun FY25",
+      "changeBasis": "vs Jul FY26",
       "trend": "up",
       "sentiment": "positive",
       "source": "SBP",
@@ -135,5 +135,5 @@
       "sub": "Next MPC: 14 September 2026"
     }
   ],
-  "lastChecked": "2026-08-17"
+  "lastChecked": "2026-08-18"
 }

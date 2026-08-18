@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T17:59:55.223Z",
+  "generatedAt": "2026-08-18T17:26:55.817Z",
   "version": "v1",
   "title": "economyofpakistan.com static data API",
   "description": "Every dataset the dashboard renders, published as stable JSON and CSV. No key, no rate limit, no scraping required. Please cite the issuing institution listed on each endpoint.",
@@ -40,7 +40,7 @@
       "dates": {
         "observation": "2026-08-07",
         "publication": null,
-        "verification": "2026-08-17",
+        "verification": "2026-08-18",
         "dashboardUpdated": "2026-08-17"
       }
     },
@@ -59,7 +59,7 @@
       "dates": {
         "observation": "2026-07",
         "publication": null,
-        "verification": "2026-08-17",
+        "verification": "2026-08-18",
         "dashboardUpdated": "2026-08-07"
       }
     },
@@ -68,18 +68,18 @@
       "label": "Workers' Remittances",
       "json": "/api/v1/remittances.json",
       "csv": "/api/v1/remittances.csv",
-      "rows": 59,
+      "rows": 60,
       "seriesKey": "monthly",
       "source": "SBP EasyData API",
       "sourceUrl": "https://easydata.sbp.org.pk",
       "sourceType": "official-primary",
       "cadence": "Monthly",
-      "latestObservation": "2026-06",
+      "latestObservation": "2026-07",
       "dates": {
-        "observation": "2026-06",
+        "observation": "2026-07",
         "publication": null,
-        "verification": "2026-08-04",
-        "dashboardUpdated": "2026-08-04"
+        "verification": "2026-08-18",
+        "dashboardUpdated": "2026-08-18"
       }
     },
     {
@@ -87,18 +87,18 @@
       "label": "Trade in Goods",
       "json": "/api/v1/trade.json",
       "csv": "/api/v1/trade.csv",
-      "rows": 66,
+      "rows": 67,
       "seriesKey": "monthly",
       "source": "State Bank of Pakistan",
       "sourceUrl": "https://www.sbp.org.pk/assets/document/exp_import_BOP_Arch.xls",
       "sourceType": "official-primary",
       "cadence": "Monthly",
-      "latestObservation": "2026-06",
+      "latestObservation": "2026-07",
       "dates": {
-        "observation": "2026-06",
+        "observation": "2026-07",
         "publication": null,
-        "verification": "2026-08-17",
-        "dashboardUpdated": "2026-07-24"
+        "verification": "2026-08-18",
+        "dashboardUpdated": "2026-08-18"
       }
     },
     {
@@ -106,18 +106,18 @@
       "label": "Foreign Direct Investment",
       "json": "/api/v1/fdi.json",
       "csv": "/api/v1/fdi.csv",
-      "rows": 59,
+      "rows": 60,
       "seriesKey": "monthly",
       "source": "State Bank of Pakistan",
       "sourceUrl": "https://archive.sbp.org.pk/ecodata/NetinflowSummary.xls",
       "sourceType": "official-primary",
       "cadence": "Monthly/FYTD",
-      "latestObservation": "2026-06",
+      "latestObservation": "2026-07",
       "dates": {
-        "observation": "2026-06",
+        "observation": "2026-07",
         "publication": null,
-        "verification": "2026-08-17",
-        "dashboardUpdated": "2026-08-07"
+        "verification": "2026-08-18",
+        "dashboardUpdated": "2026-08-18"
       }
     },
     {
@@ -125,18 +125,18 @@
       "label": "IT & Services Trade",
       "json": "/api/v1/services.json",
       "csv": "/api/v1/services.csv",
-      "rows": 3,
+      "rows": 4,
       "seriesKey": "monthlySeries",
       "source": "State Bank of Pakistan",
       "sourceUrl": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf",
       "sourceType": "official-primary",
       "cadence": "Monthly/FYTD",
-      "latestObservation": "2026-06",
+      "latestObservation": "2026-07",
       "dates": {
-        "observation": "2026-06",
+        "observation": "2026-07",
         "publication": null,
-        "verification": "2026-08-17",
-        "dashboardUpdated": "2026-08-17"
+        "verification": "2026-08-18",
+        "dashboardUpdated": "2026-08-18"
       }
     },
     {
@@ -154,7 +154,7 @@
       "dates": {
         "observation": "2026-07",
         "publication": null,
-        "verification": "2026-08-04",
+        "verification": "2026-08-18",
         "dashboardUpdated": "2026-08-04"
       }
     },
@@ -163,18 +163,18 @@
       "label": "Monetary Sector",
       "json": "/api/v1/monetary.json",
       "csv": "/api/v1/monetary.csv",
-      "rows": 540,
+      "rows": 549,
       "seriesKey": "series",
       "source": "SBP EasyData API",
       "sourceUrl": "https://easydata.sbp.org.pk",
       "sourceType": "official-primary",
       "cadence": "Weekly/Monthly",
-      "latestObservation": "2026-07",
+      "latestObservation": "2026-08",
       "dates": {
-        "observation": "2026-07",
+        "observation": "2026-08",
         "publication": null,
-        "verification": "2026-08-04",
-        "dashboardUpdated": "2026-08-04"
+        "verification": "2026-08-18",
+        "dashboardUpdated": "2026-08-18"
       }
     },
     {
@@ -192,7 +192,7 @@
       "dates": {
         "observation": "2026-06-30",
         "publication": null,
-        "verification": "2026-08-17",
+        "verification": "2026-08-18",
         "dashboardUpdated": "2026-07-24"
       }
     },
@@ -211,7 +211,7 @@
       "dates": {
         "observation": "2026-06",
         "publication": "2026-07-02",
-        "verification": "2026-08-17",
+        "verification": "2026-08-18",
         "dashboardUpdated": "2026-08-07"
       }
     },
@@ -306,8 +306,8 @@
       "dates": {
         "observation": "2026-08-07",
         "publication": null,
-        "verification": "2026-08-17",
-        "dashboardUpdated": "2026-08-17"
+        "verification": "2026-08-18",
+        "dashboardUpdated": "2026-08-18"
       }
     },
     {
@@ -364,7 +364,7 @@
         "observation": "2025",
         "publication": null,
         "verification": null,
-        "dashboardUpdated": "2026-08-17"
+        "dashboardUpdated": "2026-08-18"
       }
     },
     {

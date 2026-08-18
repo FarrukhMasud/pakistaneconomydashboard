@@ -1,5 +1,5 @@
 series,date,value,unit
-m2,2021-08,23079550.61,Million PKR
+m2,2021-08,23090174.61,Million PKR
 m2,2021-09,23296205.87,Million PKR
 m2,2021-10,23606750.33,Million PKR
 m2,2021-11,23394316.75,Million PKR
@@ -58,8 +58,9 @@ m2,2026-03,41917458.16,Million PKR
 m2,2026-04,42753284.09,Million PKR
 m2,2026-05,43044021.42,Million PKR
 m2,2026-06,43453936.16,Million PKR
-m2,2026-07,45004908.23,Million PKR
-m2_yoy,2021-08,14.26,Percent
+m2,2026-07,45001716.88,Million PKR
+m2,2026-08,44051301.47,Million PKR
+m2_yoy,2021-08,15.01,Percent
 m2_yoy,2021-09,15.39,Percent
 m2_yoy,2021-10,15.11,Percent
 m2_yoy,2021-11,14.48,Percent
@@ -118,8 +119,9 @@ m2_yoy,2026-03,16.24,Percent
 m2_yoy,2026-04,15.69,Percent
 m2_yoy,2026-05,15.92,Percent
 m2_yoy,2026-06,13.08,Percent
-m2_yoy,2026-07,14.46,Percent
-credit_private,2021-08,6747583.66,Million PKR
+m2_yoy,2026-07,14.45,Percent
+m2_yoy,2026-08,12.35,Percent
+credit_private,2021-08,6735825.53,Million PKR
 credit_private,2021-09,6764597.08,Million PKR
 credit_private,2021-10,7030859.81,Million PKR
 credit_private,2021-11,7197592.61,Million PKR
@@ -179,7 +181,8 @@ credit_private,2026-04,10797236.59,Million PKR
 credit_private,2026-05,10866055.62,Million PKR
 credit_private,2026-06,10842985.93,Million PKR
 credit_private,2026-07,11156239.12,Million PKR
-credit_pvt_yoy,2021-08,11.14,Percent
+credit_private,2026-08,11039452,Million PKR
+credit_pvt_yoy,2021-08,11.36,Percent
 credit_pvt_yoy,2021-09,11.8,Percent
 credit_pvt_yoy,2021-10,15.35,Percent
 credit_pvt_yoy,2021-11,17.41,Percent
@@ -239,7 +242,8 @@ credit_pvt_yoy,2026-04,13.64,Percent
 credit_pvt_yoy,2026-05,14.12,Percent
 credit_pvt_yoy,2026-06,13.62,Percent
 credit_pvt_yoy,2026-07,15.47,Percent
-deposits,2021-08,15793409.56,Million PKR
+credit_pvt_yoy,2026-08,13.53,Percent
+deposits,2021-08,15873777.19,Million PKR
 deposits,2021-09,16168554.6,Million PKR
 deposits,2021-10,16536450.52,Million PKR
 deposits,2021-11,16208431.35,Million PKR
@@ -298,8 +302,9 @@ deposits,2026-03,30278611.49,Million PKR
 deposits,2026-04,30774216.49,Million PKR
 deposits,2026-05,31343322.11,Million PKR
 deposits,2026-06,31203542.31,Million PKR
-deposits,2026-07,32867642.28,Million PKR
-deposits_yoy,2021-08,15.07,Percent
+deposits,2026-07,32864450.93,Million PKR
+deposits,2026-08,32047257.18,Million PKR
+deposits_yoy,2021-08,15.41,Percent
 deposits_yoy,2021-09,16.28,Percent
 deposits_yoy,2021-10,15.08,Percent
 deposits_yoy,2021-11,14.47,Percent
@@ -358,8 +363,9 @@ deposits_yoy,2026-03,15.72,Percent
 deposits_yoy,2026-04,15.31,Percent
 deposits_yoy,2026-05,17.12,Percent
 deposits_yoy,2026-06,13.6,Percent
-deposits_yoy,2026-07,16.14,Percent
-nfa,2021-08,1358770.68,Million PKR
+deposits_yoy,2026-07,16.13,Percent
+deposits_yoy,2026-08,13.17,Percent
+nfa,2021-08,1364208.94,Million PKR
 nfa,2021-09,1300540.21,Million PKR
 nfa,2021-10,1182551.75,Million PKR
 nfa,2021-11,856052.11,Million PKR
@@ -418,8 +424,9 @@ nfa,2026-03,1500345.49,Million PKR
 nfa,2026-04,1304656.19,Million PKR
 nfa,2026-05,1886702.33,Million PKR
 nfa,2026-06,2075356.43,Million PKR
-nfa,2026-07,2178119.42,Million PKR
-budgetary,2021-08,15052743.01,Million PKR
+nfa,2026-07,2178043.31,Million PKR
+nfa,2026-08,1911838.41,Million PKR
+budgetary,2021-08,15106258.98,Million PKR
 budgetary,2021-09,15411179.5,Million PKR
 budgetary,2021-10,15354776.45,Million PKR
 budgetary,2021-11,15407573.35,Million PKR
@@ -478,8 +485,9 @@ budgetary,2026-03,34738936.69,Million PKR
 budgetary,2026-04,34902522.94,Million PKR
 budgetary,2026-05,34700560.58,Million PKR
 budgetary,2026-06,35252293.56,Million PKR
-budgetary,2026-07,35868740.98,Million PKR
-reserve_money,2021-08,8676216.04,Million PKR
+budgetary,2026-07,35865625.75,Million PKR
+budgetary,2026-08,36240281.5,Million PKR
+reserve_money,2021-08,8670717.49,Million PKR
 reserve_money,2021-09,8533646.92,Million PKR
 reserve_money,2021-10,8564398.32,Million PKR
 reserve_money,2021-11,8561443.94,Million PKR
@@ -539,3 +547,4 @@ reserve_money,2026-04,14591385,Million PKR
 reserve_money,2026-05,14240147.72,Million PKR
 reserve_money,2026-06,14839392.26,Million PKR
 reserve_money,2026-07,14841652.74,Million PKR
+reserve_money,2026-08,14756192.03,Million PKR

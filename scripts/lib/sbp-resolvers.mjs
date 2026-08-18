@@ -134,11 +134,36 @@ export function resolveFdiSectorColumns(headerRow, context = {}) {
 }
 
 /**
+ * Resolve the fiscal year printed on an FDI period header.
+ * "July-June FY26 (P)" uses the FY token. At the July FY rollover SBP instead
+ * prints a calendar month ("July 2026(P)" / "July-2026 (P)"); July YYYY is the
+ * first month of FY(YYYY+1).
+ */
+export function parseFdiPeriodYear(raw) {
+  const fy = parseFiscalYear(raw);
+  if (fy !== null) return fy;
+  const match = String(raw || '').match(/^july[-\s]+(\d{4})/i);
+  if (!match) return null;
+  const calYear = parseInt(match[1], 10);
+  return Number.isFinite(calYear) ? calYear + 1 : null;
+}
+
+/** Highest FDI period year in a header row. Null when none. */
+export function latestFdiPeriodYear(row = []) {
+  let max = null;
+  for (const cell of row) {
+    const fy = parseFdiPeriodYear(cell);
+    if (fy !== null && (max === null || fy > max)) max = fy;
+  }
+  return max;
+}
+
+/**
  * Netinflow.xls / Country: row 3 = period block, row 4 = instrument
  * (FDI / FPI / Total), row 5 = FDI sub-column (Inflow / Outflow / Net).
  */
 export function resolveFdiCountryColumns(hdr3 = [], hdr4 = [], hdr5 = [], context = {}) {
-  const maxFy = latestFiscalYear(hdr3);
+  const maxFy = latestFdiPeriodYear(hdr3);
   if (maxFy === null) {
     throw new SheetParseError('No fiscal year found in FDI country header row', {
       ...context,
@@ -171,17 +196,19 @@ export function resolveFdiCountryColumns(hdr3 = [], hdr4 = [], hdr5 = [], contex
   for (let c = 2; c < hdr3.length; c++) {
     const h3 = (hdr3[c] || '').toString().trim();
     if (!/^july/i.test(h3)) continue;
-    const fy = parseFiscalYear(h3);
+    const fy = parseFdiPeriodYear(h3);
     if (fy === null) continue;
+    const stripped = h3.replace(/\s*\([PR]\)\s*/i, '').trim();
+    const isCalendarJuly = /^july[-\s]+\d{4}/i.test(stripped);
     const inflow = findSubCol(c, /^inflow$/i);
     const outflow = findSubCol(c, /^outflow$/i);
     const group = {
       net: findNetSubCol(c),
       inflow: inflow >= 0 ? inflow : null,
       outflow: outflow >= 0 ? outflow : null,
-      period: h3.replace(/\s*\(P\)\s*/i, '').trim(),
+      period: isCalendarJuly ? `July-July FY${String(fy).slice(-2)}` : stripped,
       fiscalYear: fy,
-      status: /\(\s*P\s*\)/i.test(h3) ? 'provisional' : 'final',
+      status: /\(\s*P\s*\)/i.test(h3) ? 'provisional' : /\(\s*R\s*\)/i.test(h3) ? 'revised' : 'final',
     };
     if (fy === maxFy && !current) current = group;
     else if (fy === maxFy - 1 && !prior) prior = group;

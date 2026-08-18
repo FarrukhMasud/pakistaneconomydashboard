@@ -5,114 +5,114 @@
   "sourceUrl": "https://archive.sbp.org.pk/ecodata/NetinflowSummary.xls",
   "sourceType": "official-primary",
   "cadence": "Monthly/FYTD",
-  "latestObservation": "2026-06",
+  "latestObservation": "2026-07",
   "dates": {
-    "observation": "2026-06",
+    "observation": "2026-07",
     "publication": null,
-    "verification": "2026-08-17",
-    "dashboardUpdated": "2026-08-07"
+    "verification": "2026-08-18",
+    "dashboardUpdated": "2026-08-18"
   },
-  "lastUpdated": "2026-08-07",
-  "lastChecked": "2026-08-17",
+  "lastUpdated": "2026-08-18",
+  "lastChecked": "2026-08-18",
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",
   "data": {
     "by_sector": [
       {
         "sector": "Power",
-        "amount": 958.26,
-        "inflow": 1178.58,
-        "outflow": 220.32,
-        "priorAmount": 1177.97,
-        "priorInflow": 1703.49,
-        "priorOutflow": 525.52
+        "amount": 57.48,
+        "inflow": 98.1,
+        "outflow": 40.61,
+        "priorAmount": 70.81,
+        "priorInflow": 97.76,
+        "priorOutflow": 26.95
       },
       {
         "sector": "Financial Business",
-        "amount": 805.45,
-        "inflow": 872.17,
-        "outflow": 66.72,
-        "priorAmount": 702.62,
-        "priorInflow": 769.54,
-        "priorOutflow": 66.92
+        "amount": 62.3,
+        "inflow": 67.8,
+        "outflow": 5.51,
+        "priorAmount": 58.78,
+        "priorInflow": 64.29,
+        "priorOutflow": 5.51
       },
       {
-        "sector": "Communications",
-        "amount": -456.08,
-        "inflow": 114.31,
-        "outflow": 570.39,
-        "priorAmount": -70.29,
-        "priorInflow": 162.03,
-        "priorOutflow": 232.32
-      },
-      {
-        "sector": "Electrical Machinery",
-        "amount": 146.29,
-        "inflow": 154.69,
-        "outflow": 8.4,
-        "priorAmount": 176.2,
-        "priorInflow": 176.83,
-        "priorOutflow": 0.63
+        "sector": "Trade",
+        "amount": 35.63,
+        "inflow": 42.61,
+        "outflow": 6.98,
+        "priorAmount": 4.89,
+        "priorInflow": 5.68,
+        "priorOutflow": 0.78
       },
       {
         "sector": "Mining & Quarrying",
-        "amount": -116.77,
-        "inflow": 134.4,
-        "outflow": 251.17,
-        "priorAmount": -152.03,
-        "priorInflow": 161.74,
-        "priorOutflow": 313.78
+        "amount": -11.47,
+        "inflow": 4.36,
+        "outflow": 15.84,
+        "priorAmount": 27.95,
+        "priorInflow": 53.79,
+        "priorOutflow": 25.84
       },
       {
-        "sector": "Oil & Gas Exploration",
-        "amount": -0.83,
-        "inflow": 110.68,
-        "outflow": 111.52,
-        "priorAmount": 137.42,
-        "priorInflow": 249.94,
-        "priorOutflow": 112.52
+        "sector": "Electrical Machinery",
+        "amount": 12.63,
+        "inflow": 12.67,
+        "outflow": 0.04,
+        "priorAmount": 13.51,
+        "priorInflow": 13.55,
+        "priorOutflow": 0.04
       },
       {
         "sector": "Personal Services",
-        "amount": 112.84,
-        "inflow": 133.92,
-        "outflow": 21.08,
-        "priorAmount": 97.5,
-        "priorInflow": 125.38,
-        "priorOutflow": 27.88
+        "amount": 11.08,
+        "inflow": 11.09,
+        "outflow": 0,
+        "priorAmount": 10.31,
+        "priorInflow": 10.31,
+        "priorOutflow": 0
+      },
+      {
+        "sector": "Communications",
+        "amount": -10.29,
+        "inflow": 8.3,
+        "outflow": 18.6,
+        "priorAmount": -4.18,
+        "priorInflow": 11.75,
+        "priorOutflow": 15.93
       },
       {
         "sector": "Food",
-        "amount": -102.09,
-        "inflow": 85.07,
-        "outflow": 187.15,
-        "priorAmount": 45,
-        "priorInflow": 60.11,
-        "priorOutflow": 15.11
+        "amount": 2.86,
+        "inflow": 4.08,
+        "outflow": 1.22,
+        "priorAmount": 10.24,
+        "priorInflow": 11.46,
+        "priorOutflow": 1.22
       },
       {
-        "sector": "Cement",
-        "amount": -96.6,
-        "inflow": 13.72,
-        "outflow": 110.33,
-        "priorAmount": 13.72,
-        "priorInflow": 13.72,
-        "priorOutflow": 0.01
+        "sector": "Chemicals",
+        "amount": -8.54,
+        "inflow": 2.88,
+        "outflow": 11.42,
+        "priorAmount": -1.15,
+        "priorInflow": 2.86,
+        "priorOutflow": 4.02
       },
       {
-        "sector": "Petroleum Refining",
-        "amount": 76.47,
-        "inflow": 105.34,
-        "outflow": 28.87,
-        "priorAmount": 76.56,
-        "priorInflow": 105.43,
-        "priorOutflow": 28.87
+        "sector": "Oil & Gas Exploration",
+        "amount": -8.25,
+        "inflow": 1.04,
+        "outflow": 9.29,
+        "priorAmount": 1.25,
+        "priorInflow": 10.54,
+        "priorOutflow": 9.29
       },
       {
         "sector": "Others",
-        "amount": 309.88,
+        "amount": 35.18,
         "inflow": null,
         "outflow": null,
-        "priorAmount": 272.67,
+        "priorAmount": 31.06,
         "priorInflow": null,
         "priorOutflow": null
       }
@@ -120,69 +120,69 @@
     "by_country": [
       {
         "country": "China",
-        "amount": 861.98,
+        "amount": 63.2,
         "flag": "🇨🇳",
-        "priorAmount": 1204.82
+        "priorAmount": 51.76
       },
       {
-        "country": "Norway",
-        "amount": -364.72,
-        "flag": "🇳🇴",
-        "priorAmount": 14.07
+        "country": "Canada",
+        "amount": 37,
+        "flag": "🇨🇦",
+        "priorAmount": 53.66
       },
       {
         "country": "Hongkong",
-        "amount": 339.37,
+        "amount": 20.16,
         "flag": "🇭🇰",
-        "priorAmount": 470.04
-      },
-      {
-        "country": "U.A.E",
-        "amount": 235.93,
-        "flag": "🇦🇪",
-        "priorAmount": 294.26
+        "priorAmount": 30.06
       },
       {
         "country": "Switzerland",
-        "amount": 204.71,
+        "amount": 16.8,
         "flag": "🇨🇭",
-        "priorAmount": 168.34
-      },
-      {
-        "country": "United States",
-        "amount": -155.96,
-        "flag": "🇺🇸",
-        "priorAmount": 35.28
+        "priorAmount": 20.52
       },
       {
         "country": "United Kingdom",
-        "amount": 131.88,
+        "amount": 15.87,
         "flag": "🇬🇧",
-        "priorAmount": 68.2
+        "priorAmount": 8.99
+      },
+      {
+        "country": "U.A.E",
+        "amount": 10.19,
+        "flag": "🇦🇪",
+        "priorAmount": 18.9
+      },
+      {
+        "country": "Netherlands",
+        "amount": -9.51,
+        "flag": "🇳🇱",
+        "priorAmount": -9.46
       },
       {
         "country": "Kuwait",
-        "amount": 103.52,
+        "amount": 8.54,
         "flag": "🇰🇼",
-        "priorAmount": 30.39
+        "priorAmount": 8.52
       },
       {
         "country": "Korea (South)",
-        "amount": 96.48,
+        "amount": 8.01,
         "flag": "🇰🇷",
-        "priorAmount": 96.23
+        "priorAmount": 8.01
       },
       {
-        "country": "Lebanon",
-        "amount": -93.11,
-        "flag": "🇱🇧",
-        "priorAmount": 10.62
+        "country": "Malta",
+        "amount": -7.62,
+        "flag": "🏳️",
+        "priorAmount": -7.62
       },
       {
         "country": "Others",
-        "amount": 276.71,
+        "amount": 15.97,
         "flag": "🌍",
-        "priorAmount": 99.06
+        "priorAmount": 40.1
       }
     ],
     "annual": [
@@ -248,28 +248,28 @@
         "outflow": 1931
       }
     ],
-    "sectorPeriod": "Jul-Jun FY26",
-    "sectorPriorPeriod": "Jul-Jun FY25",
-    "countryPeriod": "Jul-Jun FY26",
-    "countryPriorPeriod": "Jul-Jun FY25",
+    "sectorPeriod": "Jul-Jul FY27",
+    "sectorPriorPeriod": "Jul-Jul FY26",
+    "countryPeriod": "Jul-Jul FY27",
+    "countryPriorPeriod": "Jul-Jul FY26",
     "source": "State Bank of Pakistan",
     "dataSource": "SBP",
-    "lastUpdated": "2026-08-07",
-    "dataCoverage": "monthly through 2026-06; sector Jul-Jun FY26; country Jul-Jun FY26; headline FY2026 Jul-Jun (Netinflow.xls)",
+    "lastUpdated": "2026-08-18",
+    "dataCoverage": "monthly through 2026-07; sector Jul-Jul FY27; country Jul-Jul FY27; summary FY2027 Jul-Jul",
     "fytdComparison": {
-      "period": "Jul-Jun",
+      "period": "Jul-Jul",
       "current": {
-        "label": "FY2026",
-        "net_fdi": 1636.81,
-        "inflow": 3567.91,
-        "outflow": 1931.1,
+        "label": "FY2027",
+        "net_fdi": 178.6,
+        "inflow": 303.99,
+        "outflow": 125.39,
         "status": "provisional"
       },
       "prior": {
-        "label": "FY2025",
-        "net_fdi": 2477.31,
-        "inflow": 4267.9,
-        "outflow": 1790.59
+        "label": "FY2026",
+        "net_fdi": 223.47,
+        "inflow": 333.54,
+        "outflow": 110.07
       },
       "sourceFile": "Netinflow.xls",
       "sourceSheet": "Country",
@@ -643,9 +643,15 @@
       },
       {
         "date": "2026-06",
-        "net_fdi": 14,
-        "equity": 29,
+        "net_fdi": 49,
+        "equity": 64,
         "debt": -15
+      },
+      {
+        "date": "2026-07",
+        "net_fdi": 179,
+        "equity": 168,
+        "debt": 11
       }
     ],
     "monthlyDataSource": "SBP EasyData API - BOP BPM6",
@@ -663,7 +669,7 @@
         "name": "Debt Instruments"
       }
     },
-    "monthlyDataCoverage": "2021-08 – 2026-06",
-    "lastChecked": "2026-08-17"
+    "monthlyDataCoverage": "2021-08 – 2026-07",
+    "lastChecked": "2026-08-18"
   }
 }

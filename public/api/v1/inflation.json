@@ -9,11 +9,11 @@
   "dates": {
     "observation": "2026-07",
     "publication": null,
-    "verification": "2026-08-04",
+    "verification": "2026-08-18",
     "dashboardUpdated": "2026-08-04"
   },
   "lastUpdated": "2026-08-04",
-  "lastChecked": "2026-08-04",
+  "lastChecked": "2026-08-18",
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",
   "data": {
     "dataSource": "SBP EasyData API - Inflation Snapshot (Base: 2015-16)",
@@ -2232,6 +2232,6 @@
         }
       ]
     },
-    "lastChecked": "2026-08-04"
+    "lastChecked": "2026-08-18"
   }
 }

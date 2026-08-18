@@ -22,6 +22,7 @@ import {
   resolveFdiSectorColumns,
   resolveFdiCountryColumns,
   resolveServicesColumns,
+  parseFdiPeriodYear,
   fyMonthToYearMonth,
   EBOPS_ROW_PATTERNS,
 } from '../lib/sbp-resolvers.mjs';
@@ -146,6 +147,30 @@ test('fdiCountry: throws when the Net sub-header is absent', () => {
     () => resolveFdiCountryColumns(rows[3], rows[4], blanked),
     SheetParseError,
   );
+});
+
+test('parseFdiPeriodYear maps July calendar headers to the new fiscal year', () => {
+  assert.equal(parseFdiPeriodYear('July-June FY26 (P)'), 2026);
+  assert.equal(parseFdiPeriodYear('July 2026(P)'), 2027);
+  assert.equal(parseFdiPeriodYear('July-2026  (P)'), 2027);
+  assert.equal(parseFdiPeriodYear('July 2025'), 2026);
+  assert.equal(parseFdiPeriodYear('June 2026(R)'), null);
+});
+
+test('fdiCountry: July FY-rollover monthly comparison is FY27 vs FY26', () => {
+  // After FY26 closed, Netinflow.xls replaces Jul-Jun FYTD blocks with
+  // July 2026 / June 2026 / July 2025. July 2026 is the first month of FY27.
+  const hdr3 = ['Sr.', 'Country', 'July 2026(P)', null, null, null, null, 'June 2026(R)', null, null, null, null, 'July 2025'];
+  const hdr4 = [null, null, 'Foreign Direct Investment', null, null, 'FPI*', 'Total', 'Foreign Direct Investment', null, null, 'FPI*', 'Total', 'Foreign Direct Investment', null, null, 'FPI*', 'Total'];
+  const hdr5 = [null, null, 'Inflow', 'Outflow', 'Net', null, null, 'Inflow', 'Outflow', 'Net', null, null, 'Inflow', 'Outflow', 'Net', null, null];
+  const cols = resolveFdiCountryColumns(hdr3, hdr4, hdr5);
+  assert.equal(cols.fiscalYear, 2027);
+  assert.equal(cols.current.net, 4);
+  assert.equal(cols.prior.net, 14);
+  assert.equal(cols.current.fiscalYear, 2027);
+  assert.equal(cols.prior.fiscalYear, 2026);
+  assert.equal(cols.current.status, 'provisional');
+  assert.match(cols.current.period, /FY27/i);
 });
 
 // ─────────────────────────────────────────────────────────────

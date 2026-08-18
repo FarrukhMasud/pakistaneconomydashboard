@@ -5,15 +5,15 @@
   "sourceUrl": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf",
   "sourceType": "official-primary",
   "cadence": "Monthly/FYTD",
-  "latestObservation": "2026-06",
+  "latestObservation": "2026-07",
   "dates": {
-    "observation": "2026-06",
+    "observation": "2026-07",
     "publication": null,
-    "verification": "2026-08-17",
-    "dashboardUpdated": "2026-08-17"
+    "verification": "2026-08-18",
+    "dashboardUpdated": "2026-08-18"
   },
-  "lastUpdated": "2026-08-17",
-  "lastChecked": "2026-08-17",
+  "lastUpdated": "2026-08-18",
+  "lastChecked": "2026-08-18",
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",
   "data": {
     "categories": [
@@ -174,9 +174,9 @@
         "itCredit": 373.27
       },
       {
-        "month": "Jun-26",
-        "totalCredit": 956,
-        "itCredit": 416
+        "month": "Jul-26",
+        "totalCredit": 927,
+        "itCredit": 417
       }
     ],
     "itMonthly": {
@@ -185,7 +185,7 @@
       "yearAgoMonth": "2025-05",
       "fytdLabel": "Jul-May FY26",
       "fytdPriorLabel": "Jul-May FY25",
-      "note": "SBP's headline services table publishes total IT & Telecom through 2026-06, while the detailed EBOPS workbook currently publishes subcomponents through 2026-05. Values are exports (credit) in US$ million; component cards retain their own coverage dates.",
+      "note": "SBP's headline services table publishes total IT & Telecom through 2026-07, while the detailed EBOPS workbook currently publishes subcomponents through 2026-05. Values are exports (credit) in US$ million; component cards retain their own coverage dates.",
       "components": [
         {
           "key": "itTotal",
@@ -289,54 +289,53 @@
         "totalCredit": 956,
         "itCredit": 416,
         "freelanceCredit": null
+      },
+      {
+        "month": "2026-07",
+        "totalCredit": 927,
+        "itCredit": 417,
+        "freelanceCredit": null
       }
     ],
     "dataSource": "SBP",
-    "lastUpdated": "2026-08-17",
+    "lastUpdated": "2026-08-18",
     "dataCoverage": "Jul-May FY26",
-    "lastChecked": "2026-08-17",
+    "lastChecked": "2026-08-18",
     "bopSummary": {
       "source": "SBP Balance of Payments (BPM6) summary",
       "sourceFile": "Balancepayment_BPM6.xls",
       "sourceSheet": "BPM6_Summary",
-      "fiscalYear": "FY2026",
+      "fiscalYear": "FY2027",
       "unit": "US$ million",
-      "cumulative": {
-        "period": "Jul-Jun",
-        "fiscalYear": "FY2026",
-        "status": "provisional",
-        "credit": 10034,
-        "debit": 11925,
-        "net": -1891
-      },
+      "cumulative": null,
       "latestMonth": {
-        "period": "Jun",
-        "fiscalYear": "FY2026",
+        "period": "Jul",
+        "fiscalYear": "FY2027",
         "status": "provisional",
-        "credit": 956,
-        "debit": 931,
-        "net": 25
+        "credit": 927,
+        "debit": 1155,
+        "net": -228
       },
       "note": "SBP publishes this aggregate before the detailed EBOPS table, so it can cover a later month than the category and IT breakdowns in this section."
     },
     "itHeadline": {
-      "latestMonth": "2026-06",
-      "latest": 416,
-      "prevMonth": "2026-05",
-      "prev": 373,
-      "yearAgoMonth": "2025-06",
-      "yearAgo": 339,
-      "fytd": 4600,
-      "fytdPrior": 3814,
-      "fytdLabel": "Jul-Jun FY26",
-      "fytdPriorLabel": "Jul-Jun FY25",
-      "totalServicesLatest": 956,
-      "fiscalYear": 2026,
+      "latestMonth": "2026-07",
+      "latest": 417,
+      "prevMonth": null,
+      "prev": null,
+      "yearAgoMonth": "2025-07",
+      "yearAgo": 354,
+      "fytd": 417,
+      "fytdPrior": 354,
+      "fytdLabel": "Jul FY27",
+      "fytdPriorLabel": "Jul FY26",
+      "totalServicesLatest": 927,
+      "fiscalYear": 2027,
       "source": "State Bank of Pakistan",
       "sourceFile": "ExportsImports-Goods.pdf",
       "sourceUrl": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf",
       "status": "provisional"
     },
-    "headlineCoverage": "2026-06"
+    "headlineCoverage": "2026-07"
   }
 }

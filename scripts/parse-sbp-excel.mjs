@@ -118,8 +118,13 @@ function formatFyPeriodLabel(period) {
  * carried once, by the label, and never printed twice in the UI.
  */
 function normaliseFytdPeriod(period) {
-  const match = String(period || '').match(/jul(?:y)?[-\s]+([a-z]+)/i);
-  if (!match) return String(period || '').trim();
+  const raw = String(period || '').trim();
+  // First month of a new FY is often published as a standalone "July 2026".
+  if (/^jul(?:y)?[-\s]*\d{4}/i.test(raw) && !/jul(?:y)?[-\s]+[a-z]/i.test(raw)) {
+    return 'Jul-Jul';
+  }
+  const match = raw.match(/jul(?:y)?[-\s]+([a-z]+)/i);
+  if (!match) return raw;
   const end = match[1].slice(0, 3).toLowerCase();
   return `Jul-${end.charAt(0).toUpperCase()}${end.slice(1)}`;
 }
@@ -622,9 +627,19 @@ async function updateFdi() {
   if (countryFytd) {
     const summaryEnd = fiscalPeriodEndIndex(fytdComparison?.period);
     const countryEnd = fiscalPeriodEndIndex(countryFytd.period);
+    const fyNum = (label) => {
+      const match = String(label || '').match(/(\d{4}|\d{2})$/);
+      if (!match) return null;
+      const n = parseInt(match[1], 10);
+      return n < 100 ? 2000 + n : n;
+    };
+    const summaryFy = fyNum(fytdComparison?.current?.label);
+    const countryFy = fyNum(countryFytd.current.label);
+    const laterFy = countryFy != null && (summaryFy == null || countryFy > summaryFy);
     const sameFy = fytdComparison?.current?.label === countryFytd.current.label;
     if (
       !fytdComparison ||
+      laterFy ||
       (sameFy && countryEnd != null && (summaryEnd == null || countryEnd > summaryEnd))
     ) {
       if (fytdComparison) {
@@ -657,6 +672,13 @@ async function updateFdi() {
   }
 
   const existing = await readJson('fdi.json').catch(() => ({}));
+  // NetinflowSummary lags the July FY rollover; keep completed years already
+  // published from a closed Jul-Jun Netinflow.xls so they do not disappear.
+  for (const entry of existing.annual || []) {
+    if (!entry?.year || annual.some((a) => a.year === entry.year)) continue;
+    annual.push(entry);
+  }
+  annual.sort((a, b) => parseInt(a.year.replace('FY', '')) - parseInt(b.year.replace('FY', '')));
   const existingFytd = existing.fytdComparison;
   if (
     fytdComparison &&

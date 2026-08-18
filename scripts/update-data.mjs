@@ -128,7 +128,12 @@ async function fetchSeries(seriesKey, apiKey, startDate, endDate) {
   if (startDate) url.searchParams.set('start_date', startDate);
   if (endDate) url.searchParams.set('end_date', endDate);
 
-  const res = await fetch(url.toString());
+  const res = await fetch(url.toString(), {
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) PakistanEconomicDashboard/1.0',
+      Accept: 'application/json',
+    },
+  });
   if (!res.ok) {
     const text = await res.text().catch(() => '');
     throw new Error(`SBP API ${res.status} for ${seriesKey}: ${text.substring(0, 200)}`);

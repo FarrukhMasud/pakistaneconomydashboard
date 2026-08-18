@@ -9,7 +9,7 @@
   "dates": {
     "observation": "2026-06",
     "publication": "2026-07-02",
-    "verification": "2026-08-17",
+    "verification": "2026-08-18",
     "dashboardUpdated": "2026-08-07"
   },
   "lastUpdated": "2026-08-07",
@@ -20,7 +20,7 @@
     "basis": "Net collection (after refunds)",
     "dataSource": "FBR official tables/releases, with separately identified secondary provisional reporting where no official numeric release exists",
     "lastUpdated": "2026-08-07",
-    "lastVerified": "2026-08-17",
+    "lastVerified": "2026-08-18",
     "reviewRequired": true,
     "reviewReason": "FBR's official 1 July release confirms target achievement and Rs599bn of refunds but omits the numeric collection total. The Rs13,003bn FY2025-26 net collection is therefore retained as explicitly attributed provisional reporting until FBR publishes its official month-wise/tax-wise table or year book.",
     "observationDate": "2026-06-30",
@@ -358,7 +358,7 @@
       }
     ],
     "releaseDiscovery": {
-      "checkedAt": "2026-08-17",
+      "checkedAt": "2026-08-18",
       "archiveUrl": "https://www.fbr.gov.pk/pr/2026",
       "candidates": [
         {

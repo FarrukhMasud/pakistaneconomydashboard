@@ -1,8 +1,968 @@
 {
-  "generatedAt": "2026-08-17T17:59:17.761Z",
+  "generatedAt": "2026-08-18T17:26:27.522Z",
   "description": "Every restatement of a previously published figure. Pakistani official statistics are routinely revised from provisional to final; this log preserves what changed, when, and by how much.",
-  "entryCount": 38,
+  "entryCount": 158,
   "entries": [
+    {
+      "date": "2026-08-18",
+      "dataset": "trade",
+      "path": "monthly[date=2026-06].imports",
+      "from": 6147,
+      "to": 6152,
+      "changePct": 0.1
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "trade",
+      "path": "monthly[date=2026-06].exports",
+      "from": 2595,
+      "to": 2573,
+      "changePct": -0.8
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "trade",
+      "path": "monthly[date=2026-06].balance",
+      "from": -3552,
+      "to": -3579,
+      "changePct": -0.8
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "reserves-adequacy",
+      "path": "current.importCoverMonths",
+      "from": 3.2,
+      "to": 3.1,
+      "changePct": -3.1
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "reserves-adequacy",
+      "path": "trajectory[date=2026-08].importCoverMonths",
+      "from": 3.2,
+      "to": 3.1,
+      "changePct": -3.1
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "trade",
+      "path": "monthly[date=2026-01].imports",
+      "from": 5339,
+      "to": 5346,
+      "changePct": 0.1
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "trade",
+      "path": "monthly[date=2026-01].exports",
+      "from": 2749,
+      "to": 2745,
+      "changePct": -0.1
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "trade",
+      "path": "monthly[date=2026-01].balance",
+      "from": -2590,
+      "to": -2601,
+      "changePct": -0.4
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "trade",
+      "path": "monthly[date=2026-02].imports",
+      "from": 5114,
+      "to": 5165,
+      "changePct": 1
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "trade",
+      "path": "monthly[date=2026-02].balance",
+      "from": -2633,
+      "to": -2685,
+      "changePct": -2
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "trade",
+      "path": "monthly[date=2026-03].imports",
+      "from": 4857,
+      "to": 4892,
+      "changePct": 0.7
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "trade",
+      "path": "monthly[date=2026-03].balance",
+      "from": -2329,
+      "to": -2365,
+      "changePct": -1.5
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "trade",
+      "path": "monthly[date=2026-05].imports",
+      "from": 5640,
+      "to": 5686,
+      "changePct": 0.8
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "trade",
+      "path": "monthly[date=2026-05].exports",
+      "from": 2357,
+      "to": 2368,
+      "changePct": 0.5
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "trade",
+      "path": "monthly[date=2026-05].balance",
+      "from": -3283,
+      "to": -3318,
+      "changePct": -1.1
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Power].amount",
+      "from": 958.26,
+      "to": 57.48,
+      "changePct": -94
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Power].inflow",
+      "from": 1178.58,
+      "to": 98.1,
+      "changePct": -91.7
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Power].outflow",
+      "from": 220.32,
+      "to": 40.61,
+      "changePct": -81.6
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Power].priorAmount",
+      "from": 1177.97,
+      "to": 70.81,
+      "changePct": -94
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Power].priorInflow",
+      "from": 1703.49,
+      "to": 97.76,
+      "changePct": -94.3
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Power].priorOutflow",
+      "from": 525.52,
+      "to": 26.95,
+      "changePct": -94.9
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Financial Business].amount",
+      "from": 805.45,
+      "to": 62.3,
+      "changePct": -92.3
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Financial Business].inflow",
+      "from": 872.17,
+      "to": 67.8,
+      "changePct": -92.2
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Financial Business].outflow",
+      "from": 66.72,
+      "to": 5.51,
+      "changePct": -91.7
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Financial Business].priorAmount",
+      "from": 702.62,
+      "to": 58.78,
+      "changePct": -91.6
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Financial Business].priorInflow",
+      "from": 769.54,
+      "to": 64.29,
+      "changePct": -91.6
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Financial Business].priorOutflow",
+      "from": 66.92,
+      "to": 5.51,
+      "changePct": -91.8
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Communications].amount",
+      "from": -456.08,
+      "to": -10.29,
+      "changePct": 97.7
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Communications].inflow",
+      "from": 114.31,
+      "to": 8.3,
+      "changePct": -92.7
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Communications].outflow",
+      "from": 570.39,
+      "to": 18.6,
+      "changePct": -96.7
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Communications].priorAmount",
+      "from": -70.29,
+      "to": -4.18,
+      "changePct": 94.1
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Communications].priorInflow",
+      "from": 162.03,
+      "to": 11.75,
+      "changePct": -92.7
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Communications].priorOutflow",
+      "from": 232.32,
+      "to": 15.93,
+      "changePct": -93.1
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Electrical Machinery].amount",
+      "from": 146.29,
+      "to": 12.63,
+      "changePct": -91.4
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Electrical Machinery].inflow",
+      "from": 154.69,
+      "to": 12.67,
+      "changePct": -91.8
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Electrical Machinery].outflow",
+      "from": 8.4,
+      "to": 0.04,
+      "changePct": -99.5
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Electrical Machinery].priorAmount",
+      "from": 176.2,
+      "to": 13.51,
+      "changePct": -92.3
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Electrical Machinery].priorInflow",
+      "from": 176.83,
+      "to": 13.55,
+      "changePct": -92.3
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Electrical Machinery].priorOutflow",
+      "from": 0.63,
+      "to": 0.04,
+      "changePct": -93.7
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Mining & Quarrying].amount",
+      "from": -116.77,
+      "to": -11.47,
+      "changePct": 90.2
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Mining & Quarrying].inflow",
+      "from": 134.4,
+      "to": 4.36,
+      "changePct": -96.8
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Mining & Quarrying].outflow",
+      "from": 251.17,
+      "to": 15.84,
+      "changePct": -93.7
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Mining & Quarrying].priorAmount",
+      "from": -152.03,
+      "to": 27.95,
+      "changePct": 118.4
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Mining & Quarrying].priorInflow",
+      "from": 161.74,
+      "to": 53.79,
+      "changePct": -66.7
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Mining & Quarrying].priorOutflow",
+      "from": 313.78,
+      "to": 25.84,
+      "changePct": -91.8
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Oil & Gas Exploration].amount",
+      "from": -0.83,
+      "to": -8.25,
+      "changePct": -894
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Oil & Gas Exploration].inflow",
+      "from": 110.68,
+      "to": 1.04,
+      "changePct": -99.1
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Oil & Gas Exploration].outflow",
+      "from": 111.52,
+      "to": 9.29,
+      "changePct": -91.7
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Oil & Gas Exploration].priorAmount",
+      "from": 137.42,
+      "to": 1.25,
+      "changePct": -99.1
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Oil & Gas Exploration].priorInflow",
+      "from": 249.94,
+      "to": 10.54,
+      "changePct": -95.8
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Oil & Gas Exploration].priorOutflow",
+      "from": 112.52,
+      "to": 9.29,
+      "changePct": -91.7
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Personal Services].amount",
+      "from": 112.84,
+      "to": 11.08,
+      "changePct": -90.2
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Personal Services].inflow",
+      "from": 133.92,
+      "to": 11.09,
+      "changePct": -91.7
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Personal Services].outflow",
+      "from": 21.08,
+      "to": 0,
+      "changePct": -100
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Personal Services].priorAmount",
+      "from": 97.5,
+      "to": 10.31,
+      "changePct": -89.4
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Personal Services].priorInflow",
+      "from": 125.38,
+      "to": 10.31,
+      "changePct": -91.8
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Personal Services].priorOutflow",
+      "from": 27.88,
+      "to": 0,
+      "changePct": -100
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Food].amount",
+      "from": -102.09,
+      "to": 2.86,
+      "changePct": 102.8
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Food].inflow",
+      "from": 85.07,
+      "to": 4.08,
+      "changePct": -95.2
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Food].outflow",
+      "from": 187.15,
+      "to": 1.22,
+      "changePct": -99.3
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Food].priorAmount",
+      "from": 45,
+      "to": 10.24,
+      "changePct": -77.2
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Food].priorInflow",
+      "from": 60.11,
+      "to": 11.46,
+      "changePct": -80.9
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Food].priorOutflow",
+      "from": 15.11,
+      "to": 1.22,
+      "changePct": -91.9
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Others].amount",
+      "from": 309.88,
+      "to": 35.18,
+      "changePct": -88.6
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Others].priorAmount",
+      "from": 272.67,
+      "to": 31.06,
+      "changePct": -88.6
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_country[country=China].amount",
+      "from": 861.98,
+      "to": 63.2,
+      "changePct": -92.7
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_country[country=China].priorAmount",
+      "from": 1204.82,
+      "to": 51.76,
+      "changePct": -95.7
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_country[country=Hongkong].amount",
+      "from": 339.37,
+      "to": 20.16,
+      "changePct": -94.1
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_country[country=Hongkong].priorAmount",
+      "from": 470.04,
+      "to": 30.06,
+      "changePct": -93.6
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_country[country=U.A.E].amount",
+      "from": 235.93,
+      "to": 10.19,
+      "changePct": -95.7
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_country[country=U.A.E].priorAmount",
+      "from": 294.26,
+      "to": 18.9,
+      "changePct": -93.6
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_country[country=Switzerland].amount",
+      "from": 204.71,
+      "to": 16.8,
+      "changePct": -91.8
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_country[country=Switzerland].priorAmount",
+      "from": 168.34,
+      "to": 20.52,
+      "changePct": -87.8
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_country[country=United Kingdom].amount",
+      "from": 131.88,
+      "to": 15.87,
+      "changePct": -88
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_country[country=United Kingdom].priorAmount",
+      "from": 68.2,
+      "to": 8.99,
+      "changePct": -86.8
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_country[country=Kuwait].amount",
+      "from": 103.52,
+      "to": 8.54,
+      "changePct": -91.8
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_country[country=Kuwait].priorAmount",
+      "from": 30.39,
+      "to": 8.52,
+      "changePct": -72
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_country[country=Korea (South)].amount",
+      "from": 96.48,
+      "to": 8.01,
+      "changePct": -91.7
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_country[country=Korea (South)].priorAmount",
+      "from": 96.23,
+      "to": 8.01,
+      "changePct": -91.7
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_country[country=Others].amount",
+      "from": 276.71,
+      "to": 15.97,
+      "changePct": -94.2
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "by_country[country=Others].priorAmount",
+      "from": 99.06,
+      "to": 40.1,
+      "changePct": -59.5
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "fytdComparison.current.net_fdi",
+      "from": 1636.81,
+      "to": 178.6,
+      "changePct": -89.1
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "fytdComparison.current.inflow",
+      "from": 3567.91,
+      "to": 303.99,
+      "changePct": -91.5
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "fytdComparison.current.outflow",
+      "from": 1931.1,
+      "to": 125.39,
+      "changePct": -93.5
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "fytdComparison.prior.net_fdi",
+      "from": 2477.31,
+      "to": 223.47,
+      "changePct": -91
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "fytdComparison.prior.inflow",
+      "from": 4267.9,
+      "to": 333.54,
+      "changePct": -92.2
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "fytdComparison.prior.outflow",
+      "from": 1790.59,
+      "to": 110.07,
+      "changePct": -93.9
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "reserves-adequacy",
+      "path": "current.importCoverMonths",
+      "from": 3.1,
+      "to": 3.2,
+      "changePct": 3.2
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "reserves-adequacy",
+      "path": "trajectory[date=2026-08].importCoverMonths",
+      "from": 3.1,
+      "to": 3.2,
+      "changePct": 3.2
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "remittances",
+      "path": "monthly[date=2026-06].usa",
+      "from": 296.7873482,
+      "to": 296.4482152,
+      "changePct": -0.1
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "remittances",
+      "path": "sourceCountries[country=Saudi Arabia].value",
+      "from": 9783,
+      "to": 9873,
+      "changePct": 0.9
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "remittances",
+      "path": "sourceCountries[country=UAE].value",
+      "from": 8807,
+      "to": 8879,
+      "changePct": 0.8
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "remittances",
+      "path": "sourceCountries[country=United Kingdom].value",
+      "from": 6326,
+      "to": 6431,
+      "changePct": 1.7
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "remittances",
+      "path": "sourceCountries[country=EU Countries].value",
+      "from": 5227,
+      "to": 5264,
+      "changePct": 0.7
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "remittances",
+      "path": "sourceCountries[country=Other GCC Countries].value",
+      "from": 3934,
+      "to": 3974,
+      "changePct": 1
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "remittances",
+      "path": "sourceCountries[country=United States].value",
+      "from": 3624,
+      "to": 3671,
+      "changePct": 1.3
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "monetary",
+      "path": "m2_yoy.data[date=2021-08].value",
+      "from": 14.26,
+      "to": 15.01,
+      "changePct": 5.3
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "monetary",
+      "path": "m2_yoy.data[date=2026-07].value",
+      "from": 14.46,
+      "to": 14.45,
+      "changePct": -0.1
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "monetary",
+      "path": "credit_private.data[date=2021-08].value",
+      "from": 6747583.66,
+      "to": 6735825.53,
+      "changePct": -0.2
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "monetary",
+      "path": "credit_pvt_yoy.data[date=2021-08].value",
+      "from": 11.14,
+      "to": 11.36,
+      "changePct": 2
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "monetary",
+      "path": "deposits.data[date=2021-08].value",
+      "from": 15793409.56,
+      "to": 15873777.19,
+      "changePct": 0.5
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "monetary",
+      "path": "deposits_yoy.data[date=2021-08].value",
+      "from": 15.07,
+      "to": 15.41,
+      "changePct": 2.3
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "monetary",
+      "path": "deposits_yoy.data[date=2026-07].value",
+      "from": 16.14,
+      "to": 16.13,
+      "changePct": -0.1
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "monetary",
+      "path": "nfa.data[date=2021-08].value",
+      "from": 1358770.68,
+      "to": 1364208.94,
+      "changePct": 0.4
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "monetary",
+      "path": "budgetary.data[date=2021-08].value",
+      "from": 15052743.01,
+      "to": 15106258.98,
+      "changePct": 0.4
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "monetary",
+      "path": "reserve_money.data[date=2021-08].value",
+      "from": 8676216.04,
+      "to": 8670717.49,
+      "changePct": -0.1
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "monthly[date=2026-06].net_fdi",
+      "from": 14,
+      "to": 49,
+      "changePct": 250
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "fdi",
+      "path": "monthly[date=2026-06].equity",
+      "from": 29,
+      "to": 64,
+      "changePct": 120.7
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "trade",
+      "path": "monthly[date=2026-01].imports",
+      "from": 5346,
+      "to": 5339,
+      "changePct": -0.1
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "trade",
+      "path": "monthly[date=2026-01].exports",
+      "from": 2745,
+      "to": 2749,
+      "changePct": 0.1
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "trade",
+      "path": "monthly[date=2026-01].balance",
+      "from": -2601,
+      "to": -2590,
+      "changePct": 0.4
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "trade",
+      "path": "monthly[date=2026-02].imports",
+      "from": 5165,
+      "to": 5114,
+      "changePct": -1
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "trade",
+      "path": "monthly[date=2026-02].balance",
+      "from": -2685,
+      "to": -2633,
+      "changePct": 1.9
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "trade",
+      "path": "monthly[date=2026-03].imports",
+      "from": 4892,
+      "to": 4857,
+      "changePct": -0.7
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "trade",
+      "path": "monthly[date=2026-03].balance",
+      "from": -2365,
+      "to": -2329,
+      "changePct": 1.5
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "trade",
+      "path": "monthly[date=2026-05].imports",
+      "from": 5686,
+      "to": 5640,
+      "changePct": -0.8
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "trade",
+      "path": "monthly[date=2026-05].exports",
+      "from": 2368,
+      "to": 2357,
+      "changePct": -0.5
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "trade",
+      "path": "monthly[date=2026-05].balance",
+      "from": -3318,
+      "to": -3283,
+      "changePct": 1.1
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "reserves-adequacy",
+      "path": "current.importCoverMonths",
+      "from": 3.2,
+      "to": 3.1,
+      "changePct": -3.1
+    },
+    {
+      "date": "2026-08-18",
+      "dataset": "reserves-adequacy",
+      "path": "trajectory[date=2026-08].importCoverMonths",
+      "from": 3.2,
+      "to": 3.1,
+      "changePct": -3.1
+    },
     {
       "date": "2026-08-17",
       "dataset": "reserves-adequacy",
