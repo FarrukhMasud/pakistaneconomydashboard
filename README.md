@@ -62,7 +62,7 @@ convention:
 - **Open data:** Static JSON/CSV API under `public/api/v1/` (no key, no rate limit)
 - **Languages:** English + اردو (Urdu) with RTL layout; figures stay in English as published
 - **Tests:** `node --test` golden-file parser, data-writer, release-calendar and i18n suites
-- **SEO:** `index.html` meta/Open Graph/Twitter tags + JSON-LD (`WebSite`/`Dataset`) structured data, a crawlable no-JS fallback, plus `public/robots.txt`, `public/sitemap.xml` and `public/og-image.svg`
+- **SEO:** per-route titles/descriptions/canonicals (prerendered HTML + JSON-LD `WebPage`), a crawlable no-JS fallback on every path, `public/robots.txt`, a full `public/sitemap.xml` (`npm run generate:sitemap`), and a 1200×630 PNG Open Graph image (`public/og-image.png`)
 - **Theme:** Light / Dark / System (auto)
 
 ---

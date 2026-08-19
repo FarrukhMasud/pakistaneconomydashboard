@@ -2,6 +2,10 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { execSync } from 'node:child_process'
 import process from 'node:process'
+import { fileURLToPath } from 'node:url'
+import { dirname } from 'node:path'
+
+const rootDir = dirname(fileURLToPath(import.meta.url))
 
 function dataVersion() {
   if (process.env.VITE_DATA_VERSION) return process.env.VITE_DATA_VERSION
@@ -15,7 +19,20 @@ function dataVersion() {
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    {
+      name: 'seo-prerender',
+      apply: 'build',
+      closeBundle() {
+        // Run out-of-process so Vite's config bundler cannot mangle rewrite regexes.
+        execSync('node scripts/prerender-seo.mjs', {
+          cwd: rootDir,
+          stdio: 'inherit',
+        })
+      },
+    },
+  ],
   define: {
     'import.meta.env.VITE_DATA_VERSION': JSON.stringify(dataVersion()),
   },

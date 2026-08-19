@@ -22,7 +22,8 @@
     "generate:notes": "node scripts/generate-editorial-notes.mjs",
     "generate:preview": "node scripts/generate-update-preview.mjs",
     "generate:api": "node scripts/generate-api.mjs",
-    "generate:rss": "node scripts/generate-rss.mjs"
+    "generate:rss": "node scripts/generate-rss.mjs",
+    "generate:sitemap": "node scripts/generate-sitemap.mjs"
   },
   "dependencies": {
     "chart.js": "^4.5.1",
