@@ -16,9 +16,15 @@ import KpiCards from './components/KpiCards';
 import ReleaseCalendarSection from './components/ReleaseCalendarSection';
 import ErrorBoundary from './components/ErrorBoundary';
 import ConsentBanner from './components/ConsentBanner';
+import PlausibleAnalytics from './components/PlausibleAnalytics';
 import UpdateToast from './components/UpdateToast';
 import NotFoundSection from './components/NotFoundSection';
 import { isCoachPending, isConsentPending } from './utils/startupState';
+
+function isEmbedView() {
+  if (typeof window === 'undefined') return false;
+  return new URLSearchParams(window.location.search).get('embed') === '1';
+}
 
 const TradeSection = lazy(() => import('./components/TradeSection'));
 const ReservesSection = lazy(() => import('./components/ReservesSection'));
@@ -193,11 +199,14 @@ function App() {
       return () => cancelAnimationFrame(id);
     }, [theme]);
 
-  return (
-    <div className="app" data-section-group={activeGroupId} data-density={density}>
-      <a className="skip-link" href="#main-content">{t('a11y.skipToContent', 'Skip to main content')}</a>
+  const embed = isEmbedView();
 
-      <div className="app-chrome">
+  return (
+    <div className="app" data-section-group={activeGroupId} data-density={density} data-embed={embed ? '1' : undefined}>
+      <PlausibleAnalytics path={routePath} />
+      {!embed && <a className="skip-link" href="#main-content">{t('a11y.skipToContent', 'Skip to main content')}</a>}
+
+      {!embed && <div className="app-chrome">
         <div className="chrome-bar">
           <button
             type="button"
@@ -283,7 +292,7 @@ function App() {
             ))}
           </nav>
         )}
-      </div>
+      </div>}
 
       <main className="dashboard-content" id="main-content" tabIndex={-1}>
         <p className="sr-only" role="status" aria-live="polite">{routeAnnouncement}</p>
@@ -291,7 +300,9 @@ function App() {
           <span className="section-breadcrumb">
             {activeGroup.icon} {groupLabel(activeGroup)} <span aria-hidden="true">›</span> {sectionLabel(activeSection)}
           </span>
-          <ShareSectionLink groupId={activeGroup.id} sectionId={activeSection.id} label={sectionLabel(activeSection)} />
+          {!embed && (
+            <ShareSectionLink groupId={activeGroup.id} sectionId={activeSection.id} label={sectionLabel(activeSection)} />
+          )}
         </div>
         {lang !== 'en' && <p className="translation-notice">{t('app.translationNotice')}</p>}
         <div className="fade-in" key={routeKnown ? activeSectionId : `missing:${routePath}`}>
@@ -325,11 +336,11 @@ function App() {
         </div>
       </main>
 
-      <UpdateToast blocked={consentPending || coachPending} />
-      <ConsentBanner onResolved={() => setConsentPending(false)} />
-      <CoachMarks enabled={!consentPending} onFinished={() => setCoachPending(false)} />
+      {!embed && <UpdateToast blocked={consentPending || coachPending} />}
+      {!embed && <ConsentBanner onResolved={() => setConsentPending(false)} />}
+      {!embed && <CoachMarks enabled={!consentPending} onFinished={() => setCoachPending(false)} />}
 
-      <footer className="app-footer">
+      {!embed && <footer className="app-footer">
         <p>{t('app.footer')}</p>
         <div className="footer-sources">
           <button
@@ -346,7 +357,7 @@ function App() {
           <a href="https://invest.gov.pk" target="_blank" rel="noreferrer">{tx('Board of Investment')}</a>
           <a href="https://www.imf.org/en/Countries/PAK" target="_blank" rel="noreferrer">{tx('IMF Pakistan')}</a>
         </div>
-      </footer>
+      </footer>}
     </div>
   );
 }

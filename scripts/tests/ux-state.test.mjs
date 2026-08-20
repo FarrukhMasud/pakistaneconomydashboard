@@ -5,6 +5,7 @@ import {
   applyShareableChartState,
   parseShareableChartState,
 } from '../../src/hooks/useShareableChartState.js';
+import { embedSnippet, sectionUrl } from '../../src/utils/shareLinks.js';
 import {
   formatKpiNumber,
   formatKpiPeriod,
@@ -17,6 +18,22 @@ test('shareable chart state round-trips while preserving unrelated query paramet
   const search = applyShareableChartState('?lang=ur', { compare: 'fytd', focus: 1 }, 'off');
   assert.equal(search, '?lang=ur&compare=fytd&series=1');
   assert.deepEqual(parseShareableChartState(search, 'off'), { compare: 'fytd', focus: 1 });
+});
+
+test('embed snippet is a titled iframe of the section URL', () => {
+  const html = embedSnippet('https://economyofpakistan.com/external/reserves?embed=1', 'Reserves');
+  assert.match(html, /<iframe src="https:\/\/economyofpakistan.com\/external\/reserves\?embed=1"/);
+  assert.match(html, /title="Reserves — Pakistan Economic Dashboard"/);
+});
+
+test('sectionUrl keeps chart state and can add an embed flag', () => {
+  const url = sectionUrl('external', 'reserves', {
+    embed: true,
+    origin: 'https://economyofpakistan.com',
+    pathname: '/external/reserves',
+    search: '?compare=yoy',
+  });
+  assert.equal(url, 'https://economyofpakistan.com/external/reserves?compare=yoy&embed=1');
 });
 
 test('default chart state is omitted from the URL', () => {

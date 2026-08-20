@@ -5,6 +5,16 @@
   flex-direction: column;
 }
 
+.app[data-embed="1"] .app-chrome,
+.app[data-embed="1"] .app-footer,
+.app[data-embed="1"] .skip-link {
+  display: none;
+}
+
+.app[data-embed="1"] .dashboard-content {
+  padding-top: 0.75rem;
+}
+
 /* ===== Header ===== */
 .app-header {
   position: relative;
@@ -425,6 +435,50 @@
 .share-section-link:hover {
   color: var(--text-primary);
   border-color: var(--accent-teal);
+}
+
+.share-menu {
+  position: relative;
+}
+
+.share-menu > summary {
+  list-style: none;
+}
+
+.share-menu > summary::-webkit-details-marker {
+  display: none;
+}
+
+.share-menu__panel {
+  position: absolute;
+  inset-inline-end: 0;
+  top: calc(100% + 0.35rem);
+  z-index: 40;
+  min-width: 14.5rem;
+  display: flex;
+  flex-direction: column;
+  padding: 0.35rem;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--bg-card);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+}
+
+.share-menu__panel button {
+  appearance: none;
+  text-align: start;
+  background: transparent;
+  border: 0;
+  color: var(--text-primary);
+  padding: 0.45rem 0.65rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+}
+
+.share-menu__panel button:hover {
+  background: var(--bg-elevated);
 }
 
 /* ===== KPI Grid ===== */

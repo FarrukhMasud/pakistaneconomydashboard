@@ -63,6 +63,9 @@ convention:
 - **Languages:** English + اردو (Urdu) with RTL layout; figures stay in English as published
 - **Tests:** `node --test` golden-file parser, data-writer, release-calendar and i18n suites
 - **SEO:** per-route titles/descriptions/canonicals (prerendered HTML + JSON-LD `WebPage`), a crawlable no-JS fallback on every path, `public/robots.txt`, a full `public/sitemap.xml` (`npm run generate:sitemap`), and a 1200×630 PNG Open Graph image (`public/og-image.png`)
+- **RSS:** `public/feed.xml` (`npm run generate:rss`) publishes headline KPI figures and changes, not mere freshness flags
+- **Share & embed:** section menu copies a deep link, shares to X/LinkedIn/WhatsApp, or copies an iframe snippet (`?embed=1` hides chrome)
+- **Analytics:** cookieless Plausible pageviews on `economyofpakistan.com`; Microsoft Clarity remains consent-gated
 - **Theme:** Light / Dark / System (auto)
 
 ---

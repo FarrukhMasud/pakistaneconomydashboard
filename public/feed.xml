@@ -1,143 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>Pakistan Economic Dashboard — Critical series</title>
+    <title>Pakistan Economic Dashboard — Headline indicators</title>
     <link>https://economyofpakistan.com</link>
-    <description>Updates for reserves, inflation, FBR tax, trade, remittances and headline KPIs from official sources.</description>
+    <description>Latest official figures for reserves, inflation, remittances, FBR tax, the rupee and other headline KPIs — with the change, not just a freshness flag.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 18 Aug 2026 17:26:51 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 18 Aug 2026 00:00:00 GMT</lastBuildDate>
     <item>
-      <title>Foreign Exchange Reserves: 2026-08-07 (fresh)</title>
+      <title>Foreign Reserves (Total): 22.5 USD bn, +0.02 USD bn (7 Aug 2026)</title>
       <link>https://economyofpakistan.com/external/reserves</link>
-      <guid isPermaLink="false">reserves-2026-08-07</guid>
-      <pubDate>Mon, 17 Aug 2026 00:00:00 GMT</pubDate>
-      <description>Source: State Bank of Pakistan. Latest observation: 2026-08-07. Coverage: 2025-06 – 2026-08-07. Usually published weekly; dashboard should advance after SBP updates forex.pdf.</description>
-    </item>
-    <item>
-      <title>Monthly Average Exchange Rates: 2026-07 (fresh)</title>
-      <link>https://economyofpakistan.com/overview/overview</link>
-      <guid isPermaLink="false">exchange-rates-2026-07</guid>
-      <pubDate>Fri, 07 Aug 2026 00:00:00 GMT</pubDate>
-      <description>Source: State Bank of Pakistan. Latest observation: 2026-07. Coverage: 2021-01 – 2026-07. Monthly archive usually updates after month-end. Daily/current SBP rates are not used in this monthly chart.</description>
-    </item>
-    <item>
-      <title>Workers' Remittances: 2026-07 (fresh)</title>
-      <link>https://economyofpakistan.com/external/remittances</link>
-      <guid isPermaLink="false">remittances-2026-07</guid>
-      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
-      <description>Source: SBP EasyData API. Latest observation: 2026-07. Coverage: 2021-08 – 2026-07. Usually published monthly; April data is not expected until SBP releases the next workers remittance update.</description>
-    </item>
-    <item>
-      <title>Trade in Goods: 2026-07 (fresh)</title>
-      <link>https://economyofpakistan.com/external/trade</link>
-      <guid isPermaLink="false">trade-2026-07</guid>
-      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
-      <description>Source: State Bank of Pakistan. Latest observation: 2026-07. Coverage: 2021-01 – 2026-07. Monthly BOP goods trade data.</description>
-    </item>
-    <item>
-      <title>Foreign Direct Investment: 2026-07 (fresh)</title>
-      <link>https://economyofpakistan.com/overview/overview</link>
-      <guid isPermaLink="false">fdi-2026-07</guid>
-      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
-      <description>Source: State Bank of Pakistan. Latest observation: 2026-07. Coverage: monthly through 2026-07; sector Jul-Jul FY27; country Jul-Jul FY27; summary FY2027 Jul-Jul. Monthly net FDI can lead the detailed sector, country, and FYTD workbooks.</description>
-    </item>
-    <item>
-      <title>IT &amp; Services Trade: 2026-07 (fresh)</title>
-      <link>https://economyofpakistan.com/overview/overview</link>
-      <guid isPermaLink="false">services-2026-07</guid>
-      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
-      <description>Source: State Bank of Pakistan. Latest observation: 2026-07. Coverage: Jul-May FY26. Headline IT and total-services data can lead the detailed EBOPS category and freelance breakdown.</description>
-    </item>
-    <item>
-      <title>Inflation: 2026-07 (fresh)</title>
-      <link>https://economyofpakistan.com/prices/inflation</link>
-      <guid isPermaLink="false">inflation-2026-07</guid>
-      <pubDate>Tue, 04 Aug 2026 00:00:00 GMT</pubDate>
-      <description>Source: SBP EasyData API / PBS. Latest observation: 2026-07. Monthly CPI/WPI series sourced through SBP EasyData.</description>
-    </item>
-    <item>
-      <title>Monetary Sector: 2026-08 (fresh)</title>
-      <link>https://economyofpakistan.com/overview/overview</link>
-      <guid isPermaLink="false">monetary-2026-08</guid>
-      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
-      <description>Source: SBP EasyData API. Latest observation: 2026-08. SBP monetary series include weekly/monthly observations depending on the indicator.</description>
-    </item>
-    <item>
-      <title>Public Finance &amp; GDP: FY2026 (fresh)</title>
-      <link>https://economyofpakistan.com/overview/overview</link>
-      <guid isPermaLink="false">fiscal-FY2026</guid>
-      <pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
-      <description>Source: SBP EasyData API / SBP GDP table. Latest observation: FY2026. Coverage: FY2017 – FY2026. GDP/fiscal data is lower frequency than external-sector data.</description>
-    </item>
-    <item>
-      <title>FBR Tax Collection: 2026-06 (needs-review)</title>
-      <link>https://economyofpakistan.com/fiscal/fbr</link>
-      <guid isPermaLink="false">fbr-tax-2026-06</guid>
-      <pubDate>Fri, 07 Aug 2026 00:00:00 GMT</pubDate>
-      <description>Source: Federal Board of Revenue (FBR). Latest observation: 2026-06. FBR's official 1 July release confirms target achievement and Rs599bn of refunds but omits the numeric collection total. The Rs13,003bn FY2025-26 net collection is therefore retained as explicitly attributed provisional reporting until FBR publishes its official month-wise/tax-wise table or year book.. FBR publishes provisional monthly net collection in a press release shortly after each month-end; figures are finalised later in the FBR Year Book.</description>
-    </item>
-    <item>
-      <title>IMF Program Tracker: 2026-05-08 (fresh)</title>
-      <link>https://economyofpakistan.com/overview/overview</link>
-      <guid isPermaLink="false">imf-tracker-2026-05-08</guid>
-      <pubDate>Fri, 07 Aug 2026 00:00:00 GMT</pubDate>
-      <description>Source: IMF / official program documents. Latest observation: 2026-05-08. Update when IMF publishes Board decisions, press releases, staff reports, or official schedule changes.</description>
-    </item>
-    <item>
-      <title>KPI · Foreign Reserves (Total): 22.5 $ Billion (2026-08-07)</title>
-      <link>https://economyofpakistan.com/overview/overview</link>
       <guid isPermaLink="false">kpi-reserves-2026-08-07-22.5</guid>
       <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
-      <description>vs week ending 2026-07-31 · SBP · SBP: $17.06B · Banks: $5.44B</description>
+      <description>vs week ending 31 Jul 2026 · SBP · SBP: $17.06B · Banks: $5.44B</description>
     </item>
     <item>
-      <title>KPI · PKR / USD: 278.24 PKR (2026-07)</title>
-      <link>https://economyofpakistan.com/overview/overview</link>
+      <title>PKR / USD: 278.24 PKR, -0.34 PKR (Jul 2026)</title>
+      <link>https://economyofpakistan.com/external/exchange</link>
       <guid isPermaLink="false">kpi-exchange-rate-2026-07-278.24</guid>
       <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
-      <description>vs 2026-06 · SBP</description>
+      <description>vs Jun 2026 · SBP</description>
     </item>
     <item>
-      <title>KPI · Remittances (Monthly): 3.63 $ Billion (2026-07)</title>
-      <link>https://economyofpakistan.com/overview/overview</link>
+      <title>Remittances (Monthly): 3.63 USD bn, +0.16 USD bn (Jul 2026)</title>
+      <link>https://economyofpakistan.com/external/remittances</link>
       <guid isPermaLink="false">kpi-remittances-2026-07-3.63</guid>
       <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
-      <description>vs 2026-06 · SBP</description>
+      <description>vs Jun 2026 · SBP</description>
     </item>
     <item>
-      <title>KPI · Net FDI: 0.18 $B (Jul-Jul FY2027 (P))</title>
-      <link>https://economyofpakistan.com/overview/overview</link>
+      <title>Net FDI: 0.18 USD bn, -20.08% (Jul-Jul FY2027 (P))</title>
+      <link>https://economyofpakistan.com/external/fdi</link>
       <guid isPermaLink="false">kpi-fdi-Jul-Jul FY2027 (P)-0.18</guid>
       <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
       <description>vs Jul-Jul FY2026 · SBP</description>
     </item>
     <item>
-      <title>KPI · IT &amp; Telecom Exports: 0.42 $B (Jul FY27)</title>
-      <link>https://economyofpakistan.com/overview/overview</link>
+      <title>IT &amp; Telecom Exports: 0.42 USD bn, +20% (Jul FY2027)</title>
+      <link>https://economyofpakistan.com/external/services</link>
       <guid isPermaLink="false">kpi-it_exports-Jul FY27-0.42</guid>
       <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
       <description>vs Jul FY26 · SBP</description>
     </item>
     <item>
-      <title>KPI · GDP Growth Rate: 3.7 % (FY2026 (Est.))</title>
-      <link>https://economyofpakistan.com/overview/overview</link>
+      <title>GDP Growth Rate: 3.7 %, +0.52pp (FY2026 (Est.))</title>
+      <link>https://economyofpakistan.com/fiscal/fiscal</link>
       <guid isPermaLink="false">kpi-gdp-growth-FY2026 (Est.)-3.7</guid>
       <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
       <description>vs FY2025 · PBS / IMF</description>
     </item>
     <item>
-      <title>KPI · CPI Inflation (YoY): 9.2 % (2026-07)</title>
-      <link>https://economyofpakistan.com/overview/overview</link>
+      <title>CPI Inflation (YoY): 9.2 %, -1.9pp (Jul 2026)</title>
+      <link>https://economyofpakistan.com/prices/inflation</link>
       <guid isPermaLink="false">kpi-inflation-2026-07-9.2</guid>
       <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
-      <description>vs 2026-06 · PBS · SBP target: 5–7%</description>
+      <description>vs Jun 2026 · PBS · SBP target: 5–7%</description>
     </item>
     <item>
-      <title>KPI · FBR Tax Collection (FYTD): 13 T PKR (Jul–Jun FY2026)</title>
-      <link>https://economyofpakistan.com/overview/overview</link>
+      <title>FBR Tax Collection (FY2026): 13 Rs tn, +10.72% (Jul–Jun FY2026)</title>
+      <link>https://economyofpakistan.com/fiscal/fbr</link>
       <guid isPermaLink="false">kpi-fbr-tax-Jul–Jun FY2026-13</guid>
       <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
       <description>vs same period last year · Pakistani financial reporting citing provisional FBR figures · Target ₨12.98T · surplus ₨20B</description>
+    </item>
+    <item>
+      <title>SBP Policy Rate: 11.5 %, 0pp (27 Jul 2026)</title>
+      <link>https://economyofpakistan.com/prices/monetary</link>
+      <guid isPermaLink="false">kpi-policy-rate-2026-07-27-11.5</guid>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
+      <description>last MPC decision 27 Jul 2026 · SBP Monetary Policy Committee · Next MPC: 14 September 2026</description>
     </item>
   </channel>
 </rss>
