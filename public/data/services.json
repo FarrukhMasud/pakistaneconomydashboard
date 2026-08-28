@@ -286,9 +286,9 @@
     }
   ],
   "dataSource": "SBP",
-  "lastUpdated": "2026-08-18",
+  "lastUpdated": "2026-08-28",
   "dataCoverage": "Jul-May FY26",
-  "lastChecked": "2026-08-18",
+  "lastChecked": "2026-08-28",
   "bopSummary": {
     "source": "SBP Balance of Payments (BPM6) summary",
     "sourceFile": "Balancepayment_BPM6.xls",

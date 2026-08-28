@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-08-18T17:26:55.459Z",
-  "comparisonBase": "4f29ad2bdb246782470618b4406f42c27396b60e",
+  "generatedAt": "2026-08-28T23:13:39.635Z",
+  "comparisonBase": "59f1f21d1fbe61087a96bf08bb82f1df255adf71",
   "description": "Pre-commit comparison of working-tree dashboard data against HEAD.",
   "summary": {
-    "newObservations": 5,
-    "majorMovements": 3,
+    "newObservations": 2,
+    "majorMovements": 1,
     "newRevisions": 12,
     "sourceChanges": 0,
     "suspiciousDateJumps": 0,
@@ -13,166 +13,127 @@
   },
   "newObservations": [
     {
-      "dataset": "remittances",
-      "label": "Workers' Remittances",
-      "from": "2026-06",
-      "to": "2026-07",
-      "cadence": "Monthly"
+      "dataset": "reserves",
+      "label": "Foreign Exchange Reserves",
+      "from": "2026-08-07",
+      "to": "2026-08-21",
+      "cadence": "Weekly"
     },
     {
-      "dataset": "trade",
-      "label": "Trade in Goods",
-      "from": "2026-06",
-      "to": "2026-07",
-      "cadence": "Monthly"
-    },
-    {
-      "dataset": "fdi",
-      "label": "Foreign Direct Investment",
-      "from": "2026-06",
-      "to": "2026-07",
-      "cadence": "Monthly/FYTD"
-    },
-    {
-      "dataset": "services",
-      "label": "IT & Services Trade",
-      "from": "2026-06",
-      "to": "2026-07",
-      "cadence": "Monthly/FYTD"
-    },
-    {
-      "dataset": "monetary",
-      "label": "Monetary Sector",
-      "from": "2026-07",
-      "to": "2026-08",
-      "cadence": "Weekly/Monthly"
+      "dataset": "reserves-adequacy",
+      "label": "Reserves Adequacy Tracker",
+      "from": "2026-08-07",
+      "to": "2026-08-21",
+      "cadence": "Weekly"
     }
   ],
   "majorMovements": [
     {
-      "id": "it_exports",
-      "label": "IT & Telecom Exports",
-      "from": 4.6,
-      "to": 0.42,
-      "unit": "$B",
-      "period": "Jul FY27",
-      "percent": -90.9
-    },
-    {
-      "id": "fdi",
-      "label": "Net FDI",
-      "from": 1.64,
-      "to": 0.18,
-      "unit": "$B",
-      "period": "Jul-Jul FY2027 (P)",
-      "percent": -89
-    },
-    {
-      "id": "remittances",
-      "label": "Remittances (Monthly)",
-      "from": 3.47,
-      "to": 3.63,
+      "id": "reserves",
+      "label": "Foreign Reserves (Total)",
+      "from": 22.5,
+      "to": 22.59,
       "unit": "$ Billion",
-      "period": "2026-07",
-      "percent": 4.6
+      "period": "2026-08-21",
+      "percent": 0.4
     }
   ],
   "newRevisions": [
     {
-      "date": "2026-08-18",
-      "dataset": "trade",
-      "path": "monthly[date=2026-06].imports",
-      "from": 6147,
-      "to": 6152,
-      "changePct": 0.1
+      "date": "2026-08-28",
+      "dataset": "fdi",
+      "path": "monthlyComparison.current.net_fdi",
+      "from": 179,
+      "to": 214.29,
+      "changePct": 19.7
     },
     {
-      "date": "2026-08-18",
-      "dataset": "trade",
-      "path": "monthly[date=2026-06].exports",
-      "from": 2595,
-      "to": 2573,
-      "changePct": -0.8
+      "date": "2026-08-28",
+      "dataset": "fdi",
+      "path": "monthlyComparison.prior.net_fdi",
+      "from": 224,
+      "to": 231.91,
+      "changePct": 3.5
     },
     {
-      "date": "2026-08-18",
-      "dataset": "trade",
-      "path": "monthly[date=2026-06].balance",
-      "from": -3552,
-      "to": -3579,
-      "changePct": -0.8
+      "date": "2026-08-28",
+      "dataset": "reserves",
+      "path": "weekly[date=2026-06].banks",
+      "from": 4857.4,
+      "to": 4822.4,
+      "changePct": -0.7
     },
     {
-      "date": "2026-08-18",
+      "date": "2026-08-28",
+      "dataset": "reserves",
+      "path": "weekly[date=2026-06].total",
+      "from": 23233.6,
+      "to": 23198.6,
+      "changePct": -0.2
+    },
+    {
+      "date": "2026-08-28",
       "dataset": "reserves-adequacy",
-      "path": "current.importCoverMonths",
-      "from": 3.2,
-      "to": 3.1,
-      "changePct": -3.1
+      "path": "current.sbpReserves",
+      "from": 17.06,
+      "to": 17.1,
+      "changePct": 0.2
     },
     {
-      "date": "2026-08-18",
+      "date": "2026-08-28",
       "dataset": "reserves-adequacy",
-      "path": "trajectory[date=2026-08].importCoverMonths",
-      "from": 3.2,
-      "to": 3.1,
-      "changePct": -3.1
+      "path": "current.totalReserves",
+      "from": 22.5,
+      "to": 22.59,
+      "changePct": 0.4
     },
     {
-      "date": "2026-08-18",
-      "dataset": "trade",
-      "path": "monthly[date=2026-01].imports",
-      "from": 5339,
-      "to": 5346,
-      "changePct": 0.1
+      "date": "2026-08-28",
+      "dataset": "reserves-adequacy",
+      "path": "current.bankReserves",
+      "from": 5.44,
+      "to": 5.49,
+      "changePct": 0.9
     },
     {
-      "date": "2026-08-18",
-      "dataset": "trade",
-      "path": "monthly[date=2026-01].exports",
-      "from": 2749,
-      "to": 2745,
-      "changePct": -0.1
+      "date": "2026-08-28",
+      "dataset": "reserves-adequacy",
+      "path": "trajectory[date=2026-08].sbpReserves",
+      "from": 17.06,
+      "to": 17.1,
+      "changePct": 0.2
     },
     {
-      "date": "2026-08-18",
-      "dataset": "trade",
-      "path": "monthly[date=2026-01].balance",
-      "from": -2590,
-      "to": -2601,
-      "changePct": -0.4
+      "date": "2026-08-28",
+      "dataset": "monetary",
+      "path": "m2.data[date=2026-08].value",
+      "from": 44051301.47,
+      "to": 43980720.59,
+      "changePct": -0.2
     },
     {
-      "date": "2026-08-18",
-      "dataset": "trade",
-      "path": "monthly[date=2026-02].imports",
-      "from": 5114,
-      "to": 5165,
-      "changePct": 1
-    },
-    {
-      "date": "2026-08-18",
-      "dataset": "trade",
-      "path": "monthly[date=2026-02].balance",
-      "from": -2633,
-      "to": -2685,
-      "changePct": -2
-    },
-    {
-      "date": "2026-08-18",
-      "dataset": "trade",
-      "path": "monthly[date=2026-03].imports",
-      "from": 4857,
-      "to": 4892,
-      "changePct": 0.7
-    },
-    {
-      "date": "2026-08-18",
-      "dataset": "trade",
-      "path": "monthly[date=2026-03].balance",
-      "from": -2329,
-      "to": -2365,
+      "date": "2026-08-28",
+      "dataset": "monetary",
+      "path": "m2_yoy.data[date=2026-08].value",
+      "from": 12.35,
+      "to": 12.17,
       "changePct": -1.5
+    },
+    {
+      "date": "2026-08-28",
+      "dataset": "monetary",
+      "path": "deposits.data[date=2026-08].value",
+      "from": 32047257.18,
+      "to": 31976676.29,
+      "changePct": -0.2
+    },
+    {
+      "date": "2026-08-28",
+      "dataset": "monetary",
+      "path": "deposits_yoy.data[date=2026-08].value",
+      "from": 13.17,
+      "to": 12.92,
+      "changePct": -1.9
     }
   ],
   "sourceChanges": [],

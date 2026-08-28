@@ -1,20 +1,20 @@
 {
-  "lastUpdated": "2026-08-18",
+  "lastUpdated": "2026-08-28",
   "indicators": [
     {
       "id": "reserves",
       "label": "Foreign Reserves (Total)",
-      "value": 22.5,
+      "value": 22.59,
       "unit": "$ Billion",
-      "period": "2026-08-07",
-      "change": 0.02,
+      "period": "2026-08-21",
+      "change": 0.08,
       "changeUnit": "$B",
-      "changeBasis": "vs week ending 2026-07-31",
+      "changeBasis": "vs week ending 2026-08-13",
       "trend": "stable",
       "sentiment": "neutral",
       "source": "SBP",
       "provenanceKey": "reserves.weekly.total",
-      "sub": "SBP: $17.06B · Banks: $5.44B"
+      "sub": "SBP: $17.1B · Banks: $5.49B"
     },
     {
       "id": "exchange-rate",
@@ -135,5 +135,5 @@
       "sub": "Next MPC: 14 September 2026"
     }
   ],
-  "lastChecked": "2026-08-18"
+  "lastChecked": "2026-08-28"
 }

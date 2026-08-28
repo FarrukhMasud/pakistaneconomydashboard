@@ -9,11 +9,11 @@
   "dates": {
     "observation": "2026-07",
     "publication": null,
-    "verification": "2026-08-18",
+    "verification": "2026-08-28",
     "dashboardUpdated": "2026-08-18"
   },
   "lastUpdated": "2026-08-18",
-  "lastChecked": "2026-08-18",
+  "lastChecked": "2026-08-28",
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",
   "data": {
     "monthly": [
@@ -647,6 +647,6 @@
     "dataSource": "SBP EasyData API",
     "lastUpdated": "2026-08-18",
     "dataCoverage": "2021-08 – 2026-07",
-    "lastChecked": "2026-08-18"
+    "lastChecked": "2026-08-28"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T17:26:55.817Z",
+  "generatedAt": "2026-08-28T23:13:39.905Z",
   "version": "v1",
   "title": "economyofpakistan.com static data API",
   "description": "Every dataset the dashboard renders, published as stable JSON and CSV. No key, no rate limit, no scraping required. Please cite the issuing institution listed on each endpoint.",
@@ -30,18 +30,18 @@
       "label": "Foreign Exchange Reserves",
       "json": "/api/v1/reserves.json",
       "csv": "/api/v1/reserves.csv",
-      "rows": 19,
+      "rows": 17,
       "seriesKey": "weekly",
       "source": "State Bank of Pakistan",
       "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
       "sourceType": "official-primary",
       "cadence": "Weekly",
-      "latestObservation": "2026-08-07",
+      "latestObservation": "2026-08-21",
       "dates": {
-        "observation": "2026-08-07",
+        "observation": "2026-08-21",
         "publication": null,
-        "verification": "2026-08-18",
-        "dashboardUpdated": "2026-08-17"
+        "verification": "2026-08-28",
+        "dashboardUpdated": "2026-08-28"
       }
     },
     {
@@ -59,7 +59,7 @@
       "dates": {
         "observation": "2026-07",
         "publication": null,
-        "verification": "2026-08-18",
+        "verification": "2026-08-28",
         "dashboardUpdated": "2026-08-07"
       }
     },
@@ -78,7 +78,7 @@
       "dates": {
         "observation": "2026-07",
         "publication": null,
-        "verification": "2026-08-18",
+        "verification": "2026-08-28",
         "dashboardUpdated": "2026-08-18"
       }
     },
@@ -97,7 +97,7 @@
       "dates": {
         "observation": "2026-07",
         "publication": null,
-        "verification": "2026-08-18",
+        "verification": "2026-08-28",
         "dashboardUpdated": "2026-08-18"
       }
     },
@@ -116,8 +116,8 @@
       "dates": {
         "observation": "2026-07",
         "publication": null,
-        "verification": "2026-08-18",
-        "dashboardUpdated": "2026-08-18"
+        "verification": "2026-08-28",
+        "dashboardUpdated": "2026-08-28"
       }
     },
     {
@@ -135,8 +135,8 @@
       "dates": {
         "observation": "2026-07",
         "publication": null,
-        "verification": "2026-08-18",
-        "dashboardUpdated": "2026-08-18"
+        "verification": "2026-08-28",
+        "dashboardUpdated": "2026-08-28"
       }
     },
     {
@@ -154,7 +154,7 @@
       "dates": {
         "observation": "2026-07",
         "publication": null,
-        "verification": "2026-08-18",
+        "verification": "2026-08-28",
         "dashboardUpdated": "2026-08-04"
       }
     },
@@ -163,7 +163,7 @@
       "label": "Monetary Sector",
       "json": "/api/v1/monetary.json",
       "csv": "/api/v1/monetary.csv",
-      "rows": 549,
+      "rows": 540,
       "seriesKey": "series",
       "source": "SBP EasyData API",
       "sourceUrl": "https://easydata.sbp.org.pk",
@@ -173,8 +173,8 @@
       "dates": {
         "observation": "2026-08",
         "publication": null,
-        "verification": "2026-08-18",
-        "dashboardUpdated": "2026-08-18"
+        "verification": "2026-08-28",
+        "dashboardUpdated": "2026-08-28"
       }
     },
     {
@@ -192,7 +192,7 @@
       "dates": {
         "observation": "2026-06-30",
         "publication": null,
-        "verification": "2026-08-18",
+        "verification": "2026-08-28",
         "dashboardUpdated": "2026-07-24"
       }
     },
@@ -211,7 +211,7 @@
       "dates": {
         "observation": "2026-06",
         "publication": "2026-07-02",
-        "verification": "2026-08-18",
+        "verification": "2026-08-28",
         "dashboardUpdated": "2026-08-07"
       }
     },
@@ -302,12 +302,12 @@
       "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
       "sourceType": "official-derived",
       "cadence": "Weekly",
-      "latestObservation": "2026-08-07",
+      "latestObservation": "2026-08-21",
       "dates": {
-        "observation": "2026-08-07",
+        "observation": "2026-08-21",
         "publication": null,
-        "verification": "2026-08-18",
-        "dashboardUpdated": "2026-08-18"
+        "verification": "2026-08-28",
+        "dashboardUpdated": "2026-08-28"
       }
     },
     {
@@ -364,7 +364,7 @@
         "observation": "2025",
         "publication": null,
         "verification": null,
-        "dashboardUpdated": "2026-08-18"
+        "dashboardUpdated": "2026-08-28"
       }
     },
     {
