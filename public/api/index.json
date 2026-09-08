@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-28T23:13:39.905Z",
+  "generatedAt": "2026-09-08T18:47:27.542Z",
   "version": "v1",
   "title": "economyofpakistan.com static data API",
   "description": "Every dataset the dashboard renders, published as stable JSON and CSV. No key, no rate limit, no scraping required. Please cite the issuing institution listed on each endpoint.",
@@ -30,18 +30,18 @@
       "label": "Foreign Exchange Reserves",
       "json": "/api/v1/reserves.json",
       "csv": "/api/v1/reserves.csv",
-      "rows": 17,
+      "rows": 18,
       "seriesKey": "weekly",
       "source": "State Bank of Pakistan",
       "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
       "sourceType": "official-primary",
       "cadence": "Weekly",
-      "latestObservation": "2026-08-21",
+      "latestObservation": "2026-08-28",
       "dates": {
-        "observation": "2026-08-21",
+        "observation": "2026-08-28",
         "publication": null,
-        "verification": "2026-08-28",
-        "dashboardUpdated": "2026-08-28"
+        "verification": "2026-09-08",
+        "dashboardUpdated": "2026-09-08"
       }
     },
     {
@@ -49,18 +49,18 @@
       "label": "Monthly Average Exchange Rates",
       "json": "/api/v1/exchange-rates.json",
       "csv": "/api/v1/exchange-rates.csv",
-      "rows": 67,
+      "rows": 68,
       "seriesKey": "monthly",
       "source": "State Bank of Pakistan",
       "sourceUrl": "https://www.sbp.org.pk/assets/document/IBF_Arch.xls",
       "sourceType": "official-primary",
       "cadence": "Monthly",
-      "latestObservation": "2026-07",
+      "latestObservation": "2026-08",
       "dates": {
-        "observation": "2026-07",
+        "observation": "2026-08",
         "publication": null,
-        "verification": "2026-08-28",
-        "dashboardUpdated": "2026-08-07"
+        "verification": "2026-09-08",
+        "dashboardUpdated": "2026-09-08"
       }
     },
     {
@@ -68,7 +68,7 @@
       "label": "Workers' Remittances",
       "json": "/api/v1/remittances.json",
       "csv": "/api/v1/remittances.csv",
-      "rows": 60,
+      "rows": 59,
       "seriesKey": "monthly",
       "source": "SBP EasyData API",
       "sourceUrl": "https://easydata.sbp.org.pk",
@@ -78,8 +78,8 @@
       "dates": {
         "observation": "2026-07",
         "publication": null,
-        "verification": "2026-08-28",
-        "dashboardUpdated": "2026-08-18"
+        "verification": "2026-09-08",
+        "dashboardUpdated": "2026-09-08"
       }
     },
     {
@@ -97,7 +97,7 @@
       "dates": {
         "observation": "2026-07",
         "publication": null,
-        "verification": "2026-08-28",
+        "verification": "2026-09-08",
         "dashboardUpdated": "2026-08-18"
       }
     },
@@ -106,7 +106,7 @@
       "label": "Foreign Direct Investment",
       "json": "/api/v1/fdi.json",
       "csv": "/api/v1/fdi.csv",
-      "rows": 60,
+      "rows": 59,
       "seriesKey": "monthly",
       "source": "State Bank of Pakistan",
       "sourceUrl": "https://archive.sbp.org.pk/ecodata/NetinflowSummary.xls",
@@ -116,8 +116,8 @@
       "dates": {
         "observation": "2026-07",
         "publication": null,
-        "verification": "2026-08-28",
-        "dashboardUpdated": "2026-08-28"
+        "verification": "2026-09-08",
+        "dashboardUpdated": "2026-09-08"
       }
     },
     {
@@ -135,8 +135,8 @@
       "dates": {
         "observation": "2026-07",
         "publication": null,
-        "verification": "2026-08-28",
-        "dashboardUpdated": "2026-08-28"
+        "verification": "2026-09-08",
+        "dashboardUpdated": "2026-09-08"
       }
     },
     {
@@ -150,12 +150,12 @@
       "sourceUrl": "https://easydata.sbp.org.pk",
       "sourceType": "official-primary",
       "cadence": "Monthly",
-      "latestObservation": "2026-07",
+      "latestObservation": "2026-08",
       "dates": {
-        "observation": "2026-07",
+        "observation": "2026-08",
         "publication": null,
-        "verification": "2026-08-28",
-        "dashboardUpdated": "2026-08-04"
+        "verification": "2026-09-08",
+        "dashboardUpdated": "2026-09-08"
       }
     },
     {
@@ -173,8 +173,8 @@
       "dates": {
         "observation": "2026-08",
         "publication": null,
-        "verification": "2026-08-28",
-        "dashboardUpdated": "2026-08-28"
+        "verification": "2026-09-08",
+        "dashboardUpdated": "2026-09-08"
       }
     },
     {
@@ -192,7 +192,7 @@
       "dates": {
         "observation": "2026-06-30",
         "publication": null,
-        "verification": "2026-08-28",
+        "verification": "2026-09-08",
         "dashboardUpdated": "2026-07-24"
       }
     },
@@ -211,7 +211,7 @@
       "dates": {
         "observation": "2026-06",
         "publication": "2026-07-02",
-        "verification": "2026-08-28",
+        "verification": "2026-09-08",
         "dashboardUpdated": "2026-08-07"
       }
     },
@@ -302,12 +302,12 @@
       "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
       "sourceType": "official-derived",
       "cadence": "Weekly",
-      "latestObservation": "2026-08-21",
+      "latestObservation": "2026-08-28",
       "dates": {
-        "observation": "2026-08-21",
+        "observation": "2026-08-28",
         "publication": null,
-        "verification": "2026-08-28",
-        "dashboardUpdated": "2026-08-28"
+        "verification": "2026-09-08",
+        "dashboardUpdated": "2026-09-08"
       }
     },
     {
@@ -364,7 +364,7 @@
         "observation": "2025",
         "publication": null,
         "verification": null,
-        "dashboardUpdated": "2026-08-28"
+        "dashboardUpdated": "2026-09-08"
       }
     },
     {

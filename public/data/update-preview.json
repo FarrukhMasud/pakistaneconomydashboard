@@ -1,46 +1,78 @@
 {
-  "generatedAt": "2026-08-28T23:13:39.635Z",
-  "comparisonBase": "59f1f21d1fbe61087a96bf08bb82f1df255adf71",
+  "generatedAt": "2026-09-08T18:47:27.266Z",
+  "comparisonBase": "d0d5355cc964f71d84497479937780c4f0b61bcd",
   "description": "Pre-commit comparison of working-tree dashboard data against HEAD.",
   "summary": {
-    "newObservations": 2,
-    "majorMovements": 1,
+    "newObservations": 4,
+    "majorMovements": 3,
     "newRevisions": 12,
     "sourceChanges": 0,
     "suspiciousDateJumps": 0,
     "reviewRequired": 1,
-    "overdueReleases": 0
+    "overdueReleases": 1
   },
   "newObservations": [
     {
       "dataset": "reserves",
       "label": "Foreign Exchange Reserves",
-      "from": "2026-08-07",
-      "to": "2026-08-21",
+      "from": "2026-08-21",
+      "to": "2026-08-28",
       "cadence": "Weekly"
+    },
+    {
+      "dataset": "exchange-rates",
+      "label": "Monthly Average Exchange Rates",
+      "from": "2026-07",
+      "to": "2026-08",
+      "cadence": "Monthly"
+    },
+    {
+      "dataset": "inflation",
+      "label": "Inflation",
+      "from": "2026-07",
+      "to": "2026-08",
+      "cadence": "Monthly"
     },
     {
       "dataset": "reserves-adequacy",
       "label": "Reserves Adequacy Tracker",
-      "from": "2026-08-07",
-      "to": "2026-08-21",
+      "from": "2026-08-21",
+      "to": "2026-08-28",
       "cadence": "Weekly"
     }
   ],
   "majorMovements": [
     {
+      "id": "inflation",
+      "label": "CPI Inflation (YoY)",
+      "from": 9.2,
+      "to": 11.1,
+      "unit": "%",
+      "period": "2026-08",
+      "percent": 20.7
+    },
+    {
       "id": "reserves",
       "label": "Foreign Reserves (Total)",
-      "from": 22.5,
-      "to": 22.59,
+      "from": 22.59,
+      "to": 22.53,
       "unit": "$ Billion",
-      "period": "2026-08-21",
-      "percent": 0.4
+      "period": "2026-08-28",
+      "percent": -0.3
+    },
+    {
+      "id": "exchange-rate",
+      "label": "PKR / USD",
+      "from": 278.24,
+      "to": 277.92,
+      "unit": "PKR",
+      "period": "2026-08",
+      "percent": -0.1
     }
   ],
   "newRevisions": [
     {
-      "date": "2026-08-28",
+      "date": "2026-09-08",
       "dataset": "fdi",
       "path": "monthlyComparison.current.net_fdi",
       "from": 179,
@@ -48,7 +80,7 @@
       "changePct": 19.7
     },
     {
-      "date": "2026-08-28",
+      "date": "2026-09-08",
       "dataset": "fdi",
       "path": "monthlyComparison.prior.net_fdi",
       "from": 224,
@@ -56,84 +88,84 @@
       "changePct": 3.5
     },
     {
-      "date": "2026-08-28",
-      "dataset": "reserves",
-      "path": "weekly[date=2026-06].banks",
-      "from": 4857.4,
-      "to": 4822.4,
-      "changePct": -0.7
-    },
-    {
-      "date": "2026-08-28",
-      "dataset": "reserves",
-      "path": "weekly[date=2026-06].total",
-      "from": 23233.6,
-      "to": 23198.6,
-      "changePct": -0.2
-    },
-    {
-      "date": "2026-08-28",
+      "date": "2026-09-08",
       "dataset": "reserves-adequacy",
       "path": "current.sbpReserves",
-      "from": 17.06,
-      "to": 17.1,
-      "changePct": 0.2
+      "from": 17.1,
+      "to": 17.12,
+      "changePct": 0.1
     },
     {
-      "date": "2026-08-28",
+      "date": "2026-09-08",
       "dataset": "reserves-adequacy",
       "path": "current.totalReserves",
-      "from": 22.5,
-      "to": 22.59,
-      "changePct": 0.4
+      "from": 22.59,
+      "to": 22.53,
+      "changePct": -0.3
     },
     {
-      "date": "2026-08-28",
+      "date": "2026-09-08",
       "dataset": "reserves-adequacy",
       "path": "current.bankReserves",
-      "from": 5.44,
-      "to": 5.49,
-      "changePct": 0.9
-    },
-    {
-      "date": "2026-08-28",
-      "dataset": "reserves-adequacy",
-      "path": "trajectory[date=2026-08].sbpReserves",
-      "from": 17.06,
-      "to": 17.1,
-      "changePct": 0.2
-    },
-    {
-      "date": "2026-08-28",
-      "dataset": "monetary",
-      "path": "m2.data[date=2026-08].value",
-      "from": 44051301.47,
-      "to": 43980720.59,
-      "changePct": -0.2
-    },
-    {
-      "date": "2026-08-28",
-      "dataset": "monetary",
-      "path": "m2_yoy.data[date=2026-08].value",
-      "from": 12.35,
-      "to": 12.17,
+      "from": 5.49,
+      "to": 5.41,
       "changePct": -1.5
     },
     {
-      "date": "2026-08-28",
-      "dataset": "monetary",
-      "path": "deposits.data[date=2026-08].value",
-      "from": 32047257.18,
-      "to": 31976676.29,
-      "changePct": -0.2
+      "date": "2026-09-08",
+      "dataset": "reserves-adequacy",
+      "path": "current.importCoverMonths",
+      "from": 3.1,
+      "to": 3.2,
+      "changePct": 3.2
     },
     {
-      "date": "2026-08-28",
+      "date": "2026-09-08",
+      "dataset": "reserves-adequacy",
+      "path": "trajectory[date=2026-08].sbpReserves",
+      "from": 17.1,
+      "to": 17.12,
+      "changePct": 0.1
+    },
+    {
+      "date": "2026-09-08",
+      "dataset": "reserves-adequacy",
+      "path": "trajectory[date=2026-08].importCoverMonths",
+      "from": 3.1,
+      "to": 3.2,
+      "changePct": 3.2
+    },
+    {
+      "date": "2026-09-08",
       "dataset": "monetary",
-      "path": "deposits_yoy.data[date=2026-08].value",
-      "from": 13.17,
-      "to": 12.92,
-      "changePct": -1.9
+      "path": "m2.data[date=2021-09].value",
+      "from": 23296205.87,
+      "to": 23440136.04,
+      "changePct": 0.6
+    },
+    {
+      "date": "2026-09-08",
+      "dataset": "monetary",
+      "path": "m2_yoy.data[date=2021-09].value",
+      "from": 15.39,
+      "to": 15.98,
+      "changePct": 3.8
+    },
+    {
+      "date": "2026-09-08",
+      "dataset": "monetary",
+      "path": "credit_private.data[date=2021-09].value",
+      "from": 6764597.08,
+      "to": 6807736.5,
+      "changePct": 0.6
+    },
+    {
+      "date": "2026-09-08",
+      "dataset": "monetary",
+      "path": "credit_pvt_yoy.data[date=2021-09].value",
+      "from": 11.8,
+      "to": 12.51,
+      "changePct": 6
     }
   ],
   "sourceChanges": [],
@@ -147,5 +179,10 @@
       "observationDate": "2026-06"
     }
   ],
-  "overdueReleases": []
+  "overdueReleases": [
+    {
+      "label": "FBR Tax Collection",
+      "status": "due"
+    }
+  ]
 }

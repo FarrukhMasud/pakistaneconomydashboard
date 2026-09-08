@@ -9,22 +9,22 @@
   "dates": {
     "observation": "2026-08",
     "publication": null,
-    "verification": "2026-08-28",
-    "dashboardUpdated": "2026-08-28"
+    "verification": "2026-09-08",
+    "dashboardUpdated": "2026-09-08"
   },
-  "lastUpdated": "2026-08-28",
-  "lastChecked": "2026-08-28",
+  "lastUpdated": "2026-09-08",
+  "lastChecked": "2026-09-08",
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",
   "data": {
     "dataSource": "SBP EasyData API - Monetary & Financial Sector",
-    "lastUpdated": "2026-08-28",
+    "lastUpdated": "2026-09-08",
     "m2": {
       "name": "Broad Money (M2)",
       "seriesKey": "TS_GP_BAM_M2_W.M000070",
       "data": [
         {
           "date": "2021-09",
-          "value": 23296205.87,
+          "value": 23440136.04,
           "unit": "Million PKR"
         },
         {
@@ -330,7 +330,7 @@
       "data": [
         {
           "date": "2021-09",
-          "value": 15.39,
+          "value": 15.98,
           "unit": "Percent"
         },
         {
@@ -636,7 +636,7 @@
       "data": [
         {
           "date": "2021-09",
-          "value": 6764597.08,
+          "value": 6807736.5,
           "unit": "Million PKR"
         },
         {
@@ -942,7 +942,7 @@
       "data": [
         {
           "date": "2021-09",
-          "value": 11.8,
+          "value": 12.51,
           "unit": "Percent"
         },
         {
@@ -1248,7 +1248,7 @@
       "data": [
         {
           "date": "2021-09",
-          "value": 16168554.6,
+          "value": 16184939.08,
           "unit": "Million PKR"
         },
         {
@@ -1860,7 +1860,7 @@
       "data": [
         {
           "date": "2021-09",
-          "value": 1300540.21,
+          "value": 1318661.65,
           "unit": "Million PKR"
         },
         {
@@ -2166,7 +2166,7 @@
       "data": [
         {
           "date": "2021-09",
-          "value": 15411179.5,
+          "value": 15401921.05,
           "unit": "Million PKR"
         },
         {
@@ -2472,7 +2472,7 @@
       "data": [
         {
           "date": "2021-09",
-          "value": 8533646.92,
+          "value": 8653158.18,
           "unit": "Million PKR"
         },
         {
@@ -2772,6 +2772,6 @@
         }
       ]
     },
-    "lastChecked": "2026-08-28"
+    "lastChecked": "2026-09-08"
   }
 }

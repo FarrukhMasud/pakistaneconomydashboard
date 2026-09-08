@@ -1,16 +1,6 @@
 {
   "monthly": [
     {
-      "date": "2021-08",
-      "total": 2682.62743,
-      "saudiArabia": 715.9610477,
-      "uae": 528.1112733,
-      "uk": 359.1006348,
-      "usa": 235.1889067,
-      "otherGcc": 296.8484414,
-      "eu": 294.6722186
-    },
-    {
       "date": "2021-09",
       "total": 2779.892769,
       "saudiArabia": 719.5372702,
@@ -628,7 +618,7 @@
     }
   ],
   "dataSource": "SBP EasyData API",
-  "lastUpdated": "2026-08-18",
-  "dataCoverage": "2021-08 – 2026-07",
-  "lastChecked": "2026-08-28"
+  "lastUpdated": "2026-09-08",
+  "dataCoverage": "2021-09 – 2026-07",
+  "lastChecked": "2026-09-08"
 }

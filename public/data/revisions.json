@@ -1,8 +1,152 @@
 {
-  "generatedAt": "2026-08-28T23:12:23.856Z",
+  "generatedAt": "2026-09-08T18:47:06.397Z",
   "description": "Every restatement of a previously published figure. Pakistani official statistics are routinely revised from provisional to final; this log preserves what changed, when, and by how much.",
-  "entryCount": 173,
+  "entryCount": 191,
   "entries": [
+    {
+      "date": "2026-09-08",
+      "dataset": "fdi",
+      "path": "monthlyComparison.current.net_fdi",
+      "from": 179,
+      "to": 214.29,
+      "changePct": 19.7
+    },
+    {
+      "date": "2026-09-08",
+      "dataset": "fdi",
+      "path": "monthlyComparison.prior.net_fdi",
+      "from": 224,
+      "to": 231.91,
+      "changePct": 3.5
+    },
+    {
+      "date": "2026-09-08",
+      "dataset": "reserves-adequacy",
+      "path": "current.sbpReserves",
+      "from": 17.1,
+      "to": 17.12,
+      "changePct": 0.1
+    },
+    {
+      "date": "2026-09-08",
+      "dataset": "reserves-adequacy",
+      "path": "current.totalReserves",
+      "from": 22.59,
+      "to": 22.53,
+      "changePct": -0.3
+    },
+    {
+      "date": "2026-09-08",
+      "dataset": "reserves-adequacy",
+      "path": "current.bankReserves",
+      "from": 5.49,
+      "to": 5.41,
+      "changePct": -1.5
+    },
+    {
+      "date": "2026-09-08",
+      "dataset": "reserves-adequacy",
+      "path": "current.importCoverMonths",
+      "from": 3.1,
+      "to": 3.2,
+      "changePct": 3.2
+    },
+    {
+      "date": "2026-09-08",
+      "dataset": "reserves-adequacy",
+      "path": "trajectory[date=2026-08].sbpReserves",
+      "from": 17.1,
+      "to": 17.12,
+      "changePct": 0.1
+    },
+    {
+      "date": "2026-09-08",
+      "dataset": "reserves-adequacy",
+      "path": "trajectory[date=2026-08].importCoverMonths",
+      "from": 3.1,
+      "to": 3.2,
+      "changePct": 3.2
+    },
+    {
+      "date": "2026-09-08",
+      "dataset": "monetary",
+      "path": "m2.data[date=2021-09].value",
+      "from": 23296205.87,
+      "to": 23440136.04,
+      "changePct": 0.6
+    },
+    {
+      "date": "2026-09-08",
+      "dataset": "monetary",
+      "path": "m2_yoy.data[date=2021-09].value",
+      "from": 15.39,
+      "to": 15.98,
+      "changePct": 3.8
+    },
+    {
+      "date": "2026-09-08",
+      "dataset": "monetary",
+      "path": "credit_private.data[date=2021-09].value",
+      "from": 6764597.08,
+      "to": 6807736.5,
+      "changePct": 0.6
+    },
+    {
+      "date": "2026-09-08",
+      "dataset": "monetary",
+      "path": "credit_pvt_yoy.data[date=2021-09].value",
+      "from": 11.8,
+      "to": 12.51,
+      "changePct": 6
+    },
+    {
+      "date": "2026-09-08",
+      "dataset": "monetary",
+      "path": "deposits.data[date=2021-09].value",
+      "from": 16168554.6,
+      "to": 16184939.08,
+      "changePct": 0.1
+    },
+    {
+      "date": "2026-09-08",
+      "dataset": "monetary",
+      "path": "nfa.data[date=2021-09].value",
+      "from": 1300540.21,
+      "to": 1318661.65,
+      "changePct": 1.4
+    },
+    {
+      "date": "2026-09-08",
+      "dataset": "monetary",
+      "path": "budgetary.data[date=2021-09].value",
+      "from": 15411179.5,
+      "to": 15401921.05,
+      "changePct": -0.1
+    },
+    {
+      "date": "2026-09-08",
+      "dataset": "monetary",
+      "path": "reserve_money.data[date=2021-09].value",
+      "from": 8533646.92,
+      "to": 8653158.18,
+      "changePct": 1.4
+    },
+    {
+      "date": "2026-09-08",
+      "dataset": "fdi",
+      "path": "monthlyComparison.current.net_fdi",
+      "from": 214.29,
+      "to": 179,
+      "changePct": -16.5
+    },
+    {
+      "date": "2026-09-08",
+      "dataset": "fdi",
+      "path": "monthlyComparison.prior.net_fdi",
+      "from": 231.91,
+      "to": 224,
+      "changePct": -3.4
+    },
     {
       "date": "2026-08-28",
       "dataset": "fdi",

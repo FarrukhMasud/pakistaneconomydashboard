@@ -1,5 +1,4 @@
 series,date,value
-national_cpi,2021-08,8.353519783
 national_cpi,2021-09,8.979178716
 national_cpi,2021-10,9.2
 national_cpi,2021-11,11.5
@@ -59,7 +58,7 @@ national_cpi,2026-04,10.9
 national_cpi,2026-05,11.7
 national_cpi,2026-06,11.1
 national_cpi,2026-07,9.2
-urban_cpi,2021-08,8.319835076
+national_cpi,2026-08,11.1
 urban_cpi,2021-09,9.125281757
 urban_cpi,2021-10,9.6
 urban_cpi,2021-11,12
@@ -119,7 +118,7 @@ urban_cpi,2026-04,11.1
 urban_cpi,2026-05,11.8
 urban_cpi,2026-06,11.2
 urban_cpi,2026-07,8.7
-rural_cpi,2021-08,8.403975446
+urban_cpi,2026-08,10.4
 rural_cpi,2021-09,8.766396674
 rural_cpi,2021-10,8.7
 rural_cpi,2021-11,10.9
@@ -179,7 +178,7 @@ rural_cpi,2026-04,10.6
 rural_cpi,2026-05,11.5
 rural_cpi,2026-06,10.9
 rural_cpi,2026-07,9.9
-spi,2021-08,12.66998588
+rural_cpi,2026-08,12.2
 spi,2021-09,13.7915937
 spi,2021-10,14
 spi,2021-11,17.4
@@ -239,7 +238,7 @@ spi,2026-04,12.6
 spi,2026-05,14.91
 spi,2026-06,15
 spi,2026-07,11.48
-urban_food,2021-08,10.2035209
+spi,2026-08,9.28
 urban_food,2021-09,10.76619621
 urban_food,2021-10,9.4
 urban_food,2021-11,11.9
@@ -299,7 +298,7 @@ urban_food,2026-04,6.9
 urban_food,2026-05,6.5
 urban_food,2026-06,8.2
 urban_food,2026-07,9.6
-rural_food,2021-08,9.131961755
+urban_food,2026-08,12.1
 rural_food,2021-09,9.07112715
 rural_food,2021-10,7.2
 rural_food,2021-11,8.6
@@ -359,7 +358,7 @@ rural_food,2026-04,7.3
 rural_food,2026-05,8.5
 rural_food,2026-06,9.4
 rural_food,2026-07,10.2
-urban_nonfood,2021-08,7.204903696
+rural_food,2026-08,13.2
 urban_nonfood,2021-09,8.130201041
 urban_nonfood,2021-10,9.7
 urban_nonfood,2021-11,12
@@ -419,7 +418,7 @@ urban_nonfood,2026-04,13.8
 urban_nonfood,2026-05,15.2
 urban_nonfood,2026-06,13.1
 urban_nonfood,2026-07,8.2
-rural_nonfood,2021-08,7.749456143
+urban_nonfood,2026-08,9.4
 rural_nonfood,2021-09,8.479111692
 rural_nonfood,2021-10,10
 rural_nonfood,2021-11,13
@@ -479,7 +478,7 @@ rural_nonfood,2026-04,13.6
 rural_nonfood,2026-05,14.2
 rural_nonfood,2026-06,12.3
 rural_nonfood,2026-07,9.7
-wpi,2021-08,17.1495585
+rural_nonfood,2026-08,11.3
 wpi,2021-09,19.60677226
 wpi,2021-10,21.2
 wpi,2021-11,27
@@ -539,3 +538,4 @@ wpi,2026-04,13.6
 wpi,2026-05,12.7
 wpi,2026-06,10.7
 wpi,2026-07,9.4
+wpi,2026-08,11.8

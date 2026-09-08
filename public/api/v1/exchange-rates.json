@@ -5,15 +5,15 @@
   "sourceUrl": "https://www.sbp.org.pk/assets/document/IBF_Arch.xls",
   "sourceType": "official-primary",
   "cadence": "Monthly",
-  "latestObservation": "2026-07",
+  "latestObservation": "2026-08",
   "dates": {
-    "observation": "2026-07",
+    "observation": "2026-08",
     "publication": null,
-    "verification": "2026-08-28",
-    "dashboardUpdated": "2026-08-07"
+    "verification": "2026-09-08",
+    "dashboardUpdated": "2026-09-08"
   },
-  "lastUpdated": "2026-08-07",
-  "lastChecked": "2026-08-28",
+  "lastUpdated": "2026-09-08",
+  "lastChecked": "2026-09-08",
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",
   "data": {
     "monthly": [
@@ -485,11 +485,18 @@
         "EUR": 317.87,
         "GBP": 372.25,
         "CNY": 41.07
+      },
+      {
+        "date": "2026-08",
+        "USD": 277.92,
+        "EUR": 321.9,
+        "GBP": 376,
+        "CNY": 41.26
       }
     ],
     "dataSource": "SBP",
-    "lastUpdated": "2026-08-07",
-    "dataCoverage": "2021-01 – 2026-07",
-    "lastChecked": "2026-08-28"
+    "lastUpdated": "2026-09-08",
+    "dataCoverage": "2021-01 – 2026-08",
+    "lastChecked": "2026-09-08"
   }
 }
