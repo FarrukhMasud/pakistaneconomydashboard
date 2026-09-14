@@ -11,7 +11,7 @@ export default function DensityToggle() {
   ];
 
   return (
-    <div className="density-toggle" role="radiogroup" aria-label={t('density.label', 'Detail level')}>
+    <div className="density-toggle" role="group" aria-label={t('density.label', 'Detail level')}>
       {options.map((opt) => (
         <button
           key={opt.value}

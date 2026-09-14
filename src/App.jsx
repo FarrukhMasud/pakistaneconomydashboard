@@ -3,12 +3,16 @@ import { Chart as ChartJS } from 'chart.js';
 import './App.css';
 import './utils/chartConfig';
 import { useTheme } from './hooks/useTheme';
-import { useHashRoute } from './hooks/useHashRoute';
+import { routeToPath, useHashRoute } from './hooks/useHashRoute';
 import { useDensity } from './hooks/useDensity';
 import ThemeToggle from './components/ThemeToggle';
 import LanguageToggle from './components/LanguageToggle';
 import DensityToggle from './components/DensityToggle';
 import CommandPalette from './components/CommandPalette';
+import BrowseSections from './components/BrowseSections';
+import MobileViewSettings from './components/MobileViewSettings';
+import { isPlainNavigation } from './utils/sectionCatalog';
+import './styles/navigation.css';
 import CoachMarks from './components/CoachMarks';
 import { useI18n } from './i18n/useI18n';
 import ShareSectionLink from './components/ShareSectionLink';
@@ -141,6 +145,7 @@ function App() {
     known: routeKnown,
     navigate,
     path: routePath,
+    chartUnavailable,
   } = useHashRoute(NAV_GROUPS);
   const { theme, setTheme } = useTheme();
   const { density } = useDensity();
@@ -166,15 +171,17 @@ function App() {
   // Announce section changes to screen readers: hash routing swaps the whole
   // <main> without a page load, which is otherwise silent for assistive tech.
   // Derived during render so the live region only fires on an actual change.
-  const routeAnnouncement = t('a11y.sectionAnnounce', 'Now showing {name}')
-    .replace('{name}', t(`nav.section.${activeSection.id}`, activeSection.label).replace(/^\P{L}+/u, ''));
+  const routeAnnouncement = routeKnown
+    ? t('a11y.sectionAnnounce', 'Now showing {name}')
+      .replace('{name}', t(`nav.section.${activeSection.id}`, activeSection.label).replace(/^\P{L}+/u, ''))
+    : t('navigation.notFound', 'Section not found');
 
   // Keep the document title in sync so browser history and shared links are
   // self-describing rather than all reading "Pakistan Economic Dashboard".
   useEffect(() => {
-    const label = t(`nav.section.${activeSection.id}`, activeSection.label);
+    const label = routeKnown ? t(`nav.section.${activeSection.id}`, activeSection.label) : t('navigation.notFound', 'Section not found');
     document.title = `${label.replace(/^\P{L}+/u, '')} · ${t('app.title')} ${t('app.titleHighlight')}`;
-  }, [activeSection, t, lang]);
+  }, [activeSection, t, lang, routeKnown]);
 
   // Update Chart.js defaults when theme changes (no section remount required).
   useEffect(() => {
@@ -232,26 +239,42 @@ function App() {
               groupLabel={groupLabel}
               sectionLabel={sectionLabel}
             />
-            <DensityToggle />
-            <LanguageToggle />
-            <ThemeToggle theme={theme} setTheme={setTheme} />
+            <BrowseSections
+              groups={NAV_GROUPS}
+              activeGroupId={activeGroupId}
+              activeSectionId={routeKnown ? activeSectionId : null}
+              onNavigate={navigate}
+              groupLabel={groupLabel}
+              sectionLabel={sectionLabel}
+            />
+            <div className="desktop-view-settings">
+              <DensityToggle />
+              <LanguageToggle />
+              <ThemeToggle theme={theme} setTheme={setTheme} />
+            </div>
+            <MobileViewSettings theme={theme} setTheme={setTheme} />
           </div>
         </div>
 
         <nav className="group-nav" aria-label={t('app.primaryNav')}>
           {NAV_GROUPS.map((group) => (
-            <button
+            <a
               key={group.id}
+              href={routeToPath(group.id, group.sections[0].id)}
               className={`group-btn ${activeGroupId === group.id ? 'active' : ''}`}
-              onClick={() => navigate(group.id, group.sections[0].id)}
-              aria-current={activeGroupId === group.id ? 'page' : undefined}
+              onClick={(event) => {
+                if (!isPlainNavigation(event)) return;
+                event.preventDefault();
+                navigate(group.id, group.sections[0].id);
+              }}
+              aria-current={routeKnown && activeGroupId === group.id ? 'page' : undefined}
             >
               <span className="group-btn__icon">{group.icon}</span>
               <span className="group-btn__text">
                 <span className="group-btn__label">{groupLabel(group)}</span>
                 <span className="group-btn__blurb">{groupBlurb(group)}</span>
               </span>
-            </button>
+            </a>
           ))}
         </nav>
 
@@ -282,7 +305,7 @@ function App() {
                 className={`sub-tab-btn ${activeSectionId === section.id ? 'active' : ''}`}
                 aria-current={activeSectionId === section.id ? 'page' : undefined}
                 onClick={(event) => {
-                  if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
+                  if (!isPlainNavigation(event)) return;
                   event.preventDefault();
                   navigate(activeGroup.id, section.id);
                 }}
@@ -296,6 +319,11 @@ function App() {
 
       <main className="dashboard-content" id="main-content" tabIndex={-1}>
         <p className="sr-only" role="status" aria-live="polite">{routeAnnouncement}</p>
+        {chartUnavailable && (
+          <p className="navigation-notice" role="status">
+            {t('navigation.chartUnavailable', 'The requested chart is not available in this view. The section and its data status are shown below.')}
+          </p>
+        )}
         <div className="section-toolbar">
           <span className="section-breadcrumb">
             {activeGroup.icon} {groupLabel(activeGroup)} <span aria-hidden="true">›</span> {sectionLabel(activeSection)}

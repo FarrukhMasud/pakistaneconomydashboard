@@ -52,7 +52,11 @@ export function formatCompareBasis(basis) {
     .replace(/\b(\d{4}-\d{2})\b/g, (_, iso) => formatKpiPeriod(iso));
 }
 
-export function formatKpiChange(kpi) {
+export function formatKpiChange(kpi, t = (_key, fallback) => fallback) {
+  if (kpi?.changeDescription) {
+    const { key, fallback, value } = kpi.changeDescription;
+    return t(key, fallback).replace('{value}', value);
+  }
   if (kpi?.changeLabel && !Number.isFinite(kpi.change)) return kpi.changeLabel;
   if (!Number.isFinite(kpi?.change)) return null;
   const sign = kpi.change > 0 ? '+' : '';

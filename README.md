@@ -31,6 +31,30 @@ Navigation is grouped into **Overview**, **External Sector**, **Prices & Money**
 sub-sections. Routes are path-based (`/group/section`) with hash fallback, so every
 section is a shareable deep link.
 
+### Finding and interpreting figures
+
+- **Latest economic picture:** the overview briefing dates each observation
+  individually. A dashboard check date is not a claim that every source has
+  published new figures; source badges distinguish official, derived, and
+  explicitly attributed secondary reporting.
+- **Brief / Analyst:** Brief prioritizes headline figures and charts. Analyst
+  opens supporting context by default. Periods, comparison bases, and source
+  confidence remain available in both modes, including on mobile.
+- **Browse and search:** browse sections by topic, or search using English or
+  Urdu economic terms. Indicator results can link directly to a relevant chart.
+  Mobile view settings include language, theme, and detail level.
+- **Watchlist:** pin an indicator, switch between all indicators and your saved
+  watchlist, and undo a pin change. Pins stay on this device; no account is needed.
+- **Charts:** chronological series support 1Y / 3Y / 5Y / All windows relative to
+  the latest available observation, with the selection retained in shared links.
+  Category charts and fiscal-year overlays retain their appropriate comparison
+  periods rather than treating categories as calendar dates. Data tables and CSV
+  exports use the displayed observations.
+- **Data & sources:** chart actions expose tabular data, downloads, and source
+  details without requiring Analyst view. Chart names and summaries complement
+  the accessible data table; separate links and buttons keep navigation,
+  details, and pinning keyboard-accessible.
+
 ## Accuracy & Traceability
 
 Accuracy is the product. The following guarantees are enforced by code, not by
@@ -78,6 +102,11 @@ Translation uses two complementary layers, both under `src/i18n/`:
 | ----- | ---- | -------- | -------- |
 | Keyed dictionary | `en.js` / `ur.js` | stable ids (`nav.section.trade`) | chrome that has no natural English "source string": nav, status words, control labels |
 | String dictionary | `strings-ur.js` | the exact English source string | section titles, chart titles, descriptions, tile labels — components just call `tx('Trade Overview')` |
+
+Navigation, chart-control, and watchlist messages are paired in `ux.js` and
+merged into the keyed English/Urdu dictionaries. Regression tests check that
+literal keys are registered in both languages and interpolation placeholders
+are preserved.
 
 `tx()` normalises curly vs straight apostrophes and whitespace before lookup, and
 returns the English input unchanged when there is no translation, so an

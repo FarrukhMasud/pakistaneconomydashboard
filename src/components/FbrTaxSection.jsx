@@ -1,6 +1,7 @@
 import { Bar } from 'react-chartjs-2';
 import { useData } from '../hooks/useData';
 import { useShareableChartState } from '../hooks/useShareableChartState';
+import { fiscalYearEndDate } from '../utils/chartTimeRange';
 import { COLORS, baseBarOptions } from '../utils/chartConfig';
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
@@ -103,6 +104,7 @@ export default function FbrTaxSection() {
         borderRadius: 4,
       },
       ...(showNetCompare ? [{
+        isComparison: true,
         label: netCompareLabel,
         data: netCompare,
         backgroundColor: 'rgba(255, 167, 38, 0.3)',
@@ -436,6 +438,8 @@ export default function FbrTaxSection() {
 
         <ChartCard
           title="Monthly Net Collection vs Target"
+          observationDates={sorted.map((row) => row.date)}
+          rangeMode={showFytd ? 'fiscal' : 'chronological'}
           description={`Available monthly net FBR collection in PKR billion.${sorted.length ? ` Coverage currently runs ${formatMonthYear(sorted[0].date)} – ${formatMonthYear(sorted.at(-1).date)}.` : ''} Official FBR figures and secondary-attributed provisional months are distinguished in the chart notes. Missing months are intentionally left absent rather than estimated.`}
           source="FBR official publications / identified secondary-attributed reports"
           dataSource={dataSource}
@@ -457,6 +461,7 @@ export default function FbrTaxSection() {
                   {hasBreakdown && (
           <ChartCard
             title="Collection by Tax Head"
+            observationDates={breakdownRows.map((row) => row.date)}
             description="Monthly net collection split across the four federal tax heads: Income/Direct Tax, Sales Tax, Federal Excise Duty (FED) and Customs Duty. Only months for which FBR published a complete four-way breakdown are shown."
             source="Federal Board of Revenue (FBR)"
             dataSource={dataSource}
@@ -472,6 +477,7 @@ export default function FbrTaxSection() {
         {hasFyTotals && (
           <ChartCard
             title="Full-Year Collection by Fiscal Year"
+            observationDates={fyTotals.map((row) => fiscalYearEndDate(row.fy))}
             description="Total net FBR collection for each completed fiscal year (July–June). Amber bars indicate a provisional full-year figure that has not yet been finalised in the FBR Year Book."
             source="Federal Board of Revenue (FBR)"
             dataSource={dataSource}

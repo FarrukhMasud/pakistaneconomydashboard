@@ -123,7 +123,9 @@ export function countryFlagPlugin(countries, id) {
       yScale.ticks.forEach((tick) => {
         const index = tick.value;
         const country = countries[index];
-        const image = flagImage(country, () => chart.draw());
+        const image = flagImage(country, () => {
+          if (chart.ctx) chart.draw();
+        });
         if (!image?.complete || image.naturalWidth === 0) return;
 
         const x = yScale.left + 2;

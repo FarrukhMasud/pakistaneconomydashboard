@@ -1,5 +1,14 @@
 import { formatKpiPeriod, formatKpiChange } from './kpiFormat.js';
-import { isFiniteNumber, latestRow, pctChange } from './periodHelpers.js';
+import { isClosedFiscalPeriod, isFiniteNumber, latestRow, pctChange } from './periodHelpers.js';
+
+export const HEADLINE_KPI_IDS = [
+  'inflation', 'reserves', 'exchange-rate', 'remittances', 'trade', 'policy-rate',
+];
+
+export function selectHeadlineKpis(indicators) {
+  const byId = new Map((indicators || []).map((row) => [row.id, row]));
+  return HEADLINE_KPI_IDS.map((id) => byId.get(id)).filter(Boolean);
+}
 
 export const KPI_ROUTES = {
   reserves: { groupId: 'external', sectionId: 'reserves', datasetId: 'reserves' },
@@ -14,7 +23,7 @@ export const KPI_ROUTES = {
   trade: { groupId: 'external', sectionId: 'trade', datasetId: 'trade' },
   'current-account': { groupId: 'external', sectionId: 'trade', datasetId: 'indicators' },
   'public-debt': { groupId: 'fiscal', sectionId: 'fiscal', datasetId: 'indicators' },
-  'circular-debt': { groupId: 'insights', sectionId: 'macro-risk', datasetId: 'circular-debt' },
+  'circular-debt': { groupId: 'fiscal', sectionId: 'fiscal', datasetId: 'circular-debt' },
 };
 
 export function kpiRoute(id) {
@@ -29,7 +38,9 @@ export function yoyMatch(rows, date) {
 }
 
 export function applyYoYHeadline(kpi, rows, { valueKey = 'total', goodWhenUp = true } = {}) {
-  const latest = latestRow(rows);
+  const latest = kpi.period
+    ? rows?.find((row) => row.date === kpi.period)
+    : latestRow(rows);
   const prior = yoyMatch(rows, latest?.date);
   const current = latest?.[valueKey];
   const yearAgo = prior?.[valueKey];
@@ -45,24 +56,63 @@ export function applyYoYHeadline(kpi, rows, { valueKey = 'total', goodWhenUp = t
   return {
     ...kpi,
     momChangeLabel: formatKpiChange(kpi),
+    momChangeBasis: kpi.changeBasis,
     change: move.pct,
     changeUnit: '%',
     changeBasis: `vs ${formatKpiPeriod(prior.date)} (YoY)`,
     trend: move.direction === 'flat' ? 'stable' : move.direction,
     sentiment,
     headlineKind: 'yoy',
+    comparisonPeriod: prior.date,
+    period: kpi.period || latest.date,
+  };
+}
+
+export function tradeComparison(current, previous, period, kind) {
+  if (!isFiniteNumber(current) || !isFiniteNumber(previous)) return null;
+  const delta = current - previous;
+  const direction = delta > 0 ? 'up' : delta < 0 ? 'down' : 'flat';
+  const sameSide = current < 0 && previous < 0 || current > 0 && previous > 0;
+  const change = sameSide ? pctChange(current, previous).pct : Math.round(delta) / 1000;
+  const unit = sameSide ? '%' : 'USD bn';
+  let key;
+  let fallback;
+  if (delta === 0) {
+    key = 'overview.trade.unchanged';
+    fallback = 'Balance unchanged';
+  } else if (current < 0 && previous < 0) {
+    key = delta < 0 ? 'overview.trade.deficitWidened' : 'overview.trade.deficitNarrowed';
+    fallback = delta < 0 ? 'Deficit widened {value}' : 'Deficit narrowed {value}';
+  } else if (current > 0 && previous > 0) {
+    key = delta > 0 ? 'overview.trade.surplusWidened' : 'overview.trade.surplusNarrowed';
+    fallback = delta > 0 ? 'Surplus widened {value}' : 'Surplus narrowed {value}';
+  } else {
+    key = delta > 0 ? 'overview.trade.improved' : 'overview.trade.deteriorated';
+    fallback = delta > 0 ? 'Balance improved {value}' : 'Balance deteriorated {value}';
+  }
+  return {
+    change,
+    changeUnit: unit,
+    changeBasis: `vs ${formatKpiPeriod(period)} (${kind})`,
+    comparisonPeriod: period,
+    headlineKind: kind.toLowerCase(),
+    trend: direction === 'flat' ? 'stable' : direction,
+    sentiment: delta > 0 ? 'positive' : delta < 0 ? 'negative' : 'neutral',
+    changeDescription: { key, fallback, value: `${Math.abs(change)}${unit === '%' ? '%' : ` ${unit}`}` },
   };
 }
 
 export function buildTradeKpi(trade) {
-  const latest = latestRow(trade?.monthly);
+  const rows = [...(trade?.monthly || [])].sort((a, b) => String(a.date).localeCompare(String(b.date)));
+  const latest = latestRow(rows);
   if (!latest || !isFiniteNumber(latest.balance)) return null;
-  const yearAgo = yoyMatch(trade.monthly, latest.date);
-  const yoy = yearAgo && isFiniteNumber(yearAgo.balance)
-    ? pctChange(latest.balance, yearAgo.balance)
-    : null;
-  const prior = trade.monthly.length > 1 ? trade.monthly.at(-2) : null;
-  const mom = prior && isFiniteNumber(prior.balance) ? pctChange(latest.balance, prior.balance) : null;
+  const yearAgo = yoyMatch(rows, latest.date);
+  const [year, month] = latest.date.split('-').map(Number);
+  const priorDate = `${month === 1 ? year - 1 : year}-${String(month === 1 ? 12 : month - 1).padStart(2, '0')}`;
+  const prior = rows.find((row) => row.date === priorDate);
+  const yoy = tradeComparison(latest.balance, yearAgo?.balance, yearAgo?.date, 'YoY');
+  const mom = tradeComparison(latest.balance, prior?.balance, prior?.date, 'MoM');
+  const comparison = yoy || mom;
 
   return {
     id: 'trade',
@@ -71,24 +121,25 @@ export function buildTradeKpi(trade) {
     decimals: 2,
     unit: 'USD bn',
     period: latest.date,
-    change: yoy?.pct,
-    changeUnit: yoy?.pct != null ? '%' : undefined,
-    changeBasis: yearAgo ? `vs ${formatKpiPeriod(yearAgo.date)} (YoY)` : null,
-    momChangeLabel: mom?.pct != null ? `${mom.pct > 0 ? '+' : ''}${mom.pct}% MoM` : null,
-    trend: (yoy?.direction || mom?.direction || 'flat') === 'flat'
-      ? 'stable'
-      : (yoy?.direction || mom?.direction),
-    sentiment: latest.balance >= 0 ? 'positive' : 'negative',
+    trend: 'stable',
+    sentiment: 'neutral',
+    ...comparison,
+    momComparison: yoy ? mom : null,
     source: 'SBP',
-    sub: `Exports ${(latest.exports / 1000).toFixed(2)} USD bn · Imports ${(latest.imports / 1000).toFixed(2)} USD bn`,
+    sourceType: 'official-derived',
+    sub: isFiniteNumber(latest.exports) && isFiniteNumber(latest.imports)
+      ? `Exports ${(latest.exports / 1000).toFixed(2)} USD bn · Imports ${(latest.imports / 1000).toFixed(2)} USD bn`
+      : null,
   };
 }
 
 export function buildSnapshotKpi(row) {
   if (!row?.id) return null;
+  const completedCurrentAccount = row.id === 'current-account' && isClosedFiscalPeriod(row.asOf);
   return {
     id: row.id,
-    label: row.label,
+    label: completedCurrentAccount ? 'Current Account (Full year)' : row.label,
+    labelKey: completedCurrentAccount ? 'overview.currentAccountFullYear' : undefined,
     displayValue: `${row.value}${row.unit ? ` ${row.unit}` : ''}`.trim(),
     period: row.asOf,
     changeLabel: row.change || null,
@@ -97,6 +148,7 @@ export function buildSnapshotKpi(row) {
     sentiment: row.sentiment || 'neutral',
     source: row.source,
     sourceUrl: row.sourceUrl,
+    sourceType: row.sourceType,
     sub: row.note,
   };
 }
@@ -121,6 +173,21 @@ export function decorateOverviewKpis(indicators, { remittances } = {}) {
   });
 }
 
+export function buildOverviewIndicators({ summary, trade, remittances, snapshot } = {}) {
+  const snapshotIds = ['current-account', 'public-debt', 'circular-debt'];
+  return decorateOverviewKpis(mergeOverviewIndicators(summary?.indicators, [
+    buildTradeKpi(trade),
+    ...snapshotIds.map((id) => buildSnapshotKpi(snapshot?.indicators?.find((row) => row.id === id))),
+  ]), { remittances });
+}
+
+export function overviewFreshness(indicators, freshness) {
+  const datasets = new Map((freshness?.datasets || []).map((row) => [row.id, row]));
+  const sources = (indicators || []).map((row) => datasets.get(kpiRoute(row.id).datasetId)).filter(Boolean);
+  const latestDate = (key) => sources.map((row) => row[key]).filter(Boolean).sort().at(-1) || null;
+  return { checked: latestDate('verificationDate'), changed: latestDate('dashboardUpdated'), datasets };
+}
+
 function signedAbs(value, digits = 1) {
   const abs = Math.abs(value).toLocaleString(undefined, {
     minimumFractionDigits: digits,
@@ -133,65 +200,72 @@ function signedAbs(value, digits = 1) {
  * Rule-based briefing clauses from already-decorated KPIs + optional FBR gap.
  * Callers translate via t(clause.key, clause.fallback).replace('{value}', clause.value).
  */
-export function buildOverviewClauses({ inflation, remittances, trade, fbrGap, fbrGapUnit = 'Rs bn' } = {}) {
+export function buildOverviewClauses({ inflation, remittances, trade, fbrGap, fbrPeriod, fbrGapUnit = 'Rs bn' } = {}) {
   const clauses = [];
 
-  if (Number.isFinite(inflation?.value)) {
+  if (Number.isFinite(inflation?.value) && inflation.period) {
     const delta = inflation.change;
     const key = delta < 0
-      ? 'overview.clause.inflationCooled'
+      ? 'overview.picture.inflationCooled'
       : delta > 0
-        ? 'overview.clause.inflationRose'
-        : 'overview.clause.inflationHeld';
-    const verb = delta < 0 ? 'cooled to' : delta > 0 ? 'rose to' : 'held at';
+        ? 'overview.picture.inflationRose'
+        : Number.isFinite(delta) ? 'overview.picture.inflationHeld' : 'overview.picture.inflationAt';
+    const verb = delta < 0 ? 'cooled to' : delta > 0 ? 'rose to' : Number.isFinite(delta) ? 'held at' : 'was';
     clauses.push({
       id: 'inflation',
       key,
-      fallback: `Inflation ${verb} {value}%`,
+      fallback: `Inflation ${verb} {value}% in {period}`,
       value: String(inflation.value),
+      period: formatKpiPeriod(inflation.period),
     });
   }
 
-  if (Number.isFinite(remittances?.change) && remittances.headlineKind === 'yoy') {
+  if (Number.isFinite(remittances?.change) && remittances.headlineKind === 'yoy' && remittances.period) {
     const key = remittances.change > 0.5
-      ? 'overview.clause.remittancesUp'
+      ? 'overview.picture.remittancesUp'
       : remittances.change < -0.5
-        ? 'overview.clause.remittancesDown'
-        : 'overview.clause.remittancesFlat';
+        ? 'overview.picture.remittancesDown'
+        : 'overview.picture.remittancesFlat';
     const fallback = remittances.change > 0.5
-      ? 'remittances are {value}% higher than a year earlier'
+      ? 'remittances in {period} were {value}% higher than a year earlier'
       : remittances.change < -0.5
-        ? 'remittances are {value}% lower than a year earlier'
-        : 'remittances are little changed from a year earlier';
+        ? 'remittances in {period} were {value}% lower than a year earlier'
+        : 'remittances in {period} were little changed from a year earlier';
     clauses.push({
       id: 'remittances',
       key,
       fallback,
       value: signedAbs(remittances.change),
+      period: formatKpiPeriod(remittances.period),
     });
   }
 
-  if (Number.isFinite(trade?.value)) {
+  if (Number.isFinite(trade?.value) && trade.period) {
     const deficit = trade.value < 0;
     clauses.push({
       id: 'trade',
-      key: deficit ? 'overview.clause.tradeDeficit' : 'overview.clause.tradeSurplus',
+      key: trade.value === 0 ? 'overview.picture.tradeBalanced' : deficit ? 'overview.picture.tradeDeficit' : 'overview.picture.tradeSurplus',
       fallback: deficit
-        ? 'the latest monthly goods deficit is {value} USD bn'
-        : 'the latest monthly goods surplus is {value} USD bn',
+        ? 'the goods deficit in {period} was {value} USD bn'
+        : trade.value === 0 ? 'goods trade was balanced in {period}' : 'the goods surplus in {period} was {value} USD bn',
       value: signedAbs(trade.value, 2),
+      period: formatKpiPeriod(trade.period),
     });
   }
 
-  if (Number.isFinite(fbrGap)) {
+  if (Number.isFinite(fbrGap) && fbrPeriod) {
     const ahead = fbrGap >= 0;
+    const completed = isClosedFiscalPeriod(fbrPeriod);
     clauses.push({
       id: 'fbr',
-      key: ahead ? 'overview.clause.fbrAhead' : 'overview.clause.fbrShort',
-      fallback: ahead
-        ? 'FBR is {value} ahead of its FYTD target'
-        : 'FBR is {value} short of its FYTD target',
+      key: completed
+        ? ahead ? 'overview.picture.fbrFullAhead' : 'overview.picture.fbrFullShort'
+        : ahead ? 'overview.picture.fbrAhead' : 'overview.picture.fbrShort',
+      fallback: completed
+        ? ahead ? 'FBR ended {period} {value} ahead of its full-year target' : 'FBR ended {period} {value} short of its full-year target'
+        : ahead ? 'FBR was {value} ahead of its target for {period} (FYTD)' : 'FBR was {value} short of its target for {period} (FYTD)',
       value: `${signedAbs(fbrGap, 0)} ${fbrGapUnit}`,
+      period: formatKpiPeriod(fbrPeriod),
     });
   }
 

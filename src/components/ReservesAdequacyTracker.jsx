@@ -5,9 +5,10 @@ import TrackerFooter from './ui/TrackerFooter';
 import { LoadingCard, ErrorCard } from './ui/DataState';
 import './ui/Trackers.css';
 import useI18n from '../i18n/useI18n';
+import ChartCard from './ChartCard';
 
 export default function ReservesAdequacyTracker() {
-  const { tx } = useI18n();
+  const { t, tx } = useI18n();
   const { data, loading, error, retry } = useData('reserves-adequacy.json');
   if (loading) return <LoadingCard label="Loading reserves adequacy…" />;
   if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load reserves adequacy" compact />;
@@ -29,6 +30,7 @@ export default function ReservesAdequacyTracker() {
       },
       {
         label: `${benchmark?.label || 'Benchmark'} (${benchmark?.months} months)`,
+        isComparison: true,
         data: trajectory.map(() => benchmark?.months),
         borderColor: COLORS.amber,
         borderDash: [6, 4],
@@ -90,9 +92,18 @@ export default function ReservesAdequacyTracker() {
       </div>
 
       {trajectory.length > 1 && (
-        <div className="tracker__chart">
-          <Line data={chart} options={chartOptions} />
-        </div>
+        <ChartCard
+          chartId="chart-goods-import-cover-history"
+          title={t('chart.importCoverHistory', 'Goods-import cover history')}
+          observationDates={trajectory.map((point) => point.date)}
+          dataSource="SBP"
+          dataCoverage={current?.asOf}
+          lastUpdated={lastVerified}
+        >
+          <div className="tracker__chart">
+            <Line data={chart} options={chartOptions} />
+          </div>
+        </ChartCard>
       )}
 
       {drivers.length > 0 && (

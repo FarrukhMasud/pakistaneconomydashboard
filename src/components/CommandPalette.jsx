@@ -1,42 +1,20 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import useI18n from '../i18n/useI18n';
-import { INDICATOR_CATALOG } from '../utils/indicatorCatalog';
+import { INDICATOR_CATALOG, indicatorForQuery, scoreSearch } from '../utils/indicatorCatalog';
+import { isPlainNavigation, sectionDescription, trackDiscovery } from '../utils/sectionCatalog';
+import { routeToPath } from '../hooks/useHashRoute';
 import { useWatchlist } from '../hooks/useWatchlist';
+import { paletteShortcutAction } from '../utils/navigationModal';
+import NavigationDialog from './NavigationDialog';
+import WatchlistFeedback from './WatchlistFeedback';
 
-function isTypingTarget(target) {
-  if (!target) return false;
-  const tag = target.tagName;
-  return tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || target.isContentEditable;
-}
-
-function score(haystack, needle) {
-  const text = haystack.toLowerCase();
-  const query = needle.toLowerCase();
-  if (!query) return 0;
-  const index = text.indexOf(query);
-  if (index === 0) return 3;
-  if (index > 0) return 2;
-  let cursor = 0;
-  for (const char of query) {
-    cursor = text.indexOf(char, cursor);
-    if (cursor === -1) return -1;
-    cursor += 1;
-  }
-  return 1;
-}
-
-/**
- * Ctrl/Cmd+K jump-to-section + indicator palette.
- */
 export default function CommandPalette({ groups, onNavigate, groupLabel, sectionLabel }) {
   const { t } = useI18n();
   const { isPinned, toggle } = useWatchlist();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
-  const inputRef = useRef(null);
   const listRef = useRef(null);
-  const dialogRef = useRef(null);
 
   const sectionEntries = useMemo(() => groups.flatMap((group) => group.sections.map((section) => ({
     key: `section:${group.id}/${section.id}`,
@@ -46,39 +24,34 @@ export default function CommandPalette({ groups, onNavigate, groupLabel, section
     icon: group.icon,
     group: groupLabel(group),
     label: sectionLabel(section),
-    haystack: [sectionLabel(section), section.label, groupLabel(group), group.label, section.id].join(' '),
-  }))), [groups, groupLabel, sectionLabel]);
+    description: sectionDescription(section.id, t),
+    terms: [sectionLabel(section), section.label, groupLabel(group), group.label, section.id, sectionDescription(section.id, t)],
+  }))), [groups, groupLabel, sectionLabel, t]);
 
-  const indicatorEntries = useMemo(() => INDICATOR_CATALOG.map((item) => ({
-    key: `indicator:${item.id}`,
-    kind: 'indicator',
-    groupId: item.groupId,
-    sectionId: item.sectionId,
-    icon: '📌',
-    group: t('palette.indicator', 'Indicator'),
-    label: item.label,
-    haystack: [item.label, item.id, ...(item.terms || [])].join(' '),
-  })), [t]);
-
-  const entries = useMemo(
-    () => [...sectionEntries, ...indicatorEntries],
-    [sectionEntries, indicatorEntries],
-  );
+  const indicatorEntries = useMemo(() => INDICATOR_CATALOG.map((baseItem) => {
+    const item = indicatorForQuery(baseItem, query);
+    return {
+      ...item,
+      key: `indicator:${item.id}`,
+      kind: 'indicator',
+      icon: '📌',
+      group: t('palette.indicator', 'Indicator'),
+      label: t(item.labelKey || `indicator.${item.id}`, item.label),
+      description: item.chartId
+        ? t('palette.jumpChart', 'Jump directly to chart')
+        : t('palette.openSection', 'Open the explanatory section'),
+      terms: [t(item.labelKey || `indicator.${item.id}`, item.label), item.label, item.id, ...item.terms],
+    };
+  }), [t, query]);
 
   const results = useMemo(() => {
     if (!query.trim()) return sectionEntries;
-    return entries
-      .map((entry) => ({ entry, rank: score(entry.haystack, query.trim()) }))
-      .filter((item) => item.rank > 0)
-      .sort((a, b) => {
-        if (b.rank !== a.rank) return b.rank - a.rank;
-        // Prefer exact section matches slightly over indicators at same rank
-        if (a.entry.kind !== b.entry.kind) return a.entry.kind === 'section' ? -1 : 1;
-        return 0;
-      })
-      .map((item) => item.entry);
-  }, [entries, sectionEntries, query]);
-
+    return [...sectionEntries, ...indicatorEntries]
+      .map((entry) => ({ entry, rank: scoreSearch(entry.terms, query) }))
+      .filter(({ rank }) => rank > 0)
+      .sort((a, b) => b.rank - a.rank || Number(b.entry.kind === 'indicator') - Number(a.entry.kind === 'indicator'))
+      .map(({ entry }) => entry);
+  }, [sectionEntries, indicatorEntries, query]);
   const selectedIndex = results.length ? Math.min(activeIndex, results.length - 1) : 0;
 
   const openPalette = () => {
@@ -89,18 +62,14 @@ export default function CommandPalette({ groups, onNavigate, groupLabel, section
 
   useEffect(() => {
     const onKeyDown = (event) => {
-      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
-        event.preventDefault();
-        setOpen((value) => {
-          if (value) return false;
-          setQuery('');
-          setActiveIndex(0);
-          return true;
-        });
-        return;
-      }
-      if (event.key === '/' && !open && !isTypingTarget(event.target)) {
-        event.preventDefault();
+      const action = paletteShortcutAction(event, {
+        open,
+        anotherDialogOpen: Boolean(document.querySelector('dialog[open]:not(.search-dialog), [aria-modal="true"]:not(.search-dialog)')),
+      });
+      if (!action) return;
+      event.preventDefault();
+      if (action === 'close') setOpen(false);
+      else {
         setQuery('');
         setActiveIndex(0);
         setOpen(true);
@@ -111,138 +80,102 @@ export default function CommandPalette({ groups, onNavigate, groupLabel, section
   }, [open]);
 
   useEffect(() => {
-    if (!open) return undefined;
-    inputRef.current?.focus();
-
-    const onKeyDown = (event) => {
-      if (event.key !== 'Tab' || !dialogRef.current) return;
-      const focusable = dialogRef.current.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-      );
-      if (!focusable.length) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
-    document.addEventListener('keydown', onKeyDown);
-    return () => document.removeEventListener('keydown', onKeyDown);
-  }, [open]);
-
-  useEffect(() => {
     listRef.current?.querySelector('[data-active="true"]')?.scrollIntoView({ block: 'nearest' });
   }, [selectedIndex, open]);
 
   const choose = (entry) => {
     if (!entry) return;
-    onNavigate(entry.groupId, entry.sectionId);
+    trackDiscovery(entry.kind);
     setOpen(false);
-  };
-
-  const onInputKeyDown = (event) => {
-    if (event.key === 'Escape') {
-      setOpen(false);
-      return;
-    }
-    if (event.key === 'ArrowDown') {
-      event.preventDefault();
-      setActiveIndex((index) => (results.length ? (index + 1) % results.length : 0));
-      return;
-    }
-    if (event.key === 'ArrowUp') {
-      event.preventDefault();
-      setActiveIndex((index) => (results.length ? (index - 1 + results.length) % results.length : 0));
-      return;
-    }
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      choose(results[selectedIndex]);
-    }
+    onNavigate(entry.groupId, entry.sectionId, { chartId: entry.chartId });
   };
 
   return (
     <>
       <button
-        type="button"
-        className="palette-trigger"
-        onClick={openPalette}
-        aria-haspopup="dialog"
-        title={t('palette.open', 'Search dashboard')}
+        type="button" className="palette-trigger navigation-trigger" onClick={openPalette}
+        aria-haspopup="dialog" aria-expanded={open} title={t('palette.open', 'Search dashboard')}
       >
         <span aria-hidden="true">🔍</span>
-        <span className="palette-trigger__text">{t('palette.open', 'Search dashboard')}</span>
+        <span className="palette-trigger__text">{t('palette.trigger', 'Search')}</span>
         <kbd className="palette-trigger__kbd">Ctrl K</kbd>
       </button>
-
       {open && (
-        <div
-          className="palette-backdrop"
-          role="presentation"
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) setOpen(false);
-          }}
+        <NavigationDialog
+          className="search-dialog"
+          title={t('palette.label', 'Dashboard search')}
+          description={t('palette.description', 'Search in English or Urdu. Try inflation, dollar, مہنگائی, or ڈالر.')}
+          onClose={() => setOpen(false)}
         >
-          <div ref={dialogRef} className="palette" role="dialog" aria-modal="true" aria-label={t('palette.label', 'Dashboard search')}>
+          <label className="navigation-field">
+            <span>{t('palette.searchLabel', 'Search sections and indicators')}</span>
             <input
-              ref={inputRef}
-              className="palette__input"
-              type="text"
-              value={query}
+              data-initial-focus type="search" value={query}
               placeholder={t('palette.placeholder', 'Search sections, indicators, data…')}
               onChange={(event) => { setQuery(event.target.value); setActiveIndex(0); }}
-              onKeyDown={onInputKeyDown}
               aria-controls="palette-results"
-              aria-autocomplete="list"
+              aria-describedby="palette-keyboard-hint"
+              onKeyDown={(event) => {
+                if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+                  event.preventDefault();
+                  const change = event.key === 'ArrowDown' ? 1 : -1;
+                  setActiveIndex((index) => results.length ? (index + change + results.length) % results.length : 0);
+                } else if (event.key === 'Enter') {
+                  event.preventDefault();
+                  choose(results[selectedIndex]);
+                }
+              }}
             />
-            <ul className="palette__results" id="palette-results" role="listbox" ref={listRef}>
-              {results.map((entry, index) => {
-                const pinId = entry.kind === 'indicator' ? entry.key.replace(/^indicator:/, '') : null;
-                const pinned = pinId ? isPinned(pinId) : false;
-                return (
+          </label>
+          <p className="navigation-dialog__count" role="status">
+            {t('palette.resultCount', '{count} results').replace('{count}', String(results.length))}
+            {results[selectedIndex] && <span className="sr-only">. {results[selectedIndex].label}</span>}
+          </p>
+          <ul className="palette__results discovery-results" id="palette-results" ref={listRef}>
+            {results.map((entry, index) => {
+              const pinId = entry.kind === 'indicator' ? entry.id : null;
+              const pinned = pinId && isPinned(pinId);
+              return (
                 <li key={entry.key} className="palette__row">
-                  <button
-                    type="button"
-                    role="option"
-                    aria-selected={index === selectedIndex}
+                  <a
+                    href={routeToPath(entry.groupId, entry.sectionId, { chartId: entry.chartId })}
                     data-active={index === selectedIndex}
-                    className={`palette__item ${index === selectedIndex ? 'active' : ''} ${entry.kind === 'indicator' ? 'palette__item--indicator' : ''}`}
+                    className={`palette__item ${index === selectedIndex ? 'active' : ''}`}
                     onMouseEnter={() => setActiveIndex(index)}
-                    onClick={() => choose(entry)}
+                    onFocus={() => setActiveIndex(index)}
+                    onClick={(event) => {
+                      if (!isPlainNavigation(event)) { trackDiscovery(entry.kind); return; }
+                      event.preventDefault();
+                      choose(entry);
+                    }}
                   >
                     <span className="palette__icon" aria-hidden="true">{entry.icon}</span>
-                    <span className="palette__label">{entry.label}</span>
-                    <span className="palette__group">{entry.group}</span>
-                  </button>
+                    <span className="discovery-result__text">
+                      <strong>{entry.label}</strong>
+                      <span>{entry.description}</span>
+                      <small>{entry.group}</small>
+                    </span>
+                  </a>
                   {pinId && (
                     <button
-                      type="button"
-                      className={`palette__pin ${pinned ? 'is-pinned' : ''}`}
-                      aria-pressed={pinned}
-                      aria-label={pinned ? t('watchlist.unpin', 'Unpin') : t('watchlist.pin', 'Pin to watchlist')}
-                      title={pinned ? t('watchlist.unpin', 'Unpin') : t('watchlist.pin', 'Pin to watchlist')}
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        toggle(pinId);
-                      }}
+                      type="button" className={`palette__pin ${pinned ? 'is-pinned' : ''}`}
+                      aria-pressed={Boolean(pinned)}
+                      aria-label={`${pinned ? t('watchlist.unpin', 'Unpin') : t('watchlist.pin', 'Pin to watchlist')}: ${entry.label}`}
+                      onClick={() => toggle(pinId)}
                     >
-                      {pinned ? '★' : '☆'}
+                      <span aria-hidden="true">{pinned ? '★' : '☆'}</span>
                     </button>
                   )}
                 </li>
-                );
-              })}
-              {results.length === 0 && (
-                <li className="palette__empty">{t('palette.noResults', 'No matching section')}</li>
-              )}
-            </ul>
-            <p className="palette__hint">{t('palette.hint')}</p>
-          </div>
-        </div>
+              );
+            })}
+            {!results.length && <li className="palette__empty">{t('palette.noResults', 'No matching section')}</li>}
+          </ul>
+          <WatchlistFeedback />
+          <p className="palette__hint" id="palette-keyboard-hint">
+            {t('palette.keyboardHint', 'Use arrow keys then Enter to jump, Tab to reach links and pins, or Escape to close.')}
+          </p>
+        </NavigationDialog>
       )}
     </>
   );

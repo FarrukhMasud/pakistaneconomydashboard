@@ -213,12 +213,14 @@ export default function ServicesSection() {
                 borderRadius: 4,
               },
               ...(showYoY && itPrior.some((v) => v != null) ? [{
+                isComparison: true,
                 label: itPriorLabel || 'Prior year IT',
                 data: itPrior,
                 backgroundColor: 'rgba(66, 165, 245, 0.35)',
                 borderRadius: 4,
               }] : []),
               ...(showYoY && freelancePrior.some((v) => v != null) ? [{
+                isComparison: true,
                 label: freelancePriorLabel || 'Prior year Freelance',
                 data: freelancePrior,
                 backgroundColor: 'rgba(255, 167, 38, 0.35)',
@@ -434,6 +436,8 @@ export default function ServicesSection() {
         <div className="monthly-it-spotlight">
           <ChartCard
             title="Monthly IT & Freelance Exports"
+            observationDates={mseries.map((row) => row.month)}
+            rangeMode={showFytd ? 'fiscal' : (showYoY && !seriesHasYoY && pointYoYReady) ? 'comparison' : 'chronological'}
             description={`Monthly IT & Telecom export earnings use SBP’s latest headline table; Freelance IT uses the detailed EBOPS release and can lag by one month. ${mseries.length < 4 ? 'This series accumulates a new month with every SBP release and will lengthen into a fuller trend over time. ' : ''}Missing freelance bars indicate that SBP has not yet published that month’s detailed breakdown.`}
             source="SBP — services headline and EBOPS detail"
             dataSource="SBP"

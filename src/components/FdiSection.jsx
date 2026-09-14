@@ -10,6 +10,7 @@ import { LoadingCard, ErrorCard, UnavailableCard } from './ui/DataState';
 import { pctChange, fmtUSD, buildYoYOverlay, formatMonthYear, deriveFiscalLabels, buildMonthlyComparisonFromSeries, preferNewerMonthlyComparison, isClosedFiscalPeriod } from '../utils/periodHelpers';
 import { countryFlagPlugin, countryLabel } from '../utils/countryLabels';
 import useI18n from '../i18n/useI18n';
+import { fiscalYearEndDate } from '../utils/chartTimeRange';
 
 export default function FdiSection() {
   const { tx } = useI18n();
@@ -142,6 +143,7 @@ export default function FdiSection() {
       },
       {
         label: monthlyPriorLabel || 'Same month previous year',
+        isComparison: true,
         data: monthlyPrior,
         type: 'line',
         borderColor: COLORS.amber,
@@ -441,6 +443,7 @@ export default function FdiSection() {
       <div className="section-grid">
         <ChartCard
           title="Annual Net FDI"
+          observationDates={annual.map((row) => fiscalYearEndDate(row.year))}
           description="Annual net FDI in USD millions by completed fiscal year."
           noteKey="fdi.annualContext"
           source="SBP / Board of Investment"
@@ -455,6 +458,7 @@ export default function FdiSection() {
         {monthlyFdiData ? (
           <ChartCard
             title="Monthly Net FDI"
+            observationDates={monthly.map((row) => row.date)}
             description="Monthly net direct investment in Pakistan from SBP BPM6 data. Bars above zero show net inflows; bars below zero indicate disinvestment. The amber dashed line compares each month with the same month in the previous year."
             source="SBP EasyData API"
             dataSource={data.monthlyDataSource || 'SBP'}
@@ -486,6 +490,7 @@ export default function FdiSection() {
         )}
         <ChartCard
           title="FDI Inflow vs Outflow"
+          observationDates={flowYears.map((row) => fiscalYearEndDate(row.year))}
           description="Gross FDI inflows (new capital entering) versus outflows (disinvestment, profit repatriation). Net FDI = Inflow − Outflow. High outflow years indicate existing investors extracting profits rather than reinvesting — a concern for long-term capital formation."
           source="SBP"
           dataSource="SBP"

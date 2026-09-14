@@ -1,0 +1,197 @@
+.economic-overview .overview-refreshed__dates {
+  margin-block: 0 0.25rem;
+}
+
+.overview-source-details > summary {
+  width: fit-content;
+  min-height: 44px;
+  padding-block: 0.625rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.overview-source-details__body {
+  max-width: 70ch;
+  padding-block-end: 0.5rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.overview-source-details__body p {
+  margin-block: 0 0.5rem;
+}
+
+.economic-overview .kpi-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.economic-overview .kpi-section-link {
+  display: block;
+  flex: 1;
+  color: inherit;
+  text-decoration: none;
+}
+
+.economic-overview .kpi-trend {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: fit-content;
+  max-width: 100%;
+  gap: 0.125rem;
+  border-radius: 0.625rem;
+  line-height: 1.45;
+}
+
+.economic-overview .kpi-change-basis {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  opacity: 1;
+}
+
+.economic-overview .kpi-source {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: 0.75rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.economic-overview .kpi-source-label {
+  flex: 1 1 10rem;
+  min-width: 0;
+}
+
+.economic-overview .kpi-source .cite-figure {
+  margin-inline: 0;
+}
+
+.economic-overview .kpi-label-row {
+  padding-inline-end: 3.25rem;
+  min-height: 44px;
+  align-items: center;
+}
+
+.economic-overview .tile-expand-btn {
+  width: 44px;
+  height: 44px;
+  opacity: 1;
+  transform: none;
+}
+
+.economic-overview .kpi-pin,
+.overview-selection__button,
+.watchlist__browse,
+.watchlist-feedback__undo,
+.watchlist-feedback__dismiss {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.overview-selection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-block: 1rem;
+}
+
+@media (max-width: 720px) {
+  .economic-overview .overview-refreshed {
+    margin-block-end: 0.25rem;
+  }
+
+  .overview-selection {
+    margin-block: 0.5rem;
+  }
+}
+
+.overview-selection__button,
+.watchlist__browse,
+.watchlist-feedback__undo,
+.watchlist-feedback__dismiss {
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.625rem;
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  font: inherit;
+  cursor: pointer;
+}
+
+.overview-selection__button[aria-pressed="true"] {
+  border-color: currentColor;
+  font-weight: 700;
+}
+
+.economic-overview .kpi-section-link:focus-visible,
+.overview-selection__button:focus-visible,
+.watchlist__open:focus-visible,
+.watchlist-feedback__undo:focus-visible,
+.watchlist-feedback__dismiss:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.watchlist__open {
+  color: inherit;
+  text-decoration: none;
+}
+
+.what-moved__card {
+  text-decoration: none;
+}
+
+.watchlist-feedback {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.watchlist-feedback:has(.watchlist-feedback__status span),
+.watchlist-feedback:has(.watchlist-feedback__error) {
+  position: sticky;
+  inset-block-start: 5rem;
+  z-index: 10;
+  padding: 0.5rem 0.75rem;
+  margin-block: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.625rem;
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+}
+
+.watchlist-feedback__error {
+  flex-basis: 100%;
+  margin: 0;
+}
+
+.watchlist-feedback__status {
+  flex: 1 1 8rem;
+  font-size: 0.8rem;
+}
+
+body:has(dialog[open]) .economic-overview > .watchlist-feedback {
+  display: none;
+}
+
+dialog .watchlist-feedback:has(.watchlist-feedback__status span),
+dialog .watchlist-feedback:has(.watchlist-feedback__error) {
+  position: static;
+}
+
+.overview-all-indicators[hidden] {
+  display: none;
+}
+
+.overview-briefing__source-note {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}

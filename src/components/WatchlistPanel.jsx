@@ -1,66 +1,18 @@
-import { useMemo } from 'react';
-import { useData } from '../hooks/useData';
 import { useWatchlist } from '../hooks/useWatchlist';
 import useI18n from '../i18n/useI18n';
-import { INDICATOR_CATALOG } from '../utils/indicatorCatalog';
 import { COLORS } from '../utils/chartConfig';
 import CiteFigure from './CiteFigure';
-import { formatKpiDisplay, formatKpiPeriod } from '../utils/kpiFormat';
-import { kpiRoute } from '../utils/overviewModel';
+import SourceBadge from './SourceBadge';
+import { routeToPath } from '../hooks/useHashRoute';
+import { resolveWatchlistItems } from '../utils/watchlistModel';
 
 /**
  * Pinned indicators on Overview (localStorage). Empty state explains how to pin.
  */
-export default function WatchlistPanel({ onNavigate }) {
+export default function WatchlistPanel({ indicators = [], onNavigate, onBrowse }) {
   const { t, tx } = useI18n();
-  const { pins, toggle, clear } = useWatchlist();
-  const kpi = useData('kpi-summary.json');
-
-  const items = useMemo(() => {
-    const indicators = kpi.data?.indicators || [];
-    const byId = Object.fromEntries(indicators.map((row) => [row.id, row]));
-    const byCatalog = Object.fromEntries(INDICATOR_CATALOG.map((row) => [row.id, row]));
-
-    return pins.map((id) => {
-      const kpiRow = byId[id];
-      if (kpiRow) {
-        return {
-          id,
-          kind: 'kpi',
-          label: kpiRow.label,
-          value: formatKpiDisplay(kpiRow),
-          period: formatKpiPeriod(kpiRow.period),
-          sentiment: kpiRow.sentiment || 'neutral',
-          provenanceKey: kpiRow.provenanceKey,
-          groupId: kpiRoute(kpiRow.id).groupId,
-          sectionId: kpiRoute(kpiRow.id).sectionId,
-        };
-      }
-      const cat = byCatalog[id];
-      if (cat) {
-        return {
-          id,
-          kind: 'catalog',
-          label: cat.label,
-          value: null,
-          period: null,
-          sentiment: 'neutral',
-          groupId: cat.groupId,
-          sectionId: cat.sectionId,
-        };
-      }
-      return {
-        id,
-        kind: 'unknown',
-        label: id,
-        value: null,
-        period: null,
-        sentiment: 'neutral',
-        groupId: 'overview',
-        sectionId: 'overview',
-      };
-    });
-  }, [pins, kpi.data]);
+  const { pins, unpin, clear } = useWatchlist();
+  const items = resolveWatchlistItems(pins, indicators);
 
   if (!pins.length) {
     return (
@@ -68,10 +20,15 @@ export default function WatchlistPanel({ onNavigate }) {
         <h3>{t('watchlist.title', 'Your watchlist')}</h3>
         <p>
           {t(
-            'watchlist.empty',
-            'Pin KPIs with the ★ button, or pin indicators from the command palette (Ctrl/Cmd+K). Pins stay on this device.',
+            'watchlist.emptyHint',
+            'Choose All indicators and use a star to save the figures you follow. You can also pin sections from Search. Pins stay on this device.',
           )}
         </p>
+        {onBrowse && (
+          <button type="button" className="watchlist__browse" onClick={onBrowse}>
+            {t('watchlist.browse', 'Browse indicators')}
+          </button>
+        )}
       </section>
     );
   }
@@ -86,6 +43,7 @@ export default function WatchlistPanel({ onNavigate }) {
       </div>
       <div className="watchlist__grid">
         {items.map((item) => {
+          const label = item.labelKey ? t(item.labelKey, item.label) : item.label ? tx(item.label) : t('watchlist.indicator', 'Indicator');
           const color = item.sentiment === 'positive'
             ? COLORS.teal
             : item.sentiment === 'negative'
@@ -93,24 +51,43 @@ export default function WatchlistPanel({ onNavigate }) {
               : undefined;
           return (
             <div key={item.id} className="watchlist__card">
-              <button
-                type="button"
-                className="watchlist__open"
-                onClick={() => onNavigate?.(item.groupId, item.sectionId)}
-              >
-                <span className="watchlist__label">{tx(item.label)}</span>
+              {item.kind === 'unknown' ? (
+                <div className="watchlist__open">
+                  <span className="watchlist__label">{t('watchlist.unavailable', 'Saved indicator unavailable')}</span>
+                  <span>{t('watchlist.unavailableHint', 'Remove this pin and choose an indicator from All indicators or Search.')}</span>
+                </div>
+              ) : (
+                <a
+                  className="watchlist__open"
+                  href={routeToPath(item.groupId, item.sectionId, { chartId: item.chartId })}
+                  onClick={(event) => {
+                    if (!onNavigate || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+                    event.preventDefault();
+                    onNavigate(item.groupId, item.sectionId, { chartId: item.chartId });
+                  }}
+                >
+                <span className="watchlist__label">{label}</span>
                 {item.value != null && (
                   <strong style={color ? { color } : undefined}>{item.value}</strong>
                 )}
                 {item.period && <span className="watchlist__period">{item.period}</span>}
-              </button>
+                {item.value == null && (
+                  <span className="watchlist__period">
+                    {item.kind === 'catalog'
+                      ? t('watchlist.exploreSection', 'Explore this section')
+                      : t('watchlist.valueUnavailable', 'Value unavailable - open the section for source details')}
+                  </span>
+                )}
+                </a>
+              )}
               <div className="watchlist__actions">
+                <SourceBadge datasetId={item.datasetId} sourceType={item.sourceType} compact />
                 {item.provenanceKey && <CiteFigure figureKey={item.provenanceKey} compact />}
                 <button
                   type="button"
                   className="watchlist__unpin"
-                  onClick={() => toggle(item.id)}
-                  aria-label={t('watchlist.unpin', 'Unpin')}
+                  onClick={() => unpin(item.id)}
+                  aria-label={t('watchlist.unpinNamed', 'Unpin {label}').replace('{label}', label)}
                   title={t('watchlist.unpin', 'Unpin')}
                 >
                   ★
@@ -123,5 +100,3 @@ export default function WatchlistPanel({ onNavigate }) {
     </section>
   );
 }
-
-

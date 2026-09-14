@@ -9,6 +9,7 @@ import CircularDebtTracker from './CircularDebtTracker';
 import ExternalDebtTracker from './ExternalDebtTracker';
 import { LoadingCard, ErrorCard } from './ui/DataState';
 import { fmtPKR, fmtPct } from '../utils/periodHelpers';
+import { fiscalYearEndDate, valuesByDate } from '../utils/chartTimeRange';
 
 function formatTrillion(val) {
   return (val / 1e6).toFixed(1) + 'T';
@@ -54,9 +55,7 @@ export default function FiscalSection() {
   let balanceData, balanceOptions;
 
   if (hasPF) {
-    // Use last 10 years for cleaner charts
-    const revData = pf.total_revenue.data.slice(-10);
-    const expData = pf.total_expenditure.data.slice(-10);
+    const revData = pf.total_revenue.data;
     revenueExpLabels = revData.map((d) => d.fy);
 
     // Chart 2 — Revenue vs Expenditure
@@ -73,7 +72,7 @@ export default function FiscalSection() {
         },
         {
           label: 'Total Expenditure',
-          data: expData.map((d) => d.value),
+          data: valuesByDate(revenueExpLabels, pf.total_expenditure.data, 'value', 'fy'),
           borderColor: COLORS.coral,
           backgroundColor: COLORS.coralAlpha,
           fill: false,
@@ -102,8 +101,7 @@ export default function FiscalSection() {
     };
 
     // Chart 3 — Revenue Breakdown (Tax vs Non-Tax)
-    const taxData = pf.tax_revenue.data.slice(-10);
-    const nonTaxData = pf.nontax_revenue.data.slice(-10);
+    const taxData = pf.tax_revenue.data;
     revenueBreakdownData = {
       labels: taxData.map((d) => d.fy),
       datasets: [
@@ -115,7 +113,7 @@ export default function FiscalSection() {
         },
         {
           label: 'Non-Tax Revenue',
-          data: nonTaxData.map((d) => d.value),
+          data: valuesByDate(taxData.map((row) => row.fy), pf.nontax_revenue.data, 'value', 'fy'),
           backgroundColor: COLORS.amber,
           borderRadius: 4,
         },
@@ -144,8 +142,7 @@ export default function FiscalSection() {
     };
 
     // Chart 4 — Fiscal & Primary Balance
-    const fiscalBal = pf.fiscal_balance.data.slice(-10);
-    const primaryBal = pf.primary_balance.data.slice(-10);
+    const fiscalBal = pf.fiscal_balance.data;
     balanceData = {
       labels: fiscalBal.map((d) => d.fy),
       datasets: [
@@ -157,7 +154,7 @@ export default function FiscalSection() {
         },
         {
           label: 'Primary Balance',
-          data: primaryBal.map((d) => d.value),
+          data: valuesByDate(fiscalBal.map((row) => row.fy), pf.primary_balance.data, 'value', 'fy'),
           borderColor: COLORS.purple,
           backgroundColor: COLORS.purpleAlpha,
           type: 'line',
@@ -235,6 +232,7 @@ export default function FiscalSection() {
       <div className="chart-grid">
         <ChartCard
           title="GDP Growth Rate"
+          observationDates={labels.map(fiscalYearEndDate)}
           description="Annual real GDP growth rate. Values below the zero line indicate economic contraction, as seen in FY2020 (COVID-19 pandemic) and FY2023 (political and economic crisis)."
           dataSource="SBP / PBS"
           lastUpdated={lastUpdated}
@@ -249,6 +247,7 @@ export default function FiscalSection() {
         {hasPF && (
           <ChartCard
             title="Revenue vs Expenditure"
+            observationDates={revenueExpData.labels.map(fiscalYearEndDate)}
             description="Total government revenue vs total expenditure. The persistent gap between the two lines represents the fiscal deficit — a structural challenge Pakistan has faced for decades."
             dataSource={dataSource}
             lastUpdated={lastUpdated}
@@ -263,6 +262,7 @@ export default function FiscalSection() {
         {hasPF && (
           <ChartCard
             title="Revenue Breakdown — Tax vs Non-Tax"
+            observationDates={revenueBreakdownData.labels.map(fiscalYearEndDate)}
             description="Stacked composition of government revenue. Tax revenue (FBR collections) is the backbone of fiscal capacity. Non-tax revenue includes dividends, profits, and grants."
             dataSource={dataSource}
             lastUpdated={lastUpdated}
@@ -277,6 +277,7 @@ export default function FiscalSection() {
         {hasPF && (
           <ChartCard
             title="Fiscal & Primary Balance"
+            observationDates={balanceData.labels.map(fiscalYearEndDate)}
             description="Fiscal balance (revenue minus total expenditure) and primary balance (fiscal balance excluding interest payments). A positive primary balance indicates the government can service debt from current revenue — a key IMF reform target."
             dataSource={dataSource}
             lastUpdated={lastUpdated}

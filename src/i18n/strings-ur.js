@@ -12,6 +12,9 @@
  * published it.
  */
 const stringsUr = {
+  'FYTD comparison needs fiscal-year data.': 'مالی سال تا حال کے موازنے کے لیے مالی سال کے اعداد درکار ہیں۔',
+  'FYTD charts need at least 3 months of the new fiscal year.': 'مالی سال تا حال کے چارٹس کے لیے نئے مالی سال کے کم از کم 3 ماہ درکار ہیں۔',
+  'FYTD view needs a more complete monthly path for this fiscal year.': 'اس مالی سال کے آغاز سے اب تک کا منظر دکھانے کے لیے زیادہ مکمل ماہانہ سلسلہ درکار ہے۔',
   // ===== Chart card controls =====
   'Latest available period in this chart': 'اس چارٹ میں دستیاب تازہ ترین مدت',
   'Expand chart': 'چارٹ بڑا کریں',
@@ -55,8 +58,8 @@ const stringsUr = {
   'A partner-by-partner view of Pakistan\u2019s external sector — exports, imports and (where available) workers\u2019 remittances — for its most important trading and remittance partners. Each card shows the latest month with month-on-month (MoM) and year-on-year (YoY) momentum, plus fiscal-year-to-date totals versus the prior year. Watch for rising imports (red) outpacing exports, or softening remittances, as early signs of external-account pressure.':
     'پاکستان کے بیرونی شعبے کا شراکت دار ممالک کے اعتبار سے جائزہ — برآمدات، درآمدات اور (جہاں دستیاب ہو) ترسیلاتِ زر۔ ہر کارڈ تازہ ترین مہینہ، ماہ بہ ماہ اور سال بہ سال تبدیلی، اور مالی سال تا حال کا گزشتہ سال سے موازنہ دکھاتا ہے۔ درآمدات (سرخ) کا برآمدات سے تیز بڑھنا یا ترسیلات میں کمی بیرونی کھاتے پر دباؤ کی ابتدائی علامات ہیں۔',
   'Remittance Corridors — Monthly Trend': 'ترسیلاتِ زر کے راستے — ماہانہ رجحان',
-  'Monthly workers\u2019 remittances from Pakistan\u2019s four largest single-country corridors over the last 36 months. Saudi Arabia and the UAE dominate; sustained declines here are an early warning for the current account, while Ramadan/Eid and December typically bring seasonal spikes.':
-    'گزشتہ 36 ماہ کے دوران چار بڑے ممالک سے ماہانہ ترسیلاتِ زر۔ سعودی عرب اور متحدہ عرب امارات سرِفہرست ہیں؛ ان میں مسلسل کمی جاری کھاتے کے لیے ابتدائی خطرے کی گھنٹی ہے، جبکہ رمضان/عید اور دسمبر میں عموماً موسمی اضافہ ہوتا ہے۔',
+  "Monthly workers' remittances from Pakistan's four largest single-country corridors. Use the time range to explore available history. Saudi Arabia and the UAE dominate; sustained declines here are an early warning for the current account, while Ramadan/Eid and December typically bring seasonal spikes.":
+    'پاکستان کے چار بڑے ممالک سے ماہانہ ترسیلاتِ زر۔ دستیاب تاریخ دیکھنے کے لیے وقت کی حد منتخب کریں۔ سعودی عرب اور متحدہ عرب امارات سرِفہرست ہیں؛ ان میں مسلسل کمی جاری کھاتے کے لیے ابتدائی خطرے کی گھنٹی ہے، جبکہ رمضان/عید اور دسمبر میں عموماً موسمی اضافہ ہوتا ہے۔',
   'Exports to': 'برآمدات بنام',
   'Imports from': 'درآمدات از',
   'Remittances from': 'ترسیلات از',

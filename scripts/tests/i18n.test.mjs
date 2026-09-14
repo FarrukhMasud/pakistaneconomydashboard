@@ -6,6 +6,7 @@ import { join } from 'node:path';
 import en from '../../src/i18n/en.js';
 import ur from '../../src/i18n/ur.js';
 import stringsUr from '../../src/i18n/strings-ur.js';
+import { SECTION_GUIDANCE } from '../../src/utils/sectionGuidance.js';
 import { scanTranslatableStrings, scanTxLiterals } from '../lib/i18n-scan.mjs';
 
 /** Mirrors translateString()'s normalisation in src/i18n/context.js. */
@@ -30,6 +31,31 @@ function readAllSources(dir, out = []) {
 test('every English key has an Urdu translation', () => {
   const missing = Object.keys(en).filter(key => !(key in ur));
   assert.deepEqual(missing, [], `missing Urdu strings: ${missing.join(', ')}`);
+});
+
+test('every literal keyed UI lookup is registered for both languages', () => {
+  const keys = readAllSources('src').flatMap((source) => (
+    [...source.matchAll(/\bt\(\s*['"]([^'"]+)['"]/g)].map((match) => match[1])
+  ));
+  const missing = [...new Set(keys)].filter((key) => !(key in en) || !(key in ur));
+  assert.deepEqual(missing, [], `register keyed UI translations: ${missing.join(', ')}`);
+});
+
+test('translated UI preserves interpolation placeholders', () => {
+  const placeholders = (text) => [...new Set(text.match(/\{[A-Za-z][A-Za-z0-9]*\}/g) || [])].sort();
+  for (const [key, value] of Object.entries(en)) {
+    assert.deepEqual(placeholders(ur[key] || ''), placeholders(value), `placeholder mismatch for ${key}`);
+  }
+});
+
+test('section guidance is translated without altering the source wording', () => {
+  for (const [dataset, guidance] of Object.entries(SECTION_GUIDANCE)) {
+    for (const [kind, text] of Object.entries(guidance)) {
+      const key = `guidance.${dataset}.${kind}`;
+      assert.equal(en[key], text);
+      assert.ok(ur[key], `missing ${key}`);
+    }
+  }
 });
 
 test('the Urdu dictionary does not carry keys that no longer exist in English', () => {

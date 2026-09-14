@@ -90,7 +90,7 @@ export default function CountryTrendsSection() {
 
   const corridorChart = useMemo(() => {
     if (!remit?.monthly?.length) return null;
-    const rows = remit.monthly.slice(-36);
+    const rows = remit.monthly;
     return {
       labels: rows.map((d) => formatMonthYear(d.date)),
       datasets: CORRIDORS.map((c) => ({
@@ -152,7 +152,9 @@ export default function CountryTrendsSection() {
         <div className="section-grid" style={{ marginBottom: '1.25rem' }}>
           <ChartCard
             title="Remittance Corridors — Monthly Trend"
-            description="Monthly workers' remittances from Pakistan's four largest single-country corridors over the last 36 months. Saudi Arabia and the UAE dominate; sustained declines here are an early warning for the current account, while Ramadan/Eid and December typically bring seasonal spikes."
+            observationDates={remit.monthly.map((row) => row.date)}
+            defaultRange="3y"
+            description="Monthly workers' remittances from Pakistan's four largest single-country corridors. Use the time range to explore available history. Saudi Arabia and the UAE dominate; sustained declines here are an early warning for the current account, while Ramadan/Eid and December typically bring seasonal spikes."
             source="State Bank of Pakistan"
             dataSource="SBP EasyData API"
             lastUpdated={remit?.lastUpdated}

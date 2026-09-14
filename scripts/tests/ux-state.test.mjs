@@ -17,7 +17,7 @@ import {
 test('shareable chart state round-trips while preserving unrelated query parameters', () => {
   const search = applyShareableChartState('?lang=ur', { compare: 'fytd', focus: 1 }, 'off');
   assert.equal(search, '?lang=ur&compare=fytd&series=1');
-  assert.deepEqual(parseShareableChartState(search, 'off'), { compare: 'fytd', focus: 1 });
+  assert.deepEqual(parseShareableChartState(search, 'off'), { compare: 'fytd', focus: 1, range: 'all' });
 });
 
 test('embed snippet is a titled iframe of the section URL', () => {

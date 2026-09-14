@@ -1,0 +1,75 @@
+.trade-coverage-short {
+  margin: 0 0 1rem;
+  font-size: 0.8125rem;
+}
+
+.trade-latest-summary {
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.trade-latest-summary h3 {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.trade-latest-summary__metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0.75rem 0 0;
+}
+
+.trade-latest-summary__metrics dt {
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.trade-latest-summary__metrics dd {
+  margin: 0.25rem 0 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.trade-latest-summary__meta {
+  margin: 0.75rem 0 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .trade-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .trade-section > .section-header-block {
+    display: contents;
+  }
+
+  .trade-section > .section-header-block > .section-title {
+    order: -6;
+  }
+
+  .trade-section > .trade-latest-summary {
+    order: -5;
+  }
+
+  .trade-section > .trade-coverage-short {
+    order: -4;
+    margin-bottom: 0.75rem;
+  }
+
+  .trade-section > .trade-main-charts {
+    order: -3;
+  }
+
+  .trade-section > .trade-period-context {
+    order: -2;
+  }
+
+  .trade-section > .trade-coverage-details {
+    order: -1;
+  }
+}

@@ -3,7 +3,35 @@
  * also the fallback whenever a translation is missing, so an untranslated
  * string degrades to readable English rather than to a raw key.
  */
+import { uxEn } from './ux.js';
+
 const en = {
+  ...uxEn,
+  'coverage.differentPeriods': 'Official tables may cover different periods',
+  'guidance.trade.why': 'A widening goods deficit increases demand for foreign currency and pressure on reserves.',
+  'guidance.trade.watch': 'Watch whether export growth keeps pace with imports over the next release.',
+  'guidance.reserves.why': 'Reserves determine Pakistan’s ability to pay for imports and meet external obligations.',
+  'guidance.reserves.watch': 'Watch weekly SBP reserves together with import cover, not the headline balance alone.',
+  'guidance.exchange-rates.why': 'The rupee affects inflation, imported energy costs, debt servicing, and business confidence.',
+  'guidance.exchange-rates.watch': 'Watch for a persistent gap between monthly depreciation and inflation.',
+  'guidance.remittances.why': 'Remittances are a stable source of foreign exchange and household income.',
+  'guidance.remittances.watch': 'Watch whether growth is broad-based across corridors rather than driven by one country.',
+  'guidance.fdi.why': 'FDI brings longer-term capital, technology, and productive capacity.',
+  'guidance.fdi.watch': 'Watch both the total flow and concentration by country and sector.',
+  'guidance.services.why': 'IT and services exports diversify foreign-exchange earnings beyond goods.',
+  'guidance.services.watch': 'Watch headline IT growth while noting that detailed freelance data can lag by one release.',
+  'guidance.inflation.why': 'Inflation determines household purchasing power and heavily influences monetary policy.',
+  'guidance.inflation.watch': 'Watch the breadth of food, core, urban, and rural inflation—not only headline CPI.',
+  'guidance.monetary.why': 'Money growth and private credit indicate demand, liquidity, and future inflation pressure.',
+  'guidance.monetary.watch': 'Watch whether credit expansion accelerates faster than deposits and nominal activity.',
+  'guidance.fiscal.why': 'Fiscal deficits shape public debt, inflation risk, and the government’s financing needs.',
+  'guidance.fiscal.watch': 'Watch revenue performance, interest costs, and the primary balance together.',
+  'guidance.fbr-tax.why': 'Tax collection determines whether the government can fund spending without extra borrowing.',
+  'guidance.fbr-tax.watch': 'Watch net collection after refunds and whether official monthly tables confirm provisional totals.',
+  'guidance.budget-federal.why': 'The federal budget sets national tax, borrowing, subsidy, and development priorities.',
+  'guidance.budget-federal.watch': 'Watch execution against budget assumptions rather than announced allocations alone.',
+  'guidance.budget-provincial.why': 'Provinces deliver most frontline health, education, and local development spending.',
+  'guidance.budget-provincial.watch': 'Watch actual development execution and dependence on federal transfers.',
   'app.title': 'Pakistan',
   'app.titleHighlight': 'Economic Dashboard',
   'app.subtitle': 'Authentic, officially-sourced data from SBP, PBS, FBR & the Finance Division',

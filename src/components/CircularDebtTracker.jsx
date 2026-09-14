@@ -5,6 +5,7 @@ import TrackerFooter from './ui/TrackerFooter';
 import { LoadingCard, ErrorCard } from './ui/DataState';
 import './ui/Trackers.css';
 import useI18n from '../i18n/useI18n';
+import ChartCard from './ChartCard';
 
 function fmtPkr(bn) {
   if (bn == null) return '—';
@@ -13,7 +14,7 @@ function fmtPkr(bn) {
 }
 
 export default function CircularDebtTracker() {
-  const { tx } = useI18n();
+  const { t, tx } = useI18n();
   const { data, loading, error, retry } = useData('circular-debt.json');
   if (loading) return <LoadingCard label="Loading circular debt tracker…" />;
   if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load circular debt tracker" compact />;
@@ -76,9 +77,18 @@ export default function CircularDebtTracker() {
       </div>
 
       {stockTrend.length > 1 && (
-        <div className="tracker__chart">
-          <Bar data={chart} options={chartOptions} />
-        </div>
+        <ChartCard
+          chartId="chart-power-circular-debt-stock"
+          title={t('chart.circularDebtStock', 'Power circular debt stock')}
+          rangeMode="comparison"
+          dataSource={t('chart.circularDebtSource', 'Power Division / IMF via financial reporting')}
+          dataCoverage={stockTrend.at(-1)?.label}
+          lastUpdated={lastVerified}
+        >
+          <div className="tracker__chart">
+            <Bar data={chart} options={chartOptions} />
+          </div>
+        </ChartCard>
       )}
 
       {targets.length > 0 && (

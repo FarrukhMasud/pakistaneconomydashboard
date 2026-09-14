@@ -16,6 +16,9 @@ import { LoadingCard, ErrorCard } from './ui/DataState';
 import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, sumField, buildYoYOverlay, buildFytdSeries, formatMonthYear, formatFySummaryTitle, fytdViewReady, resolveCompareMode, fytdDisabledReason } from '../utils/periodHelpers';
 import { countryFlagPlugin, countryLabel } from '../utils/countryLabels';
 import SeriesCoverageNote from './ui/SeriesCoverageNote';
+import useI18n from '../i18n/useI18n';
+import { formatKpiPeriod } from '../utils/kpiFormat';
+import './TradeSection.css';
 
 // SBP's country-level export receipt and import payment tables are published
 // after the headline monthly trade figures, so these two charts can stop one
@@ -23,7 +26,34 @@ import SeriesCoverageNote from './ui/SeriesCoverageNote';
 const COUNTRY_COVERAGE_NOTE =
   'This is the latest period SBP has published in its country-level trade tables. They are released after the headline monthly trade figures, so this chart can stop one month short of the totals above.';
 
+export function TradeLatestSummary({ row }) {
+  const { t } = useI18n();
+  if (!row) return null;
+  const metrics = [
+    { key: 'exports', label: t('trade.exports', 'Exports') },
+    { key: 'imports', label: t('trade.imports', 'Imports') },
+    { key: 'balance', label: t('trade.balance', 'Trade balance') },
+  ];
+  return (
+    <div className="card trade-latest-summary">
+      <h3>{t('trade.latestMonth', 'Latest month: {period}').replace('{period}', formatKpiPeriod(row.date))}</h3>
+      <dl className="trade-latest-summary__metrics">
+        {metrics.map((metric) => (
+          <div key={metric.key}>
+            <dt>{metric.label}</dt>
+            <dd>{fmtUSD(row[metric.key])}</dd>
+          </div>
+        ))}
+      </dl>
+      <p className="trade-latest-summary__meta">
+        {t('trade.summaryUnits', 'USD; M = million, B = billion')} · {t('chart.sourceLabel', 'Source:')} SBP
+      </p>
+    </div>
+  );
+}
+
 export default function TradeSection() {
+  const { t } = useI18n();
   const { compareMode, setCompareMode } = useShareableChartState('yoy');
     const { data, loading, error, retry } = useData('trade.json');
 
@@ -154,6 +184,7 @@ export default function TradeSection() {
           borderWidth: 1,
         },
         ...(showBalancePrior ? [{
+          isComparison: true,
           label: balancePriorLabel,
           data: balancePrior,
           type: 'line',
@@ -305,29 +336,10 @@ export default function TradeSection() {
 
   const exportCountries = topExportCountries?.map((d) => d.country) || [];
   const importCountries = topImportCountries?.map((d) => d.country) || [];
+  const latestMonthly = monthly.findLast((row) => ['exports', 'imports', 'balance'].some((field) => Number.isFinite(row[field])));
 
-  return (
-    <section className="fade-in">
-      <SectionHeader
-        title="Trade Overview"
-        datasetId="trade"
-        description="Pakistan's goods trade flows (excluding services). Pakistan structurally imports more than it exports — primarily energy, machinery, and consumer goods — creating a persistent trade deficit. This deficit is a key driver of foreign exchange pressure and a major focus of IMF program conditionality. Export growth, especially in textiles and food, is critical for reducing external vulnerability."
-        sourceLinks={[
-          { label: 'SBP BOP Data', url: 'https://www.sbp.org.pk/ecodata/index2.asp' },
-          { label: 'PBS Statistics', url: 'https://www.pbs.gov.pk' },
-        ]}
-      />
-
-      <SeriesCoverageNote
-        items={[
-          { label: 'Headline goods trade', period: tradeDC, source: 'SBP BOP goods' },
-          { label: 'Export destinations', period: exportCountryPeriod, source: 'SBP country tables' },
-          { label: 'Import sources', period: importCountryPeriod, source: 'SBP country tables' },
-        ]}
-      />
-
-      {(cy || fy) && (
-        <div className="summary-pair">
+  const supportingSummaries = (cy || fy) && (
+        <div className="summary-pair trade-period-context">
           {cy && (
             <SummaryCard
               title={`${cy.rangeLabel} — Calendar YTD`}
@@ -371,11 +383,30 @@ export default function TradeSection() {
             />
           )}
         </div>
-      )}
+  );
 
-      <div className="section-grid">
+  return (
+    <section className="fade-in trade-section">
+      <SectionHeader
+        title="Trade Overview"
+        datasetId="trade"
+        description="Pakistan's goods trade flows (excluding services). Pakistan structurally imports more than it exports — primarily energy, machinery, and consumer goods — creating a persistent trade deficit. This deficit is a key driver of foreign exchange pressure and a major focus of IMF program conditionality. Export growth, especially in textiles and food, is critical for reducing external vulnerability."
+        sourceLinks={[
+          { label: 'SBP BOP Data', url: 'https://www.sbp.org.pk/ecodata/index2.asp' },
+          { label: 'PBS Statistics', url: 'https://www.pbs.gov.pk' },
+        ]}
+      />
+
+      <TradeLatestSummary row={latestMonthly} />
+
+      <p className="trade-coverage-short">
+        {t('trade.coverageShort', 'Headline totals use SBP goods trade; country breakdowns can cover an earlier period.')}
+      </p>
+      <div className="section-grid trade-main-charts">
         <ChartCard
           title="Imports vs Exports"
+          observationDates={monthly.map((row) => row.date)}
+          rangeMode={showFytd ? 'fiscal' : 'chronological'}
           description="Monthly trade flows in USD millions. The gap between imports (red) and exports (green) shows the trade deficit."
           noteKey="trade.deficit"
           source="PBS / SBP"
@@ -390,6 +421,8 @@ export default function TradeSection() {
         </ChartCard>
         <ChartCard
           title="Trade Balance"
+          observationDates={monthly.map((row) => row.date)}
+          rangeMode={showFytd ? 'fiscal' : 'chronological'}
           description="Monthly trade surplus or deficit. Red bars indicate deficit months (imports exceeded exports). The amber dashed line compares each month with the same month in the previous year, making seasonality easier to interpret."
           source="PBS / SBP"
           dataSource="SBP"
@@ -409,10 +442,23 @@ export default function TradeSection() {
         </ChartCard>
       </div>
 
+      {supportingSummaries}
+
+      <div className="trade-coverage-details">
+        <SeriesCoverageNote
+          items={[
+            { label: 'Headline goods trade', period: tradeDC, source: 'SBP BOP goods' },
+            { label: 'Export destinations', period: exportCountryPeriod, source: 'SBP country tables' },
+            { label: 'Import sources', period: importCountryPeriod, source: 'SBP country tables' },
+          ]}
+        />
+      </div>
+
       {fyReady && cumulativeFlowData && cumulativeBalanceData && (
         <div className="section-grid" style={{ marginTop: '1.5rem' }}>
           <ChartCard
             title="Cumulative Imports & Exports (FYTD)"
+            rangeMode="fiscal"
             description={`Running fiscal-year-to-date imports and exports for ${fy.fyLabel}, compared with the same months of ${fy.priorLabel}. This shows whether trade flows are accumulating faster or slower than last year, not just what happened in one month.`}
             source="SBP"
             dataSource="SBP"
@@ -425,6 +471,7 @@ export default function TradeSection() {
           </ChartCard>
           <ChartCard
             title="Cumulative Trade Balance (FYTD)"
+            rangeMode="fiscal"
             description={`Running trade balance for ${fy.fyLabel} compared with ${fy.priorLabel}. A more negative line means the external financing gap is widening; a less negative line means imports and exports are moving toward better balance.`}
             source="SBP"
             dataSource="SBP"

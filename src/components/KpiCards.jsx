@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useData } from '../hooks/useData';
 import { useWatchlist } from '../hooks/useWatchlist';
 import { COLORS } from '../utils/chartConfig';
@@ -9,6 +9,7 @@ import WhatMovedStrip from './WhatMovedStrip';
 import OverviewBriefing from './OverviewBriefing';
 import LatestChangesPanel from './LatestChangesPanel';
 import WatchlistPanel from './WatchlistPanel';
+import WatchlistFeedback from './WatchlistFeedback';
 import SourceBadge from './SourceBadge';
 import ExpandableTile from './ui/ExpandableTile';
 import AnimatedNumber from './ui/AnimatedNumber';
@@ -25,11 +26,10 @@ import {
   isProvisionalPeriod,
 } from '../utils/kpiFormat';
 import {
-  buildSnapshotKpi,
-  buildTradeKpi,
-  decorateOverviewKpis,
+  buildOverviewIndicators,
   kpiRoute,
-  mergeOverviewIndicators,
+  overviewFreshness,
+  selectHeadlineKpis,
 } from '../utils/overviewModel';
 
 function useOverviewLayout() {
@@ -70,8 +70,8 @@ function trendArrow(trend) {
   return '►';
 }
 
-function navigate(groupId, sectionId) {
-  const path = routeToPath(groupId, sectionId);
+function navigate(groupId, sectionId, options) {
+  const path = routeToPath(groupId, sectionId, options);
   window.history.pushState(null, '', path);
   window.dispatchEvent(new PopStateEvent('popstate'));
 }
@@ -82,30 +82,27 @@ export default function KpiCards() {
   const trade = useData('trade.json');
   const remittances = useData('remittances.json');
   const snapshot = useData('indicators.json');
-  const { isPinned, toggle } = useWatchlist();
+  const freshness = useData('data-freshness.json');
+  const { pins, isPinned, toggle } = useWatchlist();
   const { mobile: isMobile, detailsOpen, setDetailsOpen } = useOverviewLayout();
   const [showAllIndicators, setShowAllIndicators] = useState(false);
+  const [view, setView] = useState('all');
+  const allIndicatorsRef = useRef(null);
 
-  const indicators = useMemo(() => {
-    const extras = [
-      buildTradeKpi(trade.data),
-      buildSnapshotKpi(snapshot.data?.indicators?.find((row) => row.id === 'current-account')),
-      buildSnapshotKpi(snapshot.data?.indicators?.find((row) => row.id === 'public-debt')),
-      buildSnapshotKpi(snapshot.data?.indicators?.find((row) => row.id === 'circular-debt')),
-    ];
-    return decorateOverviewKpis(
-      mergeOverviewIndicators(data?.indicators, extras),
-      { remittances: remittances.data },
-    );
-  }, [data, trade.data, remittances.data, snapshot.data]);
+  const indicators = useMemo(() => buildOverviewIndicators({
+    summary: data, trade: trade.data, remittances: remittances.data, snapshot: snapshot.data,
+  }), [data, trade.data, remittances.data, snapshot.data]);
+  const dates = overviewFreshness(indicators, freshness.data);
 
   if (loading) return <LoadingCard label="Loading overview…" />;
   if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load economic overview" />;
 
-  const visibleIndicators = isMobile && !showAllIndicators ? indicators.slice(0, 6) : indicators;
+  const headlineIndicators = selectHeadlineKpis(indicators);
+  const visibleIndicators = isMobile && !showAllIndicators ? headlineIndicators : indicators;
+  const extraCount = indicators.length - headlineIndicators.length;
 
   return (
-    <section className="fade-in">
+    <section className="fade-in economic-overview">
       <SectionHeader
         title="Economic Overview"
         description="Key macroeconomic indicators at a glance. These headline numbers summarize Pakistan's economic health — from external accounts (reserves, trade, remittances) to domestic conditions (growth, inflation, monetary policy). Arrows show the direction of change; color reflects whether that movement is favorable, unfavorable, or neutral for the indicator."
@@ -114,34 +111,75 @@ export default function KpiCards() {
           { label: 'PBS Statistics', url: 'https://www.pbs.gov.pk' },
         ]}
       />
-      <p className="overview-refreshed">
-        {t('overview.refreshed', 'Data refreshed {date} · Official sources only')
-          .replace('{date}', formatKpiPeriod(data.lastUpdated))}
-      </p>
-      <OverviewBriefing onNavigate={navigate} />
-      <WhatMovedStrip onNavigate={navigate} />
+      <div className="overview-refreshed">
+        <p className="overview-refreshed__dates">
+          {(dates.checked || data.lastChecked) && (
+            <span>{t('overview.checked', 'Latest source check: {date}').replace('{date}', formatKpiPeriod(dates.checked || data.lastChecked))}</span>
+          )}
+          {(dates.changed || data.lastUpdated) && (
+            <span>{' · '}{t('overview.contentChanged', 'Latest data content change: {date}').replace('{date}', formatKpiPeriod(dates.changed || data.lastUpdated))}</span>
+          )}
+        </p>
+        <details className="overview-source-details">
+          <summary>{t('overview.aboutDatesSources', 'About dates & sources')}</summary>
+          <div className="overview-source-details__body">
+            <p>{t('overview.dateMeaning', 'A source check is not a new observation. Each figure shows its own observation period; source dates are in Details.')}</p>
+            <p>{t('overview.sourceMix', 'Official data, dashboard-derived calculations and explicitly attributed secondary reporting are labelled separately.')}</p>
+          </div>
+        </details>
+      </div>
+      <div className="overview-selection" role="group" aria-label={t('overview.indicatorView', 'Indicator view')}>
+        <button
+          ref={allIndicatorsRef}
+          type="button"
+          aria-pressed={view === 'all'}
+          className={`overview-selection__button ${view === 'all' ? 'is-active' : ''}`}
+          onClick={() => setView('all')}
+        >
+          {t('overview.allIndicators', 'All indicators')}
+        </button>
+        <button
+          type="button"
+          aria-pressed={view === 'watchlist'}
+          className={`overview-selection__button ${view === 'watchlist' ? 'is-active' : ''}`}
+          onClick={() => setView('watchlist')}
+        >
+          {t('overview.myWatchlist', 'My watchlist')} <span aria-hidden="true">({pins.length})</span>
+        </button>
+      </div>
+      <WatchlistFeedback indicators={indicators} />
+      {(pins.length > 0 || view === 'watchlist') && (
+        <WatchlistPanel
+          indicators={indicators}
+          onNavigate={navigate}
+          onBrowse={() => {
+            setView('all');
+            allIndicatorsRef.current?.focus();
+          }}
+        />
+      )}
+      <div className="overview-all-indicators" hidden={view !== 'all'}>
+      {!isMobile && <OverviewBriefing indicators={indicators} onNavigate={navigate} />}
+      {!isMobile && <WhatMovedStrip indicators={indicators} onNavigate={navigate} />}
       <p className="overview-legend">{t('overview.legend', 'Teal is favorable, coral is unfavorable, amber is little changed — not simply whether the number rose.')}</p>
       <div className="kpi-grid stagger-children">
         {visibleIndicators.map((kpi) => {
+          const label = kpi.labelKey ? t(kpi.labelKey, kpi.label) : tx(kpi.label);
           const sentiment = kpi.sentiment || 'neutral';
           const color = sentimentColor(sentiment);
-          const changeLabel = formatKpiChange(kpi);
+          const changeLabel = formatKpiChange(kpi, t);
           const compareBasis = formatCompareBasis(kpi.changeBasis);
           const pinned = isPinned(kpi.id);
           const route = kpiRoute(kpi.id);
-          const openSection = () => navigate(route.groupId, route.sectionId);
+          const sourceDates = dates.datasets.get(route.datasetId);
           return (
             <div
               key={kpi.id}
               className="kpi-card-hit"
-              onClick={(event) => {
-                if (event.target.closest('button, a')) return;
-                openSection();
-              }}
             >
               <ExpandableTile
-                className={`card kpi-card kpi-card--link sentiment-${sentiment}`}
-                title={kpi.label}
+                className={`card kpi-card sentiment-${sentiment}`}
+                title={label}
                 subtitle={`${formatKpiPeriod(kpi.period)} · Source: ${kpi.source}`}
                 details={(
                   <div className="tile-detail-list">
@@ -168,7 +206,13 @@ export default function KpiCards() {
                     {kpi.momChangeLabel && (
                       <div className="tile-detail-row">
                         <span>{t('overview.monthOnMonth', 'Month-on-month')}</span>
-                        <strong>{kpi.momChangeLabel}</strong>
+                        <strong>{kpi.momChangeLabel}{kpi.momChangeBasis ? ` ${formatCompareBasis(kpi.momChangeBasis)}` : ''}</strong>
+                      </div>
+                    )}
+                    {kpi.momComparison && (
+                      <div className="tile-detail-row">
+                        <span>{t('overview.monthOnMonth', 'Month-on-month')}</span>
+                        <strong>{formatKpiChange(kpi.momComparison, t)} {formatCompareBasis(kpi.momComparison.changeBasis)}</strong>
                       </div>
                     )}
                     {kpi.sub && (
@@ -181,6 +225,18 @@ export default function KpiCards() {
                       <span>{tx('Source')}</span>
                       <strong>{kpi.source}</strong>
                     </div>
+                    {sourceDates?.verificationDate && (
+                      <div className="tile-detail-row">
+                        <span>{t('overview.sourceChecked', 'Source checked')}</span>
+                        <strong>{formatKpiPeriod(sourceDates.verificationDate)}</strong>
+                      </div>
+                    )}
+                    {sourceDates?.dashboardUpdated && (
+                      <div className="tile-detail-row">
+                        <span>{t('overview.dataChanged', 'Data content changed')}</span>
+                        <strong>{formatKpiPeriod(sourceDates.dashboardUpdated)}</strong>
+                      </div>
+                    )}
                     {kpi.provenanceKey && (
                       <div className="tile-detail-row">
                         <span>{tx('Citation')}</span>
@@ -196,7 +252,6 @@ export default function KpiCards() {
               >
                 <div className="kpi-label-row">
                   <div className="kpi-label-meta">
-                    <div className="kpi-label">{kpi.label}</div>
                     <SourceBadge
                       datasetId={route.datasetId}
                       sourceType={kpi.sourceType}
@@ -207,16 +262,25 @@ export default function KpiCards() {
                     type="button"
                     className={`kpi-pin ${pinned ? 'is-pinned' : ''}`}
                     aria-pressed={pinned}
-                    aria-label={pinned ? t('watchlist.unpin', 'Unpin') : t('watchlist.pin', 'Pin to watchlist')}
+                    aria-label={(pinned
+                      ? t('watchlist.unpinNamed', 'Unpin {label}')
+                      : t('watchlist.pinNamed', 'Pin {label} to watchlist')).replace('{label}', label)}
                     title={pinned ? t('watchlist.unpin', 'Unpin') : t('watchlist.pin', 'Pin to watchlist')}
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      toggle(kpi.id);
-                    }}
+                    onClick={() => toggle(kpi.id)}
                   >
                     {pinned ? '★' : '☆'}
                   </button>
                 </div>
+                <a
+                  className="kpi-section-link"
+                  href={routeToPath(route.groupId, route.sectionId)}
+                  onClick={(event) => {
+                    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+                    event.preventDefault();
+                    navigate(route.groupId, route.sectionId);
+                  }}
+                >
+                <div className="kpi-label">{label}</div>
                 <div className="kpi-value" style={{ color }}>
                   {Number.isFinite(kpi.value) ? (
                     <>
@@ -237,22 +301,23 @@ export default function KpiCards() {
                 </div>
                 {kpi.sub && <div className="kpi-sub">{kpi.sub}</div>}
                 <div className={`kpi-trend ${sentiment}`} title={compareBasis || undefined}>
-                  {trendArrow(kpi.trend)} {changeLabel ?? 'n/a'}
-                  {compareBasis && <span className="kpi-change-basis"> {compareBasis}</span>}
+                  <span className="kpi-change-value">{trendArrow(kpi.trend)} {changeLabel ?? 'n/a'}</span>
+                  {compareBasis && <span className="kpi-change-basis">{compareBasis}</span>}
                 </div>
+                <span className="kpi-open-section">{t('overview.openSection', 'Open section')} →</span>
+                </a>
                 <div className="kpi-source">
-                  Source: {kpi.source}
+                  <span className="kpi-source-label">{tx('Source')}: {kpi.source}</span>
                   {kpi.provenanceKey
                     ? <CiteFigure figureKey={kpi.provenanceKey} compact />
                     : <span className="kpi-source-missing" title={t('provenance.missing', 'No provenance key for this KPI')}>ⓘ</span>}
                 </div>
-                <span className="kpi-open-section">{t('overview.openSection', 'Open section')} →</span>
               </ExpandableTile>
             </div>
           );
         })}
       </div>
-      {isMobile && indicators.length > 6 && (
+      {isMobile && extraCount > 0 && (
         <button
           type="button"
           className="overview-more-kpis"
@@ -262,9 +327,10 @@ export default function KpiCards() {
           {showAllIndicators
             ? t('overview.showFewer', 'Show fewer indicators')
             : t('overview.showMore', 'Show {count} more indicators')
-              .replace('{count}', String(indicators.length - 6))}
+              .replace('{count}', String(extraCount))}
         </button>
       )}
+      {isMobile && <OverviewBriefing indicators={indicators} onNavigate={navigate} />}
       <details
         className="overview-details"
         open={detailsOpen}
@@ -276,14 +342,14 @@ export default function KpiCards() {
       >
         <summary>
           <span>{t('overview.details', 'More context, releases and source details')}</span>
-          <small>{t('overview.detailsHint', 'Watchlist and latest data changes')}</small>
+          <small>{t('overview.contextHint', 'Latest data changes and source context')}</small>
         </summary>
         <div className="overview-details__body">
           <LatestChangesPanel />
-          <WatchlistPanel onNavigate={navigate} />
           <SnapshotPanel />
         </div>
       </details>
+      </div>
     </section>
   );
 }

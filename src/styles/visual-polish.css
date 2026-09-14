@@ -44,15 +44,6 @@
 [data-density="compact"] .app-header { padding: 1rem 1.25rem 0.85rem; }
 [data-density="compact"] .app-header h1 { font-size: 1.35rem; }
 [data-density="compact"] .header-emblem { font-size: 1.2rem; margin-bottom: 0.15rem; }
-[data-density="compact"] .chart-card > .chart-meta,
-[data-density="compact"] .summary-card > .summary-card__footnote,
-[data-density="compact"] .summary-card > .chart-provenance,
-[data-density="compact"] .source-links,
-[data-density="compact"] .chart-action-btn--csv,
-[data-density="compact"] .kpi-source,
-[data-density="compact"] .kpi-change-basis {
-  display: none;
-}
 [data-density="compact"] .chart-container.tall { height: 320px; }
 body {
   background:

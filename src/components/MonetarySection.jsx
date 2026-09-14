@@ -7,6 +7,7 @@ import SummaryCard from './ui/SummaryCard';
 import MonetaryPolicyTracker from './MonetaryPolicyTracker';
 import { LoadingCard, ErrorCard } from './ui/DataState';
 import { currentCalendarYear, currentFiscalYear, fmtPKR, fmtPct, formatMonthYear, latestRow, formatFySummaryTitle } from '../utils/periodHelpers';
+import { mergeObservationDates, valuesByDate } from '../utils/chartTimeRange';
 
 const formatDate = formatMonthYear;
 
@@ -82,13 +83,14 @@ export default function MonetarySection() {
   };
 
   // Chart 2 — Credit to Private Sector vs Deposits (dual axis)
-  const creditLabels = creditYoySeries.map((d) => formatDate(d.date));
+  const creditDates = mergeObservationDates(creditYoySeries, depositsYoySeries);
+  const creditLabels = creditDates.map(formatDate);
   const creditDepositsData = {
     labels: creditLabels,
     datasets: [
       {
         label: 'Private Sector Credit YoY (%)',
-        data: creditYoySeries.map((d) => d.value),
+        data: valuesByDate(creditDates, creditYoySeries),
         borderColor: COLORS.blue,
         backgroundColor: COLORS.blueAlpha,
         fill: false,
@@ -96,7 +98,7 @@ export default function MonetarySection() {
       },
       {
         label: 'Deposits YoY Growth (%)',
-        data: depositsYoySeries.map((d) => d.value),
+        data: valuesByDate(creditDates, depositsYoySeries),
         borderColor: COLORS.amber,
         backgroundColor: COLORS.amberAlpha,
         fill: false,
@@ -129,13 +131,14 @@ export default function MonetarySection() {
   };
 
   // Chart 3 — Broad Money (M2) absolute levels
-  const m2AbsLabels = m2Series.map((d) => formatDate(d.date));
+  const aggregateDates = mergeObservationDates(m2Series, creditSeries, depositsSeries);
+  const m2AbsLabels = aggregateDates.map(formatDate);
   const m2AbsData = {
     labels: m2AbsLabels,
     datasets: [
       {
         label: 'Broad Money M2',
-        data: m2Series.map((d) => d.value),
+        data: valuesByDate(aggregateDates, m2Series),
         borderColor: COLORS.purple,
         backgroundColor: COLORS.purpleAlpha,
         fill: true,
@@ -143,7 +146,7 @@ export default function MonetarySection() {
       },
       {
         label: 'Credit to Private Sector',
-        data: creditSeries.map((d) => d.value),
+        data: valuesByDate(aggregateDates, creditSeries),
         borderColor: COLORS.blue,
         backgroundColor: COLORS.blueAlpha,
         fill: false,
@@ -151,7 +154,7 @@ export default function MonetarySection() {
       },
       {
         label: 'Total Deposits',
-        data: depositsSeries.map((d) => d.value),
+        data: valuesByDate(aggregateDates, depositsSeries),
         borderColor: COLORS.amber,
         backgroundColor: COLORS.amberAlpha,
         fill: false,
@@ -226,6 +229,7 @@ export default function MonetarySection() {
       <div className="chart-grid">
         <ChartCard
           title="M2 Money Supply Growth"
+          observationDates={m2YoySeries.map((row) => row.date)}
           description="Year-over-year growth in broad money (M2). M2 includes currency in circulation, demand deposits, and time deposits. High M2 growth can be inflationary; SBP targets M2 growth consistent with GDP and inflation objectives."
           dataSource={dataSource}
           dataCoverage={`${firstDate} – ${lastDate} (${m2YoySeries.length} months)`}
@@ -238,6 +242,7 @@ export default function MonetarySection() {
 
         <ChartCard
           title="Credit & Deposit Growth"
+          observationDates={creditDates}
           description="YoY growth rates for private sector credit and bank deposits. Rising credit growth signals economic expansion and business confidence. Deposit growth reflects savings mobilization and banking sector health."
           dataSource={dataSource}
           dataCoverage={`${firstDate} – ${lastDate} (${creditYoySeries.length} months)`}
@@ -250,6 +255,7 @@ export default function MonetarySection() {
 
         <ChartCard
           title="Monetary Aggregates"
+          observationDates={aggregateDates}
           description="Absolute levels of M2, private sector credit, and total bank deposits in PKR. The growing gap between M2 and credit reflects government borrowing absorbing a large share of money supply."
           dataSource={dataSource}
           dataCoverage={`${firstDate} – ${lastDate} (${m2Series.length} months)`}

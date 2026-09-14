@@ -5,11 +5,12 @@ import TrackerFooter from './ui/TrackerFooter';
 import { LoadingCard, ErrorCard } from './ui/DataState';
 import './ui/Trackers.css';
 import useI18n from '../i18n/useI18n';
+import ChartCard from './ChartCard';
 
 const fmtUsd = (v) => (v == null ? '—' : `$${v}B`);
 
 export default function ExternalDebtTracker() {
-  const { tx } = useI18n();
+  const { t, tx } = useI18n();
   const { data, loading, error, retry } = useData('external-debt.json');
   if (loading) return <LoadingCard label="Loading external debt tracker…" />;
   if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load external debt tracker" compact />;
@@ -74,9 +75,17 @@ export default function ExternalDebtTracker() {
       </div>
 
       {repaymentSplit.length > 0 && (
-        <div className="tracker__chart">
-          <Doughnut data={chart} options={chartOptions} />
-        </div>
+        <ChartCard
+          chartId="chart-external-debt-repayment-split"
+          title={t('chart.debtRepaymentSplit', 'External debt repayment split')}
+          dataSource="IMF Pakistan"
+          dataCoverage={fy26?.label || 'FY2026'}
+          lastUpdated={lastVerified}
+        >
+          <div className="tracker__chart">
+            <Doughnut data={chart} options={chartOptions} />
+          </div>
+        </ChartCard>
       )}
 
       {riskNote && <p className="tracker__callout">⚠️ {riskNote}</p>}

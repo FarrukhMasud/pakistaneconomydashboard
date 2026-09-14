@@ -11,6 +11,7 @@ import SummaryCard from './ui/SummaryCard';
 import PeriodCompare from './ui/PeriodCompare';
 import { LoadingCard, ErrorCard, UnavailableCard } from './ui/DataState';
 import { currentCalendarYear, currentFiscalYear, fmtPct, avgField, buildYoYOverlay, formatMonthYear, latestRow, formatFySummaryTitle } from '../utils/periodHelpers';
+import { mergeObservationDates, valuesByDate } from '../utils/chartTimeRange';
 
 const formatDate = formatMonthYear;
 
@@ -59,6 +60,7 @@ export default function InflationSection() {
         pointHoverRadius: 5,
       },
       ...(showCpiCompare ? [{
+        isComparison: true,
         label: cpiCompareLabel,
         data: cpiCompare,
         borderColor: COLORS.amber,
@@ -100,13 +102,14 @@ export default function InflationSection() {
   };
 
   // --- Chart 2: Urban vs Rural CPI ---
-  const urbanLabels = urban_cpi.data.map((d) => formatDate(d.date));
+  const urbanDates = mergeObservationDates(urban_cpi.data, rural_cpi.data);
+  const urbanLabels = urbanDates.map(formatDate);
   const urbanRuralData = {
     labels: urbanLabels,
     datasets: [
       {
         label: 'Urban CPI YoY',
-        data: urban_cpi.data.map((d) => d.value),
+        data: valuesByDate(urbanDates, urban_cpi.data),
         borderColor: COLORS.blue,
         backgroundColor: COLORS.blueAlpha,
         fill: false,
@@ -114,7 +117,7 @@ export default function InflationSection() {
       },
       {
         label: 'Rural CPI YoY',
-        data: rural_cpi.data.map((d) => d.value),
+        data: valuesByDate(urbanDates, rural_cpi.data),
         borderColor: COLORS.amber,
         backgroundColor: COLORS.amberAlpha,
         fill: false,
@@ -154,13 +157,14 @@ export default function InflationSection() {
   };
 
   // --- Chart 3: Food vs Non-Food (Urban) ---
-  const foodLabels = urban_food.data.map((d) => formatDate(d.date));
+  const foodDates = mergeObservationDates(urban_food.data, urban_nonfood.data, rural_food.data, rural_nonfood.data);
+  const foodLabels = foodDates.map(formatDate);
   const foodNonFoodData = {
     labels: foodLabels,
     datasets: [
       {
         label: 'Urban Food',
-        data: urban_food.data.map((d) => d.value),
+        data: valuesByDate(foodDates, urban_food.data),
         borderColor: COLORS.teal,
         backgroundColor: COLORS.tealAlpha,
         fill: false,
@@ -168,7 +172,7 @@ export default function InflationSection() {
       },
       {
         label: 'Urban Non-Food',
-        data: urban_nonfood.data.map((d) => d.value),
+        data: valuesByDate(foodDates, urban_nonfood.data),
         borderColor: COLORS.purple,
         backgroundColor: COLORS.purpleAlpha,
         fill: false,
@@ -176,7 +180,7 @@ export default function InflationSection() {
       },
       {
         label: 'Rural Food',
-        data: rural_food.data.map((d) => d.value),
+        data: valuesByDate(foodDates, rural_food.data),
         borderColor: COLORS.amber,
         backgroundColor: COLORS.amberAlpha,
         borderDash: [5, 5],
@@ -185,7 +189,7 @@ export default function InflationSection() {
       },
       {
         label: 'Rural Non-Food',
-        data: rural_nonfood.data.map((d) => d.value),
+        data: valuesByDate(foodDates, rural_nonfood.data),
         borderColor: COLORS.blue,
         backgroundColor: COLORS.blueAlpha,
         borderDash: [5, 5],
@@ -226,19 +230,15 @@ export default function InflationSection() {
   };
 
   // --- Chart 4: CPI vs SPI vs WPI ---
-  // Align to the shorter common range (SPI/WPI have 75 months now)
-  const minLen = Math.min(national_cpi.data.length, spi.data.length, wpi.data.length);
-  const cpiSlice = national_cpi.data.slice(-minLen);
-  const spiSlice = spi.data.slice(-minLen);
-  const wpiSlice = wpi.data.slice(-minLen);
-  const compLabels = cpiSlice.map((d) => formatDate(d.date));
+  const compDates = mergeObservationDates(national_cpi.data, spi.data, wpi.data);
+  const compLabels = compDates.map(formatDate);
 
   const compData = {
     labels: compLabels,
     datasets: [
       {
         label: 'CPI (National)',
-        data: cpiSlice.map((d) => d.value),
+        data: valuesByDate(compDates, national_cpi.data),
         borderColor: COLORS.coral,
         backgroundColor: COLORS.coralAlpha,
         fill: false,
@@ -246,7 +246,7 @@ export default function InflationSection() {
       },
       {
         label: 'SPI (Sensitive Price)',
-        data: spiSlice.map((d) => d.value),
+        data: valuesByDate(compDates, spi.data),
         borderColor: COLORS.teal,
         backgroundColor: COLORS.tealAlpha,
         fill: false,
@@ -254,7 +254,7 @@ export default function InflationSection() {
       },
       {
         label: 'WPI (Wholesale)',
-        data: wpiSlice.map((d) => d.value),
+        data: valuesByDate(compDates, wpi.data),
         borderColor: COLORS.amber,
         backgroundColor: COLORS.amberAlpha,
         fill: false,
@@ -345,6 +345,7 @@ export default function InflationSection() {
       <div className="chart-grid">
         <ChartCard
           title="National CPI — Year-over-Year"
+          observationDates={national_cpi.data.map((row) => row.date)}
           description="Month-by-month headline inflation rate, measured against the same month a year earlier."
           noteKey="inflation.cpiPath"
           dataSource={dataSource}
@@ -360,6 +361,7 @@ export default function InflationSection() {
 
         <ChartCard
           title="Urban vs Rural Inflation"
+          observationDates={urbanDates}
           description="Compares CPI inflation in urban and rural areas. Urban inflation tends to be slightly higher due to housing and energy costs, while rural inflation is more sensitive to food prices."
           dataSource={dataSource}
           dataCoverage={`${formatDate(urban_cpi.data[0].date)} – ${formatDate(urban_cpi.data[urban_cpi.data.length - 1].date)} (${urban_cpi.data.length} months)`}
@@ -372,6 +374,7 @@ export default function InflationSection() {
 
         <ChartCard
           title="Food vs Non-Food Inflation"
+          observationDates={foodDates}
           description="Breaks down inflation by food and non-food categories for both urban and rural areas. Food inflation is a major driver of headline CPI in Pakistan, directly affecting household budgets."
           dataSource={dataSource}
           dataCoverage={`${formatDate(urban_food.data[0].date)} – ${formatDate(urban_food.data[urban_food.data.length - 1].date)} (${urban_food.data.length} months)`}
@@ -384,9 +387,10 @@ export default function InflationSection() {
 
         <ChartCard
           title="CPI vs SPI vs WPI"
+          observationDates={compDates}
           description="Compares three key price indices: CPI (consumer prices), SPI (weekly sensitive items like food/fuel), and WPI (wholesale prices). SPI tends to be more volatile as it tracks frequently-changing items."
           dataSource={dataSource}
-          dataCoverage={`${formatDate(cpiSlice[0].date)} – ${formatDate(cpiSlice[cpiSlice.length - 1].date)} (${cpiSlice.length} months)`}
+          dataCoverage={`${formatDate(compDates[0])} – ${formatDate(compDates.at(-1))} (${compDates.length} months)`}
           lastUpdated={lastUpdated}
         >
           <div style={{ height: 320 }}>

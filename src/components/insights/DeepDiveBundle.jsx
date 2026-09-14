@@ -3,6 +3,7 @@ import { Bar } from 'react-chartjs-2';
 import { baseBarOptions } from '../../utils/chartConfig';
 import { isFiniteNumber, isClosedFiscalPeriod } from '../../utils/periodHelpers';
 import SectionHeader from '../SectionHeader';
+import ChartCard from '../ChartCard';
 import { LoadingCard, ErrorCard } from '../ui/DataState';
 import {
   SOURCE_LINKS,
@@ -325,16 +326,20 @@ export function ExternalFinancingWallSection() {
               <div className="insight-grid">
                 {cards.map((card) => <InsightCard key={card.title} {...card} />)}
               </div>
-              <div className="card chart-card">
-                <div className="chart-card-header"><h3>{tx(`${fy.fyLabel} repayment split`)}</h3></div>
+              <ChartCard
+                title={tx(`${fy.fyLabel} repayment split`)}
+                dataSource="IMF Pakistan"
+                dataCoverage={fy.fyLabel}
+              >
         <div className="chart-container short"><Bar data={chart} options={options} /></div>
-      </div>
+      </ChartCard>
       {externalDebt.data?.fy27?.note && <p className="insight-note">{externalDebt.data.fy27.note}</p>}
     </section>
   );
 }
 
 export function RevenueTargetMeterSection() {
+  const { t } = useI18n();
   const fbr = useData('fbr-tax.json');
   if (fbr.loading) return <LoadingCard label="Loading revenue target meter…" />;
   if (fbr.error || !fbr.data) return <ErrorCard error={fbr.error} onRetry={fbr.retry} label="Revenue target meter" />;
@@ -390,9 +395,14 @@ export function RevenueTargetMeterSection() {
                 {fy26RevisedGap != null && <InsightCard title={`${currentLabel} revised target gap`} value={`${fmtPkrBn(Math.abs(fy26RevisedGap))} ${fy26RevisedGap >= 0 ? 'ahead' : 'short'}`} meta={`Revised target ${fmtPkrBn(fy26.revisedTarget)}`} body="Shows whether the year ended above or below the revised IMF/FBR target in the source data." source="FBR / IMF reporting" sourceUrl={fy26.sources?.[0]?.url} tone={fy26RevisedGap >= 0 ? 'positive' : 'negative'} />}
                 {fy27Increase != null && <InsightCard title={`${nextLabel} required uplift`} value={fmtPct(fy27Increase)} meta={`${fmtPkrBn(fy27.budgetTarget)} target`} body={`Increase implied by the ${nextLabel} budget target compared with the ${currentLabel} ${fy26ReferenceLabel}.`} source="Finance Division / FBR" sourceUrl={fy27.sources?.[0]?.url} tone="neutral" />}
       </div>
-      <div className="card chart-card">
+      <ChartCard
+        title={t('chart.revenueTargets', 'Revenue collection and targets')}
+        chartId="chart-revenue-collection-and-targets"
+        dataSource="FBR"
+        dataCoverage={fytd?.period || currentLabel}
+      >
         <div className="chart-container"><Bar data={chart} options={options} /></div>
-      </div>
+      </ChartCard>
               {isFiniteNumber(fy26?.actual) && isFiniteNumber(fy26?.budgetTarget) && fy26.budgetTarget !== 0 && <ProgressMeter label={`${currentLabel} actual vs budget target`} value={fy26.actual} max={fy26.budgetTarget} color={fy26.actual >= fy26.budgetTarget ? COLORS.teal : COLORS.coral} detail={`${fmt((fy26.actual / fy26.budgetTarget) * 100, 1)}% of budget target achieved`} />}
       <p className="insight-note">{fbr.data.methodologyNote}</p>
     </section>
@@ -464,10 +474,13 @@ export function ItExportDeepDiveSection() {
         {softwareConsultancy && <InsightCard title="Software consultancy" value={`$${fmt(softwareConsultancy.latest)}M`} meta={`${softwareConsultancy.latestMonth} · ${fmtPct(pctChange(softwareConsultancy.latest, softwareConsultancy.yearAgo))} YoY`} body={`FYTD software consultancy exports are $${fmt(softwareConsultancy.fytd)}M through ${softwareConsultancy.fytdLabel}.`} source="SBP EBOPS" sourceUrl="https://www.sbp.org.pk/ecodata/index2.asp" tone="neutral" />}
         {softwareExports && <InsightCard title="Computer software exports" value={`$${fmt(softwareExports.latest)}M`} meta={`${softwareExports.latestMonth} · ${fmtPct(pctChange(softwareExports.latest, softwareExports.yearAgo))} YoY`} body={`FYTD computer software exports are $${fmt(softwareExports.fytd)}M through ${softwareExports.fytdLabel}.`} source="SBP EBOPS" sourceUrl="https://www.sbp.org.pk/ecodata/index2.asp" tone="neutral" />}
       </div>
-      <div className="card chart-card">
-        <div className="chart-card-header"><h3>{tx("Monthly IT and freelance export receipts")}</h3></div>
+      <ChartCard
+        title={tx("Monthly IT and freelance export receipts")}
+        dataSource="SBP"
+        dataCoverage={itTotal?.latestMonth || itMonthly.latestMonth}
+      >
         <div className="chart-container tall"><Bar data={chart} options={options} /></div>
-      </div>
+      </ChartCard>
       <p className="insight-note">{itMonthly?.note}</p>
     </section>
   );
@@ -537,11 +550,11 @@ export function PeerComparisonSection() {
         </div>
         <a href={active.sourceUrl} target="_blank" rel="noreferrer">API source ↗</a>
       </div>
-      <div className="chart-card card">
+      <ChartCard title={active.label} dataSource="World Bank" dataCoverage={active.values.map((row) => row.year).filter(Boolean).sort().at(-1)}>
         <div style={{ height: 340 }}>
           <Bar data={chart} options={options} />
         </div>
-      </div>
+      </ChartCard>
       <div className="insight-table-wrap">
         <table className="insight-table">
           <thead><tr><th>{tx("Country")}</th><th>{tx("Value")}</th><th>{tx("Official year")}</th></tr></thead>

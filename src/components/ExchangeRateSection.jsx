@@ -140,6 +140,7 @@ export default function ExchangeRateSection() {
 
       <ChartCard
         title="Exchange Rates (PKR)"
+        observationDates={monthly.map((row) => row.date)}
         description="PKR per unit of foreign currency — USD, EUR, GBP on left axis; CNY on right axis (different scale). The sharp rise in 2022–2023 reflects significant rupee depreciation during the economic crisis. The dashed purple line shows the Chinese Yuan rate."
         source="State Bank of Pakistan"
         dataSource="SBP"

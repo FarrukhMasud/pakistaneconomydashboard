@@ -115,6 +115,7 @@ export default function ReservesSection() {
           pointHoverRadius: 4,
         },
         ...(showYoY && sbpPrior.some((v) => v != null) ? [{
+          isComparison: true,
           label: sbpPriorLabel || 'Prior year SBP',
           data: sbpPrior,
           borderColor: COLORS.amber,
@@ -231,6 +232,8 @@ export default function ReservesSection() {
 
       <ChartCard
         title="Foreign Exchange Reserves"
+        observationDates={timeSeries.map((row) => row.date)}
+        rangeMode={showFytd ? 'fiscal' : 'chronological'}
         description="SBP gross reserves (solid) and total reserves including commercial banks (dashed). Use YoY overlay or FYTD vs prior FY to compare the recovery path. Reserve cover is the single most-watched measure of Pakistan's ability to meet external obligations."
         noteKey="reserves.recovery"
         dataSource={dataSource}

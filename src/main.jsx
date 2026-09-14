@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import './styles/visual-polish.css'
 import App from './App.jsx'
+import './styles/usability.css'
 import I18nProvider from './i18n/I18nProvider.jsx'
 
 createRoot(document.getElementById('root')).render(

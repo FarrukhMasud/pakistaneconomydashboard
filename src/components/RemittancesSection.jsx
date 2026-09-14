@@ -54,7 +54,7 @@ export default function RemittancesSection() {
     const showYoY = effectiveCompare === 'yoy';
     const showFytd = effectiveCompare === 'fytd';
     const fytdTotal = buildFytdSeries(monthly, 'total');
-    const corridorRows = monthly.slice(-36).map(withOtherCountries);
+    const corridorRows = monthly.map(withOtherCountries);
     const latestCorridor = corridorRows.at(-1);
     const corridorSummary = latestCorridor ? CORRIDORS
       .map((corridor) => ({
@@ -85,6 +85,7 @@ export default function RemittancesSection() {
           borderRadius: 4,
         },
         ...(showRemCompare ? [{
+          isComparison: true,
           label: remCompareLabel,
           data: remCompare,
           backgroundColor: 'rgba(255, 167, 38, 0.25)',
@@ -237,6 +238,8 @@ export default function RemittancesSection() {
       <div className="section-grid">
         <ChartCard
           title="Monthly Remittances by Corridor"
+          observationDates={corridorRows.map((row) => row.date)}
+          defaultRange="3y"
           description="Monthly workers' remittances split by SBP's published corridor buckets. SBP exposes major single-country corridors (Saudi Arabia, UAE, UK, USA), grouped Other GCC and EU buckets, plus the residual shown here as Other countries."
           source="State Bank of Pakistan"
           dataSource="SBP EasyData API"
@@ -265,6 +268,8 @@ export default function RemittancesSection() {
       <div className="section-grid">
         <ChartCard
           title="Monthly Total"
+          observationDates={monthly.map((row) => row.date)}
+          rangeMode={showFytd ? 'fiscal' : 'chronological'}
           description="Monthly remittance inflows in USD millions. Seasonal spikes typically occur during Ramadan, Eid, and the winter holiday period. Consistent growth reflects expanding diaspora and improved formal banking channels."
           source="State Bank of Pakistan"
           dataSource="SBP EasyData API"

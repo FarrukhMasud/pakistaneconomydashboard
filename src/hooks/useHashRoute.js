@@ -1,4 +1,16 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
+function isRouteHash(hash) {
+  return /^#\/|^#[^/]+\/[^/]+/.test(hash);
+}
+
+export function readChartTarget(locationLike) {
+  const hash = String(locationLike?.hash || '');
+  const search = isRouteHash(hash) && hash.includes('?')
+    ? hash.slice(hash.indexOf('?')) : locationLike?.search;
+  const value = new URLSearchParams(search || '').get('chart');
+  return /^chart-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value || '') ? value : null;
+}
 
 /**
  * Parses path or hash routes into a validated { groupId, sectionId, known }.
@@ -20,8 +32,8 @@ export function parseRoute(locationLike, groups) {
   };
 
   let raw = '';
-  if (hash && hash !== '#' && hash !== '#/') {
-    raw = hash.replace(/^#\/?/, '');
+  if (isRouteHash(hash) && hash !== '#/') {
+    raw = hash.replace(/^#\/?/, '').split('?')[0];
   } else {
     raw = pathname.replace(/^\//, '');
   }
@@ -52,6 +64,10 @@ export function parseRoute(locationLike, groups) {
     return { ...fallback, known: false, assetLike: false };
   }
 
+  if (parts.length > 2) {
+    return { ...fallback, groupId: group.id, sectionId: group.sections[0].id, known: false };
+  }
+
   // /group alone → first section of that group (canonical).
   if (!parts[1]) {
     return { groupId: group.id, sectionId: group.sections[0].id, known: true, assetLike: false };
@@ -70,17 +86,28 @@ export function parseHash(hash, groups) {
   return parseRoute({ hash, pathname: '/' }, groups);
 }
 
-export function routeToPath(groupId, sectionId) {
-  return `/${groupId}/${sectionId}`;
+export function routeToPath(groupId, sectionId, { chartId, search = '' } = {}) {
+  const params = new URLSearchParams(search);
+  params.delete('chart');
+  if (chartId && readChartTarget({ search: `?chart=${chartId}` })) params.set('chart', chartId);
+  const query = params.toString();
+  return `/${groupId}/${sectionId}${query ? `?${query}` : ''}`;
 }
 
 export function routeToHash(groupId, sectionId) {
   return `#/${groupId}/${sectionId}`;
 }
 
+export function routeFocusIdentity(locationLike, groups) {
+  const route = parseRoute(locationLike, groups);
+  const path = route.known ? routeToPath(route.groupId, route.sectionId) : (locationLike?.pathname || '/');
+  const hash = String(locationLike?.hash || '');
+  return `${path}:${readChartTarget(locationLike) || ''}:${isRouteHash(hash) ? '' : hash}`;
+}
+
 function readLocation() {
-  if (typeof window === 'undefined') return { hash: '', pathname: '/' };
-  return { hash: window.location.hash, pathname: window.location.pathname };
+  if (typeof window === 'undefined') return { hash: '', pathname: '/', search: '' };
+  return { hash: window.location.hash, pathname: window.location.pathname, search: window.location.search };
 }
 
 /**
@@ -89,6 +116,9 @@ function readLocation() {
  */
 export function useHashRoute(groups) {
   const [loc, setLoc] = useState(readLocation);
+  const [focusRequest, setFocusRequest] = useState(0);
+  const [missingTarget, setMissingTarget] = useState(null);
+  const initialRoute = useRef(true);
 
   useEffect(() => {
     const sync = () => setLoc(readLocation());
@@ -101,30 +131,87 @@ export function useHashRoute(groups) {
   }, []);
 
   const route = useMemo(() => parseRoute(loc, groups), [loc, groups]);
+  const chartId = readChartTarget(loc);
+  const focusKey = `${routeFocusIdentity(loc, groups)}:${focusRequest}`;
 
   // Canonicalise known routes only — never rewrite unknown paths to overview.
   useEffect(() => {
     if (!route.known || route.assetLike) return;
     const canonical = routeToPath(route.groupId, route.sectionId);
     const { pathname, hash, search } = window.location;
-    if (pathname !== canonical || hash) {
-      window.history.replaceState(null, '', `${canonical}${search || ''}`);
+    if (pathname !== canonical || isRouteHash(hash)) {
+      const params = new URLSearchParams(search);
+      if (isRouteHash(hash) && hash.includes('?')) {
+        new URLSearchParams(hash.slice(hash.indexOf('?'))).forEach((value, key) => params.set(key, value));
+      }
+      const query = params.toString();
+      window.history.replaceState(null, '', `${canonical}${query ? `?${query}` : ''}${isRouteHash(hash) ? '' : hash}`);
     }
-  }, [route.groupId, route.sectionId, route.known, route.assetLike]);
+  }, [route.groupId, route.sectionId, route.known, route.assetLike, loc]);
 
-  const navigate = useCallback((groupId, sectionId, { scrollToTop = true } = {}) => {
+  const navigate = useCallback((groupId, sectionId, { scrollToTop = true, chartId: targetChart } = {}) => {
     const group = groups.find((g) => g.id === groupId) || groups[0];
     const section = group.sections.find((s) => s.id === sectionId) || group.sections[0];
-    const next = routeToPath(group.id, section.id);
-    if (window.location.pathname !== next || window.location.hash) {
-      window.history.pushState(null, '', next);
-      setLoc(readLocation());
+    const sameSection = window.location.pathname === routeToPath(group.id, section.id);
+    const params = new URLSearchParams(window.location.search);
+    if (!sameSection) {
+      for (const key of [...params.keys()]) {
+        if (key !== 'embed' && key !== 'lang') params.delete(key);
+      }
     }
-    if (scrollToTop) window.scrollTo({ top: 0, behavior: 'smooth' });
+    const next = routeToPath(group.id, section.id, { chartId: targetChart, search: params.toString() });
+    if (`${window.location.pathname}${window.location.search}${window.location.hash}` !== next) {
+      window.history.pushState(null, '', next);
+    }
+    setLoc(readLocation());
+    setFocusRequest((value) => value + 1);
+    if (scrollToTop && !targetChart) window.scrollTo({ top: 0, behavior: 'instant' });
   }, [groups]);
+
+  useEffect(() => {
+    const first = initialRoute.current;
+    initialRoute.current = false;
+    if (first && !chartId) return undefined;
+    const main = document.getElementById('main-content');
+    if (!main) return undefined;
+    let frame;
+    let unavailableAnnounced = false;
+    const focus = (target) => {
+      target.focus({ preventScroll: true });
+      if (target !== main) target.scrollIntoView({ block: 'start', behavior: 'instant' });
+    };
+    if (!chartId || !route.known) {
+      frame = requestAnimationFrame(() => focus(main));
+      return () => cancelAnimationFrame(frame);
+    }
+    const attempt = () => {
+      const target = document.getElementById(chartId);
+      if (target && main.contains(target)) {
+        focus(target);
+        setMissingTarget(null);
+        observer.disconnect();
+      } else if (!main.querySelector('.loading-card, [aria-busy="true"]') && !unavailableAnnounced) {
+        focus(main);
+        setMissingTarget(focusKey);
+        unavailableAnnounced = true;
+      }
+    };
+    const observer = new MutationObserver(() => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(attempt);
+    });
+    observer.observe(main, { childList: true, subtree: true });
+    frame = requestAnimationFrame(attempt);
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(frame);
+    };
+  }, [chartId, focusKey, route.known]);
 
   return {
     ...route,
+    chartId,
+    chartUnavailable: Boolean(chartId && missingTarget === focusKey),
     navigate,
     path: route.known ? routeToPath(route.groupId, route.sectionId) : (loc.pathname || '/'),
   };
