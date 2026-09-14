@@ -143,6 +143,8 @@ summary:focus-visible {
   .watchlist__clear,
   .cite-figure__toggle,
   .cite-figure__copy,
+  .chart-action-btn,
+  .info-toggle,
   .chart-modal__close {
     min-width: 44px;
     min-height: 44px;

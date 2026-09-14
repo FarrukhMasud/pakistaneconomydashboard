@@ -1,3 +1,5 @@
+import { visibleChartData } from './chartTimeRange.js';
+
 /** Escapes a single CSV cell, quoting only when necessary. */
 function csvCell(value) {
   if (value === null || value === undefined) return '';
@@ -12,11 +14,11 @@ function csvCell(value) {
 
 /**
  * Converts a Chart.js data object into CSV with one row per label and one
- * column per dataset, so what a reader downloads is exactly what they see.
+ * column per visible dataset, so what a reader downloads is exactly what they see.
  */
 export function chartToCsv(chartData, { title } = {}) {
   if (!chartData?.labels?.length) return '';
-  const datasets = (chartData.datasets || []).filter((dataset) => Array.isArray(dataset.data));
+  const datasets = visibleChartData(chartData).datasets.filter((dataset) => Array.isArray(dataset.data));
   const header = ['Period', ...datasets.map((dataset, index) => dataset.label || `Series ${index + 1}`)];
   const lines = [header.map(csvCell).join(',')];
   chartData.labels.forEach((label, rowIndex) => {

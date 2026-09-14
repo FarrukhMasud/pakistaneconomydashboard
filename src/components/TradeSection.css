@@ -52,17 +52,62 @@
     order: -6;
   }
 
-  .trade-section > .trade-latest-summary {
+  .trade-section > .trade-latest-summary.card {
     order: -5;
+    padding: 0.75rem;
+  }
+
+  .trade-section .trade-latest-summary__metrics,
+  .trade-section .trade-latest-summary__meta {
+    margin-top: 0.5rem;
   }
 
   .trade-section > .trade-coverage-short {
-    order: -4;
+    order: -3;
     margin-bottom: 0.75rem;
   }
 
   .trade-section > .trade-main-charts {
-    order: -3;
+    order: -4;
+  }
+
+  .trade-main-charts .chart-card-header {
+    margin-bottom: 0.25rem;
+  }
+
+  .trade-main-charts .chart-title-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 44px 44px;
+    gap: 0.25rem 0.5rem;
+  }
+
+  .trade-main-charts .chart-title-row h3 {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+  }
+
+  .trade-main-charts .latest-period-badge {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: start;
+    width: auto;
+    justify-content: flex-start;
+    font-size: 0.75rem;
+  }
+
+  .trade-main-charts .chart-action-btn {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+
+  .trade-main-charts .info-toggle {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+  }
+
+  .trade-main-charts .chart-range-controls {
+    margin-block: 0.25rem 0.5rem;
   }
 
   .trade-section > .trade-period-context {

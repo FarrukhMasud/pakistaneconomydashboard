@@ -30,6 +30,7 @@ test('tables and CSV retain the selected observations and exclude unfocused seri
   assert.equal(selected.data.datasets.length, 2);
   assert.equal(original.labels.length, 73);
   assert.doesNotMatch(chartToCsv(exported), /Prior year/);
+  assert.equal(chartToCsv(selected.data), chartToCsv(exported), 'the export utility itself must exclude hidden series too');
 });
 
 test('monthly windows are exactly 12, 36 and 60 calendar months ending at the latest observation', () => {

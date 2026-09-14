@@ -20,7 +20,7 @@ const SERVICES_COVERAGE_NOTE =
   'This is the latest period SBP has published in its EBOPS services table. SBP releases this table after the monthly trade and reserves data, so it can lag the rest of the dashboard by a month. The headline totals at the top of this section come from the Balance of Payments summary, which SBP publishes one release earlier.';
 
 export default function ServicesSection() {
-  const { tx } = useI18n();
+  const { t, tx } = useI18n();
   const { compareMode, focus, setCompareMode, setFocus } = useShareableChartState('yoy');
   const { data, loading, error, retry } = useData('services.json');
 
@@ -144,7 +144,8 @@ export default function ServicesSection() {
       ], focus),
     };
     monthlyItYTitle = 'USD Millions';
-    monthlyItCompareNote = `YoY uses SBP’s published same-month-last-year headline (${priorLabel} vs ${latestLabel}). Lagging EBOPS subcomponents are excluded when their coverage period differs.`;
+    monthlyItCompareNote = t('compare.servicesPublishedYear', 'Comparison uses SBP’s published same-month-last-year headline ({prior} vs {current}). Detailed EBOPS components with different periods are excluded.')
+      .replace('{prior}', priorLabel).replace('{current}', latestLabel);
   } else if (showFytd && !seriesHasFytdPrior && pointFytdReady) {
     const labels = fytdComponents.map((component) => component.name);
     const currentVals = fytdComponents.map((component) => component.fytd);
@@ -167,7 +168,9 @@ export default function ServicesSection() {
       ], focus),
     };
     monthlyItYTitle = 'USD Millions (cumulative)';
-    monthlyItCompareNote = `FYTD compares SBP’s cumulative headline totals (${componentFytdLabel(itComp) || 'current'} vs ${componentFytdPriorLabel(itComp) || 'prior'}). Lagging detailed components are excluded.`;
+    monthlyItCompareNote = t('compare.servicesPublishedFiscal', 'Comparison uses SBP’s cumulative headline totals ({current} vs {prior}). Detailed components with different periods are excluded.')
+      .replace('{current}', componentFytdLabel(itComp) || t('compare.currentPeriod', 'Current period'))
+      .replace('{prior}', componentFytdPriorLabel(itComp) || t('compare.priorPeriod', 'Prior period'));
   } else if (mseries.length) {
     monthlyItData = {
       labels: showFytd && fytdIt ? fytdIt.labels : mseries.map((m) => formatMonthYear(m.month)),
@@ -231,9 +234,9 @@ export default function ServicesSection() {
       ),
     };
     if (showYoY && !seriesHasYoY) {
-      monthlyItCompareNote = 'YoY overlay needs a prior-year month in the series; only the latest months are published so far.';
+      monthlyItCompareNote = t('compare.yearHistoryUnavailable', 'Last-year comparison needs a matching prior-year month; only recent months are published so far.');
     } else if (showFytd && !seriesHasFytdPrior && !pointFytdReady) {
-      monthlyItCompareNote = 'FYTD prior-year months are not yet available in the accumulating series.';
+      monthlyItCompareNote = t('compare.fiscalHistoryUnavailable', 'Matching prior-year months are not yet available for this fiscal-year comparison.');
     }
   }
 

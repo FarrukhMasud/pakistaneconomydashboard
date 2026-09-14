@@ -399,9 +399,6 @@ export default function TradeSection() {
 
       <TradeLatestSummary row={latestMonthly} />
 
-      <p className="trade-coverage-short">
-        {t('trade.coverageShort', 'Headline totals use SBP goods trade; country breakdowns can cover an earlier period.')}
-      </p>
       <div className="section-grid trade-main-charts">
         <ChartCard
           title="Imports vs Exports"
@@ -441,6 +438,10 @@ export default function TradeSection() {
           </div>
         </ChartCard>
       </div>
+
+      <p className="trade-coverage-short">
+        {t('trade.coverageShort', 'Headline totals use SBP goods trade; country breakdowns can cover an earlier period.')}
+      </p>
 
       {supportingSummaries}
 

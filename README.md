@@ -49,7 +49,7 @@ section is a shareable deep link.
   the latest available observation, with the selection retained in shared links.
   Category charts and fiscal-year overlays retain their appropriate comparison
   periods rather than treating categories as calendar dates. Data tables and CSV
-  exports use the displayed observations.
+  exports use the displayed observations and focused series.
 - **Data & sources:** chart actions expose tabular data, downloads, and source
   details without requiring Analyst view. Chart names and summaries complement
   the accessible data table; separate links and buttons keep navigation,

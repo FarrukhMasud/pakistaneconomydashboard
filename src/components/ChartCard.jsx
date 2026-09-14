@@ -81,9 +81,9 @@ function formatTableValue(value) {
   return String(value);
 }
 
-function ChartDataTable({ chartData, caption }) {
+export function ChartDataTable({ chartData, caption }) {
   const { t, tx } = useI18n();
-  const datasets = chartData.datasets.filter((dataset) => Array.isArray(dataset.data));
+  const datasets = visibleChartData(chartData).datasets.filter((dataset) => Array.isArray(dataset.data));
   return (
     <div className="chart-data-table-wrap" tabIndex={0} role="region" aria-label={caption}>
       <table className="chart-data-table">
@@ -151,7 +151,7 @@ export default function ChartCard({
   const chronological = charts.find((chart) => chart.applicable);
   const latestLabel = chronological?.data.labels.at(-1);
   const latestPeriod = chronological
-    ? /^FY\d{2,4}$/.test(String(latestLabel)) ? latestLabel : formatKpiPeriod(chronological.dates.at(-1))
+    ? formatKpiPeriod(/^FY\d{2,4}$/.test(String(latestLabel)) ? latestLabel : chronological.dates.at(-1))
     : dataCoverage;
 
   useEffect(() => {

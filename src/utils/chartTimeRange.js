@@ -26,7 +26,7 @@ export function chartValue(value) {
 }
 
 export function visibleChartData(data) {
-  return { ...data, datasets: data.datasets.filter((dataset) => !dataset.hidden) };
+  return { ...data, datasets: (data.datasets || []).filter((dataset) => !dataset.hidden) };
 }
 
 const POINT_OPTIONS = [

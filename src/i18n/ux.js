@@ -1,4 +1,10 @@
 const messages = {
+  'compare.servicesPublishedYear': ['Comparison uses SBP’s published same-month-last-year headline ({prior} vs {current}). Detailed EBOPS components with different periods are excluded.', 'موازنے میں اسٹیٹ بینک کے شائع کردہ گزشتہ سال کے اسی ماہ کے مجموعی اعداد استعمال ہوتے ہیں ({prior} بمقابلہ {current})۔ مختلف مدت والے تفصیلی EBOPS اجزا شامل نہیں ہیں۔'],
+  'compare.servicesPublishedFiscal': ['Comparison uses SBP’s cumulative headline totals ({current} vs {prior}). Detailed components with different periods are excluded.', 'موازنے میں اسٹیٹ بینک کے مجموعی جمع شدہ اعداد استعمال ہوتے ہیں ({current} بمقابلہ {prior})۔ مختلف مدت والے تفصیلی اجزا شامل نہیں ہیں۔'],
+  'compare.currentPeriod': ['Current period', 'موجودہ مدت'],
+  'compare.priorPeriod': ['Prior period', 'گزشتہ مدت'],
+  'compare.yearHistoryUnavailable': ['Last-year comparison needs a matching prior-year month; only recent months are published so far.', 'گزشتہ سال سے موازنے کے لیے اسی ماہ کے پچھلے سال کے اعداد درکار ہیں؛ اب تک صرف حالیہ مہینوں کے اعداد شائع ہوئے ہیں۔'],
+  'compare.fiscalHistoryUnavailable': ['Matching prior-year months are not yet available for this fiscal-year comparison.', 'اس مالی سال کے موازنے کے لیے گزشتہ سال کے متعلقہ مہینوں کے اعداد ابھی دستیاب نہیں ہیں۔'],
   'overview.aboutDatesSources': ['About dates & sources', 'تاریخوں اور ماخذ کی وضاحت'],
   'trade.exports': ['Exports', 'برآمدات'],
   'trade.imports': ['Imports', 'درآمدات'],

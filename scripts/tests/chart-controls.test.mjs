@@ -5,19 +5,32 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { Line } from 'react-chartjs-2';
 import { createServer } from 'vite';
 import { countryFlagPlugin } from '../../src/utils/countryLabels.js';
+import { selectChartRange } from '../../src/utils/chartTimeRange.js';
+import { applySeriesFocus } from '../../src/utils/seriesFocus.js';
+import { chartToCsv } from '../../src/utils/download.js';
+import { fytdDisabledReason } from '../../src/utils/periodHelpers.js';
 
 let server;
 let ChartCard;
+let ChartDataTable;
 let PeriodCompare;
+let TradeSection;
 let TradeLatestSummary;
 let I18nContext;
+let translate;
+let translateString;
 
 before(async () => {
-  server = await createServer({ server: { middlewareMode: true }, appType: 'custom', logLevel: 'error' });
-  ChartCard = (await server.ssrLoadModule('/src/components/ChartCard.jsx')).default;
+  server = await createServer({ server: { middlewareMode: true, hmr: false }, appType: 'custom', logLevel: 'error' });
+  const chartModule = await server.ssrLoadModule('/src/components/ChartCard.jsx');
+  ChartCard = chartModule.default;
+  ChartDataTable = chartModule.ChartDataTable;
   PeriodCompare = (await server.ssrLoadModule('/src/components/ui/PeriodCompare.jsx')).default;
-  TradeLatestSummary = (await server.ssrLoadModule('/src/components/TradeSection.jsx')).TradeLatestSummary;
-  I18nContext = (await server.ssrLoadModule('/src/i18n/context.js')).I18nContext;
+  const tradeModule = await server.ssrLoadModule('/src/components/TradeSection.jsx');
+  TradeSection = tradeModule.default;
+  TradeLatestSummary = tradeModule.TradeLatestSummary;
+  const i18n = await server.ssrLoadModule('/src/i18n/context.js');
+  ({ I18nContext, translate, translateString } = i18n);
 });
 after(async () => { await server?.close(); });
 
@@ -57,6 +70,29 @@ test('fiscal overlays have no misleading range controls and retain the complete 
   assert.match(html, /Shown: 2024-01 to 2026-01/);
 });
 
+test('essential chart periods use full observation years rather than abbreviated labels or future comparison values', () => {
+  for (const [observationDates, labels, expected] of [
+    [['2026-06', '2026-07', '2026-08'], ['Jun 26', 'Jul 26', 'Aug 26'], 'Jul 2026'],
+    [['2026-07-24', '2026-07-31', '2026-08-07'], ['24 Jul 26', '31 Jul 26', '7 Aug 26'], '31 Jul 2026'],
+    [['2024-06-30', '2025-06-30', '2026-06-30'], ['FY24', 'FY25', 'FY26'], 'FY2025'],
+  ]) {
+    const html = renderToStaticMarkup(createElement(ChartCard, {
+      title: 'Full periods', dataSource: 'SBP', dataCoverage: labels.at(-1), observationDates,
+    }, createElement(Line, {
+      data: {
+        labels,
+        datasets: [
+          { label: 'Actual', data: [1, 2, null] },
+          { label: 'Comparison', data: [10, 20, 30], isComparison: true },
+        ],
+      },
+    })));
+    assert.ok(html.includes(`<span class="latest-period-badge">Latest: ${expected}</span>`));
+    assert.ok(html.includes(`<span>Latest available period: ${expected}</span>`));
+    assert.match(html, /<span>Source: SBP<\/span>/);
+  }
+});
+
 test('deep chart anchors use original titles before translation and support stable explicit overrides', () => {
   const translate = {
     t: (key, fallback) => fallback || key,
@@ -92,6 +128,66 @@ test('disabled comparisons explain their unavailable state inline and link the b
   assert.match(html, /disabled="" aria-describedby="[^"]+-fytd"/);
   assert.match(html, /<p id="[^"]+-fytd" class="period-compare__note">Compare fiscal year to date: Needs at least three matching fiscal months\.<\/p>/);
   assert.equal((html.match(/class="period-compare__note"/g) || []).length, 1);
+});
+
+test('table and direct CSV export apply series focus and the same date window, including restoring all series', () => {
+  const periods = Array.from({ length: 24 }, (_, index) => new Date(Date.UTC(2024, index, 1)).toISOString().slice(0, 7));
+  const original = {
+    labels: periods,
+    datasets: [
+      { label: 'Unfocused', data: periods.map((_, index) => index) },
+      { label: 'Focused', data: periods.map((_, index) => index === 18 ? null : 1000 + index) },
+      { label: 'Comparison', isComparison: true, data: periods.map(() => 9999) },
+    ],
+  };
+  const selected = selectChartRange({
+    ...original, datasets: applySeriesFocus(original.datasets, 1),
+  }, periods, '1y').data;
+  const html = renderToStaticMarkup(createElement(ChartDataTable, { chartData: selected, caption: 'Visible observations' }));
+  const csv = chartToCsv(selected);
+  assert.match(html, /<th scope="col">Focused<\/th>/);
+  assert.ok(html.includes(`<th scope="row">2025-01</th><td>${(1012).toLocaleString()}</td>`));
+  assert.match(html, /<th scope="row">2025-07<\/th><td>\u2014<\/td>/);
+  assert.doesNotMatch(html, /Unfocused|Comparison|9,999/);
+  assert.equal((html.match(/<th scope="row">/g) || []).length, 12);
+  assert.equal(csv.trim().split('\n').length, 13);
+  assert.match(csv, /^Period,Focused\n2025-01,1012\n/);
+  assert.match(csv, /\n2025-07,\n/);
+  assert.doesNotMatch(csv, /Unfocused|Comparison|9999/);
+  assert.equal(original.datasets.length, 3);
+  assert.equal(original.datasets[0].hidden, undefined);
+  assert.equal(original.labels.length, 24);
+  const restored = selectChartRange({
+    ...original, datasets: applySeriesFocus(original.datasets, null),
+  }, periods, '1y').data;
+  assert.match(chartToCsv(restored), /^Period,Unfocused,Focused,Comparison\n/);
+});
+
+test('every fiscal comparison disabled reason is rendered inline in Urdu with translated plain labels', () => {
+  const reasons = [
+    fytdDisabledReason(null),
+    fytdDisabledReason({ rows: [{ date: '2026-07' }], elapsedMonths: 1 }),
+    fytdDisabledReason({ rows: [{ date: '2026-04' }], elapsedMonths: 10 }),
+  ];
+  const translations = {
+    lang: 'ur',
+    t: (key, fallback) => translate('ur', key, fallback),
+    tx: (text) => translateString('ur', text),
+  };
+  for (const reason of reasons) {
+    const translatedReason = translations.tx(reason);
+    assert.notEqual(translatedReason, reason);
+    assert.match(translatedReason, /\p{Script=Arabic}/u);
+    const html = renderToStaticMarkup(createElement(I18nContext.Provider, { value: translations },
+      createElement(PeriodCompare, { mode: 'off', onChange: () => {}, disabledModes: { fytd: reason }, note: reason }),
+    ));
+    const inlineReason = html.match(/<p id="[^"]+-fytd" class="period-compare__note">([\s\S]*?)<\/p>/)?.[1];
+    assert.ok(inlineReason?.includes(translatedReason));
+    assert.ok(!html.includes(reason));
+    assert.ok(!html.includes('Compare with last year'));
+    assert.ok(!html.includes('Compare fiscal year to date'));
+    assert.equal((html.match(/class="period-compare__note"/g) || []).length, 1);
+  }
 });
 
 test('late country flag loads do not redraw a chart destroyed by a route or focus-view change', () => {
@@ -132,6 +228,40 @@ test('Trade latest-month summary keeps three headline values, period and source 
   assert.match(html, /USD; M = million, B = billion/);
   assert.match(html, /Source: SBP/);
   assert.doesNotMatch(html, /<details|hidden=/);
+});
+
+test('Trade keeps the latest-month metrics before both main charts and annual summaries and coverage after them', async (context) => {
+  const cache = await server.ssrLoadModule('/src/hooks/dataCache.js');
+  const payload = {
+    monthly: [
+      { date: '2025-07', exports: 2000, imports: 4500, balance: -2500 },
+      { date: '2026-07', exports: 3008, imports: 6154, balance: -3146 },
+    ],
+    dataCoverage: 'Jul 26',
+    lastUpdated: '2026-08-19',
+  };
+  context.mock.method(globalThis, 'fetch', async () => ({ ok: true, json: async () => payload }));
+  try {
+    assert.equal((await cache.loadData('trade.json')).error, null);
+    const html = renderToStaticMarkup(createElement(TradeSection));
+    const headline = html.indexOf('class="card trade-latest-summary"');
+    const mainCharts = html.indexOf('class="section-grid trade-main-charts"');
+    const balanceChart = html.indexOf('id="chart-trade-balance"');
+    const coverage = html.indexOf('class="trade-coverage-short"');
+    const annualSummaries = html.indexOf('class="summary-pair trade-period-context"');
+    assert.ok(headline >= 0 && mainCharts > headline);
+    assert.ok(balanceChart > mainCharts && coverage > balanceChart);
+    assert.ok(annualSummaries > coverage);
+    const annualContext = html.slice(annualSummaries, html.indexOf('class="trade-coverage-details"'));
+    assert.equal((annualContext.match(/class="summary-card__title"/g) || []).length, 2);
+    assert.match(annualContext, /Calendar YTD/);
+    assert.match(annualContext, /First month/);
+    assert.match(html.slice(headline, mainCharts), /Source: SBP/);
+    assert.equal((html.slice(headline, mainCharts).match(/<dd>/g) || []).length, 3);
+    assert.match(html, /Latest available period: Jul 2026/);
+  } finally {
+    cache.__resetDataCache();
+  }
 });
 
 test('Trade latest-month summary does not turn an unpublished metric into zero or mix another month into the headline', () => {
