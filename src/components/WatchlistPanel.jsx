@@ -71,6 +71,7 @@ export default function WatchlistPanel({ indicators = [], onNavigate, onBrowse }
                   <strong style={color ? { color } : undefined}>{item.value}</strong>
                 )}
                 {item.period && <span className="watchlist__period">{item.period}</span>}
+                {item.source && <span className="watchlist__period watchlist__source">{tx('Source')}: {item.source}</span>}
                 {item.value == null && (
                   <span className="watchlist__period">
                     {item.kind === 'catalog'

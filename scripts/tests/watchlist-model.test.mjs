@@ -34,8 +34,22 @@ test('all KPI and catalog pins resolve labels and routes without raw ids or miss
   const debt = snapshot.indicators.find((row) => row.id === 'public-debt');
   assert.equal(items.find((row) => row.id === 'public-debt').value, `${debt.value} ${debt.unit}`);
   assert.equal(items.find((row) => row.id === 'ind-debt').sectionId, 'financing-wall');
+  assert.equal(items.find((row) => row.id === 'circular-debt').groupId, 'fiscal');
   assert.equal(items.find((row) => row.id === 'circular-debt').sectionId, 'fiscal');
   assert.equal(items.find((row) => row.id === 'ind-country').value, null);
+});
+
+test('unclassified snapshot pins retain attributed source text without an inferred official tier', () => {
+  const rows = [
+    { id: 'current-account', label: 'Current Account', value: '-139', unit: 'USD m', source: 'State Bank of Pakistan' },
+    { id: 'public-debt', label: 'Public Debt', value: '83.3', unit: 'Rs tn', source: 'Finance Division / SBP' },
+  ];
+  const enriched = buildOverviewIndicators({ snapshot: { indicators: rows } });
+  const items = resolveWatchlistItems(rows.map((row) => row.id), enriched);
+  for (const item of items) {
+    assert.equal(item.source, rows.find((row) => row.id === item.id).source);
+    assert.equal(item.sourceType, undefined);
+  }
 });
 
 test('catalog aliases deduplicate with KPI ids but unrelated monetary and debt sections stay separate', () => {

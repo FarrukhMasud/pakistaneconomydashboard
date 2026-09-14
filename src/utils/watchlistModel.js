@@ -58,6 +58,7 @@ export function resolveWatchlistItems(pins, indicators = []) {
         period: kpi ? formatKpiPeriod(kpi.period) : null,
         sentiment: kpi?.sentiment || 'neutral',
         provenanceKey: kpi?.provenanceKey,
+        source: kpi?.source,
         sourceType: kpi?.sourceType,
       };
     }
