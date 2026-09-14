@@ -107,10 +107,16 @@
       "sbp": 17117.8,
       "banks": 5410.1,
       "total": 22527.9
+    },
+    {
+      "date": "2026-09-04",
+      "sbp": 18328.2,
+      "banks": 5387.6,
+      "total": 23715.8
     }
   ],
   "dataSource": "SBP",
-  "lastUpdated": "2026-09-08",
-  "dataCoverage": "2025-06 – 2026-08-28",
-  "lastChecked": "2026-09-08"
+  "lastUpdated": "2026-09-14",
+  "dataCoverage": "2025-06 – 2026-09-04",
+  "lastChecked": "2026-09-14"
 }

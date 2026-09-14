@@ -1,8 +1,216 @@
 {
-  "generatedAt": "2026-09-08T18:47:06.397Z",
+  "generatedAt": "2026-09-14T17:15:36.450Z",
   "description": "Every restatement of a previously published figure. Pakistani official statistics are routinely revised from provisional to final; this log preserves what changed, when, and by how much.",
-  "entryCount": 191,
+  "entryCount": 217,
   "entries": [
+    {
+      "date": "2026-09-14",
+      "dataset": "fdi",
+      "path": "monthlyComparison.current.net_fdi",
+      "from": 179,
+      "to": 214.29,
+      "changePct": 19.7
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "fdi",
+      "path": "monthlyComparison.prior.net_fdi",
+      "from": 224,
+      "to": 231.91,
+      "changePct": 3.5
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "reserves-adequacy",
+      "path": "current.sbpReserves",
+      "from": 17.12,
+      "to": 18.33,
+      "changePct": 7.1
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "reserves-adequacy",
+      "path": "current.totalReserves",
+      "from": 22.53,
+      "to": 23.72,
+      "changePct": 5.3
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "reserves-adequacy",
+      "path": "current.bankReserves",
+      "from": 5.41,
+      "to": 5.39,
+      "changePct": -0.4
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "reserves-adequacy",
+      "path": "current.importCoverMonths",
+      "from": 3.2,
+      "to": 3.4,
+      "changePct": 6.2
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "remittances",
+      "path": "monthly[date=2026-07].usa",
+      "from": 317.1692527,
+      "to": 316.3043595,
+      "changePct": -0.3
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "remittances",
+      "path": "monthly[date=2026-07].eu",
+      "from": 462.1006894,
+      "to": 461.3836328,
+      "changePct": -0.2
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "remittances",
+      "path": "sourceCountries[country=Saudi Arabia].value",
+      "from": 9873,
+      "to": 10010,
+      "changePct": 1.4
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "remittances",
+      "path": "sourceCountries[country=UAE].value",
+      "from": 8879,
+      "to": 8986,
+      "changePct": 1.2
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "remittances",
+      "path": "sourceCountries[country=United Kingdom].value",
+      "from": 6431,
+      "to": 6531,
+      "changePct": 1.6
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "remittances",
+      "path": "sourceCountries[country=EU Countries].value",
+      "from": 5264,
+      "to": 5327,
+      "changePct": 1.2
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "remittances",
+      "path": "sourceCountries[country=Other GCC Countries].value",
+      "from": 3974,
+      "to": 3997,
+      "changePct": 0.6
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "remittances",
+      "path": "sourceCountries[country=United States].value",
+      "from": 3671,
+      "to": 3712,
+      "changePct": 1.1
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "monetary",
+      "path": "m2.data[date=2021-09].value",
+      "from": 23440136.04,
+      "to": 23375689.83,
+      "changePct": -0.3
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "monetary",
+      "path": "m2_yoy.data[date=2021-09].value",
+      "from": 15.98,
+      "to": 15.8,
+      "changePct": -1.1
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "monetary",
+      "path": "credit_private.data[date=2021-09].value",
+      "from": 6807736.5,
+      "to": 6881350.08,
+      "changePct": 1.1
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "monetary",
+      "path": "credit_pvt_yoy.data[date=2021-09].value",
+      "from": 12.51,
+      "to": 13.17,
+      "changePct": 5.3
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "monetary",
+      "path": "deposits.data[date=2021-09].value",
+      "from": 16184939.08,
+      "to": 16198016.5,
+      "changePct": 0.1
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "monetary",
+      "path": "deposits_yoy.data[date=2021-09].value",
+      "from": 16.28,
+      "to": 16.14,
+      "changePct": -0.9
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "monetary",
+      "path": "nfa.data[date=2021-09].value",
+      "from": 1318661.65,
+      "to": 1226794.84,
+      "changePct": -7
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "monetary",
+      "path": "nfa.data[date=2026-08].value",
+      "from": 1841257.53,
+      "to": 1820196.53,
+      "changePct": -1.1
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "monetary",
+      "path": "budgetary.data[date=2021-09].value",
+      "from": 15401921.05,
+      "to": 15384862.94,
+      "changePct": -0.1
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "monetary",
+      "path": "reserve_money.data[date=2021-09].value",
+      "from": 8653158.18,
+      "to": 8592038.7,
+      "changePct": -0.7
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "fdi",
+      "path": "monthlyComparison.current.net_fdi",
+      "from": 214.29,
+      "to": 179,
+      "changePct": -16.5
+    },
+    {
+      "date": "2026-09-14",
+      "dataset": "fdi",
+      "path": "monthlyComparison.prior.net_fdi",
+      "from": 231.91,
+      "to": 224,
+      "changePct": -3.4
+    },
     {
       "date": "2026-09-08",
       "dataset": "fdi",

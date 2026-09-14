@@ -1,20 +1,20 @@
 {
-  "lastUpdated": "2026-09-08",
+  "lastUpdated": "2026-09-14",
   "indicators": [
     {
       "id": "reserves",
       "label": "Foreign Reserves (Total)",
-      "value": 22.53,
+      "value": 23.72,
       "unit": "$ Billion",
-      "period": "2026-08-28",
-      "change": -0.06,
+      "period": "2026-09-04",
+      "change": 1.19,
       "changeUnit": "$B",
-      "changeBasis": "vs week ending 2026-08-21",
-      "trend": "stable",
-      "sentiment": "neutral",
+      "changeBasis": "vs week ending 2026-08-28",
+      "trend": "up",
+      "sentiment": "positive",
       "source": "SBP",
       "provenanceKey": "reserves.weekly.total",
-      "sub": "SBP: $17.12B · Banks: $5.41B"
+      "sub": "SBP: $18.33B · Banks: $5.39B"
     },
     {
       "id": "exchange-rate",
@@ -33,12 +33,12 @@
     {
       "id": "remittances",
       "label": "Remittances (Monthly)",
-      "value": 3.63,
+      "value": 3.66,
       "unit": "$ Billion",
-      "period": "2026-07",
-      "change": 0.16,
+      "period": "2026-08",
+      "change": 0.03,
       "changeUnit": "$B",
-      "changeBasis": "vs 2026-06",
+      "changeBasis": "vs 2026-07",
       "trend": "stable",
       "sentiment": "neutral",
       "source": "SBP",
@@ -135,5 +135,5 @@
       "sub": "Next MPC: 14 September 2026"
     }
   ],
-  "lastChecked": "2026-09-08"
+  "lastChecked": "2026-09-14"
 }
