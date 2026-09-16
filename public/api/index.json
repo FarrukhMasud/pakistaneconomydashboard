@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T17:15:59.022Z",
+  "generatedAt": "2026-09-16T22:28:18.620Z",
   "version": "v1",
   "title": "economyofpakistan.com static data API",
   "description": "Every dataset the dashboard renders, published as stable JSON and CSV. No key, no rate limit, no scraping required. Please cite the issuing institution listed on each endpoint.",
@@ -40,7 +40,7 @@
       "dates": {
         "observation": "2026-09-04",
         "publication": null,
-        "verification": "2026-09-14",
+        "verification": "2026-09-16",
         "dashboardUpdated": "2026-09-14"
       }
     },
@@ -59,7 +59,7 @@
       "dates": {
         "observation": "2026-08",
         "publication": null,
-        "verification": "2026-09-14",
+        "verification": "2026-09-16",
         "dashboardUpdated": "2026-09-08"
       }
     },
@@ -87,18 +87,18 @@
       "label": "Trade in Goods",
       "json": "/api/v1/trade.json",
       "csv": "/api/v1/trade.csv",
-      "rows": 67,
+      "rows": 68,
       "seriesKey": "monthly",
       "source": "State Bank of Pakistan",
       "sourceUrl": "https://www.sbp.org.pk/assets/document/exp_import_BOP_Arch.xls",
       "sourceType": "official-primary",
       "cadence": "Monthly",
-      "latestObservation": "2026-07",
+      "latestObservation": "2026-08",
       "dates": {
-        "observation": "2026-07",
+        "observation": "2026-08",
         "publication": null,
-        "verification": "2026-09-14",
-        "dashboardUpdated": "2026-08-18"
+        "verification": "2026-09-16",
+        "dashboardUpdated": "2026-09-16"
       }
     },
     {
@@ -116,8 +116,8 @@
       "dates": {
         "observation": "2026-07",
         "publication": null,
-        "verification": "2026-09-14",
-        "dashboardUpdated": "2026-09-14"
+        "verification": "2026-09-16",
+        "dashboardUpdated": "2026-09-16"
       }
     },
     {
@@ -125,18 +125,18 @@
       "label": "IT & Services Trade",
       "json": "/api/v1/services.json",
       "csv": "/api/v1/services.csv",
-      "rows": 4,
+      "rows": 5,
       "seriesKey": "monthlySeries",
       "source": "State Bank of Pakistan",
       "sourceUrl": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf",
       "sourceType": "official-primary",
       "cadence": "Monthly/FYTD",
-      "latestObservation": "2026-07",
+      "latestObservation": "2026-08",
       "dates": {
-        "observation": "2026-07",
+        "observation": "2026-08",
         "publication": null,
-        "verification": "2026-09-14",
-        "dashboardUpdated": "2026-09-14"
+        "verification": "2026-09-16",
+        "dashboardUpdated": "2026-09-16"
       }
     },
     {
@@ -192,7 +192,7 @@
       "dates": {
         "observation": "2026-06-30",
         "publication": null,
-        "verification": "2026-09-14",
+        "verification": "2026-09-16",
         "dashboardUpdated": "2026-07-24"
       }
     },
@@ -211,7 +211,7 @@
       "dates": {
         "observation": "2026-06",
         "publication": "2026-07-02",
-        "verification": "2026-09-14",
+        "verification": "2026-09-16",
         "dashboardUpdated": "2026-08-07"
       }
     },
@@ -306,8 +306,8 @@
       "dates": {
         "observation": "2026-09-04",
         "publication": null,
-        "verification": "2026-09-14",
-        "dashboardUpdated": "2026-09-14"
+        "verification": "2026-09-16",
+        "dashboardUpdated": "2026-09-16"
       }
     },
     {
@@ -364,7 +364,7 @@
         "observation": "2025",
         "publication": null,
         "verification": null,
-        "dashboardUpdated": "2026-09-14"
+        "dashboardUpdated": "2026-09-16"
       }
     },
     {

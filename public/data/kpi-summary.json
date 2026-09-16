@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-14",
+  "lastUpdated": "2026-09-16",
   "indicators": [
     {
       "id": "reserves",
@@ -47,28 +47,28 @@
     {
       "id": "fdi",
       "label": "Net FDI",
-      "value": 0.18,
+      "value": 0.49,
       "unit": "$B",
       "decimals": 2,
-      "period": "Jul-Jul FY2027 (P)",
-      "change": -20.08,
+      "period": "Jul-Aug FY2027 (P)",
+      "change": 24.06,
       "changeUnit": "%",
-      "changeBasis": "vs Jul-Jul FY2026",
-      "trend": "down",
-      "sentiment": "negative",
+      "changeBasis": "vs Jul-Aug FY2026",
+      "trend": "up",
+      "sentiment": "positive",
       "source": "SBP",
       "provenanceKey": "fdi.fytd.current"
     },
     {
       "id": "it_exports",
       "label": "IT & Telecom Exports",
-      "value": 0.42,
+      "value": 0.81,
       "unit": "$B",
       "decimals": 2,
-      "period": "Jul FY27",
-      "change": 20,
+      "period": "null FY27",
+      "change": 17.39,
       "changeUnit": "%",
-      "changeBasis": "vs Jul FY26",
+      "changeBasis": "vs Jul-Aug FY26",
       "trend": "up",
       "sentiment": "positive",
       "source": "SBP",
@@ -135,5 +135,5 @@
       "sub": "Next MPC: 14 September 2026"
     }
   ],
-  "lastChecked": "2026-09-14"
+  "lastChecked": "2026-09-16"
 }

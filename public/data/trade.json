@@ -398,9 +398,15 @@
     },
     {
       "date": "2026-07",
-      "imports": 6154,
-      "exports": 3008,
-      "balance": -3146
+      "imports": 6149,
+      "exports": 2985,
+      "balance": -3164
+    },
+    {
+      "date": "2026-08",
+      "imports": 5486,
+      "exports": 2460,
+      "balance": -3026
     }
   ],
   "topExportCountries": [
@@ -560,9 +566,9 @@
   "exportCountryPeriod": "Jul-May FY26 (P)",
   "importCountryPeriod": "Jul-May FY26 (P)",
   "dataSource": "SBP",
-  "lastUpdated": "2026-08-18",
-  "dataCoverage": "2021-01 – 2026-07",
-  "lastChecked": "2026-09-14",
+  "lastUpdated": "2026-09-16",
+  "dataCoverage": "2021-01 – 2026-08",
+  "lastChecked": "2026-09-16",
   "countryMonthly": {
     "latestMonth": "2026-05",
     "prevMonth": "2026-04",

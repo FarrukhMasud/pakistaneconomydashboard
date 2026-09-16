@@ -5,15 +5,15 @@
   "sourceUrl": "https://www.sbp.org.pk/assets/document/exp_import_BOP_Arch.xls",
   "sourceType": "official-primary",
   "cadence": "Monthly",
-  "latestObservation": "2026-07",
+  "latestObservation": "2026-08",
   "dates": {
-    "observation": "2026-07",
+    "observation": "2026-08",
     "publication": null,
-    "verification": "2026-09-14",
-    "dashboardUpdated": "2026-08-18"
+    "verification": "2026-09-16",
+    "dashboardUpdated": "2026-09-16"
   },
-  "lastUpdated": "2026-08-18",
-  "lastChecked": "2026-09-14",
+  "lastUpdated": "2026-09-16",
+  "lastChecked": "2026-09-16",
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",
   "data": {
     "monthly": [
@@ -415,9 +415,15 @@
       },
       {
         "date": "2026-07",
-        "imports": 6154,
-        "exports": 3008,
-        "balance": -3146
+        "imports": 6149,
+        "exports": 2985,
+        "balance": -3164
+      },
+      {
+        "date": "2026-08",
+        "imports": 5486,
+        "exports": 2460,
+        "balance": -3026
       }
     ],
     "topExportCountries": [
@@ -577,9 +583,9 @@
     "exportCountryPeriod": "Jul-May FY26 (P)",
     "importCountryPeriod": "Jul-May FY26 (P)",
     "dataSource": "SBP",
-    "lastUpdated": "2026-08-18",
-    "dataCoverage": "2021-01 – 2026-07",
-    "lastChecked": "2026-09-14",
+    "lastUpdated": "2026-09-16",
+    "dataCoverage": "2021-01 – 2026-08",
+    "lastChecked": "2026-09-16",
     "countryMonthly": {
       "latestMonth": "2026-05",
       "prevMonth": "2026-04",

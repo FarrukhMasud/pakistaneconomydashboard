@@ -1,162 +1,148 @@
 {
-  "generatedAt": "2026-09-14T17:15:58.648Z",
-  "comparisonBase": "15ec08473ae678443e800340fd76625bc23b0ca0",
+  "generatedAt": "2026-09-16T22:28:18.261Z",
+  "comparisonBase": "62a86f75a806e5639778f003fbec688d147706b8",
   "description": "Pre-commit comparison of working-tree dashboard data against HEAD.",
   "summary": {
-    "newObservations": 4,
+    "newObservations": 2,
     "majorMovements": 2,
     "newRevisions": 12,
     "sourceChanges": 0,
     "suspiciousDateJumps": 0,
     "reviewRequired": 1,
-    "overdueReleases": 1
+    "overdueReleases": 2
   },
   "newObservations": [
     {
-      "dataset": "reserves",
-      "label": "Foreign Exchange Reserves",
-      "from": "2026-08-28",
-      "to": "2026-09-04",
-      "cadence": "Weekly"
-    },
-    {
-      "dataset": "remittances",
-      "label": "Workers' Remittances",
+      "dataset": "trade",
+      "label": "Trade in Goods",
       "from": "2026-07",
       "to": "2026-08",
       "cadence": "Monthly"
     },
     {
-      "dataset": "monetary",
-      "label": "Monetary Sector",
-      "from": "2026-08",
-      "to": "2026-09",
-      "cadence": "Weekly/Monthly"
-    },
-    {
-      "dataset": "reserves-adequacy",
-      "label": "Reserves Adequacy Tracker",
-      "from": "2026-08-28",
-      "to": "2026-09-04",
-      "cadence": "Weekly"
+      "dataset": "services",
+      "label": "IT & Services Trade",
+      "from": "2026-07",
+      "to": "2026-08",
+      "cadence": "Monthly/FYTD"
     }
   ],
   "majorMovements": [
     {
-      "id": "reserves",
-      "label": "Foreign Reserves (Total)",
-      "from": 22.53,
-      "to": 23.72,
-      "unit": "$ Billion",
-      "period": "2026-09-04",
-      "percent": 5.3
+      "id": "fdi",
+      "label": "Net FDI",
+      "from": 0.18,
+      "to": 0.49,
+      "unit": "$B",
+      "period": "Jul-Aug FY2027 (P)",
+      "percent": 172.2
     },
     {
-      "id": "remittances",
-      "label": "Remittances (Monthly)",
-      "from": 3.63,
-      "to": 3.66,
-      "unit": "$ Billion",
-      "period": "2026-08",
-      "percent": 0.8
+      "id": "it_exports",
+      "label": "IT & Telecom Exports",
+      "from": 0.42,
+      "to": 0.81,
+      "unit": "$B",
+      "period": "null FY27",
+      "percent": 92.9
     }
   ],
   "newRevisions": [
     {
-      "date": "2026-09-14",
+      "date": "2026-09-16",
+      "dataset": "trade",
+      "path": "monthly[date=2026-07].imports",
+      "from": 6154,
+      "to": 6149,
+      "changePct": -0.1
+    },
+    {
+      "date": "2026-09-16",
+      "dataset": "trade",
+      "path": "monthly[date=2026-07].exports",
+      "from": 3008,
+      "to": 2985,
+      "changePct": -0.8
+    },
+    {
+      "date": "2026-09-16",
+      "dataset": "trade",
+      "path": "monthly[date=2026-07].balance",
+      "from": -3146,
+      "to": -3164,
+      "changePct": -0.6
+    },
+    {
+      "date": "2026-09-16",
       "dataset": "fdi",
-      "path": "monthlyComparison.current.net_fdi",
-      "from": 179,
-      "to": 214.29,
-      "changePct": 19.7
+      "path": "by_sector[sector=Power].amount",
+      "from": 57.48,
+      "to": 145.27,
+      "changePct": 152.7
     },
     {
-      "date": "2026-09-14",
+      "date": "2026-09-16",
       "dataset": "fdi",
-      "path": "monthlyComparison.prior.net_fdi",
-      "from": 224,
-      "to": 231.91,
-      "changePct": 3.5
+      "path": "by_sector[sector=Power].inflow",
+      "from": 98.1,
+      "to": 196.78,
+      "changePct": 100.6
     },
     {
-      "date": "2026-09-14",
-      "dataset": "reserves-adequacy",
-      "path": "current.sbpReserves",
-      "from": 17.12,
-      "to": 18.33,
-      "changePct": 7.1
+      "date": "2026-09-16",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Power].outflow",
+      "from": 40.61,
+      "to": 51.5,
+      "changePct": 26.8
     },
     {
-      "date": "2026-09-14",
-      "dataset": "reserves-adequacy",
-      "path": "current.totalReserves",
-      "from": 22.53,
-      "to": 23.72,
-      "changePct": 5.3
+      "date": "2026-09-16",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Power].priorAmount",
+      "from": 70.81,
+      "to": 157.68,
+      "changePct": 122.7
     },
     {
-      "date": "2026-09-14",
-      "dataset": "reserves-adequacy",
-      "path": "current.bankReserves",
-      "from": 5.41,
-      "to": 5.39,
-      "changePct": -0.4
+      "date": "2026-09-16",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Power].priorInflow",
+      "from": 97.76,
+      "to": 195.56,
+      "changePct": 100
     },
     {
-      "date": "2026-09-14",
-      "dataset": "reserves-adequacy",
-      "path": "current.importCoverMonths",
-      "from": 3.2,
-      "to": 3.4,
-      "changePct": 6.2
+      "date": "2026-09-16",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Power].priorOutflow",
+      "from": 26.95,
+      "to": 37.88,
+      "changePct": 40.6
     },
     {
-      "date": "2026-09-14",
-      "dataset": "remittances",
-      "path": "monthly[date=2026-07].usa",
-      "from": 317.1692527,
-      "to": 316.3043595,
-      "changePct": -0.3
+      "date": "2026-09-16",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Financial Business].amount",
+      "from": 62.3,
+      "to": 147.03,
+      "changePct": 136
     },
     {
-      "date": "2026-09-14",
-      "dataset": "remittances",
-      "path": "monthly[date=2026-07].eu",
-      "from": 462.1006894,
-      "to": 461.3836328,
-      "changePct": -0.2
+      "date": "2026-09-16",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Financial Business].inflow",
+      "from": 67.8,
+      "to": 158.04,
+      "changePct": 133.1
     },
     {
-      "date": "2026-09-14",
-      "dataset": "remittances",
-      "path": "sourceCountries[country=Saudi Arabia].value",
-      "from": 9873,
-      "to": 10010,
-      "changePct": 1.4
-    },
-    {
-      "date": "2026-09-14",
-      "dataset": "remittances",
-      "path": "sourceCountries[country=UAE].value",
-      "from": 8879,
-      "to": 8986,
-      "changePct": 1.2
-    },
-    {
-      "date": "2026-09-14",
-      "dataset": "remittances",
-      "path": "sourceCountries[country=United Kingdom].value",
-      "from": 6431,
-      "to": 6531,
-      "changePct": 1.6
-    },
-    {
-      "date": "2026-09-14",
-      "dataset": "remittances",
-      "path": "sourceCountries[country=EU Countries].value",
-      "from": 5264,
-      "to": 5327,
-      "changePct": 1.2
+      "date": "2026-09-16",
+      "dataset": "fdi",
+      "path": "by_sector[sector=Financial Business].outflow",
+      "from": 5.51,
+      "to": 11.01,
+      "changePct": 99.8
     }
   ],
   "sourceChanges": [],
@@ -171,6 +157,10 @@
     }
   ],
   "overdueReleases": [
+    {
+      "label": "SBP Policy Rate Tracker",
+      "status": "overdue"
+    },
     {
       "label": "FBR Tax Collection",
       "status": "due"
