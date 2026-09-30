@@ -18,6 +18,7 @@ import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { resolveSource } from './lib/source-docs.mjs';
 import { writeDataFile } from './lib/data-writer.mjs';
+import { getSourceEvidence } from './lib/source-evidence.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = resolve(__dirname, '..', 'public', 'data');
@@ -43,7 +44,9 @@ function pointLabel(date) {
   return /^\d{4}-\d{2}$/.test(String(date)) ? `end-${monthLabel(date)}` : `the week ending ${date}`;
 }
 
-function num(value, decimals = 1) {  return Number(value).toLocaleString('en-US', {
+function num(value, decimals = 1) {
+  if (!Number.isFinite(value)) throw new Error('An editorial claim cannot use a missing or invalid number');
+  return value.toLocaleString('en-US', {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   });
@@ -62,8 +65,8 @@ function cite(...keys) {
   });
 }
 
-function note({ text, derivation, sources, asOf }) {
-  return { text, basis: 'derived', derivation, sources, asOf };
+function note({ text, derivation, sources, asOf, evidence = [] }) {
+  return { text, basis: 'derived', derivation, sources, asOf, evidence };
 }
 
 function extremum(rows, valueOf, compare) {
@@ -81,7 +84,7 @@ async function buildNotes() {
 
   // ── Inflation ──────────────────────────────────────────────
   const inflation = await readJson('inflation.json');
-  const cpi = inflation.national_cpi?.data || [];
+  const cpi = (inflation.national_cpi?.data || []).filter(row => Number.isFinite(row.value));
   if (cpi.length > 0) {
     const peak = extremum(cpi, (r) => r.value, (a, b) => a > b);
     const latest = cpi[cpi.length - 1];
@@ -135,7 +138,7 @@ async function buildNotes() {
     const widest = extremum(tradeMonthly, (r) => r.balance, (a, b) => a < b);
     const latest = tradeMonthly[tradeMonthly.length - 1];
     notes['trade.deficit'] = note({
-      text: `The monthly goods trade deficit was widest at $${num(Math.abs(widest.balance) / 1000, 2)}bn in ${monthLabel(widest.date)}. In ${monthLabel(latest.date)} exports of $${num(latest.exports / 1000, 2)}bn against imports of $${num(latest.imports / 1000, 2)}bn left a deficit of $${num(Math.abs(latest.balance) / 1000, 2)}bn.`,
+      text: `The monthly goods trade deficit was widest at $${num(Math.abs(widest.balance) / 1000, 2)}bn in ${monthLabel(widest.date)}. In ${monthLabel(latest.date)} exports of $${num(latest.exports / 1000, 2)}bn against imports of $${num(latest.imports / 1000, 2)}bn left a ${latest.balance <= 0 ? 'deficit' : 'surplus'} of $${num(Math.abs(latest.balance) / 1000, 2)}bn.`,
       derivation: `Largest and latest monthly balance in the SBP balance-of-payments goods series covering ${tradeMonthly.length} months.`,
       sources: cite('exp_import_BOP.xls'),
       asOf: latest.date,
@@ -167,7 +170,7 @@ async function buildNotes() {
   const services = await readJson('services.json');
   const summary = services.summary;
   const comparison = services.comparison;
-  if (summary && comparison?.current && comparison?.prior) {
+  if (summary && comparison?.current && comparison?.prior && summary.totalServicesCredit > 0 && comparison.prior.itCredit > 0) {
     const share = (summary.itTelecomCredit / summary.totalServicesCredit) * 100;
     const growth = ((comparison.current.itCredit - comparison.prior.itCredit) / comparison.prior.itCredit) * 100;
     notes['services.itShare'] = note({
@@ -184,10 +187,11 @@ async function buildNotes() {
   const revenue = pf.total_revenue?.data?.at(-1);
   const expenditure = pf.total_expenditure?.data?.at(-1);
   const primary = pf.primary_balance?.data?.at(-1);
-  if (revenue && expenditure && primary && revenue.fy === expenditure.fy && revenue.fy === primary.fy) {
+  if (revenue && expenditure && primary && Number.isFinite(revenue.value) && expenditure.value > 0 && Number.isFinite(primary.value)
+    && revenue.fy === expenditure.fy && revenue.fy === primary.fy && revenue.unit === expenditure.unit && revenue.unit === primary.unit) {
     const coverage = (revenue.value / expenditure.value) * 100;
     notes['fiscal.revenueGap'] = note({
-      text: `In ${revenue.fy} total revenue of ₨${num(revenue.value / 1_000_000, 1)}tn covered ${num(coverage)}% of total expenditure of ₨${num(expenditure.value / 1_000_000, 1)}tn, leaving a primary ${primary.value >= 0 ? 'surplus' : 'deficit'} of ₨${num(Math.abs(primary.value) / 1_000_000, 2)}tn. All fiscal figures are for Pakistan's July–June fiscal year.`,
+      text: `In ${revenue.fy} total revenue of ₨${num(revenue.value / 1_000_000, 1)}tn covered ${num(coverage)}% of total expenditure of ₨${num(expenditure.value / 1_000_000, 1)}tn. The separately reported primary balance was a ${primary.value >= 0 ? 'surplus' : 'deficit'} of ₨${num(Math.abs(primary.value) / 1_000_000, 2)}tn. All fiscal figures are for Pakistan's July–June fiscal year.`,
       derivation: 'Total revenue divided by total expenditure for the latest fiscal year in the SBP summary of public finance, with the reported primary balance for the same year.',
       sources: cite('sbp-easydata', 'finance-division'),
       asOf: revenue.fy,
@@ -198,7 +202,7 @@ async function buildNotes() {
   const budget = await readJson('budget-federal.json');
   const currentYear = budget.years?.[0];
   const markup = currentYear?.currentExpenditure?.find((row) => row.key === 'markup');
-  if (currentYear && markup && currentYear.headline?.netRevenue && currentYear.headline?.grossRevenue) {
+  if (budget.publication?.status !== 'withheld' && currentYear && markup && currentYear.headline?.netRevenue && currentYear.headline?.grossRevenue) {
     const netShare = (markup.value / currentYear.headline.netRevenue) * 100;
     const grossShare = (markup.value / currentYear.headline.grossRevenue) * 100;
     notes['fiscal.debtService'] = note({
@@ -214,6 +218,34 @@ async function buildNotes() {
 
 async function main() {
   const notes = await buildNotes();
+  const inputs = {
+    'inflation.cpiPath': ['inflation.json', 'national_cpi'],
+    'exchange-rate.depreciation': ['exchange-rates.json'],
+    'reserves.recovery': ['reserves.json'],
+    'trade.deficit': ['trade.json'],
+    'fdi.annualContext': ['fdi.json'],
+    'services.itShare': ['services.json'],
+    'fiscal.revenueGap': ['fiscal.json', 'publicFinance'],
+    'fiscal.debtService': ['budget-federal.json'],
+  };
+  for (const [key, claim] of Object.entries(notes)) {
+    const [file, series] = inputs[key];
+    const data = await readJson(file);
+    const evidence = [];
+    const collect = value => {
+      if (!value || typeof value !== 'object') return;
+      if (value.artifactId) evidence.push(value);
+      for (const item of Object.values(value)) collect(item);
+    };
+    collect(series ? data[series] : data);
+    if (!evidence.length && data.sourceKey) {
+      const receipt = await getSourceEvidence(data.sourceKey);
+      if (receipt) evidence.push(receipt);
+    }
+    if (!evidence.length) throw new Error(`${key}: editorial claim has no reproducible source evidence`);
+    claim.evidence = [...new Map(evidence.map(receipt => [receipt.artifactId, receipt])).values()];
+    claim.input = { dataset: file.replace('.json', ''), series: series || null };
+  }
   await writeDataFile('editorial-notes.json', {
     description: 'Narrative claims shown alongside charts. Every note is computed from the canonical dashboard data files listed in its sources, so no editorial number is hand-typed.',
     dataSource: 'Derived from official SBP, PBS, FBR and Finance Division data',

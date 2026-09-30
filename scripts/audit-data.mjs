@@ -7,33 +7,9 @@ import { DATASETS, getDatasetFreshness } from './data-catalog.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = resolve(__dirname, '..', 'public', 'data');
-const SBP_INDEX = 'https://www.sbp.org.pk/economic-data';
 
 async function readJson(file) {
   return JSON.parse(await readFile(resolve(DATA_DIR, file), 'utf-8'));
-}
-
-async function fetchSbpIndex() {
-  if (process.env.AUDIT_SKIP_SOURCE === '1') return '';
-  const res = await fetch(SBP_INDEX, {
-    headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' },
-    signal: AbortSignal.timeout(8000),
-  });
-  if (!res.ok) throw new Error(`SBP index HTTP ${res.status}`);
-  return res.text();
-}
-
-function compact(text) {
-  return text.replace(/<[^>]*>/g, ' ').replace(/&nbsp;|&#160;/g, ' ').replace(/\s+/g, ' ').trim();
-}
-
-function findSourceUpdate(indexText, sourceFile) {
-  if (!sourceFile) return null;
-  const at = indexText.toLowerCase().indexOf(sourceFile.toLowerCase());
-  if (at < 0) return null;
-  const nearby = compact(indexText.slice(at, at + 700));
-  const match = nearby.match(/\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{1,2}\s*,?\s*\d{4}\b/i);
-  return match?.[0] || null;
 }
 
 function pad(value, width) {
@@ -42,19 +18,12 @@ function pad(value, width) {
 
 async function main() {
   const rows = [];
-  let sbpIndex = '';
-
-  try {
-    sbpIndex = await fetchSbpIndex();
-  } catch (err) {
-    console.warn(`⚠️  Could not fetch SBP index for source-published dates: ${err.message}`);
-  }
+  const catalog = await readJson('source-artifacts.json');
 
   for (const dataset of DATASETS) {
     const data = await readJson(dataset.file);
-    const freshness = getDatasetFreshness(dataset, data);
-    const sourceUpdated = findSourceUpdate(sbpIndex, dataset.sourceFile);
-    rows.push({ ...freshness, sourceUpdated });
+    const freshness = getDatasetFreshness(dataset, data, { checks: catalog.checks || {} });
+    rows.push(freshness);
   }
 
   console.log('\nPakistan Economic Dashboard — Data Freshness Audit\n');
@@ -63,9 +32,9 @@ async function main() {
 
   let failures = 0;
   for (const row of rows) {
-    const ok = row.status === 'fresh';
+    const ok = row.status === 'fresh' || row.status === 'withheld';
     if (!ok && row.critical) failures++;
-    console.log(`${pad(row.label, 27)} ${pad(row.observationDate || row.latestObservation || 'N/A', 14)} ${pad(row.publicationDate || 'N/A', 12)} ${pad(row.verificationDate || 'N/A', 12)} ${ok ? 'OK' : 'REVIEW'}`);
+    console.log(`${pad(row.label, 27)} ${pad(row.observationDate || row.latestObservation || 'N/A', 14)} ${pad(row.publicationDate || 'N/A', 12)} ${pad(row.verificationDate || 'N/A', 12)} ${row.freshnessStatus}`);
   }
 
   if (failures > 0) {
@@ -73,7 +42,7 @@ async function main() {
     process.exit(1);
   }
 
-  console.log('\n✅ All critical datasets have current dashboard metadata. Check source-updated dates above for release cadence.');
+  console.log('\n✅ Critical published observations are within their release windows; withheld values are explicitly unavailable.');
 }
 
 main().catch((err) => {

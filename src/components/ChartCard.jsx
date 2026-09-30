@@ -1,4 +1,4 @@
-import { Children, cloneElement, isValidElement, useEffect, useId, useRef, useState } from 'react';
+import { Children, cloneElement, isValidElement, useContext, useEffect, useId, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Chart as ChartJS, TimeScale } from 'chart.js';
 import 'chartjs-adapter-date-fns';
@@ -10,6 +10,11 @@ import { CHART_RANGES, chartSummary, selectChartRange, visibleChartData } from '
 import { chartToCsv, downloadTextFile, slugify } from '../utils/download';
 import { formatKpiPeriod } from '../utils/kpiFormat';
 import { trackDiscovery } from '../utils/sectionCatalog';
+import FigureTrust from './FigureTrust';
+import { UnavailableCard } from './ui/DataState';
+import { TrustContext } from '../utils/trustContext';
+import { chartHasFigures, collectEvidenceRows } from '../utils/figureTrust';
+import { chartEvidenceFor } from '../utils/chartEvidence';
 
 ChartJS.register(TimeScale);
 
@@ -72,7 +77,7 @@ function chronologicalOptions(options = {}, selection) {
 }
 
 function formatTableValue(value) {
-  if (value == null || value === '') return '—';
+  if (value == null || value === '' || (typeof value === 'number' && !Number.isFinite(value))) return '—';
   if (typeof value === 'number') return Number.isInteger(value) ? value.toLocaleString() : value.toLocaleString(undefined, { maximumFractionDigits: 2 });
   if (typeof value === 'object') {
     if ('y' in value) return formatTableValue(value.y);
@@ -81,7 +86,7 @@ function formatTableValue(value) {
   return String(value);
 }
 
-export function ChartDataTable({ chartData, caption }) {
+export function ChartDataTable({ chartData, caption, observationDates, evidenceRows, datasetId, derivation }) {
   const { t, tx } = useI18n();
   const datasets = visibleChartData(chartData).datasets.filter((dataset) => Array.isArray(dataset.data));
   return (
@@ -96,6 +101,7 @@ export function ChartDataTable({ chartData, caption }) {
                 {dataset.label ? tx(dataset.label) : `${t('chart.series', 'Series')} ${index + 1}`}
               </th>
             ))}
+            <th scope="col">{t('trust.sourceEvidence', 'Period, status & source evidence')}</th>
           </tr>
         </thead>
         <tbody>
@@ -103,8 +109,21 @@ export function ChartDataTable({ chartData, caption }) {
             <tr key={`${label}-${rowIndex}`}>
               <th scope="row">{label}</th>
               {datasets.map((dataset, colIndex) => (
-                <td key={colIndex}>{formatTableValue(dataset.data[rowIndex])}</td>
+                <td key={colIndex}>{dataset.data[rowIndex] == null ? t('trust.unavailableShort', 'Unavailable') : formatTableValue(dataset.data[rowIndex])}</td>
               ))}
+              <td>
+                {datasets.map((series, seriesIndex) => {
+                  const { rows, period } = chartEvidenceFor(series, rowIndex, { evidenceRows, observationDates, label });
+                  return <div key={seriesIndex}><strong>{tx(series.label || '')}</strong>
+                    {rows.length ? rows.map((row, index) => (
+                      <FigureTrust key={index} datasetId={datasetId} row={series.data[rowIndex] == null ? { ...row, authenticity: 'unavailable' } : row}
+                        period={row.observationDate || row.date || row.month || row.period || row.fy || row.year || period || label}
+                        derivation={series.derivation || derivation} compact />
+                    )) : <FigureTrust datasetId={datasetId} row={{ authenticity: series.data[rowIndex] == null ? 'unavailable' : 'unverified' }}
+                      period={period || label} derivation={series.derivation || derivation} compact />}
+                  </div>;
+                })}
+              </td>
             </tr>
           ))}
         </tbody>
@@ -116,6 +135,7 @@ export function ChartDataTable({ chartData, caption }) {
 export default function ChartCard({
   title, description, source, dataSource, lastUpdated, dataCoverage, coverageNote,
   provenanceKeys, noteKey, children, observationDates, rangeMode = 'chronological', defaultRange = 'all', chartId,
+  datasetId, evidenceRows, derivation,
 }) {
   const [infoOpen, setInfoOpen] = useState(false);
   const [chartOpen, setChartOpen] = useState(false);
@@ -126,6 +146,9 @@ export default function ChartCard({
   const id = useId();
   const { range, setRange } = useShareableChartState('off', defaultRange);
   const { t, tx } = useI18n();
+  const scope = useContext(TrustContext);
+  const trustDatasetId = datasetId || scope.datasetId;
+  const trustRows = evidenceRows || collectEvidenceRows(scope.data);
   const localTitle = tx(title);
   const localDescription = tx(description);
   const anchorId = chartId || `chart-${slugify(title) || id.replace(/[^a-z0-9-]/gi, '').toLowerCase()}`;
@@ -138,9 +161,10 @@ export default function ChartCard({
       unit: node.props.options?.scales?.y?.title?.text,
       categorical: !selection.applicable && rangeMode !== 'fiscal',
     });
-    charts.push({ ...selection, summary, exportData: visibleChartData(selection.data) });
+    charts.push({ ...selection, summary, exportData: visibleChartData(selection.data), available: chartHasFigures(selection.data) });
+    if (!chartHasFigures(selection.data)) return <UnavailableCard reason={t('trust.emptyChart', 'No published official values are available for this chart or selected period.')} />;
     return cloneElement(node, {
-      data: selection.data,
+      data: { ...selection.data, datasets: selection.data.datasets.map((series) => ({ ...series, spanGaps: false })) },
       options: chronologicalOptions(node.props.options, selection),
       role: 'img',
       'aria-label': charts.length > 1 ? `${localTitle} (${charts.length})` : localTitle,
@@ -196,6 +220,7 @@ export default function ChartCard({
       {latestPeriod && <span>{t('chart.latestPeriodLabel', 'Latest available period:')} {latestPeriod}</span>}
       {' '}
       {coverageNote && <span>{t('chart.coverageNotice', 'Read the coverage note in Data & sources before comparing figures.')}</span>}
+      <FigureTrust datasetId={trustDatasetId} period={chronological?.dates.at(-1) || latestPeriod} derivation={derivation} compact />
     </div>
   );
 
@@ -237,11 +262,12 @@ export default function ChartCard({
               <button
                 type="button"
                 className="source-link-pill"
+                disabled={!chart.available}
                 onClick={() => {
                   downloadTextFile(
                     `${slugify(title)}${charts.length > 1 ? `-${index + 1}` : ''}.csv`,
                     'text/csv',
-                    chartToCsv(chart.exportData, { title }),
+                    chartToCsv(chart.exportData, { title, datasetId: trustDatasetId, evidenceRows: trustRows, observationDates: chart.dates, derivation }),
                   );
                   trackDiscovery('csv');
                 }}
@@ -251,7 +277,7 @@ export default function ChartCard({
             </div>
             {tableOpen && (
               <div id={`${id}-table-${inFocus ? 'focus' : 'card'}-${index}`}>
-                <ChartDataTable chartData={chart.exportData} caption={t('chart.tabularDataFor', 'Tabular data for {name}').replace('{name}', localTitle)} />
+                <ChartDataTable chartData={chart.exportData} datasetId={trustDatasetId} evidenceRows={trustRows} observationDates={chart.dates} derivation={derivation} caption={t('chart.tabularDataFor', 'Tabular data for {name}').replace('{name}', localTitle)} />
               </div>
             )}
           </div>

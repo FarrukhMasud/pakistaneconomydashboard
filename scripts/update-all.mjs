@@ -19,6 +19,8 @@ import { writeFile, mkdir, stat } from 'fs/promises';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
+import { captureSourceArtifact, recordSourceFailure } from './lib/source-evidence.mjs';
+import { withUpdateLock } from './lib/update-lock.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const RAW_DIR = resolve(__dirname, 'sbp-raw');
@@ -172,15 +174,17 @@ async function downloadFile(name, url, fallbackUrl, description) {
       try {
         const existing = await stat(filepath);
         if (existing.size > buffer.length * 1.2 && existing.size - buffer.length > 20_000) {
-          console.log(
-            `  ⚠️  ${description}: keeping existing ${(existing.size / 1024).toFixed(0)} KB file; ${sourceUrl} is only ${(buffer.length / 1024).toFixed(0)} KB`,
-          );
-          return true;
+          throw new Error(`Source unexpectedly shrank from ${existing.size} to ${buffer.length} bytes; review is required`);
         }
-      } catch {
-        // No existing file to compare against.
+      } catch (error) {
+        if (error.code !== 'ENOENT') throw error;
       }
 
+      await captureSourceArtifact({
+        sourceKey: name, sourceUrl, responseUrl: res.url, body: buffer,
+        contentType: res.headers.get('content-type') || '', filename: name,
+        parser: 'parse-sbp-excel.mjs',
+      });
       await writeFile(filepath, buffer);
       console.log(`  ✅ ${description} (${(buffer.length / 1024).toFixed(0)} KB)`);
       return true;
@@ -190,6 +194,7 @@ async function downloadFile(name, url, fallbackUrl, description) {
   }
 
   console.log(`  ⚠️  ${description}: no verified official source succeeded; existing source file preserved`);
+  await recordSourceFailure(name, `${description}: no verified official source succeeded`);
   return false;
 }
 
@@ -217,6 +222,7 @@ async function main() {
   const args = process.argv.slice(2);
   const skipDownload = args.includes('--skip-download');
   const summary = { downloaded: 0, failed: 0, skipped: 0 };
+  if (!runScript(resolve(__dirname, 'migrate-source-evidence.mjs'), 'Source receipt migration')) throw new Error('Source receipt migration failed');
 
   // Step 1: Download fresh SBP Excel files
   if (!skipDownload) {
@@ -267,6 +273,9 @@ async function main() {
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   const peersOk = runScript(resolve(__dirname, 'update-peer-comparison.mjs'), 'update-peer-comparison.mjs');
 
+  console.log('\nApplying the official-only publication policy...');
+  const policyOk = runScript(resolve(__dirname, 'enforce-publication-policy.mjs'), 'Official-only publication policy', ['--refresh-official-stock']);
+
   // Step 4: Regenerate KPI summary from all now-fresh data files
   console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   console.log('📊 Step 4: Regenerating KPI summary from all data files...');
@@ -292,12 +301,6 @@ async function main() {
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   const previewOk = runScript(resolve(__dirname, 'generate-update-preview.mjs'), 'generate-update-preview.mjs');
 
-  // Step 4b-iv: Republish the static JSON/CSV API from the refreshed data.
-  console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  console.log('⬇️  Step 4b-iv: Publishing static data API...');
-  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  const apiOkStatic = runScript(resolve(__dirname, 'generate-api.mjs'), 'generate-api.mjs');
-
   // Step 4b-v: Critical-series RSS feed for subscribers / aggregators.
   console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   console.log('📡 Step 4b-v: Generating critical-series RSS feed...');
@@ -315,19 +318,28 @@ async function main() {
   console.log('🔎 Step 4c: Auditing critical dataset freshness...');
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   const auditOk = runScript(resolve(__dirname, 'audit-data.mjs'), 'audit-data.mjs');
+  const qualityOk = runScript(resolve(__dirname, 'generate-quality-report.mjs'), 'Checked calculation and source quality');
+  const metadataOk = qualityOk
+    && runScript(resolve(__dirname, 'generate-data-freshness.mjs'), 'Checked freshness metadata')
+    && runScript(resolve(__dirname, 'generate-api.mjs'), 'Checked static API');
+  const releaseOk = metadataOk && runScript(resolve(__dirname, 'generate-release-manifest.mjs'), 'Content-addressed release manifest');
+  const checksOk = releaseOk && runScript(resolve(__dirname, 'check-publication.mjs'), 'Pre-publication tests and audits');
 
   // Step 5: Commit and push — Cloudflare Pages auto-builds & deploys on push.
   const autoPush = !args.includes('--no-deploy');
-  const pipelineOk = parseOk && apiOk && fbrOk && peersOk && kpiOk && freshnessOk && notesOk && previewOk && apiOkStatic && rssOk && sitemapOk && auditOk;
+  const pipelineOk = parseOk && apiOk && fbrOk && peersOk && policyOk && kpiOk && freshnessOk && notesOk && previewOk && rssOk && sitemapOk && auditOk && checksOk;
   let pushOk = false;
   if (autoPush && pipelineOk) {
     console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     console.log('📤 Step 5: Commit & push (Cloudflare auto-deploys)...');
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     try {
+      execSync('git diff --quiet HEAD -- scripts src package.json package-lock.json .github index.html', {
+        cwd: resolve(__dirname, '..'), stdio: 'pipe',
+      });
       const date = new Date().toISOString().split('T')[0];
-      execSync('git add public/data/ public/feed.xml public/api/ public/sitemap.xml', { cwd: resolve(__dirname, '..'), stdio: 'inherit' });
-      const status = execSync('git status --porcelain public/data/ public/feed.xml public/api/ public/sitemap.xml', {
+      execSync('git add public/data/ public/source-evidence/ public/release-manifest.json public/feed.xml public/api/ public/sitemap.xml', { cwd: resolve(__dirname, '..'), stdio: 'inherit' });
+      const status = execSync('git status --porcelain public/data/ public/source-evidence/ public/release-manifest.json public/feed.xml public/api/ public/sitemap.xml', {
         cwd: resolve(__dirname, '..'), encoding: 'utf-8',
       }).trim();
       if (status) {
@@ -365,10 +377,12 @@ async function main() {
   console.log(`  🧾 Freshness:   ${freshnessOk ? '✅ Success' : '⚠️  Failed'}`);
   console.log(`  📝 Claims:      ${notesOk ? '✅ Success' : '⚠️  Failed'}`);
   console.log(`  🔬 Preview:     ${previewOk ? '✅ Success' : '⚠️  Failed'}`);
-  console.log(`  ⬇️  Static API:  ${apiOkStatic ? '✅ Success' : '⚠️  Failed'}`);
+  console.log(`  ⬇️  Static API:  ${metadataOk ? '✅ Success' : '⚠️  Failed'}`);
   console.log(`  📡 RSS feed:   ${rssOk ? '✅ Success' : '⚠️  Failed'}`);
   console.log(`  🗺️  Sitemap:    ${sitemapOk ? '✅ Success' : '⚠️  Failed'}`);
   console.log(`  🔎 Data audit:  ${auditOk ? '✅ Success' : '❌ Failed'}`);
+  console.log(`  Official-only policy: ${policyOk ? 'Success' : 'Failed'}`);
+  console.log(`  Publication checks: ${checksOk ? 'Success' : 'Failed'}`);
   if (autoPush) {
     console.log(`  📤 Git push:    ${pushOk ? '✅ Success (Cloudflare auto-deploys)' : '⚠️  Failed'}`);
   }
@@ -377,7 +391,7 @@ async function main() {
   if (!pipelineOk || (autoPush && !pushOk)) process.exitCode = 1;
 }
 
-main().catch((err) => {
+withUpdateLock(main, resolve(__dirname, '..')).catch((err) => {
   console.error('\n❌ Fatal error:', err.message);
   process.exit(1);
 });

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T19:11:25.428Z",
+  "generatedAt": "2026-09-30T22:10:16.153Z",
   "version": "v1",
   "title": "economyofpakistan.com static data API",
   "description": "Every dataset the dashboard renders, published as stable JSON and CSV. No key, no rate limit, no scraping required. Please cite the issuing institution listed on each endpoint.",
@@ -9,7 +9,7 @@
       "label": "Official primary",
       "short": "Official",
       "tone": "positive",
-      "description": "Published directly by the issuing institution (SBP, PBS, FBR, Finance Division, IMF or the World Bank)."
+      "description": "Retrieved directly from an official institution. The source citation distinguishes the original issuer from an official institution redistributing its data."
     },
     "official-derived": {
       "label": "Derived on this dashboard",
@@ -35,12 +35,38 @@
       "source": "State Bank of Pakistan",
       "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
       "sourceType": "official-primary",
+      "publication": {
+        "policy": "official-only",
+        "status": "published",
+        "reason": null
+      },
+      "authenticity": "official-primary",
+      "freshnessStatus": "latest-available",
+      "validation": {
+        "status": "passed",
+        "checkedAt": "2026-09-30T22:09:57.146Z",
+        "contentHash": "2abc97fda2253b5e3af0f28a03a8e396cc2c36f7374479761c1cde5a428872e8",
+        "checks": [
+          {
+            "id": "audit-sanity.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-publication.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-evidence.mjs",
+            "status": "passed"
+          }
+        ]
+      },
       "cadence": "Weekly",
       "latestObservation": "2026-09-18",
       "dates": {
         "observation": "2026-09-18",
         "publication": null,
-        "verification": "2026-09-30",
+        "verification": "2026-09-30T21:58:01.348Z",
         "dashboardUpdated": "2026-09-30"
       }
     },
@@ -54,13 +80,39 @@
       "source": "State Bank of Pakistan",
       "sourceUrl": "https://www.sbp.org.pk/assets/document/IBF_Arch.xls",
       "sourceType": "official-primary",
+      "publication": {
+        "policy": "official-only",
+        "status": "published",
+        "reason": null
+      },
+      "authenticity": "official-primary",
+      "freshnessStatus": "latest-available",
+      "validation": {
+        "status": "passed",
+        "checkedAt": "2026-09-30T22:09:57.146Z",
+        "contentHash": "a156b5ee98fd7a0298453549af26f2996f497a98ced03746c340956aac86fbc5",
+        "checks": [
+          {
+            "id": "audit-sanity.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-publication.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-evidence.mjs",
+            "status": "passed"
+          }
+        ]
+      },
       "cadence": "Monthly",
       "latestObservation": "2026-08",
       "dates": {
         "observation": "2026-08",
         "publication": null,
-        "verification": "2026-09-30",
-        "dashboardUpdated": "2026-09-08"
+        "verification": "2026-09-30T21:58:31.172Z",
+        "dashboardUpdated": "2026-09-30"
       }
     },
     {
@@ -73,13 +125,39 @@
       "source": "SBP EasyData API",
       "sourceUrl": "https://easydata.sbp.org.pk",
       "sourceType": "official-primary",
+      "publication": {
+        "policy": "official-only",
+        "status": "published",
+        "reason": null
+      },
+      "authenticity": "official-primary",
+      "freshnessStatus": "latest-available",
+      "validation": {
+        "status": "passed",
+        "checkedAt": "2026-09-30T22:09:57.146Z",
+        "contentHash": "678d93f66382a5ea21943351eae4e54c89369cdec7d54753c6aca706abd1098f",
+        "checks": [
+          {
+            "id": "audit-sanity.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-publication.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-evidence.mjs",
+            "status": "passed"
+          }
+        ]
+      },
       "cadence": "Monthly",
       "latestObservation": "2026-08",
       "dates": {
         "observation": "2026-08",
         "publication": null,
-        "verification": "2026-09-30",
-        "dashboardUpdated": "2026-09-14"
+        "verification": "2026-09-30T22:08:38.374Z",
+        "dashboardUpdated": "2026-09-30"
       }
     },
     {
@@ -92,13 +170,46 @@
       "source": "State Bank of Pakistan",
       "sourceUrl": "https://www.sbp.org.pk/assets/document/exp_import_BOP_Arch.xls",
       "sourceType": "official-primary",
+      "publication": {
+        "policy": "official-only",
+        "status": "partial",
+        "reason": "Country tables and the official monthly BOP archive disagree for overlapping periods. Country breakdowns are unavailable pending issuer reconciliation; supported monthly BOP observations remain published.",
+        "withheldFields": [
+          "topExportCountries",
+          "topImportCountries",
+          "exportCountryPeriod",
+          "importCountryPeriod",
+          "countryMonthly"
+        ]
+      },
+      "authenticity": "official-primary",
+      "freshnessStatus": "latest-available",
+      "validation": {
+        "status": "passed",
+        "checkedAt": "2026-09-30T22:09:57.146Z",
+        "contentHash": "95c3e788be42b79216ab564f846a5cc93bb6b05c4471039c91e758299ae211cc",
+        "checks": [
+          {
+            "id": "audit-sanity.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-publication.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-evidence.mjs",
+            "status": "passed"
+          }
+        ]
+      },
       "cadence": "Monthly",
       "latestObservation": "2026-08",
       "dates": {
         "observation": "2026-08",
         "publication": null,
-        "verification": "2026-09-30",
-        "dashboardUpdated": "2026-09-16"
+        "verification": "2026-09-30T21:58:21.165Z",
+        "dashboardUpdated": "2026-09-30"
       }
     },
     {
@@ -111,12 +222,38 @@
       "source": "State Bank of Pakistan",
       "sourceUrl": "https://archive.sbp.org.pk/ecodata/NetinflowSummary.xls",
       "sourceType": "official-primary",
+      "publication": {
+        "policy": "official-only",
+        "status": "published",
+        "reason": null
+      },
+      "authenticity": "official-primary",
+      "freshnessStatus": "latest-available",
+      "validation": {
+        "status": "passed",
+        "checkedAt": "2026-09-30T22:09:57.146Z",
+        "contentHash": "4a385d3c839ff2007c815364a9d96abdcb518ebe57368effd2bc924e651d7de0",
+        "checks": [
+          {
+            "id": "audit-sanity.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-publication.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-evidence.mjs",
+            "status": "passed"
+          }
+        ]
+      },
       "cadence": "Monthly/FYTD",
       "latestObservation": "2026-08",
       "dates": {
         "observation": "2026-08",
         "publication": null,
-        "verification": "2026-09-30",
+        "verification": "2026-09-30T22:08:48.536Z",
         "dashboardUpdated": "2026-09-30"
       }
     },
@@ -125,17 +262,46 @@
       "label": "IT & Services Trade",
       "json": "/api/v1/services.json",
       "csv": "/api/v1/services.csv",
-      "rows": 5,
+      "rows": 3,
       "seriesKey": "monthlySeries",
       "source": "State Bank of Pakistan",
       "sourceUrl": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf",
       "sourceType": "official-primary",
+      "publication": {
+        "policy": "official-only",
+        "status": "partial",
+        "reason": "Only archive-backed observations are retained. Unarchived legacy monthly service estimates are withheld; headline and detailed source windows are labelled separately.",
+        "withheldFields": [
+          "unarchived historical monthlySeries points"
+        ]
+      },
+      "authenticity": "official-primary",
+      "freshnessStatus": "latest-available",
+      "validation": {
+        "status": "passed",
+        "checkedAt": "2026-09-30T22:09:57.146Z",
+        "contentHash": "1c740ca7d0d2306b4c875d3a514c94d18ee85b25b94349750e4f9bc3fea8e41a",
+        "checks": [
+          {
+            "id": "audit-sanity.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-publication.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-evidence.mjs",
+            "status": "passed"
+          }
+        ]
+      },
       "cadence": "Monthly/FYTD",
       "latestObservation": "2026-08",
       "dates": {
         "observation": "2026-08",
         "publication": null,
-        "verification": "2026-09-30",
+        "verification": "2026-09-30T21:58:19.141Z",
         "dashboardUpdated": "2026-09-30"
       }
     },
@@ -149,13 +315,39 @@
       "source": "SBP EasyData API / PBS",
       "sourceUrl": "https://easydata.sbp.org.pk",
       "sourceType": "official-primary",
+      "publication": {
+        "policy": "official-only",
+        "status": "published",
+        "reason": null
+      },
+      "authenticity": "official-primary",
+      "freshnessStatus": "latest-available",
+      "validation": {
+        "status": "passed",
+        "checkedAt": "2026-09-30T22:09:57.146Z",
+        "contentHash": "9390355add9cc463e839255c8ed7bbfd0faf5dca91e366aa249cb19180e562ae",
+        "checks": [
+          {
+            "id": "audit-sanity.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-publication.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-evidence.mjs",
+            "status": "passed"
+          }
+        ]
+      },
       "cadence": "Monthly",
       "latestObservation": "2026-08",
       "dates": {
         "observation": "2026-08",
         "publication": null,
-        "verification": "2026-09-30",
-        "dashboardUpdated": "2026-09-08"
+        "verification": "2026-09-30T22:08:42.849Z",
+        "dashboardUpdated": "2026-09-30"
       }
     },
     {
@@ -168,12 +360,38 @@
       "source": "SBP EasyData API",
       "sourceUrl": "https://easydata.sbp.org.pk",
       "sourceType": "official-primary",
+      "publication": {
+        "policy": "official-only",
+        "status": "published",
+        "reason": null
+      },
+      "authenticity": "official-primary",
+      "freshnessStatus": "latest-available",
+      "validation": {
+        "status": "passed",
+        "checkedAt": "2026-09-30T22:09:57.146Z",
+        "contentHash": "dd8219b26377cd05f2ad6aa1db2c69f408488161c8d46d7382a918b760b8abfe",
+        "checks": [
+          {
+            "id": "audit-sanity.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-publication.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-evidence.mjs",
+            "status": "passed"
+          }
+        ]
+      },
       "cadence": "Weekly/Monthly",
       "latestObservation": "2026-09",
       "dates": {
         "observation": "2026-09",
         "publication": null,
-        "verification": "2026-09-30",
+        "verification": "2026-09-30T22:08:47.104Z",
         "dashboardUpdated": "2026-09-30"
       }
     },
@@ -187,13 +405,39 @@
       "source": "SBP EasyData API / SBP GDP table",
       "sourceUrl": "https://www.sbp.org.pk/assets/document/GDP_table.xlsx",
       "sourceType": "official-primary",
+      "publication": {
+        "policy": "official-only",
+        "status": "published",
+        "reason": null
+      },
+      "authenticity": "official-primary",
+      "freshnessStatus": "latest-available",
+      "validation": {
+        "status": "passed",
+        "checkedAt": "2026-09-30T22:09:57.146Z",
+        "contentHash": "8c9cb36367a0603515dd7a46182734a646af047ea3bc3d6559f94f2764541575",
+        "checks": [
+          {
+            "id": "audit-sanity.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-publication.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-evidence.mjs",
+            "status": "passed"
+          }
+        ]
+      },
       "cadence": "Quarterly/Annual",
       "latestObservation": "FY2026",
       "dates": {
         "observation": "2026-06-30",
         "publication": null,
-        "verification": "2026-09-30",
-        "dashboardUpdated": "2026-07-24"
+        "verification": "2026-09-30T22:08:52.172Z",
+        "dashboardUpdated": "2026-09-30"
       }
     },
     {
@@ -201,18 +445,50 @@
       "label": "FBR Tax Collection",
       "json": "/api/v1/fbr-tax.json",
       "csv": "/api/v1/fbr-tax.csv",
-      "rows": 14,
+      "rows": 12,
       "seriesKey": "monthly",
       "source": "Federal Board of Revenue (FBR)",
       "sourceUrl": "https://www.fbr.gov.pk",
-      "sourceType": "secondary-attributed",
+      "sourceType": "official-primary",
+      "publication": {
+        "policy": "official-only",
+        "status": "partial",
+        "reason": "Current fiscal-year totals and targets are unavailable: the official target-achievement statement omits the numeric collection total, and manually curated numeric claims lack independent reviewer approvals.",
+        "withheldFields": [
+          "fytd",
+          "annualTargets",
+          "currentFiscalYear",
+          "methodologyNote"
+        ]
+      },
+      "authenticity": "official-primary",
+      "freshnessStatus": "overdue",
+      "validation": {
+        "status": "passed",
+        "checkedAt": "2026-09-30T22:09:57.146Z",
+        "contentHash": "759f7a2aaefbfa41d6aad32015683a23b684577dfd328bd2f03be91a64df1e81",
+        "checks": [
+          {
+            "id": "audit-sanity.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-publication.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-evidence.mjs",
+            "status": "passed"
+          }
+        ]
+      },
       "cadence": "Monthly (provisional)",
-      "latestObservation": "2026-06",
+      "latestObservation": "2025-06",
       "dates": {
-        "observation": "2026-06",
-        "publication": "2026-07-02",
-        "verification": "2026-09-30",
-        "dashboardUpdated": "2026-08-07"
+        "observation": "2025-06",
+        "publication": null,
+        "verification": "2026-09-30T21:58:46.460Z",
+        "dashboardUpdated": "2026-09-30"
       }
     },
     {
@@ -224,13 +500,43 @@
       "seriesKey": null,
       "source": "IMF / official program documents",
       "sourceUrl": "https://www.imf.org/en/Countries/PAK",
-      "sourceType": "official-primary",
+      "sourceType": "unavailable",
+      "publication": {
+        "policy": "official-only",
+        "status": "withheld",
+        "reason": "Program amounts, disbursements, scorecard claims and future review estimates are unavailable pending direct verification of exact IMF documents and two distinct real reviewer approvals. The attempted direct IMF release retrieval was blocked; an institutional country page is not figure-level evidence.",
+        "withheldFields": [
+          "program",
+          "approved",
+          "totalSDR",
+          "totalUSD",
+          "duration",
+          "endDate",
+          "disbursedUSD",
+          "upcomingDecision",
+          "programScorecard",
+          "reviews",
+          "relatedFacilities",
+          "keyObjectives",
+          "observationDate",
+          "publicationDate",
+          "verifiedFrom",
+          "methodologyNote"
+        ]
+      },
+      "authenticity": "unavailable",
+      "freshnessStatus": "withheld",
+      "validation": {
+        "status": "pending",
+        "checkedAt": null,
+        "checks": []
+      },
       "cadence": "Event-driven",
-      "latestObservation": "2026-05-08",
+      "latestObservation": null,
       "dates": {
-        "observation": "2026-05-08",
-        "publication": "2026-05-08",
-        "verification": "2026-08-07",
+        "observation": null,
+        "publication": null,
+        "verification": null,
         "dashboardUpdated": "2026-08-07"
       }
     },
@@ -243,13 +549,39 @@
       "seriesKey": null,
       "source": "State Bank of Pakistan — Monetary Policy Committee",
       "sourceUrl": "https://www.sbp.org.pk/our-operations/monetary-policy",
-      "sourceType": "official-primary",
+      "sourceType": "unavailable",
+      "publication": {
+        "policy": "official-only",
+        "status": "withheld",
+        "reason": "An official monetary policy statement has been downloaded and archived. Manually curated rates, historical decisions, inflation context and meeting dates remain unavailable pending exact per-claim evidence and two distinct real reviewer approvals.",
+        "withheldFields": [
+          "currentRate",
+          "asOf",
+          "lastDecision",
+          "nextMeeting",
+          "calendar",
+          "context",
+          "decisions",
+          "observationDate",
+          "publicationDate",
+          "calendarPublicationDate",
+          "verifiedFrom",
+          "methodologyNote"
+        ]
+      },
+      "authenticity": "unavailable",
+      "freshnessStatus": "withheld",
+      "validation": {
+        "status": "pending",
+        "checkedAt": null,
+        "checks": []
+      },
       "cadence": "Event-driven",
-      "latestObservation": "2026-07-27",
+      "latestObservation": null,
       "dates": {
-        "observation": "2026-07-27",
-        "publication": "2026-07-27",
-        "verification": "2026-08-07",
+        "observation": null,
+        "publication": null,
+        "verification": null,
         "dashboardUpdated": "2026-08-07"
       }
     },
@@ -262,13 +594,36 @@
       "seriesKey": null,
       "source": "Ministry of Energy / Power Division, IMF",
       "sourceUrl": "https://www.sbp.org.pk/assets/document/pakdebt.pdf",
-      "sourceType": "secondary-attributed",
+      "sourceType": "unavailable",
+      "publication": {
+        "policy": "official-only",
+        "status": "withheld",
+        "reason": "The previously curated stock, flows, comparisons and targets were supported by newspaper reporting, not directly verified official releases. They are unavailable until exact official evidence and two distinct real reviewer approvals are supplied.",
+        "withheldFields": [
+          "current",
+          "yoy",
+          "fytdBuildup",
+          "powerVsGas",
+          "stockTrend",
+          "targets",
+          "reforms",
+          "verifiedFrom",
+          "methodologyNote"
+        ]
+      },
+      "authenticity": "unavailable",
+      "freshnessStatus": "withheld",
+      "validation": {
+        "status": "pending",
+        "checkedAt": null,
+        "checks": []
+      },
       "cadence": "Event-driven",
-      "latestObservation": "2026-04-30",
+      "latestObservation": null,
       "dates": {
-        "observation": "2026-04-30",
+        "observation": null,
         "publication": null,
-        "verification": "2026-08-07",
+        "verification": null,
         "dashboardUpdated": "2026-08-07"
       }
     },
@@ -282,13 +637,46 @@
       "source": "State Bank of Pakistan / IMF",
       "sourceUrl": "https://www.imf.org/en/Countries/PAK",
       "sourceType": "secondary-attributed",
+      "publication": {
+        "policy": "official-only",
+        "status": "partial",
+        "reason": "Official outstanding debt stock is available. Fiscal-year repayments, rollover assumptions and bond schedules are withheld because exact official evidence and required independent approvals are absent.",
+        "withheldFields": [
+          "fy26",
+          "repaymentSplit",
+          "eurobonds",
+          "fy27",
+          "methodologyNote"
+        ]
+      },
+      "authenticity": "unverified",
+      "freshnessStatus": "needs-review",
+      "validation": {
+        "status": "passed",
+        "checkedAt": "2026-09-30T22:09:57.146Z",
+        "contentHash": "c1cda8881917a5173f269b62f1c2ab4c92bbc16db831a9a774e65d3688919dca",
+        "checks": [
+          {
+            "id": "audit-sanity.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-publication.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-evidence.mjs",
+            "status": "passed"
+          }
+        ]
+      },
       "cadence": "Event-driven",
-      "latestObservation": "2026-03-31",
+      "latestObservation": "2026-06-30",
       "dates": {
-        "observation": "2026-03-31",
-        "publication": "2026-05-12",
-        "verification": "2026-08-07",
-        "dashboardUpdated": "2026-08-07"
+        "observation": "2026-06-30",
+        "publication": null,
+        "verification": "2026-09-30T21:58:52.756Z",
+        "dashboardUpdated": "2026-09-30"
       }
     },
     {
@@ -301,12 +689,44 @@
       "source": "State Bank of Pakistan",
       "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
       "sourceType": "official-derived",
+      "publication": {
+        "policy": "official-only",
+        "status": "partial",
+        "reason": "Only archive-backed reserve stocks and explicitly derived goods-import cover are published. Legacy estimated history, benchmark, IMF target and narrative drivers are withheld pending official evidence and review.",
+        "withheldFields": [
+          "benchmark",
+          "imfTarget",
+          "drivers",
+          "unsupported historical trajectory points"
+        ]
+      },
+      "authenticity": "official-derived",
+      "freshnessStatus": "latest-available",
+      "validation": {
+        "status": "passed",
+        "checkedAt": "2026-09-30T22:09:57.146Z",
+        "contentHash": "4fb2454b75b327f69c55d0471626510f71045028f41c43baeba2423bdac37438",
+        "checks": [
+          {
+            "id": "audit-sanity.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-publication.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-evidence.mjs",
+            "status": "passed"
+          }
+        ]
+      },
       "cadence": "Weekly",
       "latestObservation": "2026-09-18",
       "dates": {
         "observation": "2026-09-18",
         "publication": null,
-        "verification": "2026-09-30",
+        "verification": "2026-09-30T21:58:01.348Z",
         "dashboardUpdated": "2026-09-30"
       }
     },
@@ -314,18 +734,34 @@
       "id": "budget-federal",
       "label": "Federal Budget",
       "json": "/api/v1/budget-federal.json",
-      "csv": "/api/v1/budget-federal.csv",
-      "rows": 2,
-      "seriesKey": "years",
+      "csv": null,
+      "rows": 0,
+      "seriesKey": null,
       "source": "Government of Pakistan, Finance Division — Budget in Brief",
       "sourceUrl": "https://www.finance.gov.pk",
-      "sourceType": "official-primary",
+      "sourceType": "unavailable",
+      "publication": {
+        "policy": "official-only",
+        "status": "withheld",
+        "reason": "Previously curated budget and execution figures were sourced from press coverage. Official Finance Division budget pages could not be retrieved during this verification attempt. Budgeted targets and observed execution are unavailable pending exact official documents and two distinct real reviewer approvals.",
+        "withheldFields": [
+          "methodologyNote",
+          "years"
+        ]
+      },
+      "authenticity": "unavailable",
+      "freshnessStatus": "withheld",
+      "validation": {
+        "status": "pending",
+        "checkedAt": null,
+        "checks": []
+      },
       "cadence": "Quarterly/Annual",
-      "latestObservation": "2026-06-12",
+      "latestObservation": null,
       "dates": {
-        "observation": "2026-06-12",
+        "observation": null,
         "publication": null,
-        "verification": "2026-06-17",
+        "verification": null,
         "dashboardUpdated": "2026-06-17"
       }
     },
@@ -338,13 +774,31 @@
       "seriesKey": null,
       "source": "Provincial Finance Departments — Budget White Papers",
       "sourceUrl": "https://www.finance.gov.pk",
-      "sourceType": "secondary-attributed",
+      "sourceType": "unavailable",
+      "publication": {
+        "policy": "official-only",
+        "status": "withheld",
+        "reason": "Previously curated provincial budgets, transfers, cash surpluses and commentary relied on press reporting. They are unavailable pending verification against exact provincial finance department or Finance Division documents and two distinct real reviewer approvals.",
+        "withheldFields": [
+          "methodologyNote",
+          "fiscalYears",
+          "provincialSurplus",
+          "provinces"
+        ]
+      },
+      "authenticity": "unavailable",
+      "freshnessStatus": "withheld",
+      "validation": {
+        "status": "pending",
+        "checkedAt": null,
+        "checks": []
+      },
       "cadence": "Quarterly/Annual",
-      "latestObservation": "2026-06-22",
+      "latestObservation": null,
       "dates": {
-        "observation": "2026-06-22",
+        "observation": null,
         "publication": null,
-        "verification": "2026-06-22",
+        "verification": null,
         "dashboardUpdated": "2026-06-22"
       }
     },
@@ -358,12 +812,38 @@
       "source": "World Bank Open Data API",
       "sourceUrl": "https://data.worldbank.org",
       "sourceType": "official-primary",
+      "publication": {
+        "policy": "official-only",
+        "status": "published",
+        "reason": null
+      },
+      "authenticity": "unverified",
+      "freshnessStatus": "latest-available",
+      "validation": {
+        "status": "passed",
+        "checkedAt": "2026-09-30T22:09:57.146Z",
+        "contentHash": "23282aa755e659893e12e29307c0bdcae527d92d92f4e3c0ff447b8a5b19b304",
+        "checks": [
+          {
+            "id": "audit-sanity.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-publication.mjs",
+            "status": "passed"
+          },
+          {
+            "id": "audit-evidence.mjs",
+            "status": "passed"
+          }
+        ]
+      },
       "cadence": "Annual",
       "latestObservation": "2025",
       "dates": {
         "observation": "2025",
         "publication": null,
-        "verification": null,
+        "verification": "2026-09-30T21:58:48.332Z",
         "dashboardUpdated": "2026-09-30"
       }
     },
@@ -371,18 +851,42 @@
       "id": "economic-events",
       "label": "Official Economic Timeline",
       "json": "/api/v1/economic-events.json",
-      "csv": "/api/v1/economic-events.csv",
-      "rows": 8,
-      "seriesKey": "events",
+      "csv": null,
+      "rows": 0,
+      "seriesKey": null,
       "source": "IMF / SBP / Finance Division / NDMA",
       "sourceUrl": "https://www.imf.org/en/Countries/PAK",
-      "sourceType": "official-primary",
+      "sourceType": "unavailable",
+      "publication": {
+        "policy": "official-only",
+        "status": "withheld",
+        "reason": "The curated timeline contains economic claims without archived figure-level official evidence. Generic institutional pages do not verify event details. Entries are unavailable until their exact official releases are verified; numeric manual claims also require two distinct real reviewer approvals.",
+        "withheldFields": [
+          "latestObservation",
+          "methodologyNote",
+          "events.0",
+          "events.1",
+          "events.2",
+          "events.3",
+          "events.4",
+          "events.5",
+          "events.6",
+          "events.7"
+        ]
+      },
+      "authenticity": "unavailable",
+      "freshnessStatus": "withheld",
+      "validation": {
+        "status": "pending",
+        "checkedAt": null,
+        "checks": []
+      },
       "cadence": "Event-driven",
-      "latestObservation": "2026-07-27",
+      "latestObservation": null,
       "dates": {
-        "observation": "2026-07-27",
+        "observation": null,
         "publication": null,
-        "verification": "2026-08-07",
+        "verification": null,
         "dashboardUpdated": "2026-08-07"
       }
     },
@@ -395,13 +899,29 @@
       "seriesKey": null,
       "source": "Official methodology pages",
       "sourceUrl": "https://www.sbp.org.pk/ecodata/index2.asp",
-      "sourceType": "official-primary",
+      "sourceType": "unavailable",
+      "publication": {
+        "policy": "official-only",
+        "status": "withheld",
+        "reason": "Educational definitions and adequacy-threshold commentary were linked to institutional index pages rather than exact verified methodology publications. They remain unavailable pending direct official methodology evidence; quantitative guidance also requires two distinct real reviewer approvals.",
+        "withheldFields": [
+          "methodologyNote",
+          "sections"
+        ]
+      },
+      "authenticity": "unavailable",
+      "freshnessStatus": "withheld",
+      "validation": {
+        "status": "pending",
+        "checkedAt": null,
+        "checks": []
+      },
       "cadence": "Event-driven",
-      "latestObservation": "2026-06-26",
+      "latestObservation": null,
       "dates": {
-        "observation": "2026-06-26",
+        "observation": null,
         "publication": null,
-        "verification": "2026-06-26",
+        "verification": null,
         "dashboardUpdated": "2026-06-26"
       }
     },
@@ -474,6 +994,32 @@
       "id": "update-preview",
       "label": "Metadata: update preview",
       "json": "/api/v1/update-preview.json",
+      "csv": null,
+      "rows": 0,
+      "seriesKey": null,
+      "source": "economyofpakistan.com",
+      "sourceUrl": "https://economyofpakistan.com",
+      "sourceType": "official-derived",
+      "cadence": "Per update",
+      "latestObservation": null
+    },
+    {
+      "id": "source-artifacts",
+      "label": "Metadata: source artifacts",
+      "json": "/api/v1/source-artifacts.json",
+      "csv": null,
+      "rows": 0,
+      "seriesKey": null,
+      "source": "economyofpakistan.com",
+      "sourceUrl": "https://economyofpakistan.com",
+      "sourceType": "official-derived",
+      "cadence": "Per update",
+      "latestObservation": null
+    },
+    {
+      "id": "data-quality",
+      "label": "Metadata: data quality",
+      "json": "/api/v1/data-quality.json",
       "csv": null,
       "rows": 0,
       "seriesKey": null,

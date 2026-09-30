@@ -1,9 +1,10 @@
 # 🇵🇰 Pakistan Economic Dashboard
 
 An interactive web dashboard visualising Pakistan's key economic
-indicators using primarily **official government data** from the State Bank
+indicators using **official-source data only** from the State Bank
 of Pakistan (SBP), Pakistan Bureau of Statistics (PBS), and Ministry of
-Finance. Any secondary reporting is explicitly identified and attributed.
+Finance, IMF, and World Bank. Unsupported or unreviewed figures are withheld,
+not replaced with press reports, estimates, or zeros.
 
 **Live:** [https://economyofpakistan.com/](https://economyofpakistan.com/)
 
@@ -22,7 +23,7 @@ Finance. Any secondary reporting is explicitly identified and attributed.
 | **Inflation**        | National/Urban/Rural CPI, Food, SPI, WPI        | SBP EasyData API    |
 | **Monetary**         | M2, private credit, deposits, NFA               | SBP EasyData API    |
 | **Public Finance**   | GDP growth, fiscal balance, revenue/expenditure | SBP API + Excel     |
-| **FBR Tax**          | Monthly net tax collection + tax-head breakdown | FBR tables/releases + identified secondary reporting |
+| **FBR Tax**          | Evidenced monthly net tax collection + tax-head breakdown | Official FBR tables/releases only |
 | **Federal Budget**   | Outlay, revenue, deficit, spending mix + Good/Bad/Ugly commentary | Finance Division (Budget in Brief) |
 | **Provincial Budgets** | Punjab/Sindh/KP/Balochistan outlay, ADP, transfers + commentary | Provincial Finance Depts |
 
@@ -35,8 +36,8 @@ section is a shareable deep link.
 
 - **Latest economic picture:** the overview briefing dates each observation
   individually. A dashboard check date is not a claim that every source has
-  published new figures; source badges distinguish official, derived, and
-  explicitly attributed secondary reporting.
+  published new figures. Authenticity, freshness, and calculation validation are
+  shown separately; withheld or partial datasets explain what is unavailable.
 - **Brief / Analyst:** Brief prioritizes headline figures and charts. Analyst
   opens supporting context by default. Periods, comparison bases, and source
   confidence remain available in both modes, including on mobile.
@@ -63,15 +64,24 @@ convention:
 | Guarantee | How it is enforced |
 | --------- | ------------------ |
 | **No positional guessing in parsers** | Every column, row and fiscal year in `parse-sbp-excel.mjs` is resolved by *label* through `scripts/lib/sheet-utils.mjs` / `sbp-resolvers.mjs`. When a workbook layout changes, the parser throws `SheetParseError` instead of silently publishing the wrong column. |
-| **Every headline figure is citable** | `public/data/provenance.json` records the source document, sheet, cell location, period, unit and retrieval date for each cited figure. The 🔍 **Cite** control on KPI cards and charts shows it in-place. |
+| **Every headline figure is citable** | `public/data/provenance.json` binds the value, period, unit and exact locator to archived official evidence and its actual acquisition timestamp. Missing source statuses are `not-stated`, never silently promoted to final. |
 | **No hand-typed narrative numbers** | Every numeric claim in prose is computed by `scripts/generate-editorial-notes.mjs` from the same JSON the chart renders, so a sentence can never contradict the chart beneath it. |
 | **Restatements are visible** | `scripts/lib/data-writer.mjs` diffs each write; changed historical values are appended to `public/data/revisions.json`. `lastUpdated` only advances when numbers actually change (`lastChecked` records the run). |
 | **Dates have explicit meanings** | Freshness metadata separates the economic `observationDate`, source `publicationDate`, dashboard `verificationDate`, and `dashboardUpdated` timestamp. Staleness is calculated from the observation only. |
-| **Refreshes are previewed** | `scripts/generate-update-preview.mjs` compares working data with `HEAD` and records new observations, KPI movements, revisions, source changes, review flags, and suspicious date jumps before an automated commit. |
-| **Source trust is never implied** | Every dataset declares a tier — *official primary*, *derived on this dashboard*, or *secondary reporting* — surfaced as a badge next to its numbers. A data file can downgrade its own tier at runtime (FBR does this when only press-reported provisional figures exist). |
+| **Refreshes are previewed and gated** | Source changes, suspicious reporting-date jumps, and material unexplained movements/restatements block publication until two distinct reviewers record a content-bound approval. Suppression of unsupported observations is recorded separately. |
+| **Official-only publication** | Policy checks reject secondary figures and withhold manually curated content without official evidence and independent review. A mixed dataset cannot borrow an official badge for unsupported subcomponents. |
+| **Reproducible source snapshots** | `source-artifacts.json` records origin and final URL, SHA-256, acquisition time and exact parser/environment snapshots. Immutable files live in `public/source-evidence/`; corruption or credential-bearing evidence URLs fail checks. |
+| **Missing never means zero** | Required values, real calendar dates, fiscal periods, units, API schemas and observation order are checked. Missing optional observations remain null and are displayed as unavailable. |
+| **Failed checks stay visible** | API acquisition failures are recorded against their exact series, without credentials. Retained observations do not acquire a successful-check badge; critical failed source checks block publication. Calculation checks expose actual per-audit outcomes, independently of source freshness. |
 | **Reconciliation invariants** | `npm run audit:sanity` re-derives totals (trade balance, services credit/debit, reserves components, remittance corridors, fiscal series) and fails the build on any mismatch, plus cross-checks KPI ↔ provenance ↔ editorial notes. |
 | **Parser regression tests** | `npm test` runs golden-file tests over the real workbook layouts, including fiscal-year rollover cases that previously produced wrong FDI figures. |
 | **Projected dates are labelled** | `release-calendar.json` marks each expectation as *announced by the source* or *estimated from observed publication history*, and prints the derivation on every row. |
+| **Checks cannot be skipped by deployment** | `npm run build` runs parser tests, sanity/reconciliation, official-source/evidence, anomaly-review, critical freshness, and release-hash checks before Vite builds. A stale quality report does not certify changed data. |
+| **Production content is verified** | `release-manifest.json` hashes every data, API, evidence, RSS and sitemap asset. `npm run verify:live` compares every published byte hash and the release identity, not just dates. |
+
+These checks establish traceability and defined consistency invariants, not a
+guarantee that an issuing institution never revises or makes an error. Official
+estimates, provisional observations and budget targets retain their stated status.
 
 ## Tech Stack
 
@@ -161,10 +171,10 @@ npm run build
 
 ## Data Sources
 
-Data is sourced primarily from official Pakistani government publications.
-Where an official numeric release is unavailable, explicitly identified
-secondary reporting may be retained with its attribution and review status.
-There are **no synthetic or fabricated** data points.
+Only evidenced official publications and explicitly documented calculations from
+official inputs are eligible for publication. When a primary document, exact
+figure support or required manual review is missing, the affected value is
+unavailable. There are **no synthetic or fabricated** data points.
 
 ### SBP Excel/PDF Files (parsed by `parse-sbp-excel.mjs`)
 
@@ -202,24 +212,21 @@ date (mirroring the IMF tracker pattern):
 
 | File              | Content                                          | Primary source                         |
 | ----------------- | ------------------------------------------------ | -------------------------------------- |
-| `fbr-tax.json`    | Monthly net tax collection + tax-head breakdown  | FBR official tables/releases + explicitly identified secondary reporting |
+| `fbr-tax.json`    | Monthly net tax collection + tax-head breakdown  | Archived official FBR tables/releases |
 | `indicators.json` | At-a-glance rates/markets/fiscal-stress snapshot | SBP, Finance Division (Economic Survey), PSX, OGRA, Power Division |
 | `imf-tracker.json`| IMF EFF program review schedule & disbursements   | IMF press releases                      |
-| `budget-federal.json` | Federal budget (FY2025-26 & FY2026-27): outlay, revenue, deficit, spending mix, tax measures + editorial Good/Bad/Ugly commentary | Finance Division "Budget in Brief", as reported by Dawn & Business Recorder |
-| `budget-provincial.json` | Provincial budgets (Punjab/Sindh/KP/Balochistan): outlay, ADP, transfers, surplus + commentary | Provincial Finance Department White Papers, as reported by Dawn & Business Recorder |
+| `budget-federal.json` | Reviewed federal budget estimates and targets, when available | Finance Division "Budget in Brief" itself |
+| `budget-provincial.json` | Reviewed provincial budget estimates and targets, when available | Provincial Finance Department White Papers themselves |
 
-> **Budget data & commentary:** federal and provincial budget figures are budgeted
-> estimates taken from official budget documents (Finance Division / provincial White
-> Papers) as reported in detail by Dawn and Business Recorder, in PKR billion. Figures that
-> could not be authentically sourced are explicitly marked **NOT FOUND** rather than
-> estimated (e.g. KP and Balochistan FY2025-26 detail). The "Good / Bad / Ugly" panels are
-> **editorial opinion**, clearly labelled as such, and grounded in the official figures shown.
+> **Budget data:** budget estimates are not actual spending or receipts. They must
+> be supported directly by the official budget document and independently reviewed.
+> Unverified figures and associated numeric commentary are withheld.
 
 FBR monthly figures and the four-way breakdown (Direct/Income Tax, Sales Tax,
 FED, Customs) for the latest completed fiscal year are taken verbatim from
 FBR's official *"Month-wise / Tax-wise Net Collection"* table. Current-year
-figures are explicitly labeled by source type; secondary reports are never
-presented as official FBR releases. `indicators.json`
+figures are published only with direct official evidence and required review;
+secondary reports are not eligible. `indicators.json`
 holds point-in-time snapshots (policy rate, KSE-100, current account, public
 debt, circular debt, petrol price), each dated and linked to its source.
 
@@ -250,22 +257,23 @@ npm run update
 
 This runs these steps:
 
-1. **Download** — Fetches 11 Excel/PDF files from sbp.org.pk
+1. **Download and archive** — Fetches official Excel/PDF files and records immutable acquisition evidence
 2. **Excel Parse** — `parse-sbp-excel.mjs` processes files → JSON
 3. **API Update** — `update-data.mjs` fetches remittances,
    inflation, monetary, public finance
 4. **FBR Update** — `update-fbr.mjs` downloads & parses FBR's official
    month-wise/tax-wise PDF → refreshes closed-FY rows in `fbr-tax.json`
-5. **KPI Regeneration** — rebuilds KPI summary from all data
+5. **Official-only policy** — suppresses unsupported/manual-unreviewed content; keeps evidenced automated observations
+6. **KPI Regeneration** — rebuilds KPI summary from publishable data
 6. **Source/Freshness Metadata** — generates `source-manifest.json`,
    `data-freshness.json` and `release-calendar.json`
 6b. **Editorial claims** — `generate-editorial-notes.mjs` recomputes every
    narrative number from the refreshed data
 6c. **Update preview** — `generate-update-preview.mjs` compares refreshed data with `HEAD`
-6d. **Static API** — `generate-api.mjs` republishes `public/api/v1/*.json|.csv`
-7. **Freshness Audit** — blocks deployment if a critical dataset is stale,
-   missing, or requires review
-8. **Git Commit & Push** — commits data changes to GitHub. **Cloudflare Pages
+7. **Quality and freshness checks** — validates schemas, calculation identities, official publication policy, archives, and critical observation/source freshness
+8. **Checked metadata and API** — generates `data-quality.json`, checked freshness metadata and `public/api/v1/*.json|.csv`
+9. **Release manifest and publication gate** — hashes every data/API/evidence/feed asset and runs parser, source, freshness and anomaly checks
+10. **Git Commit & Push** — commits data changes to GitHub. **Cloudflare
    then auto-builds and deploys the site on push** (no separate upload step).
 
 Use `npm run update:local` to skip the git commit & push (and therefore
@@ -275,9 +283,9 @@ the Cloudflare auto-deploy).
 > year from FBR's official PDF (exact, internally validated — the parsed
 > monthly nets must sum to the printed full-year total or the file is left
 > unchanged). The **current** fiscal year's provisional months and the `fytd`
-> block are curated by hand from identified sources. These can include FBR
-> releases and explicitly labeled secondary reporting when FBR has not
-> published a numeric release. When FBR
+> block require direct official numeric evidence and two independent manual
+> reviews. If these are absent, the current-year headline is unavailable.
+> When FBR
 > publishes a new month-wise PDF, add its URL to `FBR_MONTHWISE_SOURCES` in
 > `scripts/update-fbr.mjs`.
 >
@@ -308,9 +316,12 @@ npm run generate:freshness
 # Recompute the sourced narrative claims shown under section headers
 npm run generate:notes
 
-# Republish the static JSON/CSV API under public/api/v1
+# Generate quality checks, then regenerate checked metadata and API
+npm run generate:quality
+npm run generate:freshness
 npm run generate:api
 npm run generate:preview
+npm run generate:release
 
 # Run the parser / data-writer / release-calendar / i18n test suites
 npm test
@@ -321,7 +332,7 @@ npm run audit:data
 # Run local deployment gates: data sanity, freshness audit, lint, build
 npm run ci:audit
 
-# Verify live site JSON matches local generated data
+# Verify the complete live release against local content hashes
 npm run verify:live
 
 # Update a specific API section
@@ -353,9 +364,74 @@ npm run verify:live
 The live dashboard also includes a **Data Freshness & Source Audit**
 panel in the Overview tab, generated from `public/data/data-freshness.json`.
 
-Run `npm run ci:audit` to execute the full gate (`audit:sanity`, `audit:data`,
-lint, and build) before pushing. In CI environments that should not fetch SBP
-source metadata, set `AUDIT_SKIP_SOURCE=1`; the local data sanity checks still run.
+Run `npm run ci:audit` before pushing. The build itself enforces tests,
+sanity/reconciliation, official-source policy, evidence integrity, update review,
+critical freshness and content hashes. Build checks use recorded acquisition
+evidence and do not silently fall back to unverifiable live-page date scraping.
+
+### Publication and review workflow
+
+Use `npm run update:local` while changing ingestion code. The automatic updater
+will not commit/push data while pipeline or frontend code differs from `HEAD`;
+commit reviewed code separately before using automatic publishing.
+Full refreshes hold `.data-update.lock` to prevent concurrent pipeline writes.
+If a process is interrupted and leaves that file behind, confirm its recorded
+process has stopped before removing that specific stale lock.
+
+Incomplete historical source receipts are retained unchanged in an explicit
+quarantine, not upgraded into fabricated parser snapshots. A new official capture
+is required before they can certify a figure. Native numeric fields are replayed
+from exact archived Excel cells, PDF coordinates, or API observation locators;
+documented derived calculations are replayed from all their inputs.
+
+The trade country breakdown is withheld when the official country-table BOP
+total contradicts the same-period main BOP archive. Supported monthly trade
+totals remain available. Unarchived services/FDI history and reserve-adequacy
+estimates, IMF targets and narrative assumptions are likewise not carried forward.
+
+First archived verification of previously untraceable legacy values is recorded
+as `initial-verification`, not an issuer restatement. Advancing a weekly sample
+within a monthly bucket is a new underlying observation. Evidence-backed
+historical restatements remain subject to the material-change review gate.
+To repair an unpublished ledger after an extraction bug, explicitly run
+`node scripts/rebuild-unpublished-revisions.mjs`: it preserves every committed
+entry and reconstructs only the pending changes against `HEAD`.
+
+For manually curated observations, follow the evidence and approval contract in
+`scripts/lib/publication-policy.mjs`: archive the actual primary release, provide
+exact figure locators and transformations, and obtain two distinct reviewer
+approvals bound to its content and evidence hashes. Do not add invented approvals
+just to make a build pass. Unsupported content remains explicitly withheld.
+
+If `audit:preview` reports a source change, suspicious date jump or material
+restatement, investigate the complete `update-preview.json`. A review ledger may
+be added at `public/data/publication-reviews.json`:
+
+```json
+{
+  "schemaVersion": 1,
+  "approvals": [
+    {
+      "previewHash": "<hash printed by audit:preview>",
+      "approvedAt": "<actual ISO-8601 approval timestamp>",
+      "reason": "<documented explanation and exact official evidence>",
+      "reviewers": ["<first real reviewer>", "<second real reviewer>"]
+    }
+  ]
+}
+```
+
+These are declarative human sign-offs recorded in version control, not
+cryptographic identity verification. They become invalid if the checked preview,
+dataset content or bound source evidence changes. No approval is generated
+automatically.
+
+After any intentional generated-file edit, rerun quality/metadata/API/feed/preview
+generation and `generate:release`; a mismatched manifest blocks the build.
+After deployment, `npm run verify:live` checks every manifest-listed asset and
+rejects old releases, partial cache rollouts and changed values with unchanged dates.
+`.gitattributes` disables line-ending conversion for published assets and source
+snapshots, preserving the exact bytes when a Windows refresh is built on Linux.
 
 ---
 
@@ -371,7 +447,9 @@ no separate upload step.
 - `wrangler.jsonc` enables Workers' native single-page-application fallback
 - Node version pinned via `.nvmrc` (Node 22; Vite 6 requires Node ≥ 18)
 - `public/_headers` keeps `index.html` and `/data/*` `no-store` (always-fresh data)
-  and caches hashed `/assets/*` immutably.
+  as well as API/feed/release metadata, and caches hashed assets and immutable
+  source evidence. Archived HTML is served as an inert download, never executable
+  same-origin content.
 
 ### Refresh data + auto-deploy (one command)
 
@@ -380,14 +458,16 @@ npm run update
 ```
 
 This fetches fresh data, regenerates KPIs/freshness, commits and pushes to GitHub;
-Cloudflare Pages then builds and deploys automatically. Use `--no-deploy` to skip
+Cloudflare then builds and deploys automatically. Use `--no-deploy` to skip
 the commit & push (and therefore the auto-deploy).
 
 ### Continuous integration
 
-`.github/workflows/dashboard-ci.yml` runs the data sanity checks, freshness
-audit, lint, and production build (`npm run ci:audit`) on every push and pull
-request. Deployment itself is handled by Cloudflare Pages' own build on push —
+`.github/workflows/dashboard-ci.yml` runs the complete checked production build
+and lint (`npm run ci:audit`) on every push and pull request, and stores the release
+manifest as a CI artifact. Cloudflare's independent `npm run build` executes the
+same publication gate, so a failed GitHub check is not the sole deployment safeguard.
+Deployment itself is handled by Cloudflare's own build on push —
 no deploy credentials are stored in the repo.
 
 Live: <https://economyofpakistan.com/>
@@ -549,6 +629,6 @@ Pakistan's fiscal year runs **July 1 – June 30**. FY2026 = July 2025 – June 
 
 ## License
 
-Data is sourced primarily from the State Bank of Pakistan, Pakistan Bureau of
-Statistics, Ministry of Finance, and other official institutions. Any
-secondary reporting is explicitly identified and linked.
+Published data is supported directly by the State Bank of Pakistan, Pakistan
+Bureau of Statistics, Ministry of Finance, and other official institutions.
+Unsupported and secondary-report-only figures are withheld.

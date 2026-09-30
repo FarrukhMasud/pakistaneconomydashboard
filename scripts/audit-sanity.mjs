@@ -4,36 +4,22 @@ import { readFile } from 'fs/promises';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { DATASETS, getDatasetFreshness } from './data-catalog.mjs';
+import { validateDataset, validPeriod } from './lib/dataset-validation.mjs';
+import { periodEndDate } from './lib/release-calendar.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = resolve(__dirname, '..', 'public', 'data');
-
-const MAX_AGE_DAYS = {
-  Weekly: 45,
-  Monthly: 150,
-  'Monthly (provisional)': 75,
-  'Monthly/FYTD': 180,
-  'Weekly/Monthly': 75,
-  'Quarterly/Annual': 540,
-};
 
 async function readJson(file) {
   return JSON.parse(await readFile(resolve(DATA_DIR, file), 'utf-8'));
 }
 
 function isIsoDate(value) {
-  return typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value);
+  return typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) && Boolean(periodEndDate(value));
 }
 
 function isIsoMonth(value) {
-  return typeof value === 'string' && /^\d{4}-\d{2}$/.test(value);
-}
-
-function daysSince(value) {
-  if (!isIsoDate(value) && !isIsoMonth(value)) return null;
-  const date = new Date(isIsoMonth(value) ? `${value}-01T00:00:00Z` : `${value}T00:00:00Z`);
-  if (Number.isNaN(date.getTime())) return null;
-  return Math.floor((Date.now() - date.getTime()) / 86_400_000);
+  return typeof value === 'string' && /^\d{4}-\d{2}$/.test(value) && Boolean(periodEndDate(value));
 }
 
 function assert(condition, message, failures) {
@@ -107,7 +93,7 @@ function assertFiniteSeries(series, datasetId, seriesName, failures) {
     return;
   }
   assertSorted(series.data, `${datasetId}.${seriesName}`, failures);
-  const invalid = series.data.filter((row) => !Number.isFinite(row.value));
+  const invalid = series.data.filter((row) => row.value !== null && !Number.isFinite(row.value));
   assert(invalid.length === 0, `${datasetId}: series ${seriesName} has ${invalid.length} non-numeric observations`, failures);
 }
 
@@ -195,7 +181,7 @@ async function auditKpiProvenance(failures) {
     const id = indicator.id || '(unnamed)';
     assert(Number.isFinite(indicator.value), `kpi-summary: ${id} has a non-numeric value`, failures);
     assert(Boolean(indicator.unit), `kpi-summary: ${id} does not declare a unit`, failures);
-    assert(Boolean(indicator.period), `kpi-summary: ${id} does not declare the period it refers to`, failures);
+    assert(validPeriod(indicator.period), `kpi-summary: ${id} has an invalid reporting period`, failures);
     assert(Boolean(indicator.source), `kpi-summary: ${id} does not declare a source`, failures);
 
     if (indicator.change !== null && indicator.change !== undefined) {
@@ -208,6 +194,12 @@ async function auditKpiProvenance(failures) {
     const figure = provenance.figures?.[indicator.provenanceKey];
     assert(Boolean(figure), `provenance: no citation recorded for ${id} (${indicator.provenanceKey})`, failures);
     if (!figure) continue;
+    const leaves = evidence => evidence?.artifactId ? [evidence]
+      : evidence?.derivation && Array.isArray(evidence.inputs) ? evidence.inputs.flatMap(leaves) : [];
+    const inputs = leaves(figure.evidence);
+    assert(inputs.length > 0, `provenance: ${id} has no immutable source evidence`, failures);
+    assert(inputs.length > 0 && inputs.every(input => input.locator), `provenance: ${id} has no exact source locator`, failures);
+    assert(inputs.some(input => input.retrievedAt === figure.retrievedAt), `provenance: ${id} retrieval date differs from the actual source receipt`, failures);
 
     assertNear(
       figure.value,
@@ -246,6 +238,9 @@ async function main() {
   for (const dataset of DATASETS) {
     const data = await readJson(dataset.file);
     const freshness = getDatasetFreshness(dataset, data);
+    try { validateDataset(dataset, data); }
+    catch (error) { failures.push(error.message); }
+    if (data.publication?.status === 'withheld') continue;
 
     assert(freshness.latestObservation, `${dataset.id}: missing latest observation`, failures);
     assert(freshness.dashboardUpdated, `${dataset.id}: missing dashboard update date`, failures);
@@ -257,25 +252,26 @@ async function main() {
     if (data.monthly) assertSorted(data.monthly, dataset.id, failures);
     if (data.weekly) assertSorted(data.weekly, dataset.id, failures);
 
-    const maxAge = MAX_AGE_DAYS[dataset.cadence];
-    const age = daysSince(freshness.latestObservation);
-    if (maxAge && age !== null) {
-      const staleMessage = `${dataset.id}: latest observation ${freshness.latestObservation} is ${age} days old`;
-      if (age > maxAge && !dataset.critical && data.reviewRequired === true) {
-        warnings.push(staleMessage);
-      } else {
-        assert(age <= maxAge, staleMessage, failures);
-      }
+    if (freshness.freshnessStatus === 'overdue') {
+      warnings.push(`${dataset.id}: latest observation ${freshness.latestObservation} is outside its release window`);
     }
 
     if (dataset.id === 'trade') {
       assert(data.monthly?.at(-1)?.date === freshness.latestObservation, 'trade: latest observation does not match monthly tail', failures);
-      assert(data.exportCountryPeriod, 'trade: missing export country period metadata', failures);
-      assert(data.importCountryPeriod, 'trade: missing import country period metadata', failures);
-      assert(Array.isArray(data.topExportCountries) && data.topExportCountries.length > 0, 'trade: missing top export countries', failures);
-      assert(Array.isArray(data.topImportCountries) && data.topImportCountries.length > 0, 'trade: missing top import countries', failures);
-      assert(data.countryMonthly && Array.isArray(data.countryMonthly.countries) && data.countryMonthly.countries.length > 0, 'trade: missing per-country monthly snapshot', failures);
-      assert(data.countryMonthly?.latestMonth, 'trade: countryMonthly missing latestMonth metadata', failures);
+      const countryFields = ['exportCountryPeriod', 'importCountryPeriod', 'topExportCountries', 'topImportCountries', 'countryMonthly'];
+      const countriesWithheld = data.publication?.status === 'partial'
+        && countryFields.every(field => data.publication.withheldFields?.includes(field));
+      if (countriesWithheld) {
+        assert(countryFields.every(field => data[field] == null), 'trade: withheld country observations are still exposed', failures);
+        assert(data.countryReconciliation?.some(check => check.result === 'conflict'), 'trade: country withholding has no recorded reconciliation conflict', failures);
+      } else {
+        assert(data.exportCountryPeriod, 'trade: missing export country period metadata', failures);
+        assert(data.importCountryPeriod, 'trade: missing import country period metadata', failures);
+        assert(Array.isArray(data.topExportCountries) && data.topExportCountries.length > 0, 'trade: missing top export countries', failures);
+        assert(Array.isArray(data.topImportCountries) && data.topImportCountries.length > 0, 'trade: missing top import countries', failures);
+        assert(data.countryMonthly && Array.isArray(data.countryMonthly.countries) && data.countryMonthly.countries.length > 0, 'trade: missing per-country monthly snapshot', failures);
+        assert(data.countryMonthly?.latestMonth, 'trade: countryMonthly missing latestMonth metadata', failures);
+      }
       assertContinuousMonths(data.monthly, 'trade', failures);
 
       for (const row of data.monthly || []) {
@@ -329,6 +325,7 @@ async function main() {
       );
 
       for (const row of data.monthly || []) {
+        if (row.equity === null || row.debt === null) continue;
         assertNear(
           row.equity + row.debt,
           row.net_fdi,
@@ -422,7 +419,7 @@ async function main() {
       assertContinuousMonths(data.monthly, 'remittances', failures);
       const corridors = ['saudiArabia', 'uae', 'uk', 'usa', 'otherGcc', 'eu'];
       for (const row of data.monthly || []) {
-        const namedTotal = corridors.reduce((sum, key) => sum + (row[key] || 0), 0);
+        const namedTotal = corridors.filter(key => Number.isFinite(row[key])).reduce((sum, key) => sum + row[key], 0);
         assert(
           Number.isFinite(row.total) && row.total > 0,
           `remittances: missing total for ${row.date}`,

@@ -24,6 +24,8 @@ import PlausibleAnalytics from './components/PlausibleAnalytics';
 import UpdateToast from './components/UpdateToast';
 import NotFoundSection from './components/NotFoundSection';
 import { isCoachPending, isConsentPending } from './utils/startupState';
+import DatasetTrustScope from './components/DatasetTrustScope';
+import { SECTION_DATASETS } from './utils/trustContext';
 
 function isEmbedView() {
   if (typeof window === 'undefined') return false;
@@ -352,7 +354,9 @@ function App() {
               )}
             >
               {routeKnown ? (
-                <ActiveSection />
+                <DatasetTrustScope datasetId={SECTION_DATASETS[activeSectionId]}>
+                  <ActiveSection />
+                </DatasetTrustScope>
               ) : (
                 <NotFoundSection
                   path={routePath}

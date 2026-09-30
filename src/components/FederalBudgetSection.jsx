@@ -6,19 +6,21 @@ import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import ChartCard from './ChartCard';
 import GoodBadUgly from './ui/GoodBadUgly';
-import { LoadingCard, ErrorCard } from './ui/DataState';
+import { LoadingCard, SectionState, UnavailableCard } from './ui/DataState';
+import FigureTrust from './FigureTrust';
+import { publicationOf } from '../utils/figureTrust';
 import './ui/Budget.css';
 import useI18n from '../i18n/useI18n';
 
 /** Format a PKR-billion value as ₨ X,XXX bn (or ₨ X.XX tn when large). */
 function fmtBn(val) {
-  if (val == null || Number.isNaN(val)) return '—';
+  if (!Number.isFinite(val)) return '—';
   if (Math.abs(val) >= 1000) return `₨${(val / 1000).toFixed(2)} tn`;
   return `₨${val.toLocaleString(undefined, { maximumFractionDigits: 1 })} bn`;
 }
 
 function pct(cur, prev) {
-  if (cur == null || prev == null || prev === 0) return null;
+  if (!Number.isFinite(cur) || !Number.isFinite(prev) || prev === 0) return null;
   return ((cur - prev) / Math.abs(prev)) * 100;
 }
 
@@ -33,14 +35,15 @@ function deltaSub(cur, prev) {
 
 export default function FederalBudgetSection() {
   const { tx } = useI18n();
-  const { data, loading, error, retry } = useData('budget-federal.json');
+  const state = useData('budget-federal.json');
+  const { data, loading } = state;
   const [fyIndex, setFyIndex] = useState(0);
 
   if (loading) return <LoadingCard label="Loading federal budget…" />;
-  if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load federal budget" />;
+  if (!data) return <SectionState state={state} label="Could not load federal budget" />;
 
   const { years = [], source, dataSource, lastUpdated, lastVerified, methodologyNote } = data;
-  if (years.length === 0) return <p>{tx("No budget data available.")}</p>;
+  if (years.length === 0) return <UnavailableCard sourceUrl={data.sourceUrl} />;
 
   const year = years[fyIndex] || years[0];
   const prior = years[fyIndex + 1] || null;
@@ -65,8 +68,8 @@ export default function FederalBudgetSection() {
       sub: h.primaryBalancePctGdp != null
         ? `${h.primaryBalancePctGdp >= 0 ? 'Surplus' : 'Deficit'} · ${h.primaryBalancePctGdp}% of GDP`
         : undefined,
-      sentiment: (h.primaryBalancePctGdp ?? 0) >= 0 ? 'positive' : 'negative',
-      color: (h.primaryBalancePctGdp ?? 0) >= 0 ? COLORS.teal : COLORS.coral,
+      sentiment: h.primaryBalancePctGdp == null ? 'neutral' : h.primaryBalancePctGdp >= 0 ? 'positive' : 'negative',
+      color: h.primaryBalancePctGdp == null ? undefined : h.primaryBalancePctGdp >= 0 ? COLORS.teal : COLORS.coral,
     },
     { label: 'Development (PSDP)', value: fmtBn(h.psdp), ...deltaSub(h.psdp, ph.psdp), sentiment: 'neutral' },
     {
@@ -78,7 +81,8 @@ export default function FederalBudgetSection() {
   ];
 
   // Where the rupee goes — current expenditure breakdown
-  const exp = (year.currentExpenditure || []).filter((e) => typeof e.value === 'number');
+  const exp = (year.currentExpenditure || []).filter((e) => Number.isFinite(e.value));
+  const expComplete = exp.length === (year.currentExpenditure || []).length && publicationOf(data)?.status !== 'partial';
   const expData = {
     labels: exp.map((e) => e.label),
     datasets: [{
@@ -95,8 +99,8 @@ export default function FederalBudgetSection() {
       tooltip: {
         callbacks: {
           label: (ctx) => {
-            const share = expTotal ? ((ctx.raw / expTotal) * 100).toFixed(1) : '0';
-            return `${ctx.label}: ${fmtBn(ctx.raw)} (${share}%)`;
+            const share = expTotal > 0 ? ((ctx.raw / expTotal) * 100).toFixed(1) : null;
+            return `${ctx.label}: ${fmtBn(ctx.raw)}${share == null ? '' : ` (${share}% of ${expComplete ? 'total' : 'published subset'})`}`;
           },
         },
       },
@@ -104,7 +108,8 @@ export default function FederalBudgetSection() {
   };
 
   // Where the rupee comes from — resources
-  const res = (year.resources || []).filter((e) => typeof e.value === 'number');
+  const res = (year.resources || []).filter((e) => Number.isFinite(e.value));
+  const resComplete = res.length === (year.resources || []).length && publicationOf(data)?.status !== 'partial';
   const resData = {
     labels: res.map((e) => e.label),
     datasets: [{
@@ -121,8 +126,8 @@ export default function FederalBudgetSection() {
       tooltip: {
         callbacks: {
           label: (ctx) => {
-            const share = resTotal ? ((ctx.raw / resTotal) * 100).toFixed(1) : '0';
-            return `${ctx.label}: ${fmtBn(ctx.raw)} (${share}%)`;
+            const share = resTotal > 0 ? ((ctx.raw / resTotal) * 100).toFixed(1) : null;
+            return `${ctx.label}: ${fmtBn(ctx.raw)}${share == null ? '' : ` (${share}% of ${resComplete ? 'total' : 'published subset'})`}`;
           },
         },
       },
@@ -158,7 +163,7 @@ export default function FederalBudgetSection() {
 
   // Debt servicing as a share of net revenue (computed from budget figures)
   const markup = (year.currentExpenditure || []).find((e) => e.key === 'markup')?.value ?? null;
-  const debtToRevenue = markup != null && h.netRevenue ? (markup / h.netRevenue) * 100 : null;
+  const debtToRevenue = Number.isFinite(markup) && h.netRevenue > 0 ? (markup / h.netRevenue) * 100 : null;
   if (markup != null) {
     summaryItems.push({
       label: 'Debt servicing',
@@ -166,6 +171,9 @@ export default function FederalBudgetSection() {
       sub: debtToRevenue != null ? `${debtToRevenue.toFixed(0)}% of net revenue` : undefined,
       sentiment: 'negative',
       color: COLORS.coral,
+      row: (year.currentExpenditure || []).find((item) => item.key === 'markup'),
+      period: year.label,
+      derivation: debtToRevenue == null ? undefined : 'Debt servicing ÷ net revenue × 100',
     });
   }
 
@@ -215,6 +223,7 @@ export default function FederalBudgetSection() {
       sub: m.priorPctGdp != null ? `vs ${m.priorPctGdp}% last year${m.highlight ? ` · ${m.highlight}` : ''}` : (m.highlight || undefined),
       sentiment: improved == null ? 'neutral' : improved ? 'positive' : 'negative',
       color: improved == null ? undefined : improved ? COLORS.teal : COLORS.coral,
+      row: m, period: ex.period,
     };
   };
   const exItems = ex ? [
@@ -261,6 +270,8 @@ export default function FederalBudgetSection() {
         title={`Federal Budget — ${year.label}${year.presented ? ` (presented ${year.presented})` : ''}`}
         accent={COLORS.teal}
         items={summaryItems}
+        row={year}
+        period={year.label}
         footnote={`Source: ${source || dataSource}. Budgeted estimates; figures may be revised at year-end.`}
       />
 
@@ -268,6 +279,9 @@ export default function FederalBudgetSection() {
         {res.length > 0 && (
           <ChartCard
             title="Where the Rupee Comes From"
+            evidenceRows={res.map((item) => ({ ...item, period: year.label }))}
+            dataCoverage={year.label}
+            derivation={`Composition percentages = amount ÷ sum of ${resComplete ? 'all' : 'available published'} resource rows × 100`}
             description="Composition of gross federal revenue by source — FBR tax revenue versus non-tax revenue (SBP profits, petroleum levy, dividends and surcharges). The bulk of FBR collection is shared with the provinces under the NFC Award before the federal government spends what remains."
             source="Finance Division — Budget in Brief"
             dataSource={source || dataSource}
@@ -282,6 +296,9 @@ export default function FederalBudgetSection() {
         {exp.length > 0 && (
           <ChartCard
             title="Where the Rupee Goes"
+            evidenceRows={exp.map((item) => ({ ...item, period: year.label }))}
+            dataCoverage={year.label}
+            derivation={`Composition percentages = amount ÷ sum of ${expComplete ? 'all' : 'available published'} expenditure rows × 100`}
             description="Composition of current (non-development) federal expenditure — markup/debt servicing, defence affairs, pensions, subsidies, grants and running of civil government — plus the development budget. The single largest line is almost always interest on debt."
             source="Finance Division — Budget in Brief"
             dataSource={source || dataSource}
@@ -296,6 +313,8 @@ export default function FederalBudgetSection() {
         {hasCompare && (
           <ChartCard
             title="This Year vs Last Year"
+            evidenceRows={[prior, year]}
+            dataCoverage={`${prior.label} / ${year.label}`}
             description="Year-on-year comparison of the headline budget aggregates: total outlay, FBR tax target, development budget (PSDP) and the budgeted fiscal deficit, in PKR billion."
             source="Finance Division — Budget in Brief"
             dataSource={source || dataSource}
@@ -320,6 +339,8 @@ export default function FederalBudgetSection() {
               title={`Actuals — ${ex.period || year.label}`}
               accent={COLORS.purple}
               items={exItems}
+              row={ex}
+              period={ex.period}
               footnote={`Source: ${ex.publishedBy || 'Ministry of Finance — Fiscal Operations'}. Actual realised figures, ${ex.period || 'year-to-date'}.`}
             />
           )}
@@ -327,6 +348,8 @@ export default function FederalBudgetSection() {
           {exCompare.length > 0 && (
             <ChartCard
               title="Actual Spend & Revenue — This Year vs Last Year"
+              evidenceRows={exCompare.map((item) => ({ ...item, period: ex.period }))}
+              dataCoverage={ex.period}
               description="Realised federal fiscal aggregates compared with the same period a year earlier (PKR billion). A falling deficit and interest bill alongside a rising primary surplus indicates genuine consolidation; the % of GDP appears in the tooltip."
               source={ex.publishedBy || 'Ministry of Finance — Fiscal Operations'}
               dataSource={ex.publishedBy || source || dataSource}
@@ -366,13 +389,14 @@ export default function FederalBudgetSection() {
         </div>
       )}
 
-      <GoodBadUgly
+      {publicationOf(data)?.status !== 'partial' && <GoodBadUgly
         commentary={year.commentary}
         title={`Budget ${year.label}: The Good, the Bad & the Ugly`}
-      />
+      />}
 
       <div className="budget-disclaimer card">
-        <p>ⓘ {methodologyNote || 'Budget figures are budgeted estimates from official Finance Division documents. The commentary is editorial opinion, clearly labelled, and grounded in the official figures shown.'}{lastVerified && <> Last verified: {lastVerified}.</>}</p>
+        <p>ⓘ {methodologyNote || 'Budget figures are budgeted estimates from official Finance Division documents. The commentary is editorial opinion, clearly labelled, and grounded in the official figures shown.'}{lastVerified && <> Source checked: {lastVerified}.</>}</p>
+        <FigureTrust datasetId="budget-federal" row={year} period={year.label} />
         {year.sources?.length > 0 && (
           <details className="budget-sources">
             <summary>Sources &amp; references ({year.sources.length})</summary>
@@ -391,4 +415,3 @@ export default function FederalBudgetSection() {
     </section>
   );
 }
-

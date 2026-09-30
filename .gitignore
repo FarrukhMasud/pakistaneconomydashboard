@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 .env
+.data-update.lock
 
 # Downloaded SBP data files (re-downloaded by npm run update)
 scripts/sbp-raw/

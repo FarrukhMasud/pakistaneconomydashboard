@@ -2,7 +2,8 @@ import { Bar } from 'react-chartjs-2';
 import { useData } from '../hooks/useData';
 import { COLORS, baseBarOptions } from '../utils/chartConfig';
 import TrackerFooter from './ui/TrackerFooter';
-import { LoadingCard, ErrorCard } from './ui/DataState';
+import { LoadingCard, ErrorCard, PublicationNotice } from './ui/DataState';
+import FigureTrust from './FigureTrust';
 import './ui/Trackers.css';
 import useI18n from '../i18n/useI18n';
 import ChartCard from './ChartCard';
@@ -15,9 +16,9 @@ function fmtPkr(bn) {
 
 export default function CircularDebtTracker() {
   const { t, tx } = useI18n();
-  const { data, loading, error, retry } = useData('circular-debt.json');
+  const { data, loading, error, retry, unavailable } = useData('circular-debt.json');
   if (loading) return <LoadingCard label="Loading circular debt tracker…" />;
-  if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load circular debt tracker" compact />;
+  if (error || !data) return <ErrorCard error={error} unavailable={unavailable} onRetry={retry} label="Could not load circular debt tracker" compact />;
 
   const { current, yoy, fytdBuildup, powerVsGas, stockTrend = [], targets = [], reforms = [], sourceUrl, lastVerified, verifiedFrom, methodologyNote } = data;
 
@@ -45,43 +46,50 @@ export default function CircularDebtTracker() {
 
   return (
     <div className="tracker card">
+      <PublicationNotice data={data} />
       <div className="tracker__header">
         <h3>⚡ Power Circular Debt Tracker</h3>
         <span className="tracker__badge">{fmtPkr(current?.stock)}</span>
       </div>
       <p className="tracker__subtitle">
-        Circular debt is the unpaid stock cascading through the power supply chain — a core IMF structural benchmark. The stock is falling year-on-year, but fresh debt is still being added, so the IMF's "zero net addition" goal is under pressure.
+        Circular debt is the unpaid stock cascading through the power supply chain. Stock, annual change and new additions are separate measures; unavailable figures are not inferred.
       </p>
 
       <div className="tracker__stats">
         <div className="tracker-stat">
           <span className="tracker-stat__label">{tx("Current stock")}</span>
           <span className="tracker-stat__value">{fmtPkr(current?.stock)}</span>
-          <span className="tracker-stat__sub">end-Apr 2026 · IMF est. {fmtPkr(current?.imfEstimate)}</span>
+          <span className="tracker-stat__sub">{current?.asOf}</span>
+          <FigureTrust datasetId="circular-debt" data={data} row={current} period={current?.asOf} compact />
         </div>
         <div className="tracker-stat">
           <span className="tracker-stat__label">{tx("Year-on-year")}</span>
-          <span className="tracker-stat__value" style={{ color: COLORS.teal }}>{yoy?.changePct}%</span>
-          <span className="tracker-stat__sub">from {fmtPkr(yoy?.priorStock)} (Apr 2025)</span>
+          <span className="tracker-stat__value">{Number.isFinite(yoy?.changePct) ? `${yoy.changePct}%` : '—'}</span>
+          <span className="tracker-stat__sub">from {fmtPkr(yoy?.priorStock)} · {yoy?.priorAsOf}</span>
+          <FigureTrust datasetId="circular-debt" data={data} row={yoy} period={current?.asOf} field="yoy" compact />
         </div>
         <div className="tracker-stat">
           <span className="tracker-stat__label">{fytdBuildup?.period ? `Buildup · ${fytdBuildup.period}` : tx("FYTD buildup")}</span>
-          <span className="tracker-stat__value" style={{ color: COLORS.coral }}>+{fmtPkr(fytdBuildup?.value)}</span>
-          <span className="tracker-stat__sub">vs +{fmtPkr(fytdBuildup?.priorValue)} same period a year earlier</span>
+          <span className="tracker-stat__value">{fmtPkr(fytdBuildup?.value)}</span>
+          <span className="tracker-stat__sub">vs {fmtPkr(fytdBuildup?.priorValue)} same period a year earlier</span>
+          <FigureTrust datasetId="circular-debt" data={data} row={fytdBuildup} period={fytdBuildup?.period} field="fytdBuildup" compact />
         </div>
         <div className="tracker-stat">
           <span className="tracker-stat__label">Power + gas combined</span>
           <span className="tracker-stat__value">{fmtPkr(powerVsGas?.combined)}</span>
           <span className="tracker-stat__sub">incl. gas {fmtPkr(powerVsGas?.gas)}</span>
+          <FigureTrust datasetId="circular-debt" data={data} row={powerVsGas} period={powerVsGas?.asOf} field="powerVsGas" compact />
         </div>
       </div>
 
       {stockTrend.length > 1 && (
         <ChartCard
+          datasetId="circular-debt"
+          evidenceRows={stockTrend}
           chartId="chart-power-circular-debt-stock"
           title={t('chart.circularDebtStock', 'Power circular debt stock')}
           rangeMode="comparison"
-          dataSource={t('chart.circularDebtSource', 'Power Division / IMF via financial reporting')}
+          dataSource="Power Division / IMF"
           dataCoverage={stockTrend.at(-1)?.label}
           lastUpdated={lastVerified}
         >

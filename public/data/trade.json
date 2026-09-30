@@ -4,903 +4,4993 @@
       "date": "2021-01",
       "imports": 4412,
       "exports": 2100,
-      "balance": -2312
+      "balance": -2312,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 724,
+            "column": 5,
+            "cell": "E724"
+          },
+          "rawValue": 2099.980226
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 724,
+            "column": 9,
+            "cell": "I724"
+          },
+          "rawValue": 4411.999524560317
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 724,
+            "column": 13,
+            "cell": "M724"
+          },
+          "rawValue": -2312.0192985603167
+        }
+      }
     },
     {
       "date": "2021-02",
       "imports": 4476,
       "exports": 2184,
-      "balance": -2292
+      "balance": -2292,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 725,
+            "column": 5,
+            "cell": "E725"
+          },
+          "rawValue": 2183.9585106289646
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 725,
+            "column": 9,
+            "cell": "I725"
+          },
+          "rawValue": 4476.039735352699
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 725,
+            "column": 13,
+            "cell": "M725"
+          },
+          "rawValue": -2292.081224723734
+        }
+      }
     },
     {
       "date": "2021-03",
       "imports": 5392,
       "exports": 2616,
-      "balance": -2776
+      "balance": -2776,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 726,
+            "column": 5,
+            "cell": "E726"
+          },
+          "rawValue": 2616.0230512355743
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 726,
+            "column": 9,
+            "cell": "I726"
+          },
+          "rawValue": 5391.964827781289
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 726,
+            "column": 13,
+            "cell": "M726"
+          },
+          "rawValue": -2775.941776545715
+        }
+      }
     },
     {
       "date": "2021-04",
       "imports": 4975,
       "exports": 2304,
-      "balance": -2671
+      "balance": -2671,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 727,
+            "column": 5,
+            "cell": "E727"
+          },
+          "rawValue": 2303.958905025422
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 727,
+            "column": 9,
+            "cell": "I727"
+          },
+          "rawValue": 4974.962849987959
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 727,
+            "column": 13,
+            "cell": "M727"
+          },
+          "rawValue": -2671.003944962537
+        }
+      }
     },
     {
       "date": "2021-05",
       "imports": 4934,
       "exports": 2130,
-      "balance": -2804
+      "balance": -2804,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 728,
+            "column": 5,
+            "cell": "E728"
+          },
+          "rawValue": 2130.0041442475745
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 728,
+            "column": 9,
+            "cell": "I728"
+          },
+          "rawValue": 4933.9768829551185
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 728,
+            "column": 13,
+            "cell": "M728"
+          },
+          "rawValue": -2803.972738707544
+        }
+      }
     },
     {
       "date": "2021-06",
       "imports": 6302,
       "exports": 2492,
-      "balance": -3810
+      "balance": -3810,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 729,
+            "column": 5,
+            "cell": "E729"
+          },
+          "rawValue": 2491.985375128079
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 729,
+            "column": 9,
+            "cell": "I729"
+          },
+          "rawValue": 6301.988525846348
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 729,
+            "column": 13,
+            "cell": "M729"
+          },
+          "rawValue": -3810.0031507182694
+        }
+      }
     },
     {
       "date": "2021-07",
       "imports": 5278,
       "exports": 2234,
-      "balance": -3044
+      "balance": -3044,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 731,
+            "column": 5,
+            "cell": "E731"
+          },
+          "rawValue": 2234.0233159182026
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 731,
+            "column": 9,
+            "cell": "I731"
+          },
+          "rawValue": 5277.989146933155
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 731,
+            "column": 13,
+            "cell": "M731"
+          },
+          "rawValue": -3043.9658310149525
+        }
+      }
     },
     {
       "date": "2021-08",
       "imports": 5869,
       "exports": 2339,
-      "balance": -3530
+      "balance": -3530,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 732,
+            "column": 5,
+            "cell": "E732"
+          },
+          "rawValue": 2338.976621387678
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 732,
+            "column": 9,
+            "cell": "I732"
+          },
+          "rawValue": 5869.019026044584
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 732,
+            "column": 13,
+            "cell": "M732"
+          },
+          "rawValue": -3530.0424046569065
+        }
+      }
     },
     {
       "date": "2021-09",
       "imports": 5951,
       "exports": 2627,
-      "balance": -3324
+      "balance": -3324,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 733,
+            "column": 5,
+            "cell": "E733"
+          },
+          "rawValue": 2627.0216342854565
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 733,
+            "column": 9,
+            "cell": "I733"
+          },
+          "rawValue": 5951.018056598439
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 733,
+            "column": 13,
+            "cell": "M733"
+          },
+          "rawValue": -3323.9964223129828
+        }
+      }
     },
     {
       "date": "2021-10",
       "imports": 5776,
       "exports": 2375,
-      "balance": -3401
+      "balance": -3401,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 734,
+            "column": 5,
+            "cell": "E734"
+          },
+          "rawValue": 2375.018532269378
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 734,
+            "column": 9,
+            "cell": "I734"
+          },
+          "rawValue": 5775.95011951704
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 734,
+            "column": 13,
+            "cell": "M734"
+          },
+          "rawValue": -3400.931587247662
+        }
+      }
     },
     {
       "date": "2021-11",
       "imports": 6252,
       "exports": 2737,
-      "balance": -3515
+      "balance": -3515,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 735,
+            "column": 5,
+            "cell": "E735"
+          },
+          "rawValue": 2736.9537877152143
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 735,
+            "column": 9,
+            "cell": "I735"
+          },
+          "rawValue": 6252.001733931212
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 735,
+            "column": 13,
+            "cell": "M735"
+          },
+          "rawValue": -3515.0479462159974
+        }
+      }
     },
     {
       "date": "2021-12",
       "imports": 6310,
       "exports": 2930,
-      "balance": -3380
+      "balance": -3380,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 736,
+            "column": 5,
+            "cell": "E736"
+          },
+          "rawValue": 2930.0290150791907
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 736,
+            "column": 9,
+            "cell": "I736"
+          },
+          "rawValue": 6309.988651057804
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 736,
+            "column": 13,
+            "cell": "M736"
+          },
+          "rawValue": -3379.9596359786137
+        }
+      }
     },
     {
       "date": "2022-01",
       "imports": 6130,
       "exports": 2503,
-      "balance": -3627
+      "balance": -3627,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 737,
+            "column": 5,
+            "cell": "E737"
+          },
+          "rawValue": 2502.9555491823485
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 737,
+            "column": 9,
+            "cell": "I737"
+          },
+          "rawValue": 6130.008567386755
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 737,
+            "column": 13,
+            "cell": "M737"
+          },
+          "rawValue": -3627.0530182044067
+        }
+      }
     },
     {
       "date": "2022-02",
       "imports": 5066,
       "exports": 2890,
-      "balance": -2176
+      "balance": -2176,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 738,
+            "column": 5,
+            "cell": "E738"
+          },
+          "rawValue": 2890.017180431055
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 738,
+            "column": 9,
+            "cell": "I738"
+          },
+          "rawValue": 5065.986501758795
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 738,
+            "column": 13,
+            "cell": "M738"
+          },
+          "rawValue": -2175.9693213277405
+        }
+      }
     },
     {
       "date": "2022-03",
       "imports": 6114,
       "exports": 3071,
-      "balance": -3043
+      "balance": -3043,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 739,
+            "column": 5,
+            "cell": "E739"
+          },
+          "rawValue": 3070.992293188006
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 739,
+            "column": 9,
+            "cell": "I739"
+          },
+          "rawValue": 6114.049320948675
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 739,
+            "column": 13,
+            "cell": "M739"
+          },
+          "rawValue": -3043.057027760669
+        }
+      }
     },
     {
       "date": "2022-04",
       "imports": 5959,
       "exports": 3152,
-      "balance": -2807
+      "balance": -2807,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 740,
+            "column": 5,
+            "cell": "E740"
+          },
+          "rawValue": 3152.007945827808
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 740,
+            "column": 9,
+            "cell": "I740"
+          },
+          "rawValue": 5958.979308520333
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 740,
+            "column": 13,
+            "cell": "M740"
+          },
+          "rawValue": -2806.971362692525
+        }
+      }
     },
     {
       "date": "2022-05",
       "imports": 5634,
       "exports": 2505,
-      "balance": -3129
+      "balance": -3129,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 741,
+            "column": 5,
+            "cell": "E741"
+          },
+          "rawValue": 2504.967154112951
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 741,
+            "column": 9,
+            "cell": "I741"
+          },
+          "rawValue": 5633.989875325708
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 741,
+            "column": 13,
+            "cell": "M741"
+          },
+          "rawValue": -3129.0227212127575
+        }
+      }
     },
     {
       "date": "2022-06",
       "imports": 7204,
       "exports": 3130,
-      "balance": -4074
+      "balance": -4074,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 742,
+            "column": 5,
+            "cell": "E742"
+          },
+          "rawValue": 3129.9794607571393
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 742,
+            "column": 9,
+            "cell": "I742"
+          },
+          "rawValue": 7203.978709475245
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 742,
+            "column": 13,
+            "cell": "M742"
+          },
+          "rawValue": -4073.9992487181053
+        }
+      }
     },
     {
       "date": "2022-07",
       "imports": 5562,
       "exports": 2215,
-      "balance": -3347
+      "balance": -3347,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 744,
+            "column": 5,
+            "cell": "E744"
+          },
+          "rawValue": 2214.993046547123
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 744,
+            "column": 9,
+            "cell": "I744"
+          },
+          "rawValue": 5561.993782369797
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 744,
+            "column": 13,
+            "cell": "M744"
+          },
+          "rawValue": -3347.0007358226744
+        }
+      }
     },
     {
       "date": "2022-08",
       "imports": 6007,
       "exports": 2734,
-      "balance": -3273
+      "balance": -3273,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 745,
+            "column": 5,
+            "cell": "E745"
+          },
+          "rawValue": 2734.0293481730523
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 745,
+            "column": 9,
+            "cell": "I745"
+          },
+          "rawValue": 6007.027254998223
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 745,
+            "column": 13,
+            "cell": "M745"
+          },
+          "rawValue": -3272.9979068251705
+        }
+      }
     },
     {
       "date": "2022-09",
       "imports": 4951,
       "exports": 2438,
-      "balance": -2513
+      "balance": -2513,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 746,
+            "column": 5,
+            "cell": "E746"
+          },
+          "rawValue": 2437.9823034779533
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 746,
+            "column": 9,
+            "cell": "I746"
+          },
+          "rawValue": 4950.962304168228
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 746,
+            "column": 13,
+            "cell": "M746"
+          },
+          "rawValue": -2512.9800006902747
+        }
+      }
     },
     {
       "date": "2022-10",
       "imports": 4657,
       "exports": 2281,
-      "balance": -2376
+      "balance": -2376,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 747,
+            "column": 5,
+            "cell": "E747"
+          },
+          "rawValue": 2281.0226513957045
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 747,
+            "column": 9,
+            "cell": "I747"
+          },
+          "rawValue": 4656.974725593739
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 747,
+            "column": 13,
+            "cell": "M747"
+          },
+          "rawValue": -2375.9520741980346
+        }
+      }
     },
     {
       "date": "2022-11",
       "imports": 4340,
       "exports": 2246,
-      "balance": -2094
+      "balance": -2094,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 748,
+            "column": 5,
+            "cell": "E748"
+          },
+          "rawValue": 2246.0353139332515
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 748,
+            "column": 9,
+            "cell": "I748"
+          },
+          "rawValue": 4339.979248142514
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 748,
+            "column": 13,
+            "cell": "M748"
+          },
+          "rawValue": -2093.9439342092624
+        }
+      }
     },
     {
       "date": "2022-12",
       "imports": 4256,
       "exports": 2308,
-      "balance": -1948
+      "balance": -1948,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 749,
+            "column": 5,
+            "cell": "E749"
+          },
+          "rawValue": 2307.986095889286
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 749,
+            "column": 9,
+            "cell": "I749"
+          },
+          "rawValue": 4256.0374162516855
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 749,
+            "column": 13,
+            "cell": "M749"
+          },
+          "rawValue": -1948.0513203623996
+        }
+      }
     },
     {
       "date": "2023-01",
       "imports": 4109,
       "exports": 2222,
-      "balance": -1887
+      "balance": -1887,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 750,
+            "column": 5,
+            "cell": "E750"
+          },
+          "rawValue": 2221.93087970701
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 750,
+            "column": 9,
+            "cell": "I750"
+          },
+          "rawValue": 4109.038474063079
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 750,
+            "column": 13,
+            "cell": "M750"
+          },
+          "rawValue": -1887.107594356069
+        }
+      }
     },
     {
       "date": "2023-02",
       "imports": 4104,
       "exports": 2199,
-      "balance": -1905
+      "balance": -1905,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 751,
+            "column": 5,
+            "cell": "E751"
+          },
+          "rawValue": 2199.022699529172
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 751,
+            "column": 9,
+            "cell": "I751"
+          },
+          "rawValue": 4104.023746256868
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 751,
+            "column": 13,
+            "cell": "M751"
+          },
+          "rawValue": -1905.0010467276966
+        }
+      }
     },
     {
       "date": "2023-03",
       "imports": 4158,
       "exports": 2422,
-      "balance": -1736
+      "balance": -1736,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 752,
+            "column": 5,
+            "cell": "E752"
+          },
+          "rawValue": 2422.0108471571943
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 752,
+            "column": 9,
+            "cell": "I752"
+          },
+          "rawValue": 4157.9555383243705
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 752,
+            "column": 13,
+            "cell": "M752"
+          },
+          "rawValue": -1735.9446911671762
+        }
+      }
     },
     {
       "date": "2023-04",
       "imports": 3622,
       "exports": 2135,
-      "balance": -1487
+      "balance": -1487,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 753,
+            "column": 5,
+            "cell": "E753"
+          },
+          "rawValue": 2134.983046425442
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 753,
+            "column": 9,
+            "cell": "I753"
+          },
+          "rawValue": 3622.049274347249
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 753,
+            "column": 13,
+            "cell": "M753"
+          },
+          "rawValue": -1487.0662279218072
+        }
+      }
     },
     {
       "date": "2023-05",
       "imports": 3752,
       "exports": 2565,
-      "balance": -1187
+      "balance": -1187,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 754,
+            "column": 5,
+            "cell": "E754"
+          },
+          "rawValue": 2564.95948151561
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 754,
+            "column": 9,
+            "cell": "I754"
+          },
+          "rawValue": 3751.989588375021
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 754,
+            "column": 13,
+            "cell": "M754"
+          },
+          "rawValue": -1187.0301068594108
+        }
+      }
     },
     {
       "date": "2023-06",
       "imports": 3177,
       "exports": 2111,
-      "balance": -1066
+      "balance": -1066,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 755,
+            "column": 5,
+            "cell": "E755"
+          },
+          "rawValue": 2110.9720685287302
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 755,
+            "column": 9,
+            "cell": "I755"
+          },
+          "rawValue": 3177.039503668383
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 755,
+            "column": 13,
+            "cell": "M755"
+          },
+          "rawValue": -1066.0674351396528
+        }
+      }
     },
     {
       "date": "2023-07",
       "imports": 4149,
       "exports": 2104,
-      "balance": -2045
+      "balance": -2045,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 757,
+            "column": 5,
+            "cell": "E757"
+          },
+          "rawValue": 2103.986530393867
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 757,
+            "column": 9,
+            "cell": "I757"
+          },
+          "rawValue": 4148.955561595264
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 757,
+            "column": 13,
+            "cell": "M757"
+          },
+          "rawValue": -2044.9690312013972
+        }
+      }
     },
     {
       "date": "2023-08",
       "imports": 4218,
       "exports": 2411,
-      "balance": -1807
+      "balance": -1807,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 758,
+            "column": 5,
+            "cell": "E758"
+          },
+          "rawValue": 2411.043303237432
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 758,
+            "column": 9,
+            "cell": "I758"
+          },
+          "rawValue": 4218.021672920184
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 758,
+            "column": 13,
+            "cell": "M758"
+          },
+          "rawValue": -1806.9783696827517
+        }
+      }
     },
     {
       "date": "2023-09",
       "imports": 3929,
       "exports": 2439,
-      "balance": -1490
+      "balance": -1490,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 759,
+            "column": 5,
+            "cell": "E759"
+          },
+          "rawValue": 2438.951421048044
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 759,
+            "column": 9,
+            "cell": "I759"
+          },
+          "rawValue": 3929.025636983685
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 759,
+            "column": 13,
+            "cell": "M759"
+          },
+          "rawValue": -1490.0742159356414
+        }
+      }
     },
     {
       "date": "2023-10",
       "imports": 4382,
       "exports": 2721,
-      "balance": -1661
+      "balance": -1661,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 760,
+            "column": 5,
+            "cell": "E760"
+          },
+          "rawValue": 2721.0393509161404
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 760,
+            "column": 9,
+            "cell": "I760"
+          },
+          "rawValue": 4381.992597400988
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 760,
+            "column": 13,
+            "cell": "M760"
+          },
+          "rawValue": -1660.953246484848
+        }
+      }
     },
     {
       "date": "2023-11",
       "imports": 4537,
       "exports": 2697,
-      "balance": -1840
+      "balance": -1840,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 761,
+            "column": 5,
+            "cell": "E761"
+          },
+          "rawValue": 2696.9907487727073
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 761,
+            "column": 9,
+            "cell": "I761"
+          },
+          "rawValue": 4536.985460053413
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 761,
+            "column": 13,
+            "cell": "M761"
+          },
+          "rawValue": -1839.9947112807054
+        }
+      }
     },
     {
       "date": "2023-12",
       "imports": 4200,
       "exports": 2783,
-      "balance": -1417
+      "balance": -1417,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 762,
+            "column": 5,
+            "cell": "E762"
+          },
+          "rawValue": 2783.0013376775755
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 762,
+            "column": 9,
+            "cell": "I762"
+          },
+          "rawValue": 4199.9721453773245
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 762,
+            "column": 13,
+            "cell": "M762"
+          },
+          "rawValue": -1416.970807699749
+        }
+      }
     },
     {
       "date": "2024-01",
       "imports": 4686,
       "exports": 2680,
-      "balance": -2006
+      "balance": -2006,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 763,
+            "column": 5,
+            "cell": "E763"
+          },
+          "rawValue": 2679.964431936977
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 763,
+            "column": 9,
+            "cell": "I763"
+          },
+          "rawValue": 4685.950464429592
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 763,
+            "column": 13,
+            "cell": "M763"
+          },
+          "rawValue": -2005.9860324926153
+        }
+      }
     },
     {
       "date": "2024-02",
       "imports": 4383,
       "exports": 2534,
-      "balance": -1849
+      "balance": -1849,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 764,
+            "column": 5,
+            "cell": "E764"
+          },
+          "rawValue": 2533.955915114013
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 764,
+            "column": 9,
+            "cell": "I764"
+          },
+          "rawValue": 4383.000358052389
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 764,
+            "column": 13,
+            "cell": "M764"
+          },
+          "rawValue": -1849.044442938376
+        }
+      }
     },
     {
       "date": "2024-03",
       "imports": 4573,
       "exports": 2523,
-      "balance": -2050
+      "balance": -2050,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 765,
+            "column": 5,
+            "cell": "E765"
+          },
+          "rawValue": 2523.0397007145048
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 765,
+            "column": 9,
+            "cell": "I765"
+          },
+          "rawValue": 4572.969520452146
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 765,
+            "column": 13,
+            "cell": "M765"
+          },
+          "rawValue": -2049.929819737641
+        }
+      }
     },
     {
       "date": "2024-04",
       "imports": 4448,
       "exports": 2638,
-      "balance": -1810
+      "balance": -1810,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 766,
+            "column": 5,
+            "cell": "E766"
+          },
+          "rawValue": 2638.0318717471932
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 766,
+            "column": 9,
+            "cell": "I766"
+          },
+          "rawValue": 4447.978625109736
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 766,
+            "column": 13,
+            "cell": "M766"
+          },
+          "rawValue": -1809.9467533625425
+        }
+      }
     },
     {
       "date": "2024-05",
       "imports": 5014,
       "exports": 3007,
-      "balance": -2007
+      "balance": -2007,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 767,
+            "column": 5,
+            "cell": "E767"
+          },
+          "rawValue": 3006.9543286980547
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 767,
+            "column": 9,
+            "cell": "I767"
+          },
+          "rawValue": 5013.999427504672
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 767,
+            "column": 13,
+            "cell": "M767"
+          },
+          "rawValue": -2007.0450988066173
+        }
+      }
     },
     {
       "date": "2024-06",
       "imports": 4638,
       "exports": 2443,
-      "balance": -2195
+      "balance": -2195,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 768,
+            "column": 5,
+            "cell": "E768"
+          },
+          "rawValue": 2443.0050904448954
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 768,
+            "column": 9,
+            "cell": "I768"
+          },
+          "rawValue": 4637.970811633002
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 768,
+            "column": 13,
+            "cell": "M768"
+          },
+          "rawValue": -2194.9657211881067
+        }
+      }
     },
     {
       "date": "2024-07",
       "imports": 4850,
       "exports": 2365,
-      "balance": -2485
+      "balance": -2485,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 770,
+            "column": 5,
+            "cell": "E770"
+          },
+          "rawValue": 2364.9884422557466
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 770,
+            "column": 9,
+            "cell": "I770"
+          },
+          "rawValue": 4849.957315524777
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 770,
+            "column": 13,
+            "cell": "M770"
+          },
+          "rawValue": -2484.9688732690306
+        }
+      }
     },
     {
       "date": "2024-08",
       "imports": 4708,
       "exports": 2439,
-      "balance": -2269
+      "balance": -2269,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 771,
+            "column": 5,
+            "cell": "E771"
+          },
+          "rawValue": 2438.9763362736353
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 771,
+            "column": 9,
+            "cell": "I771"
+          },
+          "rawValue": 4707.996144217586
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 771,
+            "column": 13,
+            "cell": "M771"
+          },
+          "rawValue": -2269.019807943951
+        }
+      }
     },
     {
       "date": "2024-09",
       "imports": 4691,
       "exports": 2616,
-      "balance": -2075
+      "balance": -2075,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 772,
+            "column": 5,
+            "cell": "E772"
+          },
+          "rawValue": 2615.9727536455925
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 772,
+            "column": 9,
+            "cell": "I772"
+          },
+          "rawValue": 4691.010676379278
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 772,
+            "column": 13,
+            "cell": "M772"
+          },
+          "rawValue": -2075.0379227336857
+        }
+      }
     },
     {
       "date": "2024-10",
       "imports": 4647,
       "exports": 3006,
-      "balance": -1641
+      "balance": -1641,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 773,
+            "column": 5,
+            "cell": "E773"
+          },
+          "rawValue": 3006.03211813674
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 773,
+            "column": 9,
+            "cell": "I773"
+          },
+          "rawValue": 4646.996517214024
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 773,
+            "column": 13,
+            "cell": "M773"
+          },
+          "rawValue": -1640.9643990772838
+        }
+      }
     },
     {
       "date": "2024-11",
       "imports": 4119,
       "exports": 2790,
-      "balance": -1329
+      "balance": -1329,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 774,
+            "column": 5,
+            "cell": "E774"
+          },
+          "rawValue": 2790.004825784087
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 774,
+            "column": 9,
+            "cell": "I774"
+          },
+          "rawValue": 4119.026112984305
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 774,
+            "column": 13,
+            "cell": "M774"
+          },
+          "rawValue": -1329.0212872002176
+        }
+      }
     },
     {
       "date": "2024-12",
       "imports": 4894,
       "exports": 3109,
-      "balance": -1785
+      "balance": -1785,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 775,
+            "column": 5,
+            "cell": "E775"
+          },
+          "rawValue": 3109.034684566127
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 775,
+            "column": 9,
+            "cell": "I775"
+          },
+          "rawValue": 4893.976456182777
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 775,
+            "column": 13,
+            "cell": "M775"
+          },
+          "rawValue": -1784.94177161665
+        }
+      }
     },
     {
       "date": "2025-01",
       "imports": 5481,
       "exports": 3009,
-      "balance": -2472
+      "balance": -2472,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 776,
+            "column": 5,
+            "cell": "E776"
+          },
+          "rawValue": 3008.9649976114815
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 776,
+            "column": 9,
+            "cell": "I776"
+          },
+          "rawValue": 5481.006427659352
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 776,
+            "column": 13,
+            "cell": "M776"
+          },
+          "rawValue": -2472.0414300478706
+        }
+      }
     },
     {
       "date": "2025-02",
       "imports": 5051,
       "exports": 2609,
-      "balance": -2442
+      "balance": -2442,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 777,
+            "column": 5,
+            "cell": "E777"
+          },
+          "rawValue": 2608.9535179820623
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 777,
+            "column": 9,
+            "cell": "I777"
+          },
+          "rawValue": 5051.007581950805
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 777,
+            "column": 13,
+            "cell": "M777"
+          },
+          "rawValue": -2442.0540639687424
+        }
+      }
     },
     {
       "date": "2025-03",
       "imports": 4938,
       "exports": 2759,
-      "balance": -2179
+      "balance": -2179,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 778,
+            "column": 5,
+            "cell": "E778"
+          },
+          "rawValue": 2759.02360000614
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 778,
+            "column": 9,
+            "cell": "I778"
+          },
+          "rawValue": 4938.005694487745
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 778,
+            "column": 13,
+            "cell": "M778"
+          },
+          "rawValue": -2178.982094481605
+        }
+      }
     },
     {
       "date": "2025-04",
       "imports": 5246,
       "exports": 2606,
-      "balance": -2640
+      "balance": -2640,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 779,
+            "column": 5,
+            "cell": "E779"
+          },
+          "rawValue": 2606.0122522146157
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 779,
+            "column": 9,
+            "cell": "I779"
+          },
+          "rawValue": 5245.950188997071
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 779,
+            "column": 13,
+            "cell": "M779"
+          },
+          "rawValue": -2639.937936782455
+        }
+      }
     },
     {
       "date": "2025-05",
       "imports": 5501,
       "exports": 2444,
-      "balance": -3057
+      "balance": -3057,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 780,
+            "column": 5,
+            "cell": "E780"
+          },
+          "rawValue": 2444.0020881621663
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 780,
+            "column": 9,
+            "cell": "I780"
+          },
+          "rawValue": 5501.040270493438
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 780,
+            "column": 13,
+            "cell": "M780"
+          },
+          "rawValue": -3057.0381823312714
+        }
+      }
     },
     {
       "date": "2025-06",
       "imports": 5020,
       "exports": 2591,
-      "balance": -2429
+      "balance": -2429,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 781,
+            "column": 5,
+            "cell": "E781"
+          },
+          "rawValue": 2590.982443905514
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 781,
+            "column": 9,
+            "cell": "I781"
+          },
+          "rawValue": 5020.045573203479
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 781,
+            "column": 13,
+            "cell": "M781"
+          },
+          "rawValue": -2429.0631292979647
+        }
+      }
     },
     {
       "date": "2025-07",
       "imports": 5429,
       "exports": 2750,
-      "balance": -2679
+      "balance": -2679,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 783,
+            "column": 5,
+            "cell": "E783"
+          },
+          "rawValue": 2750.012407196279
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 783,
+            "column": 9,
+            "cell": "I783"
+          },
+          "rawValue": 5429.0349354247965
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 783,
+            "column": 13,
+            "cell": "M783"
+          },
+          "rawValue": -2679.0225282285173
+        }
+      }
     },
     {
       "date": "2025-08",
       "imports": 5020,
       "exports": 2488,
-      "balance": -2532
+      "balance": -2532,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 784,
+            "column": 5,
+            "cell": "E784"
+          },
+          "rawValue": 2487.9747073347503
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 784,
+            "column": 9,
+            "cell": "I784"
+          },
+          "rawValue": 5020.0444189286445
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 784,
+            "column": 13,
+            "cell": "M784"
+          },
+          "rawValue": -2532.069711593894
+        }
+      }
     },
     {
       "date": "2025-09",
       "imports": 5040,
       "exports": 2609,
-      "balance": -2431
+      "balance": -2431,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 785,
+            "column": 5,
+            "cell": "E785"
+          },
+          "rawValue": 2609.001165736412
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 785,
+            "column": 9,
+            "cell": "I785"
+          },
+          "rawValue": 5040.007446348843
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 785,
+            "column": 13,
+            "cell": "M785"
+          },
+          "rawValue": -2431.0062806124306
+        }
+      }
     },
     {
       "date": "2025-10",
       "imports": 5396,
       "exports": 2632,
-      "balance": -2764
+      "balance": -2764,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 786,
+            "column": 5,
+            "cell": "E786"
+          },
+          "rawValue": 2632.3655653498713
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 786,
+            "column": 9,
+            "cell": "I786"
+          },
+          "rawValue": 5395.984636904518
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 786,
+            "column": 13,
+            "cell": "M786"
+          },
+          "rawValue": -2763.619071554647
+        }
+      }
     },
     {
       "date": "2025-11",
       "imports": 4730,
       "exports": 2277,
-      "balance": -2453
+      "balance": -2453,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 787,
+            "column": 5,
+            "cell": "E787"
+          },
+          "rawValue": 2277.008457799999
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 787,
+            "column": 9,
+            "cell": "I787"
+          },
+          "rawValue": 4730.024641336963
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 787,
+            "column": 13,
+            "cell": "M787"
+          },
+          "rawValue": -2453.016183536964
+        }
+      }
     },
     {
       "date": "2025-12",
       "imports": 5765,
       "exports": 2758,
-      "balance": -3007
+      "balance": -3007,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 788,
+            "column": 5,
+            "cell": "E788"
+          },
+          "rawValue": 2758.027370529652
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 788,
+            "column": 9,
+            "cell": "I788"
+          },
+          "rawValue": 5765.001176260169
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 788,
+            "column": 13,
+            "cell": "M788"
+          },
+          "rawValue": -3006.9738057305167
+        }
+      }
     },
     {
       "date": "2026-01",
       "imports": 5339,
       "exports": 2749,
-      "balance": -2590
+      "balance": -2590,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 789,
+            "column": 5,
+            "cell": "E789"
+          },
+          "rawValue": 2749.001939069572
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 789,
+            "column": 9,
+            "cell": "I789"
+          },
+          "rawValue": 5339.017875932362
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 789,
+            "column": 13,
+            "cell": "M789"
+          },
+          "rawValue": -2590.0159368627897
+        }
+      }
     },
     {
       "date": "2026-02",
       "imports": 5114,
       "exports": 2481,
-      "balance": -2633
+      "balance": -2633,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 790,
+            "column": 5,
+            "cell": "E790"
+          },
+          "rawValue": 2480.9725182372085
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 790,
+            "column": 9,
+            "cell": "I790"
+          },
+          "rawValue": 5113.9657999384535
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 790,
+            "column": 13,
+            "cell": "M790"
+          },
+          "rawValue": -2632.993281701245
+        }
+      }
     },
     {
       "date": "2026-03",
       "imports": 4857,
       "exports": 2528,
-      "balance": -2329
+      "balance": -2329,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 791,
+            "column": 5,
+            "cell": "E791"
+          },
+          "rawValue": 2528.028274143476
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 791,
+            "column": 9,
+            "cell": "I791"
+          },
+          "rawValue": 4856.992344891539
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 791,
+            "column": 13,
+            "cell": "M791"
+          },
+          "rawValue": -2328.9640707480626
+        }
+      }
     },
     {
       "date": "2026-04",
       "imports": 5989,
       "exports": 2619,
-      "balance": -3370
+      "balance": -3370,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 792,
+            "column": 5,
+            "cell": "E792"
+          },
+          "rawValue": 2619.007336599848
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 792,
+            "column": 9,
+            "cell": "I792"
+          },
+          "rawValue": 5989.006755921247
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 792,
+            "column": 13,
+            "cell": "M792"
+          },
+          "rawValue": -3369.999419321399
+        }
+      }
     },
     {
       "date": "2026-05",
       "imports": 5640,
       "exports": 2357,
-      "balance": -3283
+      "balance": -3283,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 793,
+            "column": 5,
+            "cell": "E793"
+          },
+          "rawValue": 2356.9566412253726
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 793,
+            "column": 9,
+            "cell": "I793"
+          },
+          "rawValue": 5639.773667076334
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 793,
+            "column": 13,
+            "cell": "M793"
+          },
+          "rawValue": -3282.8170258509617
+        }
+      }
     },
     {
       "date": "2026-06",
       "imports": 6152,
       "exports": 2573,
-      "balance": -3579
+      "balance": -3579,
+      "status": "not-stated",
+      "sourceStatus": null,
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 794,
+            "column": 5,
+            "cell": "E794"
+          },
+          "rawValue": 2572.9692960596176
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 794,
+            "column": 9,
+            "cell": "I794"
+          },
+          "rawValue": 6152.042202922473
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 794,
+            "column": 13,
+            "cell": "M794"
+          },
+          "rawValue": -3579.0729068628552
+        }
+      }
     },
     {
       "date": "2026-07",
       "imports": 6149,
       "exports": 2985,
-      "balance": -3164
+      "balance": -3164,
+      "status": "revised",
+      "sourceStatus": "R",
+      "unit": "US$ million",
+      "evidence": {
+        "exports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 796,
+            "column": 5,
+            "cell": "E796"
+          },
+          "rawValue": 2985.0267170427405
+        },
+        "imports": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 796,
+            "column": 9,
+            "cell": "I796"
+          },
+          "rawValue": 6149.0333189179555
+        },
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 796,
+            "column": 13,
+            "cell": "M796"
+          },
+          "rawValue": -3164.006601875215
+        }
+      }
     },
     {
       "date": "2026-08",
       "imports": 5486,
       "exports": 2460,
-      "balance": -3026
-    }
-  ],
-  "topExportCountries": [
-    {
-      "country": "U. S. A.",
-      "value": 5585.19,
-      "flag": "🇺🇸"
-    },
-    {
-      "country": "China",
-      "value": 2437.22,
-      "flag": "🇨🇳"
-    },
-    {
-      "country": "U. K.",
-      "value": 1959.27,
-      "flag": "🇬🇧"
-    },
-    {
-      "country": "U. A. E. Dubai",
-      "value": 1673.39,
-      "flag": "🇦🇪"
-    },
-    {
-      "country": "Germany",
-      "value": 1475.66,
-      "flag": "🇩🇪"
-    },
-    {
-      "country": "Spain",
-      "value": 1427.89,
-      "flag": "🇪🇸"
-    },
-    {
-      "country": "Netherlands (Holland)",
-      "value": 1330.88,
-      "flag": "🇳🇱"
-    },
-    {
-      "country": "Italy",
-      "value": 1056.93,
-      "flag": "🇮🇹"
-    },
-    {
-      "country": "Bangladesh",
-      "value": 655.12,
-      "flag": "🇧🇩"
-    },
-    {
-      "country": "Saudi Arabia",
-      "value": 632.99,
-      "flag": "🇸🇦"
-    },
-    {
-      "country": "France",
-      "value": 495.74,
-      "flag": "🇫🇷"
-    },
-    {
-      "country": "Belgium",
-      "value": 473.64,
-      "flag": "🇧🇪"
-    },
-    {
-      "country": "Poland",
-      "value": 446.76,
-      "flag": "🇵🇱"
-    },
-    {
-      "country": "Singapore",
-      "value": 423.69,
-      "flag": "🇸🇬"
-    },
-    {
-      "country": "Canada",
-      "value": 342.54,
-      "flag": "🇨🇦"
-    }
-  ],
-  "topImportCountries": [
-    {
-      "country": "China",
-      "value": 17555.36,
-      "flag": "🇨🇳"
-    },
-    {
-      "country": "U. A. E. Dubai",
-      "value": 6211.3,
-      "flag": "🇦🇪"
-    },
-    {
-      "country": "Saudi Arabia",
-      "value": 3613.57,
-      "flag": "🇸🇦"
-    },
-    {
-      "country": "Indonesia",
-      "value": 3144.56,
-      "flag": "🇮🇩"
-    },
-    {
-      "country": "U. S. A.",
-      "value": 2990.12,
-      "flag": "🇺🇸"
-    },
-    {
-      "country": "Qatar",
-      "value": 2163.43,
-      "flag": "🇶🇦"
-    },
-    {
-      "country": "Singapore",
-      "value": 1982.64,
-      "flag": "🇸🇬"
-    },
-    {
-      "country": "Kuwait",
-      "value": 1463.32,
-      "flag": "🇰🇼"
-    },
-    {
-      "country": "Japan",
-      "value": 1463.12,
-      "flag": "🇯🇵"
-    },
-    {
-      "country": "U. A. E. Abudhabi",
-      "value": 1357.38,
-      "flag": "🇦🇪"
-    },
-    {
-      "country": "Oman",
-      "value": 1321.81,
-      "flag": "🇴🇲"
-    },
-    {
-      "country": "Brazil",
-      "value": 1143.54,
-      "flag": "🇧🇷"
-    },
-    {
-      "country": "South Korea",
-      "value": 1040.7,
-      "flag": "🇰🇷"
-    },
-    {
-      "country": "Thailand",
-      "value": 1006.31,
-      "flag": "🇹🇭"
-    },
-    {
-      "country": "Malaysia",
-      "value": 981.22,
-      "flag": "🇲🇾"
-    }
-  ],
-  "exportCountryPeriod": "Jul-May FY26 (P)",
-  "importCountryPeriod": "Jul-May FY26 (P)",
-  "dataSource": "SBP",
-  "lastUpdated": "2026-09-16",
-  "dataCoverage": "2021-01 – 2026-08",
-  "lastChecked": "2026-09-30",
-  "countryMonthly": {
-    "latestMonth": "2026-05",
-    "prevMonth": "2026-04",
-    "yearAgoMonth": "2025-05",
-    "fytdLabel": "Jul–May FY26",
-    "fytdPriorLabel": "Jul–May FY25",
-    "note": "SBP by-country files publish the latest month, prior month, same month a year earlier, and fiscal-year-to-date totals per country. Values in US$ million.",
-    "countries": [
-      {
-        "country": "China",
-        "flag": "🇨🇳",
+      "balance": -3026,
+      "status": "provisional",
+      "sourceStatus": "P",
+      "unit": "US$ million",
+      "evidence": {
         "exports": {
-          "latest": 216.25,
-          "prev": 275.92,
-          "yearAgo": 199.53,
-          "fytd": 2437.22,
-          "fytdPrior": 2270.87
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 797,
+            "column": 5,
+            "cell": "E797"
+          },
+          "rawValue": 2459.990466585607
         },
         "imports": {
-          "latest": 1739.61,
-          "prev": 1777.39,
-          "yearAgo": 1698.86,
-          "fytd": 17555.36,
-          "fytdPrior": 14890.47
-        }
-      },
-      {
-        "country": "U.A.E.",
-        "flag": "🇦🇪",
-        "exports": {
-          "latest": 164,
-          "prev": 157.39,
-          "yearAgo": 200.28,
-          "fytd": 1950.3,
-          "fytdPrior": 1980.35
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 797,
+            "column": 9,
+            "cell": "I797"
+          },
+          "rawValue": 5485.962856116705
         },
-        "imports": {
-          "latest": 800.55,
-          "prev": 988.28,
-          "yearAgo": 785.24,
-          "fytd": 7744.63,
-          "fytdPrior": 7400.09
-        }
-      },
-      {
-        "country": "United States",
-        "flag": "🇺🇸",
-        "exports": {
-          "latest": 461.25,
-          "prev": 489.75,
-          "yearAgo": 516.16,
-          "fytd": 5585.19,
-          "fytdPrior": 5553.93
-        },
-        "imports": {
-          "latest": 449.84,
-          "prev": 400.97,
-          "yearAgo": 244.49,
-          "fytd": 2990.12,
-          "fytdPrior": 2153.62
-        }
-      },
-      {
-        "country": "Saudi Arabia",
-        "flag": "🇸🇦",
-        "exports": {
-          "latest": 49.06,
-          "prev": 53.96,
-          "yearAgo": 49.37,
-          "fytd": 632.99,
-          "fytdPrior": 656.58
-        },
-        "imports": {
-          "latest": 297.22,
-          "prev": 343.05,
-          "yearAgo": 290.85,
-          "fytd": 3613.57,
-          "fytdPrior": 3467.17
-        }
-      },
-      {
-        "country": "Indonesia",
-        "flag": "🇮🇩",
-        "exports": {
-          "latest": 5.86,
-          "prev": 6.52,
-          "yearAgo": 6.64,
-          "fytd": 86.6,
-          "fytdPrior": 264.25
-        },
-        "imports": {
-          "latest": 214.38,
-          "prev": 276.88,
-          "yearAgo": 229.74,
-          "fytd": 3144.56,
-          "fytdPrior": 2686.52
-        }
-      },
-      {
-        "country": "United Kingdom",
-        "flag": "🇬🇧",
-        "exports": {
-          "latest": 159.39,
-          "prev": 181.14,
-          "yearAgo": 173.38,
-          "fytd": 1972.26,
-          "fytdPrior": 1994.69
-        },
-        "imports": {
-          "latest": 69.22,
-          "prev": 43.96,
-          "yearAgo": 64.16,
-          "fytd": 666.56,
-          "fytdPrior": 872.42
-        }
-      },
-      {
-        "country": "Singapore",
-        "flag": "🇸🇬",
-        "exports": {
-          "latest": 68.05,
-          "prev": 53.42,
-          "yearAgo": 4.91,
-          "fytd": 423.69,
-          "fytdPrior": 297.37
-        },
-        "imports": {
-          "latest": 234.98,
-          "prev": 156.46,
-          "yearAgo": 211.38,
-          "fytd": 1982.64,
-          "fytdPrior": 2131.12
-        }
-      },
-      {
-        "country": "Germany",
-        "flag": "🇩🇪",
-        "exports": {
-          "latest": 106.5,
-          "prev": 129.52,
-          "yearAgo": 132.34,
-          "fytd": 1475.66,
-          "fytdPrior": 1552.1
-        },
-        "imports": {
-          "latest": 74.18,
-          "prev": 63.34,
-          "yearAgo": 96.94,
-          "fytd": 804.31,
-          "fytdPrior": 798.95
-        }
-      },
-      {
-        "country": "Qatar",
-        "flag": "🇶🇦",
-        "exports": {
-          "latest": 4.41,
-          "prev": 5.47,
-          "yearAgo": 7.01,
-          "fytd": 87.48,
-          "fytdPrior": 107.52
-        },
-        "imports": {
-          "latest": 5.94,
-          "prev": 10.52,
-          "yearAgo": 215.96,
-          "fytd": 2163.43,
-          "fytdPrior": 3149.6
-        }
-      },
-      {
-        "country": "Netherlands",
-        "flag": "🇳🇱",
-        "exports": {
-          "latest": 103.47,
-          "prev": 124.11,
-          "yearAgo": 113.09,
-          "fytd": 1330.88,
-          "fytdPrior": 1385.9
-        },
-        "imports": {
-          "latest": 110.23,
-          "prev": 28.81,
-          "yearAgo": 38.74,
-          "fytd": 456.03,
-          "fytdPrior": 377.91
-        }
-      },
-      {
-        "country": "Japan",
-        "flag": "🇯🇵",
-        "exports": {
-          "latest": 16.22,
-          "prev": 17.42,
-          "yearAgo": 15.23,
-          "fytd": 165.16,
-          "fytdPrior": 170.72
-        },
-        "imports": {
-          "latest": 98.11,
-          "prev": 139.1,
-          "yearAgo": 89.56,
-          "fytd": 1463.12,
-          "fytdPrior": 1062.54
-        }
-      },
-      {
-        "country": "Spain",
-        "flag": "🇪🇸",
-        "exports": {
-          "latest": 105.68,
-          "prev": 137.74,
-          "yearAgo": 122.47,
-          "fytd": 1427.89,
-          "fytdPrior": 1358.01
-        },
-        "imports": {
-          "latest": 11.9,
-          "prev": 16.87,
-          "yearAgo": 24.93,
-          "fytd": 183.49,
-          "fytdPrior": 178.62
-        }
-      },
-      {
-        "country": "Kuwait",
-        "flag": "🇰🇼",
-        "exports": {
-          "latest": 8.3,
-          "prev": 6.84,
-          "yearAgo": 7.74,
-          "fytd": 116.18,
-          "fytdPrior": 105.56
-        },
-        "imports": {
-          "latest": 154.15,
-          "prev": 202,
-          "yearAgo": 131.32,
-          "fytd": 1463.32,
-          "fytdPrior": 1585.06
-        }
-      },
-      {
-        "country": "Italy",
-        "flag": "🇮🇹",
-        "exports": {
-          "latest": 87.5,
-          "prev": 89.3,
-          "yearAgo": 112.19,
-          "fytd": 1056.93,
-          "fytdPrior": 1048.64
-        },
-        "imports": {
-          "latest": 33.66,
-          "prev": 34.67,
-          "yearAgo": 37.13,
-          "fytd": 447.96,
-          "fytdPrior": 504.76
-        }
-      },
-      {
-        "country": "Oman",
-        "flag": "🇴🇲",
-        "exports": {
-          "latest": 13.27,
-          "prev": 15.14,
-          "yearAgo": 17.46,
-          "fytd": 160.91,
-          "fytdPrior": 205.15
-        },
-        "imports": {
-          "latest": 251.78,
-          "prev": 236.21,
-          "yearAgo": 56.75,
-          "fytd": 1321.81,
-          "fytdPrior": 777.74
-        }
-      },
-      {
-        "country": "Brazil",
-        "flag": "🇧🇷",
-        "exports": {
-          "latest": 11.43,
-          "prev": 12.73,
-          "yearAgo": 11.4,
-          "fytd": 142.64,
-          "fytdPrior": 119.9
-        },
-        "imports": {
-          "latest": 159.3,
-          "prev": 171.67,
-          "yearAgo": 219.89,
-          "fytd": 1143.54,
-          "fytdPrior": 1062.25
-        }
-      },
-      {
-        "country": "South Korea",
-        "flag": "🇰🇷",
-        "exports": {
-          "latest": 26.03,
-          "prev": 21.82,
-          "yearAgo": 8.57,
-          "fytd": 222.87,
-          "fytdPrior": 138.94
-        },
-        "imports": {
-          "latest": 89.86,
-          "prev": 82.2,
-          "yearAgo": 110.17,
-          "fytd": 1040.7,
-          "fytdPrior": 925.31
-        }
-      },
-      {
-        "country": "Thailand",
-        "flag": "🇹🇭",
-        "exports": {
-          "latest": 13.97,
-          "prev": 19.62,
-          "yearAgo": 56.87,
-          "fytd": 219.59,
-          "fytdPrior": 297.04
-        },
-        "imports": {
-          "latest": 80.48,
-          "prev": 96.4,
-          "yearAgo": 78.98,
-          "fytd": 1006.31,
-          "fytdPrior": 746.8
+        "balance": {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 797,
+            "column": 13,
+            "cell": "M797"
+          },
+          "rawValue": -3025.9723895310976
         }
       }
+    }
+  ],
+  "dataSource": "SBP",
+  "lastUpdated": "2026-09-30",
+  "dataCoverage": "2021-01 – 2026-08",
+  "lastChecked": "2026-09-30",
+  "reconciliation": [
+    {
+      "check": "Independent SBP BOP exports",
+      "total": 32343,
+      "components": 32343,
+      "difference": 0,
+      "tolerance": 6.5,
+      "result": "matched",
+      "leftEvidence": {
+        "derivation": "sum over exact printed BOP window",
+        "inputs": [
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 770,
+              "column": 5,
+              "cell": "E770"
+            },
+            "rawValue": 2364.9884422557466
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 771,
+              "column": 5,
+              "cell": "E771"
+            },
+            "rawValue": 2438.9763362736353
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 772,
+              "column": 5,
+              "cell": "E772"
+            },
+            "rawValue": 2615.9727536455925
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 773,
+              "column": 5,
+              "cell": "E773"
+            },
+            "rawValue": 3006.03211813674
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 774,
+              "column": 5,
+              "cell": "E774"
+            },
+            "rawValue": 2790.004825784087
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 775,
+              "column": 5,
+              "cell": "E775"
+            },
+            "rawValue": 3109.034684566127
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 776,
+              "column": 5,
+              "cell": "E776"
+            },
+            "rawValue": 3008.9649976114815
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 777,
+              "column": 5,
+              "cell": "E777"
+            },
+            "rawValue": 2608.9535179820623
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 778,
+              "column": 5,
+              "cell": "E778"
+            },
+            "rawValue": 2759.02360000614
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 779,
+              "column": 5,
+              "cell": "E779"
+            },
+            "rawValue": 2606.0122522146157
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 780,
+              "column": 5,
+              "cell": "E780"
+            },
+            "rawValue": 2444.0020881621663
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 781,
+              "column": 5,
+              "cell": "E781"
+            },
+            "rawValue": 2590.982443905514
+          }
+        ]
+      },
+      "rightEvidence": {
+        "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+        "sourceKey": "Balancepayment_BPM6.xls",
+        "retrievedAt": "2026-09-30T21:58:00.723Z",
+        "locator": {
+          "sheet": "BPM6_Summary",
+          "row": 10,
+          "column": 3,
+          "cell": "C10"
+        },
+        "rawValue": 32343
+      }
+    },
+    {
+      "check": "Independent SBP BOP exports",
+      "total": 2488,
+      "components": 2488,
+      "difference": 0,
+      "tolerance": 1,
+      "result": "matched",
+      "leftEvidence": {
+        "derivation": "sum over exact printed BOP window",
+        "inputs": [
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 784,
+              "column": 5,
+              "cell": "E784"
+            },
+            "rawValue": 2487.9747073347503
+          }
+        ]
+      },
+      "rightEvidence": {
+        "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+        "sourceKey": "Balancepayment_BPM6.xls",
+        "retrievedAt": "2026-09-30T21:58:00.723Z",
+        "locator": {
+          "sheet": "BPM6_Summary",
+          "row": 10,
+          "column": 4,
+          "cell": "D10"
+        },
+        "rawValue": 2488
+      }
+    },
+    {
+      "check": "Independent SBP BOP exports",
+      "total": 30821,
+      "components": 30821,
+      "difference": 0,
+      "tolerance": 6.5,
+      "result": "matched",
+      "leftEvidence": {
+        "derivation": "sum over exact printed BOP window",
+        "inputs": [
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 783,
+              "column": 5,
+              "cell": "E783"
+            },
+            "rawValue": 2750.012407196279
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 784,
+              "column": 5,
+              "cell": "E784"
+            },
+            "rawValue": 2487.9747073347503
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 785,
+              "column": 5,
+              "cell": "E785"
+            },
+            "rawValue": 2609.001165736412
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 786,
+              "column": 5,
+              "cell": "E786"
+            },
+            "rawValue": 2632.3655653498713
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 787,
+              "column": 5,
+              "cell": "E787"
+            },
+            "rawValue": 2277.008457799999
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 788,
+              "column": 5,
+              "cell": "E788"
+            },
+            "rawValue": 2758.027370529652
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 789,
+              "column": 5,
+              "cell": "E789"
+            },
+            "rawValue": 2749.001939069572
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 790,
+              "column": 5,
+              "cell": "E790"
+            },
+            "rawValue": 2480.9725182372085
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 791,
+              "column": 5,
+              "cell": "E791"
+            },
+            "rawValue": 2528.028274143476
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 792,
+              "column": 5,
+              "cell": "E792"
+            },
+            "rawValue": 2619.007336599848
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 793,
+              "column": 5,
+              "cell": "E793"
+            },
+            "rawValue": 2356.9566412253726
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 794,
+              "column": 5,
+              "cell": "E794"
+            },
+            "rawValue": 2572.9692960596176
+          }
+        ]
+      },
+      "rightEvidence": {
+        "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+        "sourceKey": "Balancepayment_BPM6.xls",
+        "retrievedAt": "2026-09-30T21:58:00.723Z",
+        "locator": {
+          "sheet": "BPM6_Summary",
+          "row": 10,
+          "column": 5,
+          "cell": "E10"
+        },
+        "rawValue": 30821
+      }
+    },
+    {
+      "check": "Independent SBP BOP exports",
+      "total": 2985,
+      "components": 2985,
+      "difference": 0,
+      "tolerance": 1,
+      "result": "matched",
+      "leftEvidence": {
+        "derivation": "sum over exact printed BOP window",
+        "inputs": [
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 796,
+              "column": 5,
+              "cell": "E796"
+            },
+            "rawValue": 2985.0267170427405
+          }
+        ]
+      },
+      "rightEvidence": {
+        "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+        "sourceKey": "Balancepayment_BPM6.xls",
+        "retrievedAt": "2026-09-30T21:58:00.723Z",
+        "locator": {
+          "sheet": "BPM6_Summary",
+          "row": 10,
+          "column": 6,
+          "cell": "F10"
+        },
+        "rawValue": 2985
+      }
+    },
+    {
+      "check": "Independent SBP BOP exports",
+      "total": 2460,
+      "components": 2460,
+      "difference": 0,
+      "tolerance": 1,
+      "result": "matched",
+      "leftEvidence": {
+        "derivation": "sum over exact printed BOP window",
+        "inputs": [
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 797,
+              "column": 5,
+              "cell": "E797"
+            },
+            "rawValue": 2459.990466585607
+          }
+        ]
+      },
+      "rightEvidence": {
+        "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+        "sourceKey": "Balancepayment_BPM6.xls",
+        "retrievedAt": "2026-09-30T21:58:00.723Z",
+        "locator": {
+          "sheet": "BPM6_Summary",
+          "row": 10,
+          "column": 7,
+          "cell": "G10"
+        },
+        "rawValue": 2460
+      }
+    },
+    {
+      "check": "Independent SBP BOP exports",
+      "total": 5238,
+      "components": 5238,
+      "difference": 0,
+      "tolerance": 1.5,
+      "result": "matched",
+      "leftEvidence": {
+        "derivation": "sum over exact printed BOP window",
+        "inputs": [
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 783,
+              "column": 5,
+              "cell": "E783"
+            },
+            "rawValue": 2750.012407196279
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 784,
+              "column": 5,
+              "cell": "E784"
+            },
+            "rawValue": 2487.9747073347503
+          }
+        ]
+      },
+      "rightEvidence": {
+        "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+        "sourceKey": "Balancepayment_BPM6.xls",
+        "retrievedAt": "2026-09-30T21:58:00.723Z",
+        "locator": {
+          "sheet": "BPM6_Summary",
+          "row": 10,
+          "column": 8,
+          "cell": "H10"
+        },
+        "rawValue": 5238
+      }
+    },
+    {
+      "check": "Independent SBP BOP exports",
+      "total": 5445,
+      "components": 5445,
+      "difference": 0,
+      "tolerance": 1.5,
+      "result": "matched",
+      "leftEvidence": {
+        "derivation": "sum over exact printed BOP window",
+        "inputs": [
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 796,
+              "column": 5,
+              "cell": "E796"
+            },
+            "rawValue": 2985.0267170427405
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 797,
+              "column": 5,
+              "cell": "E797"
+            },
+            "rawValue": 2459.990466585607
+          }
+        ]
+      },
+      "rightEvidence": {
+        "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+        "sourceKey": "Balancepayment_BPM6.xls",
+        "retrievedAt": "2026-09-30T21:58:00.723Z",
+        "locator": {
+          "sheet": "BPM6_Summary",
+          "row": 10,
+          "column": 9,
+          "cell": "I10"
+        },
+        "rawValue": 5445
+      }
+    },
+    {
+      "check": "Independent SBP BOP imports",
+      "total": 59146,
+      "components": 59146,
+      "difference": 0,
+      "tolerance": 6.5,
+      "result": "matched",
+      "leftEvidence": {
+        "derivation": "sum over exact printed BOP window",
+        "inputs": [
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 770,
+              "column": 9,
+              "cell": "I770"
+            },
+            "rawValue": 4849.957315524777
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 771,
+              "column": 9,
+              "cell": "I771"
+            },
+            "rawValue": 4707.996144217586
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 772,
+              "column": 9,
+              "cell": "I772"
+            },
+            "rawValue": 4691.010676379278
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 773,
+              "column": 9,
+              "cell": "I773"
+            },
+            "rawValue": 4646.996517214024
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 774,
+              "column": 9,
+              "cell": "I774"
+            },
+            "rawValue": 4119.026112984305
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 775,
+              "column": 9,
+              "cell": "I775"
+            },
+            "rawValue": 4893.976456182777
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 776,
+              "column": 9,
+              "cell": "I776"
+            },
+            "rawValue": 5481.006427659352
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 777,
+              "column": 9,
+              "cell": "I777"
+            },
+            "rawValue": 5051.007581950805
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 778,
+              "column": 9,
+              "cell": "I778"
+            },
+            "rawValue": 4938.005694487745
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 779,
+              "column": 9,
+              "cell": "I779"
+            },
+            "rawValue": 5245.950188997071
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 780,
+              "column": 9,
+              "cell": "I780"
+            },
+            "rawValue": 5501.040270493438
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 781,
+              "column": 9,
+              "cell": "I781"
+            },
+            "rawValue": 5020.045573203479
+          }
+        ]
+      },
+      "rightEvidence": {
+        "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+        "sourceKey": "Balancepayment_BPM6.xls",
+        "retrievedAt": "2026-09-30T21:58:00.723Z",
+        "locator": {
+          "sheet": "BPM6_Summary",
+          "row": 11,
+          "column": 3,
+          "cell": "C11"
+        },
+        "rawValue": 59146
+      }
+    },
+    {
+      "check": "Independent SBP BOP imports",
+      "total": 5020,
+      "components": 5020,
+      "difference": 0,
+      "tolerance": 1,
+      "result": "matched",
+      "leftEvidence": {
+        "derivation": "sum over exact printed BOP window",
+        "inputs": [
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 784,
+              "column": 9,
+              "cell": "I784"
+            },
+            "rawValue": 5020.0444189286445
+          }
+        ]
+      },
+      "rightEvidence": {
+        "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+        "sourceKey": "Balancepayment_BPM6.xls",
+        "retrievedAt": "2026-09-30T21:58:00.723Z",
+        "locator": {
+          "sheet": "BPM6_Summary",
+          "row": 11,
+          "column": 4,
+          "cell": "D11"
+        },
+        "rawValue": 5020
+      }
+    },
+    {
+      "check": "Independent SBP BOP imports",
+      "total": 64471,
+      "components": 64471,
+      "difference": 0,
+      "tolerance": 6.5,
+      "result": "matched",
+      "leftEvidence": {
+        "derivation": "sum over exact printed BOP window",
+        "inputs": [
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 783,
+              "column": 9,
+              "cell": "I783"
+            },
+            "rawValue": 5429.0349354247965
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 784,
+              "column": 9,
+              "cell": "I784"
+            },
+            "rawValue": 5020.0444189286445
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 785,
+              "column": 9,
+              "cell": "I785"
+            },
+            "rawValue": 5040.007446348843
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 786,
+              "column": 9,
+              "cell": "I786"
+            },
+            "rawValue": 5395.984636904518
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 787,
+              "column": 9,
+              "cell": "I787"
+            },
+            "rawValue": 4730.024641336963
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 788,
+              "column": 9,
+              "cell": "I788"
+            },
+            "rawValue": 5765.001176260169
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 789,
+              "column": 9,
+              "cell": "I789"
+            },
+            "rawValue": 5339.017875932362
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 790,
+              "column": 9,
+              "cell": "I790"
+            },
+            "rawValue": 5113.9657999384535
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 791,
+              "column": 9,
+              "cell": "I791"
+            },
+            "rawValue": 4856.992344891539
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 792,
+              "column": 9,
+              "cell": "I792"
+            },
+            "rawValue": 5989.006755921247
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 793,
+              "column": 9,
+              "cell": "I793"
+            },
+            "rawValue": 5639.773667076334
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 794,
+              "column": 9,
+              "cell": "I794"
+            },
+            "rawValue": 6152.042202922473
+          }
+        ]
+      },
+      "rightEvidence": {
+        "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+        "sourceKey": "Balancepayment_BPM6.xls",
+        "retrievedAt": "2026-09-30T21:58:00.723Z",
+        "locator": {
+          "sheet": "BPM6_Summary",
+          "row": 11,
+          "column": 5,
+          "cell": "E11"
+        },
+        "rawValue": 64471
+      }
+    },
+    {
+      "check": "Independent SBP BOP imports",
+      "total": 6149,
+      "components": 6149,
+      "difference": 0,
+      "tolerance": 1,
+      "result": "matched",
+      "leftEvidence": {
+        "derivation": "sum over exact printed BOP window",
+        "inputs": [
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 796,
+              "column": 9,
+              "cell": "I796"
+            },
+            "rawValue": 6149.0333189179555
+          }
+        ]
+      },
+      "rightEvidence": {
+        "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+        "sourceKey": "Balancepayment_BPM6.xls",
+        "retrievedAt": "2026-09-30T21:58:00.723Z",
+        "locator": {
+          "sheet": "BPM6_Summary",
+          "row": 11,
+          "column": 6,
+          "cell": "F11"
+        },
+        "rawValue": 6149
+      }
+    },
+    {
+      "check": "Independent SBP BOP imports",
+      "total": 5486,
+      "components": 5486,
+      "difference": 0,
+      "tolerance": 1,
+      "result": "matched",
+      "leftEvidence": {
+        "derivation": "sum over exact printed BOP window",
+        "inputs": [
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 797,
+              "column": 9,
+              "cell": "I797"
+            },
+            "rawValue": 5485.962856116705
+          }
+        ]
+      },
+      "rightEvidence": {
+        "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+        "sourceKey": "Balancepayment_BPM6.xls",
+        "retrievedAt": "2026-09-30T21:58:00.723Z",
+        "locator": {
+          "sheet": "BPM6_Summary",
+          "row": 11,
+          "column": 7,
+          "cell": "G11"
+        },
+        "rawValue": 5486
+      }
+    },
+    {
+      "check": "Independent SBP BOP imports",
+      "total": 10449,
+      "components": 10449,
+      "difference": 0,
+      "tolerance": 1.5,
+      "result": "matched",
+      "leftEvidence": {
+        "derivation": "sum over exact printed BOP window",
+        "inputs": [
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 783,
+              "column": 9,
+              "cell": "I783"
+            },
+            "rawValue": 5429.0349354247965
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 784,
+              "column": 9,
+              "cell": "I784"
+            },
+            "rawValue": 5020.0444189286445
+          }
+        ]
+      },
+      "rightEvidence": {
+        "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+        "sourceKey": "Balancepayment_BPM6.xls",
+        "retrievedAt": "2026-09-30T21:58:00.723Z",
+        "locator": {
+          "sheet": "BPM6_Summary",
+          "row": 11,
+          "column": 8,
+          "cell": "H11"
+        },
+        "rawValue": 10449
+      }
+    },
+    {
+      "check": "Independent SBP BOP imports",
+      "total": 11635,
+      "components": 11635,
+      "difference": 0,
+      "tolerance": 1.5,
+      "result": "matched",
+      "leftEvidence": {
+        "derivation": "sum over exact printed BOP window",
+        "inputs": [
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 796,
+              "column": 9,
+              "cell": "I796"
+            },
+            "rawValue": 6149.0333189179555
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 797,
+              "column": 9,
+              "cell": "I797"
+            },
+            "rawValue": 5485.962856116705
+          }
+        ]
+      },
+      "rightEvidence": {
+        "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+        "sourceKey": "Balancepayment_BPM6.xls",
+        "retrievedAt": "2026-09-30T21:58:00.723Z",
+        "locator": {
+          "sheet": "BPM6_Summary",
+          "row": 11,
+          "column": 9,
+          "cell": "I11"
+        },
+        "rawValue": 11635
+      }
+    }
+  ],
+  "sourceEvidence": {
+    "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b": {
+      "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+      "sha256": "7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d",
+      "sourceKey": "exp_import_BOP.xls",
+      "sourceUrl": "https://www.sbp.org.pk/assets/document/exp_import_BOP_Arch.xls",
+      "responseUrl": "https://www.sbp.org.pk/assets/document/exp_import_BOP_Arch.xls",
+      "path": "/source-evidence/7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d.xls",
+      "bytes": 315392,
+      "contentType": "application/vnd.ms-excel",
+      "retrievedAt": "2026-09-30T21:57:56.136Z",
+      "parserVersion": "parse-sbp-excel.mjs:sha256:a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+      "parserPath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt",
+      "parserDependencies": [
+        {
+          "file": "package-lock.json",
+          "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+          "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+        },
+        {
+          "file": "package.json",
+          "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+          "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+        },
+        {
+          "file": "scripts/data-catalog.mjs",
+          "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+          "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+        },
+        {
+          "file": "scripts/enforce-publication-policy.mjs",
+          "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+          "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+        },
+        {
+          "file": "scripts/lib/data-writer.mjs",
+          "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+          "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+        },
+        {
+          "file": "scripts/lib/ingestion-validation.mjs",
+          "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+          "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+        },
+        {
+          "file": "scripts/lib/provenance-store.mjs",
+          "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+          "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+        },
+        {
+          "file": "scripts/lib/publication-policy.mjs",
+          "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+          "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+        },
+        {
+          "file": "scripts/lib/release-calendar.mjs",
+          "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+          "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+        },
+        {
+          "file": "scripts/lib/reserves-parser.mjs",
+          "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+          "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+        },
+        {
+          "file": "scripts/lib/sbp-resolvers.mjs",
+          "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+          "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+        },
+        {
+          "file": "scripts/lib/services-headline.mjs",
+          "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+          "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+        },
+        {
+          "file": "scripts/lib/sheet-utils.mjs",
+          "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+          "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+        },
+        {
+          "file": "scripts/lib/source-docs.mjs",
+          "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+          "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+        },
+        {
+          "file": "scripts/lib/source-evidence.mjs",
+          "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+          "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+        },
+        {
+          "file": "scripts/pdf-text.mjs",
+          "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+          "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+        },
+        {
+          "file": "scripts/update-fbr.mjs",
+          "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+          "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+        }
+      ]
+    },
+    "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c": {
+      "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+      "sha256": "c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd",
+      "sourceKey": "Balancepayment_BPM6.xls",
+      "sourceUrl": "https://www.sbp.org.pk/assets/document/Balancepayment_BPM6.xls",
+      "responseUrl": "https://www.sbp.org.pk/assets/document/Balancepayment_BPM6.xls",
+      "path": "/source-evidence/c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd.xls",
+      "bytes": 61952,
+      "contentType": "application/vnd.ms-excel",
+      "retrievedAt": "2026-09-30T21:58:00.723Z",
+      "parserVersion": "parse-sbp-excel.mjs:sha256:a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+      "parserPath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt",
+      "parserDependencies": [
+        {
+          "file": "package-lock.json",
+          "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+          "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+        },
+        {
+          "file": "package.json",
+          "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+          "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+        },
+        {
+          "file": "scripts/data-catalog.mjs",
+          "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+          "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+        },
+        {
+          "file": "scripts/enforce-publication-policy.mjs",
+          "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+          "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+        },
+        {
+          "file": "scripts/lib/data-writer.mjs",
+          "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+          "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+        },
+        {
+          "file": "scripts/lib/ingestion-validation.mjs",
+          "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+          "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+        },
+        {
+          "file": "scripts/lib/provenance-store.mjs",
+          "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+          "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+        },
+        {
+          "file": "scripts/lib/publication-policy.mjs",
+          "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+          "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+        },
+        {
+          "file": "scripts/lib/release-calendar.mjs",
+          "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+          "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+        },
+        {
+          "file": "scripts/lib/reserves-parser.mjs",
+          "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+          "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+        },
+        {
+          "file": "scripts/lib/sbp-resolvers.mjs",
+          "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+          "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+        },
+        {
+          "file": "scripts/lib/services-headline.mjs",
+          "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+          "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+        },
+        {
+          "file": "scripts/lib/sheet-utils.mjs",
+          "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+          "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+        },
+        {
+          "file": "scripts/lib/source-docs.mjs",
+          "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+          "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+        },
+        {
+          "file": "scripts/lib/source-evidence.mjs",
+          "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+          "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+        },
+        {
+          "file": "scripts/pdf-text.mjs",
+          "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+          "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+        },
+        {
+          "file": "scripts/update-fbr.mjs",
+          "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+          "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+        }
+      ]
+    },
+    "Export_Receipts_by_all_Countries.xls:287fbb741ddb6177ddf2812d1d5c2b0e9bf4c319c3b8cf58b9ef3ae5e6ab5f43:e35cec848385": {
+      "artifactId": "Export_Receipts_by_all_Countries.xls:287fbb741ddb6177ddf2812d1d5c2b0e9bf4c319c3b8cf58b9ef3ae5e6ab5f43:e35cec848385",
+      "sha256": "287fbb741ddb6177ddf2812d1d5c2b0e9bf4c319c3b8cf58b9ef3ae5e6ab5f43",
+      "sourceKey": "Export_Receipts_by_all_Countries.xls",
+      "sourceUrl": "https://archive.sbp.org.pk/ecodata/Export_Receipts_by_all_Countries.xls",
+      "responseUrl": "https://archive.sbp.org.pk/ecodata/Export_Receipts_by_all_Countries.xls",
+      "path": "/source-evidence/287fbb741ddb6177ddf2812d1d5c2b0e9bf4c319c3b8cf58b9ef3ae5e6ab5f43.xls",
+      "bytes": 97792,
+      "contentType": "application/vnd.ms-excel",
+      "retrievedAt": "2026-09-30T21:58:20.771Z",
+      "parserVersion": "parse-sbp-excel.mjs:sha256:a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+      "parserPath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt",
+      "parserDependencies": [
+        {
+          "file": "package-lock.json",
+          "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+          "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+        },
+        {
+          "file": "package.json",
+          "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+          "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+        },
+        {
+          "file": "scripts/data-catalog.mjs",
+          "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+          "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+        },
+        {
+          "file": "scripts/enforce-publication-policy.mjs",
+          "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+          "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+        },
+        {
+          "file": "scripts/lib/data-writer.mjs",
+          "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+          "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+        },
+        {
+          "file": "scripts/lib/ingestion-validation.mjs",
+          "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+          "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+        },
+        {
+          "file": "scripts/lib/provenance-store.mjs",
+          "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+          "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+        },
+        {
+          "file": "scripts/lib/publication-policy.mjs",
+          "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+          "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+        },
+        {
+          "file": "scripts/lib/release-calendar.mjs",
+          "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+          "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+        },
+        {
+          "file": "scripts/lib/reserves-parser.mjs",
+          "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+          "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+        },
+        {
+          "file": "scripts/lib/sbp-resolvers.mjs",
+          "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+          "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+        },
+        {
+          "file": "scripts/lib/services-headline.mjs",
+          "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+          "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+        },
+        {
+          "file": "scripts/lib/sheet-utils.mjs",
+          "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+          "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+        },
+        {
+          "file": "scripts/lib/source-docs.mjs",
+          "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+          "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+        },
+        {
+          "file": "scripts/lib/source-evidence.mjs",
+          "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+          "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+        },
+        {
+          "file": "scripts/pdf-text.mjs",
+          "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+          "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+        },
+        {
+          "file": "scripts/update-fbr.mjs",
+          "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+          "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+        }
+      ]
+    },
+    "Import-Payments-by-All-Countries.xlsx:2d9dd8b976b76985e7fbf5b545932c5f608fcc78d0cd626b7c52afded39d8a2e:55f56e8d89bb": {
+      "artifactId": "Import-Payments-by-All-Countries.xlsx:2d9dd8b976b76985e7fbf5b545932c5f608fcc78d0cd626b7c52afded39d8a2e:55f56e8d89bb",
+      "sha256": "2d9dd8b976b76985e7fbf5b545932c5f608fcc78d0cd626b7c52afded39d8a2e",
+      "sourceKey": "Import-Payments-by-All-Countries.xlsx",
+      "sourceUrl": "https://archive.sbp.org.pk/ecodata/Import-Payments-by-All-Countries.xlsx",
+      "responseUrl": "https://archive.sbp.org.pk/ecodata/Import-Payments-by-All-Countries.xlsx",
+      "path": "/source-evidence/2d9dd8b976b76985e7fbf5b545932c5f608fcc78d0cd626b7c52afded39d8a2e.xlsx",
+      "bytes": 33972,
+      "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "retrievedAt": "2026-09-30T21:58:21.165Z",
+      "parserVersion": "parse-sbp-excel.mjs:sha256:a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+      "parserPath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt",
+      "parserDependencies": [
+        {
+          "file": "package-lock.json",
+          "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+          "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+        },
+        {
+          "file": "package.json",
+          "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+          "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+        },
+        {
+          "file": "scripts/data-catalog.mjs",
+          "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+          "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+        },
+        {
+          "file": "scripts/enforce-publication-policy.mjs",
+          "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+          "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+        },
+        {
+          "file": "scripts/lib/data-writer.mjs",
+          "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+          "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+        },
+        {
+          "file": "scripts/lib/ingestion-validation.mjs",
+          "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+          "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+        },
+        {
+          "file": "scripts/lib/provenance-store.mjs",
+          "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+          "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+        },
+        {
+          "file": "scripts/lib/publication-policy.mjs",
+          "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+          "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+        },
+        {
+          "file": "scripts/lib/release-calendar.mjs",
+          "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+          "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+        },
+        {
+          "file": "scripts/lib/reserves-parser.mjs",
+          "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+          "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+        },
+        {
+          "file": "scripts/lib/sbp-resolvers.mjs",
+          "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+          "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+        },
+        {
+          "file": "scripts/lib/services-headline.mjs",
+          "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+          "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+        },
+        {
+          "file": "scripts/lib/sheet-utils.mjs",
+          "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+          "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+        },
+        {
+          "file": "scripts/lib/source-docs.mjs",
+          "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+          "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+        },
+        {
+          "file": "scripts/lib/source-evidence.mjs",
+          "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+          "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+        },
+        {
+          "file": "scripts/pdf-text.mjs",
+          "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+          "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+        },
+        {
+          "file": "scripts/update-fbr.mjs",
+          "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+          "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+        }
+      ]
+    }
+  },
+  "countryReconciliation": [
+    {
+      "check": "Export_Receipts_by_all_Countries.xls latest country components = banks total",
+      "total": 2278.69,
+      "components": 2278.620000000001,
+      "difference": 0.06999999999925421,
+      "tolerance": 1.075,
+      "result": "matched"
+    },
+    {
+      "check": "Export_Receipts_by_all_Countries.xls prev country components = banks total",
+      "total": 2537.11,
+      "components": 2537.1500000000005,
+      "difference": -0.04000000000041837,
+      "tolerance": 1.075,
+      "result": "matched"
+    },
+    {
+      "check": "Export_Receipts_by_all_Countries.xls yearAgo country components = banks total",
+      "total": 2545.23,
+      "components": 2545.2000000000003,
+      "difference": 0.02999999999974534,
+      "tolerance": 1.075,
+      "result": "matched"
+    },
+    {
+      "check": "Export_Receipts_by_all_Countries.xls fytd country components = banks total",
+      "total": 27690.32,
+      "components": 27690.290000000008,
+      "difference": 0.02999999999155989,
+      "tolerance": 1.075,
+      "result": "matched"
+    },
+    {
+      "check": "Export_Receipts_by_all_Countries.xls fytdPrior country components = banks total",
+      "total": 29113.47,
+      "components": 29113.459999999992,
+      "difference": 0.010000000009313226,
+      "tolerance": 1.075,
+      "result": "matched"
+    },
+    {
+      "check": "Import-Payments-by-All-Countries.xlsx latest country components = banks total",
+      "total": 5714.09,
+      "components": 5714.069999999999,
+      "difference": 0.020000000001346052,
+      "tolerance": 1.075,
+      "result": "matched"
+    },
+    {
+      "check": "Import-Payments-by-All-Countries.xlsx prev country components = banks total",
+      "total": 5921.48,
+      "components": 5921.439999999999,
+      "difference": 0.040000000000873115,
+      "tolerance": 1.075,
+      "result": "matched"
+    },
+    {
+      "check": "Import-Payments-by-All-Countries.xlsx yearAgo country components = banks total",
+      "total": 5460.33,
+      "components": 5460.32,
+      "difference": 0.010000000000218279,
+      "tolerance": 1.075,
+      "result": "matched"
+    },
+    {
+      "check": "Import-Payments-by-All-Countries.xlsx fytd country components = banks total",
+      "total": 57917.25,
+      "components": 57917.28,
+      "difference": -0.029999999998835847,
+      "tolerance": 1.075,
+      "result": "matched"
+    },
+    {
+      "check": "Import-Payments-by-All-Countries.xlsx fytdPrior country components = banks total",
+      "total": 53844.88,
+      "components": 53844.95,
+      "difference": -0.06999999999970896,
+      "tolerance": 1.075,
+      "result": "matched"
+    },
+    {
+      "check": "Country workbook independent BOP exports total vs archive",
+      "result": "conflict",
+      "date": "2026-05",
+      "countryTableValue": 2368,
+      "archiveValue": 2357,
+      "difference": 11,
+      "leftEvidence": {
+        "artifactId": "Export_Receipts_by_all_Countries.xls:287fbb741ddb6177ddf2812d1d5c2b0e9bf4c319c3b8cf58b9ef3ae5e6ab5f43:e35cec848385",
+        "sourceKey": "Export_Receipts_by_all_Countries.xls",
+        "retrievedAt": "2026-09-30T21:58:20.771Z",
+        "locator": {
+          "sheet": "Exp Acount",
+          "row": 229,
+          "column": 6,
+          "cell": "F229"
+        },
+        "rawValue": 2368002.6350923725,
+        "scale": 0.001
+      },
+      "rightEvidence": {
+        "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+        "sourceKey": "exp_import_BOP.xls",
+        "retrievedAt": "2026-09-30T21:57:56.136Z",
+        "locator": {
+          "sheet": "Exp.Imp.(BOP)Arch",
+          "row": 793,
+          "column": 5,
+          "cell": "E793"
+        },
+        "rawValue": 2356.9566412253726
+      },
+      "reason": "Official tables disagree for the same BOP period; country figures are withheld, not reconciled."
+    },
+    {
+      "check": "Country workbook independent BOP exports total vs archive",
+      "total": 2619.01,
+      "components": 2619,
+      "difference": 0.010000000000218279,
+      "tolerance": 1,
+      "result": "matched",
+      "leftEvidence": {
+        "artifactId": "Export_Receipts_by_all_Countries.xls:287fbb741ddb6177ddf2812d1d5c2b0e9bf4c319c3b8cf58b9ef3ae5e6ab5f43:e35cec848385",
+        "sourceKey": "Export_Receipts_by_all_Countries.xls",
+        "retrievedAt": "2026-09-30T21:58:20.771Z",
+        "locator": {
+          "sheet": "Exp Acount",
+          "row": 229,
+          "column": 5,
+          "cell": "E229"
+        },
+        "rawValue": 2619007.3365998473,
+        "scale": 0.001
+      },
+      "rightEvidence": {
+        "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+        "sourceKey": "exp_import_BOP.xls",
+        "retrievedAt": "2026-09-30T21:57:56.136Z",
+        "locator": {
+          "sheet": "Exp.Imp.(BOP)Arch",
+          "row": 792,
+          "column": 5,
+          "cell": "E792"
+        },
+        "rawValue": 2619.007336599848
+      }
+    },
+    {
+      "check": "Country workbook independent BOP exports total vs archive",
+      "total": 2444,
+      "components": 2444,
+      "difference": 0,
+      "tolerance": 1,
+      "result": "matched",
+      "leftEvidence": {
+        "artifactId": "Export_Receipts_by_all_Countries.xls:287fbb741ddb6177ddf2812d1d5c2b0e9bf4c319c3b8cf58b9ef3ae5e6ab5f43:e35cec848385",
+        "sourceKey": "Export_Receipts_by_all_Countries.xls",
+        "retrievedAt": "2026-09-30T21:58:20.771Z",
+        "locator": {
+          "sheet": "Exp Acount",
+          "row": 229,
+          "column": 4,
+          "cell": "D229"
+        },
+        "rawValue": 2444002.088162166,
+        "scale": 0.001
+      },
+      "rightEvidence": {
+        "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+        "sourceKey": "exp_import_BOP.xls",
+        "retrievedAt": "2026-09-30T21:57:56.136Z",
+        "locator": {
+          "sheet": "Exp.Imp.(BOP)Arch",
+          "row": 780,
+          "column": 5,
+          "cell": "E780"
+        },
+        "rawValue": 2444.0020881621663
+      }
+    },
+    {
+      "check": "Country workbook independent BOP imports total vs archive",
+      "result": "conflict",
+      "date": "2026-05",
+      "countryTableValue": 5686.01,
+      "archiveValue": 5640,
+      "difference": 46.01000000000022,
+      "leftEvidence": {
+        "artifactId": "Import-Payments-by-All-Countries.xlsx:2d9dd8b976b76985e7fbf5b545932c5f608fcc78d0cd626b7c52afded39d8a2e:55f56e8d89bb",
+        "sourceKey": "Import-Payments-by-All-Countries.xlsx",
+        "retrievedAt": "2026-09-30T21:58:21.165Z",
+        "locator": {
+          "sheet": "Imports by all Countries",
+          "row": 229,
+          "column": 6,
+          "cell": "F229"
+        },
+        "rawValue": 5686012.647901507,
+        "scale": 0.001
+      },
+      "rightEvidence": {
+        "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+        "sourceKey": "exp_import_BOP.xls",
+        "retrievedAt": "2026-09-30T21:57:56.136Z",
+        "locator": {
+          "sheet": "Exp.Imp.(BOP)Arch",
+          "row": 793,
+          "column": 9,
+          "cell": "I793"
+        },
+        "rawValue": 5639.773667076334
+      },
+      "reason": "Official tables disagree for the same BOP period; country figures are withheld, not reconciled."
+    },
+    {
+      "check": "Country workbook independent BOP imports total vs archive",
+      "total": 5989.01,
+      "components": 5989,
+      "difference": 0.010000000000218279,
+      "tolerance": 1,
+      "result": "matched",
+      "leftEvidence": {
+        "artifactId": "Import-Payments-by-All-Countries.xlsx:2d9dd8b976b76985e7fbf5b545932c5f608fcc78d0cd626b7c52afded39d8a2e:55f56e8d89bb",
+        "sourceKey": "Import-Payments-by-All-Countries.xlsx",
+        "retrievedAt": "2026-09-30T21:58:21.165Z",
+        "locator": {
+          "sheet": "Imports by all Countries",
+          "row": 229,
+          "column": 5,
+          "cell": "E229"
+        },
+        "rawValue": 5989006.755921242,
+        "scale": 0.001
+      },
+      "rightEvidence": {
+        "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+        "sourceKey": "exp_import_BOP.xls",
+        "retrievedAt": "2026-09-30T21:57:56.136Z",
+        "locator": {
+          "sheet": "Exp.Imp.(BOP)Arch",
+          "row": 792,
+          "column": 9,
+          "cell": "I792"
+        },
+        "rawValue": 5989.006755921247
+      }
+    },
+    {
+      "check": "Country workbook independent BOP imports total vs archive",
+      "total": 5501.04,
+      "components": 5501,
+      "difference": 0.03999999999996362,
+      "tolerance": 1,
+      "result": "matched",
+      "leftEvidence": {
+        "artifactId": "Import-Payments-by-All-Countries.xlsx:2d9dd8b976b76985e7fbf5b545932c5f608fcc78d0cd626b7c52afded39d8a2e:55f56e8d89bb",
+        "sourceKey": "Import-Payments-by-All-Countries.xlsx",
+        "retrievedAt": "2026-09-30T21:58:21.165Z",
+        "locator": {
+          "sheet": "Imports by all Countries",
+          "row": 229,
+          "column": 4,
+          "cell": "D229"
+        },
+        "rawValue": 5501040.270493438,
+        "scale": 0.001
+      },
+      "rightEvidence": {
+        "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+        "sourceKey": "exp_import_BOP.xls",
+        "retrievedAt": "2026-09-30T21:57:56.136Z",
+        "locator": {
+          "sheet": "Exp.Imp.(BOP)Arch",
+          "row": 780,
+          "column": 9,
+          "cell": "I780"
+        },
+        "rawValue": 5501.040270493438
+      }
+    }
+  ],
+  "publication": {
+    "policy": "official-only",
+    "status": "partial",
+    "reason": "Country tables and the official monthly BOP archive disagree for overlapping periods. Country breakdowns are unavailable pending issuer reconciliation; supported monthly BOP observations remain published.",
+    "withheldFields": [
+      "topExportCountries",
+      "topImportCountries",
+      "exportCountryPeriod",
+      "importCountryPeriod",
+      "countryMonthly"
     ]
   }
 }

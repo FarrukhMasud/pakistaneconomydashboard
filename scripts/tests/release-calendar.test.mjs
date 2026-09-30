@@ -16,6 +16,9 @@ test('periodEndDate expands a month label to the last calendar day', () => {
   assert.equal(periodEndDate('2026-07-17'), '2026-07-17');
   assert.equal(periodEndDate('FY2026'), null);
   assert.equal(periodEndDate(undefined), null);
+  assert.equal(periodEndDate('2026-02-30'), null);
+  assert.equal(periodEndDate('2026-13'), null);
+  assert.equal(periodEndDate('2026-00-10'), null);
 });
 
 test('observedInterval measures monthly spacing', () => {
@@ -73,7 +76,7 @@ test('buildReleaseRow projects the next monthly release and states its basis', (
   const row = buildReleaseRow({
     dataset: monthlyDataset,
     data: monthlyData(),
-    freshness: { latestObservation: '2026-06', dashboardUpdated: '2026-07-24T00:00:00.000Z' },
+    freshness: { latestObservation: '2026-06', publicationDate: '2026-07-24T00:00:00.000Z', dashboardUpdated: '2026-07-30' },
     now: new Date('2026-07-24T00:00:00Z'),
   });
 
@@ -85,6 +88,16 @@ test('buildReleaseRow projects the next monthly release and states its basis', (
   assert.ok(row.windowEnd > row.expectedRelease);
   assert.match(row.basis, /Estimated/);
   assert.match(row.basis, /Not an official release calendar/);
+});
+
+test('a dashboard refresh cannot masquerade as an official publication date', () => {
+  const row = buildReleaseRow({
+    dataset: monthlyDataset,
+    data: monthlyData(),
+    freshness: { latestObservation: '2026-06', dashboardUpdated: '2026-07-24' },
+    now: new Date('2026-07-24T00:00:00Z'),
+  });
+  assert.notEqual(row.publicationLagDays, 24);
 });
 
 test('buildReleaseRow flags a stalled series as overdue with the days late', () => {

@@ -35,39 +35,25 @@
       <description>vs Jul-Aug FY2026 · SBP</description>
     </item>
     <item>
-      <title>IT &amp; Telecom Exports: 0.81 USD bn, +17.39% (null FY2027)</title>
+      <title>IT &amp; Telecom Exports: 0.81 USD bn, +17.37% (Jul-Aug FY2027)</title>
       <link>https://economyofpakistan.com/external/services</link>
-      <guid isPermaLink="false">kpi-it_exports-null FY27-0.81</guid>
+      <guid isPermaLink="false">kpi-it_exports-Jul-Aug FY27-0.81</guid>
       <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
       <description>vs Jul-Aug FY26 · SBP</description>
     </item>
     <item>
-      <title>GDP Growth Rate: 3.7 %, +0.52pp (FY2026 (Est.))</title>
+      <title>GDP Growth Rate: 3.7 %, +0.52pp (FY2026)</title>
       <link>https://economyofpakistan.com/fiscal/fiscal</link>
-      <guid isPermaLink="false">kpi-gdp-growth-FY2026 (Est.)-3.7</guid>
+      <guid isPermaLink="false">kpi-gdp-growth-FY2026-3.7</guid>
       <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
-      <description>vs FY2025 · PBS / IMF</description>
+      <description>vs FY2025 · PBS via SBP</description>
     </item>
     <item>
       <title>CPI Inflation (YoY): 11.1 %, +1.9pp (Aug 2026)</title>
       <link>https://economyofpakistan.com/prices/inflation</link>
       <guid isPermaLink="false">kpi-inflation-2026-08-11.1</guid>
       <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
-      <description>vs Jul 2026 · PBS · SBP target: 5–7%</description>
-    </item>
-    <item>
-      <title>FBR Tax Collection (FY2026): 13 Rs tn, +10.72% (Jul–Jun FY2026)</title>
-      <link>https://economyofpakistan.com/fiscal/fbr</link>
-      <guid isPermaLink="false">kpi-fbr-tax-Jul–Jun FY2026-13</guid>
-      <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
-      <description>vs same period last year · Pakistani financial reporting citing provisional FBR figures · Target ₨12.98T · surplus ₨20B</description>
-    </item>
-    <item>
-      <title>SBP Policy Rate: 11.5 %, 0pp (27 Jul 2026)</title>
-      <link>https://economyofpakistan.com/prices/monetary</link>
-      <guid isPermaLink="false">kpi-policy-rate-2026-07-27-11.5</guid>
-      <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
-      <description>last MPC decision 27 Jul 2026 · SBP Monetary Policy Committee · Next MPC: 14 September 2026</description>
+      <description>vs Jul 2026 · PBS</description>
     </item>
   </channel>
 </rss>

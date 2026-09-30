@@ -9,7 +9,7 @@ import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import PeriodCompare from './ui/PeriodCompare';
-import { LoadingCard, ErrorCard, UnavailableCard } from './ui/DataState';
+import { LoadingCard, ErrorCard } from './ui/DataState';
 import { currentCalendarYear, currentFiscalYear, fmtPct, avgField, buildYoYOverlay, formatMonthYear, latestRow, formatFySummaryTitle } from '../utils/periodHelpers';
 import { mergeObservationDates, valuesByDate } from '../utils/chartTimeRange';
 
@@ -23,11 +23,11 @@ export default function InflationSection() {
   if (loading) return <LoadingCard label="Loading inflation data…" />;
   if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load inflation data" />;
 
-  const { national_cpi, urban_cpi, rural_cpi, spi, urban_food, rural_food, urban_nonfood, rural_nonfood, wpi, dataSource, lastUpdated } = data;
-
-  if (!national_cpi?.data?.length) {
-    return <UnavailableCard label="Could not load inflation data" reason="National CPI series is empty." />;
-  }
+  const { dataSource, lastUpdated } = data;
+  const series = (key) => data[key] || { data: [] };
+  const national_cpi = series('national_cpi'), urban_cpi = series('urban_cpi'), rural_cpi = series('rural_cpi');
+  const spi = series('spi'), wpi = series('wpi'), urban_food = series('urban_food'), rural_food = series('rural_food');
+  const urban_nonfood = series('urban_nonfood'), rural_nonfood = series('rural_nonfood');
 
   const latestCpi = latestRow(national_cpi?.data);
   const latestUrban = latestRow(urban_cpi?.data);
@@ -81,7 +81,7 @@ export default function InflationSection() {
       tooltip: {
         ...baseLineOptions.plugins.tooltip,
         callbacks: {
-          label: (ctx) => `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(1)}%`,
+          label: (ctx) => `${ctx.dataset.label}: ${fmtPct(ctx.parsed.y)}`,
         },
       },
     },
@@ -133,7 +133,7 @@ export default function InflationSection() {
       tooltip: {
         ...baseLineOptions.plugins.tooltip,
         callbacks: {
-          label: (ctx) => `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(1)}%`,
+          label: (ctx) => `${ctx.dataset.label}: ${fmtPct(ctx.parsed.y)}`,
         },
       },
     },
@@ -206,7 +206,7 @@ export default function InflationSection() {
       tooltip: {
         ...baseLineOptions.plugins.tooltip,
         callbacks: {
-          label: (ctx) => `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(1)}%`,
+          label: (ctx) => `${ctx.dataset.label}: ${fmtPct(ctx.parsed.y)}`,
         },
       },
     },
@@ -270,7 +270,7 @@ export default function InflationSection() {
       tooltip: {
         ...baseLineOptions.plugins.tooltip,
         callbacks: {
-          label: (ctx) => `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(1)}%`,
+          label: (ctx) => `${ctx.dataset.label}: ${fmtPct(ctx.parsed.y)}`,
         },
       },
     },
@@ -294,15 +294,15 @@ export default function InflationSection() {
   };
 
   // Latest values summary card
-  const firstDate = formatDate(national_cpi.data[0].date);
-  const lastDate = formatDate(latestCpi.date);
+  const firstDate = formatDate(national_cpi.data[0]?.date);
+  const lastDate = formatDate(latestCpi?.date);
 
   return (
     <>
       <SectionHeader
         title="Inflation"
         datasetId="inflation"
-        description="Inflation measured Year-over-Year (base year 2015–16). SBP's medium-term inflation target is 5–7%. The CPI is the primary policy target — when CPI exceeds the target, SBP raises the policy rate to cool demand. Food prices (40%+ of CPI basket) disproportionately affect lower-income households. SPI tracks weekly-priced essentials; WPI measures wholesale/producer prices and often leads CPI trends."
+        description="Inflation is measured year-over-year. CPI measures consumer prices, SPI tracks prices of selected essential items, and WPI measures wholesale prices. No policy target is shown without exact official evidence."
         sourceLinks={[
           { label: 'PBS Price Statistics', url: 'https://www.pbs.gov.pk/cpi' },
           { label: 'SBP EasyData Portal', url: 'https://easydata.sbp.org.pk' },

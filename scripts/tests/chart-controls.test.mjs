@@ -9,6 +9,7 @@ import { selectChartRange } from '../../src/utils/chartTimeRange.js';
 import { applySeriesFocus } from '../../src/utils/seriesFocus.js';
 import { chartToCsv } from '../../src/utils/download.js';
 import { fytdDisabledReason } from '../../src/utils/periodHelpers.js';
+import { prepareDataset } from '../../src/utils/figureTrust.js';
 
 let server;
 let ChartCard;
@@ -16,6 +17,8 @@ let ChartDataTable;
 let PeriodCompare;
 let TradeSection;
 let TradeLatestSummary;
+let FbrTaxContent;
+let FigureTrust;
 let I18nContext;
 let translate;
 let translateString;
@@ -29,6 +32,8 @@ before(async () => {
   const tradeModule = await server.ssrLoadModule('/src/components/TradeSection.jsx');
   TradeSection = tradeModule.default;
   TradeLatestSummary = tradeModule.TradeLatestSummary;
+  ({ FbrTaxContent } = await server.ssrLoadModule('/src/components/FbrTaxSection.jsx'));
+  FigureTrust = (await server.ssrLoadModule('/src/components/FigureTrust.jsx')).default;
   const i18n = await server.ssrLoadModule('/src/i18n/context.js');
   ({ I18nContext, translate, translateString } = i18n);
 });
@@ -36,6 +41,32 @@ after(async () => { await server?.close(); });
 
 const dates = ['2024-01', '2025-01', '2026-01'];
 const data = { labels: dates, datasets: [{ label: 'Imports', data: [10, null, 30] }] };
+const withoutTrustDetails = (html) => html.replace(/<details\b[^>]*>[\s\S]*?<\/details>/g, '');
+const headlineMetrics = (html) => [...withoutTrustDetails(html).matchAll(/<dt>(Exports|Imports|Trade balance)<\/dt><dd>([^<]*)<\/dd>/g)]
+  .map((match) => [match[1], match[2]]);
+
+test('FBR renders verified history with withheld targets and missing verification links', () => {
+  const { data } = prepareDataset({
+    sourceType: 'official-primary', sourceUrl: 'https://www.fbr.gov.pk',
+    publication: { policy: 'official-only', status: 'partial', withheldFields: ['fytd', 'annualTargets'] },
+    monthly: [{ date: '2025-06', net: 1015.646 }],
+    fyTotals: [{ fy: 'FY2025', net: 11744.315 }],
+    fytd: null, annualTargets: null,
+  }, { verifiedFrom: null });
+  assert.deepEqual(data.annualTargets, []);
+  assert.equal(data.verifiedFrom, null);
+  const html = renderToStaticMarkup(createElement(FbrTaxContent, { data, compareMode: 'yoy', setCompareMode: () => {} }));
+  assert.match(html, /FBR Tax Collection/);
+  assert.match(html, /Monthly Net Collection/);
+  assert.doesNotMatch(html, /Tax Targets vs Reported Collection/);
+});
+
+test('figure trust renders exact structured fiscal windows instead of raw objects', () => {
+  const period = { start: '2026-07', end: '2026-08', fiscalYear: 2027 };
+  const html = renderToStaticMarkup(createElement(FigureTrust, { datasetId: 'services', row: { period }, period }));
+  assert.match(html, /Jul 2026 – Aug 2026 \(FY2027\)/);
+  assert.doesNotMatch(html, /\[object Object\]/);
+});
 
 test('shared chart renders an accessible canvas, actual-data summary and a discoverable data/source disclosure', () => {
   const html = renderToStaticMarkup(createElement(ChartCard, {
@@ -147,12 +178,12 @@ test('table and direct CSV export apply series focus and the same date window, i
   const csv = chartToCsv(selected);
   assert.match(html, /<th scope="col">Focused<\/th>/);
   assert.ok(html.includes(`<th scope="row">2025-01</th><td>${(1012).toLocaleString()}</td>`));
-  assert.match(html, /<th scope="row">2025-07<\/th><td>\u2014<\/td>/);
+  assert.match(html, /<th scope="row">2025-07<\/th><td>Unavailable<\/td>/);
   assert.doesNotMatch(html, /Unfocused|Comparison|9,999/);
   assert.equal((html.match(/<th scope="row">/g) || []).length, 12);
   assert.equal(csv.trim().split('\n').length, 13);
   assert.match(csv, /^Period,Focused\n2025-01,1012\n/);
-  assert.match(csv, /\n2025-07,\n/);
+  assert.match(csv, /\n2025-07,Unavailable\n/);
   assert.doesNotMatch(csv, /Unfocused|Comparison|9999/);
   assert.equal(original.datasets.length, 3);
   assert.equal(original.datasets[0].hidden, undefined);
@@ -161,6 +192,24 @@ test('table and direct CSV export apply series focus and the same date window, i
     ...original, datasets: applySeriesFocus(original.datasets, null),
   }, periods, '1y').data;
   assert.match(chartToCsv(restored), /^Period,Unfocused,Focused,Comparison\n/);
+});
+
+test('chart tables localize missing values while CSV preserves unavailable gaps and genuine zeros', () => {
+  const chartData = {
+    labels: ['2026-01', '2026-02', '2026-03'],
+    datasets: [{ label: 'Imports', data: [0, null, undefined] }],
+  };
+  const html = renderToStaticMarkup(createElement(I18nContext.Provider, {
+    value: {
+      lang: 'ur',
+      t: (key, fallback) => translate('ur', key, fallback),
+      tx: (text) => translateString('ur', text),
+    },
+  }, createElement(ChartDataTable, { chartData, caption: 'Visible observations' })));
+  assert.match(html, /<th scope="row">2026-01<\/th><td>0<\/td>/);
+  assert.match(html, /<th scope="row">2026-02<\/th><td>دستیاب نہیں<\/td>/);
+  assert.match(html, /<th scope="row">2026-03<\/th><td>دستیاب نہیں<\/td>/);
+  assert.match(chartToCsv(chartData), /^Period,Imports\n2026-01,0\n2026-02,Unavailable\n2026-03,Unavailable\n$/);
 });
 
 test('every fiscal comparison disabled reason is rendered inline in Urdu with translated plain labels', () => {
@@ -224,10 +273,15 @@ test('Trade latest-month summary keeps three headline values, period and source 
   assert.match(html, /<dt>Exports<\/dt><dd>3\.0B<\/dd>/);
   assert.match(html, /<dt>Imports<\/dt><dd>6\.2B<\/dd>/);
   assert.match(html, /<dt>Trade balance<\/dt><dd>-3\.1B<\/dd>/);
-  assert.equal((html.match(/<dd>/g) || []).length, 3);
+  assert.deepEqual(headlineMetrics(html), [
+    ['Exports', '3.0B'], ['Imports', '6.2B'], ['Trade balance', '-3.1B'],
+  ]);
   assert.match(html, /USD; M = million, B = billion/);
   assert.match(html, /Source: SBP/);
-  assert.doesNotMatch(html, /<details|hidden=/);
+  assert.doesNotMatch(withoutTrustDetails(html), /hidden=/);
+  assert.equal((html.match(/<details class="figure-trust__details"/g) || []).length, 3);
+  assert.match(html, /<dt>Authenticity<\/dt>/);
+  assert.match(html, /<dt>Calculation validation<\/dt>/);
 });
 
 test('Trade keeps the latest-month metrics before both main charts and annual summaries and coverage after them', async (context) => {
@@ -239,10 +293,23 @@ test('Trade keeps the latest-month metrics before both main charts and annual su
     ],
     dataCoverage: 'Jul 26',
     lastUpdated: '2026-08-19',
+    sourceType: 'official-primary',
+    publication: { policy: 'official-only', status: 'published', reason: null, withheldFields: [] },
   };
-  context.mock.method(globalThis, 'fetch', async () => ({ ok: true, json: async () => payload }));
+  const metadata = {
+    datasets: [{
+      id: 'trade', sourceType: 'official-primary', authenticity: 'official-primary',
+      publication: payload.publication, freshnessStatus: 'latest-available',
+      validation: { status: 'pending', checkedAt: null, checks: [] },
+    }],
+  };
+  context.mock.method(globalThis, 'fetch', async (url) => ({
+    ok: true,
+    json: async () => String(url).includes('data-freshness.json') ? metadata : payload,
+  }));
   try {
-    assert.equal((await cache.loadData('trade.json')).error, null);
+    const results = await Promise.all([cache.loadData('trade.json'), cache.loadData('data-freshness.json')]);
+    assert.ok(results.every((result) => result.error === null));
     const html = renderToStaticMarkup(createElement(TradeSection));
     const headline = html.indexOf('class="card trade-latest-summary"');
     const mainCharts = html.indexOf('class="section-grid trade-main-charts"');
@@ -257,7 +324,9 @@ test('Trade keeps the latest-month metrics before both main charts and annual su
     assert.match(annualContext, /Calendar YTD/);
     assert.match(annualContext, /First month/);
     assert.match(html.slice(headline, mainCharts), /Source: SBP/);
-    assert.equal((html.slice(headline, mainCharts).match(/<dd>/g) || []).length, 3);
+    assert.deepEqual(headlineMetrics(html.slice(headline, mainCharts)), [
+      ['Exports', '3.0B'], ['Imports', '6.2B'], ['Trade balance', '-3.1B'],
+    ]);
     assert.match(html, /Latest available period: Jul 2026/);
   } finally {
     cache.__resetDataCache();

@@ -22,7 +22,33 @@
           "sourceType": "official-primary"
         }
       ],
-      "asOf": "2026-08"
+      "asOf": "2026-08",
+      "evidence": [
+        {
+          "artifactId": "TS_GP_PT_CPI_M.P00011516:992ea9d6835afb2264ee8f8289a0a8ca857050e6ceb60fcf75307ace6671092a:0d69e7d9200f",
+          "sourceKey": "TS_GP_PT_CPI_M.P00011516",
+          "retrievedAt": "2026-09-30T22:08:39.268Z",
+          "locator": {
+            "seriesKey": "TS_GP_PT_CPI_M.P00011516",
+            "observationDate": "2026-08-31",
+            "row": 1,
+            "column": 5,
+            "columns": {
+              "seriesKey": 2,
+              "date": 4,
+              "value": 5,
+              "unit": 6,
+              "status": 7,
+              "comments": 8
+            }
+          },
+          "rawValue": "11.1"
+        }
+      ],
+      "input": {
+        "dataset": "inflation",
+        "series": "national_cpi"
+      }
     },
     "exchange-rate.depreciation": {
       "text": "The rupee's monthly average moved from ₨153.08/USD in April 2021 to its weakest monthly average of ₨297.75 in September 2023 — a 48.6% loss of value against the dollar. It averaged ₨277.92 in August 2026, 6.7% stronger than that low.",
@@ -37,7 +63,113 @@
           "sourceType": "official-primary"
         }
       ],
-      "asOf": "2026-08"
+      "asOf": "2026-08",
+      "evidence": [
+        {
+          "artifactId": "IBF_Arch.xls:9841e21ca29483ce31a45a912275f83e36e6a53e4545a41ba45a4b9996aa2b7c:014515a6f2dd",
+          "sha256": "9841e21ca29483ce31a45a912275f83e36e6a53e4545a41ba45a4b9996aa2b7c",
+          "sourceKey": "IBF_Arch.xls",
+          "sourceUrl": "https://www.sbp.org.pk/assets/document/IBF_Arch.xls",
+          "responseUrl": "https://www.sbp.org.pk/assets/document/IBF_Arch.xls",
+          "path": "/source-evidence/9841e21ca29483ce31a45a912275f83e36e6a53e4545a41ba45a4b9996aa2b7c.xls",
+          "bytes": 3250688,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-09-30T21:58:06.500Z",
+          "parserVersion": "parse-sbp-excel.mjs:sha256:a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+          "parserPath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt",
+          "parserDependencies": [
+            {
+              "file": "package-lock.json",
+              "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+              "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+            },
+            {
+              "file": "package.json",
+              "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+              "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+            },
+            {
+              "file": "scripts/data-catalog.mjs",
+              "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+              "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+            },
+            {
+              "file": "scripts/enforce-publication-policy.mjs",
+              "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+              "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+            },
+            {
+              "file": "scripts/lib/data-writer.mjs",
+              "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+              "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+            },
+            {
+              "file": "scripts/lib/ingestion-validation.mjs",
+              "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+              "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+            },
+            {
+              "file": "scripts/lib/provenance-store.mjs",
+              "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+              "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+            },
+            {
+              "file": "scripts/lib/publication-policy.mjs",
+              "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+              "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+            },
+            {
+              "file": "scripts/lib/release-calendar.mjs",
+              "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+              "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+            },
+            {
+              "file": "scripts/lib/reserves-parser.mjs",
+              "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+              "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+            },
+            {
+              "file": "scripts/lib/sbp-resolvers.mjs",
+              "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+              "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+            },
+            {
+              "file": "scripts/lib/services-headline.mjs",
+              "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+              "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+            },
+            {
+              "file": "scripts/lib/sheet-utils.mjs",
+              "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+              "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+            },
+            {
+              "file": "scripts/lib/source-docs.mjs",
+              "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+              "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+            },
+            {
+              "file": "scripts/lib/source-evidence.mjs",
+              "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+              "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+            },
+            {
+              "file": "scripts/pdf-text.mjs",
+              "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+              "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+            },
+            {
+              "file": "scripts/update-fbr.mjs",
+              "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+              "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+            }
+          ]
+        }
+      ],
+      "input": {
+        "dataset": "exchange-rates",
+        "series": null
+      }
     },
     "reserves.recovery": {
       "text": "Across the published window, total liquid reserves were lowest at $18.90bn at end-September 2025 and stood at $26.81bn at the week ending 2026-09-18, of which $21.40bn is held by the SBP.",
@@ -52,7 +184,113 @@
           "sourceType": "official-primary"
         }
       ],
-      "asOf": "2026-09-18"
+      "asOf": "2026-09-18",
+      "evidence": [
+        {
+          "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+          "sha256": "8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868",
+          "sourceKey": "forex.pdf",
+          "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
+          "responseUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
+          "path": "/source-evidence/8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868.pdf",
+          "bytes": 142091,
+          "contentType": "application/pdf",
+          "retrievedAt": "2026-09-30T21:58:01.348Z",
+          "parserVersion": "parse-sbp-excel.mjs:sha256:a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+          "parserPath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt",
+          "parserDependencies": [
+            {
+              "file": "package-lock.json",
+              "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+              "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+            },
+            {
+              "file": "package.json",
+              "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+              "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+            },
+            {
+              "file": "scripts/data-catalog.mjs",
+              "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+              "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+            },
+            {
+              "file": "scripts/enforce-publication-policy.mjs",
+              "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+              "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+            },
+            {
+              "file": "scripts/lib/data-writer.mjs",
+              "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+              "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+            },
+            {
+              "file": "scripts/lib/ingestion-validation.mjs",
+              "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+              "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+            },
+            {
+              "file": "scripts/lib/provenance-store.mjs",
+              "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+              "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+            },
+            {
+              "file": "scripts/lib/publication-policy.mjs",
+              "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+              "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+            },
+            {
+              "file": "scripts/lib/release-calendar.mjs",
+              "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+              "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+            },
+            {
+              "file": "scripts/lib/reserves-parser.mjs",
+              "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+              "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+            },
+            {
+              "file": "scripts/lib/sbp-resolvers.mjs",
+              "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+              "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+            },
+            {
+              "file": "scripts/lib/services-headline.mjs",
+              "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+              "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+            },
+            {
+              "file": "scripts/lib/sheet-utils.mjs",
+              "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+              "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+            },
+            {
+              "file": "scripts/lib/source-docs.mjs",
+              "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+              "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+            },
+            {
+              "file": "scripts/lib/source-evidence.mjs",
+              "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+              "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+            },
+            {
+              "file": "scripts/pdf-text.mjs",
+              "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+              "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+            },
+            {
+              "file": "scripts/update-fbr.mjs",
+              "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+              "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+            }
+          ]
+        }
+      ],
+      "input": {
+        "dataset": "reserves",
+        "series": null
+      }
     },
     "trade.deficit": {
       "text": "The monthly goods trade deficit was widest at $4.07bn in June 2022. In August 2026 exports of $2.46bn against imports of $5.49bn left a deficit of $3.03bn.",
@@ -67,10 +305,154 @@
           "sourceType": "official-primary"
         }
       ],
-      "asOf": "2026-08"
+      "asOf": "2026-08",
+      "evidence": [
+        {
+          "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+          "sourceKey": "exp_import_BOP.xls",
+          "retrievedAt": "2026-09-30T21:57:56.136Z",
+          "locator": {
+            "sheet": "Exp.Imp.(BOP)Arch",
+            "row": 780,
+            "column": 9,
+            "cell": "I780"
+          },
+          "rawValue": 5501.040270493438
+        },
+        {
+          "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+          "sha256": "c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd",
+          "sourceKey": "Balancepayment_BPM6.xls",
+          "sourceUrl": "https://www.sbp.org.pk/assets/document/Balancepayment_BPM6.xls",
+          "responseUrl": "https://www.sbp.org.pk/assets/document/Balancepayment_BPM6.xls",
+          "path": "/source-evidence/c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd.xls",
+          "bytes": 61952,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-09-30T21:58:00.723Z",
+          "parserVersion": "parse-sbp-excel.mjs:sha256:a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+          "parserPath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt",
+          "parserDependencies": [
+            {
+              "file": "package-lock.json",
+              "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+              "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+            },
+            {
+              "file": "package.json",
+              "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+              "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+            },
+            {
+              "file": "scripts/data-catalog.mjs",
+              "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+              "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+            },
+            {
+              "file": "scripts/enforce-publication-policy.mjs",
+              "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+              "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+            },
+            {
+              "file": "scripts/lib/data-writer.mjs",
+              "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+              "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+            },
+            {
+              "file": "scripts/lib/ingestion-validation.mjs",
+              "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+              "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+            },
+            {
+              "file": "scripts/lib/provenance-store.mjs",
+              "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+              "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+            },
+            {
+              "file": "scripts/lib/publication-policy.mjs",
+              "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+              "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+            },
+            {
+              "file": "scripts/lib/release-calendar.mjs",
+              "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+              "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+            },
+            {
+              "file": "scripts/lib/reserves-parser.mjs",
+              "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+              "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+            },
+            {
+              "file": "scripts/lib/sbp-resolvers.mjs",
+              "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+              "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+            },
+            {
+              "file": "scripts/lib/services-headline.mjs",
+              "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+              "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+            },
+            {
+              "file": "scripts/lib/sheet-utils.mjs",
+              "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+              "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+            },
+            {
+              "file": "scripts/lib/source-docs.mjs",
+              "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+              "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+            },
+            {
+              "file": "scripts/lib/source-evidence.mjs",
+              "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+              "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+            },
+            {
+              "file": "scripts/pdf-text.mjs",
+              "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+              "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+            },
+            {
+              "file": "scripts/update-fbr.mjs",
+              "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+              "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+            }
+          ]
+        },
+        {
+          "artifactId": "Export_Receipts_by_all_Countries.xls:287fbb741ddb6177ddf2812d1d5c2b0e9bf4c319c3b8cf58b9ef3ae5e6ab5f43:e35cec848385",
+          "sourceKey": "Export_Receipts_by_all_Countries.xls",
+          "retrievedAt": "2026-09-30T21:58:20.771Z",
+          "locator": {
+            "sheet": "Exp Acount",
+            "row": 229,
+            "column": 4,
+            "cell": "D229"
+          },
+          "rawValue": 2444002.088162166,
+          "scale": 0.001
+        },
+        {
+          "artifactId": "Import-Payments-by-All-Countries.xlsx:2d9dd8b976b76985e7fbf5b545932c5f608fcc78d0cd626b7c52afded39d8a2e:55f56e8d89bb",
+          "sourceKey": "Import-Payments-by-All-Countries.xlsx",
+          "retrievedAt": "2026-09-30T21:58:21.165Z",
+          "locator": {
+            "sheet": "Imports by all Countries",
+            "row": 229,
+            "column": 4,
+            "cell": "D229"
+          },
+          "rawValue": 5501040.270493438,
+          "scale": 0.001
+        }
+      ],
+      "input": {
+        "dataset": "trade",
+        "series": null
+      }
     },
     "fdi.annualContext": {
-      "text": "Net FDI in FY2026 was $1.64bn ($3.57bn of inflows against $1.93bn of outflows) — below the series peak of $2.78bn in FY2018, and the strongest since FY2025.",
+      "text": "Net FDI in FY2025 was $2.48bn ($4.27bn of inflows against $1.79bn of outflows) — below the series peak of $2.78bn in FY2018, and the strongest since FY2020.",
       "basis": "derived",
       "derivation": "Latest completed fiscal year compared against every other year in the annual net FDI series from FY2017.",
       "sources": [
@@ -82,10 +464,631 @@
           "sourceType": "official-primary"
         }
       ],
-      "asOf": "FY2026"
+      "asOf": "FY2025",
+      "evidence": [
+        {
+          "artifactId": "Netinflow.xls:51f6f6f0ba1d742563fd836b0aac101be7b281bdc05f27a4505c320134c9dd0f:97abc66641b2",
+          "sha256": "51f6f6f0ba1d742563fd836b0aac101be7b281bdc05f27a4505c320134c9dd0f",
+          "sourceKey": "Netinflow.xls",
+          "sourceUrl": "https://www.sbp.org.pk/assets/document/Netinflow.xls",
+          "responseUrl": "https://www.sbp.org.pk/assets/document/Netinflow.xls",
+          "path": "/source-evidence/51f6f6f0ba1d742563fd836b0aac101be7b281bdc05f27a4505c320134c9dd0f.xls",
+          "bytes": 81920,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-09-30T21:57:58.574Z",
+          "parserVersion": "parse-sbp-excel.mjs:sha256:a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+          "parserPath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt",
+          "parserDependencies": [
+            {
+              "file": "package-lock.json",
+              "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+              "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+            },
+            {
+              "file": "package.json",
+              "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+              "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+            },
+            {
+              "file": "scripts/data-catalog.mjs",
+              "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+              "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+            },
+            {
+              "file": "scripts/enforce-publication-policy.mjs",
+              "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+              "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+            },
+            {
+              "file": "scripts/lib/data-writer.mjs",
+              "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+              "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+            },
+            {
+              "file": "scripts/lib/ingestion-validation.mjs",
+              "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+              "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+            },
+            {
+              "file": "scripts/lib/provenance-store.mjs",
+              "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+              "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+            },
+            {
+              "file": "scripts/lib/publication-policy.mjs",
+              "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+              "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+            },
+            {
+              "file": "scripts/lib/release-calendar.mjs",
+              "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+              "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+            },
+            {
+              "file": "scripts/lib/reserves-parser.mjs",
+              "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+              "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+            },
+            {
+              "file": "scripts/lib/sbp-resolvers.mjs",
+              "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+              "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+            },
+            {
+              "file": "scripts/lib/services-headline.mjs",
+              "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+              "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+            },
+            {
+              "file": "scripts/lib/sheet-utils.mjs",
+              "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+              "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+            },
+            {
+              "file": "scripts/lib/source-docs.mjs",
+              "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+              "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+            },
+            {
+              "file": "scripts/lib/source-evidence.mjs",
+              "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+              "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+            },
+            {
+              "file": "scripts/pdf-text.mjs",
+              "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+              "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+            },
+            {
+              "file": "scripts/update-fbr.mjs",
+              "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+              "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+            }
+          ]
+        },
+        {
+          "artifactId": "NetinflowSummary.xls:29b6045f71cb22f4da2fd1120875e10b92cdc96fa7bc228d7886467f09e56f99:552b80d6762b",
+          "sha256": "29b6045f71cb22f4da2fd1120875e10b92cdc96fa7bc228d7886467f09e56f99",
+          "sourceKey": "NetinflowSummary.xls",
+          "sourceUrl": "https://archive.sbp.org.pk/ecodata/NetinflowSummary.xls",
+          "responseUrl": "https://archive.sbp.org.pk/ecodata/NetinflowSummary.xls",
+          "path": "/source-evidence/29b6045f71cb22f4da2fd1120875e10b92cdc96fa7bc228d7886467f09e56f99.xls",
+          "bytes": 57344,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-09-30T21:57:59.436Z",
+          "parserVersion": "parse-sbp-excel.mjs:sha256:a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+          "parserPath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt",
+          "parserDependencies": [
+            {
+              "file": "package-lock.json",
+              "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+              "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+            },
+            {
+              "file": "package.json",
+              "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+              "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+            },
+            {
+              "file": "scripts/data-catalog.mjs",
+              "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+              "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+            },
+            {
+              "file": "scripts/enforce-publication-policy.mjs",
+              "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+              "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+            },
+            {
+              "file": "scripts/lib/data-writer.mjs",
+              "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+              "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+            },
+            {
+              "file": "scripts/lib/ingestion-validation.mjs",
+              "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+              "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+            },
+            {
+              "file": "scripts/lib/provenance-store.mjs",
+              "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+              "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+            },
+            {
+              "file": "scripts/lib/publication-policy.mjs",
+              "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+              "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+            },
+            {
+              "file": "scripts/lib/release-calendar.mjs",
+              "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+              "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+            },
+            {
+              "file": "scripts/lib/reserves-parser.mjs",
+              "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+              "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+            },
+            {
+              "file": "scripts/lib/sbp-resolvers.mjs",
+              "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+              "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+            },
+            {
+              "file": "scripts/lib/services-headline.mjs",
+              "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+              "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+            },
+            {
+              "file": "scripts/lib/sheet-utils.mjs",
+              "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+              "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+            },
+            {
+              "file": "scripts/lib/source-docs.mjs",
+              "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+              "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+            },
+            {
+              "file": "scripts/lib/source-evidence.mjs",
+              "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+              "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+            },
+            {
+              "file": "scripts/pdf-text.mjs",
+              "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+              "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+            },
+            {
+              "file": "scripts/update-fbr.mjs",
+              "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+              "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+            }
+          ]
+        },
+        {
+          "artifactId": "TS_GP_BOP_BPM6SUM_M.P00330:cd661cec1470a4ce0cde9aa3bdf3d3b740889c439ab991e7157827fec171a9ae:212874d0addb",
+          "sha256": "cd661cec1470a4ce0cde9aa3bdf3d3b740889c439ab991e7157827fec171a9ae",
+          "sourceKey": "TS_GP_BOP_BPM6SUM_M.P00330",
+          "sourceUrl": "https://easydata.sbp.org.pk/api/v1/series/TS_GP_BOP_BPM6SUM_M.P00330/data?format=json&start_date=2021-09-30&end_date=2026-09-30",
+          "responseUrl": "https://easydata.sbp.org.pk/api/v1/series/TS_GP_BOP_BPM6SUM_M.P00330/data?format=json&start_date=2021-09-30&end_date=2026-09-30",
+          "path": "/source-evidence/cd661cec1470a4ce0cde9aa3bdf3d3b740889c439ab991e7157827fec171a9ae.json",
+          "bytes": 11075,
+          "contentType": "application/json;charset=utf-8",
+          "retrievedAt": "2026-09-30T22:08:47.664Z",
+          "parserVersion": "update-data.mjs:sha256:b0474b6e87ded8cb9e1124738d94e51c69499fb1e06551c89fe3f63d359c16f1:environment:fa62c8b03b0d33878b4074671762e28c81fef2ee53bc911b48b2be715a86fe83",
+          "parserPath": "/source-evidence/parser-b0474b6e87ded8cb9e1124738d94e51c69499fb1e06551c89fe3f63d359c16f1.txt",
+          "parserDependencies": [
+            {
+              "file": "package-lock.json",
+              "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+              "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+            },
+            {
+              "file": "package.json",
+              "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+              "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+            },
+            {
+              "file": "scripts/data-catalog.mjs",
+              "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+              "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+            },
+            {
+              "file": "scripts/enforce-publication-policy.mjs",
+              "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+              "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+            },
+            {
+              "file": "scripts/lib/data-writer.mjs",
+              "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+              "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+            },
+            {
+              "file": "scripts/lib/ingestion-validation.mjs",
+              "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+              "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+            },
+            {
+              "file": "scripts/lib/provenance-store.mjs",
+              "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+              "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+            },
+            {
+              "file": "scripts/lib/publication-policy.mjs",
+              "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+              "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+            },
+            {
+              "file": "scripts/lib/release-calendar.mjs",
+              "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+              "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+            },
+            {
+              "file": "scripts/lib/reserves-parser.mjs",
+              "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+              "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+            },
+            {
+              "file": "scripts/lib/sbp-resolvers.mjs",
+              "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+              "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+            },
+            {
+              "file": "scripts/lib/services-headline.mjs",
+              "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+              "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+            },
+            {
+              "file": "scripts/lib/sheet-utils.mjs",
+              "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+              "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+            },
+            {
+              "file": "scripts/lib/source-docs.mjs",
+              "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+              "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+            },
+            {
+              "file": "scripts/lib/source-evidence.mjs",
+              "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+              "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+            },
+            {
+              "file": "scripts/parse-sbp-excel.mjs",
+              "sha256": "a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a",
+              "sourcePath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt"
+            },
+            {
+              "file": "scripts/pdf-text.mjs",
+              "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+              "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+            },
+            {
+              "file": "scripts/update-fbr.mjs",
+              "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+              "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+            }
+          ]
+        },
+        {
+          "artifactId": "TS_GP_BOP_BPM6SUM_M.P00340:8e12453347ce424ea0f526701627683c115bd4fc39748abf9e25b278e4093c55:2849852f85a8",
+          "sha256": "8e12453347ce424ea0f526701627683c115bd4fc39748abf9e25b278e4093c55",
+          "sourceKey": "TS_GP_BOP_BPM6SUM_M.P00340",
+          "sourceUrl": "https://easydata.sbp.org.pk/api/v1/series/TS_GP_BOP_BPM6SUM_M.P00340/data?format=json&start_date=2021-09-30&end_date=2026-09-30",
+          "responseUrl": "https://easydata.sbp.org.pk/api/v1/series/TS_GP_BOP_BPM6SUM_M.P00340/data?format=json&start_date=2021-09-30&end_date=2026-09-30",
+          "path": "/source-evidence/8e12453347ce424ea0f526701627683c115bd4fc39748abf9e25b278e4093c55.json",
+          "bytes": 14794,
+          "contentType": "application/json;charset=utf-8",
+          "retrievedAt": "2026-09-30T22:08:48.102Z",
+          "parserVersion": "update-data.mjs:sha256:b0474b6e87ded8cb9e1124738d94e51c69499fb1e06551c89fe3f63d359c16f1:environment:fa62c8b03b0d33878b4074671762e28c81fef2ee53bc911b48b2be715a86fe83",
+          "parserPath": "/source-evidence/parser-b0474b6e87ded8cb9e1124738d94e51c69499fb1e06551c89fe3f63d359c16f1.txt",
+          "parserDependencies": [
+            {
+              "file": "package-lock.json",
+              "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+              "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+            },
+            {
+              "file": "package.json",
+              "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+              "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+            },
+            {
+              "file": "scripts/data-catalog.mjs",
+              "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+              "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+            },
+            {
+              "file": "scripts/enforce-publication-policy.mjs",
+              "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+              "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+            },
+            {
+              "file": "scripts/lib/data-writer.mjs",
+              "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+              "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+            },
+            {
+              "file": "scripts/lib/ingestion-validation.mjs",
+              "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+              "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+            },
+            {
+              "file": "scripts/lib/provenance-store.mjs",
+              "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+              "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+            },
+            {
+              "file": "scripts/lib/publication-policy.mjs",
+              "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+              "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+            },
+            {
+              "file": "scripts/lib/release-calendar.mjs",
+              "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+              "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+            },
+            {
+              "file": "scripts/lib/reserves-parser.mjs",
+              "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+              "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+            },
+            {
+              "file": "scripts/lib/sbp-resolvers.mjs",
+              "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+              "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+            },
+            {
+              "file": "scripts/lib/services-headline.mjs",
+              "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+              "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+            },
+            {
+              "file": "scripts/lib/sheet-utils.mjs",
+              "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+              "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+            },
+            {
+              "file": "scripts/lib/source-docs.mjs",
+              "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+              "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+            },
+            {
+              "file": "scripts/lib/source-evidence.mjs",
+              "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+              "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+            },
+            {
+              "file": "scripts/parse-sbp-excel.mjs",
+              "sha256": "a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a",
+              "sourcePath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt"
+            },
+            {
+              "file": "scripts/pdf-text.mjs",
+              "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+              "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+            },
+            {
+              "file": "scripts/update-fbr.mjs",
+              "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+              "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+            }
+          ]
+        },
+        {
+          "artifactId": "TS_GP_BOP_BPM6SUM_M.P00350:482b01db836fb4eea5f4fcb4c08066f65158d0772f33d64ce1d540b2f719da8d:1a2034b43048",
+          "sha256": "482b01db836fb4eea5f4fcb4c08066f65158d0772f33d64ce1d540b2f719da8d",
+          "sourceKey": "TS_GP_BOP_BPM6SUM_M.P00350",
+          "sourceUrl": "https://easydata.sbp.org.pk/api/v1/series/TS_GP_BOP_BPM6SUM_M.P00350/data?format=json&start_date=2021-09-30&end_date=2026-09-30",
+          "responseUrl": "https://easydata.sbp.org.pk/api/v1/series/TS_GP_BOP_BPM6SUM_M.P00350/data?format=json&start_date=2021-09-30&end_date=2026-09-30",
+          "path": "/source-evidence/482b01db836fb4eea5f4fcb4c08066f65158d0772f33d64ce1d540b2f719da8d.json",
+          "bytes": 11812,
+          "contentType": "application/json;charset=utf-8",
+          "retrievedAt": "2026-09-30T22:08:48.536Z",
+          "parserVersion": "update-data.mjs:sha256:b0474b6e87ded8cb9e1124738d94e51c69499fb1e06551c89fe3f63d359c16f1:environment:fa62c8b03b0d33878b4074671762e28c81fef2ee53bc911b48b2be715a86fe83",
+          "parserPath": "/source-evidence/parser-b0474b6e87ded8cb9e1124738d94e51c69499fb1e06551c89fe3f63d359c16f1.txt",
+          "parserDependencies": [
+            {
+              "file": "package-lock.json",
+              "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+              "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+            },
+            {
+              "file": "package.json",
+              "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+              "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+            },
+            {
+              "file": "scripts/data-catalog.mjs",
+              "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+              "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+            },
+            {
+              "file": "scripts/enforce-publication-policy.mjs",
+              "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+              "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+            },
+            {
+              "file": "scripts/lib/data-writer.mjs",
+              "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+              "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+            },
+            {
+              "file": "scripts/lib/ingestion-validation.mjs",
+              "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+              "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+            },
+            {
+              "file": "scripts/lib/provenance-store.mjs",
+              "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+              "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+            },
+            {
+              "file": "scripts/lib/publication-policy.mjs",
+              "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+              "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+            },
+            {
+              "file": "scripts/lib/release-calendar.mjs",
+              "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+              "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+            },
+            {
+              "file": "scripts/lib/reserves-parser.mjs",
+              "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+              "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+            },
+            {
+              "file": "scripts/lib/sbp-resolvers.mjs",
+              "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+              "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+            },
+            {
+              "file": "scripts/lib/services-headline.mjs",
+              "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+              "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+            },
+            {
+              "file": "scripts/lib/sheet-utils.mjs",
+              "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+              "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+            },
+            {
+              "file": "scripts/lib/source-docs.mjs",
+              "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+              "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+            },
+            {
+              "file": "scripts/lib/source-evidence.mjs",
+              "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+              "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+            },
+            {
+              "file": "scripts/parse-sbp-excel.mjs",
+              "sha256": "a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a",
+              "sourcePath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt"
+            },
+            {
+              "file": "scripts/pdf-text.mjs",
+              "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+              "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+            },
+            {
+              "file": "scripts/update-fbr.mjs",
+              "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+              "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+            }
+          ]
+        },
+        {
+          "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+          "sha256": "c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd",
+          "sourceKey": "Balancepayment_BPM6.xls",
+          "sourceUrl": "https://www.sbp.org.pk/assets/document/Balancepayment_BPM6.xls",
+          "responseUrl": "https://www.sbp.org.pk/assets/document/Balancepayment_BPM6.xls",
+          "path": "/source-evidence/c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd.xls",
+          "bytes": 61952,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-09-30T21:58:00.723Z",
+          "parserVersion": "parse-sbp-excel.mjs:sha256:a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+          "parserPath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt",
+          "parserDependencies": [
+            {
+              "file": "package-lock.json",
+              "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+              "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+            },
+            {
+              "file": "package.json",
+              "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+              "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+            },
+            {
+              "file": "scripts/data-catalog.mjs",
+              "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+              "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+            },
+            {
+              "file": "scripts/enforce-publication-policy.mjs",
+              "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+              "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+            },
+            {
+              "file": "scripts/lib/data-writer.mjs",
+              "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+              "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+            },
+            {
+              "file": "scripts/lib/ingestion-validation.mjs",
+              "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+              "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+            },
+            {
+              "file": "scripts/lib/provenance-store.mjs",
+              "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+              "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+            },
+            {
+              "file": "scripts/lib/publication-policy.mjs",
+              "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+              "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+            },
+            {
+              "file": "scripts/lib/release-calendar.mjs",
+              "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+              "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+            },
+            {
+              "file": "scripts/lib/reserves-parser.mjs",
+              "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+              "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+            },
+            {
+              "file": "scripts/lib/sbp-resolvers.mjs",
+              "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+              "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+            },
+            {
+              "file": "scripts/lib/services-headline.mjs",
+              "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+              "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+            },
+            {
+              "file": "scripts/lib/sheet-utils.mjs",
+              "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+              "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+            },
+            {
+              "file": "scripts/lib/source-docs.mjs",
+              "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+              "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+            },
+            {
+              "file": "scripts/lib/source-evidence.mjs",
+              "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+              "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+            },
+            {
+              "file": "scripts/pdf-text.mjs",
+              "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+              "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+            },
+            {
+              "file": "scripts/update-fbr.mjs",
+              "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+              "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+            }
+          ]
+        }
+      ],
+      "input": {
+        "dataset": "fdi",
+        "series": null
+      }
     },
     "services.itShare": {
-      "text": "IT & telecom exports of $4.18bn in Jul-May FY26 were 46.0% of all services exports and up 20.2% on Jul-May FY25.",
+      "text": "IT & telecom exports of $4.18bn in Jul-May, FY26 were 46.0% of all services exports and up 20.2% on Jul-May FY25.",
       "basis": "derived",
       "derivation": "IT & telecom credit as a share of total services credit for the same fiscal-year-to-date window, compared with the same window a year earlier.",
       "sources": [
@@ -97,10 +1100,416 @@
           "sourceType": "official-primary"
         }
       ],
-      "asOf": "Jul-May FY26"
+      "asOf": "Jul-May, FY26",
+      "evidence": [
+        {
+          "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+          "sha256": "8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6",
+          "sourceKey": "dt.xls",
+          "sourceUrl": "https://archive.sbp.org.pk/ecodata/dt.xls",
+          "responseUrl": "https://archive.sbp.org.pk/ecodata/dt.xls",
+          "path": "/source-evidence/8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6.xls",
+          "bytes": 1541632,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-09-30T21:58:15.167Z",
+          "parserVersion": "parse-sbp-excel.mjs:sha256:a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+          "parserPath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt",
+          "parserDependencies": [
+            {
+              "file": "package-lock.json",
+              "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+              "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+            },
+            {
+              "file": "package.json",
+              "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+              "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+            },
+            {
+              "file": "scripts/data-catalog.mjs",
+              "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+              "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+            },
+            {
+              "file": "scripts/enforce-publication-policy.mjs",
+              "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+              "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+            },
+            {
+              "file": "scripts/lib/data-writer.mjs",
+              "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+              "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+            },
+            {
+              "file": "scripts/lib/ingestion-validation.mjs",
+              "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+              "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+            },
+            {
+              "file": "scripts/lib/provenance-store.mjs",
+              "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+              "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+            },
+            {
+              "file": "scripts/lib/publication-policy.mjs",
+              "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+              "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+            },
+            {
+              "file": "scripts/lib/release-calendar.mjs",
+              "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+              "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+            },
+            {
+              "file": "scripts/lib/reserves-parser.mjs",
+              "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+              "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+            },
+            {
+              "file": "scripts/lib/sbp-resolvers.mjs",
+              "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+              "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+            },
+            {
+              "file": "scripts/lib/services-headline.mjs",
+              "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+              "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+            },
+            {
+              "file": "scripts/lib/sheet-utils.mjs",
+              "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+              "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+            },
+            {
+              "file": "scripts/lib/source-docs.mjs",
+              "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+              "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+            },
+            {
+              "file": "scripts/lib/source-evidence.mjs",
+              "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+              "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+            },
+            {
+              "file": "scripts/pdf-text.mjs",
+              "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+              "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+            },
+            {
+              "file": "scripts/update-fbr.mjs",
+              "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+              "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+            }
+          ]
+        },
+        {
+          "artifactId": "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:ab5ed8e3f335",
+          "sha256": "a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b",
+          "sourceKey": "ExportsImports-Goods.pdf",
+          "sourceUrl": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf",
+          "responseUrl": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf",
+          "path": "/source-evidence/a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b.pdf",
+          "bytes": 289433,
+          "contentType": "application/pdf",
+          "retrievedAt": "2026-09-30T21:58:19.141Z",
+          "parserVersion": "parse-sbp-excel.mjs:sha256:a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+          "parserPath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt",
+          "parserDependencies": [
+            {
+              "file": "package-lock.json",
+              "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+              "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+            },
+            {
+              "file": "package.json",
+              "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+              "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+            },
+            {
+              "file": "scripts/data-catalog.mjs",
+              "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+              "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+            },
+            {
+              "file": "scripts/enforce-publication-policy.mjs",
+              "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+              "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+            },
+            {
+              "file": "scripts/lib/data-writer.mjs",
+              "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+              "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+            },
+            {
+              "file": "scripts/lib/ingestion-validation.mjs",
+              "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+              "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+            },
+            {
+              "file": "scripts/lib/provenance-store.mjs",
+              "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+              "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+            },
+            {
+              "file": "scripts/lib/publication-policy.mjs",
+              "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+              "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+            },
+            {
+              "file": "scripts/lib/release-calendar.mjs",
+              "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+              "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+            },
+            {
+              "file": "scripts/lib/reserves-parser.mjs",
+              "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+              "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+            },
+            {
+              "file": "scripts/lib/sbp-resolvers.mjs",
+              "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+              "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+            },
+            {
+              "file": "scripts/lib/services-headline.mjs",
+              "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+              "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+            },
+            {
+              "file": "scripts/lib/sheet-utils.mjs",
+              "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+              "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+            },
+            {
+              "file": "scripts/lib/source-docs.mjs",
+              "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+              "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+            },
+            {
+              "file": "scripts/lib/source-evidence.mjs",
+              "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+              "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+            },
+            {
+              "file": "scripts/pdf-text.mjs",
+              "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+              "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+            },
+            {
+              "file": "scripts/update-fbr.mjs",
+              "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+              "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+            }
+          ]
+        },
+        {
+          "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+          "sha256": "c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd",
+          "sourceKey": "Balancepayment_BPM6.xls",
+          "sourceUrl": "https://www.sbp.org.pk/assets/document/Balancepayment_BPM6.xls",
+          "responseUrl": "https://www.sbp.org.pk/assets/document/Balancepayment_BPM6.xls",
+          "path": "/source-evidence/c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd.xls",
+          "bytes": 61952,
+          "contentType": "application/vnd.ms-excel",
+          "retrievedAt": "2026-09-30T21:58:00.723Z",
+          "parserVersion": "parse-sbp-excel.mjs:sha256:a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+          "parserPath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt",
+          "parserDependencies": [
+            {
+              "file": "package-lock.json",
+              "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+              "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+            },
+            {
+              "file": "package.json",
+              "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+              "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+            },
+            {
+              "file": "scripts/data-catalog.mjs",
+              "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+              "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+            },
+            {
+              "file": "scripts/enforce-publication-policy.mjs",
+              "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+              "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+            },
+            {
+              "file": "scripts/lib/data-writer.mjs",
+              "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+              "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+            },
+            {
+              "file": "scripts/lib/ingestion-validation.mjs",
+              "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+              "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+            },
+            {
+              "file": "scripts/lib/provenance-store.mjs",
+              "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+              "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+            },
+            {
+              "file": "scripts/lib/publication-policy.mjs",
+              "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+              "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+            },
+            {
+              "file": "scripts/lib/release-calendar.mjs",
+              "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+              "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+            },
+            {
+              "file": "scripts/lib/reserves-parser.mjs",
+              "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+              "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+            },
+            {
+              "file": "scripts/lib/sbp-resolvers.mjs",
+              "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+              "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+            },
+            {
+              "file": "scripts/lib/services-headline.mjs",
+              "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+              "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+            },
+            {
+              "file": "scripts/lib/sheet-utils.mjs",
+              "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+              "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+            },
+            {
+              "file": "scripts/lib/source-docs.mjs",
+              "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+              "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+            },
+            {
+              "file": "scripts/lib/source-evidence.mjs",
+              "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+              "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+            },
+            {
+              "file": "scripts/pdf-text.mjs",
+              "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+              "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+            },
+            {
+              "file": "scripts/update-fbr.mjs",
+              "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+              "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+            }
+          ]
+        },
+        {
+          "artifactId": "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:3c1462d18012",
+          "sha256": "a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b",
+          "sourceKey": "ExportsImports-Goods.pdf",
+          "sourceUrl": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf",
+          "responseUrl": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf",
+          "path": "/source-evidence/a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b.pdf",
+          "bytes": 289433,
+          "contentType": "application/pdf",
+          "retrievedAt": "2026-09-30T21:51:34.081Z",
+          "parserVersion": "parse-sbp-excel.mjs:sha256:6f96577499bd015f9d037b620afa2e2209a3c770df2019a1ed240cb3e1a461ed:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+          "parserPath": "/source-evidence/parser-6f96577499bd015f9d037b620afa2e2209a3c770df2019a1ed240cb3e1a461ed.txt",
+          "parserDependencies": [
+            {
+              "file": "package-lock.json",
+              "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+              "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+            },
+            {
+              "file": "package.json",
+              "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+              "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+            },
+            {
+              "file": "scripts/data-catalog.mjs",
+              "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+              "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+            },
+            {
+              "file": "scripts/enforce-publication-policy.mjs",
+              "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+              "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+            },
+            {
+              "file": "scripts/lib/data-writer.mjs",
+              "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+              "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+            },
+            {
+              "file": "scripts/lib/ingestion-validation.mjs",
+              "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+              "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+            },
+            {
+              "file": "scripts/lib/provenance-store.mjs",
+              "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+              "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+            },
+            {
+              "file": "scripts/lib/publication-policy.mjs",
+              "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+              "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+            },
+            {
+              "file": "scripts/lib/release-calendar.mjs",
+              "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+              "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+            },
+            {
+              "file": "scripts/lib/reserves-parser.mjs",
+              "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+              "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+            },
+            {
+              "file": "scripts/lib/sbp-resolvers.mjs",
+              "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+              "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+            },
+            {
+              "file": "scripts/lib/services-headline.mjs",
+              "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+              "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+            },
+            {
+              "file": "scripts/lib/sheet-utils.mjs",
+              "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+              "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+            },
+            {
+              "file": "scripts/lib/source-docs.mjs",
+              "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+              "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+            },
+            {
+              "file": "scripts/lib/source-evidence.mjs",
+              "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+              "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+            },
+            {
+              "file": "scripts/pdf-text.mjs",
+              "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+              "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+            },
+            {
+              "file": "scripts/update-fbr.mjs",
+              "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+              "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+            }
+          ]
+        }
+      ],
+      "input": {
+        "dataset": "services",
+        "series": null
+      }
     },
     "fiscal.revenueGap": {
-      "text": "In FY25 total revenue of ₨18.0tn covered 74.5% of total expenditure of ₨24.2tn, leaving a primary surplus of ₨2.72tn. All fiscal figures are for Pakistan's July–June fiscal year.",
+      "text": "In FY25 total revenue of ₨18.0tn covered 74.5% of total expenditure of ₨24.2tn. The separately reported primary balance was a surplus of ₨2.72tn. All fiscal figures are for Pakistan's July–June fiscal year.",
       "basis": "derived",
       "derivation": "Total revenue divided by total expenditure for the latest fiscal year in the SBP summary of public finance, with the reported primary balance for the same year.",
       "sources": [
@@ -119,22 +1528,173 @@
           "sourceType": "official-primary"
         }
       ],
-      "asOf": "FY25"
-    },
-    "fiscal.debtService": {
-      "text": "Debt servicing alone is budgeted at ₨8.05tn in FY2026-27 — 39.1% of gross federal revenue and 68.5% of the net revenue the federal government actually keeps after transfers to the provinces.",
-      "basis": "derived",
-      "derivation": "Budgeted interest (\"markup\") payments divided by budgeted gross and net federal revenue, as presented on 2026-06-12.",
-      "sources": [
+      "asOf": "FY25",
+      "evidence": [
         {
-          "id": "finance-division",
-          "institution": "Ministry of Finance, Government of Pakistan",
-          "label": "Federal Budget and Fiscal Operations",
-          "url": "https://www.finance.gov.pk/",
-          "sourceType": "official-primary"
+          "artifactId": "TS_GP_PF_SPF_Y.SPF370000:462afbb2444107c17a3c2143a2335c88880f1dc4a577d7aa5c725d7dfe5c9c9b:0b9c7d6419b5",
+          "sourceKey": "TS_GP_PF_SPF_Y.SPF370000",
+          "retrievedAt": "2026-09-30T22:08:49.117Z",
+          "locator": {
+            "seriesKey": "TS_GP_PF_SPF_Y.SPF370000",
+            "observationDate": "2025-06-30",
+            "row": 1,
+            "column": 5,
+            "columns": {
+              "seriesKey": 2,
+              "date": 4,
+              "value": 5,
+              "unit": 6,
+              "status": 7,
+              "comments": 8
+            }
+          },
+          "rawValue": "-6168015"
+        },
+        {
+          "artifactId": "TS_GP_PF_SPF_Y.SPF450000:7bea0115397203fcd32fac18eadbd90cd1bbfcdac1c18b7bb01495037c3ba32e:32b42fe6fb8d",
+          "sourceKey": "TS_GP_PF_SPF_Y.SPF450000",
+          "retrievedAt": "2026-09-30T22:08:49.554Z",
+          "locator": {
+            "seriesKey": "TS_GP_PF_SPF_Y.SPF450000",
+            "observationDate": "2025-06-30",
+            "row": 1,
+            "column": 5,
+            "columns": {
+              "seriesKey": 2,
+              "date": 4,
+              "value": 5,
+              "unit": 6,
+              "status": 7,
+              "comments": 8
+            }
+          },
+          "rawValue": "2719402"
+        },
+        {
+          "artifactId": "TS_GP_PF_SPF_Y.SPF010000:5db9fc09e417ba39bff518921b62df9808e7095d6e4217ba60c0faca8f5a8ead:1c26f7123863",
+          "sourceKey": "TS_GP_PF_SPF_Y.SPF010000",
+          "retrievedAt": "2026-09-30T22:08:50.011Z",
+          "locator": {
+            "seriesKey": "TS_GP_PF_SPF_Y.SPF010000",
+            "observationDate": "2025-06-30",
+            "row": 1,
+            "column": 5,
+            "columns": {
+              "seriesKey": 2,
+              "date": 4,
+              "value": 5,
+              "unit": 6,
+              "status": 7,
+              "comments": 8
+            }
+          },
+          "rawValue": "17997486"
+        },
+        {
+          "artifactId": "TS_GP_PF_SPF_Y.SPF050000:2bb4cae98d95c63b238c2c50ad5a8da6e37423d2f9cfc522e72a79cc7ae76052:ef82dfd393d6",
+          "sourceKey": "TS_GP_PF_SPF_Y.SPF050000",
+          "retrievedAt": "2026-09-30T22:08:50.434Z",
+          "locator": {
+            "seriesKey": "TS_GP_PF_SPF_Y.SPF050000",
+            "observationDate": "2025-06-30",
+            "row": 1,
+            "column": 5,
+            "columns": {
+              "seriesKey": 2,
+              "date": 4,
+              "value": 5,
+              "unit": 6,
+              "status": 7,
+              "comments": 8
+            }
+          },
+          "rawValue": "12722909"
+        },
+        {
+          "artifactId": "TS_GP_PF_SPF_Y.SPF090000:22811d6cc3f7a66c57a221eee335556c78bba368d90260dee9d4d5ef87f44693:556c9e5b8c0e",
+          "sourceKey": "TS_GP_PF_SPF_Y.SPF090000",
+          "retrievedAt": "2026-09-30T22:08:50.875Z",
+          "locator": {
+            "seriesKey": "TS_GP_PF_SPF_Y.SPF090000",
+            "observationDate": "2025-06-30",
+            "row": 1,
+            "column": 5,
+            "columns": {
+              "seriesKey": 2,
+              "date": 4,
+              "value": 5,
+              "unit": 6,
+              "status": 7,
+              "comments": 8
+            }
+          },
+          "rawValue": "5274576"
+        },
+        {
+          "artifactId": "TS_GP_PF_SPF_Y.SPF130000:e3f8189aa5e1dc5b62f74c8ba779cd4d7aaa8165bde5cd8f3fa98058b1b3976c:2a121688a0c3",
+          "sourceKey": "TS_GP_PF_SPF_Y.SPF130000",
+          "retrievedAt": "2026-09-30T22:08:51.318Z",
+          "locator": {
+            "seriesKey": "TS_GP_PF_SPF_Y.SPF130000",
+            "observationDate": "2025-06-30",
+            "row": 1,
+            "column": 5,
+            "columns": {
+              "seriesKey": 2,
+              "date": 4,
+              "value": 5,
+              "unit": 6,
+              "status": 7,
+              "comments": 8
+            }
+          },
+          "rawValue": "24165501"
+        },
+        {
+          "artifactId": "TS_GP_PF_SPF_Y.SPF170000:c6b09a44c50ecaf477acd3c61582fec94ded5421a980ebf56f2fe5bb1abcdc87:0d8c1b9ef7a4",
+          "sourceKey": "TS_GP_PF_SPF_Y.SPF170000",
+          "retrievedAt": "2026-09-30T22:08:51.760Z",
+          "locator": {
+            "seriesKey": "TS_GP_PF_SPF_Y.SPF170000",
+            "observationDate": "2025-06-30",
+            "row": 1,
+            "column": 5,
+            "columns": {
+              "seriesKey": 2,
+              "date": 4,
+              "value": 5,
+              "unit": 6,
+              "status": 7,
+              "comments": 8
+            }
+          },
+          "rawValue": "21528585"
+        },
+        {
+          "artifactId": "TS_GP_PF_SPF_Y.SPF250000:a763d6bde42cd7d6225a7149082f2544ba48bc11a9d0234ed54bbc5b456fc1b5:e6eba5f37d6a",
+          "sourceKey": "TS_GP_PF_SPF_Y.SPF250000",
+          "retrievedAt": "2026-09-30T22:08:52.172Z",
+          "locator": {
+            "seriesKey": "TS_GP_PF_SPF_Y.SPF250000",
+            "observationDate": "2025-06-30",
+            "row": 1,
+            "column": 5,
+            "columns": {
+              "seriesKey": 2,
+              "date": 4,
+              "value": 5,
+              "unit": 6,
+              "status": 7,
+              "comments": 8
+            }
+          },
+          "rawValue": "2983402"
         }
       ],
-      "asOf": "2026-27"
+      "input": {
+        "dataset": "fiscal",
+        "series": "publicFinance"
+      }
     }
   },
   "lastUpdated": "2026-09-30",

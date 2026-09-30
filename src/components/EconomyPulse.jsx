@@ -4,8 +4,11 @@ import useI18n from '../i18n/useI18n';
 import { COLORS } from '../utils/chartConfig';
 import MiniSparkline from './ui/MiniSparkline';
 import AnimatedNumber from './ui/AnimatedNumber';
-import { formatMonthYear, formatDayMonthYear, isFiniteNumber } from '../utils/periodHelpers';
+import { formatMonthYear, formatDayMonthYear } from '../utils/periodHelpers';
 import { formatKpiUnit, getKpiDecimals } from '../utils/kpiFormat';
+import FigureTrust from './FigureTrust';
+import { kpiRoute } from '../utils/overviewModel';
+import { ErrorCard } from './ui/DataState';
 
 const PULSE = [
   { id: 'reserves', label: 'Reserves', groupId: 'external', sectionId: 'reserves', sparkKey: 'reserves' },
@@ -67,21 +70,21 @@ export default function EconomyPulse({ onNavigate }) {
 
     const r = takeTail(
       seriesOf(reserves.data?.weekly || reserves.data?.monthly).map((row) => row.total ?? row.value),
-    ).filter(isFiniteNumber);
+    );
     const inf = takeTail(
       seriesOf(inflation.data?.national_cpi || inflation.data?.national || inflation.data?.cpi)
         .map((row) => row.yoy ?? row.value),
-    ).filter(isFiniteNumber);
+    );
     const fx = takeTail(
       seriesOf(exchange.data?.monthly || exchange.data?.daily || exchange.data?.usd)
         .map((row) => row.USD ?? row.rate ?? row.value),
-    ).filter(isFiniteNumber);
+    );
     const tax = takeTail(
       seriesOf(fbr.data?.monthly).map((row) => row.net ?? row.value),
-    ).filter(isFiniteNumber);
+    );
     const rem = takeTail(
       seriesOf(remittances.data?.monthly).map((row) => row.total ?? row.value),
-    ).filter(isFiniteNumber);
+    );
 
     return {
       reserves: r,
@@ -96,23 +99,25 @@ export default function EconomyPulse({ onNavigate }) {
     const byId = Object.fromEntries((kpi.data?.indicators || []).map((row) => [row.id, row]));
     return PULSE.map((spec) => {
       const row = byId[spec.id];
-      if (!row) return null;
+      const unavailable = !row || row.unavailable || !Number.isFinite(row.value);
       return {
         ...spec,
-        label: row.label || spec.label,
-        value: row.value,
-        decimals: getKpiDecimals(row),
-        unit: formatKpiUnit(row.unit),
-        period: formatPeriod(row.period),
-        change: row.change,
-        changeUnit: row.changeUnit,
-        sentiment: row.sentiment || 'neutral',
-        spark: sparks[spec.sparkKey] || [],
+        row, unavailable,
+        label: row?.label || spec.label,
+        value: unavailable ? null : row.value,
+        decimals: getKpiDecimals(row || {}),
+        unit: unavailable ? '' : formatKpiUnit(row.unit),
+        period: formatPeriod(row?.period),
+        change: unavailable ? null : row.change,
+        changeUnit: row?.changeUnit,
+        sentiment: unavailable ? 'neutral' : row.sentiment || 'neutral',
+        spark: unavailable ? [] : sparks[spec.sparkKey] || [],
       };
-    }).filter(Boolean);
+    });
   }, [kpi.data, sparks]);
 
   if (kpi.loading && !kpi.data) return null;
+  if (kpi.error) return <ErrorCard error={kpi.error} onRetry={kpi.retry} compact />;
   if (!chips.length) return null;
 
   return (
@@ -132,17 +137,17 @@ export default function EconomyPulse({ onNavigate }) {
           const color = sentimentColor(chip.sentiment);
           const delta = formatDelta(chip.change, chip.changeUnit);
           return (
+            <article key={chip.id} className="pulse-chip">
             <button
-              key={chip.id}
               type="button"
-              className="pulse-chip"
+              className="pulse-chip__open"
               onClick={() => onNavigate?.(chip.groupId, chip.sectionId)}
             >
               <div className="pulse-chip__top">
                 <span className="pulse-chip__label">{tx(chip.label)}</span>
               </div>
               <span className="pulse-chip__value" style={{ color }}>
-                <AnimatedNumber value={chip.value} decimals={chip.decimals} />
+                {chip.unavailable ? t('trust.unavailableShort', 'Unavailable') : <AnimatedNumber value={chip.value} decimals={chip.decimals} />}
                 {' '}
                 <span className="pulse-chip__unit">{chip.unit}</span>
               </span>
@@ -152,6 +157,10 @@ export default function EconomyPulse({ onNavigate }) {
               </span>
               <MiniSparkline values={chip.spark} color={color} />
             </button>
+            <FigureTrust datasetId={kpiRoute(chip.id).datasetId}
+              row={chip.unavailable ? { ...chip.row, authenticity: 'unavailable' } : chip.row}
+              period={chip.row?.period} compact />
+            </article>
           );
         })}
       </div>

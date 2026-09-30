@@ -3,6 +3,7 @@ import useI18n from '../i18n/useI18n';
 import { COLORS } from '../utils/chartConfig';
 import CiteFigure from './CiteFigure';
 import SourceBadge from './SourceBadge';
+import FigureTrust from './FigureTrust';
 import { routeToPath } from '../hooks/useHashRoute';
 import { resolveWatchlistItems } from '../utils/watchlistModel';
 
@@ -74,7 +75,7 @@ export default function WatchlistPanel({ indicators = [], onNavigate, onBrowse }
                 {item.source && <span className="watchlist__period watchlist__source">{tx('Source')}: {item.source}</span>}
                 {item.value == null && (
                   <span className="watchlist__period">
-                    {item.kind === 'catalog'
+                    {item.unavailable ? t('trust.unavailable', 'Official figure not yet published / verified') : item.kind === 'catalog'
                       ? t('watchlist.exploreSection', 'Explore this section')
                       : t('watchlist.valueUnavailable', 'Value unavailable - open the section for source details')}
                   </span>
@@ -94,6 +95,7 @@ export default function WatchlistPanel({ indicators = [], onNavigate, onBrowse }
                   ★
                 </button>
               </div>
+              {item.kind === 'kpi' && <FigureTrust datasetId={item.datasetId} row={item.trust} period={item.trust?.period} compact />}
             </div>
           );
         })}

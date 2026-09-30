@@ -3,13 +3,14 @@ import { useData } from '../hooks/useData';
 import { useShareableChartState } from '../hooks/useShareableChartState';
 import { COLORS, COLOR_LIST, baseBarOptions, baseDoughnutOptions } from '../utils/chartConfig';
 import ChartCard from './ChartCard';
+import { pointEvidenceRow } from '../utils/chartEvidence';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import SeriesCoverageNote from './ui/SeriesCoverageNote';
 import PeriodCompare from './ui/PeriodCompare';
 import SeriesFocus from './ui/SeriesFocus';
 import { applySeriesFocus } from '../utils/seriesFocus';
-import { LoadingCard, ErrorCard, UnavailableCard } from './ui/DataState';
+import { LoadingCard, ErrorCard } from './ui/DataState';
 import { pctChange, formatMonthYear, buildYoYOverlay, buildFytdSeries, currentFiscalYear, resolveCompareMode, fytdDisabledReason, fytdViewReady } from '../utils/periodHelpers';
 import useI18n from '../i18n/useI18n';
 
@@ -18,6 +19,8 @@ import useI18n from '../i18n/useI18n';
 // the rest of the dashboard. Say so rather than leaving readers to guess.
 const SERVICES_COVERAGE_NOTE =
   'This is the latest period SBP has published in its EBOPS services table. SBP releases this table after the monthly trade and reserves data, so it can lag the rest of the dashboard by a month. The headline totals at the top of this section come from the Balance of Payments summary, which SBP publishes one release earlier.';
+
+const usdM = (value) => Number.isFinite(value) ? `$${value}M` : '—';
 
 export default function ServicesSection() {
   const { t, tx } = useI18n();
@@ -31,11 +34,7 @@ export default function ServicesSection() {
   if (loading) return <LoadingCard label="Loading services data…" />;
   if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load services data" />;
 
-  const { categories, itBreakdown, summary, comparison, recentMonths, itMonthly, monthlySeries, bopSummary } = data;
-
-  if (!Array.isArray(categories) || !categories.length) {
-    return <UnavailableCard label="Could not load services data" reason="Services category breakdown is empty." />;
-  }
+  const { categories = [], itBreakdown, summary, comparison, recentMonths, itMonthly, monthlySeries, bopSummary } = data;
 
   // SBP's Balance of Payments summary carries the headline services aggregate a
   // release ahead of the detailed EBOPS table, so it can cover a later month
@@ -49,7 +48,7 @@ export default function ServicesSection() {
   // too thin, fall back to itMonthly point comparisons (latest vs year-ago /
   // FYTD vs prior FY) so PeriodCompare still changes the chart.
   const mseries = monthlySeries || [];
-  const mseriesRows = mseries.map((m) => ({ date: m.month, itCredit: m.itCredit, freelanceCredit: m.freelanceCredit }));
+  const mseriesRows = mseries.map((m) => ({ ...m, date: m.month }));
   const fyWindow = currentFiscalYear(mseriesRows);
   const fyReady = fytdViewReady(fyWindow);
   const fytdReason = fytdDisabledReason(fyWindow);
@@ -58,6 +57,7 @@ export default function ServicesSection() {
   const showFytd = effectiveCompare === 'fytd';
   const recentMonthsDisplay = mseries.length
     ? mseries.slice(-4).map((m) => ({
+        ...m,
         month: formatMonthYear(m.month),
         totalCredit: m.totalCredit,
         itCredit: m.itCredit,
@@ -75,6 +75,7 @@ export default function ServicesSection() {
   const detailItComp = itMonthly?.components?.find((c) => c.key === 'itTotal') || null;
   const itComp = data.itHeadline
     ? {
+        ...data.itHeadline,
         key: 'itTotal',
         name: 'IT & Telecom (total)',
         latest: data.itHeadline.latest,
@@ -131,12 +132,15 @@ export default function ServicesSection() {
       datasets: applySeriesFocus([
         {
           label: priorLabel,
+          isComparison: true,
+          evidenceRows: pointComponents.map((component) => pointEvidenceRow(component, 'yearAgo', componentYearAgoMonth(component))),
           data: priorVals,
           backgroundColor: 'rgba(66, 165, 245, 0.45)',
           borderRadius: 4,
         },
         {
           label: latestLabel,
+          evidenceRows: pointComponents.map((component) => pointEvidenceRow(component, 'latest', componentMonth(component))),
           data: latestVals,
           backgroundColor: COLORS.teal,
           borderRadius: 4,
@@ -155,12 +159,15 @@ export default function ServicesSection() {
       datasets: applySeriesFocus([
         {
           label: componentFytdPriorLabel(itComp) || 'Prior FYTD',
+          isComparison: true,
+          evidenceRows: fytdComponents.map((component) => pointEvidenceRow(component, 'fytdPrior', componentFytdPriorLabel(component))),
           data: priorVals,
           backgroundColor: 'rgba(66, 165, 245, 0.45)',
           borderRadius: 4,
         },
         {
           label: componentFytdLabel(itComp) || 'Current FYTD',
+          evidenceRows: fytdComponents.map((component) => pointEvidenceRow(component, 'fytd', componentFytdLabel(component))),
           data: currentVals,
           backgroundColor: COLORS.teal,
           borderRadius: 4,
@@ -179,24 +186,28 @@ export default function ServicesSection() {
           ? [
               {
                 label: `${fytdIt.currentLabel} IT & Telecom`,
+                valueField: 'itCredit',
                 data: fytdIt.current,
                 backgroundColor: COLORS.teal,
                 borderRadius: 4,
               },
               {
                 label: `${fytdFreelance.currentLabel} Freelance IT`,
+                valueField: 'freelanceCredit',
                 data: fytdFreelance.current,
                 backgroundColor: COLORS.amber,
                 borderRadius: 4,
               },
               ...(fytdIt.prior.some((v) => v != null) ? [{
                 label: `${fytdIt.priorLabel} IT (same months)`,
+                valueField: 'itCredit',
                 data: fytdIt.prior,
                 backgroundColor: 'rgba(66, 165, 245, 0.35)',
                 borderRadius: 4,
               }] : []),
               ...(fytdFreelance.prior.some((v) => v != null) ? [{
                 label: `${fytdFreelance.priorLabel} Freelance (same months)`,
+                valueField: 'freelanceCredit',
                 data: fytdFreelance.prior,
                 backgroundColor: 'rgba(255, 167, 38, 0.35)',
                 borderRadius: 4,
@@ -205,12 +216,14 @@ export default function ServicesSection() {
           : [
               {
                 label: 'IT & Telecom',
+                valueField: 'itCredit',
                 data: mseries.map((m) => m.itCredit),
                 backgroundColor: COLORS.teal,
                 borderRadius: 4,
               },
               {
                 label: 'Freelance IT',
+                valueField: 'freelanceCredit',
                 data: mseries.map((m) => m.freelanceCredit),
                 backgroundColor: COLORS.amber,
                 borderRadius: 4,
@@ -218,6 +231,7 @@ export default function ServicesSection() {
               ...(showYoY && itPrior.some((v) => v != null) ? [{
                 isComparison: true,
                 label: itPriorLabel || 'Prior year IT',
+                valueField: 'itCredit',
                 data: itPrior,
                 backgroundColor: 'rgba(66, 165, 245, 0.35)',
                 borderRadius: 4,
@@ -225,6 +239,7 @@ export default function ServicesSection() {
               ...(showYoY && freelancePrior.some((v) => v != null) ? [{
                 isComparison: true,
                 label: freelancePriorLabel || 'Prior year Freelance',
+                valueField: 'freelanceCredit',
                 data: freelancePrior,
                 backgroundColor: 'rgba(255, 167, 38, 0.35)',
                 borderRadius: 4,
@@ -259,7 +274,7 @@ export default function ServicesSection() {
     ...(itMonthly?.components || []).filter((component) => component.key !== 'itTotal'),
   ].filter((component) => component?.latest != null);
   const itMomentum = itMonthly ? momentumComponents.map((c) => {
-    const yoy = c.yearAgo ? pctChange(c.latest, c.yearAgo) : { pct: null, direction: 'flat' };
+    const yoy = pctChange(c.latest, c.yearAgo);
     const fy = c.fytdPrior ? pctChange(c.fytd, c.fytdPrior) : { pct: null };
     const sub = [
       componentMonth(c) ? `as of ${formatMonthYear(componentMonth(c))}` : null,
@@ -268,11 +283,12 @@ export default function ServicesSection() {
     ].filter(Boolean).join(' · ');
     return {
       label: c.name,
-      value: `$${c.latest}M`,
+      value: usdM(c.latest),
       sub,
       direction: yoy.direction,
       sentiment: yoy.direction === 'up' ? 'positive' : yoy.direction === 'down' ? 'negative' : 'neutral',
       color: c.key === 'freelance' ? COLORS.amber : c.key === 'itTotal' ? COLORS.teal : undefined,
+      row: c, period: componentMonth(c),
     };
   }) : [];
 
@@ -376,7 +392,7 @@ export default function ServicesSection() {
     labels: topCatsForBalance.map((d) => d.name),
     datasets: [
       { label: 'Credit (Exports)', data: topCatsForBalance.map((d) => d.credit), backgroundColor: COLORS.teal, borderRadius: 4 },
-      { label: 'Debit (Imports)', data: topCatsForBalance.map((d) => Math.abs(d.debit)), backgroundColor: COLORS.coral, borderRadius: 4 },
+      { label: 'Debit (Imports)', data: topCatsForBalance.map((d) => Number.isFinite(d.debit) ? Math.abs(d.debit) : null), backgroundColor: COLORS.coral, borderRadius: 4 },
     ],
   };
 
@@ -413,21 +429,24 @@ export default function ServicesSection() {
       {bopCumulative && (
         <SummaryCard
           title={`Services trade headline — ${bopCumulative.period} ${bopCumulative.fiscalYear}`}
+          row={bopCumulative}
+          period={`${bopCumulative.period} ${bopCumulative.fiscalYear}`}
           accent={COLORS.purple}
           items={[
-            { label: 'Exports of services (credit)', value: `$${bopCumulative.credit}M`, color: COLORS.teal },
-            { label: 'Imports of services (debit)', value: `$${bopCumulative.debit}M`, color: COLORS.coral },
+            { label: 'Exports of services (credit)', value: usdM(bopCumulative.credit), color: COLORS.teal },
+            { label: 'Imports of services (debit)', value: usdM(bopCumulative.debit), color: COLORS.coral },
             {
               label: 'Balance on trade in services',
-              value: `$${bopCumulative.net}M`,
+              value: usdM(bopCumulative.net),
               sentiment: bopCumulative.net >= 0 ? 'positive' : 'negative',
               color: bopCumulative.net >= 0 ? COLORS.teal : COLORS.coral,
             },
             ...(bopMonth ? [{
               label: `${bopMonth.period} ${bopMonth.fiscalYear} exports`,
-              value: `$${bopMonth.credit}M`,
-              sub: `Net $${bopMonth.net}M`,
+              value: usdM(bopMonth.credit),
+              sub: Number.isFinite(bopMonth.net) ? `Net ${usdM(bopMonth.net)}` : undefined,
               color: COLORS.blue,
+              row: bopMonth, period: `${bopMonth.period} ${bopMonth.fiscalYear}`,
             }] : []),
           ]}
           footnote={`SBP Balance of Payments (BPM6) summary, "Exports/Imports of Services" and "Balance on Trade in Services" rows${bopCumulative.status ? ` · ${bopCumulative.status}` : ''}. SBP publishes this aggregate a release ahead of the detailed EBOPS table, so it covers ${bopMonth ? `${bopMonth.period} ${bopMonth.fiscalYear}` : 'a later month'} while the category and IT breakdowns below stop at ${summary?.period || 'the previous month'}.`}
@@ -439,6 +458,7 @@ export default function ServicesSection() {
         <div className="monthly-it-spotlight">
           <ChartCard
             title="Monthly IT & Freelance Exports"
+            evidenceRows={mseries.length ? mseries : [itComp, freelanceComp].filter(Boolean)}
             observationDates={mseries.map((row) => row.month)}
             rangeMode={showFytd ? 'fiscal' : (showYoY && !seriesHasYoY && pointYoYReady) ? 'comparison' : 'chronological'}
             description={`Monthly IT & Telecom export earnings use SBP’s latest headline table; Freelance IT uses the detailed EBOPS release and can lag by one month. ${mseries.length < 4 ? 'This series accumulates a new month with every SBP release and will lengthen into a fuller trend over time. ' : ''}Missing freelance bars indicate that SBP has not yet published that month’s detailed breakdown.`}
@@ -494,12 +514,14 @@ export default function ServicesSection() {
           <div className="summary-pair">
             <SummaryCard
               title={`${summary.period} — Services Summary`}
+              row={summary}
+              period={summary.period}
               accent={COLORS.teal}
               items={[
-                { label: 'Total Services Credit', value: `$${summary.totalServicesCredit}M`, sub: totalGrowth ? `${totalGrowth.pct > 0 ? '+' : ''}${totalGrowth.pct}% YoY` : '', direction: totalGrowth?.direction, sentiment: totalGrowth?.direction === 'up' ? 'positive' : 'negative', color: COLORS.teal },
-                { label: 'Services Net Balance', value: `$${summary.totalServicesNet}M`, sentiment: summary.totalServicesNet >= 0 ? 'positive' : 'negative', color: summary.totalServicesNet >= 0 ? COLORS.teal : COLORS.coral },
-                { label: 'IT & Telecom Credit', value: `$${summary.itTelecomCredit}M`, sub: itGrowth ? `${itGrowth.pct > 0 ? '+' : ''}${itGrowth.pct}% YoY` : '', direction: itGrowth?.direction, sentiment: itGrowth?.direction === 'up' ? 'positive' : 'negative', color: COLORS.blue },
-                { label: 'Computer Services', value: `$${summary.computerServicesCredit}M`, color: COLORS.amber },
+                { label: 'Total Services Credit', value: usdM(summary.totalServicesCredit), sub: totalGrowth?.pct != null ? `${totalGrowth.pct > 0 ? '+' : ''}${totalGrowth.pct}% YoY` : '', direction: totalGrowth?.direction, sentiment: totalGrowth?.direction === 'up' ? 'positive' : 'neutral', color: COLORS.teal },
+                { label: 'Services Net Balance', value: usdM(summary.totalServicesNet), sentiment: summary.totalServicesNet >= 0 ? 'positive' : 'negative', color: summary.totalServicesNet >= 0 ? COLORS.teal : COLORS.coral },
+                { label: 'IT & Telecom Credit', value: usdM(summary.itTelecomCredit), sub: itGrowth?.pct != null ? `${itGrowth.pct > 0 ? '+' : ''}${itGrowth.pct}% YoY` : '', direction: itGrowth?.direction, sentiment: itGrowth?.direction === 'up' ? 'positive' : 'neutral', color: COLORS.blue },
+                { label: 'Computer Services', value: usdM(summary.computerServicesCredit), color: COLORS.amber },
               ]}
               footnote={`Source: SBP Balance of Payments · Last updated: ${data.lastUpdated || 'N/A'}`}
             />
@@ -509,9 +531,10 @@ export default function ServicesSection() {
                 accent={COLORS.blue}
                 items={recentMonthsDisplay.map((m, i) => ({
                   label: m.month,
-                  value: `$${m.totalCredit}M`,
-                  sub: `IT: $${m.itCredit}M`,
+                  value: usdM(m.totalCredit),
+                  sub: Number.isFinite(m.itCredit) ? `IT: ${usdM(m.itCredit)}` : undefined,
                   color: i === 0 ? COLORS.blue : COLORS.purple,
+                  row: m, period: m.month,
                 }))}
                 footnote="Monthly services exports · Source: SBP"
               />
@@ -523,6 +546,7 @@ export default function ServicesSection() {
       <div className="section-grid">
         <ChartCard
           title="Service Categories (Exports)"
+          evidenceRows={sortedCats}
           description={`Service categories ranked by credit (export) value, comparing ${curLabel} vs ${priorLabel}. IT & Telecom leads Pakistan's services exports.`}
           source="SBP"
           dataSource="SBP"

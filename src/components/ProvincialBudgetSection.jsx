@@ -6,12 +6,13 @@ import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import ChartCard from './ChartCard';
 import GoodBadUgly from './ui/GoodBadUgly';
-import { LoadingCard, ErrorCard } from './ui/DataState';
+import { LoadingCard, SectionState, UnavailableCard } from './ui/DataState';
+import FigureTrust from './FigureTrust';
+import { publicationOf } from '../utils/figureTrust';
 import './ui/Budget.css';
-import useI18n from '../i18n/useI18n';
 
 function fmtBn(val) {
-  if (val == null || Number.isNaN(val)) return '—';
+  if (!Number.isFinite(val)) return '—';
   if (val < 0) return `−${fmtBn(-val)}`;
   if (Math.abs(val) >= 1000) return `₨${(val / 1000).toFixed(2)} tn`;
   return `₨${val.toLocaleString(undefined, { maximumFractionDigits: 1 })} bn`;
@@ -34,16 +35,16 @@ const CENSUS_2023_POP = {
 const PROVINCE_NAME = { punjab: 'Punjab', sindh: 'Sindh', kp: 'KP', balochistan: 'Balochistan' };
 
 export default function ProvincialBudgetSection() {
-  const { tx } = useI18n();
-  const { data, loading, error, retry } = useData('budget-provincial.json');
+  const state = useData('budget-provincial.json');
+  const { data, loading } = state;
   const [fy, setFy] = useState(null);
   const [activeProvince, setActiveProvince] = useState(null);
 
   if (loading) return <LoadingCard label="Loading provincial budgets…" />;
-  if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load provincial budgets" />;
+  if (!data) return <SectionState state={state} label="Could not load provincial budgets" />;
 
   const { provinces = [], fiscalYears = [], lastUpdated, lastVerified, methodologyNote } = data;
-  if (provinces.length === 0) return <p>{tx("No provincial budget data available.")}</p>;
+  if (provinces.length === 0) return <UnavailableCard sourceUrl={data.sourceUrl} />;
 
   const selectedFy = fy || fiscalYears[0];
   const provinceId = activeProvince || provinces[0].id;
@@ -86,8 +87,8 @@ export default function ProvincialBudgetSection() {
         ...baseDoughnutOptions.plugins?.tooltip,
         callbacks: {
           label: (ctx) => {
-            const share = nfcTotal ? ((ctx.raw / nfcTotal) * 100).toFixed(1) : '0';
-            return `${ctx.label}: ${fmtBn(ctx.raw)} (${share}%)`;
+            const share = nfcTotal > 0 ? ((ctx.raw / nfcTotal) * 100).toFixed(1) : null;
+            return `${ctx.label}: ${fmtBn(ctx.raw)}${share == null ? '' : ` (${share}% of published provinces)`}`;
           },
         },
       },
@@ -164,8 +165,8 @@ export default function ProvincialBudgetSection() {
     {
       label: 'Surplus / (deficit)',
       value: fmtBn(py.surplus),
-      sentiment: (py.surplus ?? 0) >= 0 ? 'positive' : 'negative',
-      color: (py.surplus ?? 0) >= 0 ? COLORS.teal : COLORS.coral,
+      sentiment: py.surplus == null ? 'neutral' : py.surplus >= 0 ? 'positive' : 'negative',
+      color: py.surplus == null ? undefined : py.surplus >= 0 ? COLORS.teal : COLORS.coral,
     },
   ] : [];
 
@@ -201,7 +202,9 @@ export default function ProvincialBudgetSection() {
   const devShare = py?.adp != null && py?.totalOutlay ? (py.adp / py.totalOutlay) * 100 : null;
   const autonomy = py?.ownTaxRevenue != null && py?.totalOutlay ? (py.ownTaxRevenue / py.totalOutlay) * 100 : null;
   const pop = CENSUS_2023_POP[prov.id];
-  const perCapita = py?.totalOutlay != null && pop ? (py.totalOutlay * 1e9) / pop : null; // PKR per person
+  // Publish this cross-source calculation only when its population evidence is supplied.
+  const census = data.population?.[prov.id];
+  const perCapita = Number.isFinite(py?.totalOutlay) && pop && census?.evidence && census.value === pop ? (py.totalOutlay * 1e9) / pop : null;
   const insightItems = py ? [
     devShare != null && {
       label: 'Development share',
@@ -209,6 +212,7 @@ export default function ProvincialBudgetSection() {
       sub: 'ADP ÷ total outlay — how much is for new development vs running costs',
       sentiment: devShare >= 25 ? 'positive' : devShare >= 15 ? 'neutral' : 'negative',
       color: devShare >= 25 ? COLORS.teal : devShare >= 15 ? undefined : COLORS.coral,
+      derivation: 'Published ADP ÷ published total outlay × 100',
     },
     autonomy != null && {
       label: 'Fiscal autonomy',
@@ -216,12 +220,15 @@ export default function ProvincialBudgetSection() {
       sub: 'Own-tax ÷ outlay — the rest depends on federal transfers',
       sentiment: autonomy >= 20 ? 'positive' : autonomy >= 10 ? 'neutral' : 'negative',
       color: autonomy >= 20 ? COLORS.teal : autonomy >= 10 ? undefined : COLORS.coral,
+      derivation: 'Published own-source tax revenue ÷ published total outlay × 100',
     },
     perCapita != null && {
       label: 'Budget per person',
       value: `₨${Math.round(perCapita).toLocaleString()}`,
       sub: 'Total outlay ÷ 2023 census population',
       sentiment: 'neutral',
+      derivation: 'Published outlay (PKR billion) × 1,000,000,000 ÷ official 2023 census population',
+      row: { ...py, evidence: [py.evidence, census?.evidence].filter(Boolean) },
     },
   ].filter(Boolean) : [];
 
@@ -259,8 +266,10 @@ export default function ProvincialBudgetSection() {
         {hasNfc && (
           <ChartCard
             title="Federal NFC Transfers by Province"
+            evidenceRows={provinces.map((province) => ({ ...(province.years || []).find((year) => year.fy === nfcFy), name: province.name, period: `FY${nfcFy}` }))}
+            derivation="Province transfer ÷ sum of published province transfers × 100"
             description={`How the federal divisible pool is shared among the four provinces under the NFC Award (FY${nfcFy}). Punjab takes the largest share, broadly tracking population. These transfers are the dominant resource for every province — which is exactly why a federal tax shortfall squeezes all of them.`}
-            source="Provincial Finance Departments / Dawn — NFC transfers"
+            source="Provincial Finance Departments — NFC transfers"
             dataSource="Provincial Finance Departments"
             dataCoverage={`FY${nfcFy}`}
             lastUpdated={lastUpdated}
@@ -273,6 +282,7 @@ export default function ProvincialBudgetSection() {
 
         <ChartCard
           title="Provinces Compared — Outlay, Development & Transfers"
+          evidenceRows={rows.map((row) => ({ ...row.yr, name: row.province.name }))}
           description="Total budget outlay, development (Annual Development Programme) allocation and federal transfers for each province in the selected fiscal year, in PKR billion. Only provinces whose budget for this year could be independently sourced show bars; blanks are data we deliberately did not estimate."
           source="Provincial Finance Departments — White Papers"
           dataSource="Provincial Finance Departments"
@@ -298,6 +308,8 @@ export default function ProvincialBudgetSection() {
 
           <SummaryCard
             title={`Provincial cash surpluses — ${ps.period}`}
+            row={ps}
+            period={ps.period}
             accent={COLORS.purple}
             items={[
               { label: 'Combined surplus delivered', value: fmtBn(ps.actualTotal), sub: '9-month actual', sentiment: 'positive', color: COLORS.teal },
@@ -305,9 +317,9 @@ export default function ProvincialBudgetSection() {
               {
                 label: 'Target met?',
                 value: ps.actualTotal != null && ps.fullYearTarget ? `${((ps.actualTotal / ps.fullYearTarget) * 100).toFixed(0)}%` : '—',
-                sub: ps.actualTotal > ps.fullYearTarget ? 'already beat the annual target in 9 months' : 'of the annual target so far',
-                sentiment: ps.actualTotal > ps.fullYearTarget ? 'positive' : 'neutral',
-                color: ps.actualTotal > ps.fullYearTarget ? COLORS.teal : undefined,
+                sub: Number.isFinite(ps.actualTotal) && ps.fullYearTarget > 0 ? ps.actualTotal > ps.fullYearTarget ? 'above the annual target' : 'of the annual target so far' : undefined,
+                sentiment: Number.isFinite(ps.actualTotal) && ps.fullYearTarget > 0 && ps.actualTotal > ps.fullYearTarget ? 'positive' : 'neutral',
+                derivation: 'Published actual total ÷ full-year target × 100',
               },
             ]}
             footnote={`Source: ${ps.sources?.[0]?.label || 'Ministry of Finance — Fiscal Operations'}. ${ps.note || ''}`}
@@ -315,7 +327,8 @@ export default function ProvincialBudgetSection() {
 
           <ChartCard
             title="Cash Surplus Delivered by Province"
-            description={`Cash surplus each province actually ran in ${ps.period || 'the latest reported period'}, in PKR billion. The combined Rs${ps.actualTotal?.toLocaleString()}bn ${ps.actualTotal != null && ps.fullYearTarget != null && ps.actualTotal > ps.fullYearTarget ? 'already exceeded' : 'is measured against'} the full-year IMF target of Rs${ps.fullYearTarget?.toLocaleString()}bn — early-year surpluses can partly reflect provinces under-spending development budgets, which typically accelerate later.`}
+            evidenceRows={psRows.map((row) => ({ ...ps, name: row.name, value: row.value }))}
+            description={`Published provincial cash surpluses for ${ps.period || 'the reported period'}, in PKR billion. Unavailable provinces are not included as zero.`}
             source={ps.sources?.[0]?.label || 'Ministry of Finance — Fiscal Operations'}
             dataSource="Ministry of Finance — Fiscal Operations"
             dataCoverage={ps.period}
@@ -366,6 +379,8 @@ export default function ProvincialBudgetSection() {
             title={`${prov.name} — FY${selectedFy}${py.status ? ` (${py.status})` : ''}`}
             accent={accent}
             items={provItems}
+            row={py}
+            period={`FY${selectedFy}`}
             footnote={`Source: ${prov.source || 'Provincial Finance Department White Paper'}. Budgeted estimates.`}
           />
 
@@ -374,6 +389,8 @@ export default function ProvincialBudgetSection() {
               title={`${prov.name} — Computed Insights (FY${selectedFy})`}
               accent={accent}
               items={insightItems}
+              row={py}
+              period={`FY${selectedFy}`}
               footnote="Computed from the figures shown. Note: the scope of provincial ADP varies (some provinces quote total development including foreign-funded and federal PSDP), so development-share comparisons are indicative."
             />
           )}
@@ -382,6 +399,7 @@ export default function ProvincialBudgetSection() {
             <div className="section-grid">
               <ChartCard
                 title={`${prov.name} — Key Allocations`}
+                evidenceRows={numericHl.map((row) => ({ ...row, period: `FY${selectedFy}` }))}
                 description={`Major budgeted allocations for ${prov.name} in FY${selectedFy}, in PKR billion. Only line items the province published a specific rupee figure for are charted; see the full list below for qualitative measures.`}
                 source={prov.source || 'Provincial Finance Department White Paper'}
                 dataSource="Provincial Finance Departments"
@@ -405,6 +423,7 @@ export default function ProvincialBudgetSection() {
                       <>
                         {hl.label && <strong>{hl.label}: </strong>}
                         {hl.value != null ? fmtBn(hl.value) : ''}{hl.note ? ` — ${hl.note}` : ''}
+                        <FigureTrust datasetId="budget-provincial" row={hl} period={`FY${selectedFy}`} compact />
                       </>
                     )}
                   </li>
@@ -413,10 +432,10 @@ export default function ProvincialBudgetSection() {
             </div>
           )}
 
-          <GoodBadUgly
+          {publicationOf(data)?.status !== 'partial' && <GoodBadUgly
             commentary={py.commentary}
             title={`${prov.name} Budget FY${selectedFy}: The Good, the Bad & the Ugly`}
-          />
+          />}
 
           {py.sources?.length > 0 && (
             <div className="budget-disclaimer card">
@@ -445,7 +464,7 @@ export default function ProvincialBudgetSection() {
       )}
 
       <div className="budget-disclaimer card">
-        <p>ⓘ {methodologyNote || 'Provincial budget figures are budgeted estimates from official Finance Department White Papers. Commentary is editorial opinion, clearly labelled, grounded in the official figures shown.'}{lastVerified && <> Last verified: {lastVerified}.</>}</p>
+        <p>ⓘ {methodologyNote || 'Provincial budget figures are budgeted estimates from official Finance Department White Papers. Commentary is editorial opinion, clearly labelled, grounded in the official figures shown.'}{lastVerified && <> Source checked: {lastVerified}.</>}</p>
       </div>
     </section>
   );

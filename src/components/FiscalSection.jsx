@@ -7,21 +7,22 @@ import SummaryCard from './ui/SummaryCard';
 import ImfTracker from './ImfTracker';
 import CircularDebtTracker from './CircularDebtTracker';
 import ExternalDebtTracker from './ExternalDebtTracker';
-import { LoadingCard, ErrorCard } from './ui/DataState';
+import { LoadingCard, SectionState } from './ui/DataState';
 import { fmtPKR, fmtPct } from '../utils/periodHelpers';
 import { fiscalYearEndDate, valuesByDate } from '../utils/chartTimeRange';
 
 function formatTrillion(val) {
-  return (val / 1e6).toFixed(1) + 'T';
+  return Number.isFinite(val) ? (val / 1e6).toFixed(1) + 'T' : '—';
 }
 
 export default function FiscalSection() {
-  const { data, loading, error, retry } = useData('fiscal.json');
+  const state = useData('fiscal.json');
+  const { data, loading } = state;
 
   if (loading) return <LoadingCard label="Loading fiscal data…" />;
-  if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load fiscal data" />;
+  if (!data) return <><SectionState state={state} label="Could not load fiscal data" /><ImfTracker /><CircularDebtTracker /><ExternalDebtTracker /></>;
 
-  const { annual, publicFinance, dataSource, lastUpdated, dataCoverage: fiscDC } = data;
+  const { annual = [], publicFinance, dataSource, lastUpdated, dataCoverage: fiscDC } = data;
 
   // Chart 1 — GDP Growth Rate
   const labels = annual.map((d) => d.year);
@@ -48,15 +49,16 @@ export default function FiscalSection() {
 
   // Public finance charts (if available)
   const pf = publicFinance || {};
-  const hasPF = pf.total_revenue && pf.total_revenue.data?.length > 0;
+  const hasPF = Object.values(pf).some((series) => series?.data?.length);
 
   let revenueExpLabels, revenueExpData, revenueExpOptions;
   let revenueBreakdownData, revenueBreakdownOptions;
   let balanceData, balanceOptions;
 
   if (hasPF) {
-    const revData = pf.total_revenue.data;
-    revenueExpLabels = revData.map((d) => d.fy);
+    const revData = pf.total_revenue?.data || [];
+    const axes = (first, second) => [...new Set([...first, ...second].map((row) => row.fy))].sort();
+    revenueExpLabels = axes(revData, pf.total_expenditure?.data || []);
 
     // Chart 2 — Revenue vs Expenditure
     revenueExpData = {
@@ -64,7 +66,8 @@ export default function FiscalSection() {
       datasets: [
         {
           label: 'Total Revenue',
-          data: revData.map((d) => d.value),
+          data: valuesByDate(revenueExpLabels, revData, 'value', 'fy'),
+          evidenceRows: revenueExpLabels.map((fy) => revData.filter((row) => row.fy === fy)),
           borderColor: COLORS.teal,
           backgroundColor: COLORS.tealAlpha,
           fill: false,
@@ -72,7 +75,8 @@ export default function FiscalSection() {
         },
         {
           label: 'Total Expenditure',
-          data: valuesByDate(revenueExpLabels, pf.total_expenditure.data, 'value', 'fy'),
+          data: valuesByDate(revenueExpLabels, pf.total_expenditure?.data || [], 'value', 'fy'),
+          evidenceRows: revenueExpLabels.map((fy) => (pf.total_expenditure?.data || []).filter((row) => row.fy === fy)),
           borderColor: COLORS.coral,
           backgroundColor: COLORS.coralAlpha,
           fill: false,
@@ -101,19 +105,22 @@ export default function FiscalSection() {
     };
 
     // Chart 3 — Revenue Breakdown (Tax vs Non-Tax)
-    const taxData = pf.tax_revenue.data;
+    const taxData = pf.tax_revenue?.data || [];
+    const taxLabels = axes(taxData, pf.nontax_revenue?.data || []);
     revenueBreakdownData = {
-      labels: taxData.map((d) => d.fy),
+      labels: taxLabels,
       datasets: [
         {
           label: 'Tax Revenue',
-          data: taxData.map((d) => d.value),
+          data: valuesByDate(taxLabels, taxData, 'value', 'fy'),
+          evidenceRows: taxLabels.map((fy) => taxData.filter((row) => row.fy === fy)),
           backgroundColor: COLORS.blue,
           borderRadius: 4,
         },
         {
           label: 'Non-Tax Revenue',
-          data: valuesByDate(taxData.map((row) => row.fy), pf.nontax_revenue.data, 'value', 'fy'),
+          data: valuesByDate(taxLabels, pf.nontax_revenue?.data || [], 'value', 'fy'),
+          evidenceRows: taxLabels.map((fy) => (pf.nontax_revenue?.data || []).filter((row) => row.fy === fy)),
           backgroundColor: COLORS.amber,
           borderRadius: 4,
         },
@@ -142,19 +149,23 @@ export default function FiscalSection() {
     };
 
     // Chart 4 — Fiscal & Primary Balance
-    const fiscalBal = pf.fiscal_balance.data;
+    const fiscalBal = pf.fiscal_balance?.data || [];
+    const balanceLabels = axes(fiscalBal, pf.primary_balance?.data || []);
+    const fiscalValues = valuesByDate(balanceLabels, fiscalBal, 'value', 'fy');
     balanceData = {
-      labels: fiscalBal.map((d) => d.fy),
+      labels: balanceLabels,
       datasets: [
         {
           label: 'Fiscal Balance',
-          data: fiscalBal.map((d) => d.value),
-          backgroundColor: fiscalBal.map((d) => d.value < 0 ? COLORS.coral : COLORS.teal),
+          data: fiscalValues,
+          evidenceRows: balanceLabels.map((fy) => fiscalBal.filter((row) => row.fy === fy)),
+          backgroundColor: fiscalValues.map((value) => value == null ? COLORS.text : value < 0 ? COLORS.coral : COLORS.teal),
           borderRadius: 4,
         },
         {
           label: 'Primary Balance',
-          data: valuesByDate(fiscalBal.map((row) => row.fy), pf.primary_balance.data, 'value', 'fy'),
+          data: valuesByDate(balanceLabels, pf.primary_balance?.data || [], 'value', 'fy'),
+          evidenceRows: balanceLabels.map((fy) => (pf.primary_balance?.data || []).filter((row) => row.fy === fy)),
           borderColor: COLORS.purple,
           backgroundColor: COLORS.purpleAlpha,
           type: 'line',
@@ -186,7 +197,7 @@ export default function FiscalSection() {
     };
   }
 
-  const pfCoverage = hasPF
+  const pfCoverage = pf.total_revenue?.data?.length
     ? `${pf.total_revenue.data[0].fy} – ${pf.total_revenue.data.at(-1).fy} (${pf.total_revenue.data.length} years)`
     : '';
 
@@ -207,17 +218,17 @@ export default function FiscalSection() {
       {/* Fiscal Summary Card */}
       {(() => {
         const latestGDP = annual[annual.length - 1];
-        const gdpTrend = latestGDP.gdpGrowth >= 0 ? 'up' : 'down';
-        const items = [
-          { label: `GDP Growth (${latestGDP.year})`, value: fmtPct(latestGDP.gdpGrowth), direction: gdpTrend, sentiment: gdpTrend === 'up' ? 'positive' : 'negative', color: COLORS.teal },
-        ];
+        const gdpTrend = latestGDP?.gdpGrowth >= 0 ? 'up' : 'down';
+        const items = latestGDP ? [
+          { label: `GDP Growth (${latestGDP.year})`, value: fmtPct(latestGDP.gdpGrowth), row: latestGDP, period: latestGDP.year, direction: gdpTrend, sentiment: gdpTrend === 'up' ? 'positive' : 'negative', color: COLORS.teal },
+        ] : [];
         if (hasPF) {
-          const latestRev = pf.total_revenue.data.at(-1);
-          const latestExp = pf.total_expenditure.data.at(-1);
-          const latestFB = pf.fiscal_balance.data.at(-1);
-          if (latestRev) items.push({ label: `Revenue (${latestRev.fy})`, value: fmtPKR(latestRev.value), color: COLORS.teal });
-          if (latestExp) items.push({ label: `Expenditure (${latestExp.fy})`, value: fmtPKR(latestExp.value), color: COLORS.coral });
-          if (latestFB) items.push({ label: `Fiscal Balance (${latestFB.fy})`, value: fmtPKR(latestFB.value), sentiment: latestFB.value >= 0 ? 'positive' : 'negative', color: latestFB.value >= 0 ? COLORS.teal : COLORS.coral });
+          const latestRev = pf.total_revenue?.data?.at(-1);
+          const latestExp = pf.total_expenditure?.data?.at(-1);
+          const latestFB = pf.fiscal_balance?.data?.at(-1);
+          if (latestRev) items.push({ label: `Revenue (${latestRev.fy})`, value: fmtPKR(latestRev.value), color: COLORS.teal, row: latestRev, period: latestRev.fy });
+          if (latestExp) items.push({ label: `Expenditure (${latestExp.fy})`, value: fmtPKR(latestExp.value), color: COLORS.coral, row: latestExp, period: latestExp.fy });
+          if (latestFB) items.push({ label: `Fiscal Balance (${latestFB.fy})`, value: fmtPKR(latestFB.value), sentiment: latestFB.value >= 0 ? 'positive' : 'negative', color: latestFB.value >= 0 ? COLORS.teal : COLORS.coral, row: latestFB, period: latestFB.fy });
         }
         return (
           <SummaryCard
@@ -232,11 +243,12 @@ export default function FiscalSection() {
       <div className="chart-grid">
         <ChartCard
           title="GDP Growth Rate"
+          evidenceRows={annual}
           observationDates={labels.map(fiscalYearEndDate)}
           description="Annual real GDP growth rate. Values below the zero line indicate economic contraction, as seen in FY2020 (COVID-19 pandemic) and FY2023 (political and economic crisis)."
           dataSource="SBP / PBS"
           lastUpdated={lastUpdated}
-          dataCoverage={fiscDC || `${annual[0]?.year} – ${annual[annual.length-1]?.year}`}
+          dataCoverage={fiscDC || (annual.length ? `${annual[0].year} – ${annual.at(-1).year}` : undefined)}
           provenanceKeys={['fiscal.gdpGrowth.latest']}
         >
           <div style={{ height: 300 }}>
@@ -247,6 +259,7 @@ export default function FiscalSection() {
         {hasPF && (
           <ChartCard
             title="Revenue vs Expenditure"
+            evidenceRows={[...(pf.total_revenue?.data || []), ...(pf.total_expenditure?.data || [])]}
             observationDates={revenueExpData.labels.map(fiscalYearEndDate)}
             description="Total government revenue vs total expenditure. The persistent gap between the two lines represents the fiscal deficit — a structural challenge Pakistan has faced for decades."
             dataSource={dataSource}
@@ -262,6 +275,7 @@ export default function FiscalSection() {
         {hasPF && (
           <ChartCard
             title="Revenue Breakdown — Tax vs Non-Tax"
+            evidenceRows={[...(pf.tax_revenue?.data || []), ...(pf.nontax_revenue?.data || [])]}
             observationDates={revenueBreakdownData.labels.map(fiscalYearEndDate)}
             description="Stacked composition of government revenue. Tax revenue (FBR collections) is the backbone of fiscal capacity. Non-tax revenue includes dividends, profits, and grants."
             dataSource={dataSource}
@@ -277,6 +291,7 @@ export default function FiscalSection() {
         {hasPF && (
           <ChartCard
             title="Fiscal & Primary Balance"
+            evidenceRows={[...(pf.fiscal_balance?.data || []), ...(pf.primary_balance?.data || [])]}
             observationDates={balanceData.labels.map(fiscalYearEndDate)}
             description="Fiscal balance (revenue minus total expenditure) and primary balance (fiscal balance excluding interest payments). A positive primary balance indicates the government can service debt from current revenue — a key IMF reform target."
             dataSource={dataSource}

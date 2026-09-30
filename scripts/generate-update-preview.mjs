@@ -5,6 +5,8 @@ import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 import { DATASETS, getDatasetFreshness } from './data-catalog.mjs';
+import { stripVolatile } from './lib/data-writer.mjs';
+import { sha256 } from './lib/source-evidence.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
@@ -60,13 +62,24 @@ async function main() {
   const sourceChanges = [];
   const suspiciousDateJumps = [];
   const reviewRequired = [];
+  const publicationChanges = [];
+  const datasetContentHashes = {};
 
   for (const dataset of DATASETS) {
     const current = await readJson(dataset.file);
     const previous = headFile(dataset.file);
     const now = getDatasetFreshness(dataset, current);
+    datasetContentHashes[dataset.id] = sha256(JSON.stringify({
+      data: stripVolatile(current), evidence: current.evidence || current.sourceEvidence || null,
+    }));
+    if (current.publication?.status === 'withheld' || current.publication?.status === 'partial') {
+      publicationChanges.push({
+        dataset: dataset.id, status: current.publication.status,
+        reason: current.publication.reason, withheldFields: current.publication.withheldFields || [],
+      });
+    }
 
-    if (previous) {
+    if (previous && current.publication?.status !== 'withheld') {
       const before = getDatasetFreshness(dataset, previous);
       if (now.observationDate && now.observationDate !== before.observationDate) {
         newObservations.push({
@@ -80,7 +93,7 @@ async function main() {
         const fromTime = dateValue(before.observationDate);
         const toTime = dateValue(now.observationDate);
         const gap = monthGap(before.observationDate, now.observationDate);
-        if (fromTime && toTime && toTime < fromTime) {
+        if (fromTime && toTime && toTime < fromTime && current.publication?.status !== 'partial') {
           suspiciousDateJumps.push({
             dataset: dataset.id,
             label: dataset.label,
@@ -142,24 +155,23 @@ async function main() {
       };
     })
     .filter(Boolean)
-    .sort((a, b) => Math.abs(b.percent ?? b.to - b.from) - Math.abs(a.percent ?? a.to - a.from))
-    .slice(0, 8);
+    .sort((a, b) => Math.abs(b.percent ?? b.to - b.from) - Math.abs(a.percent ?? a.to - a.from));
 
   const revisions = await readJson('revisions.json');
   const previousRevisions = headFile('revisions.json');
   const previousRevisionKeys = new Set((previousRevisions?.entries || []).map(uniqueRevisionKey));
   const newRevisions = (revisions.entries || [])
-    .filter((entry) => !previousRevisionKeys.has(uniqueRevisionKey(entry)))
-    .slice(0, 12);
+    .filter((entry) => !previousRevisionKeys.has(uniqueRevisionKey(entry)));
 
   const releaseCalendar = await readJson('release-calendar.json');
   const overdueReleases = (releaseCalendar.releases || [])
     .filter((release) => ['overdue', 'due'].includes(release.status))
     .map((release) => ({
-      dataset: release.dataset,
+      dataset: release.id,
       label: release.label,
       status: release.status,
-      expectedDate: release.expectedDate,
+      expectedDate: release.expectedRelease,
+      schedule: release.schedule,
     }));
 
   const output = {
@@ -187,6 +199,8 @@ async function main() {
     sourceChanges,
     suspiciousDateJumps,
     reviewRequired,
+    publicationChanges,
+    datasetContentHashes,
     overdueReleases,
   };
 

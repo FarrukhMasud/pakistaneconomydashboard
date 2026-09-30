@@ -1,49 +1,32 @@
 #!/usr/bin/env node
+import { readFile } from 'node:fs/promises';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { LIVE_URL } from './data-catalog.mjs';
+import { collectReleaseFiles, releaseId, validateReleaseManifest, verifyLiveRelease } from './lib/release-integrity.mjs';
 
-import { readFile } from 'fs/promises';
-import { resolve, dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { DATASETS, LIVE_URL, getDatasetFreshness } from './data-catalog.mjs';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const DATA_DIR = resolve(__dirname, '..', 'public', 'data');
-
-async function readLocal(file) {
-  return JSON.parse(await readFile(resolve(DATA_DIR, file), 'utf-8'));
-}
-
-async function readLive(file) {
-  const url = `${LIVE_URL}/data/${file}?verify=${Date.now()}`;
-  const res = await fetch(url, { cache: 'no-store' });
-  if (!res.ok) throw new Error(`${file}: live HTTP ${res.status}`);
-  return res.json();
-}
+const publicDir = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'public');
 
 async function main() {
-  let mismatches = 0;
-  console.log('\nVerifying live site data against local files\n');
-
-  for (const dataset of DATASETS) {
-    const [localData, liveData] = await Promise.all([
-      readLocal(dataset.file),
-      readLive(dataset.file),
-    ]);
-    const local = getDatasetFreshness(dataset, localData);
-    const live = getDatasetFreshness(dataset, liveData);
-    const same = local.latestObservation === live.latestObservation && local.dashboardUpdated === live.dashboardUpdated;
-    if (!same) mismatches++;
-    console.log(`${same ? '✅' : '❌'} ${dataset.label}: local ${local.latestObservation}/${local.dashboardUpdated} | live ${live.latestObservation}/${live.dashboardUpdated}`);
-  }
-
-  if (mismatches > 0) {
-    console.error(`\n❌ ${mismatches} live dataset(s) do not match local output.`);
-    process.exit(1);
-  }
-
-  console.log('\n✅ Live site data matches local generated data.');
+  const args = process.argv.slice(2);
+  const urlIndex = args.indexOf('--url');
+  const origin = new URL(urlIndex >= 0 ? args[urlIndex + 1] : LIVE_URL);
+  if (!['http:', 'https:'].includes(origin.protocol) || origin.username || origin.password) throw new Error('Invalid verification origin');
+  const local = validateReleaseManifest(JSON.parse(await readFile(resolve(publicDir, 'release-manifest.json'), 'utf8')));
+  const actualLocal = await collectReleaseFiles(publicDir);
+  if (releaseId(actualLocal) !== local.releaseId) throw new Error('Local files changed after the checked release manifest was created');
+  const readLive = async (path) => {
+    const url = new URL(path, origin);
+    url.searchParams.set('verify', `${local.releaseId}-${Date.now()}`);
+    const response = await fetch(url, { cache: 'no-store', signal: AbortSignal.timeout(30000) });
+    if (!response.ok) throw new Error(`${path}: live HTTP ${response.status}`);
+    return Buffer.from(await response.arrayBuffer());
+  };
+  await verifyLiveRelease(local, readLive);
+  console.log(`Verified all ${local.files.length} dataset, API, evidence, and feed assets for release ${local.releaseId.slice(0, 12)}`);
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
+main().catch(error => {
+  console.error(error.message);
+  process.exitCode = 1;
 });

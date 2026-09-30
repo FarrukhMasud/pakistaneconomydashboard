@@ -5,7 +5,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { __test__ } from '../lib/data-writer.mjs';
+import { __test__, validateNumericValues } from '../lib/data-writer.mjs';
 
 const { collectRevisions, stripVolatile, rowKeyOf } = __test__;
 
@@ -54,8 +54,35 @@ test('collectRevisions treats a KPI period advance as a new observation', () => 
 
 test('collectRevisions ignores floating-point noise', () => {
   const before = { x: 100 };
-  const after = { x: 100.00001 };
+  const after = { x: 100 + Number.EPSILON * 64 };
   assert.deepEqual(collectRevisions(before, after), []);
+});
+
+test('small genuine restatements are preserved', () => {
+  assert.deepEqual(collectRevisions({ x: 100 }, { x: 100.00001 }), [
+    { path: 'x', from: 100, to: 100.00001 },
+  ]);
+});
+
+test('aggregate period advances are new observations, not revisions', () => {
+  assert.deepEqual(collectRevisions(
+    { fytd: { period: 'Jul-Aug FY27', net: 12 } },
+    { fytd: { period: 'Jul-Sep FY27', net: 20 } },
+  ), []);
+});
+
+test('evidence checks do not create analytical revisions', () => {
+  assert.deepEqual(collectRevisions(
+    { evidence: { bytes: 10 }, value: 2 },
+    { evidence: { bytes: 20 }, value: 2 },
+  ), []);
+});
+
+test('canonical writes reject non-finite values and broken periods', () => {
+  assert.throws(() => validateNumericValues({ value: NaN }), /non-finite/);
+  assert.throws(() => validateNumericValues({ value: Infinity }), /non-finite/);
+  assert.throws(() => validateNumericValues({ period: 'null FY27' }), /invalid reporting period/);
+  assert.doesNotThrow(() => validateNumericValues({ value: null, period: 'Jul-Aug FY27' }));
 });
 
 test('collectRevisions ignores volatile bookkeeping keys', () => {
@@ -75,4 +102,18 @@ test('rowKeyOf prefers date-like identity keys', () => {
   assert.equal(rowKeyOf({ country: 'China', amount: 1 }), 'country=China');
   assert.equal(rowKeyOf({ amount: 1 }), null);
   assert.equal(rowKeyOf(5), null);
+});
+
+test('country observations match country and year, never a shared annual date', () => {
+  const before = { values: [{ countryCode: 'PAK', year: 2025, value: 3.7 }, { countryCode: 'VNM', year: 2025, value: 8.02 }] };
+  assert.deepEqual(collectRevisions(before, { values: [...before.values].reverse() }), []);
+  const after = { values: [{ countryCode: 'VNM', year: 2025, value: 8.02 }, { countryCode: 'PAK', year: 2025, value: 3.8 }] };
+  assert.deepEqual(collectRevisions(before, after), [{ path: 'values[countryCode=PAK,year=2025].value', from: 3.7, to: 3.8 }]);
+});
+
+test('a newer weekly sample in the same monthly bucket is not an issuer restatement', () => {
+  assert.deepEqual(collectRevisions(
+    { data: [{ date: '2026-09', observationDate: '2026-09-18', value: 100 }] },
+    { data: [{ date: '2026-09', observationDate: '2026-09-25', value: 101 }] },
+  ), []);
 });

@@ -18,7 +18,7 @@ export function sourceLinksWithFytd(fytd) {
 }
 
 export function fmt(value, digits = 1) {
-  if (value == null || Number.isNaN(value)) return '—';
+  if (!Number.isFinite(value)) return '—';
   return Number(value).toLocaleString(undefined, { maximumFractionDigits: digits });
 }
 
@@ -28,21 +28,21 @@ export function signed(value, suffix = '', digits = 1) {
 }
 
 export function latest(rows = []) {
-  return rows.at(-1) || null;
+  return rows?.at(-1) || null;
 }
 
 export function previous(rows = []) {
-  return rows.length > 1 ? rows.at(-2) : null;
+  return rows?.length > 1 ? rows.at(-2) : null;
 }
 
 export function yoyRow(rows = [], date) {
   if (!date) return null;
   const [year, month] = date.split('-');
-  return rows.find((row) => row.date === `${Number(year) - 1}-${month}`);
+  return rows?.find((row) => row.date === `${Number(year) - 1}-${month}`);
 }
 
 export function pctChange(current, prior) {
-  if (current == null || prior == null || prior === 0) return null;
+  if (!Number.isFinite(current) || !Number.isFinite(prior) || prior === 0) return null;
   return ((current - prior) / Math.abs(prior)) * 100;
 }
 
@@ -89,8 +89,8 @@ export function resolveFyLabels(...sources) {
 
 export function multiState(results) {
   const loading = results.some((r) => r.loading);
-  const failed = results.filter((r) => r.error);
-  const retryAll = () => results.forEach((r) => r.retry?.());
+  const failed = results.filter((r) => r.error || r.unavailable || r.publication?.status === 'partial');
+  const retryAll = () => results.filter((r) => r.error).forEach((r) => r.retry?.());
   return { loading, failed, retryAll, hasPartialFailure: !loading && failed.length > 0 };
 }
 

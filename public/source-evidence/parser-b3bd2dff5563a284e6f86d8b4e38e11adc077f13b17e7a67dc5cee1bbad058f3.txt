@@ -1,0 +1,333 @@
+#!/usr/bin/env node
+
+/**
+ * Pakistan Economic Dashboard — FBR Tax Collection Updater
+ *
+ * Refreshes the CLOSED-fiscal-year monthly rows in public/data/fbr-tax.json
+ * directly from FBR's official "Month-wise / Tax-wise Net Collection" PDF
+ * (download1.fbr.gov.pk). This is the single authoritative, internally
+ * consistent source for monthly net collection with the four-way tax-head
+ * breakdown (Direct/Income Tax, Sales Tax, FED, Customs).
+ *
+ * What it does:
+ *   1. Downloads each configured FBR month-wise PDF.
+ *   2. Parses the monthly table with pdfreader (no fabricated numbers).
+ *   3. Replaces the monthly rows for the FYs the PDF covers, while PRESERVING
+ *      separately attributed current-FY rows and all curated metadata
+ *      (fytd, methodologyNote, verifiedFrom, etc.).
+ *   4. Upserts the full-year total into fyTotals and recomputes fytd.priorNet
+ *      from the freshly parsed rows so growth figures stay exact.
+ *
+ * If a download or parse fails, the existing data is left untouched (the
+ * dashboard never shows partial or guessed figures).
+ *
+ * Updating for a new fiscal year:
+ *   Add an entry to FBR_MONTHWISE_SOURCES below with the new PDF URL once FBR
+ *   publishes it. Find the link on
+ *   https://www.fbr.gov.pk/fbr-biannual-quarterly-reviews/131167/132077 or the
+ *   FBR revenue/statistics downloads section.
+ *
+ * Usage:
+ *   node scripts/update-fbr.mjs
+ *   node scripts/update-fbr.mjs --skip-download   # parse an already-downloaded PDF
+ */
+
+import { readFile, writeFile, mkdir } from 'fs/promises';
+import { existsSync } from 'fs';
+import { resolve, dirname } from 'path';
+import { fileURLToPath, pathToFileURL } from 'url';
+import { parsePdfTextItems } from './pdf-text.mjs';
+import { captureSourceArtifact, getSourceEvidence, sha256 } from './lib/source-evidence.mjs';
+import { hashContent, applyPublicationPolicy, verifyAutomatedPublicationClaims } from './lib/publication-policy.mjs';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const DATA_DIR = resolve(__dirname, '..', 'public', 'data');
+const RAW_DIR = resolve(__dirname, 'sbp-raw');
+const FBR_FILE = resolve(DATA_DIR, 'fbr-tax.json');
+const FBR_RELEASE_ARCHIVE = 'https://www.fbr.gov.pk/pr/2026';
+
+// Official FBR month-wise / tax-wise net-collection PDFs, one per fiscal year.
+// fyStartYear = the calendar year the FY starts in (FY2024-25 starts in 2024).
+const FBR_MONTHWISE_SOURCES = [
+  {
+    fyLabel: 'FY2025',
+    fyStartYear: 2024,
+    file: 'fbr-monthwise-FY2024-25.pdf',
+    sourceKey: 'fbr-monthwise-FY2024-25.pdf',
+    url: 'https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf',
+    provisional: true,
+  },
+];
+
+const MONTHS = {
+  JULY: 7, AUGUST: 8, SEPTEMBER: 9, OCTOBER: 10, NOVEMBER: 11, DECEMBER: 12,
+  JANUARY: 1, FEBRUARY: 2, MARCH: 3, APRIL: 4, MAY: 5, JUNE: 6,
+};
+
+const num = (s) => {
+  const v = parseFloat(String(s).replace(/,/g, ''));
+  return Number.isFinite(v) ? v : null;
+};
+
+async function downloadPdf(url, file) {
+  const dest = resolve(RAW_DIR, file);
+  const res = await fetch(url, {
+    signal: AbortSignal.timeout(30000),
+    headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' },
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const buf = Buffer.from(await res.arrayBuffer());
+  if (buf.length < 5000) throw new Error(`response too small (${buf.length} bytes)`);
+  const contentType = res.headers.get('content-type') || '';
+  if (contentType.toLowerCase().includes('text/html') || buf.subarray(0, 5).toString('ascii') !== '%PDF-') {
+    throw new Error('invalid PDF response');
+  }
+  await mkdir(RAW_DIR, { recursive: true });
+  await writeFile(dest, buf);
+  await captureSourceArtifact({
+    sourceKey: file, sourceUrl: url, responseUrl: res.url, body: buf,
+    contentType, filename: file, parser: 'update-fbr.mjs',
+  });
+  return dest;
+}
+
+function stripHtml(value) {
+  return String(value || '')
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&#39;|&apos;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+async function discoverOfficialReleases() {
+  const response = await fetch(FBR_RELEASE_ARCHIVE, {
+    signal: AbortSignal.timeout(30000),
+    headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' },
+  });
+  if (!response.ok) throw new Error(`release archive HTTP ${response.status}`);
+  const html = await response.text();
+  const candidates = [];
+  for (const match of html.matchAll(/href="([^"]+)"[^>]*>([^<]{1,240})</gi)) {
+    const title = stripHtml(match[2]);
+    if (!/revenue|collection|target achievement|tax collection/i.test(title)) continue;
+    const url = new URL(match[1], FBR_RELEASE_ARCHIVE).toString();
+    if (candidates.some((candidate) => candidate.url === url)) continue;
+    candidates.push({ title, url });
+  }
+
+  const releases = [];
+  for (const candidate of candidates.slice(0, 8)) {
+    try {
+      const releaseResponse = await fetch(candidate.url, {
+        signal: AbortSignal.timeout(15000),
+        headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' },
+      });
+      if (!releaseResponse.ok) throw new Error(`HTTP ${releaseResponse.status}`);
+      releases.push({ ...candidate, status: 'discovered-not-reviewed' });
+    } catch (error) {
+      console.warn(`Official FBR release discovery failed for ${candidate.url}: ${error.message}`);
+      releases.push({ ...candidate, status: 'unavailable', reason: error.message });
+    }
+  }
+  return releases;
+}
+
+// Parse the PDF into ordered text lines: [{ text, nums:[...] }, ...]
+export async function parsePdfLines(path) {
+  const rows = {};
+  for (const item of await parsePdfTextItems(path)) {
+    if (item.text === undefined) continue;
+    const key = `${item.page}|${item.y.toFixed(2)}`;
+    (rows[key] ||= []).push({ x: item.x, t: item.text });
+  }
+
+  return Object.keys(rows)
+    .sort((a, b) => {
+      const [pa, ya] = a.split('|').map(Number);
+      const [pb, yb] = b.split('|').map(Number);
+      return pa - pb || ya - yb;
+    })
+    .map((key) => {
+      const cells = rows[key].sort((a, b) => a.x - b.x);
+      const nums = cells.map(cell => num(cell.t)).filter(value => value !== null);
+      return { text: cells.map(cell => cell.t).join(' ').trim(), nums };
+    });
+}
+
+// Turn parsed lines into monthly rows for a given fiscal year.
+export function extractMonthly(lines, source) {
+  const out = [];
+  let fyTotal = null;
+  for (let i = 0; i < lines.length; i++) {
+    const label = lines[i].text.replace(/[^A-Za-z]/g, '').toUpperCase();
+    const next = lines[i + 1];
+    if (MONTHS[label] && next && next.nums.length >= 5) {
+      const [dt, st, fed, cus, total] = next.nums.slice(0, 5);
+      const month = MONTHS[label];
+      const year = month >= 7 ? source.fyStartYear : source.fyStartYear + 1;
+      const date = `${year}-${String(month).padStart(2, '0')}`;
+      out.push({
+        date, fy: source.fyLabel,
+        net: total,
+        incomeTax: dt, salesTax: st, fed, customs: cus,
+        provisional: source.provisional,
+        sourceType: 'official-primary',
+        source: source.url,
+      });
+    } else if (label === 'TOTAL' && next && next.nums.length >= 5) {
+      fyTotal = next.nums.slice(0, 5)[4];
+    }
+  }
+  // Validate: the 12 monthly nets must sum to the printed FY total.
+  if (out.length !== 12) throw new Error(`expected 12 months, parsed ${out.length}`);
+  const sum = Math.round(out.reduce((s, m) => s + m.net, 0) * 10) / 10;
+  if (fyTotal != null && Math.abs(sum - fyTotal) > 0.5) {
+    throw new Error(`monthly sum ${sum} != printed total ${fyTotal}`);
+  }
+  out.sort((a, b) => a.date.localeCompare(b.date));
+  return { monthly: out, fyTotal: fyTotal ?? sum };
+}
+
+// Recompute fytd.priorNet = prior-FY collection over the same Jul..N window.
+function recomputePriorNet(fbr) {
+  if (!fbr.fytd?.period || typeof fbr.fytd.net !== 'number') return;
+  const m = fbr.fytd.period.match(/Jul[–-]([A-Za-z]{3})/);
+  if (!m) return;
+  const endName = { JAN: 1, FEB: 2, MAR: 3, APR: 4, MAY: 5, JUN: 6, JUL: 7, AUG: 8, SEP: 9, OCT: 10, NOV: 11, DEC: 12 }[m[1].toUpperCase()];
+  if (!endName) return;
+  // Prior FY is one year before the fytd FY (e.g. FY2026 -> FY2025).
+  const fyNum = parseInt(fbr.fytd.fyLabel.replace(/\D/g, ''), 10);
+  const priorFyStart = fyNum - 2;
+  const months = [];
+  for (let mo = 7; mo <= 12; mo++) months.push(`${priorFyStart}-${String(mo).padStart(2, '0')}`);
+  for (let mo = 1; mo <= endName; mo++) months.push(`${priorFyStart + 1}-${String(mo).padStart(2, '0')}`);
+  const rows = fbr.monthly.filter((r) => months.includes(r.date) && typeof r.net === 'number');
+  if (rows.length === months.length) {
+    fbr.fytd.priorNet = Math.round(rows.reduce((s, r) => s + r.net, 0) * 10) / 10;
+  }
+}
+
+async function main() {
+  const skipDownload = process.argv.includes('--skip-download');
+  console.log('\n🧾 Updating FBR tax collection from official month-wise PDFs...');
+
+  const fbr = JSON.parse(await readFile(FBR_FILE, 'utf-8'));
+  const originalData = JSON.stringify({
+    monthly: fbr.monthly,
+    fytd: fbr.fytd,
+    fyTotals: fbr.fyTotals,
+  });
+  let updated = 0;
+  const today = new Date().toISOString().split('T')[0];
+
+  try {
+    fbr.releaseDiscovery = {
+      checkedAt: today,
+      archiveUrl: FBR_RELEASE_ARCHIVE,
+      candidates: await discoverOfficialReleases(),
+    };
+    console.log(`  🔎 Checked ${fbr.releaseDiscovery.candidates.length} relevant official FBR release(s)`);
+  } catch (err) {
+    console.log(`  ⚠️  Official release discovery failed: ${err.message}`);
+  }
+
+  for (const source of FBR_MONTHWISE_SOURCES) {
+    try {
+      let path = resolve(RAW_DIR, source.file);
+      if (!skipDownload || !existsSync(path)) {
+        path = await downloadPdf(source.url, source.file);
+        console.log(`  ✅ Downloaded ${source.fyLabel} (${source.file})`);
+      }
+      const lines = await parsePdfLines(path);
+      const { monthly, fyTotal } = extractMonthly(lines, source);
+      const receipt = await getSourceEvidence(source.sourceKey);
+      if (!receipt || receipt.sha256 !== sha256(await readFile(path))) {
+        throw new Error('Cached PDF does not match an archived direct official download; rerun without --skip-download.');
+      }
+      if (!receipt.parserVersion.startsWith('update-fbr.mjs:sha256:')) {
+        throw new Error('Official PDF must be captured by this FBR parser; rerun without --skip-download.');
+      }
+
+      // Replace this FY's monthly rows; keep all other rows (provisional current FY).
+      fbr.monthly = fbr.monthly.filter((r) => r.fy !== source.fyLabel).concat(monthly);
+
+      // Upsert the full-year total.
+      fbr.fyTotals ||= [];
+      const existing = fbr.fyTotals.find((t) => t.fy === source.fyLabel);
+      if (existing) {
+        existing.net = fyTotal;
+        existing.source = source.url;
+        existing.provisional = source.provisional;
+        existing.sourceType = 'official-primary';
+      } else {
+        fbr.fyTotals.push({ fy: source.fyLabel, net: fyTotal, provisional: source.provisional, sourceType: 'official-primary', source: source.url });
+      }
+
+      console.log(`  📊 ${source.fyLabel}: 12 months parsed, FY total ₨${fyTotal.toLocaleString()}bn`);
+      updated++;
+    } catch (err) {
+      console.log(`  ⚠️  ${source.fyLabel}: ${err.message} — keeping existing data`);
+    }
+  }
+
+  if (updated === 0) {
+    throw new Error('No official FBR source could be downloaded and verified; fbr-tax.json was left unchanged.');
+  }
+
+  fbr.monthly.sort((a, b) => a.date.localeCompare(b.date));
+  fbr.fyTotals?.sort((a, b) => a.fy.localeCompare(b.fy));
+  recomputePriorNet(fbr);
+  const dataChanged = originalData !== JSON.stringify({
+    monthly: fbr.monthly,
+    fytd: fbr.fytd,
+    fyTotals: fbr.fyTotals,
+  });
+  if (dataChanged) fbr.lastUpdated = today;
+  fbr.lastVerified = today;
+
+  delete fbr.releaseDiscovery;
+  delete fbr.verifiedFrom;
+  delete fbr.observationDate;
+  delete fbr.publicationDate;
+  fbr.dataSource = 'Federal Board of Revenue official month-wise / tax-wise net collection PDF';
+  fbr.methodologyNote = 'Historical monthly rows and their fiscal-year total are parsed directly from the linked FBR provisional table. Current-year collection and targets are unavailable until an exact official numeric release and required independent reviews are available. Missing months are not estimated or interpolated.';
+  fbr.publicationEvidence = {};
+  const receipts = {};
+  for (const source of FBR_MONTHWISE_SOURCES) {
+    const receipt = await getSourceEvidence(source.sourceKey);
+    if (!receipt) throw new Error(`Missing FBR source receipt: ${source.sourceKey}`);
+    receipts[source.sourceKey] = receipt;
+    for (const key of ['monthly', 'fyTotals']) {
+      fbr[key].forEach((row, index) => {
+        if (row.fy !== source.fyLabel || row.source !== source.url) return;
+        fbr.publicationEvidence[`${key}.${index}`] = {
+          sourceType: 'official-primary', method: 'automated', sourceKey: source.sourceKey,
+          sourceUrl: source.url, artifactId: receipt.artifactId, evidenceHash: receipt.sha256,
+          contentHash: hashContent(row), location: `Month-wise / tax-wise net collection table; ${row.date || row.fy}`,
+          status: source.provisional ? 'provisional' : 'final',
+        };
+      });
+    }
+  }
+  fbr.publication = {
+    policy: 'official-only', status: 'partial',
+    reason: 'Current fiscal-year totals and targets are unavailable: the official target-achievement statement omits the numeric collection total, and manually curated numeric claims lack independent reviewer approvals.',
+    withheldFields: ['fytd', 'annualTargets', 'currentFiscalYear'],
+  };
+  const descriptor = { id: 'fbr-tax', parser: 'manual-curation' };
+  const verifiedAutomatedClaims = await verifyAutomatedPublicationClaims(descriptor, fbr, { evidence: receipts, dataDir: DATA_DIR });
+  const output = applyPublicationPolicy(descriptor, fbr, { evidence: receipts, verifiedAutomatedClaims });
+  await writeFile(FBR_FILE, JSON.stringify(output, null, 2) + '\n');
+  console.log(`  ✅ Verified fbr-tax.json against ${updated} official source(s).`);
+  if (!dataChanged) console.log('  ℹ️  Official figures were unchanged; lastUpdated was preserved.');
+  console.log('  ℹ️  Unsupported current-year figures are withheld; directly parsed historical official rows remain available.');
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) main().catch((err) => {
+  console.error(`\n❌ FBR update failed: ${err.message}`);
+  process.exit(1);
+});

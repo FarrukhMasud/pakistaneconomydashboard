@@ -97,7 +97,7 @@ test('every chart result is backed by an existing ChartCard title', () => {
       assert.ok(trackerSource.includes(`chartId="${entry.chartId}"`), `${tracker} declares ${entry.chartId}`);
       continue;
     }
-    const titles = [...source.matchAll(/<ChartCard\b[\s\S]*?title="([^"]+)"/g)].map((match) => match[1]);
+    const titles = [...source.matchAll(/<ChartCard\b[\s\S]*?title=(?:"([^"]+)"|\{t\('[^']+', '([^']+)'\)\})/g)].map((match) => match[1] || match[2]);
     assert.ok(titles.includes(entry.chartTitle), `${entry.id}: ${entry.chartTitle}`);
   }
 });

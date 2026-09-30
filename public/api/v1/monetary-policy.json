@@ -3,206 +3,73 @@
   "label": "SBP Policy Rate Tracker",
   "source": "State Bank of Pakistan — Monetary Policy Committee",
   "sourceUrl": "https://www.sbp.org.pk/our-operations/monetary-policy",
-  "sourceType": "official-primary",
+  "sourceType": "unavailable",
+  "publication": {
+    "policy": "official-only",
+    "status": "withheld",
+    "reason": "An official monetary policy statement has been downloaded and archived. Manually curated rates, historical decisions, inflation context and meeting dates remain unavailable pending exact per-claim evidence and two distinct real reviewer approvals.",
+    "withheldFields": [
+      "currentRate",
+      "asOf",
+      "lastDecision",
+      "nextMeeting",
+      "calendar",
+      "context",
+      "decisions",
+      "observationDate",
+      "publicationDate",
+      "calendarPublicationDate",
+      "verifiedFrom",
+      "methodologyNote"
+    ]
+  },
+  "authenticity": "unavailable",
+  "freshnessStatus": "withheld",
+  "validation": {
+    "status": "pending",
+    "checkedAt": null,
+    "checks": []
+  },
   "cadence": "Event-driven",
-  "latestObservation": "2026-07-27",
+  "latestObservation": null,
   "dates": {
-    "observation": "2026-07-27",
-    "publication": "2026-07-27",
-    "verification": "2026-08-07",
+    "observation": null,
+    "publication": null,
+    "verification": null,
     "dashboardUpdated": "2026-08-07"
   },
   "lastUpdated": "2026-08-07",
   "lastChecked": null,
-  "licence": "Official public data, redistributed with attribution. Cite the original institution.",
+  "licence": "Consult the issuing institution for reuse terms. Source attribution does not establish a redistribution licence.",
   "data": {
-    "currentRate": 11.5,
-    "asOf": "2026-07-27",
+    "title": "SBP Policy Rate Tracker",
     "unit": "%",
-    "lastDecision": {
-      "date": "2026-07-27",
-      "action": "hold",
-      "changeBps": 0,
-      "note": "Held at 11.5%. The MPC noted that headline and core inflation moderated in June but remained elevated, while the external outlook and FX reserves improved."
-    },
-    "nextMeeting": {
-      "date": "2026-09-14",
-      "dateText": "14 September 2026",
-      "note": "Scheduled in SBP's advance MPC calendar for FY2026-27."
-    },
-    "calendar": [
-      {
-        "date": "2026-09-14",
-        "status": "scheduled"
-      },
-      {
-        "date": "2026-10-26",
-        "status": "scheduled"
-      },
-      {
-        "date": "2026-12-14",
-        "status": "scheduled"
-      },
-      {
-        "date": "2027-01-25",
-        "status": "scheduled"
-      },
-      {
-        "date": "2027-03-08",
-        "status": "scheduled"
-      },
-      {
-        "date": "2027-04-26",
-        "status": "scheduled"
-      },
-      {
-        "date": "2027-06-14",
-        "status": "scheduled"
-      }
-    ],
-    "context": {
-      "inflationYoY": 9.2,
-      "inflationPeriod": "July 2026",
-      "realRate": 2.3,
-      "peak": {
-        "rate": 22,
-        "date": "2023-06",
-        "note": "All-time high, held until easing began in June 2024."
-      },
-      "trough": {
-        "rate": 10.5,
-        "date": "2025-12",
-        "note": "Cyclical low before the April 2026 hike."
-      },
-      "easingNote": "From the 22% peak, SBP cut a cumulative 1,150 bps to a low of 10.5% (Dec 2025) — then surprised markets with a 100 bps hike in April 2026, its first increase in almost three years, as the Middle East conflict pushed up oil and inflation."
-    },
-    "decisions": [
-      {
-        "date": "2024-06-10",
-        "rate": 20.5,
-        "changeBps": -150,
-        "action": "cut"
-      },
-      {
-        "date": "2024-07-29",
-        "rate": 19.5,
-        "changeBps": -100,
-        "action": "cut"
-      },
-      {
-        "date": "2024-09-12",
-        "rate": 17.5,
-        "changeBps": -200,
-        "action": "cut"
-      },
-      {
-        "date": "2024-11-04",
-        "rate": 15,
-        "changeBps": -250,
-        "action": "cut"
-      },
-      {
-        "date": "2024-12-16",
-        "rate": 13,
-        "changeBps": -200,
-        "action": "cut"
-      },
-      {
-        "date": "2025-01-27",
-        "rate": 12,
-        "changeBps": -100,
-        "action": "cut"
-      },
-      {
-        "date": "2025-03-10",
-        "rate": 12,
-        "changeBps": 0,
-        "action": "hold"
-      },
-      {
-        "date": "2025-05-05",
-        "rate": 11,
-        "changeBps": -100,
-        "action": "cut"
-      },
-      {
-        "date": "2025-06-16",
-        "rate": 11,
-        "changeBps": 0,
-        "action": "hold"
-      },
-      {
-        "date": "2025-07-30",
-        "rate": 11,
-        "changeBps": 0,
-        "action": "hold"
-      },
-      {
-        "date": "2025-09-15",
-        "rate": 11,
-        "changeBps": 0,
-        "action": "hold"
-      },
-      {
-        "date": "2025-10-27",
-        "rate": 11,
-        "changeBps": 0,
-        "action": "hold"
-      },
-      {
-        "date": "2025-12-15",
-        "rate": 10.5,
-        "changeBps": -50,
-        "action": "cut"
-      },
-      {
-        "date": "2026-01-26",
-        "rate": 10.5,
-        "changeBps": 0,
-        "action": "hold"
-      },
-      {
-        "date": "2026-03-09",
-        "rate": 10.5,
-        "changeBps": 0,
-        "action": "hold"
-      },
-      {
-        "date": "2026-04-27",
-        "rate": 11.5,
-        "changeBps": 100,
-        "action": "hike",
-        "note": "First hike in almost three years — inflation risks from the Middle East war and higher global energy prices."
-      },
-      {
-        "date": "2026-06-15",
-        "rate": 11.5,
-        "changeBps": 0,
-        "action": "hold"
-      },
-      {
-        "date": "2026-07-27",
-        "rate": 11.5,
-        "changeBps": 0,
-        "action": "hold",
-        "note": "SBP maintained the policy rate as inflation moderated and the external outlook improved."
-      }
-    ],
-    "observationDate": "2026-07-27",
-    "publicationDate": "2026-07-27",
-    "calendarPublicationDate": "2026-06-23",
-    "sourceUrl": "https://www.sbp.org.pk/our-operations/monetary-policy",
-    "lastVerified": "2026-08-07",
-    "lastUpdated": "2026-08-07",
-    "verifiedFrom": [
+    "sourceUrl": "https://www.sbp.org.pk/assets/document/publications/MPS-July-2026-Eng.pdf",
+    "sourceLinks": [
       "https://www.sbp.org.pk/assets/document/publications/MPS-July-2026-Eng.pdf",
-      "https://www.sbp.org.pk/assets/documents/press-release/Pr-23-Jun-2026-1.pdf",
-      "https://tradingeconomics.com/pakistan/interest-rate",
-      "https://www.sbp.org.pk/press/2026/Pr-09-Mar-2026.pdf",
-      "https://www.brecorder.com/news/40418213",
-      "https://profit.pakistantoday.com.pk/2026/04/27/sbp-raises-policy-rate-by-100-bps-to-11-5-after-three-years-as-inflation-risks-mount",
-      "https://profit.pakistantoday.com.pk/2025/07/22/sbp-announces-fy26-mpc-meeting-calendar-introduces-biannual-monetary-policy-reports"
+      "/source-evidence/7e4b06c2ec3040a44268dbeb77bbbd8dcbedd0134ae6f6e9cc42394bc7bef2d2.pdf"
     ],
-    "methodologyNote": "SBP Monetary Policy Committee decisions, compiled primarily from SBP statements and calendars. Rates are the announced policy (target) rate effective the day after each decision. The real policy rate is the policy rate minus latest YoY CPI inflation."
+    "lastUpdated": "2026-08-07",
+    "reviewRequired": true,
+    "publication": {
+      "policy": "official-only",
+      "status": "withheld",
+      "reason": "An official monetary policy statement has been downloaded and archived. Manually curated rates, historical decisions, inflation context and meeting dates remain unavailable pending exact per-claim evidence and two distinct real reviewer approvals.",
+      "withheldFields": [
+        "currentRate",
+        "asOf",
+        "lastDecision",
+        "nextMeeting",
+        "calendar",
+        "context",
+        "decisions",
+        "observationDate",
+        "publicationDate",
+        "calendarPublicationDate",
+        "verifiedFrom",
+        "methodologyNote"
+      ]
+    },
+    "reviewReason": "An official monetary policy statement has been downloaded and archived. Manually curated rates, historical decisions, inflation context and meeting dates remain unavailable pending exact per-claim evidence and two distinct real reviewer approvals."
   }
 }

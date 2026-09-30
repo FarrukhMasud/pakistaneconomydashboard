@@ -18,6 +18,7 @@ import { countryFlagPlugin, countryLabel } from '../utils/countryLabels';
 import SeriesCoverageNote from './ui/SeriesCoverageNote';
 import useI18n from '../i18n/useI18n';
 import { formatKpiPeriod } from '../utils/kpiFormat';
+import FigureTrust from './FigureTrust';
 import './TradeSection.css';
 
 // SBP's country-level export receipt and import payment tables are published
@@ -42,6 +43,7 @@ export function TradeLatestSummary({ row }) {
           <div key={metric.key}>
             <dt>{metric.label}</dt>
             <dd>{fmtUSD(row[metric.key])}</dd>
+            <FigureTrust datasetId="trade" row={row} field={`monthly.${metric.key}`} period={row.date} compact />
           </div>
         ))}
       </dl>
@@ -61,18 +63,14 @@ export default function TradeSection() {
     if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load trade data" />;
 
     const {
-      monthly,
-      topExportCountries,
-      topImportCountries,
+      monthly = [],
+      topExportCountries = [],
+      topImportCountries = [],
       exportCountryPeriod,
       importCountryPeriod,
       lastUpdated: tradeLU,
       dataCoverage: tradeDC,
     } = data;
-
-    if (!monthly?.length) {
-      return <ErrorCard error={new Error('Trade series is empty')} onRetry={retry} label="Could not load trade data" />;
-    }
 
     // Current year summary
     const cy = currentCalendarYear(monthly);
@@ -98,6 +96,7 @@ export default function TradeSection() {
         ? [
             {
               label: `${fytdImports.currentLabel} imports`,
+              valueField: 'imports',
               data: fytdImports.current,
               borderColor: COLORS.coral,
               backgroundColor: COLORS.coralAlpha,
@@ -105,6 +104,7 @@ export default function TradeSection() {
             },
             {
               label: `${fytdExports.currentLabel} exports`,
+              valueField: 'exports',
               data: fytdExports.current,
               borderColor: COLORS.teal,
               backgroundColor: COLORS.tealAlpha,
@@ -112,6 +112,7 @@ export default function TradeSection() {
             },
             ...(fytdImports.prior.some((v) => v != null) ? [{
               label: `${fytdImports.priorLabel} imports`,
+              valueField: 'imports',
               data: fytdImports.prior,
               borderColor: COLORS.coral,
               backgroundColor: 'transparent',
@@ -121,6 +122,7 @@ export default function TradeSection() {
             }] : []),
             ...(fytdExports.prior.some((v) => v != null) ? [{
               label: `${fytdExports.priorLabel} exports`,
+              valueField: 'exports',
               data: fytdExports.prior,
               borderColor: COLORS.teal,
               backgroundColor: 'transparent',
@@ -132,6 +134,7 @@ export default function TradeSection() {
         : [
             {
               label: 'Imports',
+              valueField: 'imports',
               data: monthly.map((d) => d.imports),
               borderColor: COLORS.coral,
               backgroundColor: COLORS.coralAlpha,
@@ -139,6 +142,7 @@ export default function TradeSection() {
             },
             {
               label: 'Exports',
+              valueField: 'exports',
               data: monthly.map((d) => d.exports),
               borderColor: COLORS.teal,
               backgroundColor: COLORS.tealAlpha,
@@ -178,6 +182,7 @@ export default function TradeSection() {
       datasets: [
         {
           label: showFytd && fytdBalance ? `${fytdBalance.currentLabel} trade balance` : 'Trade Balance',
+          valueField: 'balance',
           data: balanceValues,
           backgroundColor: balanceColors,
           borderColor: balanceColors,
@@ -186,6 +191,7 @@ export default function TradeSection() {
         ...(showBalancePrior ? [{
           isComparison: true,
           label: balancePriorLabel,
+          valueField: 'balance',
           data: balancePrior,
           type: 'line',
           borderColor: COLORS.amber,
@@ -227,20 +233,27 @@ export default function TradeSection() {
   const cumulative = (rows, field) => {
     let total = 0;
     return rows.map((row) => {
-      total += Number(row[field]) || 0;
-      return Math.round(total * 100) / 100;
+      total = Number.isFinite(total) && Number.isFinite(row[field]) ? total + row[field] : null;
+      return total == null ? null : Math.round(total * 100) / 100;
     });
   };
 
   const fyRows = fy?.rows || [];
   const priorFyRows = fy?.prior || [];
   const fyLabels = fyRows.map((d) => formatMonthYear(d.date));
+  const cumulativeEvidence = (rows, field) => ({
+    valueField: field === 'trade balance' ? 'balance' : field,
+    observationDates: rows.slice(0, fyRows.length).map((row) => row.date),
+    evidenceRows: rows.slice(0, fyRows.length).map((_, index) => rows.slice(0, index + 1)),
+    derivation: `Sum of published monthly ${field} from fiscal-year start through the displayed month`,
+  });
   const cumulativeFlowData = fyRows.length ? {
     labels: fyLabels,
     datasets: [
       {
         label: `${fy.fyLabel} cumulative imports`,
         data: cumulative(fyRows, 'imports'),
+        ...cumulativeEvidence(fyRows, 'imports'),
         borderColor: COLORS.coral,
         backgroundColor: COLORS.coralAlpha,
         fill: false,
@@ -249,6 +262,7 @@ export default function TradeSection() {
       {
         label: `${fy.fyLabel} cumulative exports`,
         data: cumulative(fyRows, 'exports'),
+        ...cumulativeEvidence(fyRows, 'exports'),
         borderColor: COLORS.teal,
         backgroundColor: COLORS.tealAlpha,
         fill: false,
@@ -258,6 +272,7 @@ export default function TradeSection() {
         {
           label: `${fy.priorLabel} same-period imports`,
           data: cumulative(priorFyRows, 'imports').slice(0, fyRows.length),
+          ...cumulativeEvidence(priorFyRows, 'imports'),
           borderColor: COLORS.coral,
           backgroundColor: 'transparent',
           borderDash: [6, 3],
@@ -267,6 +282,7 @@ export default function TradeSection() {
         {
           label: `${fy.priorLabel} same-period exports`,
           data: cumulative(priorFyRows, 'exports').slice(0, fyRows.length),
+          ...cumulativeEvidence(priorFyRows, 'exports'),
           borderColor: COLORS.teal,
           backgroundColor: 'transparent',
           borderDash: [6, 3],
@@ -283,6 +299,7 @@ export default function TradeSection() {
       {
         label: `${fy.fyLabel} cumulative trade balance`,
         data: cumulative(fyRows, 'balance'),
+        ...cumulativeEvidence(fyRows, 'trade balance'),
         borderColor: COLORS.amber,
         backgroundColor: COLORS.amberAlpha,
         fill: true,
@@ -291,6 +308,7 @@ export default function TradeSection() {
       ...(priorFyRows.length ? [{
         label: `${fy.priorLabel} same-period balance`,
         data: cumulative(priorFyRows, 'balance').slice(0, fyRows.length),
+        ...cumulativeEvidence(priorFyRows, 'trade balance'),
         borderColor: COLORS.blue,
         backgroundColor: 'transparent',
         borderDash: [6, 3],
@@ -343,6 +361,8 @@ export default function TradeSection() {
           {cy && (
             <SummaryCard
               title={`${cy.rangeLabel} — Calendar YTD`}
+              row={{ evidence: cy.rows.map((row) => row.evidence) }}
+              period={cy.rangeLabel}
               accent={COLORS.teal}
               items={(() => {
                 const ytdExports = sumField(cy.rows, 'exports');
@@ -353,9 +373,9 @@ export default function TradeSection() {
                 const expChg = pctChange(ytdExports, priorExports);
                 const impChg = pctChange(ytdImports, priorImports);
                 return [
-                  { label: 'Exports', value: fmtUSD(ytdExports), sub: priorExports ? `${expChg.pct > 0 ? '+' : ''}${expChg.pct}% YoY` : '', direction: expChg.direction, sentiment: expChg.direction === 'up' ? 'positive' : 'negative', color: COLORS.teal },
-                  { label: 'Imports', value: fmtUSD(ytdImports), sub: priorImports ? `${impChg.pct > 0 ? '+' : ''}${impChg.pct}% YoY` : '', direction: impChg.direction, sentiment: impChg.direction === 'up' ? 'negative' : 'positive', color: COLORS.coral },
-                  { label: 'Trade Balance', value: fmtUSD(ytdBalance), sentiment: ytdBalance >= 0 ? 'positive' : 'negative', color: ytdBalance >= 0 ? COLORS.teal : COLORS.coral },
+                  { label: 'Exports', field: 'exports', derivation: 'Sum of published monthly exports in the stated calendar period', value: fmtUSD(ytdExports), sub: expChg.pct != null ? `${expChg.pct > 0 ? '+' : ''}${expChg.pct}% YoY` : '', direction: expChg.direction, sentiment: expChg.direction === 'up' ? 'positive' : expChg.direction === 'down' ? 'negative' : 'neutral', color: COLORS.teal },
+                  { label: 'Imports', field: 'imports', derivation: 'Sum of published monthly imports in the stated calendar period', value: fmtUSD(ytdImports), sub: impChg.pct != null ? `${impChg.pct > 0 ? '+' : ''}${impChg.pct}% YoY` : '', direction: impChg.direction, sentiment: impChg.direction === 'up' ? 'negative' : impChg.direction === 'down' ? 'positive' : 'neutral', color: COLORS.coral },
+                  { label: 'Trade Balance', field: 'balance', derivation: 'Sum of published monthly trade balances in the stated calendar period', value: fmtUSD(ytdBalance), sentiment: ytdBalance == null ? 'neutral' : ytdBalance >= 0 ? 'positive' : 'negative', color: ytdBalance >= 0 ? COLORS.teal : COLORS.coral },
                 ];
               })()}
               footnote={`${cy.months} month${cy.months > 1 ? 's' : ''} · Source: SBP`}
@@ -364,6 +384,8 @@ export default function TradeSection() {
           {fy && (
             <SummaryCard
               title={formatFySummaryTitle(fy)}
+              row={{ evidence: fy.rows.map((row) => row.evidence) }}
+              period={fy.rangeLabel}
               accent={COLORS.blue}
               items={(() => {
                 const fytdExports = sumField(fy.rows, 'exports');
@@ -374,9 +396,9 @@ export default function TradeSection() {
                 const expChg = pctChange(fytdExports, priorExports);
                 const impChg = pctChange(fytdImports, priorImports);
                 return [
-                  { label: 'Exports', value: fmtUSD(fytdExports), sub: priorExports ? `${expChg.pct > 0 ? '+' : ''}${expChg.pct}% vs ${fy.priorLabel}` : '', direction: expChg.direction, sentiment: expChg.direction === 'up' ? 'positive' : 'negative', color: COLORS.teal },
-                  { label: 'Imports', value: fmtUSD(fytdImports), sub: priorImports ? `${impChg.pct > 0 ? '+' : ''}${impChg.pct}% vs ${fy.priorLabel}` : '', direction: impChg.direction, sentiment: impChg.direction === 'up' ? 'negative' : 'positive', color: COLORS.coral },
-                  { label: 'Trade Balance', value: fmtUSD(fytdBalance), sentiment: fytdBalance >= 0 ? 'positive' : 'negative', color: fytdBalance >= 0 ? COLORS.teal : COLORS.coral },
+                  { label: 'Exports', field: 'exports', derivation: 'Sum of published monthly exports in the stated fiscal period', value: fmtUSD(fytdExports), sub: expChg.pct != null ? `${expChg.pct > 0 ? '+' : ''}${expChg.pct}% vs ${fy.priorLabel}` : '', direction: expChg.direction, sentiment: expChg.direction === 'up' ? 'positive' : expChg.direction === 'down' ? 'negative' : 'neutral', color: COLORS.teal },
+                  { label: 'Imports', field: 'imports', derivation: 'Sum of published monthly imports in the stated fiscal period', value: fmtUSD(fytdImports), sub: impChg.pct != null ? `${impChg.pct > 0 ? '+' : ''}${impChg.pct}% vs ${fy.priorLabel}` : '', direction: impChg.direction, sentiment: impChg.direction === 'up' ? 'negative' : impChg.direction === 'down' ? 'positive' : 'neutral', color: COLORS.coral },
+                  { label: 'Trade Balance', field: 'balance', derivation: 'Sum of published monthly trade balances in the stated fiscal period', value: fmtUSD(fytdBalance), sentiment: fytdBalance == null ? 'neutral' : fytdBalance >= 0 ? 'positive' : 'negative', color: fytdBalance >= 0 ? COLORS.teal : COLORS.coral },
                 ];
               })()}
               footnote={`${fy.months} month${fy.months > 1 ? 's' : ''} · Source: SBP`}

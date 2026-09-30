@@ -41,49 +41,378 @@
       "unit": "%",
       "higherIsGood": true,
       "whyItMatters": "Shows how quickly real output is expanding after inflation.",
+      "evidence": {
+        "artifactId": "NY.GDP.MKTP.KD.ZG:9172f1442614eadb450068a4a1706c9061c24e1cbdc336693bee8740aae469a3:587b15887986",
+        "sha256": "9172f1442614eadb450068a4a1706c9061c24e1cbdc336693bee8740aae469a3",
+        "sourceKey": "NY.GDP.MKTP.KD.ZG",
+        "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NY.GDP.MKTP.KD.ZG?format=json&per_page=20000",
+        "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NY.GDP.MKTP.KD.ZG?format=json&per_page=20000",
+        "path": "/source-evidence/9172f1442614eadb450068a4a1706c9061c24e1cbdc336693bee8740aae469a3.json",
+        "bytes": 99496,
+        "contentType": "application/json;charset=utf-8",
+        "retrievedAt": "2026-09-30T21:43:15.653Z",
+        "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+        "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+        "parserDependencies": [
+          {
+            "file": "package-lock.json",
+            "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+            "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+          },
+          {
+            "file": "package.json",
+            "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+            "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+          },
+          {
+            "file": "scripts/lib/data-writer.mjs",
+            "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+            "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+          },
+          {
+            "file": "scripts/lib/source-evidence.mjs",
+            "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+            "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+          }
+        ]
+      },
       "sourceUrl": "https://api.worldbank.org/v2/country/PAK;IND;BGD;LKA;EGY;TUR;VNM/indicator/NY.GDP.MKTP.KD.ZG",
       "values": [
         {
           "countryCode": "PAK",
           "countryName": "Pakistan",
           "year": 2025,
-          "value": 3.7
+          "value": 3.7,
+          "rawValue": 3.69842668749033,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "NY.GDP.MKTP.KD.ZG:9172f1442614eadb450068a4a1706c9061c24e1cbdc336693bee8740aae469a3:587b15887986",
+            "sha256": "9172f1442614eadb450068a4a1706c9061c24e1cbdc336693bee8740aae469a3",
+            "sourceKey": "NY.GDP.MKTP.KD.ZG",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NY.GDP.MKTP.KD.ZG?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NY.GDP.MKTP.KD.ZG?format=json&per_page=20000",
+            "path": "/source-evidence/9172f1442614eadb450068a4a1706c9061c24e1cbdc336693bee8740aae469a3.json",
+            "bytes": 99496,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:15.653Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "PAK",
+              "indicator": "NY.GDP.MKTP.KD.ZG",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "IND",
           "countryName": "India",
           "year": 2025,
-          "value": 7.57
+          "value": 7.57,
+          "rawValue": 7.56666179284244,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "NY.GDP.MKTP.KD.ZG:9172f1442614eadb450068a4a1706c9061c24e1cbdc336693bee8740aae469a3:587b15887986",
+            "sha256": "9172f1442614eadb450068a4a1706c9061c24e1cbdc336693bee8740aae469a3",
+            "sourceKey": "NY.GDP.MKTP.KD.ZG",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NY.GDP.MKTP.KD.ZG?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NY.GDP.MKTP.KD.ZG?format=json&per_page=20000",
+            "path": "/source-evidence/9172f1442614eadb450068a4a1706c9061c24e1cbdc336693bee8740aae469a3.json",
+            "bytes": 99496,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:15.653Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "IND",
+              "indicator": "NY.GDP.MKTP.KD.ZG",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "BGD",
           "countryName": "Bangladesh",
           "year": 2025,
-          "value": 3.49
+          "value": 3.49,
+          "rawValue": 3.48990671836833,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "NY.GDP.MKTP.KD.ZG:9172f1442614eadb450068a4a1706c9061c24e1cbdc336693bee8740aae469a3:587b15887986",
+            "sha256": "9172f1442614eadb450068a4a1706c9061c24e1cbdc336693bee8740aae469a3",
+            "sourceKey": "NY.GDP.MKTP.KD.ZG",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NY.GDP.MKTP.KD.ZG?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NY.GDP.MKTP.KD.ZG?format=json&per_page=20000",
+            "path": "/source-evidence/9172f1442614eadb450068a4a1706c9061c24e1cbdc336693bee8740aae469a3.json",
+            "bytes": 99496,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:15.653Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "BGD",
+              "indicator": "NY.GDP.MKTP.KD.ZG",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "LKA",
           "countryName": "Sri Lanka",
           "year": 2025,
-          "value": 4.95
+          "value": 4.95,
+          "rawValue": 4.9534339114043,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "NY.GDP.MKTP.KD.ZG:9172f1442614eadb450068a4a1706c9061c24e1cbdc336693bee8740aae469a3:587b15887986",
+            "sha256": "9172f1442614eadb450068a4a1706c9061c24e1cbdc336693bee8740aae469a3",
+            "sourceKey": "NY.GDP.MKTP.KD.ZG",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NY.GDP.MKTP.KD.ZG?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NY.GDP.MKTP.KD.ZG?format=json&per_page=20000",
+            "path": "/source-evidence/9172f1442614eadb450068a4a1706c9061c24e1cbdc336693bee8740aae469a3.json",
+            "bytes": 99496,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:15.653Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "LKA",
+              "indicator": "NY.GDP.MKTP.KD.ZG",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "EGY",
           "countryName": "Egypt",
           "year": 2025,
-          "value": 4.39
+          "value": 4.39,
+          "rawValue": 4.39201068570188,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "NY.GDP.MKTP.KD.ZG:9172f1442614eadb450068a4a1706c9061c24e1cbdc336693bee8740aae469a3:587b15887986",
+            "sha256": "9172f1442614eadb450068a4a1706c9061c24e1cbdc336693bee8740aae469a3",
+            "sourceKey": "NY.GDP.MKTP.KD.ZG",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NY.GDP.MKTP.KD.ZG?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NY.GDP.MKTP.KD.ZG?format=json&per_page=20000",
+            "path": "/source-evidence/9172f1442614eadb450068a4a1706c9061c24e1cbdc336693bee8740aae469a3.json",
+            "bytes": 99496,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:15.653Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "EGY",
+              "indicator": "NY.GDP.MKTP.KD.ZG",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "TUR",
           "countryName": "Türkiye",
           "year": 2025,
-          "value": 3.6
+          "value": 3.6,
+          "rawValue": 3.60462514082589,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "NY.GDP.MKTP.KD.ZG:9172f1442614eadb450068a4a1706c9061c24e1cbdc336693bee8740aae469a3:587b15887986",
+            "sha256": "9172f1442614eadb450068a4a1706c9061c24e1cbdc336693bee8740aae469a3",
+            "sourceKey": "NY.GDP.MKTP.KD.ZG",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NY.GDP.MKTP.KD.ZG?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NY.GDP.MKTP.KD.ZG?format=json&per_page=20000",
+            "path": "/source-evidence/9172f1442614eadb450068a4a1706c9061c24e1cbdc336693bee8740aae469a3.json",
+            "bytes": 99496,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:15.653Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "TUR",
+              "indicator": "NY.GDP.MKTP.KD.ZG",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "VNM",
           "countryName": "Vietnam",
           "year": 2025,
-          "value": 8.02
+          "value": 8.02,
+          "rawValue": 8.01882998978245,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "NY.GDP.MKTP.KD.ZG:9172f1442614eadb450068a4a1706c9061c24e1cbdc336693bee8740aae469a3:587b15887986",
+            "sha256": "9172f1442614eadb450068a4a1706c9061c24e1cbdc336693bee8740aae469a3",
+            "sourceKey": "NY.GDP.MKTP.KD.ZG",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NY.GDP.MKTP.KD.ZG?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NY.GDP.MKTP.KD.ZG?format=json&per_page=20000",
+            "path": "/source-evidence/9172f1442614eadb450068a4a1706c9061c24e1cbdc336693bee8740aae469a3.json",
+            "bytes": 99496,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:15.653Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "VNM",
+              "indicator": "NY.GDP.MKTP.KD.ZG",
+              "observationDate": "2025"
+            }
+          }
         }
       ]
     },
@@ -94,49 +423,378 @@
       "unit": "%",
       "higherIsGood": false,
       "whyItMatters": "High inflation erodes purchasing power and often forces tighter monetary policy.",
+      "evidence": {
+        "artifactId": "FP.CPI.TOTL.ZG:668770cf1a5b6bb9af28e4a7957ed24d0280c63043ea424b100414134825be0a:5c76457251d1",
+        "sha256": "668770cf1a5b6bb9af28e4a7957ed24d0280c63043ea424b100414134825be0a",
+        "sourceKey": "FP.CPI.TOTL.ZG",
+        "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FP.CPI.TOTL.ZG?format=json&per_page=20000",
+        "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FP.CPI.TOTL.ZG?format=json&per_page=20000",
+        "path": "/source-evidence/668770cf1a5b6bb9af28e4a7957ed24d0280c63043ea424b100414134825be0a.json",
+        "bytes": 105109,
+        "contentType": "application/json;charset=utf-8",
+        "retrievedAt": "2026-09-30T21:43:15.777Z",
+        "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+        "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+        "parserDependencies": [
+          {
+            "file": "package-lock.json",
+            "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+            "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+          },
+          {
+            "file": "package.json",
+            "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+            "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+          },
+          {
+            "file": "scripts/lib/data-writer.mjs",
+            "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+            "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+          },
+          {
+            "file": "scripts/lib/source-evidence.mjs",
+            "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+            "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+          }
+        ]
+      },
       "sourceUrl": "https://api.worldbank.org/v2/country/PAK;IND;BGD;LKA;EGY;TUR;VNM/indicator/FP.CPI.TOTL.ZG",
       "values": [
         {
           "countryCode": "PAK",
           "countryName": "Pakistan",
           "year": 2025,
-          "value": 3.55
+          "value": 3.55,
+          "rawValue": 3.54555214890893,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "FP.CPI.TOTL.ZG:668770cf1a5b6bb9af28e4a7957ed24d0280c63043ea424b100414134825be0a:5c76457251d1",
+            "sha256": "668770cf1a5b6bb9af28e4a7957ed24d0280c63043ea424b100414134825be0a",
+            "sourceKey": "FP.CPI.TOTL.ZG",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FP.CPI.TOTL.ZG?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FP.CPI.TOTL.ZG?format=json&per_page=20000",
+            "path": "/source-evidence/668770cf1a5b6bb9af28e4a7957ed24d0280c63043ea424b100414134825be0a.json",
+            "bytes": 105109,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:15.777Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "PAK",
+              "indicator": "FP.CPI.TOTL.ZG",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "IND",
           "countryName": "India",
           "year": 2025,
-          "value": 2.4
+          "value": 2.4,
+          "rawValue": 2.39884954182294,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "FP.CPI.TOTL.ZG:668770cf1a5b6bb9af28e4a7957ed24d0280c63043ea424b100414134825be0a:5c76457251d1",
+            "sha256": "668770cf1a5b6bb9af28e4a7957ed24d0280c63043ea424b100414134825be0a",
+            "sourceKey": "FP.CPI.TOTL.ZG",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FP.CPI.TOTL.ZG?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FP.CPI.TOTL.ZG?format=json&per_page=20000",
+            "path": "/source-evidence/668770cf1a5b6bb9af28e4a7957ed24d0280c63043ea424b100414134825be0a.json",
+            "bytes": 105109,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:15.777Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "IND",
+              "indicator": "FP.CPI.TOTL.ZG",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "BGD",
           "countryName": "Bangladesh",
           "year": 2025,
-          "value": 8.77
+          "value": 8.77,
+          "rawValue": 8.7687628116114,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "FP.CPI.TOTL.ZG:668770cf1a5b6bb9af28e4a7957ed24d0280c63043ea424b100414134825be0a:5c76457251d1",
+            "sha256": "668770cf1a5b6bb9af28e4a7957ed24d0280c63043ea424b100414134825be0a",
+            "sourceKey": "FP.CPI.TOTL.ZG",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FP.CPI.TOTL.ZG?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FP.CPI.TOTL.ZG?format=json&per_page=20000",
+            "path": "/source-evidence/668770cf1a5b6bb9af28e4a7957ed24d0280c63043ea424b100414134825be0a.json",
+            "bytes": 105109,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:15.777Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "BGD",
+              "indicator": "FP.CPI.TOTL.ZG",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "LKA",
           "countryName": "Sri Lanka",
           "year": 2025,
-          "value": -4.76
+          "value": -4.76,
+          "rawValue": -4.76386036960983,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "FP.CPI.TOTL.ZG:668770cf1a5b6bb9af28e4a7957ed24d0280c63043ea424b100414134825be0a:5c76457251d1",
+            "sha256": "668770cf1a5b6bb9af28e4a7957ed24d0280c63043ea424b100414134825be0a",
+            "sourceKey": "FP.CPI.TOTL.ZG",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FP.CPI.TOTL.ZG?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FP.CPI.TOTL.ZG?format=json&per_page=20000",
+            "path": "/source-evidence/668770cf1a5b6bb9af28e4a7957ed24d0280c63043ea424b100414134825be0a.json",
+            "bytes": 105109,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:15.777Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "LKA",
+              "indicator": "FP.CPI.TOTL.ZG",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "EGY",
           "countryName": "Egypt",
           "year": 2025,
-          "value": 14.07
+          "value": 14.07,
+          "rawValue": 14.0735136645934,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "FP.CPI.TOTL.ZG:668770cf1a5b6bb9af28e4a7957ed24d0280c63043ea424b100414134825be0a:5c76457251d1",
+            "sha256": "668770cf1a5b6bb9af28e4a7957ed24d0280c63043ea424b100414134825be0a",
+            "sourceKey": "FP.CPI.TOTL.ZG",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FP.CPI.TOTL.ZG?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FP.CPI.TOTL.ZG?format=json&per_page=20000",
+            "path": "/source-evidence/668770cf1a5b6bb9af28e4a7957ed24d0280c63043ea424b100414134825be0a.json",
+            "bytes": 105109,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:15.777Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "EGY",
+              "indicator": "FP.CPI.TOTL.ZG",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "TUR",
           "countryName": "Türkiye",
           "year": 2025,
-          "value": 34.88
+          "value": 34.88,
+          "rawValue": 34.8811629820306,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "FP.CPI.TOTL.ZG:668770cf1a5b6bb9af28e4a7957ed24d0280c63043ea424b100414134825be0a:5c76457251d1",
+            "sha256": "668770cf1a5b6bb9af28e4a7957ed24d0280c63043ea424b100414134825be0a",
+            "sourceKey": "FP.CPI.TOTL.ZG",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FP.CPI.TOTL.ZG?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FP.CPI.TOTL.ZG?format=json&per_page=20000",
+            "path": "/source-evidence/668770cf1a5b6bb9af28e4a7957ed24d0280c63043ea424b100414134825be0a.json",
+            "bytes": 105109,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:15.777Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "TUR",
+              "indicator": "FP.CPI.TOTL.ZG",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "VNM",
           "countryName": "Vietnam",
           "year": 2025,
-          "value": 3.31
+          "value": 3.31,
+          "rawValue": 3.3099931421974,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "FP.CPI.TOTL.ZG:668770cf1a5b6bb9af28e4a7957ed24d0280c63043ea424b100414134825be0a:5c76457251d1",
+            "sha256": "668770cf1a5b6bb9af28e4a7957ed24d0280c63043ea424b100414134825be0a",
+            "sourceKey": "FP.CPI.TOTL.ZG",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FP.CPI.TOTL.ZG?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FP.CPI.TOTL.ZG?format=json&per_page=20000",
+            "path": "/source-evidence/668770cf1a5b6bb9af28e4a7957ed24d0280c63043ea424b100414134825be0a.json",
+            "bytes": 105109,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:15.777Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "VNM",
+              "indicator": "FP.CPI.TOTL.ZG",
+              "observationDate": "2025"
+            }
+          }
         }
       ]
     },
@@ -147,49 +805,378 @@
       "unit": "% of GDP",
       "higherIsGood": true,
       "whyItMatters": "Export intensity is a proxy for foreign-exchange earning capacity.",
+      "evidence": {
+        "artifactId": "NE.EXP.GNFS.ZS:7ce78a82678f1cdd48bb4eb2125a5aff6af3add31c26b8f527da59e1e249e6ac:c8c79dfeab93",
+        "sha256": "7ce78a82678f1cdd48bb4eb2125a5aff6af3add31c26b8f527da59e1e249e6ac",
+        "sourceKey": "NE.EXP.GNFS.ZS",
+        "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NE.EXP.GNFS.ZS?format=json&per_page=20000",
+        "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NE.EXP.GNFS.ZS?format=json&per_page=20000",
+        "path": "/source-evidence/7ce78a82678f1cdd48bb4eb2125a5aff6af3add31c26b8f527da59e1e249e6ac.json",
+        "bytes": 106857,
+        "contentType": "application/json;charset=utf-8",
+        "retrievedAt": "2026-09-30T21:43:15.883Z",
+        "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+        "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+        "parserDependencies": [
+          {
+            "file": "package-lock.json",
+            "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+            "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+          },
+          {
+            "file": "package.json",
+            "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+            "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+          },
+          {
+            "file": "scripts/lib/data-writer.mjs",
+            "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+            "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+          },
+          {
+            "file": "scripts/lib/source-evidence.mjs",
+            "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+            "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+          }
+        ]
+      },
       "sourceUrl": "https://api.worldbank.org/v2/country/PAK;IND;BGD;LKA;EGY;TUR;VNM/indicator/NE.EXP.GNFS.ZS",
       "values": [
         {
           "countryCode": "PAK",
           "countryName": "Pakistan",
           "year": 2025,
-          "value": 9.99
+          "value": 9.99,
+          "rawValue": 9.98520671042165,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "NE.EXP.GNFS.ZS:7ce78a82678f1cdd48bb4eb2125a5aff6af3add31c26b8f527da59e1e249e6ac:c8c79dfeab93",
+            "sha256": "7ce78a82678f1cdd48bb4eb2125a5aff6af3add31c26b8f527da59e1e249e6ac",
+            "sourceKey": "NE.EXP.GNFS.ZS",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NE.EXP.GNFS.ZS?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NE.EXP.GNFS.ZS?format=json&per_page=20000",
+            "path": "/source-evidence/7ce78a82678f1cdd48bb4eb2125a5aff6af3add31c26b8f527da59e1e249e6ac.json",
+            "bytes": 106857,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:15.883Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "PAK",
+              "indicator": "NE.EXP.GNFS.ZS",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "IND",
           "countryName": "India",
           "year": 2025,
-          "value": 22.26
+          "value": 22.26,
+          "rawValue": 22.2630410669804,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "NE.EXP.GNFS.ZS:7ce78a82678f1cdd48bb4eb2125a5aff6af3add31c26b8f527da59e1e249e6ac:c8c79dfeab93",
+            "sha256": "7ce78a82678f1cdd48bb4eb2125a5aff6af3add31c26b8f527da59e1e249e6ac",
+            "sourceKey": "NE.EXP.GNFS.ZS",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NE.EXP.GNFS.ZS?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NE.EXP.GNFS.ZS?format=json&per_page=20000",
+            "path": "/source-evidence/7ce78a82678f1cdd48bb4eb2125a5aff6af3add31c26b8f527da59e1e249e6ac.json",
+            "bytes": 106857,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:15.883Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "IND",
+              "indicator": "NE.EXP.GNFS.ZS",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "BGD",
           "countryName": "Bangladesh",
           "year": 2025,
-          "value": 11.12
+          "value": 11.12,
+          "rawValue": 11.1161085689856,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "NE.EXP.GNFS.ZS:7ce78a82678f1cdd48bb4eb2125a5aff6af3add31c26b8f527da59e1e249e6ac:c8c79dfeab93",
+            "sha256": "7ce78a82678f1cdd48bb4eb2125a5aff6af3add31c26b8f527da59e1e249e6ac",
+            "sourceKey": "NE.EXP.GNFS.ZS",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NE.EXP.GNFS.ZS?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NE.EXP.GNFS.ZS?format=json&per_page=20000",
+            "path": "/source-evidence/7ce78a82678f1cdd48bb4eb2125a5aff6af3add31c26b8f527da59e1e249e6ac.json",
+            "bytes": 106857,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:15.883Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "BGD",
+              "indicator": "NE.EXP.GNFS.ZS",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "LKA",
           "countryName": "Sri Lanka",
           "year": 2025,
-          "value": 18.97
+          "value": 18.97,
+          "rawValue": 18.9673796128721,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "NE.EXP.GNFS.ZS:7ce78a82678f1cdd48bb4eb2125a5aff6af3add31c26b8f527da59e1e249e6ac:c8c79dfeab93",
+            "sha256": "7ce78a82678f1cdd48bb4eb2125a5aff6af3add31c26b8f527da59e1e249e6ac",
+            "sourceKey": "NE.EXP.GNFS.ZS",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NE.EXP.GNFS.ZS?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NE.EXP.GNFS.ZS?format=json&per_page=20000",
+            "path": "/source-evidence/7ce78a82678f1cdd48bb4eb2125a5aff6af3add31c26b8f527da59e1e249e6ac.json",
+            "bytes": 106857,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:15.883Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "LKA",
+              "indicator": "NE.EXP.GNFS.ZS",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "EGY",
           "countryName": "Egypt",
           "year": 2025,
-          "value": 19.82
+          "value": 19.82,
+          "rawValue": 19.8200284513845,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "NE.EXP.GNFS.ZS:7ce78a82678f1cdd48bb4eb2125a5aff6af3add31c26b8f527da59e1e249e6ac:c8c79dfeab93",
+            "sha256": "7ce78a82678f1cdd48bb4eb2125a5aff6af3add31c26b8f527da59e1e249e6ac",
+            "sourceKey": "NE.EXP.GNFS.ZS",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NE.EXP.GNFS.ZS?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NE.EXP.GNFS.ZS?format=json&per_page=20000",
+            "path": "/source-evidence/7ce78a82678f1cdd48bb4eb2125a5aff6af3add31c26b8f527da59e1e249e6ac.json",
+            "bytes": 106857,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:15.883Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "EGY",
+              "indicator": "NE.EXP.GNFS.ZS",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "TUR",
           "countryName": "Türkiye",
           "year": 2025,
-          "value": 24.85
+          "value": 24.85,
+          "rawValue": 24.8497719904256,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "NE.EXP.GNFS.ZS:7ce78a82678f1cdd48bb4eb2125a5aff6af3add31c26b8f527da59e1e249e6ac:c8c79dfeab93",
+            "sha256": "7ce78a82678f1cdd48bb4eb2125a5aff6af3add31c26b8f527da59e1e249e6ac",
+            "sourceKey": "NE.EXP.GNFS.ZS",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NE.EXP.GNFS.ZS?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NE.EXP.GNFS.ZS?format=json&per_page=20000",
+            "path": "/source-evidence/7ce78a82678f1cdd48bb4eb2125a5aff6af3add31c26b8f527da59e1e249e6ac.json",
+            "bytes": 106857,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:15.883Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "TUR",
+              "indicator": "NE.EXP.GNFS.ZS",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "VNM",
           "countryName": "Vietnam",
           "year": 2025,
-          "value": 98.24
+          "value": 98.24,
+          "rawValue": 98.2444078637672,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "NE.EXP.GNFS.ZS:7ce78a82678f1cdd48bb4eb2125a5aff6af3add31c26b8f527da59e1e249e6ac:c8c79dfeab93",
+            "sha256": "7ce78a82678f1cdd48bb4eb2125a5aff6af3add31c26b8f527da59e1e249e6ac",
+            "sourceKey": "NE.EXP.GNFS.ZS",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NE.EXP.GNFS.ZS?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/NE.EXP.GNFS.ZS?format=json&per_page=20000",
+            "path": "/source-evidence/7ce78a82678f1cdd48bb4eb2125a5aff6af3add31c26b8f527da59e1e249e6ac.json",
+            "bytes": 106857,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:15.883Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "VNM",
+              "indicator": "NE.EXP.GNFS.ZS",
+              "observationDate": "2025"
+            }
+          }
         }
       ]
     },
@@ -200,49 +1187,378 @@
       "unit": "months of imports",
       "higherIsGood": true,
       "whyItMatters": "Import-cover months indicate the external buffer available during FX stress.",
+      "evidence": {
+        "artifactId": "FI.RES.TOTL.MO:65184351d0a2689193775c5d817a695f1a2adaa1c0e4900dcd8d9f3fe5d9be47:55f0d9e3e7f3",
+        "sha256": "65184351d0a2689193775c5d817a695f1a2adaa1c0e4900dcd8d9f3fe5d9be47",
+        "sourceKey": "FI.RES.TOTL.MO",
+        "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FI.RES.TOTL.MO?format=json&per_page=20000",
+        "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FI.RES.TOTL.MO?format=json&per_page=20000",
+        "path": "/source-evidence/65184351d0a2689193775c5d817a695f1a2adaa1c0e4900dcd8d9f3fe5d9be47.json",
+        "bytes": 103356,
+        "contentType": "application/json;charset=utf-8",
+        "retrievedAt": "2026-09-30T21:43:16.003Z",
+        "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+        "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+        "parserDependencies": [
+          {
+            "file": "package-lock.json",
+            "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+            "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+          },
+          {
+            "file": "package.json",
+            "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+            "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+          },
+          {
+            "file": "scripts/lib/data-writer.mjs",
+            "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+            "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+          },
+          {
+            "file": "scripts/lib/source-evidence.mjs",
+            "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+            "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+          }
+        ]
+      },
       "sourceUrl": "https://api.worldbank.org/v2/country/PAK;IND;BGD;LKA;EGY;TUR;VNM/indicator/FI.RES.TOTL.MO",
       "values": [
         {
           "countryCode": "PAK",
           "countryName": "Pakistan",
           "year": 2025,
-          "value": 3.76
+          "value": 3.76,
+          "rawValue": 3.75530612751488,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "FI.RES.TOTL.MO:65184351d0a2689193775c5d817a695f1a2adaa1c0e4900dcd8d9f3fe5d9be47:55f0d9e3e7f3",
+            "sha256": "65184351d0a2689193775c5d817a695f1a2adaa1c0e4900dcd8d9f3fe5d9be47",
+            "sourceKey": "FI.RES.TOTL.MO",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FI.RES.TOTL.MO?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FI.RES.TOTL.MO?format=json&per_page=20000",
+            "path": "/source-evidence/65184351d0a2689193775c5d817a695f1a2adaa1c0e4900dcd8d9f3fe5d9be47.json",
+            "bytes": 103356,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:16.003Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "PAK",
+              "indicator": "FI.RES.TOTL.MO",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "IND",
           "countryName": "India",
           "year": 2025,
-          "value": 7.88
+          "value": 7.88,
+          "rawValue": 7.8761457217327,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "FI.RES.TOTL.MO:65184351d0a2689193775c5d817a695f1a2adaa1c0e4900dcd8d9f3fe5d9be47:55f0d9e3e7f3",
+            "sha256": "65184351d0a2689193775c5d817a695f1a2adaa1c0e4900dcd8d9f3fe5d9be47",
+            "sourceKey": "FI.RES.TOTL.MO",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FI.RES.TOTL.MO?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FI.RES.TOTL.MO?format=json&per_page=20000",
+            "path": "/source-evidence/65184351d0a2689193775c5d817a695f1a2adaa1c0e4900dcd8d9f3fe5d9be47.json",
+            "bytes": 103356,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:16.003Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "IND",
+              "indicator": "FI.RES.TOTL.MO",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "BGD",
           "countryName": "Bangladesh",
           "year": 2025,
-          "value": 3.91
+          "value": 3.91,
+          "rawValue": 3.91092137452087,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "FI.RES.TOTL.MO:65184351d0a2689193775c5d817a695f1a2adaa1c0e4900dcd8d9f3fe5d9be47:55f0d9e3e7f3",
+            "sha256": "65184351d0a2689193775c5d817a695f1a2adaa1c0e4900dcd8d9f3fe5d9be47",
+            "sourceKey": "FI.RES.TOTL.MO",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FI.RES.TOTL.MO?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FI.RES.TOTL.MO?format=json&per_page=20000",
+            "path": "/source-evidence/65184351d0a2689193775c5d817a695f1a2adaa1c0e4900dcd8d9f3fe5d9be47.json",
+            "bytes": 103356,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:16.003Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "BGD",
+              "indicator": "FI.RES.TOTL.MO",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "LKA",
           "countryName": "Sri Lanka",
           "year": 2024,
-          "value": 2.86
+          "value": 2.86,
+          "rawValue": 2.86493580597895,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "FI.RES.TOTL.MO:65184351d0a2689193775c5d817a695f1a2adaa1c0e4900dcd8d9f3fe5d9be47:55f0d9e3e7f3",
+            "sha256": "65184351d0a2689193775c5d817a695f1a2adaa1c0e4900dcd8d9f3fe5d9be47",
+            "sourceKey": "FI.RES.TOTL.MO",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FI.RES.TOTL.MO?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FI.RES.TOTL.MO?format=json&per_page=20000",
+            "path": "/source-evidence/65184351d0a2689193775c5d817a695f1a2adaa1c0e4900dcd8d9f3fe5d9be47.json",
+            "bytes": 103356,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:16.003Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "LKA",
+              "indicator": "FI.RES.TOTL.MO",
+              "observationDate": "2024"
+            }
+          }
         },
         {
           "countryCode": "EGY",
           "countryName": "Egypt",
           "year": 2025,
-          "value": 4.36
+          "value": 4.36,
+          "rawValue": 4.35960492991794,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "FI.RES.TOTL.MO:65184351d0a2689193775c5d817a695f1a2adaa1c0e4900dcd8d9f3fe5d9be47:55f0d9e3e7f3",
+            "sha256": "65184351d0a2689193775c5d817a695f1a2adaa1c0e4900dcd8d9f3fe5d9be47",
+            "sourceKey": "FI.RES.TOTL.MO",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FI.RES.TOTL.MO?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FI.RES.TOTL.MO?format=json&per_page=20000",
+            "path": "/source-evidence/65184351d0a2689193775c5d817a695f1a2adaa1c0e4900dcd8d9f3fe5d9be47.json",
+            "bytes": 103356,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:16.003Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "EGY",
+              "indicator": "FI.RES.TOTL.MO",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "TUR",
           "countryName": "Türkiye",
           "year": 2024,
-          "value": 4.73
+          "value": 4.73,
+          "rawValue": 4.72961263910876,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "FI.RES.TOTL.MO:65184351d0a2689193775c5d817a695f1a2adaa1c0e4900dcd8d9f3fe5d9be47:55f0d9e3e7f3",
+            "sha256": "65184351d0a2689193775c5d817a695f1a2adaa1c0e4900dcd8d9f3fe5d9be47",
+            "sourceKey": "FI.RES.TOTL.MO",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FI.RES.TOTL.MO?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FI.RES.TOTL.MO?format=json&per_page=20000",
+            "path": "/source-evidence/65184351d0a2689193775c5d817a695f1a2adaa1c0e4900dcd8d9f3fe5d9be47.json",
+            "bytes": 103356,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:16.003Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "TUR",
+              "indicator": "FI.RES.TOTL.MO",
+              "observationDate": "2024"
+            }
+          }
         },
         {
           "countryCode": "VNM",
           "countryName": "Vietnam",
           "year": 2024,
-          "value": 2.37
+          "value": 2.37,
+          "rawValue": 2.37407817485002,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "FI.RES.TOTL.MO:65184351d0a2689193775c5d817a695f1a2adaa1c0e4900dcd8d9f3fe5d9be47:55f0d9e3e7f3",
+            "sha256": "65184351d0a2689193775c5d817a695f1a2adaa1c0e4900dcd8d9f3fe5d9be47",
+            "sourceKey": "FI.RES.TOTL.MO",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FI.RES.TOTL.MO?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/FI.RES.TOTL.MO?format=json&per_page=20000",
+            "path": "/source-evidence/65184351d0a2689193775c5d817a695f1a2adaa1c0e4900dcd8d9f3fe5d9be47.json",
+            "bytes": 103356,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:16.003Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "VNM",
+              "indicator": "FI.RES.TOTL.MO",
+              "observationDate": "2024"
+            }
+          }
         }
       ]
     },
@@ -253,49 +1569,378 @@
       "unit": "% of GDP",
       "higherIsGood": true,
       "whyItMatters": "Persistent deficits increase dependence on financing and rollovers.",
+      "evidence": {
+        "artifactId": "BN.CAB.XOKA.GD.ZS:f94c245f0ea07793e267657e0ddf461b13f5699f9a5d32ef93db04036ce89687:75bfc939ce5c",
+        "sha256": "f94c245f0ea07793e267657e0ddf461b13f5699f9a5d32ef93db04036ce89687",
+        "sourceKey": "BN.CAB.XOKA.GD.ZS",
+        "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/BN.CAB.XOKA.GD.ZS?format=json&per_page=20000",
+        "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/BN.CAB.XOKA.GD.ZS?format=json&per_page=20000",
+        "path": "/source-evidence/f94c245f0ea07793e267657e0ddf461b13f5699f9a5d32ef93db04036ce89687.json",
+        "bytes": 104629,
+        "contentType": "application/json;charset=utf-8",
+        "retrievedAt": "2026-09-30T21:43:16.083Z",
+        "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+        "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+        "parserDependencies": [
+          {
+            "file": "package-lock.json",
+            "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+            "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+          },
+          {
+            "file": "package.json",
+            "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+            "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+          },
+          {
+            "file": "scripts/lib/data-writer.mjs",
+            "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+            "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+          },
+          {
+            "file": "scripts/lib/source-evidence.mjs",
+            "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+            "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+          }
+        ]
+      },
       "sourceUrl": "https://api.worldbank.org/v2/country/PAK;IND;BGD;LKA;EGY;TUR;VNM/indicator/BN.CAB.XOKA.GD.ZS",
       "values": [
         {
           "countryCode": "PAK",
           "countryName": "Pakistan",
           "year": 2025,
-          "value": -0.11
+          "value": -0.11,
+          "rawValue": -0.109990064562897,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "BN.CAB.XOKA.GD.ZS:f94c245f0ea07793e267657e0ddf461b13f5699f9a5d32ef93db04036ce89687:75bfc939ce5c",
+            "sha256": "f94c245f0ea07793e267657e0ddf461b13f5699f9a5d32ef93db04036ce89687",
+            "sourceKey": "BN.CAB.XOKA.GD.ZS",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/BN.CAB.XOKA.GD.ZS?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/BN.CAB.XOKA.GD.ZS?format=json&per_page=20000",
+            "path": "/source-evidence/f94c245f0ea07793e267657e0ddf461b13f5699f9a5d32ef93db04036ce89687.json",
+            "bytes": 104629,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:16.083Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "PAK",
+              "indicator": "BN.CAB.XOKA.GD.ZS",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "IND",
           "countryName": "India",
           "year": 2025,
-          "value": -0.42
+          "value": -0.42,
+          "rawValue": -0.416854153498652,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "BN.CAB.XOKA.GD.ZS:f94c245f0ea07793e267657e0ddf461b13f5699f9a5d32ef93db04036ce89687:75bfc939ce5c",
+            "sha256": "f94c245f0ea07793e267657e0ddf461b13f5699f9a5d32ef93db04036ce89687",
+            "sourceKey": "BN.CAB.XOKA.GD.ZS",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/BN.CAB.XOKA.GD.ZS?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/BN.CAB.XOKA.GD.ZS?format=json&per_page=20000",
+            "path": "/source-evidence/f94c245f0ea07793e267657e0ddf461b13f5699f9a5d32ef93db04036ce89687.json",
+            "bytes": 104629,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:16.083Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "IND",
+              "indicator": "BN.CAB.XOKA.GD.ZS",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "BGD",
           "countryName": "Bangladesh",
           "year": 2025,
-          "value": -0.05
+          "value": -0.05,
+          "rawValue": -0.0524732355435052,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "BN.CAB.XOKA.GD.ZS:f94c245f0ea07793e267657e0ddf461b13f5699f9a5d32ef93db04036ce89687:75bfc939ce5c",
+            "sha256": "f94c245f0ea07793e267657e0ddf461b13f5699f9a5d32ef93db04036ce89687",
+            "sourceKey": "BN.CAB.XOKA.GD.ZS",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/BN.CAB.XOKA.GD.ZS?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/BN.CAB.XOKA.GD.ZS?format=json&per_page=20000",
+            "path": "/source-evidence/f94c245f0ea07793e267657e0ddf461b13f5699f9a5d32ef93db04036ce89687.json",
+            "bytes": 104629,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:16.083Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "BGD",
+              "indicator": "BN.CAB.XOKA.GD.ZS",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "LKA",
           "countryName": "Sri Lanka",
           "year": 2024,
-          "value": 1.21
+          "value": 1.21,
+          "rawValue": 1.21048332599166,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "BN.CAB.XOKA.GD.ZS:f94c245f0ea07793e267657e0ddf461b13f5699f9a5d32ef93db04036ce89687:75bfc939ce5c",
+            "sha256": "f94c245f0ea07793e267657e0ddf461b13f5699f9a5d32ef93db04036ce89687",
+            "sourceKey": "BN.CAB.XOKA.GD.ZS",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/BN.CAB.XOKA.GD.ZS?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/BN.CAB.XOKA.GD.ZS?format=json&per_page=20000",
+            "path": "/source-evidence/f94c245f0ea07793e267657e0ddf461b13f5699f9a5d32ef93db04036ce89687.json",
+            "bytes": 104629,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:16.083Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "LKA",
+              "indicator": "BN.CAB.XOKA.GD.ZS",
+              "observationDate": "2024"
+            }
+          }
         },
         {
           "countryCode": "EGY",
           "countryName": "Egypt",
           "year": 2025,
-          "value": -3.82
+          "value": -3.82,
+          "rawValue": -3.81547628555514,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "BN.CAB.XOKA.GD.ZS:f94c245f0ea07793e267657e0ddf461b13f5699f9a5d32ef93db04036ce89687:75bfc939ce5c",
+            "sha256": "f94c245f0ea07793e267657e0ddf461b13f5699f9a5d32ef93db04036ce89687",
+            "sourceKey": "BN.CAB.XOKA.GD.ZS",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/BN.CAB.XOKA.GD.ZS?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/BN.CAB.XOKA.GD.ZS?format=json&per_page=20000",
+            "path": "/source-evidence/f94c245f0ea07793e267657e0ddf461b13f5699f9a5d32ef93db04036ce89687.json",
+            "bytes": 104629,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:16.083Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "EGY",
+              "indicator": "BN.CAB.XOKA.GD.ZS",
+              "observationDate": "2025"
+            }
+          }
         },
         {
           "countryCode": "TUR",
           "countryName": "Türkiye",
           "year": 2024,
-          "value": -0.77
+          "value": -0.77,
+          "rawValue": -0.766008235540632,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "BN.CAB.XOKA.GD.ZS:f94c245f0ea07793e267657e0ddf461b13f5699f9a5d32ef93db04036ce89687:75bfc939ce5c",
+            "sha256": "f94c245f0ea07793e267657e0ddf461b13f5699f9a5d32ef93db04036ce89687",
+            "sourceKey": "BN.CAB.XOKA.GD.ZS",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/BN.CAB.XOKA.GD.ZS?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/BN.CAB.XOKA.GD.ZS?format=json&per_page=20000",
+            "path": "/source-evidence/f94c245f0ea07793e267657e0ddf461b13f5699f9a5d32ef93db04036ce89687.json",
+            "bytes": 104629,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:16.083Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "TUR",
+              "indicator": "BN.CAB.XOKA.GD.ZS",
+              "observationDate": "2024"
+            }
+          }
         },
         {
           "countryCode": "VNM",
           "countryName": "Vietnam",
           "year": 2024,
-          "value": 6.33
+          "value": 6.33,
+          "rawValue": 6.33496605552948,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "BN.CAB.XOKA.GD.ZS:f94c245f0ea07793e267657e0ddf461b13f5699f9a5d32ef93db04036ce89687:75bfc939ce5c",
+            "sha256": "f94c245f0ea07793e267657e0ddf461b13f5699f9a5d32ef93db04036ce89687",
+            "sourceKey": "BN.CAB.XOKA.GD.ZS",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/BN.CAB.XOKA.GD.ZS?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/BN.CAB.XOKA.GD.ZS?format=json&per_page=20000",
+            "path": "/source-evidence/f94c245f0ea07793e267657e0ddf461b13f5699f9a5d32ef93db04036ce89687.json",
+            "bytes": 104629,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:16.083Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "VNM",
+              "indicator": "BN.CAB.XOKA.GD.ZS",
+              "observationDate": "2024"
+            }
+          }
         }
       ]
     },
@@ -306,6 +1951,41 @@
       "unit": "% of GDP",
       "higherIsGood": true,
       "whyItMatters": "Tax-to-GDP indicates the state capacity available to fund services and debt costs.",
+      "evidence": {
+        "artifactId": "GC.TAX.TOTL.GD.ZS:20bf841c0b06ba4e2c2825fb8ce5a76e9f3544f8b548fd33e6170622e69cb179:c713a3e892ad",
+        "sha256": "20bf841c0b06ba4e2c2825fb8ce5a76e9f3544f8b548fd33e6170622e69cb179",
+        "sourceKey": "GC.TAX.TOTL.GD.ZS",
+        "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/GC.TAX.TOTL.GD.ZS?format=json&per_page=20000",
+        "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/GC.TAX.TOTL.GD.ZS?format=json&per_page=20000",
+        "path": "/source-evidence/20bf841c0b06ba4e2c2825fb8ce5a76e9f3544f8b548fd33e6170622e69cb179.json",
+        "bytes": 96950,
+        "contentType": "application/json;charset=utf-8",
+        "retrievedAt": "2026-09-30T21:43:16.176Z",
+        "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+        "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+        "parserDependencies": [
+          {
+            "file": "package-lock.json",
+            "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+            "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+          },
+          {
+            "file": "package.json",
+            "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+            "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+          },
+          {
+            "file": "scripts/lib/data-writer.mjs",
+            "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+            "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+          },
+          {
+            "file": "scripts/lib/source-evidence.mjs",
+            "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+            "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+          }
+        ]
+      },
       "sourceUrl": "https://api.worldbank.org/v2/country/PAK;IND;BGD;LKA;EGY;TUR;VNM/indicator/GC.TAX.TOTL.GD.ZS",
       "values": [
         {
@@ -318,31 +1998,241 @@
           "countryCode": "IND",
           "countryName": "India",
           "year": 2022,
-          "value": 6.93
+          "value": 6.93,
+          "rawValue": 6.93372148022965,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "GC.TAX.TOTL.GD.ZS:20bf841c0b06ba4e2c2825fb8ce5a76e9f3544f8b548fd33e6170622e69cb179:c713a3e892ad",
+            "sha256": "20bf841c0b06ba4e2c2825fb8ce5a76e9f3544f8b548fd33e6170622e69cb179",
+            "sourceKey": "GC.TAX.TOTL.GD.ZS",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/GC.TAX.TOTL.GD.ZS?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/GC.TAX.TOTL.GD.ZS?format=json&per_page=20000",
+            "path": "/source-evidence/20bf841c0b06ba4e2c2825fb8ce5a76e9f3544f8b548fd33e6170622e69cb179.json",
+            "bytes": 96950,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:16.176Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "IND",
+              "indicator": "GC.TAX.TOTL.GD.ZS",
+              "observationDate": "2022"
+            }
+          }
         },
         {
           "countryCode": "BGD",
           "countryName": "Bangladesh",
           "year": 2021,
-          "value": 7.64
+          "value": 7.64,
+          "rawValue": 7.64236301017901,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "GC.TAX.TOTL.GD.ZS:20bf841c0b06ba4e2c2825fb8ce5a76e9f3544f8b548fd33e6170622e69cb179:c713a3e892ad",
+            "sha256": "20bf841c0b06ba4e2c2825fb8ce5a76e9f3544f8b548fd33e6170622e69cb179",
+            "sourceKey": "GC.TAX.TOTL.GD.ZS",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/GC.TAX.TOTL.GD.ZS?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/GC.TAX.TOTL.GD.ZS?format=json&per_page=20000",
+            "path": "/source-evidence/20bf841c0b06ba4e2c2825fb8ce5a76e9f3544f8b548fd33e6170622e69cb179.json",
+            "bytes": 96950,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:16.176Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "BGD",
+              "indicator": "GC.TAX.TOTL.GD.ZS",
+              "observationDate": "2021"
+            }
+          }
         },
         {
           "countryCode": "LKA",
           "countryName": "Sri Lanka",
           "year": 2023,
-          "value": 9.88
+          "value": 9.88,
+          "rawValue": 9.87891768094967,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "GC.TAX.TOTL.GD.ZS:20bf841c0b06ba4e2c2825fb8ce5a76e9f3544f8b548fd33e6170622e69cb179:c713a3e892ad",
+            "sha256": "20bf841c0b06ba4e2c2825fb8ce5a76e9f3544f8b548fd33e6170622e69cb179",
+            "sourceKey": "GC.TAX.TOTL.GD.ZS",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/GC.TAX.TOTL.GD.ZS?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/GC.TAX.TOTL.GD.ZS?format=json&per_page=20000",
+            "path": "/source-evidence/20bf841c0b06ba4e2c2825fb8ce5a76e9f3544f8b548fd33e6170622e69cb179.json",
+            "bytes": 96950,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:16.176Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "LKA",
+              "indicator": "GC.TAX.TOTL.GD.ZS",
+              "observationDate": "2023"
+            }
+          }
         },
         {
           "countryCode": "EGY",
           "countryName": "Egypt",
           "year": 2015,
-          "value": 12.52
+          "value": 12.52,
+          "rawValue": 12.5192110970171,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "GC.TAX.TOTL.GD.ZS:20bf841c0b06ba4e2c2825fb8ce5a76e9f3544f8b548fd33e6170622e69cb179:c713a3e892ad",
+            "sha256": "20bf841c0b06ba4e2c2825fb8ce5a76e9f3544f8b548fd33e6170622e69cb179",
+            "sourceKey": "GC.TAX.TOTL.GD.ZS",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/GC.TAX.TOTL.GD.ZS?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/GC.TAX.TOTL.GD.ZS?format=json&per_page=20000",
+            "path": "/source-evidence/20bf841c0b06ba4e2c2825fb8ce5a76e9f3544f8b548fd33e6170622e69cb179.json",
+            "bytes": 96950,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:16.176Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "EGY",
+              "indicator": "GC.TAX.TOTL.GD.ZS",
+              "observationDate": "2015"
+            }
+          }
         },
         {
           "countryCode": "TUR",
           "countryName": "Türkiye",
           "year": 2024,
-          "value": 17.62
+          "value": 17.62,
+          "rawValue": 17.6239296509985,
+          "status": "not-stated",
+          "evidence": {
+            "artifactId": "GC.TAX.TOTL.GD.ZS:20bf841c0b06ba4e2c2825fb8ce5a76e9f3544f8b548fd33e6170622e69cb179:c713a3e892ad",
+            "sha256": "20bf841c0b06ba4e2c2825fb8ce5a76e9f3544f8b548fd33e6170622e69cb179",
+            "sourceKey": "GC.TAX.TOTL.GD.ZS",
+            "sourceUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/GC.TAX.TOTL.GD.ZS?format=json&per_page=20000",
+            "responseUrl": "https://api.worldbank.org/v2/country/PAK%3BIND%3BBGD%3BLKA%3BEGY%3BTUR%3BVNM/indicator/GC.TAX.TOTL.GD.ZS?format=json&per_page=20000",
+            "path": "/source-evidence/20bf841c0b06ba4e2c2825fb8ce5a76e9f3544f8b548fd33e6170622e69cb179.json",
+            "bytes": 96950,
+            "contentType": "application/json;charset=utf-8",
+            "retrievedAt": "2026-09-30T21:43:16.176Z",
+            "parserVersion": "update-peer-comparison.mjs:sha256:bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac:environment:0009125f91c94e5baaaf14cde0f7999cee249c1401a59e36a5caf8d466f64175",
+            "parserPath": "/source-evidence/parser-bafc4456f95a0a5c009e227b75e4d366b7b3c40b07a57cd1c1901b2b69375eac.txt",
+            "parserDependencies": [
+              {
+                "file": "package-lock.json",
+                "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+                "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+              },
+              {
+                "file": "package.json",
+                "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+                "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+              },
+              {
+                "file": "scripts/lib/data-writer.mjs",
+                "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+                "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+              },
+              {
+                "file": "scripts/lib/source-evidence.mjs",
+                "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+                "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+              }
+            ],
+            "locator": {
+              "countryCode": "TUR",
+              "indicator": "GC.TAX.TOTL.GD.ZS",
+              "observationDate": "2024"
+            }
+          }
         },
         {
           "countryCode": "VNM",
@@ -353,5 +2243,6 @@
       ]
     }
   ],
-  "methodologyNote": "Peer comparison values are the latest non-null annual World Development Indicators observation available for each country and indicator. Years can differ by country because official annual data is released at different times."
+  "methodologyNote": "Peer comparison values are the latest non-null annual World Development Indicators observation available for each country and indicator. Years can differ by country because official annual data is released at different times.",
+  "lastChecked": "2026-09-30"
 }

@@ -3,6 +3,7 @@ import { useData } from '../hooks/useData';
 import useI18n from '../i18n/useI18n';
 import { isFiniteNumber } from '../utils/periodHelpers';
 import { buildOverviewClauses, joinClauses } from '../utils/overviewModel';
+import { PublicationNotice, UnavailableCard } from './ui/DataState';
 
 export default function OverviewBriefing({ indicators = [], onNavigate }) {
   const { t } = useI18n();
@@ -32,17 +33,13 @@ export default function OverviewBriefing({ indicators = [], onNavigate }) {
     return joinClauses(parts);
   }, [indicators, fbr.data, t]);
 
-  if (!sentence) return null;
+  if (!sentence && !fbr.unavailable && !indicators.some((row) => row.unavailable)) return null;
 
   return (
     <section className="overview-briefing" aria-label={t('overview.briefingTitle', 'State of the economy')}>
       <div className="overview-briefing__kicker">{t('overview.latestPicture', 'Latest economic picture')}</div>
       <p className="overview-briefing__sentence">{sentence}</p>
-      {indicators.find((row) => row.id === 'fbr-tax')?.sourceType === 'secondary-attributed' && (
-        <p className="overview-briefing__source-note">
-          {t('overview.fbrSecondary', 'FBR: provisional figures from attributed secondary reporting, not an official numeric release.')}
-        </p>
-      )}
+      {fbr.unavailable ? <UnavailableCard {...fbr.unavailable} compact /> : <PublicationNotice data={fbr.data} compact />}
       <a
         className="overview-briefing__link"
         href="/insights/briefing"

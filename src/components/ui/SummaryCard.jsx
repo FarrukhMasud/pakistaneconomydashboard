@@ -3,6 +3,7 @@ import './SummaryCard.css';
 import ExpandableTile from './ExpandableTile';
 import CiteFigure from '../CiteFigure';
 import useI18n from '../../i18n/useI18n';
+import FigureTrust from '../FigureTrust';
 
 /**
  * Reusable summary card for section-level KPIs.
@@ -16,8 +17,9 @@ import useI18n from '../../i18n/useI18n';
  * @param {string}  accent   – CSS color for top border accent
  * @param {string[]} provenanceKeys – provenance.json ids to expose "cite this figure" links for
  */
-export default function SummaryCard({ title, items = [], footnote, accent, provenanceKeys }) {
+export default function SummaryCard({ title, items = [], footnote, accent, provenanceKeys, datasetId, row, period }) {
   const { t, tx } = useI18n();
+  const unavailable = (item) => item.unavailable || item.value == null || item.value === '—';
   const arrow = (dir) => {
     if (dir === 'up') return '▲';
     if (dir === 'down') return '▼';
@@ -41,8 +43,10 @@ export default function SummaryCard({ title, items = [], footnote, accent, prove
           {items.map((item, i) => (
             <div key={i} className="tile-detail-row">
               <span>{tx(item.label)}</span>
-              <strong style={item.color ? { color: item.color } : undefined}>{item.value}</strong>
-              {item.sub && <small>{tx(item.sub)}</small>}
+              <strong style={!unavailable(item) && item.color ? { color: item.color } : undefined}>{unavailable(item) ? t('trust.unavailableShort', 'Unavailable') : item.value}</strong>
+              {!unavailable(item) && item.sub && <small>{tx(item.sub)}</small>}
+              <FigureTrust datasetId={item.datasetId || datasetId} row={unavailable(item) ? { ...(item.trust || item.row || row), authenticity: 'unavailable' } : item.trust || item.row || row}
+                field={item.field} period={item.period || period} derivation={item.derivation} compact />
             </div>
           ))}
           {footnote && <p className="summary-card__footnote">{tx(footnote)}</p>}
@@ -56,13 +60,15 @@ export default function SummaryCard({ title, items = [], footnote, accent, prove
             <span className="summary-item__label">{tx(item.label)}</span>
             <span
               className="summary-item__value"
-              style={item.color ? { color: item.color } : undefined}
+              style={!unavailable(item) && item.color ? { color: item.color } : undefined}
             >
-              {item.value}
+              {unavailable(item) ? t('trust.unavailableShort', 'Unavailable') : item.value}
             </span>
-            {(item.direction || item.sub) && (
+            <FigureTrust datasetId={item.datasetId || datasetId} row={unavailable(item) ? { ...(item.trust || item.row || row), authenticity: 'unavailable' } : item.trust || item.row || row}
+              field={item.field} period={item.period || period} derivation={item.derivation} compact />
+            {!unavailable(item) && (item.direction || item.sub) && (
               <span className={`summary-item__sub ${sentimentClass(item.sentiment)}`}>
-                {item.direction && (
+                {item.direction === 'unavailable' ? t('trust.changeUnavailable', 'Comparison unavailable') : item.direction && (
                   <span className="summary-item__arrow">{arrow(item.direction)}</span>
                 )}
                 {tx(item.sub)}

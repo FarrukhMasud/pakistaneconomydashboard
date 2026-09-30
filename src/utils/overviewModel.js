@@ -1,5 +1,6 @@
 import { formatKpiPeriod, formatKpiChange } from './kpiFormat.js';
 import { isClosedFiscalPeriod, isFiniteNumber, latestRow, pctChange } from './periodHelpers.js';
+import { restrictIndicator } from './figureTrust.js';
 
 export const HEADLINE_KPI_IDS = [
   'inflation', 'reserves', 'exchange-rate', 'remittances', 'trade', 'policy-rate',
@@ -30,6 +31,12 @@ export function kpiRoute(id) {
   return KPI_ROUTES[id] || { groupId: 'overview', sectionId: 'overview', datasetId: undefined };
 }
 
+export function trendArrow(trend) {
+  if (trend === 'up') return '▲';
+  if (trend === 'down') return '▼';
+  return trend === 'stable' || trend === 'flat' ? '►' : '';
+}
+
 export function yoyMatch(rows, date) {
   if (!date || !Array.isArray(rows)) return null;
   const [year, month] = String(date).split('-');
@@ -38,6 +45,7 @@ export function yoyMatch(rows, date) {
 }
 
 export function applyYoYHeadline(kpi, rows, { valueKey = 'total', goodWhenUp = true } = {}) {
+  if (kpi.unavailable) return kpi;
   const latest = kpi.period
     ? rows?.find((row) => row.date === kpi.period)
     : latestRow(rows);
@@ -121,12 +129,19 @@ export function buildTradeKpi(trade) {
     decimals: 2,
     unit: 'USD bn',
     period: latest.date,
-    trend: 'stable',
+    trend: 'unavailable',
     sentiment: 'neutral',
     ...comparison,
     momComparison: yoy ? mom : null,
     source: 'SBP',
     sourceType: 'official-derived',
+    provenanceKey: 'trade.monthly.balance',
+    status: latest.status ?? 'not-stated',
+    derivation: 'US$ million divided by 1000 to US$ billion',
+    evidence: latest.evidence?.balance ? {
+      derivation: 'US$ million divided by 1000 to US$ billion',
+      inputs: [latest.evidence.balance],
+    } : null,
     sub: isFiniteNumber(latest.exports) && isFiniteNumber(latest.imports)
       ? `Exports ${(latest.exports / 1000).toFixed(2)} USD bn · Imports ${(latest.imports / 1000).toFixed(2)} USD bn`
       : null,
@@ -140,11 +155,14 @@ export function buildSnapshotKpi(row) {
     id: row.id,
     label: completedCurrentAccount ? 'Current Account (Full year)' : row.label,
     labelKey: completedCurrentAccount ? 'overview.currentAccountFullYear' : undefined,
-    displayValue: `${row.value}${row.unit ? ` ${row.unit}` : ''}`.trim(),
+    displayValue: row.unavailable || row.value == null ? null : `${row.value}${row.unit ? ` ${row.unit}` : ''}`.trim(),
+    unavailable: row.unavailable,
+    evidence: row.evidence,
+    status: row.status,
     period: row.asOf,
-    changeLabel: row.change || null,
+    changeLabel: row.change ?? null,
     changeBasis: row.note || null,
-    trend: row.trend || 'stable',
+    trend: row.change == null && row.trend === 'stable' ? 'unavailable' : row.trend || 'unavailable',
     sentiment: row.sentiment || 'neutral',
     source: row.source,
     sourceUrl: row.sourceUrl,
@@ -173,12 +191,12 @@ export function decorateOverviewKpis(indicators, { remittances } = {}) {
   });
 }
 
-export function buildOverviewIndicators({ summary, trade, remittances, snapshot } = {}) {
+export function buildOverviewIndicators({ summary, trade, remittances, snapshot, freshness } = {}) {
   const snapshotIds = ['current-account', 'public-debt', 'circular-debt'];
   return decorateOverviewKpis(mergeOverviewIndicators(summary?.indicators, [
     buildTradeKpi(trade),
     ...snapshotIds.map((id) => buildSnapshotKpi(snapshot?.indicators?.find((row) => row.id === id))),
-  ]), { remittances });
+  ]), { remittances }).map((row) => restrictIndicator(row, freshness));
 }
 
 export function overviewFreshness(indicators, freshness) {

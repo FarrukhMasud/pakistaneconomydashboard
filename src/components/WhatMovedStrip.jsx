@@ -2,9 +2,10 @@ import { useMemo } from 'react';
 import useI18n from '../i18n/useI18n';
 import { COLORS } from '../utils/chartConfig';
 import { formatCompareBasis, formatKpiChange, formatKpiDisplay, formatKpiPeriod } from '../utils/kpiFormat';
-import { kpiRoute } from '../utils/overviewModel';
+import { kpiRoute, trendArrow } from '../utils/overviewModel';
 import { routeToPath } from '../hooks/useHashRoute';
 import { isClosedFiscalPeriod } from '../utils/periodHelpers';
+import FigureTrust from './FigureTrust';
 
 const CRITICAL = [
   { id: 'reserves', label: 'Reserves' },
@@ -13,12 +14,6 @@ const CRITICAL = [
   { id: 'trade', label: 'Trade balance' },
   { id: 'remittances', label: 'Remittances' },
 ];
-
-function arrow(trend) {
-  if (trend === 'up') return '▲';
-  if (trend === 'down') return '▼';
-  return '►';
-}
 
 /**
  * Compact “what moved” strip for Overview — five critical series with last change.
@@ -30,10 +25,11 @@ export default function WhatMovedStrip({ indicators = [], onNavigate }) {
 
     return CRITICAL.map((spec) => {
       const row = byId[spec.id];
-      if (!row) return null;
+      if (!row || row.unavailable) return null;
       const route = kpiRoute(row.id);
       return {
         id: row.id,
+        row, datasetId: route.datasetId,
         label: spec.id === 'fbr-tax'
           ? isClosedFiscalPeriod(row.period)
             ? t('overview.fbrFullYear', 'FBR full year')
@@ -43,7 +39,7 @@ export default function WhatMovedStrip({ indicators = [], onNavigate }) {
         period: formatKpiPeriod(row.period),
         changeLabel: formatKpiChange(row, t),
         secondary: formatCompareBasis(row.changeBasis),
-        trend: row.trend || 'flat',
+        trend: row.trend || 'unavailable',
         sentiment: row.sentiment || 'neutral',
         groupId: route.groupId,
         sectionId: route.sectionId,
@@ -67,9 +63,8 @@ export default function WhatMovedStrip({ indicators = [], onNavigate }) {
               ? COLORS.coral
               : COLORS.amber;
           return (
-            <a
-              key={move.id}
-              className={`what-moved__card sentiment-${move.sentiment}`}
+            <article key={move.id} className={`what-moved__card sentiment-${move.sentiment}`}>
+            <a className="what-moved__open"
               href={routeToPath(move.groupId, move.sectionId)}
               onClick={(event) => {
                 if (!onNavigate || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
@@ -81,12 +76,14 @@ export default function WhatMovedStrip({ indicators = [], onNavigate }) {
               <strong className="what-moved__value" style={{ color }}>{move.value}</strong>
               <span className="what-moved__period">{move.period}</span>
               <span className={`what-moved__change ${move.sentiment}`}>
-                {arrow(move.trend)} {move.changeLabel || '—'}
+                {trendArrow(move.trend)} {move.changeLabel ?? t('trust.changeUnavailable', 'Comparison unavailable')}
               </span>
               {move.secondary && (
                 <span className="what-moved__basis">{tx(move.secondary)}</span>
               )}
             </a>
+            <FigureTrust datasetId={move.datasetId} row={move.row} period={move.row.period} compact />
+            </article>
           );
         })}
       </div>

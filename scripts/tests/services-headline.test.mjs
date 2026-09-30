@@ -7,6 +7,7 @@ const item = (x, y, text) => ({ page: 1, x, y, text });
 
 test('services headline resolves the latest IT month and full-year totals', () => {
   const items = [
+    item(2.65, 4.447, '(Million US $ )'),
     item(13.951, 5.049, 'Jul-Jun'),
     item(16.193, 5.049, 'Jun'),
     item(24.032, 5.049, 'May'),
@@ -33,7 +34,7 @@ test('services headline resolves the latest IT month and full-year totals', () =
     item(32.366, 13.689, '4,600'),
   ];
 
-  assert.deepEqual(parseServicesHeadline(items), {
+  const expected = {
     latestMonth: '2026-06',
     latest: 416,
     prevMonth: '2026-05',
@@ -46,11 +47,16 @@ test('services headline resolves the latest IT month and full-year totals', () =
     fytdPriorLabel: 'Jul-Jun FY25',
     totalServicesLatest: 956,
     fiscalYear: 2026,
-  });
+  };
+  const parsed = parseServicesHeadline(items);
+  assert.deepEqual(Object.fromEntries(Object.keys(expected).map(key => [key, parsed[key]])), expected);
+  assert.equal(parsed.status, 'not-stated');
+  assert.equal(parsed.evidence.fytd.locator.rawValue, '4,600');
 });
 
 test('services headline follows the FYTD columns after the July rollover', () => {
   const items = [
+    item(2.65, 4.447, '(Million US $ )'),
     item(13.951, 5.049, 'Jul-Jun'),
     item(16.193, 5.049, 'Jul'),
     item(26.094, 5.049, 'Jul'),

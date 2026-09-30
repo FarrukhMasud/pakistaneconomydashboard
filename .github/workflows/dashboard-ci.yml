@@ -15,8 +15,6 @@ jobs:
   audit:
     name: Audit and build
     runs-on: ubuntu-latest
-    env:
-      AUDIT_SKIP_SOURCE: '1'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,3 +30,9 @@ jobs:
 
       - name: Run data and build checks
         run: npm run ci:audit
+
+      - name: Archive checked release identity
+        uses: actions/upload-artifact@v4
+        with:
+          name: checked-release
+          path: public/release-manifest.json

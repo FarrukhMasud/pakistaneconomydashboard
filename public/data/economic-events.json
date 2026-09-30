@@ -1,74 +1,24 @@
 {
-  "dataSource": "Official IMF, SBP, PBS, Finance Division, and NDMA publications",
+  "title": "Official Economic Timeline",
   "sourceUrl": "https://www.imf.org/en/Countries/PAK",
   "lastUpdated": "2026-08-07",
-  "lastVerified": "2026-08-07",
-  "latestObservation": "2026-07-27",
-  "methodologyNote": "Events are included only when they can be tied to an official or primary institutional source. They are meant as chart context, not as causal claims.",
-  "events": [
-    {
-      "date": "2022-08-30",
-      "category": "Climate shock",
-      "title": "2022 floods declared a national emergency",
-      "whyItMatters": "Flood damage affected agriculture, food prices, fiscal needs, and external financing requirements.",
-      "officialSource": "NDMA / Government of Pakistan",
-      "sourceUrl": "https://cms.ndma.gov.pk"
-    },
-    {
-      "date": "2023-07-12",
-      "category": "IMF program",
-      "title": "IMF Board approved Pakistan's Stand-By Arrangement",
-      "whyItMatters": "The SBA restored official financing after severe external-pressure episodes and helped rebuild reserves.",
-      "officialSource": "International Monetary Fund",
-      "sourceUrl": "https://www.imf.org/en/News/Articles/2023/07/12/pr23261-pakistan-imf-executive-board-approves-us3-billion-stand-by-arrangement"
-    },
-    {
-      "date": "2024-06-10",
-      "category": "Monetary policy",
-      "title": "SBP began easing from the 22% policy-rate peak",
-      "whyItMatters": "The first cut after a prolonged tightening cycle marked a shift as inflation pressures moderated.",
-      "officialSource": "State Bank of Pakistan",
-      "sourceUrl": "https://www.sbp.org.pk/m_policy/index.asp"
-    },
-    {
-      "date": "2024-09-25",
-      "category": "IMF program",
-      "title": "IMF Board approved Extended Fund Facility for Pakistan",
-      "whyItMatters": "The EFF anchored medium-term fiscal, energy, and external-sector reforms.",
-      "officialSource": "International Monetary Fund",
-      "sourceUrl": "https://www.imf.org/en/Countries/PAK"
-    },
-    {
-      "date": "2025-05-09",
-      "category": "IMF program",
-      "title": "IMF completed first EFF review and approved RSF arrangement",
-      "whyItMatters": "The review unlocked official financing and added a climate-resilience financing track.",
-      "officialSource": "International Monetary Fund",
-      "sourceUrl": "https://www.imf.org/en/Countries/PAK"
-    },
-    {
-      "date": "2026-06-11",
-      "category": "Fiscal data",
-      "title": "Pakistan Economic Survey 2025-26 released",
-      "whyItMatters": "The survey updates official fiscal, debt, external-sector, and growth context used in curated dashboard indicators.",
-      "officialSource": "Finance Division",
-      "sourceUrl": "https://www.finance.gov.pk/survey_2026.html"
-    },
-    {
-      "date": "2026-06-15",
-      "category": "Monetary policy",
-      "title": "SBP Monetary Policy Committee held the policy rate at 11.5%",
-      "whyItMatters": "The decision reflects the balance between inflation risks and growth/financial conditions.",
-      "officialSource": "State Bank of Pakistan",
-      "sourceUrl": "https://www.sbp.org.pk/m_policy/index.asp"
-    },
-    {
-      "date": "2026-07-27",
-      "category": "Monetary policy",
-      "title": "SBP held the policy rate at 11.5% for a second consecutive meeting",
-      "whyItMatters": "The decision kept policy restrictive as inflation moderated, while stronger reserves and an improved external outlook reduced near-term balance-of-payments pressure.",
-      "officialSource": "State Bank of Pakistan",
-      "sourceUrl": "https://www.sbp.org.pk/assets/document/publications/MPS-July-2026-Eng.pdf"
-    }
-  ]
+  "reviewRequired": true,
+  "publication": {
+    "policy": "official-only",
+    "status": "withheld",
+    "reason": "The curated timeline contains economic claims without archived figure-level official evidence. Generic institutional pages do not verify event details. Entries are unavailable until their exact official releases are verified; numeric manual claims also require two distinct real reviewer approvals.",
+    "withheldFields": [
+      "latestObservation",
+      "methodologyNote",
+      "events.0",
+      "events.1",
+      "events.2",
+      "events.3",
+      "events.4",
+      "events.5",
+      "events.6",
+      "events.7"
+    ]
+  },
+  "reviewReason": "The curated timeline contains economic claims without archived figure-level official evidence. Generic institutional pages do not verify event details. Entries are unavailable until their exact official releases are verified; numeric manual claims also require two distinct real reviewer approvals."
 }

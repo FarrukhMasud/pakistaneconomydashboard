@@ -1,0 +1,387 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "checkedAt": "2026-09-30T22:09:57.146Z",
+  "datasets": {
+    "reserves": {
+      "status": "passed",
+      "checkedAt": "2026-09-30T22:09:57.146Z",
+      "contentHash": "2abc97fda2253b5e3af0f28a03a8e396cc2c36f7374479761c1cde5a428872e8",
+      "checks": [
+        {
+          "id": "audit-sanity.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-publication.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-evidence.mjs",
+          "status": "passed"
+        }
+      ]
+    },
+    "exchange-rates": {
+      "status": "passed",
+      "checkedAt": "2026-09-30T22:09:57.146Z",
+      "contentHash": "a156b5ee98fd7a0298453549af26f2996f497a98ced03746c340956aac86fbc5",
+      "checks": [
+        {
+          "id": "audit-sanity.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-publication.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-evidence.mjs",
+          "status": "passed"
+        }
+      ]
+    },
+    "remittances": {
+      "status": "passed",
+      "checkedAt": "2026-09-30T22:09:57.146Z",
+      "contentHash": "678d93f66382a5ea21943351eae4e54c89369cdec7d54753c6aca706abd1098f",
+      "checks": [
+        {
+          "id": "audit-sanity.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-publication.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-evidence.mjs",
+          "status": "passed"
+        }
+      ]
+    },
+    "trade": {
+      "status": "passed",
+      "checkedAt": "2026-09-30T22:09:57.146Z",
+      "contentHash": "95c3e788be42b79216ab564f846a5cc93bb6b05c4471039c91e758299ae211cc",
+      "checks": [
+        {
+          "id": "audit-sanity.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-publication.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-evidence.mjs",
+          "status": "passed"
+        }
+      ]
+    },
+    "fdi": {
+      "status": "passed",
+      "checkedAt": "2026-09-30T22:09:57.146Z",
+      "contentHash": "4a385d3c839ff2007c815364a9d96abdcb518ebe57368effd2bc924e651d7de0",
+      "checks": [
+        {
+          "id": "audit-sanity.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-publication.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-evidence.mjs",
+          "status": "passed"
+        }
+      ]
+    },
+    "services": {
+      "status": "passed",
+      "checkedAt": "2026-09-30T22:09:57.146Z",
+      "contentHash": "1c740ca7d0d2306b4c875d3a514c94d18ee85b25b94349750e4f9bc3fea8e41a",
+      "checks": [
+        {
+          "id": "audit-sanity.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-publication.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-evidence.mjs",
+          "status": "passed"
+        }
+      ]
+    },
+    "inflation": {
+      "status": "passed",
+      "checkedAt": "2026-09-30T22:09:57.146Z",
+      "contentHash": "9390355add9cc463e839255c8ed7bbfd0faf5dca91e366aa249cb19180e562ae",
+      "checks": [
+        {
+          "id": "audit-sanity.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-publication.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-evidence.mjs",
+          "status": "passed"
+        }
+      ]
+    },
+    "monetary": {
+      "status": "passed",
+      "checkedAt": "2026-09-30T22:09:57.146Z",
+      "contentHash": "dd8219b26377cd05f2ad6aa1db2c69f408488161c8d46d7382a918b760b8abfe",
+      "checks": [
+        {
+          "id": "audit-sanity.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-publication.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-evidence.mjs",
+          "status": "passed"
+        }
+      ]
+    },
+    "fiscal": {
+      "status": "passed",
+      "checkedAt": "2026-09-30T22:09:57.146Z",
+      "contentHash": "8c9cb36367a0603515dd7a46182734a646af047ea3bc3d6559f94f2764541575",
+      "checks": [
+        {
+          "id": "audit-sanity.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-publication.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-evidence.mjs",
+          "status": "passed"
+        }
+      ]
+    },
+    "fbr-tax": {
+      "status": "passed",
+      "checkedAt": "2026-09-30T22:09:57.146Z",
+      "contentHash": "759f7a2aaefbfa41d6aad32015683a23b684577dfd328bd2f03be91a64df1e81",
+      "checks": [
+        {
+          "id": "audit-sanity.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-publication.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-evidence.mjs",
+          "status": "passed"
+        }
+      ]
+    },
+    "imf-tracker": {
+      "status": "pending",
+      "checkedAt": "2026-09-30T22:09:57.146Z",
+      "contentHash": "728531331d8accd8ad245d2b85e0f40c5a14273d683fedc9a44c758636b373a9",
+      "checks": [
+        {
+          "id": "audit-sanity.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-publication.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-evidence.mjs",
+          "status": "passed"
+        }
+      ]
+    },
+    "monetary-policy": {
+      "status": "pending",
+      "checkedAt": "2026-09-30T22:09:57.146Z",
+      "contentHash": "2a07daa7699b53f0ae93685eed572cb95746399c366f864d48a2fcc66782e1a2",
+      "checks": [
+        {
+          "id": "audit-sanity.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-publication.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-evidence.mjs",
+          "status": "passed"
+        }
+      ]
+    },
+    "circular-debt": {
+      "status": "pending",
+      "checkedAt": "2026-09-30T22:09:57.146Z",
+      "contentHash": "619099dc05f69d3aee4a3965bb90463e097cd87a63caffda3807a14dec1efb43",
+      "checks": [
+        {
+          "id": "audit-sanity.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-publication.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-evidence.mjs",
+          "status": "passed"
+        }
+      ]
+    },
+    "external-debt": {
+      "status": "passed",
+      "checkedAt": "2026-09-30T22:09:57.146Z",
+      "contentHash": "c1cda8881917a5173f269b62f1c2ab4c92bbc16db831a9a774e65d3688919dca",
+      "checks": [
+        {
+          "id": "audit-sanity.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-publication.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-evidence.mjs",
+          "status": "passed"
+        }
+      ]
+    },
+    "reserves-adequacy": {
+      "status": "passed",
+      "checkedAt": "2026-09-30T22:09:57.146Z",
+      "contentHash": "4fb2454b75b327f69c55d0471626510f71045028f41c43baeba2423bdac37438",
+      "checks": [
+        {
+          "id": "audit-sanity.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-publication.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-evidence.mjs",
+          "status": "passed"
+        }
+      ]
+    },
+    "budget-federal": {
+      "status": "pending",
+      "checkedAt": "2026-09-30T22:09:57.146Z",
+      "contentHash": "f4c4dd85d3ec57dca28845af236016d13764ef7af3ffc0cf6a429949c5da9da7",
+      "checks": [
+        {
+          "id": "audit-sanity.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-publication.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-evidence.mjs",
+          "status": "passed"
+        }
+      ]
+    },
+    "budget-provincial": {
+      "status": "pending",
+      "checkedAt": "2026-09-30T22:09:57.146Z",
+      "contentHash": "23cb78559898ebc457165510f2f69de2ce9a8a255339b68e9dedd6a8819f135a",
+      "checks": [
+        {
+          "id": "audit-sanity.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-publication.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-evidence.mjs",
+          "status": "passed"
+        }
+      ]
+    },
+    "peer-comparison": {
+      "status": "passed",
+      "checkedAt": "2026-09-30T22:09:57.146Z",
+      "contentHash": "23282aa755e659893e12e29307c0bdcae527d92d92f4e3c0ff447b8a5b19b304",
+      "checks": [
+        {
+          "id": "audit-sanity.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-publication.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-evidence.mjs",
+          "status": "passed"
+        }
+      ]
+    },
+    "economic-events": {
+      "status": "pending",
+      "checkedAt": "2026-09-30T22:09:57.146Z",
+      "contentHash": "26782250279df342ba838aa9d5fe96660267c26c2d42bbfdc4928d15847979d3",
+      "checks": [
+        {
+          "id": "audit-sanity.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-publication.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-evidence.mjs",
+          "status": "passed"
+        }
+      ]
+    },
+    "explainers": {
+      "status": "pending",
+      "checkedAt": "2026-09-30T22:09:57.146Z",
+      "contentHash": "b833d767b31f3a39ae9a189ec62407c26d940673a379584fbf1a8108eb19cf04",
+      "checks": [
+        {
+          "id": "audit-sanity.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-publication.mjs",
+          "status": "passed"
+        },
+        {
+          "id": "audit-evidence.mjs",
+          "status": "passed"
+        }
+      ]
+    }
+  }
+}

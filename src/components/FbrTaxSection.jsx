@@ -10,6 +10,8 @@ import PeriodCompare from './ui/PeriodCompare';
 import { LoadingCard, ErrorCard, UnavailableCard } from './ui/DataState';
 import { formatMonthYear, pctChange, buildYoYOverlay, buildFytdSeries, currentFiscalYear, resolveCompareMode, fytdDisabledReason, fytdViewReady, isClosedFiscalPeriod } from '../utils/periodHelpers';
 import './ui/FbrTax.css';
+import { hasPublishedFigures, sourceFigureStatus, TRUST_LABELS } from '../utils/figureTrust';
+import useI18n from '../i18n/useI18n';
 
 const TAX_HEADS = [
   { key: 'incomeTax', label: 'Income / Direct Tax', color: COLORS.teal },
@@ -20,7 +22,7 @@ const TAX_HEADS = [
 
 /** Format a PKR-billion value as ₨ X,XXX bn (or ₨ X.XX tn when large). */
 function fmtBn(val) {
-  if (val == null || Number.isNaN(val)) return '—';
+  if (!Number.isFinite(val)) return '—';
   if (Math.abs(val) >= 1000) return `₨ ${(val / 1000).toFixed(2)} tn`;
   return `₨ ${val.toLocaleString(undefined, { maximumFractionDigits: 1 })} bn`;
 }
@@ -48,22 +50,27 @@ export default function FbrTaxSection() {
   if (loading) return <LoadingCard label="Loading FBR tax data…" />;
   if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load FBR tax data" />;
 
+  return <FbrTaxContent data={data} compareMode={compareMode} setCompareMode={setCompareMode} />;
+}
+
+export function FbrTaxContent({ data, compareMode, setCompareMode }) {
+  const { t } = useI18n();
   const {
-    monthly = [],
-    fyTotals = [],
     fytd,
-    annualTargets = [],
     dataSource,
     lastUpdated,
     lastVerified,
-    verifiedFrom = [],
     methodologyNote,
     sourceUrl,
   } = data;
+  const monthly = data.monthly ?? [];
+  const fyTotals = data.fyTotals ?? [];
+  const annualTargets = data.annualTargets ?? [];
+  const verifiedFrom = data.verifiedFrom ?? [];
 
   const sorted = [...monthly].sort((a, b) => a.date.localeCompare(b.date));
-  if (!sorted.length && !annualTargets.length && !fyTotals.length) {
-    return <UnavailableCard label="Could not load FBR tax data" reason="FBR series is empty." />;
+  if (!hasPublishedFigures(data)) {
+    return <UnavailableCard reason={data.publication?.reason} sourceUrl={sourceUrl} />;
   }
   const fyWindow = currentFiscalYear(sorted);
   const fyReady = fytdViewReady(fyWindow);
@@ -72,6 +79,8 @@ export default function FbrTaxSection() {
   const showYoY = effectiveCompare === 'yoy';
   const showFytd = effectiveCompare === 'fytd';
   const closedFytd = isClosedFiscalPeriod(fytd?.period);
+  const hasFytd = Number.isFinite(fytd?.net);
+  const fytdPeriod = fytd?.period || t('trust.periodUnknown', 'Period not stated');
   const fytdNet = buildFytdSeries(sorted, 'net');
   const { priorData: netPrior, priorLabel: netPriorLabel } = buildYoYOverlay(sorted, 'net');
   const labels = showFytd && fytdNet ? fytdNet.labels : sorted.map((d) => formatMonthYear(d.date));
@@ -83,8 +92,8 @@ export default function FbrTaxSection() {
   const latestYm = latest?.date;
   const priorYearYm = latestYm ? `${Number(latestYm.slice(0, 4)) - 1}${latestYm.slice(4)}` : null;
   const priorYearMonth = sorted.find((d) => d.date === priorYearYm);
-  const latestYoY = latest && priorYearMonth ? pctChange(latest.net, priorYearMonth.net) : { pct: null, direction: 'flat' };
-  const latestVsTarget = latest?.target ? latest.net - latest.target : null;
+  const latestYoY = latest && priorYearMonth ? pctChange(latest.net, priorYearMonth.net) : { pct: null, direction: 'unavailable' };
+  const latestVsTarget = Number.isFinite(latest?.net) && Number.isFinite(latest?.target) ? latest.net - latest.target : null;
 
   const netValues = showFytd && fytdNet ? fytdNet.current : sorted.map((d) => d.net ?? null);
   const netCompare = showFytd && fytdNet ? fytdNet.prior : netPrior;
@@ -129,7 +138,7 @@ export default function FbrTaxSection() {
             const notes = [];
             const provenance = provenanceLabel(row);
             if (provenance) notes.push(provenance);
-            if (row?.target != null) {
+            if (Number.isFinite(row?.net) && Number.isFinite(row?.target)) {
               const diff = row.net - row.target;
               notes.push(`Target: ${fmtBn(row.target)} (${diff >= 0 ? '+' : '−'}${fmtBn(Math.abs(diff))})`);
             }
@@ -239,7 +248,7 @@ export default function FbrTaxSection() {
 
   // ── FYTD run-rate: actual collection vs the pace required to hit target ──
   const annualForFytd = fytd ? annualTargets.find((d) => d.fyLabel === fytd.fyLabel) : null;
-  const hasRunRate = !!(fytd && fytd.target != null);
+  const hasRunRate = hasFytd && Number.isFinite(fytd.target);
   const runRateData = {
     labels: [fytd?.period || 'Fiscal year to date'],
     datasets: [
@@ -248,7 +257,7 @@ export default function FbrTaxSection() {
       { label: 'Prior year (same period)', data: [fytd?.priorNet ?? null], backgroundColor: COLORS.purple, borderRadius: 4 },
     ],
   };
-  const runRateGap = fytd && fytd.target != null ? fytd.net - fytd.target : null;
+  const runRateGap = hasRunRate ? fytd.net - fytd.target : null;
   const runRateOptions = {
     ...baseBarOptions,
     plugins: {
@@ -289,7 +298,7 @@ export default function FbrTaxSection() {
         ...baseBarOptions.plugins.tooltip,
         callbacks: {
           label: (ctx) => fmtBn(ctx.raw),
-          afterLabel: (ctx) => (fyTotals[ctx.dataIndex]?.provisional ? 'Provisional' : 'Final'),
+          afterLabel: (ctx) => TRUST_LABELS.status[sourceFigureStatus(fyTotals[ctx.dataIndex])],
         },
       },
     },
@@ -301,13 +310,14 @@ export default function FbrTaxSection() {
 
   // ── Summary card items ──
   const summaryItems = [];
-  if (latest) {
+  if (Number.isFinite(latest?.net)) {
     summaryItems.push({
       label: `Net collection · ${fmtDate(latest.date)}${latest.provisional ? ' (P)' : ''}`,
       value: fmtBn(latest.net),
       sub: latestYoY.pct != null ? `${latestYoY.pct >= 0 ? '+' : ''}${latestYoY.pct}% YoY` : undefined,
       direction: latestYoY.direction,
       sentiment: latestYoY.direction === 'up' ? 'positive' : latestYoY.direction === 'down' ? 'negative' : 'neutral',
+      row: latest, period: latest.date,
     });
     if (latestVsTarget != null) {
       summaryItems.push({
@@ -316,19 +326,21 @@ export default function FbrTaxSection() {
         sub: latestVsTarget >= 0 ? 'Target met' : 'Shortfall',
         sentiment: latestVsTarget >= 0 ? 'positive' : 'negative',
         color: latestVsTarget >= 0 ? COLORS.teal : COLORS.coral,
+        row: latest, period: latest.date, derivation: 'Published monthly net collection − published monthly target',
       });
     }
   }
-  if (fytd) {
-    const fytdGrowth = fytd.priorNet ? pctChange(fytd.net, fytd.priorNet) : { pct: null, direction: 'flat' };
+  if (hasFytd) {
+    const fytdGrowth = pctChange(fytd.net, fytd.priorNet);
     summaryItems.push({
-      label: `${closedFytd ? 'Full year' : 'FYTD'} · ${fytd.period}`,
+      label: `${closedFytd ? 'Full year' : 'FYTD'} · ${fytdPeriod}`,
       value: fmtBn(fytd.net),
       sub: fytdGrowth.pct != null ? `${fytdGrowth.pct >= 0 ? '+' : ''}${fytdGrowth.pct}% vs prior FY` : undefined,
       direction: fytdGrowth.direction,
       sentiment: fytdGrowth.direction === 'up' ? 'positive' : 'neutral',
+      row: fytd, period: fytd.period,
     });
-    if (fytd.target != null) {
+    if (Number.isFinite(fytd.target) && Number.isFinite(fytd.net)) {
       const diff = fytd.net - fytd.target;
       summaryItems.push({
         label: closedFytd ? `${fytd.fyLabel || 'Full year'} vs target` : 'FYTD vs target',
@@ -336,6 +348,7 @@ export default function FbrTaxSection() {
         sub: diff >= 0 ? 'Ahead of target' : 'Behind target',
         sentiment: diff >= 0 ? 'positive' : 'negative',
         color: diff >= 0 ? COLORS.teal : COLORS.coral,
+        row: fytd, period: fytd.period, derivation: 'Published same-period collections − published target',
       });
     }
   }
@@ -350,6 +363,7 @@ export default function FbrTaxSection() {
       sub: miss >= 0 ? 'Target met' : `${latestActual.status} shortfall`,
       sentiment: miss >= 0 ? 'positive' : 'negative',
       color: miss >= 0 ? COLORS.teal : COLORS.coral,
+      row: latestActual, period: latestActual.fy, derivation: 'Published actual collections − published budget target',
     });
   }
   const latestEstimate = [...annualTargets].reverse().find((d) => d.estimate != null);
@@ -360,6 +374,7 @@ export default function FbrTaxSection() {
       sub: 'Budget-speech estimate; not an FBR year-end actual',
       sentiment: 'neutral',
       color: COLORS.amber,
+      row: latestEstimate, period: latestEstimate.fy,
     });
   }
 
@@ -368,7 +383,7 @@ export default function FbrTaxSection() {
       <SectionHeader
         title="FBR Tax Collection"
         datasetId="fbr-tax"
-        description="Federal tax collection reported by the Federal Board of Revenue (FBR), Pakistan's largest source of government revenue. Figures are net of refunds in PKR billion. Official FBR figures and secondary reports attributed to provisional FBR data are explicitly distinguished; missing months are never estimated or interpolated."
+        description="Official Federal Board of Revenue tax collection, net of refunds in PKR billion. Closed-year historical series remain available when supported by official evidence. Current figures without verifiable official evidence are unavailable; unsupported press numbers are not published."
         sourceLinks={[
           { label: 'FBR Official Site', url: 'https://www.fbr.gov.pk' },
           { label: 'FBR Press Releases', url: 'https://www.fbr.gov.pk/categ/press-releases/51147/131163' },
@@ -378,10 +393,10 @@ export default function FbrTaxSection() {
 
       {summaryItems.length > 0 && (
         <SummaryCard
-          title={fytd ? `FBR Revenue — ${fytd.fyLabel}` : 'FBR Revenue'}
+          title={hasFytd && fytd.fyLabel ? `FBR Revenue — ${fytd.fyLabel}` : 'FBR Revenue'}
           accent={COLORS.teal}
           items={summaryItems}
-          footnote={`Source: ${dataSource}. Latest official numeric monthly release: January 2026; later aggregates are explicitly marked provisional and secondary-attributed.`}
+          footnote={`Source: ${dataSource || 'FBR'}. Latest available published observation: ${latest?.date || 'not stated'}. See publication limits for withheld fields.`}
         />
       )}
 
@@ -390,7 +405,7 @@ export default function FbrTaxSection() {
           <ChartCard
             title="Tax Targets vs Reported Collection"
             description={`The original budget target (blue), revised target (amber), and reported collection (teal).${latestEstimate ? ` ${latestEstimate.fyLabel || latestEstimate.fy}'s ${fmtBn(latestEstimate.estimate)} is a pre-year-end estimate, not an FBR year-end actual; the chart and notes label it accordingly.` : ' Estimates are labelled separately from final actuals.'}`}
-            source="FBR / Finance Division; secondary references identified below"
+            source="FBR / Finance Division official publications"
             dataSource={dataSource}
             lastUpdated={lastUpdated}
           >
@@ -422,8 +437,8 @@ export default function FbrTaxSection() {
 
         {hasRunRate && (
           <ChartCard
-            title={closedFytd ? `${fytd.fyLabel} Collection vs Target` : 'Run-Rate Tracker — Is FBR On Pace?'}
-            description={`${closedFytd ? `Full-year collection for ${fytd.period}` : `Cumulative collection so far this fiscal year (${fytd.period})`} against the ${closedFytd ? 'full-year target' : 'run-rate needed to hit its target by this point'}, with the same period a year earlier for context. ${runRateGap != null && runRateGap < 0 ? `Reported collection is ₨${Math.abs(runRateGap).toLocaleString()}bn behind the required pace` : 'Reported collection is ahead of the required pace'}${annualForFytd?.budgetTarget ? `; the full-year target is ₨${annualForFytd.budgetTarget.toLocaleString()}bn` : ''}.`}
+            title={closedFytd ? `${fytd.fyLabel || 'Full year'} Collection vs Target` : 'Run-Rate Tracker — Is FBR On Pace?'}
+            description={`${closedFytd ? `Full-year collection for ${fytdPeriod}` : `Cumulative collection so far this fiscal year (${fytdPeriod})`} against the ${closedFytd ? 'full-year target' : 'run-rate needed to hit its target by this point'}, with the same period a year earlier for context. ${runRateGap < 0 ? `Reported collection is ₨${Math.abs(runRateGap).toLocaleString()}bn behind the required pace` : runRateGap > 0 ? 'Reported collection is ahead of the required pace' : 'Reported collection matches the required pace'}${Number.isFinite(annualForFytd?.budgetTarget) ? `; the full-year target is ₨${annualForFytd.budgetTarget.toLocaleString()}bn` : ''}.`}
             source={fytd.sourceLabel || 'Provisional FBR reporting'}
             dataSource={dataSource}
             dataCoverage={fytd.period}
@@ -437,11 +452,13 @@ export default function FbrTaxSection() {
         )}
 
         <ChartCard
-          title="Monthly Net Collection vs Target"
+          title={t('chart.monthlyFbrNet', 'Monthly Net Collection')}
+          chartId="chart-monthly-net-collection"
           observationDates={sorted.map((row) => row.date)}
           rangeMode={showFytd ? 'fiscal' : 'chronological'}
-          description={`Available monthly net FBR collection in PKR billion.${sorted.length ? ` Coverage currently runs ${formatMonthYear(sorted[0].date)} – ${formatMonthYear(sorted.at(-1).date)}.` : ''} Official FBR figures and secondary-attributed provisional months are distinguished in the chart notes. Missing months are intentionally left absent rather than estimated.`}
-          source="FBR official publications / identified secondary-attributed reports"
+          description={`Available official monthly net collection in PKR billion.${sorted.length ? ` Coverage: ${formatMonthYear(sorted[0].date)} – ${formatMonthYear(sorted.at(-1).date)}.` : ''} Missing or unsupported figures are not estimated.`}
+          evidenceRows={sorted}
+          source="Federal Board of Revenue official publications"
           dataSource={dataSource}
           dataCoverage={latest ? fmtDate(latest.date) : undefined}
           lastUpdated={lastUpdated}
@@ -493,7 +510,7 @@ export default function FbrTaxSection() {
       <div className="fbr-disclaimer card">
         <p>
           ⓘ {methodologyNote}
-          {lastVerified && <> Last verified: {fmtDate(lastVerified)}.</>}
+          {lastVerified && <> Source checked: {fmtDate(lastVerified)}.</>}
         </p>
         {verifiedFrom.length > 0 && (
           <details className="fbr-sources">

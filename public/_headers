@@ -7,14 +7,23 @@
   Cache-Control: no-store, must-revalidate
 
 /data/*
-  # App requests append ?v=<git sha>; short cache is safe and helps the SW offline fallback.
-  Cache-Control: public, max-age=300, stale-while-revalidate=86400
+  Cache-Control: no-store, must-revalidate
 
 /api/*
-  Cache-Control: public, max-age=300, stale-while-revalidate=86400
+  Cache-Control: no-store, must-revalidate
 
 /feed.xml
-  Cache-Control: public, max-age=300, stale-while-revalidate=86400
+  Cache-Control: no-store, must-revalidate
+
+/release-manifest.json
+  Cache-Control: no-store, must-revalidate
+
+/source-evidence/*
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Disposition: attachment
+  Content-Security-Policy: default-src 'none'; sandbox
+  X-Content-Type-Options: nosniff
+  Content-Type: application/octet-stream
 
 /sw.js
   Cache-Control: public, max-age=0, must-revalidate

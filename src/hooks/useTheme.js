@@ -9,7 +9,7 @@ function systemPrefersDark() {
 function applyTheme(theme) {
   const root = document.documentElement;
   if (theme === 'system') {
-    root.removeAttribute('data-theme');
+    root.setAttribute('data-theme', systemPrefersDark() ? 'dark' : 'light');
     // Mirror resolved scheme for components that read data-theme only.
     root.dataset.resolvedTheme = systemPrefersDark() ? 'dark' : 'light';
   } else {
@@ -21,6 +21,8 @@ function applyTheme(theme) {
 export function useTheme() {
   const [theme, setTheme] = useState(() => {
     try {
+      const requested = new URLSearchParams(window.location.search).get('scoutTheme');
+      if (['light', 'dark'].includes(requested)) return requested;
       return localStorage.getItem(STORAGE_KEY) || 'system';
     } catch {
       return 'system';

@@ -4,6 +4,7 @@ import SourceBadge from './SourceBadge';
 import useI18n from '../i18n/useI18n';
 import { SECTION_GUIDANCE } from '../utils/sectionGuidance';
 import { useDensity } from '../hooks/useDensity';
+import FigureTrust from './FigureTrust';
 
 export default function SectionHeader({ title, description, sourceLinks, noteKey, datasetId }) {
   const [expandedOverride, setExpanded] = useState(null);
@@ -19,6 +20,7 @@ export default function SectionHeader({ title, description, sourceLinks, noteKey
         {tx(title)}
         {datasetId && <SourceBadge datasetId={datasetId} />}
       </h2>
+      {datasetId && <FigureTrust datasetId={datasetId} compact />}
       <div className="section-header-actions">
         <button
           className="section-intro-toggle"

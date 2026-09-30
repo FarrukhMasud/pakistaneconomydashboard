@@ -6,7 +6,8 @@ import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import PeriodCompare from './ui/PeriodCompare';
-import { LoadingCard, ErrorCard, UnavailableCard } from './ui/DataState';
+import { LoadingCard, ErrorCard } from './ui/DataState';
+import { finiteSum } from '../utils/figureTrust';
 import { currentCalendarYear, currentFiscalYear, pctChange, fmtUSD, sumField, avgField, buildYoYOverlay, buildFytdSeries, formatFySummaryTitle, fytdViewReady, resolveCompareMode, fytdDisabledReason } from '../utils/periodHelpers';
 
 const CORRIDORS = [
@@ -20,17 +21,23 @@ const CORRIDORS = [
 ];
 
 function formatDate(dateStr) {
+  if (!dateStr) return 'Period not stated';
   const [y, m] = dateStr.split('-');
   const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   return `${months[parseInt(m, 10) - 1]} ${y.slice(2)}`;
 }
 
 function withOtherCountries(row) {
-  const known = ['saudiArabia', 'uae', 'uk', 'usa', 'otherGcc', 'eu']
-    .reduce((sum, field) => sum + (Number(row[field]) || 0), 0);
+  const fields = ['saudiArabia', 'uae', 'uk', 'usa', 'otherGcc', 'eu'];
+  const known = finiteSum(fields.map((field) => row[field]));
+  const otherCountries = Number.isFinite(row.total) && known != null && row.total >= known ? row.total - known : null;
   return {
     ...row,
-    otherCountries: Math.max(0, (Number(row.total) || 0) - known),
+    otherCountries,
+    evidence: { ...row.evidence, otherCountries: { derivation: 'Published total remittances − sum of all displayed published corridor values',
+      complete: otherCountries != null && ['total', ...fields].every((field) => row.evidence?.[field]),
+      inputs: ['total', ...fields].map((field) => row.evidence?.[field]).filter(Boolean) } },
+    observations: { ...row.observations, otherCountries: { observationDate: row.date, status: 'derived' } },
   };
 }
 
@@ -41,10 +48,7 @@ export default function RemittancesSection() {
     if (loading) return <LoadingCard label="Loading remittances…" />;
     if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load remittances" />;
 
-    const { monthly, sourceCountries, lastUpdated: remLU, dataCoverage: remDC } = data;
-    if (!monthly?.length) {
-      return <UnavailableCard label="Could not load remittances" reason="Remittance series is empty." />;
-    }
+    const { monthly = [], sourceCountries = [], lastUpdated: remLU, dataCoverage: remDC } = data;
 
     const cy = currentCalendarYear(monthly);
     const fy = currentFiscalYear(monthly);
@@ -59,8 +63,9 @@ export default function RemittancesSection() {
     const corridorSummary = latestCorridor ? CORRIDORS
       .map((corridor) => ({
         label: corridor.label,
+        field: corridor.field,
         value: latestCorridor[corridor.field],
-        share: latestCorridor.total ? (latestCorridor[corridor.field] / latestCorridor.total) * 100 : null,
+        share: Number.isFinite(latestCorridor[corridor.field]) && latestCorridor.total > 0 ? (latestCorridor[corridor.field] / latestCorridor.total) * 100 : null,
         color: corridor.color,
       }))
       .sort((a, b) => (b.value ?? -Infinity) - (a.value ?? -Infinity)) : [];
@@ -78,6 +83,7 @@ export default function RemittancesSection() {
       datasets: [
         {
           label: showFytd && fytdTotal ? `${fytdTotal.currentLabel} remittances` : 'Total Remittances',
+          valueField: 'total',
           data: remValues,
           backgroundColor: COLORS.teal,
           borderColor: COLORS.teal,
@@ -87,6 +93,7 @@ export default function RemittancesSection() {
         ...(showRemCompare ? [{
           isComparison: true,
           label: remCompareLabel,
+          valueField: 'total',
           data: remCompare,
           backgroundColor: 'rgba(255, 167, 38, 0.25)',
           borderColor: COLORS.amber,
@@ -121,6 +128,7 @@ export default function RemittancesSection() {
     labels: corridorRows.map((d) => formatDate(d.date)),
     datasets: CORRIDORS.map((corridor) => ({
       label: corridor.label,
+      valueField: corridor.field,
       data: corridorRows.map((d) => d[corridor.field]),
       backgroundColor: corridor.color,
       borderRadius: 3,
@@ -139,7 +147,7 @@ export default function RemittancesSection() {
       tooltip: {
         ...baseBarOptions.plugins.tooltip,
         callbacks: {
-          label: (ctx) => `${ctx.dataset.label}: $${Number(ctx.raw).toLocaleString(undefined, { maximumFractionDigits: 1 })}M`,
+          label: (ctx) => `${ctx.dataset.label}: ${fmtUSD(ctx.raw)}`,
         },
       },
     },
@@ -163,6 +171,7 @@ export default function RemittancesSection() {
     datasets: [
       {
         label: 'Remittances (USD M)',
+        valueField: 'value',
         data: sourceCountries.map((d) => d.value),
         backgroundColor: sourceCountries.map((_, i) => COLOR_LIST[i % COLOR_LIST.length]),
         borderRadius: 4,
@@ -209,8 +218,10 @@ export default function RemittancesSection() {
           const chg = pctChange(total, priorTotal);
           const avg = avgField(period.rows, 'total');
           return [
-            { label: 'Total', value: fmtUSD(total), sub: priorTotal ? `${chg.pct > 0 ? '+' : ''}${chg.pct}% ${priorLabel}` : '', direction: chg.direction, sentiment: chg.direction === 'up' ? 'positive' : 'negative', color: COLORS.teal },
-            { label: 'Monthly Avg', value: fmtUSD(avg), color: COLORS.blue },
+            { label: 'Total', value: fmtUSD(total), sub: chg.pct != null ? `${chg.pct > 0 ? '+' : ''}${chg.pct}% ${priorLabel}` : '', direction: chg.direction, sentiment: chg.direction === 'up' ? 'positive' : chg.direction === 'down' ? 'negative' : 'neutral', color: COLORS.teal,
+              row: { evidence: period.rows.map((row) => row.evidence?.total || row.evidence) }, field: 'total', period: period.rangeLabel, derivation: 'Sum of published monthly remittances in the stated period' },
+            { label: 'Monthly Avg', value: fmtUSD(avg), color: COLORS.blue,
+              row: { evidence: period.rows.map((row) => row.evidence?.total || row.evidence) }, field: 'total', period: period.rangeLabel, derivation: 'Sum of published monthly remittances ÷ number of published months in the stated period' },
           ];
         };
         return (
@@ -239,6 +250,7 @@ export default function RemittancesSection() {
         <ChartCard
           title="Monthly Remittances by Corridor"
           observationDates={corridorRows.map((row) => row.date)}
+          evidenceRows={corridorRows}
           defaultRange="3y"
           description="Monthly workers' remittances split by SBP's published corridor buckets. SBP exposes major single-country corridors (Saudi Arabia, UAE, UK, USA), grouped Other GCC and EU buckets, plus the residual shown here as Other countries."
           source="State Bank of Pakistan"
@@ -256,6 +268,7 @@ export default function RemittancesSection() {
             accent={COLORS.teal}
             items={corridorSummary.map((corridor) => ({
               label: corridor.label,
+              row: latestCorridor, field: corridor.field, period: latestCorridor.date,
               value: fmtUSD(corridor.value),
               sub: corridor.share != null ? `${corridor.share.toFixed(1)}% of total` : '',
               color: corridor.color,

@@ -4,131 +4,1051 @@
   "source": "State Bank of Pakistan",
   "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
   "sourceType": "official-primary",
+  "publication": {
+    "policy": "official-only",
+    "status": "published",
+    "reason": null
+  },
+  "authenticity": "official-primary",
+  "freshnessStatus": "latest-available",
+  "validation": {
+    "status": "passed",
+    "checkedAt": "2026-09-30T22:09:57.146Z",
+    "contentHash": "2abc97fda2253b5e3af0f28a03a8e396cc2c36f7374479761c1cde5a428872e8",
+    "checks": [
+      {
+        "id": "audit-sanity.mjs",
+        "status": "passed"
+      },
+      {
+        "id": "audit-publication.mjs",
+        "status": "passed"
+      },
+      {
+        "id": "audit-evidence.mjs",
+        "status": "passed"
+      }
+    ]
+  },
   "cadence": "Weekly",
   "latestObservation": "2026-09-18",
   "dates": {
     "observation": "2026-09-18",
     "publication": null,
-    "verification": "2026-09-30",
+    "verification": "2026-09-30T21:58:01.348Z",
     "dashboardUpdated": "2026-09-30"
   },
   "lastUpdated": "2026-09-30",
   "lastChecked": "2026-09-30",
-  "licence": "Official public data, redistributed with attribution. Cite the original institution.",
+  "licence": "Consult the issuing institution for reuse terms. Source attribution does not establish a redistribution licence.",
   "data": {
     "weekly": [
       {
         "date": "2025-06",
+        "frequency": "monthly",
         "sbp": 14505.8,
         "banks": 4763.4,
-        "total": 19269.2
+        "total": 19269.2,
+        "unit": "US$ million",
+        "status": "not-stated",
+        "evidence": {
+          "sbp": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 15.263,
+              "y": 20.096,
+              "dateLabel": "Jun 25 ",
+              "columnLabel": "SBP"
+            },
+            "rawValue": "14,505.8"
+          },
+          "banks": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 23.229,
+              "y": 20.096,
+              "dateLabel": "Jun 25 ",
+              "columnLabel": "BANKS"
+            },
+            "rawValue": "4,763.4"
+          },
+          "total": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 29.051,
+              "y": 20.096,
+              "dateLabel": "Jun 25 ",
+              "columnLabel": "TOTAL LIQUID     "
+            },
+            "rawValue": "19,269.2"
+          }
+        }
       },
       {
         "date": "2025-07",
+        "frequency": "monthly",
         "sbp": 14324.1,
         "banks": 4652,
-        "total": 18976.1
+        "total": 18976.1,
+        "unit": "US$ million",
+        "status": "not-stated",
+        "evidence": {
+          "sbp": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 15.263,
+              "y": 21.311,
+              "dateLabel": "Jul 25 ",
+              "columnLabel": "SBP"
+            },
+            "rawValue": "14,324.1"
+          },
+          "banks": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 23.229,
+              "y": 21.311,
+              "dateLabel": "Jul 25 ",
+              "columnLabel": "BANKS"
+            },
+            "rawValue": "4,652.0"
+          },
+          "total": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 29.051,
+              "y": 21.311,
+              "dateLabel": "Jul 25 ",
+              "columnLabel": "TOTAL LIQUID     "
+            },
+            "rawValue": "18,976.1"
+          }
+        }
       },
       {
         "date": "2025-08",
+        "frequency": "monthly",
         "sbp": 14319.5,
         "banks": 4757.6,
-        "total": 19077.1
+        "total": 19077.1,
+        "unit": "US$ million",
+        "status": "not-stated",
+        "evidence": {
+          "sbp": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 15.263,
+              "y": 22.353,
+              "dateLabel": "Aug 25",
+              "columnLabel": "SBP"
+            },
+            "rawValue": "14,319.5"
+          },
+          "banks": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 23.229,
+              "y": 22.353,
+              "dateLabel": "Aug 25",
+              "columnLabel": "BANKS"
+            },
+            "rawValue": "4,757.6"
+          },
+          "total": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 29.051,
+              "y": 22.353,
+              "dateLabel": "Aug 25",
+              "columnLabel": "TOTAL LIQUID     "
+            },
+            "rawValue": "19,077.1"
+          }
+        }
       },
       {
         "date": "2025-09",
+        "frequency": "monthly",
         "sbp": 14174.6,
         "banks": 4729.7,
-        "total": 18904.3
+        "total": 18904.3,
+        "unit": "US$ million",
+        "status": "not-stated",
+        "evidence": {
+          "sbp": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 15.263,
+              "y": 23.396,
+              "dateLabel": "Sep 25",
+              "columnLabel": "SBP"
+            },
+            "rawValue": "14,174.6"
+          },
+          "banks": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 23.229,
+              "y": 23.396,
+              "dateLabel": "Sep 25",
+              "columnLabel": "BANKS"
+            },
+            "rawValue": "4,729.7"
+          },
+          "total": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 29.051,
+              "y": 23.396,
+              "dateLabel": "Sep 25",
+              "columnLabel": "TOTAL LIQUID     "
+            },
+            "rawValue": "18,904.3"
+          }
+        }
       },
       {
         "date": "2025-10",
+        "frequency": "monthly",
         "sbp": 14502.9,
         "banks": 4671.1,
-        "total": 19174
+        "total": 19174,
+        "unit": "US$ million",
+        "status": "not-stated",
+        "evidence": {
+          "sbp": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 15.263,
+              "y": 24.573,
+              "dateLabel": "Oct 25 ",
+              "columnLabel": "SBP"
+            },
+            "rawValue": "14,502.9"
+          },
+          "banks": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 23.229,
+              "y": 24.573,
+              "dateLabel": "Oct 25 ",
+              "columnLabel": "BANKS"
+            },
+            "rawValue": "4,671.1"
+          },
+          "total": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 29.051,
+              "y": 24.573,
+              "dateLabel": "Oct 25 ",
+              "columnLabel": "TOTAL LIQUID     "
+            },
+            "rawValue": "19,174.0"
+          }
+        }
       },
       {
         "date": "2025-11",
+        "frequency": "monthly",
         "sbp": 14588.8,
         "banks": 4546.8,
-        "total": 19135.6
+        "total": 19135.6,
+        "unit": "US$ million",
+        "status": "not-stated",
+        "evidence": {
+          "sbp": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 15.263,
+              "y": 25.721,
+              "dateLabel": "Nov 25 ",
+              "columnLabel": "SBP"
+            },
+            "rawValue": "14,588.8"
+          },
+          "banks": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 23.229,
+              "y": 25.721,
+              "dateLabel": "Nov 25 ",
+              "columnLabel": "BANKS"
+            },
+            "rawValue": "4,546.8"
+          },
+          "total": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 29.051,
+              "y": 25.721,
+              "dateLabel": "Nov 25 ",
+              "columnLabel": "TOTAL LIQUID     "
+            },
+            "rawValue": "19,135.6"
+          }
+        }
       },
       {
         "date": "2025-12",
+        "frequency": "monthly",
         "sbp": 16053.5,
         "banks": 4784.8,
-        "total": 20838.3
+        "total": 20838.3,
+        "unit": "US$ million",
+        "status": "not-stated",
+        "evidence": {
+          "sbp": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 15.263,
+              "y": 26.869,
+              "dateLabel": "Dec 25 ",
+              "columnLabel": "SBP"
+            },
+            "rawValue": "16,053.5"
+          },
+          "banks": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 23.229,
+              "y": 26.869,
+              "dateLabel": "Dec 25 ",
+              "columnLabel": "BANKS"
+            },
+            "rawValue": "4,784.8"
+          },
+          "total": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 29.051,
+              "y": 26.869,
+              "dateLabel": "Dec 25 ",
+              "columnLabel": "TOTAL LIQUID     "
+            },
+            "rawValue": "20,838.3"
+          }
+        }
       },
       {
         "date": "2026-01",
+        "frequency": "monthly",
         "sbp": 16157.2,
         "banks": 4814.6,
-        "total": 20971.8
+        "total": 20971.8,
+        "unit": "US$ million",
+        "status": "not-stated",
+        "evidence": {
+          "sbp": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 15.263,
+              "y": 28.017,
+              "dateLabel": "Jan 26 ",
+              "columnLabel": "SBP"
+            },
+            "rawValue": "16,157.2"
+          },
+          "banks": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 23.229,
+              "y": 28.017,
+              "dateLabel": "Jan 26 ",
+              "columnLabel": "BANKS"
+            },
+            "rawValue": "4,814.6"
+          },
+          "total": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 29.051,
+              "y": 28.017,
+              "dateLabel": "Jan 26 ",
+              "columnLabel": "TOTAL LIQUID     "
+            },
+            "rawValue": "20,971.8"
+          }
+        }
       },
       {
         "date": "2026-02",
+        "frequency": "monthly",
         "sbp": 16298.7,
         "banks": 4761.5,
-        "total": 21060.2
+        "total": 21060.2,
+        "unit": "US$ million",
+        "status": "not-stated",
+        "evidence": {
+          "sbp": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 15.263,
+              "y": 29.164,
+              "dateLabel": "Feb 26 ",
+              "columnLabel": "SBP"
+            },
+            "rawValue": "16,298.7"
+          },
+          "banks": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 23.229,
+              "y": 29.164,
+              "dateLabel": "Feb 26 ",
+              "columnLabel": "BANKS"
+            },
+            "rawValue": "4,761.5"
+          },
+          "total": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 29.051,
+              "y": 29.164,
+              "dateLabel": "Feb 26 ",
+              "columnLabel": "TOTAL LIQUID     "
+            },
+            "rawValue": "21,060.2"
+          }
+        }
       },
       {
         "date": "2026-03",
+        "frequency": "monthly",
         "sbp": 16381.9,
         "banks": 4950,
-        "total": 21331.9
+        "total": 21331.9,
+        "unit": "US$ million",
+        "status": "not-stated",
+        "evidence": {
+          "sbp": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 15.263,
+              "y": 30.162,
+              "dateLabel": "Mar 26",
+              "columnLabel": "SBP"
+            },
+            "rawValue": "16,381.9"
+          },
+          "banks": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 23.229,
+              "y": 30.162,
+              "dateLabel": "Mar 26",
+              "columnLabel": "BANKS"
+            },
+            "rawValue": "4,950.0"
+          },
+          "total": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 29.051,
+              "y": 30.162,
+              "dateLabel": "Mar 26",
+              "columnLabel": "TOTAL LIQUID     "
+            },
+            "rawValue": "21,331.9"
+          }
+        }
       },
       {
         "date": "2026-04",
+        "frequency": "monthly",
         "sbp": 15850.7,
         "banks": 4952.9,
-        "total": 20803.6
+        "total": 20803.6,
+        "unit": "US$ million",
+        "status": "not-stated",
+        "evidence": {
+          "sbp": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 15.263,
+              "y": 31.308999999999997,
+              "dateLabel": "Apr 26 ",
+              "columnLabel": "SBP"
+            },
+            "rawValue": "15,850.7"
+          },
+          "banks": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 23.229,
+              "y": 31.308999999999997,
+              "dateLabel": "Apr 26 ",
+              "columnLabel": "BANKS"
+            },
+            "rawValue": "4,952.9"
+          },
+          "total": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 29.051,
+              "y": 31.308999999999997,
+              "dateLabel": "Apr 26 ",
+              "columnLabel": "TOTAL LIQUID     "
+            },
+            "rawValue": "20,803.6"
+          }
+        }
       },
       {
         "date": "2026-05",
+        "frequency": "monthly",
         "sbp": 17189.3,
         "banks": 4920.2,
-        "total": 22109.5
+        "total": 22109.5,
+        "unit": "US$ million",
+        "status": "not-stated",
+        "evidence": {
+          "sbp": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 15.263,
+              "y": 32.457,
+              "dateLabel": "May 26 ",
+              "columnLabel": "SBP"
+            },
+            "rawValue": "17,189.3"
+          },
+          "banks": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 23.229,
+              "y": 32.457,
+              "dateLabel": "May 26 ",
+              "columnLabel": "BANKS"
+            },
+            "rawValue": "4,920.2"
+          },
+          "total": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 29.051,
+              "y": 32.457,
+              "dateLabel": "May 26 ",
+              "columnLabel": "TOTAL LIQUID     "
+            },
+            "rawValue": "22,109.5"
+          }
+        }
       },
       {
         "date": "2026-06",
+        "frequency": "monthly",
         "sbp": 18376.2,
         "banks": 4829.4,
-        "total": 23205.6
+        "total": 23205.6,
+        "unit": "US$ million",
+        "status": "not-stated",
+        "evidence": {
+          "sbp": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 15.263,
+              "y": 33.604,
+              "dateLabel": "Jun 26 ",
+              "columnLabel": "SBP"
+            },
+            "rawValue": "18,376.2"
+          },
+          "banks": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 23.229,
+              "y": 33.604,
+              "dateLabel": "Jun 26 ",
+              "columnLabel": "BANKS"
+            },
+            "rawValue": "4,829.4"
+          },
+          "total": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 29.051,
+              "y": 33.604,
+              "dateLabel": "Jun 26 ",
+              "columnLabel": "TOTAL LIQUID     "
+            },
+            "rawValue": "23,205.6"
+          }
+        }
       },
       {
         "date": "2026-07",
+        "frequency": "monthly",
         "sbp": 17043.1,
         "banks": 4848.5,
-        "total": 21891.6
+        "total": 21891.6,
+        "unit": "US$ million",
+        "status": "not-stated",
+        "evidence": {
+          "sbp": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 15.263,
+              "y": 34.752,
+              "dateLabel": "Jul 26 ",
+              "columnLabel": "SBP"
+            },
+            "rawValue": "17,043.1"
+          },
+          "banks": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 23.229,
+              "y": 34.752,
+              "dateLabel": "Jul 26 ",
+              "columnLabel": "BANKS"
+            },
+            "rawValue": "4,848.5"
+          },
+          "total": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 29.051,
+              "y": 34.752,
+              "dateLabel": "Jul 26 ",
+              "columnLabel": "TOTAL LIQUID     "
+            },
+            "rawValue": "21,891.6"
+          }
+        }
       },
       {
         "date": "2026-08",
+        "frequency": "monthly",
         "sbp": 17152.8,
         "banks": 4879.1,
-        "total": 22031.9
+        "total": 22031.9,
+        "unit": "US$ million",
+        "status": "not-stated",
+        "evidence": {
+          "sbp": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 15.293,
+              "y": 35.877,
+              "dateLabel": "Aug 26 ",
+              "columnLabel": "SBP"
+            },
+            "rawValue": "17,152.8"
+          },
+          "banks": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 23.229,
+              "y": 35.877,
+              "dateLabel": "Aug 26 ",
+              "columnLabel": "BANKS"
+            },
+            "rawValue": "4,879.1"
+          },
+          "total": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 29.051,
+              "y": 35.877,
+              "dateLabel": "Aug 26 ",
+              "columnLabel": "TOTAL LIQUID     "
+            },
+            "rawValue": "22,031.9"
+          }
+        }
       },
       {
         "date": "2026-09-04",
+        "frequency": "weekly",
         "sbp": 18328.2,
         "banks": 5387.6,
-        "total": 23715.8
+        "total": 23715.8,
+        "unit": "US$ million",
+        "status": "not-stated",
+        "evidence": {
+          "sbp": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 15.263,
+              "y": 40.011,
+              "dateLabel": "4-Sep-26",
+              "columnLabel": "SBP"
+            },
+            "rawValue": "18,328.2"
+          },
+          "banks": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 23.229,
+              "y": 40.011,
+              "dateLabel": "4-Sep-26",
+              "columnLabel": "BANKS"
+            },
+            "rawValue": "5,387.6"
+          },
+          "total": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 29.051,
+              "y": 40.011,
+              "dateLabel": "4-Sep-26",
+              "columnLabel": "TOTAL LIQUID     "
+            },
+            "rawValue": "23,715.8"
+          }
+        }
       },
       {
         "date": "2026-09-11",
+        "frequency": "weekly",
         "sbp": 21389,
         "banks": 5402.2,
-        "total": 26791.2
+        "total": 26791.2,
+        "unit": "US$ million",
+        "status": "not-stated",
+        "evidence": {
+          "sbp": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 15.263,
+              "y": 41.009,
+              "dateLabel": "11-Sep-26",
+              "columnLabel": "SBP"
+            },
+            "rawValue": "21,389.0"
+          },
+          "banks": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 23.229,
+              "y": 41.009,
+              "dateLabel": "11-Sep-26",
+              "columnLabel": "BANKS"
+            },
+            "rawValue": "5,402.2"
+          },
+          "total": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 29.051,
+              "y": 41.009,
+              "dateLabel": "11-Sep-26",
+              "columnLabel": "TOTAL LIQUID     "
+            },
+            "rawValue": "26,791.2"
+          }
+        }
       },
       {
         "date": "2026-09-18",
+        "frequency": "weekly",
         "sbp": 21400.3,
         "banks": 5410.3,
-        "total": 26810.6
+        "total": 26810.6,
+        "unit": "US$ million",
+        "status": "not-stated",
+        "evidence": {
+          "sbp": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 15.263,
+              "y": 41.999,
+              "dateLabel": "18-Sep-26",
+              "columnLabel": "SBP"
+            },
+            "rawValue": "21,400.3"
+          },
+          "banks": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 23.229,
+              "y": 41.999,
+              "dateLabel": "18-Sep-26",
+              "columnLabel": "BANKS"
+            },
+            "rawValue": "5,410.3"
+          },
+          "total": {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 29.051,
+              "y": 41.999,
+              "dateLabel": "18-Sep-26",
+              "columnLabel": "TOTAL LIQUID     "
+            },
+            "rawValue": "26,810.6"
+          }
+        }
       }
     ],
     "dataSource": "SBP",
     "lastUpdated": "2026-09-30",
     "dataCoverage": "2025-06 – 2026-09-18",
-    "lastChecked": "2026-09-30"
+    "lastChecked": "2026-09-30",
+    "sourceEvidence": {
+      "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b": {
+        "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+        "sha256": "8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868",
+        "sourceKey": "forex.pdf",
+        "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
+        "responseUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
+        "path": "/source-evidence/8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868.pdf",
+        "bytes": 142091,
+        "contentType": "application/pdf",
+        "retrievedAt": "2026-09-30T21:58:01.348Z",
+        "parserVersion": "parse-sbp-excel.mjs:sha256:a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+        "parserPath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt",
+        "parserDependencies": [
+          {
+            "file": "package-lock.json",
+            "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+            "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+          },
+          {
+            "file": "package.json",
+            "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+            "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+          },
+          {
+            "file": "scripts/data-catalog.mjs",
+            "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+            "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+          },
+          {
+            "file": "scripts/enforce-publication-policy.mjs",
+            "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+            "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+          },
+          {
+            "file": "scripts/lib/data-writer.mjs",
+            "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+            "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+          },
+          {
+            "file": "scripts/lib/ingestion-validation.mjs",
+            "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+            "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+          },
+          {
+            "file": "scripts/lib/provenance-store.mjs",
+            "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+            "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+          },
+          {
+            "file": "scripts/lib/publication-policy.mjs",
+            "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+            "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+          },
+          {
+            "file": "scripts/lib/release-calendar.mjs",
+            "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+            "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+          },
+          {
+            "file": "scripts/lib/reserves-parser.mjs",
+            "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+            "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+          },
+          {
+            "file": "scripts/lib/sbp-resolvers.mjs",
+            "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+            "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+          },
+          {
+            "file": "scripts/lib/services-headline.mjs",
+            "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+            "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+          },
+          {
+            "file": "scripts/lib/sheet-utils.mjs",
+            "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+            "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+          },
+          {
+            "file": "scripts/lib/source-docs.mjs",
+            "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+            "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+          },
+          {
+            "file": "scripts/lib/source-evidence.mjs",
+            "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+            "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+          },
+          {
+            "file": "scripts/pdf-text.mjs",
+            "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+            "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+          },
+          {
+            "file": "scripts/update-fbr.mjs",
+            "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+            "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+          }
+        ]
+      }
+    }
   }
 }

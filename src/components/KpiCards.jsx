@@ -11,6 +11,8 @@ import LatestChangesPanel from './LatestChangesPanel';
 import WatchlistPanel from './WatchlistPanel';
 import WatchlistFeedback from './WatchlistFeedback';
 import SourceBadge from './SourceBadge';
+import FigureTrust from './FigureTrust';
+import { UnavailableCard } from './ui/DataState';
 import ExpandableTile from './ui/ExpandableTile';
 import AnimatedNumber from './ui/AnimatedNumber';
 import { LoadingCard, ErrorCard } from './ui/DataState';
@@ -23,13 +25,13 @@ import {
   formatKpiPeriod,
   formatKpiUnit,
   getKpiDecimals,
-  isProvisionalPeriod,
 } from '../utils/kpiFormat';
 import {
   buildOverviewIndicators,
   kpiRoute,
   overviewFreshness,
   selectHeadlineKpis,
+  trendArrow,
 } from '../utils/overviewModel';
 
 function useOverviewLayout() {
@@ -64,12 +66,6 @@ function sentimentColor(sentiment) {
   return COLORS.amber;
 }
 
-function trendArrow(trend) {
-  if (trend === 'up') return '▲';
-  if (trend === 'down') return '▼';
-  return '►';
-}
-
 function navigate(groupId, sectionId, options) {
   const path = routeToPath(groupId, sectionId, options);
   window.history.pushState(null, '', path);
@@ -78,7 +74,7 @@ function navigate(groupId, sectionId, options) {
 
 export default function KpiCards() {
   const { t, tx } = useI18n();
-  const { data, loading, error, retry } = useData('kpi-summary.json');
+  const { data, loading, error, retry, unavailable, dependencyErrors } = useData('kpi-summary.json');
   const trade = useData('trade.json');
   const remittances = useData('remittances.json');
   const snapshot = useData('indicators.json');
@@ -90,11 +86,12 @@ export default function KpiCards() {
   const allIndicatorsRef = useRef(null);
 
   const indicators = useMemo(() => buildOverviewIndicators({
-    summary: data, trade: trade.data, remittances: remittances.data, snapshot: snapshot.data,
-  }), [data, trade.data, remittances.data, snapshot.data]);
+    summary: data, trade: trade.data, remittances: remittances.data, snapshot: snapshot.data, freshness: freshness.data,
+  }), [data, trade.data, remittances.data, snapshot.data, freshness.data]);
   const dates = overviewFreshness(indicators, freshness.data);
 
   if (loading) return <LoadingCard label="Loading overview…" />;
+  if (unavailable) return <UnavailableCard {...unavailable} />;
   if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load economic overview" />;
 
   const headlineIndicators = selectHeadlineKpis(indicators);
@@ -111,6 +108,7 @@ export default function KpiCards() {
           { label: 'PBS Statistics', url: 'https://www.pbs.gov.pk' },
         ]}
       />
+      {dependencyErrors.map((result) => <ErrorCard key={result.id} error={result.error} onRetry={retry} compact />)}
       <div className="overview-refreshed">
         <p className="overview-refreshed__dates">
           {(dates.checked || data.lastChecked) && (
@@ -124,7 +122,7 @@ export default function KpiCards() {
           <summary>{t('overview.aboutDatesSources', 'About dates & sources')}</summary>
           <div className="overview-source-details__body">
             <p>{t('overview.dateMeaning', 'A source check is not a new observation. Each figure shows its own observation period; source dates are in Details.')}</p>
-            <p>{t('overview.sourceMix', 'Official data, dashboard-derived calculations and explicitly attributed secondary reporting are labelled separately.')}</p>
+            <p>{t('trust.officialOnly', 'Only verifiable official figures are published. Unsupported press numbers are unavailable, not estimates.')}</p>
           </div>
         </details>
       </div>
@@ -165,7 +163,7 @@ export default function KpiCards() {
       <div className="kpi-grid stagger-children">
         {visibleIndicators.map((kpi) => {
           const label = kpi.labelKey ? t(kpi.labelKey, kpi.label) : tx(kpi.label);
-          const sentiment = kpi.sentiment || 'neutral';
+          const sentiment = kpi.unavailable ? 'neutral' : kpi.sentiment || 'neutral';
           const color = sentimentColor(sentiment);
           const changeLabel = formatKpiChange(kpi, t);
           const compareBasis = formatCompareBasis(kpi.changeBasis);
@@ -195,7 +193,7 @@ export default function KpiCards() {
                     </div>
                     <div className="tile-detail-row">
                       <span>{tx('Change')}</span>
-                      <strong>{trendArrow(kpi.trend)} {changeLabel ?? 'n/a'}</strong>
+                      <strong>{trendArrow(kpi.trend)} {changeLabel ?? t('trust.changeUnavailable', 'Comparison unavailable')}</strong>
                     </div>
                     {compareBasis && (
                       <div className="tile-detail-row">
@@ -282,7 +280,9 @@ export default function KpiCards() {
                 >
                 <div className="kpi-label">{label}</div>
                 <div className="kpi-value" style={{ color }}>
-                  {Number.isFinite(kpi.value) ? (
+                  {kpi.unavailable ? (
+                    <span>{t('trust.unavailableShort', 'Unavailable')}</span>
+                  ) : Number.isFinite(kpi.value) ? (
                     <>
                       <AnimatedNumber
                         value={kpi.value}
@@ -297,13 +297,13 @@ export default function KpiCards() {
                 </div>
                 <div className="kpi-period">
                   {formatKpiPeriod(kpi.period)}
-                  {isProvisionalPeriod(kpi.period) && <span className="provisional-badge">{tx('Provisional')}</span>}
                 </div>
+                {kpi.unavailable && <p>{kpi.unavailable.reason}</p>}
                 {kpi.sub && <div className="kpi-sub">{kpi.sub}</div>}
-                <div className={`kpi-trend ${sentiment}`} title={compareBasis || undefined}>
-                  <span className="kpi-change-value">{trendArrow(kpi.trend)} {changeLabel ?? 'n/a'}</span>
+                {!kpi.unavailable && <div className={`kpi-trend ${sentiment}`} title={compareBasis || undefined}>
+                  <span className="kpi-change-value">{trendArrow(kpi.trend)} {changeLabel ?? t('trust.changeUnavailable', 'Comparison unavailable')}</span>
                   {compareBasis && <span className="kpi-change-basis">{compareBasis}</span>}
-                </div>
+                </div>}
                 <span className="kpi-open-section">{t('overview.openSection', 'Open section')} →</span>
                 </a>
                 <div className="kpi-source">
@@ -312,6 +312,7 @@ export default function KpiCards() {
                     ? <CiteFigure figureKey={kpi.provenanceKey} compact />
                     : <span className="kpi-source-missing" title={t('provenance.missing', 'No provenance key for this KPI')}>ⓘ</span>}
                 </div>
+                <FigureTrust datasetId={route.datasetId} row={kpi} period={kpi.period} derivation={kpi.derivation} compact />
               </ExpandableTile>
             </div>
           );

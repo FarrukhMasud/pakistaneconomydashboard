@@ -4,17 +4,46 @@
   "source": "State Bank of Pakistan",
   "sourceUrl": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf",
   "sourceType": "official-primary",
+  "publication": {
+    "policy": "official-only",
+    "status": "partial",
+    "reason": "Only archive-backed observations are retained. Unarchived legacy monthly service estimates are withheld; headline and detailed source windows are labelled separately.",
+    "withheldFields": [
+      "unarchived historical monthlySeries points"
+    ]
+  },
+  "authenticity": "official-primary",
+  "freshnessStatus": "latest-available",
+  "validation": {
+    "status": "passed",
+    "checkedAt": "2026-09-30T22:09:57.146Z",
+    "contentHash": "1c740ca7d0d2306b4c875d3a514c94d18ee85b25b94349750e4f9bc3fea8e41a",
+    "checks": [
+      {
+        "id": "audit-sanity.mjs",
+        "status": "passed"
+      },
+      {
+        "id": "audit-publication.mjs",
+        "status": "passed"
+      },
+      {
+        "id": "audit-evidence.mjs",
+        "status": "passed"
+      }
+    ]
+  },
   "cadence": "Monthly/FYTD",
   "latestObservation": "2026-08",
   "dates": {
     "observation": "2026-08",
     "publication": null,
-    "verification": "2026-09-30",
+    "verification": "2026-09-30T21:58:19.141Z",
     "dashboardUpdated": "2026-09-30"
   },
   "lastUpdated": "2026-09-30",
   "lastChecked": "2026-09-30",
-  "licence": "Official public data, redistributed with attribution. Cite the original institution.",
+  "licence": "Consult the issuing institution for reuse terms. Source attribution does not establish a redistribution licence.",
   "data": {
     "categories": [
       {
@@ -25,7 +54,101 @@
         "priorCredit": 932.08,
         "priorDebit": 4313.6,
         "priorNet": -3381.53,
-        "period": "Jul-May FY26"
+        "period": "Jul-May, FY26",
+        "status": "provisional",
+        "priorStatus": "not-stated",
+        "evidence": {
+          "credit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 14,
+              "column": 15,
+              "cell": "O14"
+            },
+            "rawValue": 854560.4073263749,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "debit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 14,
+              "column": 16,
+              "cell": "P14"
+            },
+            "rawValue": 4548331.408299858,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "net": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 14,
+              "column": 17,
+              "cell": "Q14"
+            },
+            "rawValue": -3693771.0009734826,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 14,
+              "column": 12,
+              "cell": "L14"
+            },
+            "rawValue": 932075.3655076519,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorDebit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 14,
+              "column": 13,
+              "cell": "M14"
+            },
+            "rawValue": 4313602.0122130215,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorNet": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 14,
+              "column": 14,
+              "cell": "N14"
+            },
+            "rawValue": -3381526.6467053695,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          }
+        }
       },
       {
         "name": "Travel",
@@ -35,7 +158,101 @@
         "priorCredit": 677.09,
         "priorDebit": 2265.43,
         "priorNet": -1588.34,
-        "period": "Jul-May FY26"
+        "period": "Jul-May, FY26",
+        "status": "provisional",
+        "priorStatus": "not-stated",
+        "evidence": {
+          "credit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 34,
+              "column": 15,
+              "cell": "O34"
+            },
+            "rawValue": 985435.7891744201,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "debit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 34,
+              "column": 16,
+              "cell": "P34"
+            },
+            "rawValue": 2781054.0679412745,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "net": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 34,
+              "column": 17,
+              "cell": "Q34"
+            },
+            "rawValue": -1795618.2787668544,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 34,
+              "column": 12,
+              "cell": "L34"
+            },
+            "rawValue": 677091.29506487,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorDebit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 34,
+              "column": 13,
+              "cell": "M34"
+            },
+            "rawValue": 2265434.237854704,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorNet": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 34,
+              "column": 14,
+              "cell": "N34"
+            },
+            "rawValue": -1588342.9427898338,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          }
+        }
       },
       {
         "name": "Insurance & Pension",
@@ -45,7 +262,101 @@
         "priorCredit": 98.38,
         "priorDebit": 310.81,
         "priorNet": -212.42,
-        "period": "Jul-May FY26"
+        "period": "Jul-May, FY26",
+        "status": "provisional",
+        "priorStatus": "not-stated",
+        "evidence": {
+          "credit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 47,
+              "column": 15,
+              "cell": "O47"
+            },
+            "rawValue": 64061.704000000005,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "debit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 47,
+              "column": 16,
+              "cell": "P47"
+            },
+            "rawValue": 293330.2172929041,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "net": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 47,
+              "column": 17,
+              "cell": "Q47"
+            },
+            "rawValue": -229268.5132929041,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 47,
+              "column": 12,
+              "cell": "L47"
+            },
+            "rawValue": 98381.23660000002,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorDebit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 47,
+              "column": 13,
+              "cell": "M47"
+            },
+            "rawValue": 310805.57752960466,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorNet": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 47,
+              "column": 14,
+              "cell": "N47"
+            },
+            "rawValue": -212424.34092960466,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          }
+        }
       },
       {
         "name": "Financial Services",
@@ -55,7 +366,101 @@
         "priorCredit": 54.54,
         "priorDebit": 814.49,
         "priorNet": -759.95,
-        "period": "Jul-May FY26"
+        "period": "Jul-May, FY26",
+        "status": "provisional",
+        "priorStatus": "not-stated",
+        "evidence": {
+          "credit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 55,
+              "column": 15,
+              "cell": "O55"
+            },
+            "rawValue": 67849.74627799999,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "debit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 55,
+              "column": 16,
+              "cell": "P55"
+            },
+            "rawValue": 646170.3778495669,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "net": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 55,
+              "column": 17,
+              "cell": "Q55"
+            },
+            "rawValue": -578320.6315715669,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 55,
+              "column": 12,
+              "cell": "L55"
+            },
+            "rawValue": 54535.05481502001,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorDebit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 55,
+              "column": 13,
+              "cell": "M55"
+            },
+            "rawValue": 814489.6289496206,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorNet": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 55,
+              "column": 14,
+              "cell": "N55"
+            },
+            "rawValue": -759954.5741346006,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          }
+        }
       },
       {
         "name": "IP Charges",
@@ -65,7 +470,101 @@
         "priorCredit": 11.12,
         "priorDebit": 274.42,
         "priorNet": -263.3,
-        "period": "Jul-May FY26"
+        "period": "Jul-May, FY26",
+        "status": "provisional",
+        "priorStatus": "not-stated",
+        "evidence": {
+          "credit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 58,
+              "column": 15,
+              "cell": "O58"
+            },
+            "rawValue": 9541.6056,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "debit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 58,
+              "column": 16,
+              "cell": "P58"
+            },
+            "rawValue": 235601.78219999996,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "net": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 58,
+              "column": 17,
+              "cell": "Q58"
+            },
+            "rawValue": -226060.17659999995,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 58,
+              "column": 12,
+              "cell": "L58"
+            },
+            "rawValue": 11117.524,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorDebit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 58,
+              "column": 13,
+              "cell": "M58"
+            },
+            "rawValue": 274416.9348,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorNet": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 58,
+              "column": 14,
+              "cell": "N58"
+            },
+            "rawValue": -263299.4108,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          }
+        }
       },
       {
         "name": "IT & Telecom",
@@ -75,7 +574,101 @@
         "priorCredit": 3480.46,
         "priorDebit": 461.11,
         "priorNet": 3019.35,
-        "period": "Jul-May FY26"
+        "period": "Jul-May, FY26",
+        "status": "provisional",
+        "priorStatus": "not-stated",
+        "evidence": {
+          "credit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 59,
+              "column": 15,
+              "cell": "O59"
+            },
+            "rawValue": 4183443.2089000004,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "debit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 59,
+              "column": 16,
+              "cell": "P59"
+            },
+            "rawValue": 606875.4893523838,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "net": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 59,
+              "column": 17,
+              "cell": "Q59"
+            },
+            "rawValue": 3576567.719547617,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 59,
+              "column": 12,
+              "cell": "L59"
+            },
+            "rawValue": 3480461.7679,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorDebit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 59,
+              "column": 13,
+              "cell": "M59"
+            },
+            "rawValue": 461106.86996000004,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorNet": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 59,
+              "column": 14,
+              "cell": "N59"
+            },
+            "rawValue": 3019354.8979399996,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          }
+        }
       },
       {
         "name": "Other Business",
@@ -85,7 +678,101 @@
         "priorCredit": 1556.75,
         "priorDebit": 1199.28,
         "priorNet": 357.47,
-        "period": "Jul-May FY26"
+        "period": "Jul-May, FY26",
+        "status": "provisional",
+        "priorStatus": "not-stated",
+        "evidence": {
+          "credit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 73,
+              "column": 15,
+              "cell": "O73"
+            },
+            "rawValue": 1937788.4525,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "debit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 73,
+              "column": 16,
+              "cell": "P73"
+            },
+            "rawValue": 1087609.8223743446,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "net": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 73,
+              "column": 17,
+              "cell": "Q73"
+            },
+            "rawValue": 850178.6301256553,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 73,
+              "column": 12,
+              "cell": "L73"
+            },
+            "rawValue": 1556752.339855,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorDebit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 73,
+              "column": 13,
+              "cell": "M73"
+            },
+            "rawValue": 1199280.7773954207,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorNet": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 73,
+              "column": 14,
+              "cell": "N73"
+            },
+            "rawValue": 357471.5624595792,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          }
+        }
       },
       {
         "name": "Personal/Cultural",
@@ -95,39 +782,437 @@
         "priorCredit": 46.58,
         "priorDebit": 11.48,
         "priorNet": 35.1,
-        "period": "Jul-May FY26"
+        "period": "Jul-May, FY26",
+        "status": "provisional",
+        "priorStatus": "not-stated",
+        "evidence": {
+          "credit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 88,
+              "column": 15,
+              "cell": "O88"
+            },
+            "rawValue": 75231.036949,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "debit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 88,
+              "column": 16,
+              "cell": "P88"
+            },
+            "rawValue": 122553.08069580913,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "net": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 88,
+              "column": 17,
+              "cell": "Q88"
+            },
+            "rawValue": -47322.043746809126,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 88,
+              "column": 12,
+              "cell": "L88"
+            },
+            "rawValue": 46575.25694100001,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorDebit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 88,
+              "column": 13,
+              "cell": "M88"
+            },
+            "rawValue": 11476.143,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorNet": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 88,
+              "column": 14,
+              "cell": "N88"
+            },
+            "rawValue": 35099.113941,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          }
+        }
       }
     ],
     "itBreakdown": [
       {
         "name": "Telecom",
         "credit": 640.18,
-        "priorCredit": 498.77
+        "priorCredit": 498.77,
+        "status": "provisional",
+        "priorStatus": "not-stated",
+        "evidence": {
+          "credit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 60,
+              "column": 15,
+              "cell": "O60"
+            },
+            "rawValue": 640176.3937,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 60,
+              "column": 12,
+              "cell": "L60"
+            },
+            "rawValue": 498768.17749999993,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          }
+        }
       },
       {
         "name": "Software Consultancy",
         "credit": 1159.58,
-        "priorCredit": 1011.73
+        "priorCredit": 1011.73,
+        "status": "provisional",
+        "priorStatus": "not-stated",
+        "evidence": {
+          "credit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 65,
+              "column": 15,
+              "cell": "O65"
+            },
+            "rawValue": 1159583.757,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 65,
+              "column": 12,
+              "cell": "L65"
+            },
+            "rawValue": 1011733.6863,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          }
+        }
       },
       {
         "name": "Computer Software Export/Import",
         "credit": 589.85,
-        "priorCredit": 539.65
+        "priorCredit": 539.65,
+        "status": "provisional",
+        "priorStatus": "not-stated",
+        "evidence": {
+          "credit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 67,
+              "column": 15,
+              "cell": "O67"
+            },
+            "rawValue": 589847.5473,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 67,
+              "column": 12,
+              "cell": "L67"
+            },
+            "rawValue": 539645.101,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          }
+        }
       },
       {
         "name": "Freelance IT",
         "credit": 1060.79,
-        "priorCredit": 708.05
+        "priorCredit": 708.05,
+        "status": "provisional",
+        "priorStatus": "not-stated",
+        "evidence": {
+          "credit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 68,
+              "column": 15,
+              "cell": "O68"
+            },
+            "rawValue": 1060788.0389999987,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 68,
+              "column": 12,
+              "cell": "L68"
+            },
+            "rawValue": 708048.2106000001,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          }
+        }
       },
       {
         "name": "Information Services",
         "credit": 4.25,
-        "priorCredit": 20.64
+        "priorCredit": 20.64,
+        "status": "provisional",
+        "priorStatus": "not-stated",
+        "evidence": {
+          "credit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 70,
+              "column": 15,
+              "cell": "O70"
+            },
+            "rawValue": 4246.7523,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          },
+          "priorCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 70,
+              "column": 12,
+              "cell": "L70"
+            },
+            "rawValue": 20642.7886,
+            "scale": 0.001,
+            "sourceUnit": "US$ thousand",
+            "unit": "US$ million"
+          }
+        }
       },
       {
         "name": "Other Computer Services",
         "credit": 728.8,
-        "priorCredit": 701.62
+        "priorCredit": 701.62,
+        "missingReasons": {
+          "credit": null,
+          "priorCredit": null
+        },
+        "status": "provisional",
+        "priorStatus": "not-stated",
+        "evidence": {
+          "credit": {
+            "derivation": "computer services less named components (all inputs in US$ million)",
+            "inputs": [
+              {
+                "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+                "sourceKey": "dt.xls",
+                "retrievedAt": "2026-09-30T21:58:15.167Z",
+                "locator": {
+                  "sheet": "EBOPS ",
+                  "row": 63,
+                  "column": 15,
+                  "cell": "O63"
+                },
+                "rawValue": 3539020.0629,
+                "scale": 0.001
+              },
+              {
+                "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+                "sourceKey": "dt.xls",
+                "retrievedAt": "2026-09-30T21:58:15.167Z",
+                "locator": {
+                  "sheet": "EBOPS ",
+                  "row": 65,
+                  "column": 15,
+                  "cell": "O65"
+                },
+                "rawValue": 1159583.757,
+                "scale": 0.001,
+                "sourceUnit": "US$ thousand",
+                "unit": "US$ million"
+              },
+              {
+                "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+                "sourceKey": "dt.xls",
+                "retrievedAt": "2026-09-30T21:58:15.167Z",
+                "locator": {
+                  "sheet": "EBOPS ",
+                  "row": 67,
+                  "column": 15,
+                  "cell": "O67"
+                },
+                "rawValue": 589847.5473,
+                "scale": 0.001,
+                "sourceUnit": "US$ thousand",
+                "unit": "US$ million"
+              },
+              {
+                "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+                "sourceKey": "dt.xls",
+                "retrievedAt": "2026-09-30T21:58:15.167Z",
+                "locator": {
+                  "sheet": "EBOPS ",
+                  "row": 68,
+                  "column": 15,
+                  "cell": "O68"
+                },
+                "rawValue": 1060788.0389999987,
+                "scale": 0.001,
+                "sourceUnit": "US$ thousand",
+                "unit": "US$ million"
+              }
+            ]
+          },
+          "priorCredit": {
+            "derivation": "computer services less named components (all inputs in US$ million)",
+            "inputs": [
+              {
+                "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+                "sourceKey": "dt.xls",
+                "retrievedAt": "2026-09-30T21:58:15.167Z",
+                "locator": {
+                  "sheet": "EBOPS ",
+                  "row": 63,
+                  "column": 12,
+                  "cell": "L63"
+                },
+                "rawValue": 2961050.8018,
+                "scale": 0.001
+              },
+              {
+                "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+                "sourceKey": "dt.xls",
+                "retrievedAt": "2026-09-30T21:58:15.167Z",
+                "locator": {
+                  "sheet": "EBOPS ",
+                  "row": 65,
+                  "column": 12,
+                  "cell": "L65"
+                },
+                "rawValue": 1011733.6863,
+                "scale": 0.001,
+                "sourceUnit": "US$ thousand",
+                "unit": "US$ million"
+              },
+              {
+                "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+                "sourceKey": "dt.xls",
+                "retrievedAt": "2026-09-30T21:58:15.167Z",
+                "locator": {
+                  "sheet": "EBOPS ",
+                  "row": 67,
+                  "column": 12,
+                  "cell": "L67"
+                },
+                "rawValue": 539645.101,
+                "scale": 0.001,
+                "sourceUnit": "US$ thousand",
+                "unit": "US$ million"
+              },
+              {
+                "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+                "sourceKey": "dt.xls",
+                "retrievedAt": "2026-09-30T21:58:15.167Z",
+                "locator": {
+                  "sheet": "EBOPS ",
+                  "row": 68,
+                  "column": 12,
+                  "cell": "L68"
+                },
+                "rawValue": 708048.2106000001,
+                "scale": 0.001,
+                "sourceUnit": "US$ thousand",
+                "unit": "US$ million"
+              }
+            ]
+          }
+        }
       }
     ],
     "summary": {
@@ -137,26 +1222,223 @@
       "itTelecomCredit": 4183.44,
       "itTelecomNet": 3576.57,
       "computerServicesCredit": 3539.02,
-      "period": "Jul-May FY26"
+      "period": "Jul-May, FY26",
+      "status": "provisional",
+      "evidence": {
+        "totalServicesCredit": {
+          "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+          "sourceKey": "dt.xls",
+          "retrievedAt": "2026-09-30T21:58:15.167Z",
+          "locator": {
+            "sheet": "EBOPS ",
+            "row": 9,
+            "column": 15,
+            "cell": "O9"
+          },
+          "rawValue": 9097022.16249334,
+          "scale": 0.001
+        },
+        "totalServicesDebit": {
+          "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+          "sourceKey": "dt.xls",
+          "retrievedAt": "2026-09-30T21:58:15.167Z",
+          "locator": {
+            "sheet": "EBOPS ",
+            "row": 9,
+            "column": 16,
+            "cell": "P9"
+          },
+          "rawValue": 11099730.365130898,
+          "scale": 0.001
+        },
+        "totalServicesNet": {
+          "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+          "sourceKey": "dt.xls",
+          "retrievedAt": "2026-09-30T21:58:15.167Z",
+          "locator": {
+            "sheet": "EBOPS ",
+            "row": 9,
+            "column": 17,
+            "cell": "Q9"
+          },
+          "rawValue": -2002708.202637557,
+          "scale": 0.001
+        },
+        "itTelecomCredit": {
+          "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+          "sourceKey": "dt.xls",
+          "retrievedAt": "2026-09-30T21:58:15.167Z",
+          "locator": {
+            "sheet": "EBOPS ",
+            "row": 59,
+            "column": 15,
+            "cell": "O59"
+          },
+          "rawValue": 4183443.2089000004,
+          "scale": 0.001
+        },
+        "itTelecomNet": {
+          "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+          "sourceKey": "dt.xls",
+          "retrievedAt": "2026-09-30T21:58:15.167Z",
+          "locator": {
+            "sheet": "EBOPS ",
+            "row": 59,
+            "column": 17,
+            "cell": "Q59"
+          },
+          "rawValue": 3576567.719547617,
+          "scale": 0.001
+        },
+        "computerServicesCredit": {
+          "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+          "sourceKey": "dt.xls",
+          "retrievedAt": "2026-09-30T21:58:15.167Z",
+          "locator": {
+            "sheet": "EBOPS ",
+            "row": 63,
+            "column": 15,
+            "cell": "O63"
+          },
+          "rawValue": 3539020.0629,
+          "scale": 0.001
+        }
+      }
     },
     "comparison": {
       "current": {
         "totalCredit": 9097.02,
         "itCredit": 4183.44,
-        "fy": 2026
+        "fy": 2026,
+        "status": "provisional",
+        "evidence": {
+          "totalCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 9,
+              "column": 15,
+              "cell": "O9"
+            },
+            "rawValue": 9097022.16249334,
+            "scale": 0.001
+          },
+          "itCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 59,
+              "column": 15,
+              "cell": "O59"
+            },
+            "rawValue": 4183443.2089000004,
+            "scale": 0.001
+          }
+        }
       },
       "prior": {
         "totalCredit": 7750.14,
         "itCredit": 3480.46,
-        "fy": 2025
+        "fy": 2025,
+        "status": "not-stated",
+        "evidence": {
+          "totalCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 9,
+              "column": 12,
+              "cell": "L9"
+            },
+            "rawValue": 7750141.769427574,
+            "scale": 0.001
+          },
+          "itCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 59,
+              "column": 12,
+              "cell": "L59"
+            },
+            "rawValue": 3480461.7679,
+            "scale": 0.001
+          }
+        }
       },
       "fy25": {
         "totalCredit": 7750.14,
-        "itCredit": 3480.46
+        "itCredit": 3480.46,
+        "status": "not-stated",
+        "evidence": {
+          "totalCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 9,
+              "column": 12,
+              "cell": "L9"
+            },
+            "rawValue": 7750141.769427574,
+            "scale": 0.001
+          },
+          "itCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 59,
+              "column": 12,
+              "cell": "L59"
+            },
+            "rawValue": 3480461.7679,
+            "scale": 0.001
+          }
+        }
       },
       "fy26": {
         "totalCredit": 9097.02,
-        "itCredit": 4183.44
+        "itCredit": 4183.44,
+        "status": "provisional",
+        "evidence": {
+          "totalCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 9,
+              "column": 15,
+              "cell": "O9"
+            },
+            "rawValue": 9097022.16249334,
+            "scale": 0.001
+          },
+          "itCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 59,
+              "column": 15,
+              "cell": "O59"
+            },
+            "rawValue": 4183443.2089000004,
+            "scale": 0.001
+          }
+        }
       },
       "period": "Jul-May",
       "currentLabel": "FY26",
@@ -164,33 +1446,81 @@
     },
     "recentMonths": [
       {
+        "month": "Apr-26",
+        "totalCredit": 904.09,
+        "itCredit": 422.26,
+        "status": "revised",
+        "evidence": {
+          "totalCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 9,
+              "column": 6,
+              "cell": "F9"
+            },
+            "rawValue": 904093.6297119238,
+            "scale": 0.001
+          },
+          "itCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 59,
+              "column": 6,
+              "cell": "F59"
+            },
+            "rawValue": 422262.2687,
+            "scale": 0.001
+          }
+        }
+      },
+      {
         "month": "May-26",
         "totalCredit": 838.28,
-        "itCredit": 373.27
-      },
-      {
-        "month": "Jun-26",
-        "totalCredit": 956,
-        "itCredit": 416
-      },
-      {
-        "month": "Jul-26",
-        "totalCredit": 927,
-        "itCredit": 417
-      },
-      {
-        "month": "Aug-26",
-        "totalCredit": 872,
-        "itCredit": 394
+        "itCredit": 373.27,
+        "status": "provisional",
+        "evidence": {
+          "totalCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 9,
+              "column": 9,
+              "cell": "I9"
+            },
+            "rawValue": 838278.7543749138,
+            "scale": 0.001
+          },
+          "itCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 59,
+              "column": 9,
+              "cell": "I59"
+            },
+            "rawValue": 373265.0824,
+            "scale": 0.001
+          }
+        }
       }
     ],
     "itMonthly": {
       "latestMonth": "2026-05",
       "prevMonth": "2026-04",
       "yearAgoMonth": "2025-05",
-      "fytdLabel": "Jul-May FY26",
-      "fytdPriorLabel": "Jul-May FY25",
-      "note": "SBP's headline services table publishes total IT & Telecom through 2026-08, while the detailed EBOPS workbook currently publishes subcomponents through 2026-05. Values are exports (credit) in US$ million; component cards retain their own coverage dates.",
+      "fytdLabel": "Jul-May, FY26",
+      "fytdPriorLabel": "Jul-May, FY25",
+      "note": "SBP's EBOPS services file publishes the latest month, prior month, the same month a year earlier, and fiscal-year-to-date totals. Values are exports (credit) in US$ million. \"Freelance IT\" is SBP's own line for individual freelancer earnings; total IT & freelancing exports are captured within IT & Telecom (Jul–May).",
       "components": [
         {
           "key": "itTotal",
@@ -200,10 +1530,90 @@
           "yearAgo": 329.29,
           "fytd": 4183.44,
           "fytdPrior": 3480.46,
-          "latestMonth": "2026-05",
-          "yearAgoMonth": "2025-05",
-          "fytdLabel": "Jul-May FY26",
-          "fytdPriorLabel": "Jul-May FY25"
+          "statuses": {
+            "latest": "provisional",
+            "prev": "revised",
+            "yearAgo": "not-stated",
+            "fytd": "provisional",
+            "fytdPrior": "not-stated"
+          },
+          "evidence": {
+            "latest": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 59,
+                "column": 9,
+                "cell": "I59"
+              },
+              "rawValue": 373265.0824,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            },
+            "prev": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 59,
+                "column": 6,
+                "cell": "F59"
+              },
+              "rawValue": 422262.2687,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            },
+            "yearAgo": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 59,
+                "column": 3,
+                "cell": "C59"
+              },
+              "rawValue": 329292.0721,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            },
+            "fytd": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 59,
+                "column": 15,
+                "cell": "O59"
+              },
+              "rawValue": 4183443.2089000004,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            },
+            "fytdPrior": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 59,
+                "column": 12,
+                "cell": "L59"
+              },
+              "rawValue": 3480461.7679,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            }
+          }
         },
         {
           "key": "telecom",
@@ -213,10 +1623,90 @@
           "yearAgo": 48.01,
           "fytd": 640.18,
           "fytdPrior": 498.77,
-          "latestMonth": "2026-05",
-          "yearAgoMonth": "2025-05",
-          "fytdLabel": "Jul-May FY26",
-          "fytdPriorLabel": "Jul-May FY25"
+          "statuses": {
+            "latest": "provisional",
+            "prev": "revised",
+            "yearAgo": "not-stated",
+            "fytd": "provisional",
+            "fytdPrior": "not-stated"
+          },
+          "evidence": {
+            "latest": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 60,
+                "column": 9,
+                "cell": "I60"
+              },
+              "rawValue": 49052.3527,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            },
+            "prev": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 60,
+                "column": 6,
+                "cell": "F60"
+              },
+              "rawValue": 75491.87640000001,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            },
+            "yearAgo": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 60,
+                "column": 3,
+                "cell": "C60"
+              },
+              "rawValue": 48010.8613,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            },
+            "fytd": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 60,
+                "column": 15,
+                "cell": "O60"
+              },
+              "rawValue": 640176.3937,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            },
+            "fytdPrior": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 60,
+                "column": 12,
+                "cell": "L60"
+              },
+              "rawValue": 498768.17749999993,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            }
+          }
         },
         {
           "key": "softwareConsultancy",
@@ -226,10 +1716,90 @@
           "yearAgo": 99.08,
           "fytd": 1159.58,
           "fytdPrior": 1011.73,
-          "latestMonth": "2026-05",
-          "yearAgoMonth": "2025-05",
-          "fytdLabel": "Jul-May FY26",
-          "fytdPriorLabel": "Jul-May FY25"
+          "statuses": {
+            "latest": "provisional",
+            "prev": "revised",
+            "yearAgo": "not-stated",
+            "fytd": "provisional",
+            "fytdPrior": "not-stated"
+          },
+          "evidence": {
+            "latest": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 65,
+                "column": 9,
+                "cell": "I65"
+              },
+              "rawValue": 112006.136,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            },
+            "prev": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 65,
+                "column": 6,
+                "cell": "F65"
+              },
+              "rawValue": 110991.544,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            },
+            "yearAgo": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 65,
+                "column": 3,
+                "cell": "C65"
+              },
+              "rawValue": 99077.569,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            },
+            "fytd": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 65,
+                "column": 15,
+                "cell": "O65"
+              },
+              "rawValue": 1159583.757,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            },
+            "fytdPrior": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 65,
+                "column": 12,
+                "cell": "L65"
+              },
+              "rawValue": 1011733.6863,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            }
+          }
         },
         {
           "key": "softwareExports",
@@ -239,10 +1809,90 @@
           "yearAgo": 49.15,
           "fytd": 589.85,
           "fytdPrior": 539.65,
-          "latestMonth": "2026-05",
-          "yearAgoMonth": "2025-05",
-          "fytdLabel": "Jul-May FY26",
-          "fytdPriorLabel": "Jul-May FY25"
+          "statuses": {
+            "latest": "provisional",
+            "prev": "revised",
+            "yearAgo": "not-stated",
+            "fytd": "provisional",
+            "fytdPrior": "not-stated"
+          },
+          "evidence": {
+            "latest": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 67,
+                "column": 9,
+                "cell": "I67"
+              },
+              "rawValue": 47718.402700000006,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            },
+            "prev": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 67,
+                "column": 6,
+                "cell": "F67"
+              },
+              "rawValue": 68558.4392,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            },
+            "yearAgo": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 67,
+                "column": 3,
+                "cell": "C67"
+              },
+              "rawValue": 49152.94809999999,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            },
+            "fytd": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 67,
+                "column": 15,
+                "cell": "O67"
+              },
+              "rawValue": 589847.5473,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            },
+            "fytdPrior": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 67,
+                "column": 12,
+                "cell": "L67"
+              },
+              "rawValue": 539645.101,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            }
+          }
         },
         {
           "key": "freelance",
@@ -252,10 +1902,90 @@
           "yearAgo": 65.79,
           "fytd": 1060.79,
           "fytdPrior": 708.05,
-          "latestMonth": "2026-05",
-          "yearAgoMonth": "2025-05",
-          "fytdLabel": "Jul-May FY26",
-          "fytdPriorLabel": "Jul-May FY25"
+          "statuses": {
+            "latest": "provisional",
+            "prev": "revised",
+            "yearAgo": "not-stated",
+            "fytd": "provisional",
+            "fytdPrior": "not-stated"
+          },
+          "evidence": {
+            "latest": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 68,
+                "column": 9,
+                "cell": "I68"
+              },
+              "rawValue": 101505.90980000132,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            },
+            "prev": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 68,
+                "column": 6,
+                "cell": "F68"
+              },
+              "rawValue": 102912.9182000009,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            },
+            "yearAgo": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 68,
+                "column": 3,
+                "cell": "C68"
+              },
+              "rawValue": 65786.141,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            },
+            "fytd": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 68,
+                "column": 15,
+                "cell": "O68"
+              },
+              "rawValue": 1060788.0389999987,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            },
+            "fytdPrior": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 68,
+                "column": 12,
+                "cell": "L68"
+              },
+              "rawValue": 708048.2106000001,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            }
+          }
         },
         {
           "key": "informationServices",
@@ -265,52 +1995,260 @@
           "yearAgo": 0.38,
           "fytd": 4.25,
           "fytdPrior": 20.64,
-          "latestMonth": "2026-05",
-          "yearAgoMonth": "2025-05",
-          "fytdLabel": "Jul-May FY26",
-          "fytdPriorLabel": "Jul-May FY25"
+          "statuses": {
+            "latest": "provisional",
+            "prev": "revised",
+            "yearAgo": "not-stated",
+            "fytd": "provisional",
+            "fytdPrior": "not-stated"
+          },
+          "evidence": {
+            "latest": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 70,
+                "column": 9,
+                "cell": "I70"
+              },
+              "rawValue": 320.0665,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            },
+            "prev": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 70,
+                "column": 6,
+                "cell": "F70"
+              },
+              "rawValue": 397.02729999999997,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            },
+            "yearAgo": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 70,
+                "column": 3,
+                "cell": "C70"
+              },
+              "rawValue": 380.00109999999995,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            },
+            "fytd": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 70,
+                "column": 15,
+                "cell": "O70"
+              },
+              "rawValue": 4246.7523,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            },
+            "fytdPrior": {
+              "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+              "sourceKey": "dt.xls",
+              "retrievedAt": "2026-09-30T21:58:15.167Z",
+              "locator": {
+                "sheet": "EBOPS ",
+                "row": 70,
+                "column": 12,
+                "cell": "L70"
+              },
+              "rawValue": 20642.7886,
+              "scale": 0.001,
+              "sourceUnit": "US$ thousand",
+              "unit": "US$ million"
+            }
+          }
         }
-      ],
-      "detailLatestMonth": "2026-05",
-      "detailYearAgoMonth": "2025-05",
-      "detailFytdLabel": "Jul-May FY26",
-      "detailFytdPriorLabel": "Jul-May FY25"
+      ]
     },
     "monthlySeries": [
       {
         "month": "2026-04",
         "totalCredit": 904.09,
         "itCredit": 422.26,
-        "freelanceCredit": 102.91
+        "freelanceCredit": 102.91,
+        "status": "revised",
+        "evidence": {
+          "totalCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 9,
+              "column": 6,
+              "cell": "F9"
+            },
+            "rawValue": 904093.6297119238,
+            "scale": 0.001
+          },
+          "itCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 59,
+              "column": 6,
+              "cell": "F59"
+            },
+            "rawValue": 422262.2687,
+            "scale": 0.001
+          },
+          "freelanceCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 68,
+              "column": 6,
+              "cell": "F68"
+            },
+            "rawValue": 102912.9182000009,
+            "scale": 0.001
+          }
+        }
       },
       {
         "month": "2026-05",
         "totalCredit": 838.28,
         "itCredit": 373.27,
-        "freelanceCredit": 101.51
-      },
-      {
-        "month": "2026-06",
-        "totalCredit": 956,
-        "itCredit": 416,
-        "freelanceCredit": null
-      },
-      {
-        "month": "2026-07",
-        "totalCredit": 927,
-        "itCredit": 417,
-        "freelanceCredit": null
+        "freelanceCredit": 101.51,
+        "status": "provisional",
+        "evidence": {
+          "totalCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 9,
+              "column": 9,
+              "cell": "I9"
+            },
+            "rawValue": 838278.7543749138,
+            "scale": 0.001
+          },
+          "itCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 59,
+              "column": 9,
+              "cell": "I59"
+            },
+            "rawValue": 373265.0824,
+            "scale": 0.001
+          },
+          "freelanceCredit": {
+            "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+            "sourceKey": "dt.xls",
+            "retrievedAt": "2026-09-30T21:58:15.167Z",
+            "locator": {
+              "sheet": "EBOPS ",
+              "row": 68,
+              "column": 9,
+              "cell": "I68"
+            },
+            "rawValue": 101505.90980000132,
+            "scale": 0.001
+          }
+        }
       },
       {
         "month": "2026-08",
         "totalCredit": 872,
         "itCredit": 394,
-        "freelanceCredit": null
+        "freelanceCredit": null,
+        "status": "provisional",
+        "statuses": {
+          "totalCredit": "provisional",
+          "itCredit": "provisional",
+          "freelanceCredit": "provisional"
+        },
+        "evidence": {
+          "totalCredit": {
+            "artifactId": "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:ab5ed8e3f335",
+            "sourceKey": "ExportsImports-Goods.pdf",
+            "retrievedAt": "2026-09-30T21:58:19.141Z",
+            "locator": {
+              "page": 1,
+              "rowLabel": "2. Exports of Services",
+              "x": 27.864,
+              "y": 9.886,
+              "rawValue": "872",
+              "periodHeader": {
+                "x": 27.062,
+                "y": 5.649,
+                "text": "Aug"
+              },
+              "fiscalYearHeader": {
+                "x": 26.897,
+                "y": 6.339,
+                "text": "FY27"
+              }
+            },
+            "rawValue": "872",
+            "sourceUnit": "US$ million",
+            "unit": "US$ million",
+            "scale": 1
+          },
+          "itCredit": {
+            "artifactId": "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:ab5ed8e3f335",
+            "sourceKey": "ExportsImports-Goods.pdf",
+            "retrievedAt": "2026-09-30T21:58:19.141Z",
+            "locator": {
+              "page": 1,
+              "rowLabel": "9. Telecommunications, Computer, and Information Services",
+              "x": 27.864,
+              "y": 16.501,
+              "rawValue": "394",
+              "periodHeader": {
+                "x": 27.062,
+                "y": 5.649,
+                "text": "Aug"
+              },
+              "fiscalYearHeader": {
+                "x": 26.897,
+                "y": 6.339,
+                "text": "FY27"
+              }
+            },
+            "rawValue": "394",
+            "sourceUnit": "US$ million",
+            "unit": "US$ million",
+            "scale": 1
+          }
+        }
       }
     ],
     "dataSource": "SBP",
     "lastUpdated": "2026-09-30",
-    "dataCoverage": "Jul-May FY26",
+    "dataCoverage": "Jul-May, FY26",
     "lastChecked": "2026-09-30",
     "bopSummary": {
       "source": "SBP Balance of Payments (BPM6) summary",
@@ -324,7 +2262,50 @@
         "status": "provisional",
         "credit": 1811,
         "debit": 2373,
-        "net": -562
+        "net": -562,
+        "coverage": {
+          "start": "2026-07",
+          "end": "2026-08",
+          "fiscalYear": 2027
+        },
+        "evidence": {
+          "credit": {
+            "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+            "sourceKey": "Balancepayment_BPM6.xls",
+            "retrievedAt": "2026-09-30T21:58:00.723Z",
+            "locator": {
+              "sheet": "BPM6_Summary",
+              "row": 13,
+              "column": 9,
+              "cell": "I13"
+            },
+            "rawValue": 1811
+          },
+          "debit": {
+            "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+            "sourceKey": "Balancepayment_BPM6.xls",
+            "retrievedAt": "2026-09-30T21:58:00.723Z",
+            "locator": {
+              "sheet": "BPM6_Summary",
+              "row": 14,
+              "column": 9,
+              "cell": "I14"
+            },
+            "rawValue": 2373
+          },
+          "net": {
+            "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+            "sourceKey": "Balancepayment_BPM6.xls",
+            "retrievedAt": "2026-09-30T21:58:00.723Z",
+            "locator": {
+              "sheet": "BPM6_Summary",
+              "row": 15,
+              "column": 9,
+              "cell": "I15"
+            },
+            "rawValue": -562
+          }
+        }
       },
       "latestMonth": {
         "period": "Aug",
@@ -332,7 +2313,49 @@
         "status": "provisional",
         "credit": 872,
         "debit": 1158,
-        "net": -286
+        "net": -286,
+        "coverage": {
+          "start": "2026-08",
+          "end": "2026-08"
+        },
+        "evidence": {
+          "credit": {
+            "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+            "sourceKey": "Balancepayment_BPM6.xls",
+            "retrievedAt": "2026-09-30T21:58:00.723Z",
+            "locator": {
+              "sheet": "BPM6_Summary",
+              "row": 13,
+              "column": 7,
+              "cell": "G13"
+            },
+            "rawValue": 872
+          },
+          "debit": {
+            "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+            "sourceKey": "Balancepayment_BPM6.xls",
+            "retrievedAt": "2026-09-30T21:58:00.723Z",
+            "locator": {
+              "sheet": "BPM6_Summary",
+              "row": 14,
+              "column": 7,
+              "cell": "G14"
+            },
+            "rawValue": 1158
+          },
+          "net": {
+            "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+            "sourceKey": "Balancepayment_BPM6.xls",
+            "retrievedAt": "2026-09-30T21:58:00.723Z",
+            "locator": {
+              "sheet": "BPM6_Summary",
+              "row": 15,
+              "column": 7,
+              "cell": "G15"
+            },
+            "rawValue": -286
+          }
+        }
       },
       "note": "SBP publishes this aggregate before the detailed EBOPS table, so it can cover a later month than the category and IT breakdowns in this section."
     },
@@ -345,15 +2368,1311 @@
       "yearAgo": 337,
       "fytd": 811,
       "fytdPrior": 691,
-      "fytdLabel": "null FY27",
+      "fytdLabel": "Jul-Aug FY27",
       "fytdPriorLabel": "Jul-Aug FY26",
       "totalServicesLatest": 872,
       "fiscalYear": 2027,
+      "period": {
+        "start": "2026-07",
+        "end": "2026-08",
+        "fiscalYear": 2027
+      },
+      "priorPeriod": {
+        "start": "2025-07",
+        "end": "2025-08",
+        "fiscalYear": 2026
+      },
+      "unit": "US$ million",
+      "status": "provisional",
+      "statuses": {
+        "latest": "provisional",
+        "prev": "revised",
+        "yearAgo": "not-stated",
+        "fytd": "provisional",
+        "fytdPrior": "not-stated",
+        "totalServicesLatest": "provisional"
+      },
+      "sourceStatuses": {
+        "latest": "P",
+        "prev": "R",
+        "yearAgo": "FY26",
+        "fytd": "P",
+        "fytdPrior": "FY26",
+        "totalServicesLatest": "P"
+      },
+      "evidence": {
+        "latest": {
+          "artifactId": "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:ab5ed8e3f335",
+          "sourceKey": "ExportsImports-Goods.pdf",
+          "retrievedAt": "2026-09-30T21:58:19.141Z",
+          "locator": {
+            "page": 1,
+            "rowLabel": "9. Telecommunications, Computer, and Information Services",
+            "x": 27.864,
+            "y": 16.501,
+            "rawValue": "394",
+            "periodHeader": {
+              "x": 27.062,
+              "y": 5.649,
+              "text": "Aug"
+            },
+            "fiscalYearHeader": {
+              "x": 26.897,
+              "y": 6.339,
+              "text": "FY27"
+            }
+          },
+          "rawValue": "394",
+          "sourceUnit": "US$ million",
+          "unit": "US$ million",
+          "scale": 1
+        },
+        "prev": {
+          "artifactId": "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:ab5ed8e3f335",
+          "sourceKey": "ExportsImports-Goods.pdf",
+          "retrievedAt": "2026-09-30T21:58:19.141Z",
+          "locator": {
+            "page": 1,
+            "rowLabel": "9. Telecommunications, Computer, and Information Services",
+            "x": 25.389,
+            "y": 16.501,
+            "rawValue": "417",
+            "periodHeader": {
+              "x": 24.692,
+              "y": 5.649,
+              "text": "Jul"
+            },
+            "fiscalYearHeader": {
+              "x": 24.414,
+              "y": 6.339,
+              "text": "FY27"
+            }
+          },
+          "rawValue": "417",
+          "sourceUnit": "US$ million",
+          "unit": "US$ million",
+          "scale": 1
+        },
+        "yearAgo": {
+          "artifactId": "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:ab5ed8e3f335",
+          "sourceKey": "ExportsImports-Goods.pdf",
+          "retrievedAt": "2026-09-30T21:58:19.141Z",
+          "locator": {
+            "page": 1,
+            "rowLabel": "9. Telecommunications, Computer, and Information Services",
+            "x": 20.439,
+            "y": 16.501,
+            "rawValue": "337",
+            "periodHeader": {
+              "x": 19.636,
+              "y": 5.649,
+              "text": "Aug"
+            },
+            "fiscalYearHeader": {
+              "x": 19.546,
+              "y": 6.286,
+              "text": "FY26"
+            }
+          },
+          "rawValue": "337",
+          "sourceUnit": "US$ million",
+          "unit": "US$ million",
+          "scale": 1
+        },
+        "fytd": {
+          "artifactId": "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:ab5ed8e3f335",
+          "sourceKey": "ExportsImports-Goods.pdf",
+          "retrievedAt": "2026-09-30T21:58:19.141Z",
+          "locator": {
+            "page": 1,
+            "rowLabel": "9. Telecommunications, Computer, and Information Services",
+            "x": 32.816,
+            "y": 16.501,
+            "rawValue": "811",
+            "periodHeader": {
+              "x": 30.454,
+              "y": 5.649,
+              "text": "Jul-Aug"
+            },
+            "fiscalYearHeader": {
+              "x": 31.848999999999997,
+              "y": 6.339,
+              "text": "FY27"
+            }
+          },
+          "rawValue": "811",
+          "sourceUnit": "US$ million",
+          "unit": "US$ million",
+          "scale": 1
+        },
+        "fytdPrior": {
+          "artifactId": "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:ab5ed8e3f335",
+          "sourceKey": "ExportsImports-Goods.pdf",
+          "retrievedAt": "2026-09-30T21:58:19.141Z",
+          "locator": {
+            "page": 1,
+            "rowLabel": "9. Telecommunications, Computer, and Information Services",
+            "x": 30.341,
+            "y": 16.501,
+            "rawValue": "691",
+            "periodHeader": {
+              "x": 30.454,
+              "y": 5.649,
+              "text": "Jul-Aug"
+            },
+            "fiscalYearHeader": {
+              "x": 29.449,
+              "y": 6.286,
+              "text": "FY26"
+            }
+          },
+          "rawValue": "691",
+          "sourceUnit": "US$ million",
+          "unit": "US$ million",
+          "scale": 1
+        },
+        "totalServicesLatest": {
+          "artifactId": "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:ab5ed8e3f335",
+          "sourceKey": "ExportsImports-Goods.pdf",
+          "retrievedAt": "2026-09-30T21:58:19.141Z",
+          "locator": {
+            "page": 1,
+            "rowLabel": "2. Exports of Services",
+            "x": 27.864,
+            "y": 9.886,
+            "rawValue": "872",
+            "periodHeader": {
+              "x": 27.062,
+              "y": 5.649,
+              "text": "Aug"
+            },
+            "fiscalYearHeader": {
+              "x": 26.897,
+              "y": 6.339,
+              "text": "FY27"
+            }
+          },
+          "rawValue": "872",
+          "sourceUnit": "US$ million",
+          "unit": "US$ million",
+          "scale": 1
+        }
+      },
+      "reconciliation": [
+        {
+          "check": "Headline FYTD = all printed months in the same window",
+          "total": 811,
+          "components": 811,
+          "difference": 0,
+          "tolerance": 1,
+          "result": "matched",
+          "leftEvidence": {
+            "artifactId": "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:ab5ed8e3f335",
+            "sourceKey": "ExportsImports-Goods.pdf",
+            "retrievedAt": "2026-09-30T21:58:19.141Z",
+            "locator": {
+              "page": 1,
+              "rowLabel": "9. Telecommunications, Computer, and Information Services",
+              "x": 32.816,
+              "y": 16.501,
+              "rawValue": "811",
+              "periodHeader": {
+                "x": 30.454,
+                "y": 5.649,
+                "text": "Jul-Aug"
+              },
+              "fiscalYearHeader": {
+                "x": 31.848999999999997,
+                "y": 6.339,
+                "text": "FY27"
+              }
+            },
+            "rawValue": "811",
+            "sourceUnit": "US$ million",
+            "unit": "US$ million",
+            "scale": 1
+          },
+          "rightEvidence": {
+            "derivation": "sum of printed monthly IT columns in exact FYTD coverage",
+            "inputs": [
+              {
+                "artifactId": "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:ab5ed8e3f335",
+                "sourceKey": "ExportsImports-Goods.pdf",
+                "retrievedAt": "2026-09-30T21:58:19.141Z",
+                "locator": {
+                  "page": 1,
+                  "rowLabel": "9. Telecommunications, Computer, and Information Services",
+                  "x": 25.389,
+                  "y": 16.501,
+                  "rawValue": "417",
+                  "periodHeader": {
+                    "x": 24.692,
+                    "y": 5.649,
+                    "text": "Jul"
+                  },
+                  "fiscalYearHeader": {
+                    "x": 24.414,
+                    "y": 6.339,
+                    "text": "FY27"
+                  }
+                }
+              },
+              {
+                "artifactId": "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:ab5ed8e3f335",
+                "sourceKey": "ExportsImports-Goods.pdf",
+                "retrievedAt": "2026-09-30T21:58:19.141Z",
+                "locator": {
+                  "page": 1,
+                  "rowLabel": "9. Telecommunications, Computer, and Information Services",
+                  "x": 27.864,
+                  "y": 16.501,
+                  "rawValue": "394",
+                  "periodHeader": {
+                    "x": 27.062,
+                    "y": 5.649,
+                    "text": "Aug"
+                  },
+                  "fiscalYearHeader": {
+                    "x": 26.897,
+                    "y": 6.339,
+                    "text": "FY27"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "check": "Headline IT vs independent EBOPS same month",
+          "total": 394,
+          "components": 394,
+          "difference": 0,
+          "tolerance": 1,
+          "result": "matched",
+          "leftEvidence": {
+            "artifactId": "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:ab5ed8e3f335",
+            "sourceKey": "ExportsImports-Goods.pdf",
+            "retrievedAt": "2026-09-30T21:58:19.141Z",
+            "locator": {
+              "page": 1,
+              "rowLabel": "9. Telecommunications, Computer, and Information Services",
+              "x": 27.864,
+              "y": 16.501,
+              "rawValue": "394",
+              "periodHeader": {
+                "x": 27.062,
+                "y": 5.649,
+                "text": "Aug"
+              },
+              "fiscalYearHeader": {
+                "x": 26.897,
+                "y": 6.339,
+                "text": "FY27"
+              }
+            },
+            "rawValue": "394",
+            "sourceUnit": "US$ million",
+            "unit": "US$ million",
+            "scale": 1
+          },
+          "rightEvidence": {
+            "artifactId": "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:3c1462d18012",
+            "sourceKey": "ExportsImports-Goods.pdf",
+            "retrievedAt": "2026-09-30T21:51:34.081Z",
+            "locator": {
+              "page": 1,
+              "rowLabel": "9. Telecommunications, Computer, and Information Services",
+              "x": 27.864,
+              "y": 16.501,
+              "rawValue": "394",
+              "periodHeader": {
+                "x": 27.062,
+                "y": 5.649,
+                "text": "Aug"
+              },
+              "fiscalYearHeader": {
+                "x": 26.897,
+                "y": 6.339,
+                "text": "FY27"
+              }
+            },
+            "rawValue": "394",
+            "sourceUnit": "US$ million",
+            "unit": "US$ million",
+            "scale": 1
+          }
+        },
+        {
+          "check": "Independent SBP BOP totalCredit",
+          "result": "not-comparable",
+          "reason": "different-coverage",
+          "rightPeriod": [
+            "2024-07",
+            "2025-06"
+          ],
+          "rightEvidence": {
+            "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+            "sourceKey": "Balancepayment_BPM6.xls",
+            "retrievedAt": "2026-09-30T21:58:00.723Z",
+            "locator": {
+              "sheet": "BPM6_Summary",
+              "row": 13,
+              "column": 3,
+              "cell": "C13"
+            },
+            "rawValue": 8450
+          }
+        },
+        {
+          "check": "Independent SBP BOP totalCredit",
+          "result": "not-comparable",
+          "reason": "different-coverage",
+          "rightPeriod": [
+            "2025-08",
+            "2025-08"
+          ],
+          "rightEvidence": {
+            "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+            "sourceKey": "Balancepayment_BPM6.xls",
+            "retrievedAt": "2026-09-30T21:58:00.723Z",
+            "locator": {
+              "sheet": "BPM6_Summary",
+              "row": 13,
+              "column": 4,
+              "cell": "D13"
+            },
+            "rawValue": 677
+          }
+        },
+        {
+          "check": "Independent SBP BOP totalCredit",
+          "result": "not-comparable",
+          "reason": "different-coverage",
+          "rightPeriod": [
+            "2025-07",
+            "2026-06"
+          ],
+          "rightEvidence": {
+            "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+            "sourceKey": "Balancepayment_BPM6.xls",
+            "retrievedAt": "2026-09-30T21:58:00.723Z",
+            "locator": {
+              "sheet": "BPM6_Summary",
+              "row": 13,
+              "column": 5,
+              "cell": "E13"
+            },
+            "rawValue": 10020
+          }
+        },
+        {
+          "check": "Independent SBP BOP totalCredit",
+          "result": "not-comparable",
+          "reason": "different-coverage",
+          "rightPeriod": [
+            "2026-07",
+            "2026-07"
+          ],
+          "rightEvidence": {
+            "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+            "sourceKey": "Balancepayment_BPM6.xls",
+            "retrievedAt": "2026-09-30T21:58:00.723Z",
+            "locator": {
+              "sheet": "BPM6_Summary",
+              "row": 13,
+              "column": 6,
+              "cell": "F13"
+            },
+            "rawValue": 939
+          }
+        },
+        {
+          "check": "Independent SBP BOP totalCredit",
+          "total": 872,
+          "components": 872,
+          "difference": 0,
+          "tolerance": 1,
+          "result": "matched",
+          "leftEvidence": {
+            "derivation": "sum over exact printed BOP window",
+            "inputs": [
+              {
+                "artifactId": "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:ab5ed8e3f335",
+                "sourceKey": "ExportsImports-Goods.pdf",
+                "retrievedAt": "2026-09-30T21:58:19.141Z",
+                "locator": {
+                  "page": 1,
+                  "rowLabel": "2. Exports of Services",
+                  "x": 27.864,
+                  "y": 9.886,
+                  "rawValue": "872",
+                  "periodHeader": {
+                    "x": 27.062,
+                    "y": 5.649,
+                    "text": "Aug"
+                  },
+                  "fiscalYearHeader": {
+                    "x": 26.897,
+                    "y": 6.339,
+                    "text": "FY27"
+                  }
+                },
+                "rawValue": "872",
+                "sourceUnit": "US$ million",
+                "unit": "US$ million",
+                "scale": 1
+              }
+            ]
+          },
+          "rightEvidence": {
+            "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+            "sourceKey": "Balancepayment_BPM6.xls",
+            "retrievedAt": "2026-09-30T21:58:00.723Z",
+            "locator": {
+              "sheet": "BPM6_Summary",
+              "row": 13,
+              "column": 7,
+              "cell": "G13"
+            },
+            "rawValue": 872
+          }
+        },
+        {
+          "check": "Independent SBP BOP totalCredit",
+          "result": "not-comparable",
+          "reason": "different-coverage",
+          "rightPeriod": [
+            "2025-07",
+            "2025-08"
+          ],
+          "rightEvidence": {
+            "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+            "sourceKey": "Balancepayment_BPM6.xls",
+            "retrievedAt": "2026-09-30T21:58:00.723Z",
+            "locator": {
+              "sheet": "BPM6_Summary",
+              "row": 13,
+              "column": 8,
+              "cell": "H13"
+            },
+            "rawValue": 1405
+          }
+        },
+        {
+          "check": "Independent SBP BOP totalCredit",
+          "result": "not-comparable",
+          "reason": "different-coverage",
+          "rightPeriod": [
+            "2026-07",
+            "2026-08"
+          ],
+          "rightEvidence": {
+            "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+            "sourceKey": "Balancepayment_BPM6.xls",
+            "retrievedAt": "2026-09-30T21:58:00.723Z",
+            "locator": {
+              "sheet": "BPM6_Summary",
+              "row": 13,
+              "column": 9,
+              "cell": "I13"
+            },
+            "rawValue": 1811
+          }
+        },
+        {
+          "check": "Headline IT cumulative vs independent EBOPS",
+          "result": "not-comparable",
+          "reason": "different-coverage",
+          "leftPeriod": [
+            "2026-07",
+            "2026-08"
+          ],
+          "rightPeriod": [
+            "2025-07",
+            "2026-05"
+          ]
+        }
+      ],
       "source": "State Bank of Pakistan",
       "sourceFile": "ExportsImports-Goods.pdf",
-      "sourceUrl": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf",
-      "status": "provisional"
+      "sourceUrl": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf"
     },
-    "headlineCoverage": "2026-08"
+    "headlineCoverage": "2026-08",
+    "reconciliation": [
+      {
+        "check": "EBOPS services credit less debit = net",
+        "total": -2002708.202637557,
+        "components": -2002708.202637557,
+        "difference": 0,
+        "tolerance": 0.02,
+        "result": "matched"
+      },
+      {
+        "check": "EBOPS total services vs published top-level categories",
+        "total": 9097022.16249334,
+        "components": 9097022.16249334,
+        "difference": 0,
+        "tolerance": 0.02,
+        "result": "matched"
+      },
+      {
+        "check": "EBOPS IT total vs telecom + computer + information services",
+        "total": 4183443.2089000004,
+        "components": 4183443.2088999995,
+        "difference": 9.313225746154785e-10,
+        "tolerance": 0.02,
+        "result": "matched"
+      },
+      {
+        "check": "EBOPS services credit less debit = net",
+        "total": -2638615.551230657,
+        "components": -2638615.551230657,
+        "difference": 0,
+        "tolerance": 0.02,
+        "result": "matched"
+      },
+      {
+        "check": "EBOPS total services vs published top-level categories",
+        "total": 7750141.769427574,
+        "components": 7750141.769427573,
+        "difference": 9.313225746154785e-10,
+        "tolerance": 0.02,
+        "result": "matched"
+      },
+      {
+        "check": "EBOPS IT total vs telecom + computer + information services",
+        "total": 3480461.7679,
+        "components": 3480461.7679,
+        "difference": 0,
+        "tolerance": 0.02,
+        "result": "matched"
+      },
+      {
+        "check": "EBOPS services credit less debit = net",
+        "total": 33339.13601624372,
+        "components": 33339.13601624372,
+        "difference": 0,
+        "tolerance": 0.02,
+        "result": "matched"
+      },
+      {
+        "check": "EBOPS total services vs published top-level categories",
+        "total": 904093.6297119238,
+        "components": 904093.6297119238,
+        "difference": 0,
+        "tolerance": 0.02,
+        "result": "matched"
+      },
+      {
+        "check": "EBOPS IT total vs telecom + computer + information services",
+        "total": 422262.2687,
+        "components": 422262.2687,
+        "difference": 0,
+        "tolerance": 0.02,
+        "result": "matched"
+      },
+      {
+        "check": "EBOPS services credit less debit = net",
+        "total": 30461.18690796278,
+        "components": 30461.18690796278,
+        "difference": 0,
+        "tolerance": 0.02,
+        "result": "matched"
+      },
+      {
+        "check": "EBOPS total services vs published top-level categories",
+        "total": 838278.7543749138,
+        "components": 838278.7543749138,
+        "difference": 0,
+        "tolerance": 0.02,
+        "result": "matched"
+      },
+      {
+        "check": "EBOPS IT total vs telecom + computer + information services",
+        "total": 373265.0824,
+        "components": 373265.0824,
+        "difference": 0,
+        "tolerance": 0.02,
+        "result": "matched"
+      },
+      {
+        "check": "Independent SBP BOP totalCredit",
+        "result": "not-comparable",
+        "reason": "different-coverage",
+        "rightPeriod": [
+          "2024-07",
+          "2025-06"
+        ],
+        "rightEvidence": {
+          "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+          "sourceKey": "Balancepayment_BPM6.xls",
+          "retrievedAt": "2026-09-30T21:58:00.723Z",
+          "locator": {
+            "sheet": "BPM6_Summary",
+            "row": 13,
+            "column": 3,
+            "cell": "C13"
+          },
+          "rawValue": 8450
+        }
+      },
+      {
+        "check": "Independent SBP BOP totalCredit",
+        "result": "not-comparable",
+        "reason": "different-coverage",
+        "rightPeriod": [
+          "2025-08",
+          "2025-08"
+        ],
+        "rightEvidence": {
+          "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+          "sourceKey": "Balancepayment_BPM6.xls",
+          "retrievedAt": "2026-09-30T21:58:00.723Z",
+          "locator": {
+            "sheet": "BPM6_Summary",
+            "row": 13,
+            "column": 4,
+            "cell": "D13"
+          },
+          "rawValue": 677
+        }
+      },
+      {
+        "check": "Independent SBP BOP totalCredit",
+        "result": "not-comparable",
+        "reason": "different-coverage",
+        "rightPeriod": [
+          "2025-07",
+          "2026-06"
+        ],
+        "rightEvidence": {
+          "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+          "sourceKey": "Balancepayment_BPM6.xls",
+          "retrievedAt": "2026-09-30T21:58:00.723Z",
+          "locator": {
+            "sheet": "BPM6_Summary",
+            "row": 13,
+            "column": 5,
+            "cell": "E13"
+          },
+          "rawValue": 10020
+        }
+      },
+      {
+        "check": "Independent SBP BOP totalCredit",
+        "result": "not-comparable",
+        "reason": "different-coverage",
+        "rightPeriod": [
+          "2026-07",
+          "2026-07"
+        ],
+        "rightEvidence": {
+          "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+          "sourceKey": "Balancepayment_BPM6.xls",
+          "retrievedAt": "2026-09-30T21:58:00.723Z",
+          "locator": {
+            "sheet": "BPM6_Summary",
+            "row": 13,
+            "column": 6,
+            "cell": "F13"
+          },
+          "rawValue": 939
+        }
+      },
+      {
+        "check": "Independent SBP BOP totalCredit",
+        "total": 872,
+        "components": 872,
+        "difference": 0,
+        "tolerance": 1,
+        "result": "matched",
+        "leftEvidence": {
+          "derivation": "sum over exact printed BOP window",
+          "inputs": [
+            {
+              "artifactId": "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:ab5ed8e3f335",
+              "sourceKey": "ExportsImports-Goods.pdf",
+              "retrievedAt": "2026-09-30T21:58:19.141Z",
+              "locator": {
+                "page": 1,
+                "rowLabel": "2. Exports of Services",
+                "x": 27.864,
+                "y": 9.886,
+                "rawValue": "872",
+                "periodHeader": {
+                  "x": 27.062,
+                  "y": 5.649,
+                  "text": "Aug"
+                },
+                "fiscalYearHeader": {
+                  "x": 26.897,
+                  "y": 6.339,
+                  "text": "FY27"
+                }
+              },
+              "rawValue": "872",
+              "sourceUnit": "US$ million",
+              "unit": "US$ million",
+              "scale": 1
+            }
+          ]
+        },
+        "rightEvidence": {
+          "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+          "sourceKey": "Balancepayment_BPM6.xls",
+          "retrievedAt": "2026-09-30T21:58:00.723Z",
+          "locator": {
+            "sheet": "BPM6_Summary",
+            "row": 13,
+            "column": 7,
+            "cell": "G13"
+          },
+          "rawValue": 872
+        }
+      },
+      {
+        "check": "Independent SBP BOP totalCredit",
+        "result": "not-comparable",
+        "reason": "different-coverage",
+        "rightPeriod": [
+          "2025-07",
+          "2025-08"
+        ],
+        "rightEvidence": {
+          "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+          "sourceKey": "Balancepayment_BPM6.xls",
+          "retrievedAt": "2026-09-30T21:58:00.723Z",
+          "locator": {
+            "sheet": "BPM6_Summary",
+            "row": 13,
+            "column": 8,
+            "cell": "H13"
+          },
+          "rawValue": 1405
+        }
+      },
+      {
+        "check": "Independent SBP BOP totalCredit",
+        "result": "not-comparable",
+        "reason": "different-coverage",
+        "rightPeriod": [
+          "2026-07",
+          "2026-08"
+        ],
+        "rightEvidence": {
+          "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+          "sourceKey": "Balancepayment_BPM6.xls",
+          "retrievedAt": "2026-09-30T21:58:00.723Z",
+          "locator": {
+            "sheet": "BPM6_Summary",
+            "row": 13,
+            "column": 9,
+            "cell": "I13"
+          },
+          "rawValue": 1811
+        }
+      },
+      {
+        "check": "EBOPS cumulative services vs independent BOP total",
+        "result": "not-comparable",
+        "reason": "different-coverage",
+        "leftPeriod": [
+          "2025-07",
+          "2026-05"
+        ],
+        "rightPeriod": [
+          "2024-07",
+          "2025-06"
+        ]
+      },
+      {
+        "check": "EBOPS cumulative services vs independent BOP total",
+        "result": "not-comparable",
+        "reason": "different-coverage",
+        "leftPeriod": [
+          "2025-07",
+          "2026-05"
+        ],
+        "rightPeriod": [
+          "2025-08",
+          "2025-08"
+        ]
+      },
+      {
+        "check": "EBOPS cumulative services vs independent BOP total",
+        "result": "not-comparable",
+        "reason": "different-coverage",
+        "leftPeriod": [
+          "2025-07",
+          "2026-05"
+        ],
+        "rightPeriod": [
+          "2025-07",
+          "2026-06"
+        ]
+      },
+      {
+        "check": "EBOPS cumulative services vs independent BOP total",
+        "result": "not-comparable",
+        "reason": "different-coverage",
+        "leftPeriod": [
+          "2025-07",
+          "2026-05"
+        ],
+        "rightPeriod": [
+          "2026-07",
+          "2026-07"
+        ]
+      },
+      {
+        "check": "EBOPS cumulative services vs independent BOP total",
+        "result": "not-comparable",
+        "reason": "different-coverage",
+        "leftPeriod": [
+          "2025-07",
+          "2026-05"
+        ],
+        "rightPeriod": [
+          "2026-08",
+          "2026-08"
+        ]
+      },
+      {
+        "check": "EBOPS cumulative services vs independent BOP total",
+        "result": "not-comparable",
+        "reason": "different-coverage",
+        "leftPeriod": [
+          "2025-07",
+          "2026-05"
+        ],
+        "rightPeriod": [
+          "2025-07",
+          "2025-08"
+        ]
+      },
+      {
+        "check": "EBOPS cumulative services vs independent BOP total",
+        "result": "not-comparable",
+        "reason": "different-coverage",
+        "leftPeriod": [
+          "2025-07",
+          "2026-05"
+        ],
+        "rightPeriod": [
+          "2026-07",
+          "2026-08"
+        ]
+      }
+    ],
+    "sourceEvidence": {
+      "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797": {
+        "artifactId": "dt.xls:8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6:ed44bf718797",
+        "sha256": "8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6",
+        "sourceKey": "dt.xls",
+        "sourceUrl": "https://archive.sbp.org.pk/ecodata/dt.xls",
+        "responseUrl": "https://archive.sbp.org.pk/ecodata/dt.xls",
+        "path": "/source-evidence/8f70fab1316b5457e384836a2d93bb3da4dc84bc9fd13d4caeffd68b253d23e6.xls",
+        "bytes": 1541632,
+        "contentType": "application/vnd.ms-excel",
+        "retrievedAt": "2026-09-30T21:58:15.167Z",
+        "parserVersion": "parse-sbp-excel.mjs:sha256:a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+        "parserPath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt",
+        "parserDependencies": [
+          {
+            "file": "package-lock.json",
+            "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+            "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+          },
+          {
+            "file": "package.json",
+            "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+            "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+          },
+          {
+            "file": "scripts/data-catalog.mjs",
+            "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+            "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+          },
+          {
+            "file": "scripts/enforce-publication-policy.mjs",
+            "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+            "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+          },
+          {
+            "file": "scripts/lib/data-writer.mjs",
+            "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+            "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+          },
+          {
+            "file": "scripts/lib/ingestion-validation.mjs",
+            "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+            "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+          },
+          {
+            "file": "scripts/lib/provenance-store.mjs",
+            "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+            "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+          },
+          {
+            "file": "scripts/lib/publication-policy.mjs",
+            "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+            "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+          },
+          {
+            "file": "scripts/lib/release-calendar.mjs",
+            "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+            "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+          },
+          {
+            "file": "scripts/lib/reserves-parser.mjs",
+            "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+            "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+          },
+          {
+            "file": "scripts/lib/sbp-resolvers.mjs",
+            "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+            "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+          },
+          {
+            "file": "scripts/lib/services-headline.mjs",
+            "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+            "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+          },
+          {
+            "file": "scripts/lib/sheet-utils.mjs",
+            "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+            "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+          },
+          {
+            "file": "scripts/lib/source-docs.mjs",
+            "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+            "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+          },
+          {
+            "file": "scripts/lib/source-evidence.mjs",
+            "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+            "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+          },
+          {
+            "file": "scripts/pdf-text.mjs",
+            "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+            "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+          },
+          {
+            "file": "scripts/update-fbr.mjs",
+            "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+            "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+          }
+        ]
+      },
+      "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:ab5ed8e3f335": {
+        "artifactId": "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:ab5ed8e3f335",
+        "sha256": "a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b",
+        "sourceKey": "ExportsImports-Goods.pdf",
+        "sourceUrl": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf",
+        "responseUrl": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf",
+        "path": "/source-evidence/a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b.pdf",
+        "bytes": 289433,
+        "contentType": "application/pdf",
+        "retrievedAt": "2026-09-30T21:58:19.141Z",
+        "parserVersion": "parse-sbp-excel.mjs:sha256:a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+        "parserPath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt",
+        "parserDependencies": [
+          {
+            "file": "package-lock.json",
+            "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+            "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+          },
+          {
+            "file": "package.json",
+            "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+            "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+          },
+          {
+            "file": "scripts/data-catalog.mjs",
+            "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+            "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+          },
+          {
+            "file": "scripts/enforce-publication-policy.mjs",
+            "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+            "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+          },
+          {
+            "file": "scripts/lib/data-writer.mjs",
+            "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+            "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+          },
+          {
+            "file": "scripts/lib/ingestion-validation.mjs",
+            "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+            "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+          },
+          {
+            "file": "scripts/lib/provenance-store.mjs",
+            "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+            "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+          },
+          {
+            "file": "scripts/lib/publication-policy.mjs",
+            "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+            "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+          },
+          {
+            "file": "scripts/lib/release-calendar.mjs",
+            "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+            "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+          },
+          {
+            "file": "scripts/lib/reserves-parser.mjs",
+            "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+            "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+          },
+          {
+            "file": "scripts/lib/sbp-resolvers.mjs",
+            "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+            "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+          },
+          {
+            "file": "scripts/lib/services-headline.mjs",
+            "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+            "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+          },
+          {
+            "file": "scripts/lib/sheet-utils.mjs",
+            "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+            "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+          },
+          {
+            "file": "scripts/lib/source-docs.mjs",
+            "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+            "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+          },
+          {
+            "file": "scripts/lib/source-evidence.mjs",
+            "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+            "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+          },
+          {
+            "file": "scripts/pdf-text.mjs",
+            "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+            "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+          },
+          {
+            "file": "scripts/update-fbr.mjs",
+            "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+            "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+          }
+        ]
+      },
+      "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c": {
+        "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+        "sha256": "c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd",
+        "sourceKey": "Balancepayment_BPM6.xls",
+        "sourceUrl": "https://www.sbp.org.pk/assets/document/Balancepayment_BPM6.xls",
+        "responseUrl": "https://www.sbp.org.pk/assets/document/Balancepayment_BPM6.xls",
+        "path": "/source-evidence/c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd.xls",
+        "bytes": 61952,
+        "contentType": "application/vnd.ms-excel",
+        "retrievedAt": "2026-09-30T21:58:00.723Z",
+        "parserVersion": "parse-sbp-excel.mjs:sha256:a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+        "parserPath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt",
+        "parserDependencies": [
+          {
+            "file": "package-lock.json",
+            "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+            "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+          },
+          {
+            "file": "package.json",
+            "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+            "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+          },
+          {
+            "file": "scripts/data-catalog.mjs",
+            "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+            "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+          },
+          {
+            "file": "scripts/enforce-publication-policy.mjs",
+            "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+            "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+          },
+          {
+            "file": "scripts/lib/data-writer.mjs",
+            "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+            "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+          },
+          {
+            "file": "scripts/lib/ingestion-validation.mjs",
+            "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+            "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+          },
+          {
+            "file": "scripts/lib/provenance-store.mjs",
+            "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+            "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+          },
+          {
+            "file": "scripts/lib/publication-policy.mjs",
+            "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+            "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+          },
+          {
+            "file": "scripts/lib/release-calendar.mjs",
+            "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+            "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+          },
+          {
+            "file": "scripts/lib/reserves-parser.mjs",
+            "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+            "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+          },
+          {
+            "file": "scripts/lib/sbp-resolvers.mjs",
+            "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+            "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+          },
+          {
+            "file": "scripts/lib/services-headline.mjs",
+            "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+            "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+          },
+          {
+            "file": "scripts/lib/sheet-utils.mjs",
+            "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+            "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+          },
+          {
+            "file": "scripts/lib/source-docs.mjs",
+            "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+            "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+          },
+          {
+            "file": "scripts/lib/source-evidence.mjs",
+            "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+            "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+          },
+          {
+            "file": "scripts/pdf-text.mjs",
+            "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+            "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+          },
+          {
+            "file": "scripts/update-fbr.mjs",
+            "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+            "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+          }
+        ]
+      },
+      "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:3c1462d18012": {
+        "artifactId": "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:3c1462d18012",
+        "sha256": "a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b",
+        "sourceKey": "ExportsImports-Goods.pdf",
+        "sourceUrl": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf",
+        "responseUrl": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf",
+        "path": "/source-evidence/a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b.pdf",
+        "bytes": 289433,
+        "contentType": "application/pdf",
+        "retrievedAt": "2026-09-30T21:51:34.081Z",
+        "parserVersion": "parse-sbp-excel.mjs:sha256:6f96577499bd015f9d037b620afa2e2209a3c770df2019a1ed240cb3e1a461ed:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+        "parserPath": "/source-evidence/parser-6f96577499bd015f9d037b620afa2e2209a3c770df2019a1ed240cb3e1a461ed.txt",
+        "parserDependencies": [
+          {
+            "file": "package-lock.json",
+            "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+            "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+          },
+          {
+            "file": "package.json",
+            "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+            "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+          },
+          {
+            "file": "scripts/data-catalog.mjs",
+            "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+            "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+          },
+          {
+            "file": "scripts/enforce-publication-policy.mjs",
+            "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+            "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+          },
+          {
+            "file": "scripts/lib/data-writer.mjs",
+            "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+            "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+          },
+          {
+            "file": "scripts/lib/ingestion-validation.mjs",
+            "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+            "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+          },
+          {
+            "file": "scripts/lib/provenance-store.mjs",
+            "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+            "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+          },
+          {
+            "file": "scripts/lib/publication-policy.mjs",
+            "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+            "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+          },
+          {
+            "file": "scripts/lib/release-calendar.mjs",
+            "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+            "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+          },
+          {
+            "file": "scripts/lib/reserves-parser.mjs",
+            "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+            "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+          },
+          {
+            "file": "scripts/lib/sbp-resolvers.mjs",
+            "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+            "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+          },
+          {
+            "file": "scripts/lib/services-headline.mjs",
+            "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+            "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+          },
+          {
+            "file": "scripts/lib/sheet-utils.mjs",
+            "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+            "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+          },
+          {
+            "file": "scripts/lib/source-docs.mjs",
+            "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+            "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+          },
+          {
+            "file": "scripts/lib/source-evidence.mjs",
+            "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+            "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+          },
+          {
+            "file": "scripts/pdf-text.mjs",
+            "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+            "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+          },
+          {
+            "file": "scripts/update-fbr.mjs",
+            "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+            "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+          }
+        ]
+      }
+    },
+    "publication": {
+      "policy": "official-only",
+      "status": "partial",
+      "reason": "Only archive-backed observations are retained. Unarchived legacy monthly service estimates are withheld; headline and detailed source windows are labelled separately.",
+      "withheldFields": [
+        "unarchived historical monthlySeries points"
+      ]
+    }
   }
 }

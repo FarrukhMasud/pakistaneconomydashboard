@@ -6,39 +6,36 @@ import SectionHeader from './SectionHeader';
 import SummaryCard from './ui/SummaryCard';
 import ExpandableTile from './ui/ExpandableTile';
 import SeriesCoverageNote from './ui/SeriesCoverageNote';
-import { LoadingCard, ErrorCard, UnavailableCard } from './ui/DataState';
+import { LoadingCard, ErrorCard } from './ui/DataState';
 import { pctChange, fmtUSD, buildYoYOverlay, formatMonthYear, deriveFiscalLabels, buildMonthlyComparisonFromSeries, preferNewerMonthlyComparison, isClosedFiscalPeriod } from '../utils/periodHelpers';
 import { countryFlagPlugin, countryLabel } from '../utils/countryLabels';
 import useI18n from '../i18n/useI18n';
 import { fiscalYearEndDate } from '../utils/chartTimeRange';
 
 export default function FdiSection() {
-  const { tx } = useI18n();
+  const { t, tx } = useI18n();
   const { data, loading, error, retry } = useData('fdi.json');
 
   if (loading) return <LoadingCard label="Loading FDI data…" />;
   if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load FDI data" />;
 
-  const { annual, by_sector, by_country, fytdComparison, monthlyComparison: workbookMonthlyComparison, monthly = [], sectorPeriod, sectorPriorPeriod, lastUpdated: fdiLU } = data;
-
-    if (!Array.isArray(annual) || !annual.length) {
-      return <UnavailableCard label="Could not load FDI data" reason="Annual FDI series is empty." />;
-    }
+  const { annual = [], by_sector = [], by_country = [], fytdComparison, monthlyComparison: workbookMonthlyComparison, monthly = [], sectorPeriod, sectorPriorPeriod, lastUpdated: fdiLU } = data;
 
     // Latest full-year summary
-    const latest = annual[annual.length - 1];
+    const latest = annual.at(-1);
     const prev = annual.length >= 2 ? annual[annual.length - 2] : null;
-    const chg = prev ? pctChange(latest.net_fdi, prev.net_fdi) : { pct: null, direction: 'flat' };
+    const chg = pctChange(latest?.net_fdi, prev?.net_fdi);
     const fyLabels = deriveFiscalLabels(monthly.length ? monthly : null);
 
   // FYTD comparison
-  const fytd = fytdComparison;
-  const monthlyComparison = preferNewerMonthlyComparison(
+  const fytd = fytdComparison?.current ? fytdComparison : null;
+  const comparison = preferNewerMonthlyComparison(
     workbookMonthlyComparison,
     buildMonthlyComparisonFromSeries(monthly, 'net_fdi'),
   );
+  const monthlyComparison = comparison ? { ...comparison, current: comparison.current || {}, prior: comparison.prior || {} } : null;
   const fytdClosed = isClosedFiscalPeriod(fytd?.period);
-  const fytdChg = fytd?.prior ? pctChange(fytd.current.net_fdi, fytd.prior.net_fdi) : null;
+  const fytdChg = fytd?.prior ? pctChange(fytd.current?.net_fdi, fytd.prior.net_fdi) : null;
   const latestMonthly = monthly.at(-1) || null;
   const latestMonthlyYear = latestMonthly ? Number(latestMonthly.date.slice(0, 4)) : null;
   const latestMonthlyMonth = latestMonthly?.date.slice(5, 7);
@@ -57,13 +54,14 @@ export default function FdiSection() {
   const concentrationShare = topCountry && positiveCountryTotal
     ? Math.round((topCountry.amount / positiveCountryTotal) * 100)
     : null;
-  const fytdDelta = fytd?.prior ? fytd.current.net_fdi - fytd.prior.net_fdi : null;
+  const fytdDelta = Number.isFinite(fytd?.current?.net_fdi) && Number.isFinite(fytd?.prior?.net_fdi) ? fytd.current.net_fdi - fytd.prior.net_fdi : null;
 
   // ── Chart 1: Annual Net FDI (full fiscal years only) ──
   const annualBarData = {
     labels: annual.map((d) => d.year),
     datasets: [{
       label: 'Net FDI (USD M)',
+      valueField: 'net_fdi',
       data: annual.map((d) => d.net_fdi),
       backgroundColor: COLORS.teal,
       borderColor: COLORS.teal,
@@ -90,18 +88,21 @@ export default function FdiSection() {
     datasets: [
       {
         label: 'Net FDI',
+        valueField: 'net_fdi',
         data: [monthlyComparison.prior.net_fdi, monthlyComparison.current.net_fdi],
         backgroundColor: [COLORS.blue, COLORS.teal],
         borderRadius: 4,
       },
       ...(monthlyComparison.prior.inflow != null || monthlyComparison.current.inflow != null ? [{
         label: 'Gross Inflow',
+        valueField: 'inflow',
         data: [monthlyComparison.prior.inflow, monthlyComparison.current.inflow],
         backgroundColor: 'rgba(66, 165, 245, 0.35)',
         borderRadius: 4,
       }] : []),
       ...(monthlyComparison.prior.outflow != null || monthlyComparison.current.outflow != null ? [{
         label: 'Outflow',
+        valueField: 'outflow',
         data: [monthlyComparison.prior.outflow, monthlyComparison.current.outflow],
         backgroundColor: 'rgba(239, 83, 80, 0.45)',
         borderRadius: 4,
@@ -115,7 +116,7 @@ export default function FdiSection() {
       ...baseBarOptions.plugins,
       tooltip: {
         ...baseBarOptions.plugins?.tooltip,
-        callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatCurrency(ctx.raw * 1e6)}` },
+        callbacks: { label: (ctx) => `${ctx.dataset.label}: ${Number.isFinite(ctx.raw) ? formatCurrency(ctx.raw * 1e6) : 'Unavailable'}` },
       },
     },
     scales: {
@@ -134,6 +135,7 @@ export default function FdiSection() {
     datasets: [
       {
         label: 'Net FDI',
+        valueField: 'net_fdi',
         data: monthly.map((d) => d.net_fdi),
         backgroundColor: monthly.map((d) => d.net_fdi >= 0 ? COLORS.teal : COLORS.coral),
         borderColor: monthly.map((d) => d.net_fdi >= 0 ? COLORS.teal : COLORS.coral),
@@ -143,6 +145,7 @@ export default function FdiSection() {
       },
       {
         label: monthlyPriorLabel || 'Same month previous year',
+        valueField: 'net_fdi',
         isComparison: true,
         data: monthlyPrior,
         type: 'line',
@@ -180,12 +183,12 @@ export default function FdiSection() {
   };
 
   // ── Chart 2: Inflow vs Outflow ──
-  const flowYears = annual.filter(d => d.inflow && d.outflow);
+  const flowYears = annual.filter(d => Number.isFinite(d.inflow) && Number.isFinite(d.outflow));
   const flowBarData = {
     labels: flowYears.map(d => d.year),
     datasets: [
-      { label: 'Inflow', data: flowYears.map(d => d.inflow), backgroundColor: COLORS.teal, borderRadius: 4 },
-      { label: 'Outflow', data: flowYears.map(d => d.outflow), backgroundColor: COLORS.coral, borderRadius: 4 },
+      { label: 'Inflow', valueField: 'inflow', data: flowYears.map(d => d.inflow), backgroundColor: COLORS.teal, borderRadius: 4 },
+      { label: 'Outflow', valueField: 'outflow', data: flowYears.map(d => d.outflow), backgroundColor: COLORS.coral, borderRadius: 4 },
     ],
   };
 
@@ -211,8 +214,8 @@ export default function FdiSection() {
   if (by_sector.some(d => d.priorAmount != null)) {
     sectorChartData.datasets.push({
       label: sectorPriorPeriod || 'Prior FYTD',
-      data: by_sector.map((d) => d.priorAmount ?? 0),
-      backgroundColor: by_sector.map((d) => (d.priorAmount ?? 0) >= 0 ? 'rgba(45, 212, 191, 0.35)' : 'rgba(255, 107, 107, 0.35)'),
+      data: by_sector.map((d) => d.priorAmount ?? null),
+      backgroundColor: by_sector.map((d) => d.priorAmount >= 0 ? 'rgba(45, 212, 191, 0.35)' : 'rgba(255, 107, 107, 0.35)'),
       borderRadius: 4,
     });
   }
@@ -256,8 +259,8 @@ export default function FdiSection() {
   if (by_country.some(d => d.priorAmount != null)) {
     countryBarData.datasets.push({
       label: data.countryPriorPeriod || 'Prior FYTD',
-      data: by_country.map((d) => d.priorAmount ?? 0),
-      backgroundColor: by_country.map((d) => (d.priorAmount ?? 0) >= 0 ? 'rgba(45, 212, 191, 0.35)' : 'rgba(255, 107, 107, 0.35)'),
+      data: by_country.map((d) => d.priorAmount ?? null),
+      backgroundColor: by_country.map((d) => d.priorAmount >= 0 ? 'rgba(45, 212, 191, 0.35)' : 'rgba(255, 107, 107, 0.35)'),
       borderRadius: 4,
     });
   }
@@ -303,26 +306,26 @@ export default function FdiSection() {
       />
 
       <div className="summary-pair">
-        <SummaryCard
+        {latest && <SummaryCard
           title={`${latest.year}${latest.status ? ` (${latest.status[0].toUpperCase()})` : ''} — Annual FDI`}
           accent={COLORS.teal}
           items={[
-            { label: 'Net FDI', value: fmtUSD(latest.net_fdi), sub: prev ? `${chg.pct > 0 ? '+' : ''}${chg.pct}% vs ${prev.year}` : '', direction: chg.direction, sentiment: chg.direction === 'up' ? 'positive' : 'negative', color: COLORS.teal },
-            ...(latest.inflow ? [{ label: 'Gross Inflow', value: fmtUSD(latest.inflow), color: COLORS.blue }] : []),
-            ...(latest.outflow ? [{ label: 'Outflow', value: fmtUSD(latest.outflow), color: COLORS.coral }] : []),
+            { label: 'Net FDI', value: fmtUSD(latest.net_fdi), sub: chg.pct != null ? `${chg.pct > 0 ? '+' : ''}${chg.pct}% vs ${prev.year}` : '', direction: chg.direction, sentiment: chg.direction === 'up' ? 'positive' : chg.direction === 'down' ? 'negative' : 'neutral', color: COLORS.teal },
+            ...(Number.isFinite(latest.inflow) ? [{ label: 'Gross Inflow', value: fmtUSD(latest.inflow), color: COLORS.blue }] : []),
+            ...(Number.isFinite(latest.outflow) ? [{ label: 'Outflow', value: fmtUSD(latest.outflow), color: COLORS.coral }] : []),
           ]}
           footnote={`Source: SBP / Board of Investment${latest.status === 'revised' ? ' · Revised figures' : ''}`}
-        />
+        />}
         {fytd && (
           <SummaryCard
             title={`${fytd.current.label} (${fytd.period}) — ${fytdClosed ? 'Full year' : 'Fiscal YTD'}`}
             accent={COLORS.blue}
             items={[
-              { label: 'Net FDI', value: fmtUSD(fytd.current.net_fdi), sub: fytdChg ? `${fytdChg.pct > 0 ? '+' : ''}${fytdChg.pct}% vs ${fytd.prior.label}` : '', direction: fytdChg?.direction, sentiment: fytdChg?.direction === 'up' ? 'positive' : 'negative', color: COLORS.teal },
-              ...(fytd.current.inflow ? [{ label: 'Gross Inflow', value: fmtUSD(fytd.current.inflow), color: COLORS.blue }] : []),
-              ...(fytd.current.outflow ? [{ label: 'Outflow', value: fmtUSD(fytd.current.outflow), color: COLORS.coral }] : []),
+              { label: 'Net FDI', value: fmtUSD(fytd.current.net_fdi), sub: fytdChg?.pct != null ? `${fytdChg.pct > 0 ? '+' : ''}${fytdChg.pct}% vs ${fytd.prior.label}` : '', direction: fytdChg?.direction || 'unavailable', sentiment: fytdChg?.direction === 'up' ? 'positive' : fytdChg?.direction === 'down' ? 'negative' : 'neutral', color: COLORS.teal },
+              ...(Number.isFinite(fytd.current.inflow) ? [{ label: 'Gross Inflow', value: fmtUSD(fytd.current.inflow), color: COLORS.blue }] : []),
+              ...(Number.isFinite(fytd.current.outflow) ? [{ label: 'Outflow', value: fmtUSD(fytd.current.outflow), color: COLORS.coral }] : []),
             ]}
-            footnote={`Detailed SBP summary is currently through ${fytd.period}; monthly net FDI is available through ${formatMonthYear(latestMonthly?.date)}. ${fytd.prior ? `Prior: ${fytd.prior.label} ${fytd.period} $${Math.round(fytd.prior.net_fdi)}M` : ''}`}
+            footnote={`Detailed SBP summary is currently through ${fytd.period}; monthly net FDI is available through ${formatMonthYear(latestMonthly?.date)}. ${Number.isFinite(fytd.prior?.net_fdi) ? `Prior: ${fytd.prior.label} ${fytd.period} $${Math.round(fytd.prior.net_fdi)}M` : t('trust.changeUnavailable', 'Comparison unavailable')}`}
           />
         )}
       </div>
@@ -449,7 +452,7 @@ export default function FdiSection() {
           source="SBP / Board of Investment"
           dataSource="SBP"
           lastUpdated={fdiLU}
-          dataCoverage={`${annual[0].year} – ${latest.year}`}
+          dataCoverage={latest ? `${annual[0]?.year} – ${latest.year}` : undefined}
         >
           <div className="chart-container">
             <Bar data={annualBarData} options={annualBarOptions} />
@@ -481,7 +484,8 @@ export default function FdiSection() {
             source="SBP"
             dataSource="SBP"
             lastUpdated={fdiLU}
-            dataCoverage={`${monthlyComparison.month} ${monthlyComparison.current.label}${monthlyComparison.current.status ? ' (P)' : ''}`}
+            dataCoverage={`${monthlyComparison.month} ${monthlyComparison.current.label || 'Period not stated'}`}
+            evidenceRows={[monthlyComparison.current, monthlyComparison.prior]}
           >
             <div className="chart-container">
               <Bar data={monthlyBarData} options={monthlyBarOptions} />

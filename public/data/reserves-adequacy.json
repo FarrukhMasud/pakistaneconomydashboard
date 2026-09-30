@@ -9,68 +9,421 @@
     "importCoverLabel": "Goods-import cover",
     "importCoverNote": "Computed from SBP-held reserves of $21.4bn and the trailing 12-month average monthly goods-import bill of $5.47bn.",
     "importCoverBasis": "SBP-held reserves divided by the trailing 12-month average of official SBP monthly goods imports.",
-    "unit": "US$ billion"
+    "unit": "US$ billion",
+    "status": "not-stated",
+    "evidence": {
+      "sbpReserves": {
+        "derivation": "US$ million divided by 1000",
+        "inputs": [
+          {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 15.263,
+              "y": 41.999,
+              "dateLabel": "18-Sep-26",
+              "columnLabel": "SBP"
+            },
+            "rawValue": "21,400.3"
+          }
+        ]
+      },
+      "totalReserves": {
+        "derivation": "US$ million divided by 1000",
+        "inputs": [
+          {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 29.051,
+              "y": 41.999,
+              "dateLabel": "18-Sep-26",
+              "columnLabel": "TOTAL LIQUID     "
+            },
+            "rawValue": "26,810.6"
+          }
+        ]
+      },
+      "bankReserves": {
+        "derivation": "US$ million divided by 1000",
+        "inputs": [
+          {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 23.229,
+              "y": 41.999,
+              "dateLabel": "18-Sep-26",
+              "columnLabel": "BANKS"
+            },
+            "rawValue": "5,410.3"
+          }
+        ]
+      },
+      "importCoverMonths": {
+        "derivation": "SBP reserves / average of 12 consecutive monthly BOP goods imports",
+        "inputs": [
+          {
+            "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+            "sourceKey": "forex.pdf",
+            "retrievedAt": "2026-09-30T21:58:01.348Z",
+            "locator": {
+              "page": 1,
+              "x": 15.263,
+              "y": 41.999,
+              "dateLabel": "18-Sep-26",
+              "columnLabel": "SBP"
+            },
+            "rawValue": "21,400.3"
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 785,
+              "column": 9,
+              "cell": "I785"
+            },
+            "rawValue": 5040.007446348843
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 786,
+              "column": 9,
+              "cell": "I786"
+            },
+            "rawValue": 5395.984636904518
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 787,
+              "column": 9,
+              "cell": "I787"
+            },
+            "rawValue": 4730.024641336963
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 788,
+              "column": 9,
+              "cell": "I788"
+            },
+            "rawValue": 5765.001176260169
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 789,
+              "column": 9,
+              "cell": "I789"
+            },
+            "rawValue": 5339.017875932362
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 790,
+              "column": 9,
+              "cell": "I790"
+            },
+            "rawValue": 5113.9657999384535
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 791,
+              "column": 9,
+              "cell": "I791"
+            },
+            "rawValue": 4856.992344891539
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 792,
+              "column": 9,
+              "cell": "I792"
+            },
+            "rawValue": 5989.006755921247
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 793,
+              "column": 9,
+              "cell": "I793"
+            },
+            "rawValue": 5639.773667076334
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 794,
+              "column": 9,
+              "cell": "I794"
+            },
+            "rawValue": 6152.042202922473
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 796,
+              "column": 9,
+              "cell": "I796"
+            },
+            "rawValue": 6149.0333189179555
+          },
+          {
+            "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+            "sourceKey": "exp_import_BOP.xls",
+            "retrievedAt": "2026-09-30T21:57:56.136Z",
+            "locator": {
+              "sheet": "Exp.Imp.(BOP)Arch",
+              "row": 797,
+              "column": 9,
+              "cell": "I797"
+            },
+            "rawValue": 5485.962856116705
+          }
+        ]
+      }
+    }
   },
-  "benchmark": {
-    "months": 3,
-    "label": "Common minimum rule-of-thumb",
-    "note": "Three months of imports is a widely used minimum rule-of-thumb. It is not a substitute for the IMF's broader reserve-adequacy assessment."
-  },
-  "imfTarget": {
-    "value": 13.9,
-    "asOf": "2025-06-30",
-    "note": "The IMF's end-FY25 SBP reserves target was $13.9bn; Pakistan exceeded it at $14.5bn. Reserves have since been rebuilt further."
-  },
+  "benchmark": null,
+  "imfTarget": null,
   "trajectory": [
-    {
-      "date": "2025-06",
-      "sbpReserves": 14.5,
-      "importCoverMonths": 2.5,
-      "label": "Jun 2025"
-    },
-    {
-      "date": "2025-12",
-      "sbpReserves": 15.89,
-      "importCoverMonths": 2.6,
-      "label": "Dec 2025"
-    },
-    {
-      "date": "2026-03",
-      "sbpReserves": 17.2,
-      "importCoverMonths": 3.1,
-      "label": "Mar 2026"
-    },
-    {
-      "date": "2026-06",
-      "sbpReserves": 15.92,
-      "importCoverMonths": 2.9,
-      "label": "19 Jun 2026"
-    },
-    {
-      "date": "2026-07",
-      "sbpReserves": 17.04,
-      "importCoverMonths": 3.2,
-      "label": "Jul 31, 2026"
-    },
-    {
-      "date": "2026-08",
-      "sbpReserves": 17.12,
-      "importCoverMonths": 3.2,
-      "label": "Aug 28, 2026"
-    },
     {
       "date": "2026-09",
       "sbpReserves": 21.4,
       "importCoverMonths": 3.9,
-      "label": "Sep 18, 2026"
+      "label": "Sep 18, 2026",
+      "status": "not-stated",
+      "evidence": {
+        "sbpReserves": {
+          "derivation": "US$ million divided by 1000",
+          "inputs": [
+            {
+              "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+              "sourceKey": "forex.pdf",
+              "retrievedAt": "2026-09-30T21:58:01.348Z",
+              "locator": {
+                "page": 1,
+                "x": 15.263,
+                "y": 41.999,
+                "dateLabel": "18-Sep-26",
+                "columnLabel": "SBP"
+              },
+              "rawValue": "21,400.3"
+            }
+          ]
+        },
+        "importCoverMonths": {
+          "derivation": "SBP reserves / average of 12 consecutive monthly BOP goods imports",
+          "inputs": [
+            {
+              "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+              "sourceKey": "forex.pdf",
+              "retrievedAt": "2026-09-30T21:58:01.348Z",
+              "locator": {
+                "page": 1,
+                "x": 15.263,
+                "y": 41.999,
+                "dateLabel": "18-Sep-26",
+                "columnLabel": "SBP"
+              },
+              "rawValue": "21,400.3"
+            },
+            {
+              "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+              "sourceKey": "exp_import_BOP.xls",
+              "retrievedAt": "2026-09-30T21:57:56.136Z",
+              "locator": {
+                "sheet": "Exp.Imp.(BOP)Arch",
+                "row": 785,
+                "column": 9,
+                "cell": "I785"
+              },
+              "rawValue": 5040.007446348843
+            },
+            {
+              "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+              "sourceKey": "exp_import_BOP.xls",
+              "retrievedAt": "2026-09-30T21:57:56.136Z",
+              "locator": {
+                "sheet": "Exp.Imp.(BOP)Arch",
+                "row": 786,
+                "column": 9,
+                "cell": "I786"
+              },
+              "rawValue": 5395.984636904518
+            },
+            {
+              "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+              "sourceKey": "exp_import_BOP.xls",
+              "retrievedAt": "2026-09-30T21:57:56.136Z",
+              "locator": {
+                "sheet": "Exp.Imp.(BOP)Arch",
+                "row": 787,
+                "column": 9,
+                "cell": "I787"
+              },
+              "rawValue": 4730.024641336963
+            },
+            {
+              "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+              "sourceKey": "exp_import_BOP.xls",
+              "retrievedAt": "2026-09-30T21:57:56.136Z",
+              "locator": {
+                "sheet": "Exp.Imp.(BOP)Arch",
+                "row": 788,
+                "column": 9,
+                "cell": "I788"
+              },
+              "rawValue": 5765.001176260169
+            },
+            {
+              "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+              "sourceKey": "exp_import_BOP.xls",
+              "retrievedAt": "2026-09-30T21:57:56.136Z",
+              "locator": {
+                "sheet": "Exp.Imp.(BOP)Arch",
+                "row": 789,
+                "column": 9,
+                "cell": "I789"
+              },
+              "rawValue": 5339.017875932362
+            },
+            {
+              "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+              "sourceKey": "exp_import_BOP.xls",
+              "retrievedAt": "2026-09-30T21:57:56.136Z",
+              "locator": {
+                "sheet": "Exp.Imp.(BOP)Arch",
+                "row": 790,
+                "column": 9,
+                "cell": "I790"
+              },
+              "rawValue": 5113.9657999384535
+            },
+            {
+              "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+              "sourceKey": "exp_import_BOP.xls",
+              "retrievedAt": "2026-09-30T21:57:56.136Z",
+              "locator": {
+                "sheet": "Exp.Imp.(BOP)Arch",
+                "row": 791,
+                "column": 9,
+                "cell": "I791"
+              },
+              "rawValue": 4856.992344891539
+            },
+            {
+              "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+              "sourceKey": "exp_import_BOP.xls",
+              "retrievedAt": "2026-09-30T21:57:56.136Z",
+              "locator": {
+                "sheet": "Exp.Imp.(BOP)Arch",
+                "row": 792,
+                "column": 9,
+                "cell": "I792"
+              },
+              "rawValue": 5989.006755921247
+            },
+            {
+              "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+              "sourceKey": "exp_import_BOP.xls",
+              "retrievedAt": "2026-09-30T21:57:56.136Z",
+              "locator": {
+                "sheet": "Exp.Imp.(BOP)Arch",
+                "row": 793,
+                "column": 9,
+                "cell": "I793"
+              },
+              "rawValue": 5639.773667076334
+            },
+            {
+              "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+              "sourceKey": "exp_import_BOP.xls",
+              "retrievedAt": "2026-09-30T21:57:56.136Z",
+              "locator": {
+                "sheet": "Exp.Imp.(BOP)Arch",
+                "row": 794,
+                "column": 9,
+                "cell": "I794"
+              },
+              "rawValue": 6152.042202922473
+            },
+            {
+              "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+              "sourceKey": "exp_import_BOP.xls",
+              "retrievedAt": "2026-09-30T21:57:56.136Z",
+              "locator": {
+                "sheet": "Exp.Imp.(BOP)Arch",
+                "row": 796,
+                "column": 9,
+                "cell": "I796"
+              },
+              "rawValue": 6149.0333189179555
+            },
+            {
+              "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+              "sourceKey": "exp_import_BOP.xls",
+              "retrievedAt": "2026-09-30T21:57:56.136Z",
+              "locator": {
+                "sheet": "Exp.Imp.(BOP)Arch",
+                "row": 797,
+                "column": 9,
+                "cell": "I797"
+              },
+              "rawValue": 5485.962856116705
+            }
+          ]
+        }
+      }
     }
   ],
-  "drivers": [
-    "IMF EFF + RSF disbursements (~$1.3bn in May 2026)",
-    "Rollovers of bilateral deposits, notably from China and the Gulf",
-    "A contained current-account balance and stronger remittances",
-    "Tighter monetary policy supporting the rupee and inflows"
-  ],
+  "drivers": [],
   "context": "The latest official SBP reserve stock covers about 3.9 months of the trailing goods-import bill on this dashboard's stated calculation. This is a transparent directional measure, not the IMF's broader reserve-adequacy metric.",
   "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
   "lastVerified": "2026-09-30",
@@ -84,7 +437,220 @@
     "https://www.geo.tv/latest/612144-pakistan-exceeds-imfs-target-with-sbps-reserves-reaching-145bn",
     "https://www.imf.org/-/media/files/publications/cr/2026/english/1pakea2026001.pdf"
   ],
-  "methodologyNote": "The current 3.9-month figure is calculated as $21.4bn of SBP-held reserves divided by $5.47bn, the trailing 12-month average of SBP monthly goods imports through 2026-08. It therefore measures goods-import cover and may differ from official or IMF measures that use broader imports or reserve-adequacy methods. Historical trajectory points are reported estimates and are not recalculated on the same basis.",
+  "methodologyNote": "The current 3.9-month figure is calculated as $21.4bn of SBP-held reserves divided by $5.47bn, the trailing 12-month average of SBP monthly goods imports through 2026-08. It therefore measures goods-import cover and may differ from official or IMF measures that use broader imports or reserve-adequacy methods. Only historical points supported by archived inputs are retained.",
   "lastUpdated": "2026-09-30",
-  "lastChecked": "2026-09-30"
+  "lastChecked": "2026-09-30",
+  "sourceEvidence": {
+    "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b": {
+      "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+      "sha256": "8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868",
+      "sourceKey": "forex.pdf",
+      "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
+      "responseUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
+      "path": "/source-evidence/8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868.pdf",
+      "bytes": 142091,
+      "contentType": "application/pdf",
+      "retrievedAt": "2026-09-30T21:58:01.348Z",
+      "parserVersion": "parse-sbp-excel.mjs:sha256:a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+      "parserPath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt",
+      "parserDependencies": [
+        {
+          "file": "package-lock.json",
+          "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+          "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+        },
+        {
+          "file": "package.json",
+          "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+          "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+        },
+        {
+          "file": "scripts/data-catalog.mjs",
+          "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+          "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+        },
+        {
+          "file": "scripts/enforce-publication-policy.mjs",
+          "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+          "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+        },
+        {
+          "file": "scripts/lib/data-writer.mjs",
+          "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+          "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+        },
+        {
+          "file": "scripts/lib/ingestion-validation.mjs",
+          "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+          "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+        },
+        {
+          "file": "scripts/lib/provenance-store.mjs",
+          "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+          "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+        },
+        {
+          "file": "scripts/lib/publication-policy.mjs",
+          "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+          "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+        },
+        {
+          "file": "scripts/lib/release-calendar.mjs",
+          "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+          "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+        },
+        {
+          "file": "scripts/lib/reserves-parser.mjs",
+          "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+          "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+        },
+        {
+          "file": "scripts/lib/sbp-resolvers.mjs",
+          "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+          "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+        },
+        {
+          "file": "scripts/lib/services-headline.mjs",
+          "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+          "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+        },
+        {
+          "file": "scripts/lib/sheet-utils.mjs",
+          "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+          "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+        },
+        {
+          "file": "scripts/lib/source-docs.mjs",
+          "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+          "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+        },
+        {
+          "file": "scripts/lib/source-evidence.mjs",
+          "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+          "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+        },
+        {
+          "file": "scripts/pdf-text.mjs",
+          "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+          "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+        },
+        {
+          "file": "scripts/update-fbr.mjs",
+          "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+          "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+        }
+      ]
+    },
+    "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b": {
+      "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+      "sha256": "7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d",
+      "sourceKey": "exp_import_BOP.xls",
+      "sourceUrl": "https://www.sbp.org.pk/assets/document/exp_import_BOP_Arch.xls",
+      "responseUrl": "https://www.sbp.org.pk/assets/document/exp_import_BOP_Arch.xls",
+      "path": "/source-evidence/7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d.xls",
+      "bytes": 315392,
+      "contentType": "application/vnd.ms-excel",
+      "retrievedAt": "2026-09-30T21:57:56.136Z",
+      "parserVersion": "parse-sbp-excel.mjs:sha256:a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+      "parserPath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt",
+      "parserDependencies": [
+        {
+          "file": "package-lock.json",
+          "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+          "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+        },
+        {
+          "file": "package.json",
+          "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+          "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+        },
+        {
+          "file": "scripts/data-catalog.mjs",
+          "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+          "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+        },
+        {
+          "file": "scripts/enforce-publication-policy.mjs",
+          "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+          "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+        },
+        {
+          "file": "scripts/lib/data-writer.mjs",
+          "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+          "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+        },
+        {
+          "file": "scripts/lib/ingestion-validation.mjs",
+          "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+          "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+        },
+        {
+          "file": "scripts/lib/provenance-store.mjs",
+          "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+          "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+        },
+        {
+          "file": "scripts/lib/publication-policy.mjs",
+          "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+          "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+        },
+        {
+          "file": "scripts/lib/release-calendar.mjs",
+          "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+          "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+        },
+        {
+          "file": "scripts/lib/reserves-parser.mjs",
+          "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+          "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+        },
+        {
+          "file": "scripts/lib/sbp-resolvers.mjs",
+          "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+          "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+        },
+        {
+          "file": "scripts/lib/services-headline.mjs",
+          "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+          "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+        },
+        {
+          "file": "scripts/lib/sheet-utils.mjs",
+          "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+          "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+        },
+        {
+          "file": "scripts/lib/source-docs.mjs",
+          "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+          "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+        },
+        {
+          "file": "scripts/lib/source-evidence.mjs",
+          "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+          "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+        },
+        {
+          "file": "scripts/pdf-text.mjs",
+          "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+          "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+        },
+        {
+          "file": "scripts/update-fbr.mjs",
+          "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+          "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+        }
+      ]
+    }
+  },
+  "publication": {
+    "policy": "official-only",
+    "status": "partial",
+    "reason": "Only archive-backed reserve stocks and explicitly derived goods-import cover are published. Legacy estimated history, benchmark, IMF target and narrative drivers are withheld pending official evidence and review.",
+    "withheldFields": [
+      "benchmark",
+      "imfTarget",
+      "drivers",
+      "unsupported historical trajectory points"
+    ]
+  }
 }

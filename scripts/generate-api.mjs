@@ -13,6 +13,7 @@ import { readFile, writeFile, mkdir, rm } from 'fs/promises';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { DATASETS, SOURCE_TIERS, getDatasetFreshness } from './data-catalog.mjs';
+import { sha256 } from './lib/source-evidence.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = resolve(__dirname, '..', 'public', 'data');
@@ -44,7 +45,7 @@ function pickSeries(data) {
 
 function csvCell(value) {
   if (value === null || value === undefined) return '';
-  if (typeof value === 'object') return JSON.stringify(value).replace(/"/g, '""');
+  if (typeof value === 'object') return `"${JSON.stringify(value).replace(/"/g, '""')}"`;
   const text = String(value);
   return /[",\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
 }
@@ -67,16 +68,27 @@ function toCsv(rows) {
 }
 
 async function main() {
+  const quality = JSON.parse(await readFile(resolve(DATA_DIR, 'data-quality.json'), 'utf8'));
+  const artifacts = JSON.parse(await readFile(resolve(DATA_DIR, 'source-artifacts.json'), 'utf8'));
+  if (quality.status !== 'passed') throw new Error('Static API publication requires passing calculation and source checks');
+  const inputs = await Promise.all(DATASETS.map(async dataset => {
+    const body = await readFile(resolve(DATA_DIR, dataset.file));
+    if (quality.datasets?.[dataset.id]?.contentHash !== sha256(body)) throw new Error(`${dataset.id}: data changed after validation`);
+    return { dataset, body };
+  }));
   await rm(API_DIR, { recursive: true, force: true });
   await mkdir(resolve(API_DIR, VERSION), { recursive: true });
 
   const generatedAt = new Date().toISOString();
   const endpoints = [];
 
-  for (const dataset of DATASETS) {
-    const data = JSON.parse(await readFile(resolve(DATA_DIR, dataset.file), 'utf-8'));
-    const freshness = getDatasetFreshness(dataset, data);
-    const series = pickSeries(data);
+  for (const { dataset, body } of inputs) {
+    const data = JSON.parse(body.toString('utf8'));
+    const report = quality.datasets?.[dataset.id];
+    const freshness = getDatasetFreshness(dataset, data, {
+      checks: artifacts.checks || {}, validation: report?.contentHash === sha256(body) ? report : null,
+    });
+    const series = data.publication?.status === 'withheld' ? null : pickSeries(data);
 
     const jsonPath = `/api/${VERSION}/${dataset.id}.json`;
     await writeFile(
@@ -87,6 +99,10 @@ async function main() {
         source: dataset.source,
         sourceUrl: dataset.sourceUrl,
         sourceType: freshness.sourceType,
+        publication: freshness.publication,
+        authenticity: freshness.authenticity,
+        freshnessStatus: freshness.freshnessStatus,
+        validation: freshness.validation,
         cadence: dataset.cadence,
         latestObservation: freshness.latestObservation,
         dates: {
@@ -97,7 +113,7 @@ async function main() {
         },
         lastUpdated: data.lastUpdated || null,
         lastChecked: data.lastChecked || null,
-        licence: 'Official public data, redistributed with attribution. Cite the original institution.',
+        licence: 'Consult the issuing institution for reuse terms. Source attribution does not establish a redistribution licence.',
         data,
       }, null, 2)}\n`,
     );
@@ -112,6 +128,10 @@ async function main() {
       source: dataset.source,
       sourceUrl: dataset.sourceUrl,
       sourceType: freshness.sourceType,
+      publication: freshness.publication,
+      authenticity: freshness.authenticity,
+      freshnessStatus: freshness.freshnessStatus,
+      validation: freshness.validation,
       cadence: dataset.cadence,
       latestObservation: freshness.latestObservation,
       dates: {
@@ -131,7 +151,7 @@ async function main() {
   }
 
   // Meta endpoints so a consumer can discover provenance without scraping.
-  for (const file of ['provenance.json', 'data-freshness.json', 'release-calendar.json', 'revisions.json', 'editorial-notes.json', 'update-preview.json']) {
+  for (const file of ['provenance.json', 'data-freshness.json', 'release-calendar.json', 'revisions.json', 'editorial-notes.json', 'update-preview.json', 'source-artifacts.json', 'data-quality.json']) {
     try {
       const raw = await readFile(resolve(DATA_DIR, file), 'utf-8');
       await writeFile(resolve(API_DIR, VERSION, file), raw);
@@ -148,8 +168,8 @@ async function main() {
         cadence: 'Per update',
         latestObservation: null,
       });
-    } catch {
-      // A meta file that has not been generated yet simply is not published.
+    } catch (error) {
+      throw new Error(`Required API metadata ${file} cannot be published`, { cause: error });
     }
   }
 

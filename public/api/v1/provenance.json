@@ -1,48 +1,12 @@
 {
-  "generatedAt": "2026-09-30T19:11:20.889Z",
+  "generatedAt": "2026-09-30T22:09:48.072Z",
   "description": "Machine-readable citation for every headline figure on the dashboard. Each entry names the publishing institution, the exact source document, the worksheet and the row/column it was read from.",
   "sources": {
-    "fbr-collection": {
-      "id": "fbr-collection",
-      "institution": "Federal Board of Revenue",
-      "title": "FBR revenue collection statements",
-      "url": "https://www.fbr.gov.pk/",
-      "landingUrl": "https://www.fbr.gov.pk/",
-      "sourceType": "official-primary",
-      "cadence": "monthly"
-    },
-    "pbs-cpi": {
-      "id": "pbs-cpi",
-      "institution": "Pakistan Bureau of Statistics",
-      "title": "Consumer Price Index monthly review",
-      "url": "https://www.pbs.gov.pk/cpi",
-      "landingUrl": "https://www.pbs.gov.pk/",
-      "sourceType": "official-primary",
-      "cadence": "monthly"
-    },
     "sbp-bop-bpm6": {
       "id": "sbp-bop-bpm6",
       "institution": "State Bank of Pakistan",
       "title": "Balance of Payments (BPM6)",
       "url": "https://www.sbp.org.pk/assets/document/Balancepayment_BPM6.xls",
-      "landingUrl": "https://www.sbp.org.pk/ecodata/index2.asp",
-      "sourceType": "official-primary",
-      "cadence": "monthly"
-    },
-    "sbp-easydata": {
-      "id": "sbp-easydata",
-      "institution": "State Bank of Pakistan",
-      "title": "SBP EasyData statistical API",
-      "url": "https://easydata.sbp.org.pk/",
-      "landingUrl": "https://easydata.sbp.org.pk/",
-      "sourceType": "official-primary",
-      "cadence": "monthly"
-    },
-    "sbp-ebops-services": {
-      "id": "sbp-ebops-services",
-      "institution": "State Bank of Pakistan",
-      "title": "Trade in Services (EBOPS classification)",
-      "url": "https://archive.sbp.org.pk/ecodata/dt.xls",
       "landingUrl": "https://www.sbp.org.pk/ecodata/index2.asp",
       "sourceType": "official-primary",
       "cadence": "monthly"
@@ -83,15 +47,6 @@
       "sourceType": "official-primary",
       "cadence": "monthly"
     },
-    "sbp-monetary-policy": {
-      "id": "sbp-monetary-policy",
-      "institution": "State Bank of Pakistan",
-      "title": "Monetary Policy Statements and decisions",
-      "url": "https://www.sbp.org.pk/m_policy/index.asp",
-      "landingUrl": "https://www.sbp.org.pk/m_policy/index.asp",
-      "sourceType": "official-primary",
-      "cadence": "per-meeting"
-    },
     "sbp-netinflow-country": {
       "id": "sbp-netinflow-country",
       "institution": "State Bank of Pakistan",
@@ -100,6 +55,24 @@
       "landingUrl": "https://www.sbp.org.pk/ecodata/index2.asp",
       "sourceType": "official-primary",
       "cadence": "monthly"
+    },
+    "sbp-series-ts_gp_bop_wr_m.wr0010": {
+      "id": "sbp-series-ts_gp_bop_wr_m.wr0010",
+      "institution": "State Bank of Pakistan",
+      "title": "SBP EasyData series TS_GP_BOP_WR_M.WR0010",
+      "url": "https://easydata.sbp.org.pk/api/series/TS_GP_BOP_WR_M.WR0010/data",
+      "landingUrl": "https://easydata.sbp.org.pk",
+      "sourceType": "official-primary",
+      "cadence": "series-specific"
+    },
+    "sbp-series-ts_gp_pt_cpi_m.p00011516": {
+      "id": "sbp-series-ts_gp_pt_cpi_m.p00011516",
+      "institution": "State Bank of Pakistan",
+      "title": "SBP EasyData series TS_GP_PT_CPI_M.P00011516",
+      "url": "https://easydata.sbp.org.pk/api/series/TS_GP_PT_CPI_M.P00011516/data",
+      "landingUrl": "https://easydata.sbp.org.pk",
+      "sourceType": "official-primary",
+      "cadence": "series-specific"
     },
     "sbp-services-headline": {
       "id": "sbp-services-headline",
@@ -115,106 +88,263 @@
     "exchange-rates.monthly.usd": {
       "label": "PKR/USD interbank closing rate, monthly average",
       "sourceId": "sbp-ibf-arch",
-      "sheet": null,
-      "location": "Interbank rates archive, USD column",
+      "sheet": "Monthly Avg. Ex. Rates in PKR",
+      "location": "{\"sheet\":\"Monthly Avg. Ex. Rates in PKR\",\"row\":849,\"column\":24,\"cell\":\"X849\"}",
       "period": "2026-08",
-      "status": "final",
+      "status": "not-stated",
       "unit": "PKR per USD",
       "value": 277.92,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-09-30"
-    },
-    "fbr.fytd.net": {
-      "label": "FBR net tax collection, fiscal year to date",
-      "sourceId": "fbr-collection",
-      "sheet": null,
-      "location": "FBR revenue collection statement, net collection",
-      "period": "Jul–Jun FY2026",
-      "status": "provisional",
-      "unit": "PKR trillion",
-      "value": 13,
-      "derivedFrom": null,
-      "note": "Currently sourced from press reporting of provisional FBR figures, not an FBR publication.",
-      "retrievedAt": "2026-09-30"
+      "retrievedAt": "2026-09-30T21:58:06.500Z",
+      "evidence": {
+        "artifactId": "IBF_Arch.xls:9841e21ca29483ce31a45a912275f83e36e6a53e4545a41ba45a4b9996aa2b7c:014515a6f2dd",
+        "sourceKey": "IBF_Arch.xls",
+        "retrievedAt": "2026-09-30T21:58:06.500Z",
+        "locator": {
+          "sheet": "Monthly Avg. Ex. Rates in PKR",
+          "row": 849,
+          "column": 24,
+          "cell": "X849"
+        },
+        "rawValue": 277.9187405947368
+      },
+      "locator": {
+        "sheet": "Monthly Avg. Ex. Rates in PKR",
+        "row": 849,
+        "column": 24,
+        "cell": "X849"
+      },
+      "seriesKey": null,
+      "rawValue": null,
+      "rawUnit": null,
+      "transformation": null
     },
     "fdi.fytd.current": {
       "label": "Net foreign direct investment, fiscal year to date",
       "sourceId": "sbp-netinflow-country",
       "sheet": "Country",
-      "location": "\"Total\" row, net FDI column of the current fiscal-year-to-date block",
+      "location": "{\"sheet\":\"Country\",\"row\":66,\"column\":11,\"cell\":\"K66\"}",
       "period": "Jul-Aug FY2027 (P)",
       "status": "provisional",
       "unit": "US$ billion",
       "value": 0.49,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-09-30"
+      "retrievedAt": "2026-09-30T21:57:58.574Z",
+      "evidence": {
+        "artifactId": "Netinflow.xls:51f6f6f0ba1d742563fd836b0aac101be7b281bdc05f27a4505c320134c9dd0f:97abc66641b2",
+        "sourceKey": "Netinflow.xls",
+        "retrievedAt": "2026-09-30T21:57:58.574Z",
+        "locator": {
+          "sheet": "Country",
+          "row": 66,
+          "column": 11,
+          "cell": "K66"
+        },
+        "rawValue": 494.45320469886065,
+        "scale": 0.001
+      },
+      "locator": {
+        "sheet": "Country",
+        "row": 66,
+        "column": 11,
+        "cell": "K66"
+      },
+      "seriesKey": null,
+      "rawValue": null,
+      "rawUnit": null,
+      "transformation": null
     },
     "fiscal.gdpGrowth.latest": {
       "label": "Real GDP growth rate at constant basic prices of 2015-16",
       "sourceId": "sbp-gdp-table",
       "sheet": "Annual",
-      "location": "\"GDP Growth Rate (%)\" row",
-      "period": "FY2026 (Est.)",
-      "status": "estimate",
+      "location": "{\"sheet\":\"Annual\",\"row\":6,\"column\":30,\"cell\":\"AD6\"}",
+      "period": "FY2026",
+      "status": "not-stated",
       "unit": "%",
       "value": 3.7,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-09-30"
+      "retrievedAt": "2026-09-30T21:58:00.092Z",
+      "evidence": {
+        "artifactId": "GDP_table.xlsx:6bcf5cac2a6f2e34acd03f0332eb92132a9b36d5b9ef8bf04245f74d9a449761:8c69f6d3578b",
+        "sourceKey": "GDP_table.xlsx",
+        "retrievedAt": "2026-09-30T21:58:00.092Z",
+        "locator": {
+          "sheet": "Annual",
+          "row": 6,
+          "column": 30,
+          "cell": "AD6"
+        },
+        "rawValue": 3.701874914329025,
+        "unit": "%",
+        "sourceUnit": "GDP Growth Rate (%)",
+        "periodHeader": {
+          "row": 5,
+          "column": 30,
+          "cell": "AD5",
+          "text": "2025-26"
+        },
+        "unitHeader": {
+          "row": 6,
+          "column": 3,
+          "cell": "C6",
+          "text": "GDP Growth Rate (%)"
+        }
+      },
+      "locator": {
+        "sheet": "Annual",
+        "row": 6,
+        "column": 30,
+        "cell": "AD6"
+      },
+      "seriesKey": null,
+      "rawValue": null,
+      "rawUnit": null,
+      "transformation": null
     },
     "inflation.nationalCpi.latest": {
       "label": "National Consumer Price Index, year-on-year inflation",
-      "sourceId": "pbs-cpi",
+      "sourceId": "sbp-series-ts_gp_pt_cpi_m.p00011516",
       "sheet": null,
-      "location": "Monthly CPI review, national year-on-year rate",
+      "location": "{\"seriesKey\":\"TS_GP_PT_CPI_M.P00011516\",\"observationDate\":\"2026-08-31\",\"row\":1,\"column\":5,\"columns\":{\"seriesKey\":2,\"date\":4,\"value\":5,\"unit\":6,\"status\":7,\"comments\":8}}",
       "period": "2026-08",
-      "status": "final",
+      "status": "not-stated",
       "unit": "%",
       "value": 11.1,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-09-30"
-    },
-    "monetaryPolicy.currentRate": {
-      "label": "SBP policy (target) rate set by the Monetary Policy Committee",
-      "sourceId": "sbp-monetary-policy",
-      "sheet": null,
-      "location": "Latest Monetary Policy Statement",
-      "period": "2026-07-27",
-      "status": "final",
-      "unit": "%",
-      "value": 11.5,
-      "derivedFrom": null,
-      "note": null,
-      "retrievedAt": "2026-09-30"
+      "retrievedAt": "2026-09-30T22:08:39.268Z",
+      "evidence": {
+        "artifactId": "TS_GP_PT_CPI_M.P00011516:992ea9d6835afb2264ee8f8289a0a8ca857050e6ceb60fcf75307ace6671092a:0d69e7d9200f",
+        "sourceKey": "TS_GP_PT_CPI_M.P00011516",
+        "retrievedAt": "2026-09-30T22:08:39.268Z",
+        "locator": {
+          "seriesKey": "TS_GP_PT_CPI_M.P00011516",
+          "observationDate": "2026-08-31",
+          "row": 1,
+          "column": 5,
+          "columns": {
+            "seriesKey": 2,
+            "date": 4,
+            "value": 5,
+            "unit": 6,
+            "status": 7,
+            "comments": 8
+          }
+        },
+        "rawValue": "11.1"
+      },
+      "locator": {
+        "seriesKey": "TS_GP_PT_CPI_M.P00011516",
+        "observationDate": "2026-08-31",
+        "row": 1,
+        "column": 5,
+        "columns": {
+          "seriesKey": 2,
+          "date": 4,
+          "value": 5,
+          "unit": 6,
+          "status": 7,
+          "comments": 8
+        }
+      },
+      "seriesKey": null,
+      "rawValue": null,
+      "rawUnit": null,
+      "transformation": null
     },
     "remittances.monthly.total": {
       "label": "Workers’ remittances, monthly total",
-      "sourceId": "sbp-easydata",
+      "sourceId": "sbp-series-ts_gp_bop_wr_m.wr0010",
       "sheet": null,
-      "location": "Workers’ remittances by country of origin, total",
+      "location": "{\"seriesKey\":\"TS_GP_BOP_WR_M.WR0010\",\"observationDate\":\"2026-08-31\",\"row\":1,\"column\":5,\"columns\":{\"seriesKey\":2,\"date\":4,\"value\":5,\"unit\":6,\"status\":7,\"comments\":8}}",
       "period": "2026-08",
-      "status": "final",
+      "status": "not-stated",
       "unit": "US$ billion",
       "value": 3.66,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-09-30"
+      "retrievedAt": "2026-09-30T22:08:37.395Z",
+      "evidence": {
+        "artifactId": "TS_GP_BOP_WR_M.WR0010:beff53d74ac04b0f76a7669282f3036df37342e97a32ac615a4f716961de04b1:2c11aac59663",
+        "sourceKey": "TS_GP_BOP_WR_M.WR0010",
+        "retrievedAt": "2026-09-30T22:08:37.395Z",
+        "locator": {
+          "seriesKey": "TS_GP_BOP_WR_M.WR0010",
+          "observationDate": "2026-08-31",
+          "row": 1,
+          "column": 5,
+          "columns": {
+            "seriesKey": 2,
+            "date": 4,
+            "value": 5,
+            "unit": 6,
+            "status": 7,
+            "comments": 8
+          }
+        },
+        "rawValue": "3656.33767",
+        "scale": 0.001
+      },
+      "locator": {
+        "seriesKey": "TS_GP_BOP_WR_M.WR0010",
+        "observationDate": "2026-08-31",
+        "row": 1,
+        "column": 5,
+        "columns": {
+          "seriesKey": 2,
+          "date": 4,
+          "value": 5,
+          "unit": 6,
+          "status": 7,
+          "comments": 8
+        }
+      },
+      "seriesKey": null,
+      "rawValue": null,
+      "rawUnit": null,
+      "transformation": null
     },
     "reserves.weekly.total": {
       "label": "Total liquid foreign exchange reserves (SBP + scheduled banks)",
       "sourceId": "sbp-forex-reserves",
       "sheet": null,
-      "location": "Weekly reserves statement, \"Total Liquid Foreign Reserves\" line",
+      "location": "{\"page\":1,\"x\":29.051,\"y\":41.999,\"dateLabel\":\"18-Sep-26\",\"columnLabel\":\"TOTAL LIQUID     \"}",
       "period": "2026-09-18",
-      "status": "final",
+      "status": "not-stated",
       "unit": "US$ billion",
       "value": 26.81,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-09-30"
+      "retrievedAt": "2026-09-30T21:58:01.348Z",
+      "evidence": {
+        "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+        "sourceKey": "forex.pdf",
+        "retrievedAt": "2026-09-30T21:58:01.348Z",
+        "locator": {
+          "page": 1,
+          "x": 29.051,
+          "y": 41.999,
+          "dateLabel": "18-Sep-26",
+          "columnLabel": "TOTAL LIQUID     "
+        },
+        "rawValue": "26,810.6",
+        "scale": 0.001
+      },
+      "locator": {
+        "page": 1,
+        "x": 29.051,
+        "y": 41.999,
+        "dateLabel": "18-Sep-26",
+        "columnLabel": "TOTAL LIQUID     "
+      },
+      "seriesKey": null,
+      "rawValue": null,
+      "rawUnit": null,
+      "transformation": null
     },
     "services.bop.cumulative": {
       "label": "Balance on trade in services, fiscal year to date",
@@ -227,7 +357,29 @@
       "value": -562,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-09-30"
+      "retrievedAt": "2026-09-30T21:58:00.723Z",
+      "evidence": {
+        "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+        "sourceKey": "Balancepayment_BPM6.xls",
+        "retrievedAt": "2026-09-30T21:58:00.723Z",
+        "locator": {
+          "sheet": "BPM6_Summary",
+          "row": 15,
+          "column": 9,
+          "cell": "I15"
+        },
+        "rawValue": -562
+      },
+      "locator": {
+        "sheet": "BPM6_Summary",
+        "row": 15,
+        "column": 9,
+        "cell": "I15"
+      },
+      "seriesKey": null,
+      "rawValue": null,
+      "rawUnit": null,
+      "transformation": null
     },
     "services.bop.latestMonth": {
       "label": "Exports of services, latest published month",
@@ -240,33 +392,78 @@
       "value": 872,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-09-30"
+      "retrievedAt": "2026-09-30T21:58:00.723Z",
+      "evidence": {
+        "artifactId": "Balancepayment_BPM6.xls:c045c432aaf8d92738ba69e84ff30b0215e10173926883b23d7ed183616fd5dd:afef84d7574c",
+        "sourceKey": "Balancepayment_BPM6.xls",
+        "retrievedAt": "2026-09-30T21:58:00.723Z",
+        "locator": {
+          "sheet": "BPM6_Summary",
+          "row": 13,
+          "column": 7,
+          "cell": "G13"
+        },
+        "rawValue": 872
+      },
+      "locator": {
+        "sheet": "BPM6_Summary",
+        "row": 13,
+        "column": 7,
+        "cell": "G13"
+      },
+      "seriesKey": null,
+      "rawValue": null,
+      "rawUnit": null,
+      "transformation": null
     },
     "services.itHeadline.fytd": {
       "label": "Telecommunications, computer and information services exports (credit)",
       "sourceId": "sbp-services-headline",
       "sheet": null,
-      "location": "IT & Telecommunication Services, current fiscal-year cumulative column",
-      "period": "null FY27",
+      "location": "{\"derivation\":\"US$ million divided by 1000 to US$ billion\",\"inputs\":[{\"artifactId\":\"ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:ab5ed8e3f335\",\"sourceKey\":\"ExportsImports-Goods.pdf\",\"retrievedAt\":\"2026-09-30T21:58:19.141Z\",\"locator\":{\"page\":1,\"rowLabel\":\"9. Telecommunications, Computer, and Information Services\",\"x\":32.816,\"y\":16.501,\"rawValue\":\"811\",\"periodHeader\":{\"x\":30.454,\"y\":5.649,\"text\":\"Jul-Aug\"},\"fiscalYearHeader\":{\"x\":31.848999999999997,\"y\":6.339,\"text\":\"FY27\"}},\"rawValue\":\"811\",\"sourceUnit\":\"US$ million\",\"unit\":\"US$ million\",\"scale\":1}]}",
+      "period": "Jul-Aug FY27",
       "status": "provisional",
       "unit": "US$ billion",
       "value": 0.81,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-09-30"
-    },
-    "services.itTelecom.credit": {
-      "label": "Telecommunications, computer and information services exports (credit)",
-      "sourceId": "sbp-ebops-services",
-      "sheet": null,
-      "location": "EBOPS line 9 \"Telecommunications, Computer and information services\", credit column",
-      "period": "Jul-May FY26",
-      "status": "provisional",
-      "unit": "US$ billion",
-      "value": 4.18,
-      "derivedFrom": null,
-      "note": null,
-      "retrievedAt": "2026-08-07"
+      "retrievedAt": "2026-09-30T21:58:19.141Z",
+      "evidence": {
+        "derivation": "US$ million divided by 1000 to US$ billion",
+        "inputs": [
+          {
+            "artifactId": "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:ab5ed8e3f335",
+            "sourceKey": "ExportsImports-Goods.pdf",
+            "retrievedAt": "2026-09-30T21:58:19.141Z",
+            "locator": {
+              "page": 1,
+              "rowLabel": "9. Telecommunications, Computer, and Information Services",
+              "x": 32.816,
+              "y": 16.501,
+              "rawValue": "811",
+              "periodHeader": {
+                "x": 30.454,
+                "y": 5.649,
+                "text": "Jul-Aug"
+              },
+              "fiscalYearHeader": {
+                "x": 31.848999999999997,
+                "y": 6.339,
+                "text": "FY27"
+              }
+            },
+            "rawValue": "811",
+            "sourceUnit": "US$ million",
+            "unit": "US$ million",
+            "scale": 1
+          }
+        ]
+      },
+      "locator": null,
+      "seriesKey": null,
+      "rawValue": null,
+      "rawUnit": null,
+      "transformation": null
     },
     "services.itTelecom.headline": {
       "label": "Telecommunications, computer and information services exports (credit), latest month",
@@ -274,25 +471,94 @@
       "sheet": null,
       "location": "Row 9 \"Telecommunications, Computer, and Information Services\", 2026-08 column",
       "period": null,
-      "status": "final",
+      "status": "provisional",
       "unit": "US$ million",
       "value": 394,
       "derivedFrom": null,
       "note": null,
-      "retrievedAt": "2026-09-30"
+      "retrievedAt": "2026-09-30T21:58:19.141Z",
+      "evidence": {
+        "artifactId": "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:ab5ed8e3f335",
+        "sourceKey": "ExportsImports-Goods.pdf",
+        "retrievedAt": "2026-09-30T21:58:19.141Z",
+        "locator": {
+          "page": 1,
+          "rowLabel": "9. Telecommunications, Computer, and Information Services",
+          "x": 27.864,
+          "y": 16.501,
+          "rawValue": "394",
+          "periodHeader": {
+            "x": 27.062,
+            "y": 5.649,
+            "text": "Aug"
+          },
+          "fiscalYearHeader": {
+            "x": 26.897,
+            "y": 6.339,
+            "text": "FY27"
+          }
+        },
+        "rawValue": "394",
+        "sourceUnit": "US$ million",
+        "unit": "US$ million",
+        "scale": 1
+      },
+      "locator": {
+        "page": 1,
+        "rowLabel": "9. Telecommunications, Computer, and Information Services",
+        "x": 27.864,
+        "y": 16.501,
+        "rawValue": "394",
+        "periodHeader": {
+          "x": 27.062,
+          "y": 5.649,
+          "text": "Aug"
+        },
+        "fiscalYearHeader": {
+          "x": 26.897,
+          "y": 6.339,
+          "text": "FY27"
+        }
+      },
+      "seriesKey": null,
+      "rawValue": null,
+      "rawUnit": null,
+      "transformation": null
     },
     "trade.monthly.balance": {
       "label": "Monthly goods trade balance (BOP basis)",
       "sourceId": "sbp-exp-import-bop",
-      "sheet": null,
-      "location": "Exports and imports of goods, monthly",
+      "sheet": "Exp.Imp.(BOP)Arch",
+      "location": "{\"sheet\":\"Exp.Imp.(BOP)Arch\",\"row\":797,\"column\":13,\"cell\":\"M797\"}",
       "period": "2026-08",
-      "status": "final",
+      "status": "provisional",
       "unit": "US$ million",
       "value": -3026,
       "derivedFrom": "Exports of $2460M less imports of $5486M as published by SBP",
       "note": null,
-      "retrievedAt": "2026-09-30"
+      "retrievedAt": "2026-09-30T21:57:56.136Z",
+      "evidence": {
+        "artifactId": "exp_import_BOP.xls:7f8ce136f1e06f8ba6981f9ecb09c98effffe368485f52ccba0c93cb152eb55d:5fb0e377cf3b",
+        "sourceKey": "exp_import_BOP.xls",
+        "retrievedAt": "2026-09-30T21:57:56.136Z",
+        "locator": {
+          "sheet": "Exp.Imp.(BOP)Arch",
+          "row": 797,
+          "column": 13,
+          "cell": "M797"
+        },
+        "rawValue": -3025.9723895310976
+      },
+      "locator": {
+        "sheet": "Exp.Imp.(BOP)Arch",
+        "row": 797,
+        "column": 13,
+        "cell": "M797"
+      },
+      "seriesKey": null,
+      "rawValue": null,
+      "rawUnit": null,
+      "transformation": null
     }
   }
 }

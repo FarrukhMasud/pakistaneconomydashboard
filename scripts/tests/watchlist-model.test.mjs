@@ -6,6 +6,7 @@ import { buildOverviewIndicators, KPI_ROUTES } from '../../src/utils/overviewMod
 import { normalizePins, resolveWatchlistItems } from '../../src/utils/watchlistModel.js';
 import { createWatchlistStore, WATCHLIST_STORAGE_KEY } from '../../src/utils/watchlistStore.js';
 import { routeToPath } from '../../src/hooks/useHashRoute.js';
+import { formatKpiDisplay, formatKpiPeriod } from '../../src/utils/kpiFormat.js';
 
 const readData = (file) => JSON.parse(readFileSync(new URL(`../../public/data/${file}.json`, import.meta.url)));
 const snapshot = readData('indicators');
@@ -22,21 +23,53 @@ function memoryStorage(initial = []) {
   };
 }
 
-test('all KPI and catalog pins resolve labels and routes without raw ids or missing enriched values', () => {
+test('all KPI and catalog pins retain labels and routes when figures are unavailable', () => {
   const pins = [...Object.keys(KPI_ROUTES), ...INDICATOR_CATALOG.map((row) => row.id)];
   const items = resolveWatchlistItems(pins, indicators);
   assert.ok(items.every((item) => item.kind !== 'unknown' && item.label && item.label !== item.id));
   assert.ok(items.every((item) => item.groupId && item.sectionId));
   for (const item of items.filter((row) => row.kind === 'kpi')) {
-    assert.ok(item.value, `Missing ${item.id} value`);
-    assert.ok(item.period, `Missing ${item.id} period`);
+    const indicator = indicators.find((row) => row.id === item.id);
+    assert.equal(item.value, indicator && !indicator.unavailable ? formatKpiDisplay(indicator) : null);
+    assert.equal(item.period, indicator ? formatKpiPeriod(indicator.period) : null);
+    if (indicator?.unavailable) assert.equal(item.unavailable, indicator.unavailable);
   }
-  const debt = snapshot.indicators.find((row) => row.id === 'public-debt');
-  assert.equal(items.find((row) => row.id === 'public-debt').value, `${debt.value} ${debt.unit}`);
   assert.equal(items.find((row) => row.id === 'ind-debt').sectionId, 'financing-wall');
   assert.equal(items.find((row) => row.id === 'circular-debt').groupId, 'fiscal');
   assert.equal(items.find((row) => row.id === 'circular-debt').sectionId, 'fiscal');
   assert.equal(items.find((row) => row.id === 'ind-country').value, null);
+});
+
+test('watchlist hides stale withheld figures without losing routes or replacing absence with zero', () => {
+  const reason = 'Current collection is unavailable without an official release.';
+  const enriched = buildOverviewIndicators({
+    summary: {
+      indicators: [
+        { id: 'reserves', label: 'Foreign Reserves (Total)', value: 0, unit: 'USD bn', period: '2026-07', sourceType: 'official-primary' },
+        { id: 'fbr-tax', label: 'FBR Tax Collection', value: 13, unit: 'T PKR', period: 'FY2026', sourceType: 'official-primary', change: 5, sentiment: 'positive' },
+      ],
+    },
+    snapshot: { publication: { policy: 'official-only', status: 'withheld', reason, withheldFields: ['indicators'] } },
+    freshness: {
+      datasets: [
+        { id: 'reserves', authenticity: 'official-primary' },
+        { id: 'fbr-tax', authenticity: 'official-primary', publication: { policy: 'official-only', status: 'partial', reason, withheldFields: ['fytd'] } },
+      ],
+    },
+  });
+  const [reserves, fbr, debt] = resolveWatchlistItems(['reserves', 'fbr-tax', 'public-debt'], enriched);
+  assert.equal(reserves.value, '0 USD bn');
+  assert.equal(fbr.value, null);
+  assert.equal(fbr.unavailable.reason, reason);
+  assert.equal(fbr.trust.value, null);
+  assert.equal(fbr.trust.change, null);
+  assert.equal(fbr.sentiment, 'neutral');
+  assert.equal(fbr.groupId, 'fiscal');
+  assert.equal(fbr.sectionId, 'fbr');
+  assert.equal(debt.value, null);
+  assert.equal(debt.period, null);
+  assert.equal(debt.label, 'Total Public Debt');
+  assert.equal(debt.sectionId, 'fiscal');
 });
 
 test('unclassified snapshot pins retain attributed source text without an inferred official tier', () => {

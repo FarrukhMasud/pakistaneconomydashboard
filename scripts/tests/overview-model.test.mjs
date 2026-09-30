@@ -28,6 +28,8 @@ import {
 test('KPI periods and units use one display language', () => {
   assert.equal(formatKpiPeriod('2026-07-31'), '31 Jul 2026');
   assert.equal(formatKpiPeriod('2026-07'), 'Jul 2026');
+  assert.equal(formatKpiPeriod({ start: '2026-07', end: '2026-08', fiscalYear: 2027 }), 'Jul 2026 – Aug 2026 (FY2027)');
+  assert.equal(formatKpiPeriod({ start: '2026-07' }), '—');
   assert.equal(formatKpiUnit('T PKR'), 'Rs tn');
   assert.equal(formatKpiUnit('$ Billion'), 'USD bn');
   assert.equal(formatCompareBasis('vs 2026-06'), 'vs Jun 2026');
@@ -44,6 +46,7 @@ test('trade KPI uses YoY as the headline change', () => {
       { date: '2026-06', imports: 6100, exports: 2550, balance: -3550 },
     ],
   });
+
   assert.equal(kpi.id, 'trade');
   assert.equal(kpi.value, -3.55);
   assert.equal(kpi.unit, 'USD bn');
@@ -52,6 +55,14 @@ test('trade KPI uses YoY as the headline change', () => {
   assert.match(kpi.changeBasis, /YoY/);
   assert.equal(kpi.sentiment, 'negative');
   assert.equal(kpiRoute('trade').sectionId, 'trade');
+});
+
+test('derived trade headline carries the exact source balance input and source status', () => {
+  const evidence = { artifactId: 'official-trade', locator: { cell: 'Q797' }, rawValue: -3030 };
+  const kpi = buildTradeKpi({ monthly: [{ date: '2026-08', balance: -3030, status: 'provisional', evidence: { balance: evidence } }] });
+  assert.equal(kpi.provenanceKey, 'trade.monthly.balance');
+  assert.equal(kpi.status, 'provisional');
+  assert.deepEqual(kpi.evidence.inputs, [evidence]);
 });
 
 test('seasonal remittances headline is YoY, not MoM', () => {

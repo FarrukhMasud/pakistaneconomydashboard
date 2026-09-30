@@ -29,8 +29,9 @@ export function formatDayMonthYear(dateStr) {
 
 /** Parse "YYYY-MM" or "YYYY-MM-DD" into { year, month } */
 function parseYM(dateStr) {
-  const [y, m] = dateStr.split('-').map(Number);
-  return { year: y, month: m };
+  if (typeof dateStr !== 'string' || !/^\d{4}-\d{2}(?:-\d{2})?$/.test(dateStr)) return { year: null, month: null };
+  const [year, month] = dateStr.split('-').map(Number);
+  return month >= 1 && month <= 12 ? { year, month } : { year: null, month: null };
 }
 
 /**
@@ -40,7 +41,8 @@ function parseYM(dateStr) {
  */
 export function currentCalendarYear(rows) {
   if (!rows?.length) return null;
-  const sorted = [...rows].sort((a, b) => a.date.localeCompare(b.date));
+  const sorted = rows.filter((row) => parseYM(row?.date).year != null).sort((a, b) => a.date.localeCompare(b.date));
+  if (!sorted.length) return null;
   const latest = parseYM(sorted[sorted.length - 1].date);
   const first = sorted.find(r => parseYM(r.date).year === latest.year);
   const firstMonth = first ? parseYM(first.date).month : 1;
@@ -73,6 +75,7 @@ export function currentCalendarYear(rows) {
 export function toFYLabel(dateOrFY) {
   if (typeof dateOrFY === 'string' && dateOrFY.startsWith('FY')) return dateOrFY;
   const { year, month } = parseYM(dateOrFY);
+  if (!year || !month) return null;
   // FY label is the year the FY ends in (July-June cycle)
   const fy = month >= 7 ? year + 1 : year;
   return `FY${String(fy).slice(-2)}`;
@@ -80,10 +83,10 @@ export function toFYLabel(dateOrFY) {
 
 /**
  * Compute % change between two values.
- * Returns { pct: number, direction: "up"|"down"|"flat" }
+ * Returns a nullable percentage and "up"|"down"|"flat"|"unavailable".
  */
 export function pctChange(current, previous) {
-  if (!previous || previous === 0) return { pct: null, direction: 'flat' };
+  if (!isFiniteNumber(current) || !isFiniteNumber(previous) || previous === 0) return { pct: null, direction: 'unavailable' };
   const pct = ((current - previous) / Math.abs(previous)) * 100;
   const direction = pct > 0.5 ? 'up' : pct < -0.5 ? 'down' : 'flat';
   return { pct: Math.round(pct * 10) / 10, direction };
@@ -91,7 +94,7 @@ export function pctChange(current, previous) {
 
 /** Format a number with $ B/M suffix */
 export function fmtUSD(val) {
-  if (val == null) return '—';
+  if (!isFiniteNumber(val)) return '—';
   const abs = Math.abs(val);
   if (abs >= 1e3) return (val / 1e3).toFixed(1) + 'B';
   return val.toFixed(1) + 'M';
@@ -99,7 +102,7 @@ export function fmtUSD(val) {
 
 /** Format PKR with T/B/M suffix */
 export function fmtPKR(val) {
-  if (val == null) return '—';
+  if (!isFiniteNumber(val)) return '—';
   const abs = Math.abs(val);
   if (abs >= 1e6) return '₨ ' + (val / 1e6).toFixed(1) + 'T';
   if (abs >= 1e3) return '₨ ' + (val / 1e3).toFixed(0) + 'B';
@@ -108,25 +111,26 @@ export function fmtPKR(val) {
 
 /** Format as percentage string */
 export function fmtPct(val, decimals = 1) {
-  if (val == null) return '—';
+  if (!isFiniteNumber(val)) return '—';
   return val.toFixed(decimals) + '%';
 }
 
 /** Format exchange rate */
 export function fmtRate(val) {
-  if (val == null) return '—';
+  if (!isFiniteNumber(val)) return '—';
   return val.toFixed(2);
 }
 
 /** Sum a numeric field from an array of objects */
 export function sumField(rows, field) {
-  return rows.reduce((s, r) => s + (Number(r[field]) || 0), 0);
+  if (!rows?.length || !rows.every((row) => isFiniteNumber(row[field]))) return null;
+  return rows.reduce((sum, row) => sum + row[field], 0);
 }
 
 /** Average a numeric field */
 export function avgField(rows, field) {
-  if (!rows.length) return 0;
-  return sumField(rows, field) / rows.length;
+  const sum = sumField(rows, field);
+  return sum == null ? null : sum / rows.length;
 }
 
 /** Get the latest value from a sorted data array */
@@ -158,7 +162,8 @@ export function deriveFiscalLabels(rowsOrDate) {
   if (typeof rowsOrDate === 'string') {
     ({ year, month } = parseYM(rowsOrDate));
   } else if (Array.isArray(rowsOrDate) && rowsOrDate.length) {
-    const sorted = [...rowsOrDate].sort((a, b) => String(a.date).localeCompare(String(b.date)));
+    const sorted = rowsOrDate.filter((row) => parseYM(row?.date).year != null).sort((a, b) => String(a.date).localeCompare(String(b.date)));
+    if (!sorted.length) return null;
     ({ year, month } = parseYM(sorted[sorted.length - 1].date));
   } else {
     return null;
@@ -266,7 +271,8 @@ export function buildYoYOverlay(rows, field, { matchGrain = false } = {}) {
  */
 export function currentFiscalYear(rows) {
   if (!rows?.length) return null;
-  const sorted = [...rows].sort((a, b) => a.date.localeCompare(b.date));
+  const sorted = rows.filter((row) => parseYM(row?.date).year != null).sort((a, b) => a.date.localeCompare(b.date));
+  if (!sorted.length) return null;
   const latest = parseYM(sorted[sorted.length - 1].date);
 
   // Determine which FY the latest data falls in
@@ -400,6 +406,7 @@ export function buildMonthlyComparisonFromSeries(rows, field = 'net_fdi') {
   return {
     month: MONTH_NAMES[month - 1],
     current: {
+      ...latest,
       label: currentLabels?.fyFull || `FY${year}`,
       net_fdi: latest.net_fdi ?? latest[field],
       inflow: latest.inflow ?? null,
@@ -409,6 +416,7 @@ export function buildMonthlyComparisonFromSeries(rows, field = 'net_fdi') {
       date: latest.date,
     },
     prior: {
+      ...prior,
       label: priorLabels?.fyFull || `FY${year - 1}`,
       net_fdi: prior.net_fdi ?? prior[field],
       inflow: prior.inflow ?? null,

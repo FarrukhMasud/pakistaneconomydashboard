@@ -1,7 +1,9 @@
 import { visibleChartData } from './chartTimeRange.js';
+import { evidenceListOf, sourceFigureStatus } from './figureTrust.js';
+import { chartEvidenceFor } from './chartEvidence.js';
 
 /** Escapes a single CSV cell, quoting only when necessary. */
-function csvCell(value) {
+export function csvCell(value) {
   if (value === null || value === undefined) return '';
   if (typeof value === 'object') {
     if ('y' in value) return csvCell(value.y);
@@ -16,16 +18,30 @@ function csvCell(value) {
  * Converts a Chart.js data object into CSV with one row per label and one
  * column per visible dataset, so what a reader downloads is exactly what they see.
  */
-export function chartToCsv(chartData, { title } = {}) {
+export function chartToCsv(chartData, { title, evidenceRows, observationDates, derivation } = {}) {
   if (!chartData?.labels?.length) return '';
   const datasets = visibleChartData(chartData).datasets.filter((dataset) => Array.isArray(dataset.data));
-  const header = ['Period', ...datasets.map((dataset, index) => dataset.label || `Series ${index + 1}`)];
+  const includeEvidence = Array.isArray(evidenceRows);
+  const header = ['Period', ...datasets.map((dataset, index) => dataset.label || `Series ${index + 1}`),
+    ...(includeEvidence ? ['Source status', 'Evidence observation periods', 'Original source', 'Source artifact', 'Artifact retrieved', 'Source locator', 'Downloaded from', 'Parser version', 'Derivation'] : [])];
   const lines = [header.map(csvCell).join(',')];
   chartData.labels.forEach((label, rowIndex) => {
-    lines.push([label, ...datasets.map((dataset) => dataset.data[rowIndex])].map(csvCell).join(','));
+    const sources = datasets.map((series) => ({ series, ...chartEvidenceFor(series, rowIndex, { evidenceRows, observationDates, label }) }));
+    const join = (key) => sources.map(({ series, rows }) => `${series.label}: ${rows.flatMap((row) => evidenceListOf(row)).map((item) =>
+      typeof item[key] === 'object' && item[key] ? JSON.stringify(item[key]) : item[key]).filter(Boolean).join(' | ') || 'Not recorded'}`).join(' ; ');
+    lines.push([label, ...datasets.map((dataset) => dataset.data[rowIndex] ?? 'Unavailable'),
+      ...(includeEvidence ? [
+        sources.map(({ series, period, rows }) => `${series.label} (${period || 'Period not stated'}): ${rows.map(sourceFigureStatus).join(' | ') || 'Source status not stated'}`).join(' ; '),
+        sources.map(({ series, rows }) => `${series.label}: ${rows.map((row) => row.observationDate || row.date || row.month || row.period || row.fy || row.year || 'Period not stated').join(' | ') || 'Not recorded'}`).join(' ; '),
+        join('sourceUrl'), join('artifactUrl'), join('retrievedAt'),
+        join('locator'),
+        join('responseUrl'), join('parserVersion'),
+        sources.map(({ series, rows }) => `${series.label}: ${series.derivation || derivation || rows.map((row) => row.derivation || row.derivedFrom).filter(Boolean).join(' | ') || 'No derivation documented; see source'}`).join(' ; '),
+      ] : []),
+    ].map(csvCell).join(','));
   });
   const preamble = title
-    ? `# ${title}\n# Downloaded from economyofpakistan.com on ${new Date().toISOString().slice(0, 10)}\n`
+    ? `# ${title}\n# Export generated ${new Date().toISOString().slice(0, 10)}; not source retrieval time.\n`
     : '';
   return `${preamble}${lines.join('\n')}\n`;
 }

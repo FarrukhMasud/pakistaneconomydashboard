@@ -72,6 +72,9 @@ export function selectChartRange(data, dates, range = 'all', mode = 'chronologic
       labels: indices.map((index) => data.labels[index]),
       datasets: data.datasets.map((dataset) => {
         const result = { ...dataset, data: indices.map((index) => dataset.data[index] ?? null) };
+        for (const key of ['observationDates', 'evidenceRows']) {
+          if (Array.isArray(dataset[key])) result[key] = indices.map((index) => dataset[key][index]);
+        }
         for (const key of POINT_OPTIONS) {
           if (Array.isArray(dataset[key]) && dataset[key].length) {
             result[key] = indices.map((index) => dataset[key][index % dataset[key].length]);

@@ -1,4 +1,6 @@
 import useI18n from '../../i18n/useI18n';
+import { OFFICIAL_UNAVAILABLE, publicationOf, safeSourceUrl, withheldPaths } from '../../utils/figureTrust';
+import '../../styles/trust.css';
 
 export function LoadingCard({ label }) {
   const { t, tx } = useI18n();
@@ -16,8 +18,9 @@ export function LoadingCard({ label }) {
   );
 }
 
-export function ErrorCard({ error, onRetry, label, compact = false }) {
+export function ErrorCard({ error, onRetry, label, compact = false, unavailable }) {
   const { t, tx } = useI18n();
+  if (!error) return <UnavailableCard {...unavailable} />;
   const message = error?.message || t('common.loadFailed', 'Failed to load data');
   const title = label ? tx(label) : t('common.unavailable', 'Data unavailable');
 
@@ -48,33 +51,52 @@ export function ErrorCard({ error, onRetry, label, compact = false }) {
   );
 }
 
-export function UnavailableCard({ label, reason }) {
+export function UnavailableCard({ label, reason, sourceUrl }) {
   const { t, tx } = useI18n();
   return (
-    <div className="card data-state-card data-state-card--muted" role="status">
+    <div className="card data-state-card data-state-card--muted publication-notice" role="status">
       <strong className="data-state-card__title">
-        {label ? tx(label) : t('common.unavailable', 'Data unavailable')}
+        {label && label !== OFFICIAL_UNAVAILABLE ? tx(label) : t('trust.unavailable', OFFICIAL_UNAVAILABLE)}
       </strong>
       {reason && <p className="data-state-card__msg">{tx(reason)}</p>}
+      {safeSourceUrl(sourceUrl) && <a href={safeSourceUrl(sourceUrl)} target="_blank" rel="noopener noreferrer">{t('trust.originalSource', 'Original source')}</a>}
     </div>
+  );
+}
+
+export function PublicationNotice({ data, unavailable }) {
+  const { t, tx } = useI18n();
+  if (unavailable) return <UnavailableCard {...unavailable} />;
+  if (publicationOf(data)?.status !== 'partial') return null;
+  return (
+    <aside className="publication-notice" role="status">
+      <strong>{t('trust.partial', 'Partial publication: certified figures retained')}</strong>
+      <p>{tx(publicationOf(data).reason || OFFICIAL_UNAVAILABLE)}</p>
+      <p>{t('trust.unavailableFields', 'Unavailable fields')}: {withheldPaths(data).join(', ') || t('trust.evidenceMissing', 'Exact source evidence not available')}</p>
+      {safeSourceUrl(data.sourceUrl) && <a href={safeSourceUrl(data.sourceUrl)} target="_blank" rel="noopener noreferrer">{t('trust.originalSource', 'Original source')}</a>}
+    </aside>
   );
 }
 
 /**
  * Standard section guard: loading → error/empty → children(data).
  */
-export default function SectionState({
-  loading,
-  error,
-  data,
-  retry,
+export function SectionState({
+  state,
+  loading = state?.loading,
+  error = state?.error,
+  data = state?.data,
+  retry = state?.retry,
+  label,
   loadingLabel,
-  errorLabel,
+  errorLabel = label,
   requireData = true,
   children,
   compact = false,
+  unavailable = state?.unavailable,
 }) {
   if (loading) return <LoadingCard label={loadingLabel} />;
+  if (unavailable) return <UnavailableCard {...unavailable} />;
   if (error || (requireData && !data)) {
     return (
       <ErrorCard
@@ -87,3 +109,5 @@ export default function SectionState({
   }
   return typeof children === 'function' ? children(data) : children;
 }
+
+export default SectionState;

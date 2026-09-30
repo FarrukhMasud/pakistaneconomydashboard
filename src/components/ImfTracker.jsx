@@ -1,6 +1,7 @@
 import { useData } from '../hooks/useData';
 import { COLORS } from '../utils/chartConfig';
-import { LoadingCard, ErrorCard } from './ui/DataState';
+import { LoadingCard, ErrorCard, PublicationNotice } from './ui/DataState';
+import FigureTrust from './FigureTrust';
 import './ui/ImfTracker.css';
 import useI18n from '../i18n/useI18n';
 
@@ -12,10 +13,10 @@ function formatDate(dateStr, options = { month: 'short', year: 'numeric' }) {
 
 export default function ImfTracker() {
   const { tx } = useI18n();
-  const { data, loading, error, retry } = useData('imf-tracker.json');
+  const { data, loading, error, retry, unavailable } = useData('imf-tracker.json');
 
   if (loading) return <LoadingCard label="Loading IMF tracker…" />;
-  if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load IMF tracker" compact />;
+  if (error || !data) return <ErrorCard error={error} unavailable={unavailable} onRetry={retry} label="Could not load IMF tracker" compact />;
 
   const {
     program,
@@ -23,7 +24,7 @@ export default function ImfTracker() {
     disbursedUSD,
     upcomingDecision,
     relatedFacilities,
-    reviews,
+    reviews = [],
     keyObjectives,
     programScorecard,
     sourceUrl,
@@ -31,15 +32,18 @@ export default function ImfTracker() {
     methodologyNote,
   } = data;
 
-  const completed = reviews.filter(r => r.status === 'completed');
   const staffLevel = reviews.find(r => r.status === 'staff_level');
   const needsVerification = reviews.find(r => r.status === 'needs_verification');
-  const disbursed = disbursedUSD || completed.reduce((s, r) => s + r.usdM, 0);
-  const pctDisbursed = Math.round((disbursed / totalUSD) * 100);
+  const disbursed = Number.isFinite(disbursedUSD) ? disbursedUSD : null;
+  const remaining = Number.isFinite(totalUSD) && disbursed != null ? totalUSD - disbursed : null;
+  const pctDisbursed = totalUSD > 0 && disbursed != null ? Math.round((disbursed / totalUSD) * 100) : null;
+  const usd = (value, digits = 1) => Number.isFinite(value) ? `$${(value / 1000).toFixed(digits)}B` : '—';
   const nextReview = staffLevel || needsVerification || reviews.find(r => r.status === 'pending');
 
   return (
     <div className="imf-tracker card">
+      <PublicationNotice data={data} />
+      <FigureTrust datasetId="imf-tracker" data={data} period={data.asOf || data.programPeriod} />
       <div className="imf-tracker__header">
         <h3>🏛️ IMF Program Tracker</h3>
         <span className="imf-tracker__badge">
@@ -50,38 +54,41 @@ export default function ImfTracker() {
       <div className="imf-tracker__summary">
         <div className="imf-stat">
           <span className="imf-stat__label">{tx("Total Program")}</span>
-          <span className="imf-stat__value">${(totalUSD / 1000).toFixed(0)}B</span>
+          <span className="imf-stat__value">{usd(totalUSD, 0)}</span>
+          <FigureTrust datasetId="imf-tracker" data={data} field="totalUSD" period={data.programPeriod} compact />
         </div>
         <div className="imf-stat">
           <span className="imf-stat__label">{tx("Disbursed")}</span>
           <span className="imf-stat__value" style={{ color: COLORS.teal }}>
-            ${(disbursed / 1000).toFixed(1)}B
+            {usd(disbursed)}
           </span>
+          <FigureTrust datasetId="imf-tracker" data={data} field="disbursedUSD" period={data.asOf} compact />
         </div>
         <div className="imf-stat">
           <span className="imf-stat__label">{tx("Remaining")}</span>
           <span className="imf-stat__value" style={{ color: COLORS.amber }}>
-            ${((totalUSD - disbursed) / 1000).toFixed(1)}B
+            {usd(remaining)}
           </span>
+          <FigureTrust datasetId="imf-tracker" data={data} period={data.asOf} derivation="Total program − published disbursements" compact />
         </div>
         <div className="imf-stat">
           <span className="imf-stat__label">{tx("Next")}</span>
           <span className="imf-stat__value" style={{ color: COLORS.blue }}>
-            {nextReview ? `${nextReview.name}${staffLevel || needsVerification ? ' ⏳' : ''}` : 'Complete'}
+            {nextReview ? `${nextReview.name}${staffLevel || needsVerification ? ' ⏳' : ''}` : reviews.length && reviews.every((review) => review.status === 'completed') ? 'Complete' : '—'}
           </span>
         </div>
       </div>
 
       {/* Progress bar */}
-      <div className="imf-progress">
+      {pctDisbursed != null && <div className="imf-progress">
         <div className="imf-progress__bar">
           <div
             className="imf-progress__fill"
-            style={{ width: `${pctDisbursed}%` }}
+            style={{ width: `${Math.min(100, Math.max(0, pctDisbursed))}%` }}
           />
         </div>
         <span className="imf-progress__label">{pctDisbursed}% disbursed</span>
-      </div>
+      </div>}
 
       {upcomingDecision && (
         <div className="imf-next-decision">
@@ -139,7 +146,8 @@ export default function ImfTracker() {
                   : r.date ? formatDate(r.date) : r.expected ? `Expected ${r.expected}` : ''}
                 {r.status === 'staff_level' && ' — Awaiting Board'}
               </span>
-              <span className="imf-timeline__amount">${r.usdM}M</span>
+              <span className="imf-timeline__amount">{Number.isFinite(r.usdM) ? `$${r.usdM}M` : '—'}</span>
+              <FigureTrust datasetId="imf-tracker" data={data} row={r} period={r.date || r.expected} compact />
             </div>
           </div>
         ))}
@@ -181,7 +189,7 @@ export default function ImfTracker() {
       <div className="imf-disclaimer">
         <p>
           ⓘ {methodologyNote}
-          {lastVerified && <> Last verified: {formatDate(lastVerified + 'T00:00:00')}.</>}
+          {lastVerified && <> Source checked: {formatDate(lastVerified)}.</>}
         </p>
         <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="source-link-pill">
           🔗 IMF Pakistan Page

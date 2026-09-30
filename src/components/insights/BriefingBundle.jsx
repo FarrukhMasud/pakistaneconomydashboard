@@ -1,7 +1,8 @@
-import { isFiniteNumber } from '../../utils/periodHelpers';
+import { avgField, isFiniteNumber } from '../../utils/periodHelpers';
+import { resolveSourceTier, TRUST_LABELS } from '../../utils/figureTrust';
 import DataFreshnessPanel from '../DataFreshnessPanel';
 import SectionHeader from '../SectionHeader';
-import { LoadingCard, ErrorCard } from '../ui/DataState';
+import { LoadingCard, ErrorCard, UnavailableCard } from '../ui/DataState';
 import {
   SOURCE_LINKS,
   sourceLinksWithFytd,
@@ -19,11 +20,12 @@ import {
   useData,
   COLORS,
 } from './helpers.js';
-import { ProgressMeter, InsightCard, PartialFailureNote } from './shared.jsx';
+import { ProgressMeter, InsightCard, PartialFailureNote, TrustedContextValue } from './shared.jsx';
+import FigureTrust from '../FigureTrust';
 import useI18n from '../../i18n/useI18n';
 import '../ui/Insights.css';
 export function GoodBadWatchSection() {
-  const { tx } = useI18n();
+  const { t, tx } = useI18n();
   const remittances = useData('remittances.json');
   const services = useData('services.json');
   const reserves = useData('reserves.json');
@@ -35,7 +37,7 @@ export function GoodBadWatchSection() {
 
   const sources = [remittances, services, reserves, fbr, policy, circularDebt, imf, trade];
     const { loading, failed, retryAll, hasPartialFailure } = multiState(sources);
-    if (loading) return <LoadingCard label="Writing verified Good / Bad / Watch brief…" />;
+    if (loading) return <LoadingCard label="Building the latest official-data briefing…" />;
     const fy = resolveFyLabels(trade, remittances, services);
 
     const latestRemit = latest(remittances.data?.monthly);
@@ -43,7 +45,7 @@ export function GoodBadWatchSection() {
     const remitGrowth = pctChange(latestRemit?.total, remitYoy?.total);
     const latestReserve = latest(reserves.data?.weekly);
     const prevReserve = previous(reserves.data?.weekly);
-    const reserveChange = latestReserve && prevReserve ? latestReserve.sbp - prevReserve.sbp : null;
+    const reserveChange = isFiniteNumber(latestReserve?.sbp) && isFiniteNumber(prevReserve?.sbp) ? latestReserve.sbp - prevReserve.sbp : null;
     const fbrGap = fbr.data?.fytd && isFiniteNumber(fbr.data.fytd.net) && isFiniteNumber(fbr.data.fytd.target)
       ? fbr.data.fytd.net - fbr.data.fytd.target
       : null;
@@ -54,39 +56,43 @@ export function GoodBadWatchSection() {
     const circularTarget = circularDebt.data?.targets?.find(
       (target) => target.label === fy.fyFull || target.label === fy.fyLabel || target.label === `FY${fy.fy}`,
     );
+    const itGrowth = pctChange(itTotal?.fytd, itTotal?.fytdPrior);
+    const freelanceGrowth = pctChange(freelance?.fytd, freelance?.fytdPrior);
+    const claim = (text, datasetId, row, period, derivation) => ({ text, datasetId, row, period, derivation });
 
   const columns = [
     {
       title: 'Good',
       tone: 'positive',
       items: [
-        remitGrowth != null && remitGrowth > 0 && `Remittances rose ${fmtPct(remitGrowth)} YoY in ${latestRemit.date}.`,
-        itTotal?.fytd != null && itTotal?.fytdPrior != null && `IT & Telecom exports are ${fmtPct(pctChange(itTotal.fytd, itTotal.fytdPrior))} higher FYTD (${itTotal.fytdLabel || services.data.itMonthly.fytdLabel}).`,
-        freelance?.fytd != null && freelance?.fytdPrior != null && `Freelance IT exports are ${fmtPct(pctChange(freelance.fytd, freelance.fytdPrior))} higher FYTD.`,
-        circularDebt.data?.yoy?.changePct < 0 && `Power circular debt stock is down ${Math.abs(circularDebt.data.yoy.changePct)}% YoY as of ${circularDebt.data.current.asOf}.`,
+        remitGrowth > 0 && claim(`Remittances rose ${fmtPct(remitGrowth)} YoY in ${latestRemit.date}.`, 'remittances', latestRemit, latestRemit.date, '(Current month ÷ same month last year − 1) × 100'),
+        itGrowth > 0 && claim(`IT & Telecom exports are ${fmtPct(itGrowth)} higher FYTD (${itTotal.fytdLabel || services.data?.itMonthly?.fytdLabel}).`, 'services', itTotal, itTotal.fytdLabel, '(Current FYTD ÷ prior-year same-period FYTD − 1) × 100'),
+        freelanceGrowth > 0 && claim(`Freelance IT exports are ${fmtPct(freelanceGrowth)} higher FYTD (${freelance.fytdLabel || 'Period not stated'}).`, 'services', freelance, freelance.fytdLabel, '(Current FYTD ÷ prior-year same-period FYTD − 1) × 100'),
+        circularDebt.data?.yoy?.changePct < 0 && claim(`Power circular debt stock is down ${Math.abs(circularDebt.data.yoy.changePct)}% YoY as of ${circularDebt.data.current?.asOf}.`, 'circular-debt', circularDebt.data.current, circularDebt.data.current?.asOf),
       ].filter(Boolean),
     },
     {
       title: 'Bad',
       tone: 'negative',
       items: [
-        fbrGap != null && fbrGap < 0 && `FBR collection is ${fmtPkrBn(Math.abs(fbrGap))} below FYTD target (${fbr.data.fytd.period}).`,
-        reserveChange != null && reserveChange < 0 && `SBP reserves fell $${fmt(Math.abs(reserveChange) / 1000, 2)}B in the latest week.`,
-        policy.data?.context?.inflationYoY > 7 && `Inflation at ${policy.data.context.inflationYoY}% remains above SBP's 5–7% medium-term target.`,
-        latestTrade?.balance < 0 && `Latest goods trade balance is a $${fmt(Math.abs(latestTrade.balance) / 1000, 2)}B deficit.`,
+        itGrowth < 0 && claim(`IT & Telecom exports are ${fmt(Math.abs(itGrowth))}% lower FYTD (${itTotal.fytdLabel || 'Period not stated'}).`, 'services', itTotal, itTotal.fytdLabel, '(Current FYTD ÷ prior-year same-period FYTD − 1) × 100'),
+        freelanceGrowth < 0 && claim(`Freelance IT exports are ${fmt(Math.abs(freelanceGrowth))}% lower FYTD (${freelance.fytdLabel || 'Period not stated'}).`, 'services', freelance, freelance.fytdLabel, '(Current FYTD ÷ prior-year same-period FYTD − 1) × 100'),
+        fbrGap < 0 && claim(`FBR collection is ${fmtPkrBn(Math.abs(fbrGap))} below FYTD target (${fbr.data.fytd.period}).`, 'fbr-tax', fbr.data.fytd, fbr.data.fytd.period, 'FYTD net collection − FYTD target'),
+        reserveChange < 0 && claim(`SBP reserves fell $${fmt(Math.abs(reserveChange) / 1000, 2)}B in the latest week (${latestReserve.date} vs ${prevReserve.date}).`, 'reserves', latestReserve, latestReserve.date, 'Current weekly SBP reserves − prior weekly SBP reserves'),
+        latestTrade?.balance < 0 && claim(`Latest goods trade balance is a $${fmt(Math.abs(latestTrade.balance) / 1000, 2)}B deficit (${latestTrade.date}).`, 'trade', latestTrade, latestTrade.date),
       ].filter(Boolean),
     },
     {
       title: 'Watch',
       tone: 'neutral',
       items: [
-        imf.data?.upcomingDecision?.dateText && `${imf.data.upcomingDecision.label}: ${imf.data.upcomingDecision.dateText}.`,
-                circularTarget?.status === 'at risk' && `Circular-debt ${fy.fyLabel} target is at risk: ${circularTarget.statusNote}`,
+        imf.data?.upcomingDecision?.dateText && claim(`${imf.data.upcomingDecision.label}: ${imf.data.upcomingDecision.dateText}.`, 'imf-tracker', imf.data.upcomingDecision, imf.data.upcomingDecision.dateText),
+                circularTarget?.status === 'at risk' && claim(`Circular-debt ${fy.fyLabel} target is at risk: ${circularTarget.statusNote}`, 'circular-debt', circularTarget, fy.fyLabel),
                 (() => {
                   const next = fbr.data?.annualTargets?.find((row) => row.fyLabel === `FY${fy.fy + 1}` || row.fyLabel === `FY${String(fy.fy + 1).slice(-2)}`);
-                  return next?.budgetTarget != null && `${next.fyLabel || `FY${fy.fy + 1}`} FBR target is ${fmtPkrBn(next.budgetTarget)}.`;
+                  return isFiniteNumber(next?.budgetTarget) && claim(`${next.fyLabel || `FY${fy.fy + 1}`} FBR target is ${fmtPkrBn(next.budgetTarget)}.`, 'fbr-tax', next, next.fyLabel);
                 })(),
-                (services.data?.itHeadline?.latestMonth || services.data?.itMonthly?.latestMonth) && `Track whether IT/freelance exports extend the latest monthly trend after ${services.data?.itHeadline?.latestMonth || services.data.itMonthly.latestMonth}.`,
+                (services.data?.itHeadline?.latestMonth || services.data?.itMonthly?.latestMonth) && claim(`Track whether IT/freelance exports extend the latest monthly trend after ${services.data?.itHeadline?.latestMonth || services.data.itMonthly.latestMonth}.`, 'services', itTotal, itTotal?.latestMonth),
               ].filter(Boolean),
             },
           ];
@@ -95,7 +101,7 @@ export function GoodBadWatchSection() {
             <section className="fade-in">
               <SectionHeader
                 title="Good / Bad / Watch Brief"
-                description="A rule-based monthly brief from verified dashboard data. It intentionally avoids adding unverified claims, forecasts, or figures not present in source-backed datasets."
+                description={t('trust.briefDescription', 'A rule-based brief from published official datasets. Unavailable figures and unverified claims are excluded; calculations retain their source periods.')}
                 sourceLinks={sourceLinksWithFytd(fbr.data?.fytd)}
               />
               {hasPartialFailure && <PartialFailureNote failed={failed} onRetry={retryAll} />}
@@ -104,7 +110,9 @@ export function GoodBadWatchSection() {
           <div key={column.title} className={`brief-column brief-column--${column.tone}`}>
             <h3>{column.title}</h3>
             <ul>
-              {column.items.length ? column.items.map((item) => <li key={item}>{item}</li>) : <li>{tx("No verified item currently qualifies.")}</li>}
+              {column.items.length ? column.items.map((item) => <li key={item.text}>{tx(item.text)}
+                <FigureTrust datasetId={item.datasetId} row={item.row} period={item.period} derivation={item.derivation} compact />
+              </li>) : <li>{t('trust.noBriefItem', 'No published official item currently qualifies.')}</li>}
             </ul>
           </div>
         ))}
@@ -147,6 +155,7 @@ export function EconomicBriefingSection() {
       body: 'Reserves are the first line of defense against import and external-debt pressure. Watch both the level and import-cover months.',
       source: 'State Bank of Pakistan',
       sourceUrl: 'https://www.sbp.org.pk/ecodata/index2.asp',
+      datasetId: 'reserves', row: res,
     },
     isFiniteNumber(r?.total) && {
       title: 'Remittance support',
@@ -156,15 +165,17 @@ export function EconomicBriefingSection() {
       body: 'Remittances are one of Pakistan’s most important recurring foreign-exchange inflows and can offset part of the trade gap.',
       source: 'SBP EasyData',
       sourceUrl: 'https://easydata.sbp.org.pk',
+      datasetId: 'remittances', row: r,
     },
     isFiniteNumber(t?.balance) && {
       title: 'Trade gap',
-      value: `$${fmt(Math.abs(t.balance) / 1000, 2)}B deficit`,
+      value: `$${fmt(Math.abs(t.balance) / 1000, 2)}B ${t.balance < 0 ? 'deficit' : t.balance > 0 ? 'surplus' : 'balanced'}`,
       meta: `${t.date || 'Latest'} · ${tPrev && isFiniteNumber(tPrev.balance) ? `${signed(t.balance - tPrev.balance, 'M', 0)} vs prior month` : '—'}`,
       tone: tPrev && isFiniteNumber(tPrev.balance) ? trendClass(t.balance - tPrev.balance) : 'neutral',
       body: 'A smaller negative balance eases pressure on reserves. Imports, exports, and remittances should be read together.',
       source: 'State Bank of Pakistan',
       sourceUrl: 'https://www.sbp.org.pk/ecodata/index2.asp',
+      datasetId: 'trade', row: t,
     },
     isFiniteNumber(inf?.value) && {
       title: 'Inflation pulse',
@@ -174,6 +185,7 @@ export function EconomicBriefingSection() {
       body: 'Inflation determines household purchasing power and guides SBP policy-rate decisions.',
       source: 'PBS via SBP EasyData',
       sourceUrl: 'https://easydata.sbp.org.pk',
+      datasetId: 'inflation', row: inf,
     },
     fbrGap != null && {
       title: 'Tax target pressure',
@@ -183,6 +195,7 @@ export function EconomicBriefingSection() {
       body: 'Tax collection relative to target indicates how much fiscal adjustment may be needed through revenue measures or spending control.',
       source: fbr.data?.fytd?.sourceLabel || 'Federal Board of Revenue',
       sourceUrl: fbr.data?.fytd?.source || 'https://www.fbr.gov.pk',
+      datasetId: 'fbr-tax', row: fbr.data?.fytd, derivation: 'FYTD net collection − FYTD target',
     },
   ].filter(Boolean);
 
@@ -225,18 +238,14 @@ export function RiskOutlookSection() {
     const priorInf = previous(inflation.data?.national_cpi?.data);
     const latestRemit = latest(remittances.data?.monthly);
     const remit3m = (remittances.data?.monthly || []).slice(-3);
-    const remitAvg = remit3m.length
-      ? remit3m.reduce((sum, row) => sum + (Number(row.total) || 0), 0) / remit3m.length
-      : null;
+    const remitAvg = remit3m.length === 3 ? avgField(remit3m, 'total') : null;
     const latestTrade = latest(trade.data?.monthly);
     const trade3m = (trade.data?.monthly || []).slice(-3);
-    const tradeAvg = trade3m.length
-      ? trade3m.reduce((sum, row) => sum + (Number(row.balance) || 0), 0) / trade3m.length
-      : null;
-    const petrol = indicators.data?.indicators?.find((row) => row.id === 'petrol-price');
-    const policy = indicators.data?.indicators?.find((row) => row.id === 'policy-rate');
-    const publicDebt = indicators.data?.indicators?.find((row) => row.id === 'public-debt');
-    const circularDebt = indicators.data?.indicators?.find((row) => row.id === 'circular-debt');
+    const tradeAvg = trade3m.length === 3 ? avgField(trade3m, 'balance') : null;
+    const petrol = indicators.data?.indicators?.find((row) => row.id === 'petrol-price' && !row.unavailable);
+    const policy = indicators.data?.indicators?.find((row) => row.id === 'policy-rate' && !row.unavailable);
+    const publicDebt = indicators.data?.indicators?.find((row) => row.id === 'public-debt' && !row.unavailable);
+    const circularDebt = indicators.data?.indicators?.find((row) => row.id === 'circular-debt' && !row.unavailable);
     const fbrGap = fbr.data?.fytd && isFiniteNumber(fbr.data.fytd.net) && isFiniteNumber(fbr.data.fytd.target)
       ? fbr.data.fytd.net - fbr.data.fytd.target
       : null;
@@ -254,22 +263,22 @@ export function RiskOutlookSection() {
           <div className="context-block card">
             <h3>{tx("Fiscal stress monitor")}</h3>
             <div className="context-list">
-              <div><span>{tx("Fiscal balance")}</span><strong>{latestFiscal ? `₨${fmt(latestFiscal.value / 1e6, 2)}T` : '—'}</strong><small>{latestFiscal?.fy}</small></div>
-              <div><span>{tx("Primary balance")}</span><strong>{latestPrimary ? `₨${fmt(latestPrimary.value / 1e6, 2)}T` : '—'}</strong><small>{latestPrimary?.fy}</small></div>
-              <div><span>{tx("FBR target gap")}</span><strong>{fbrGap == null ? '—' : `₨${fmt(Math.abs(fbrGap), 0)}B ${fbrGap >= 0 ? 'ahead' : 'short'}`}</strong><small>{fbr.data?.fytd?.period || '—'}</small></div>
-              <div><span>{tx("Public debt")}</span><strong>{publicDebt ? `${publicDebt.value}${publicDebt.unit || ''}` : '—'}</strong><small>{publicDebt?.change || '—'}</small></div>
-              <div><span>{tx("Power circular debt")}</span><strong>{circularDebt ? `${circularDebt.value}${circularDebt.unit || ''}` : '—'}</strong><small>{circularDebt?.asOf || '—'}</small></div>
+              <TrustedContextValue label="Fiscal balance" value={isFiniteNumber(latestFiscal?.value) ? `₨${fmt(latestFiscal.value / 1e6, 2)}T` : null} period={latestFiscal?.fy} datasetId="fiscal" row={latestFiscal} />
+              <TrustedContextValue label="Primary balance" value={isFiniteNumber(latestPrimary?.value) ? `₨${fmt(latestPrimary.value / 1e6, 2)}T` : null} period={latestPrimary?.fy} datasetId="fiscal" row={latestPrimary} />
+              <TrustedContextValue label="FBR target gap" value={fbrGap == null ? null : `₨${fmt(Math.abs(fbrGap), 0)}B ${fbrGap >= 0 ? 'ahead' : 'short'}`} period={fbr.data?.fytd?.period} datasetId="fbr-tax" row={fbr.data?.fytd} derivation="FYTD net collection − FYTD target" />
+              <TrustedContextValue label="Public debt" value={publicDebt?.value != null ? `${publicDebt.value}${publicDebt.unit || ''}` : null} period={publicDebt?.asOf} datasetId="indicators" row={publicDebt} />
+              <TrustedContextValue label="Power circular debt" value={circularDebt?.value != null ? `${circularDebt.value}${circularDebt.unit || ''}` : null} period={circularDebt?.asOf} datasetId="indicators" row={circularDebt} />
             </div>
           </div>
 
           <div className="context-block card">
             <h3>{tx("External vulnerability scorecard")}</h3>
             <div className="context-list">
-              <div><span>{tx("Import cover")}</span><strong>{reservesAdequacy.data?.current?.importCoverMonths != null ? `${reservesAdequacy.data.current.importCoverMonths} months` : '—'}</strong><small>{reservesAdequacy.data?.benchmark?.label || '—'}</small></div>
-              <div><span>{tx("SBP reserves")}</span><strong>{reservesAdequacy.data?.current?.sbpReserves != null ? `$${reservesAdequacy.data.current.sbpReserves}B` : '—'}</strong><small>{reservesAdequacy.data?.current?.asOf || '—'}</small></div>
-              <div><span>{tx(`${fy.fyLabel} gross external repayment`)}</span><strong>{externalDebt.data?.fy26?.grossRepayment != null ? `$${externalDebt.data.fy26.grossRepayment}B` : '—'}</strong><small>rollovers remain critical</small></div>
-              <div><span>{tx("Hard-cash repayment")}</span><strong>{externalDebt.data?.fy26?.hardRepayment != null ? `$${externalDebt.data.fy26.hardRepayment}B` : '—'}</strong><small>interest + non-rolled principal</small></div>
-              <div><span>{tx("Latest trade deficit")}</span><strong>{isFiniteNumber(latestTrade?.balance) ? `$${fmt(Math.abs(latestTrade.balance) / 1000, 2)}B` : '—'}</strong><small>{latestTrade?.date || '—'}</small></div>
+              <TrustedContextValue label="Import cover" value={isFiniteNumber(reservesAdequacy.data?.current?.importCoverMonths) ? `${reservesAdequacy.data.current.importCoverMonths} months` : null} period={reservesAdequacy.data?.current?.asOf} datasetId="reserves-adequacy" row={reservesAdequacy.data?.current} />
+              <TrustedContextValue label="SBP reserves" value={isFiniteNumber(reservesAdequacy.data?.current?.sbpReserves) ? `$${reservesAdequacy.data.current.sbpReserves}B` : null} period={reservesAdequacy.data?.current?.asOf} datasetId="reserves-adequacy" row={reservesAdequacy.data?.current} />
+              <TrustedContextValue label={`${fy.fyLabel} gross external repayment`} value={isFiniteNumber(externalDebt.data?.fy26?.grossRepayment) ? `$${externalDebt.data.fy26.grossRepayment}B` : null} period={fy.fyLabel} datasetId="external-debt" row={externalDebt.data?.fy26} />
+              <TrustedContextValue label="Hard-cash repayment" value={isFiniteNumber(externalDebt.data?.fy26?.hardRepayment) ? `$${externalDebt.data.fy26.hardRepayment}B` : null} period={fy.fyLabel} datasetId="external-debt" row={externalDebt.data?.fy26} />
+              <TrustedContextValue label={latestTrade?.balance > 0 ? 'Latest trade surplus' : 'Latest trade deficit'} value={isFiniteNumber(latestTrade?.balance) ? `$${fmt(Math.abs(latestTrade.balance) / 1000, 2)}B` : null} period={latestTrade?.date} datasetId="trade" row={latestTrade} />
             </div>
           </div>
         </div>
@@ -278,20 +287,20 @@ export function RiskOutlookSection() {
           <div className="context-block card">
             <h3>{tx("Household impact view")}</h3>
             <div className="context-list">
-              <div><span>{tx("CPI inflation")}</span><strong>{isFiniteNumber(latestInf?.value) ? `${fmt(latestInf.value)}%` : '—'}</strong><small>{latestInf?.date || '—'}</small></div>
-              <div><span>{tx("Inflation momentum")}</span><strong>{isFiniteNumber(latestInf?.value) && isFiniteNumber(priorInf?.value) ? signed(latestInf.value - priorInf.value, ' pp') : '—'}</strong><small>latest vs prior month</small></div>
-              <div><span>{tx("Policy rate")}</span><strong>{policy ? `${policy.value}${policy.unit || ''}` : '—'}</strong><small>{policy?.asOf || '—'}</small></div>
-              <div><span>{tx("Petrol price")}</span><strong>{petrol ? `${petrol.value}${petrol.unit || ''}` : '—'}</strong><small>{petrol?.asOf || '—'}</small></div>
+              <TrustedContextValue label="CPI inflation" value={isFiniteNumber(latestInf?.value) ? `${fmt(latestInf.value)}%` : null} period={latestInf?.date} datasetId="inflation" row={latestInf} />
+              <TrustedContextValue label="Inflation momentum" value={isFiniteNumber(latestInf?.value) && isFiniteNumber(priorInf?.value) ? signed(latestInf.value - priorInf.value, ' pp') : null} period={latestInf?.date} datasetId="inflation" row={latestInf} derivation={`Latest CPI (${latestInf?.date || 'unavailable'}) − prior CPI (${priorInf?.date || 'unavailable'})`} />
+              <TrustedContextValue label="Policy rate" value={policy?.value != null ? `${policy.value}${policy.unit || ''}` : null} period={policy?.asOf} datasetId="indicators" row={policy} />
+              <TrustedContextValue label="Petrol price" value={petrol?.value != null ? `${petrol.value}${petrol.unit || ''}` : null} period={petrol?.asOf} datasetId="indicators" row={petrol} />
             </div>
           </div>
 
           <div className="context-block card">
             <h3>{tx("Trend watch, not a forecast")}</h3>
             <div className="context-list">
-              <div><span>{tx("Remittances vs 3-month average")}</span><strong>{isFiniteNumber(latestRemit?.total) && isFiniteNumber(remitAvg) ? signed(pctChange(latestRemit.total, remitAvg), '%') : '—'}</strong><small>{latestRemit?.date || '—'}</small></div>
-              <div><span>{tx("Trade balance vs 3-month average")}</span><strong>{isFiniteNumber(latestTrade?.balance) && isFiniteNumber(tradeAvg) ? signed(latestTrade.balance - tradeAvg, 'M', 0) : '—'}</strong><small>less negative is better</small></div>
-              <div><span>{tx("Inflation direction")}</span><strong>{isFiniteNumber(latestInf?.value) && isFiniteNumber(priorInf?.value) ? (latestInf.value >= priorInf.value ? 'Rising' : 'Cooling') : '—'}</strong><small>latest official CPI print</small></div>
-              <div><span>{tx("Tax collection vs FYTD target")}</span><strong>{fbrGap == null ? '—' : (fbrGap >= 0 ? 'Ahead' : 'Behind')}</strong><small>source-attributed FYTD comparison</small></div>
+              <TrustedContextValue label="Remittances vs 3-month average" value={isFiniteNumber(latestRemit?.total) && isFiniteNumber(remitAvg) ? signed(pctChange(latestRemit.total, remitAvg), '%') : null} period={latestRemit?.date} datasetId="remittances" row={latestRemit} derivation="(Latest month ÷ mean of three published months − 1) × 100" />
+              <TrustedContextValue label="Trade balance vs 3-month average" value={isFiniteNumber(latestTrade?.balance) && isFiniteNumber(tradeAvg) ? signed(latestTrade.balance - tradeAvg, 'M', 0) : null} period={latestTrade?.date} datasetId="trade" row={latestTrade} derivation="Latest balance − mean of three published monthly balances" />
+              <TrustedContextValue label="Inflation direction" value={isFiniteNumber(latestInf?.value) && isFiniteNumber(priorInf?.value) ? latestInf.value === priorInf.value ? 'Unchanged' : latestInf.value > priorInf.value ? 'Rising' : 'Cooling' : null} period={latestInf?.date} datasetId="inflation" row={latestInf} derivation="Compare latest published CPI with the prior published month" />
+              <TrustedContextValue label="Tax collection vs FYTD target" value={fbrGap == null ? null : fbrGap >= 0 ? 'Ahead' : 'Behind'} period={fbr.data?.fytd?.period} datasetId="fbr-tax" row={fbr.data?.fytd} derivation="FYTD net collection − FYTD target" />
             </div>
           </div>
         </div>
@@ -305,6 +314,7 @@ export function EconomicTimelineSection() {
   const { data, loading, error, retry } = useData('economic-events.json');
   if (loading) return <LoadingCard label="Loading official economic timeline…" />;
   if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Economic timeline" />;
+  if (!Array.isArray(data.events) || !data.events.length) return <UnavailableCard reason={data.publication?.reason} sourceUrl={data.sourceUrl} />;
 
   return (
     <section className="fade-in">
@@ -336,6 +346,7 @@ export function LearningCenterSection() {
   const { data, loading, error, retry } = useData('explainers.json');
   if (loading) return <LoadingCard label="Loading learning center…" />;
   if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Learning center" />;
+  if (!Array.isArray(data.sections) || !data.sections.length) return <UnavailableCard reason={data.publication?.reason} sourceUrl={data.sourceUrl} />;
 
   return (
     <section className="fade-in">
@@ -367,47 +378,37 @@ export function LearningCenterSection() {
 }
 
 export function SourceTrustSection() {
+  const { t } = useI18n();
   const { data, loading, error, retry } = useData('data-freshness.json');
   if (loading) return <LoadingCard label="Loading source trust audit…" />;
   if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Source trust" />;
   const datasets = data?.datasets || [];
-  const tiers = data?.tiers || {};
 
   const byTier = datasets.reduce((acc, dataset) => {
-    const key = dataset.sourceType || 'official-primary';
+    const key = resolveSourceTier(dataset);
     (acc[key] = acc[key] || []).push(dataset);
     return acc;
   }, {});
 
-  const counts = datasets.reduce((acc, dataset) => {
-    if (dataset.apiSeries?.length) acc.api += 1;
-    else if (dataset.sourceFile) acc.files += 1;
-    else acc.curated += 1;
-    if (dataset.critical) acc.critical += 1;
-    return acc;
-  }, { api: 0, files: 0, curated: 0, critical: 0 });
-
-  const tierOrder = ['official-primary', 'official-derived', 'secondary-attributed'];
+  const tierOrder = ['official-primary', 'official-derived', 'unverified', 'unavailable'];
 
   return (
     <section className="fade-in">
       <SectionHeader
         title="Source Confidence & Audit Trail"
-        description="Not every number on this dashboard carries the same weight. This page states, dataset by dataset, whether a figure comes straight from the issuing institution, is derived here from official inputs, or is currently only available through press reporting of official figures."
+        description={t('trust.officialOnly', 'Only verifiable official figures are published. Unsupported press numbers are unavailable, not estimates.')}
         sourceLinks={SOURCE_LINKS}
       />
       {!loading && (
         <>
           <div className="trust-tier-list">
             {tierOrder.filter((key) => byTier[key]?.length).map((key) => {
-              const tier = tiers[key] || {};
               return (
-                <div key={key} className={`trust-tier trust-tier--${tier.tone || 'neutral'}`}>
+                <div key={key} className="trust-tier trust-tier--neutral">
                   <div className="trust-tier__head">
-                    <h3>{tier.label || key}</h3>
+                    <h3>{t(`trust.authenticity.${key}`, TRUST_LABELS.authenticity[key])}</h3>
                     <span className="trust-tier__count">{byTier[key].length} datasets</span>
                   </div>
-                  <p className="trust-tier__desc">{tier.description}</p>
                   <ul className="trust-tier__items">
                     {byTier[key].map((dataset) => (
                       <li key={dataset.id}>
@@ -415,7 +416,7 @@ export function SourceTrustSection() {
                         <span>{dataset.sourceLabel || dataset.source}</span>
                         {dataset.verifiedFrom?.length > 0 && (
                           <small>
-                            Verified against {dataset.verifiedFrom.length} published report{dataset.verifiedFrom.length === 1 ? '' : 's'}:{' '}
+                            {t('trust.originalSource', 'Original source')}:{' '}
                             {dataset.verifiedFrom.map((url, index) => (
                               <a key={url} href={url} target="_blank" rel="noreferrer">
                                 [{index + 1}]
@@ -429,12 +430,6 @@ export function SourceTrustSection() {
                 </div>
               );
             })}
-          </div>
-          <div className="trust-grid">
-            <InsightCard title="Official APIs" value={counts.api} meta="machine-readable series" body="Fetched from SBP EasyData or other official APIs where available." source="Generated source manifest" tone="positive" />
-            <InsightCard title="Official files" value={counts.files} meta="Excel/PDF source files" body="Parsed from official SBP/FBR/Finance Division files with source-file metadata." source="Generated source manifest" tone="positive" />
-            <InsightCard title="Curated official documents" value={counts.curated} meta="event-driven datasets" body="Used only where no stable machine-readable feed exists; each card links to primary sources." source="Generated source manifest" tone="neutral" />
-            <InsightCard title="Critical datasets" value={counts.critical} meta="freshness-monitored" body="Core indicators are checked by the audit script before build/deploy." source="Generated source manifest" tone="positive" />
           </div>
         </>
       )}

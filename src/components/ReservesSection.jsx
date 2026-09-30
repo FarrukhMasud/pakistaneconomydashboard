@@ -13,7 +13,7 @@ import PeriodCompare from './ui/PeriodCompare';
 import SeriesFocus from './ui/SeriesFocus';
 import { applySeriesFocus } from '../utils/seriesFocus';
 import ReservesAdequacyTracker from './ReservesAdequacyTracker';
-import { LoadingCard, ErrorCard, UnavailableCard } from './ui/DataState';
+import { LoadingCard, SectionState } from './ui/DataState';
 import {
   currentCalendarYear,
   currentFiscalYear,
@@ -37,18 +37,15 @@ function formatDate(dateStr) {
 
 export default function ReservesSection() {
   const { compareMode, focus, setCompareMode, setFocus } = useShareableChartState('yoy');
-  const { data, loading, error, retry } = useData('reserves.json');
+  const state = useData('reserves.json');
+  const { data, loading } = state;
   const adequacy = useData('reserves-adequacy.json');
 
   if (loading) return <LoadingCard label="Loading reserves data…" />;
-  if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load reserves data" />;
+  if (!data) return <><SectionState state={state} label="Could not load reserves data" /><ReservesAdequacyTracker /></>;
 
   const timeSeries = data.weekly || data.monthly || [];
   const { dataSource, lastUpdated, dataCoverage } = data;
-
-  if (!timeSeries.length) {
-    return <UnavailableCard label="Could not load reserves data" reason="Reserves series is empty." />;
-  }
 
   const cy = currentCalendarYear(timeSeries);
   const fy = currentFiscalYear(timeSeries);
@@ -69,6 +66,7 @@ export default function ReservesSection() {
     ? [
         {
           label: `${fytdSbp.currentLabel} SBP reserves`,
+          valueField: 'sbp',
           data: fytdSbp.current,
           borderColor: COLORS.teal,
           backgroundColor: COLORS.tealAlpha,
@@ -78,6 +76,7 @@ export default function ReservesSection() {
         },
         {
           label: `${fytdTotal.currentLabel} total`,
+          valueField: 'total',
           data: fytdTotal.current,
           borderColor: COLORS.blue,
           backgroundColor: 'transparent',
@@ -87,6 +86,7 @@ export default function ReservesSection() {
         },
         ...(fytdSbp.prior.some((v) => v != null) ? [{
           label: `${fytdSbp.priorLabel} SBP (same months)`,
+          valueField: 'sbp',
           data: fytdSbp.prior,
           borderColor: COLORS.amber,
           backgroundColor: 'transparent',
@@ -98,6 +98,7 @@ export default function ReservesSection() {
     : [
         {
           label: 'SBP Reserves (USD M)',
+          valueField: 'sbp',
           data: timeSeries.map((d) => d.sbp),
           borderColor: COLORS.teal,
           backgroundColor: COLORS.tealAlpha,
@@ -107,6 +108,7 @@ export default function ReservesSection() {
         },
         {
           label: 'Total (SBP + Banks)',
+          valueField: 'total',
           data: timeSeries.map((d) => d.total),
           borderColor: COLORS.blue,
           backgroundColor: 'transparent',
@@ -117,6 +119,7 @@ export default function ReservesSection() {
         ...(showYoY && sbpPrior.some((v) => v != null) ? [{
           isComparison: true,
           label: sbpPriorLabel || 'Prior year SBP',
+          valueField: 'sbp',
           data: sbpPrior,
           borderColor: COLORS.amber,
           backgroundColor: 'transparent',
@@ -152,14 +155,14 @@ export default function ReservesSection() {
       tooltip: {
         ...baseLineOptions.plugins.tooltip,
         callbacks: {
-          label: (ctx) => `${ctx.dataset.label}: ${formatCurrency(ctx.raw * 1e6)}`,
+          label: (ctx) => `${ctx.dataset.label}: ${Number.isFinite(ctx.raw) ? formatCurrency(ctx.raw * 1e6) : 'Unavailable'}`,
         },
       },
     },
   };
 
   const latest = timeSeries[timeSeries.length - 1];
-  const lowest = timeSeries.reduce((min, d) => (d.sbp < min.sbp ? d : min), timeSeries[0]);
+  const lowest = timeSeries.filter((row) => Number.isFinite(row.sbp)).reduce((min, row) => !min || row.sbp < min.sbp ? row : min, null);
 
   const importCoverMonths = adequacy.data?.current?.importCoverMonths;
   const importCoverLabel = adequacy.data?.current?.importCoverLabel || 'Goods-import cover';
@@ -169,10 +172,11 @@ export default function ReservesSection() {
     const startVal = cy.rows[0]?.sbp;
     const endVal = cy.rows[cy.rows.length - 1]?.sbp;
     const chg = pctChange(endVal, startVal);
+    const delta = Number.isFinite(startVal) && Number.isFinite(endVal) ? endVal - startVal : null;
     cyItems.push(
-      { label: 'SBP Reserves', value: fmtUSD(latest.sbp), sub: `${formatDate(latest.date)}${importCoverMonths != null ? ` · ${importCoverMonths} months ${importCoverLabel.toLowerCase()}` : ''}`, color: COLORS.teal },
-      { label: 'Total (SBP + Banks)', value: fmtUSD(latest.total), sub: 'Includes commercial-bank reserves', color: COLORS.blue },
-      { label: 'CY Change', value: `${(endVal - startVal) >= 0 ? '+' : ''}${fmtUSD(endVal - startVal)}`, direction: chg.direction, sentiment: chg.direction === 'up' ? 'positive' : 'negative', sub: `${chg.pct > 0 ? '+' : ''}${chg.pct}%` },
+      { label: 'SBP Reserves', row: latest, field: 'sbp', period: latest.date, value: fmtUSD(latest.sbp), sub: `${formatDate(latest.date)}${importCoverMonths != null ? ` · ${importCoverMonths} months ${importCoverLabel.toLowerCase()}` : ''}`, color: COLORS.teal },
+      { label: 'Total (SBP + Banks)', row: latest, field: 'total', period: latest.date, value: fmtUSD(latest.total), sub: 'Includes commercial-bank reserves', color: COLORS.blue },
+      { label: 'CY Change', value: delta == null ? '—' : `${delta >= 0 ? '+' : ''}${fmtUSD(delta)}`, direction: chg.direction, sentiment: delta == null ? 'neutral' : chg.direction === 'up' ? 'positive' : 'negative', sub: chg.pct == null ? null : `${chg.pct > 0 ? '+' : ''}${chg.pct}%`, row: { evidence: [latest.evidence?.sbp || latest.evidence, cy.rows[0]?.evidence?.sbp || cy.rows[0]?.evidence] }, period: cy.rangeLabel, derivation: 'Latest SBP reserves − first published SBP reserves in selected calendar year' },
     );
   }
 
@@ -180,18 +184,18 @@ export default function ReservesSection() {
   if (fy && fy.rows.length > 0) {
     const fyStart = fy.rows[0]?.sbp;
     const fyEnd = fy.rows[fy.rows.length - 1]?.sbp;
-    const canCompare = fy.rows.length >= 2;
-    const fyChg = canCompare ? pctChange(fyEnd, fyStart) : { pct: null, direction: 'flat' };
+    const canCompare = fy.rows.length >= 2 && Number.isFinite(fyStart) && Number.isFinite(fyEnd);
+    const fyChg = canCompare ? pctChange(fyEnd, fyStart) : { pct: null, direction: 'unavailable' };
     fyItems.push(
-      { label: canCompare ? `Start of ${fy.fyLabel}` : `Latest · ${fy.fyLabel}`, value: fmtUSD(canCompare ? fyStart : fyEnd), sub: formatDate(canCompare ? fy.rows[0].date : fy.rows[fy.rows.length - 1].date), color: COLORS.blue },
+      { label: canCompare ? `Start of ${fy.fyLabel}` : `Latest · ${fy.fyLabel}`, row: canCompare ? fy.rows[0] : fy.rows.at(-1), field: 'sbp', value: fmtUSD(canCompare ? fyStart : fyEnd), sub: formatDate(canCompare ? fy.rows[0].date : fy.rows[fy.rows.length - 1].date), color: COLORS.blue },
     );
     if (canCompare) {
       fyItems.push(
-        { label: 'FY change', value: `${(fyEnd - fyStart) >= 0 ? '+' : ''}${fmtUSD(fyEnd - fyStart)}`, direction: fyChg.direction, sentiment: fyChg.direction === 'up' ? 'positive' : 'negative', sub: `${fyChg.pct > 0 ? '+' : ''}${fyChg.pct}%` },
+        { label: 'FY change', row: { evidence: [fy.rows.at(-1)?.evidence?.sbp || fy.rows.at(-1)?.evidence, fy.rows[0]?.evidence?.sbp || fy.rows[0]?.evidence] }, period: fy.rangeLabel, derivation: 'Latest SBP reserves − first published SBP reserves in selected fiscal year', value: `${(fyEnd - fyStart) >= 0 ? '+' : ''}${fmtUSD(fyEnd - fyStart)}`, direction: fyChg.direction, sentiment: fyChg.direction === 'up' ? 'positive' : fyChg.direction === 'down' ? 'negative' : 'neutral', sub: fyChg.pct == null ? null : `${fyChg.pct > 0 ? '+' : ''}${fyChg.pct}%` },
       );
     }
     fyItems.push(
-      { label: 'Lowest in Period', value: fmtUSD(lowest.sbp), sub: formatDate(lowest.date), color: COLORS.coral },
+      { label: 'Lowest published observation', value: fmtUSD(lowest?.sbp), sub: formatDate(lowest?.date), color: COLORS.coral, row: lowest, field: 'sbp', period: lowest?.date, derivation: 'Minimum of available published SBP observations; gaps excluded' },
     );
   }
 
@@ -215,6 +219,8 @@ export default function ReservesSection() {
               title={`${cy.rangeLabel} — Calendar YTD`}
               accent={COLORS.teal}
               items={cyItems}
+              row={latest}
+              period={latest?.date}
               footnote={`${cy.months} data points · Source: ${dataSource || 'SBP'}`}
               provenanceKeys={['reserves.weekly.total']}
             />
@@ -224,6 +230,7 @@ export default function ReservesSection() {
               title={formatFySummaryTitle(fy)}
               accent={COLORS.blue}
               items={fyItems}
+              period={fy.fyLabel}
               footnote={`${fy.months} data points · ${dataCoverage || 'Available period'}`}
             />
           )}
@@ -232,6 +239,7 @@ export default function ReservesSection() {
 
       <ChartCard
         title="Foreign Exchange Reserves"
+        evidenceRows={timeSeries}
         observationDates={timeSeries.map((row) => row.date)}
         rangeMode={showFytd ? 'fiscal' : 'chronological'}
         description="SBP gross reserves (solid) and total reserves including commercial banks (dashed). Use YoY overlay or FYTD vs prior FY to compare the recovery path. Reserve cover is the single most-watched measure of Pakistan's ability to meet external obligations."

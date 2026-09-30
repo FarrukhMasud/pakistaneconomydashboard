@@ -134,8 +134,8 @@ const stringsUr = {
 
   // ===== Inflation =====
   Inflation: 'مہنگائی',
-  'Inflation measured Year-over-Year (base year 2015–16). SBP\u2019s medium-term inflation target is 5–7%. The CPI is the primary policy target — when CPI exceeds the target, SBP raises the policy rate to cool demand. Food prices (40%+ of CPI basket) disproportionately affect lower-income households. SPI tracks weekly-priced essentials; WPI measures wholesale/producer prices and often leads CPI trends.':
-    'مہنگائی سال بہ سال بنیاد پر (بنیادی سال 2015–16)۔ اسٹیٹ بینک کا درمیانی مدتی ہدف 5 تا 7 فیصد ہے۔ صارف قیمت اشاریہ (CPI) بنیادی پالیسی ہدف ہے — جب یہ ہدف سے تجاوز کرے تو اسٹیٹ بینک طلب کم کرنے کے لیے شرحِ سود بڑھاتا ہے۔ خوراک کی قیمتیں (CPI ٹوکری کا 40 فیصد سے زائد) کم آمدنی والے گھرانوں پر زیادہ اثر ڈالتی ہیں۔ SPI ہفتہ وار ضروری اشیا اور WPI تھوک قیمتوں کی پیمائش کرتا ہے جو اکثر CPI سے پہلے رجحان ظاہر کرتا ہے۔',
+  'Inflation is measured year-over-year. CPI measures consumer prices, SPI tracks prices of selected essential items, and WPI measures wholesale prices. No policy target is shown without exact official evidence.':
+    'مہنگائی سال بہ سال بنیاد پر ناپی جاتی ہے۔ CPI صارف قیمتوں، SPI منتخب ضروری اشیا کی قیمتوں، اور WPI تھوک قیمتوں کی پیمائش کرتا ہے۔ درست سرکاری ثبوت کے بغیر کوئی پالیسی ہدف نہیں دکھایا جاتا۔',
   'National CPI — Year-over-Year': 'قومی صارف قیمت اشاریہ — سال بہ سال',
   'Month-by-month headline inflation rate, measured against the same month a year earlier.':
     'ماہ بہ ماہ مہنگائی کی شرح، گزشتہ سال کے اسی مہینے کے مقابلے میں۔',
@@ -183,11 +183,10 @@ const stringsUr = {
 
   // ===== FBR =====
   'FBR Tax Collection': 'ایف بی آر ٹیکس وصولی',
-  'Federal tax collection reported by the Federal Board of Revenue (FBR), Pakistan\u2019s largest source of government revenue. Figures are net of refunds in PKR billion. Official FBR figures and secondary reports attributed to provisional FBR data are explicitly distinguished; missing months are never estimated or interpolated.':
-    'فیڈرل بورڈ آف ریونیو (ایف بی آر) کی رپورٹ کردہ وفاقی ٹیکس وصولی، جو حکومتی آمدنی کا سب سے بڑا ذریعہ ہے۔ اعداد ریفنڈ منہا کرنے کے بعد ارب روپے میں ہیں۔ ایف بی آر کے سرکاری اعداد اور عارضی اعداد پر مبنی صحافتی رپورٹس کو الگ الگ ظاہر کیا گیا ہے؛ غائب مہینوں کا اندازہ کبھی نہیں لگایا جاتا۔',
+  'Official Federal Board of Revenue tax collection, net of refunds in PKR billion. Closed-year historical series remain available when supported by official evidence. Current figures without verifiable official evidence are unavailable; unsupported press numbers are not published.':
+    'فیڈرل بورڈ آف ریونیو کی سرکاری ٹیکس وصولی، ریفنڈ منہا کرنے کے بعد ارب روپے میں۔ مکمل مالی سالوں کے تاریخی سلسلے سرکاری ثبوت کی موجودگی میں دستیاب رہتے ہیں۔ قابل تصدیق سرکاری ثبوت کے بغیر حالیہ اعداد دستیاب نہیں؛ بلا ثبوت اخباری اعداد شائع نہیں کیے جاتے۔',
   'Tax Targets vs Reported Collection': 'ٹیکس اہداف بمقابلہ رپورٹ شدہ وصولی',
   'Run-Rate Tracker — Is FBR On Pace?': 'رفتار کا جائزہ — کیا ایف بی آر ہدف پر ہے؟',
-  'Monthly Net Collection vs Target': 'ماہانہ خالص وصولی بمقابلہ ہدف',
   'Collection by Tax Head': 'ٹیکس کی مد کے لحاظ سے وصولی',
   'Monthly net collection split across the four federal tax heads: Income/Direct Tax, Sales Tax, Federal Excise Duty (FED) and Customs Duty. Only months for which FBR published a complete four-way breakdown are shown.':
     'چار وفاقی مدات میں ماہانہ خالص وصولی: انکم/ڈائریکٹ ٹیکس، سیلز ٹیکس، فیڈرل ایکسائز ڈیوٹی اور کسٹمز ڈیوٹی۔ صرف وہ مہینے دکھائے گئے ہیں جن کی مکمل تفصیل ایف بی آر نے شائع کی۔',
@@ -225,18 +224,20 @@ const stringsUr = {
     'دکھائے گئے اعداد سے شمار کیا گیا۔ نوٹ: صوبائی ترقیاتی پروگرام کا دائرہ مختلف ہوتا ہے (بعض صوبے غیر ملکی معاونت اور وفاقی پی ایس ڈی پی سمیت کل ترقیاتی رقم بتاتے ہیں)، اس لیے موازنہ محض اشاراتی ہے۔',
 
   // ===== Insights =====
-  'Building macro risk scorecard from verified data…': 'تصدیق شدہ اعداد سے خطرات کا اسکور کارڈ تیار کیا جا رہا ہے…',
+  'Building macro risk scorecard from published data…': 'شائع شدہ اعداد سے معاشی خطرات کا اسکور کارڈ تیار کیا جا رہا ہے…',
   'Macro Risk Scorecard': 'معاشی خطرات کا اسکور کارڈ',
-  'A compact risk dashboard built only from verified dashboard datasets. It labels pressure points without adding estimates or unpublished figures.':
-    'صرف تصدیق شدہ اعداد پر مبنی مختصر خطرات کا خلاصہ۔ یہ دباؤ کے نکات کی نشاندہی کرتا ہے، کوئی اندازہ یا غیر شائع شدہ عدد شامل نہیں کرتا۔',
+  'Available official figures and clearly labelled calculations. Unpublished or unsupported figures are unavailable, not estimated.':
+    'دستیاب سرکاری اعداد اور واضح طور پر نشان زد حسابی نتائج۔ غیر شائع شدہ یا بلا ثبوت اعداد دستیاب نہیں، ان کا تخمینہ نہیں لگایا جاتا۔',
+  'Unavailable source figures are not scored or treated as zero.':
+    'غیر دستیاب اصل اعداد کو اسکور نہیں دیا جاتا اور نہ انہیں صفر سمجھا جاتا ہے۔',
   'Loading IMF compliance tracker…': 'آئی ایم ایف اہداف کا جائزہ لوڈ ہو رہا ہے…',
   'IMF Program Compliance Tracker': 'آئی ایم ایف پروگرام اہداف کا جائزہ',
-  'Verified IMF-program scorecard plus live watch items from official dashboard data. Items marked watch are not declared met or missed unless the source data supports that label.':
-    'تصدیق شدہ آئی ایم ایف پروگرام اسکور کارڈ اور سرکاری اعداد سے اخذ کردہ زیرِ نظر نکات۔ زیرِ نظر نکات کو پورا یا ناکام قرار نہیں دیا جاتا جب تک ماخذ اعداد اس کی تائید نہ کریں۔',
+  'Published IMF-program scorecard and source-supported watch items. Missing observations are not declared met or missed.':
+    'شائع شدہ آئی ایم ایف پروگرام کا اسکور کارڈ اور ماخذ سے ثابت شدہ زیرِ نظر نکات۔ غائب مشاہدات کو اہداف کی تکمیل یا ناکامی قرار نہیں دیا جاتا۔',
   'Loading external financing wall…': 'بیرونی ادائیگیوں کا خاکہ لوڈ ہو رہا ہے…',
   'External Financing Wall': 'بیرونی ادائیگیوں کا بوجھ',
-  'A source-backed view of the repayment wall, expected rollovers, hard-cash burden, and reserve cushion. FY27 is shown only as a public range because detailed maturities are not fully public.':
-    'ماخذ سے تصدیق شدہ جائزہ: قرض ادائیگیوں کا بوجھ، متوقع تجدید، نقد ادائیگی اور ذخائر کا سہارا۔ مالی سال 2027 صرف ایک عوامی حد کے طور پر دکھایا گیا ہے کیونکہ تفصیلی ادائیگیاں مکمل طور پر عوامی نہیں۔',
+  'Available official external servicing and reserve figures. Unsupported repayment and rollover estimates are unavailable; certified stock observations remain visible.':
+    'دستیاب سرکاری بیرونی قرضوں کی ادائیگی اور ذخائر کے اعداد۔ قرضوں کی ادائیگی اور تجدید کے بلا ثبوت تخمینے دستیاب نہیں؛ تصدیق شدہ قرض کے حجم کے مشاہدات دکھائے جاتے ہیں۔',
   'Writing verified Good / Bad / Watch brief…': 'تصدیق شدہ بہتر / خراب / زیرِ نظر خلاصہ تیار کیا جا رہا ہے…',
   'Good / Bad / Watch Brief': 'بہتر / خراب / زیرِ نظر خلاصہ',
   'A rule-based monthly brief from verified dashboard data. It intentionally avoids adding unverified claims, forecasts, or figures not present in source-backed datasets.':

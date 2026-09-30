@@ -4,7 +4,8 @@ import { useData } from '../hooks/useData';
 import { COLORS, baseLineOptions } from '../utils/chartConfig';
 import ChartCard from './ChartCard';
 import SectionHeader from './SectionHeader';
-import { LoadingCard, ErrorCard } from './ui/DataState';
+import { LoadingCard, ErrorCard, PublicationNotice, UnavailableCard } from './ui/DataState';
+import FigureTrust from './FigureTrust';
 import { fmtUSD, formatMonthYear } from '../utils/periodHelpers';
 import './ui/CountryTrends.css';
 import useI18n from '../i18n/useI18n';
@@ -26,7 +27,7 @@ const CORRIDORS = [
 ];
 
 function pct(curr, prev) {
-  if (curr == null || prev == null || prev === 0) return null;
+  if (!Number.isFinite(curr) || !Number.isFinite(prev) || prev === 0) return null;
   return ((curr - prev) / prev) * 100;
 }
 
@@ -46,7 +47,7 @@ function TrendChip({ value, caption, goodWhenUp = true }) {
   );
 }
 
-function FlowRow({ icon, label, snap, latestMonth, goodWhenUp }) {
+function FlowRow({ icon, label, snap, latestMonth, goodWhenUp, datasetId = 'trade' }) {
   if (!snap || snap.latest == null) return null;
   return (
     <div className="country-row">
@@ -54,7 +55,7 @@ function FlowRow({ icon, label, snap, latestMonth, goodWhenUp }) {
       <span className="country-row__main">
         <span className="country-row__label">{label}</span>
         <span className="country-row__value">
-          ${fmtUSD(snap.latest)}
+          {Number.isFinite(snap.latest) ? `$${fmtUSD(snap.latest)}` : '—'}
           {latestMonth && <span className="month-tag">{formatMonthYear(latestMonth)}</span>}
         </span>
       </span>
@@ -62,14 +63,15 @@ function FlowRow({ icon, label, snap, latestMonth, goodWhenUp }) {
         <TrendChip value={pct(snap.latest, snap.prev)} caption="MoM" goodWhenUp={goodWhenUp} />
         <TrendChip value={pct(snap.latest, snap.yearAgo)} caption="YoY" goodWhenUp={goodWhenUp} />
       </span>
+      <FigureTrust datasetId={datasetId} row={snap} period={latestMonth} compact />
     </div>
   );
 }
 
 export default function CountryTrendsSection() {
   const { tx } = useI18n();
-  const { data: trade, loading: tLoading, error: tError, retry: tRetry } = useData('trade.json');
-  const { data: remit, loading: rLoading } = useData('remittances.json');
+  const { data: trade, loading: tLoading, error: tError, retry: tRetry, unavailable: tradeUnavailable } = useData('trade.json');
+  const { data: remit, loading: rLoading, error: rError, retry: rRetry, unavailable: remUnavailable } = useData('remittances.json');
 
   const remitByCountry = useMemo(() => {
     const out = {};
@@ -79,6 +81,7 @@ export default function CountryTrendsSection() {
     const yearAgo = remit.monthly[remit.monthly.length - 13];
     for (const [name, field] of Object.entries(REMIT_FIELD)) {
       out[name] = {
+        evidence: last?.evidence,
         latest: last?.[field] ?? null,
         prev: prev?.[field] ?? null,
         yearAgo: yearAgo?.[field] ?? null,
@@ -107,16 +110,9 @@ export default function CountryTrendsSection() {
   }, [remit]);
 
   if (tLoading || rLoading) return <LoadingCard label="Loading country trends…" />;
-  if (tError || !trade) return <ErrorCard error={tError} onRetry={tRetry} label="Could not load country trends" />;
+  if (tError) return <ErrorCard error={tError} onRetry={tRetry} label="Could not load country trends" />;
 
-  const cm = trade.countryMonthly;
-  if (!cm || !cm.countries?.length) {
-    return (
-      <section className="fade-in">
-        <SectionHeader title="Country Trends" description="Per-country trade & remittance data is not available in the current dataset." />
-      </section>
-    );
-  }
+  const cm = trade?.countryMonthly || { countries: [] };
 
   const corridorOptions = {
     ...baseLineOptions,
@@ -138,6 +134,8 @@ export default function CountryTrendsSection() {
         description="A partner-by-partner view of Pakistan's external sector — exports, imports and (where available) workers' remittances — for its most important trading and remittance partners. Each card shows the latest month with month-on-month (MoM) and year-on-year (YoY) momentum, plus fiscal-year-to-date totals versus the prior year. Watch for rising imports (red) outpacing exports, or softening remittances, as early signs of external-account pressure."
         sourceLinks={[{ label: 'SBP EasyData Portal', url: 'https://easydata.sbp.org.pk' }]}
       />
+      {tradeUnavailable && <UnavailableCard {...tradeUnavailable} compact />}
+      {rError ? <ErrorCard error={rError} onRetry={rRetry} compact /> : remUnavailable ? <UnavailableCard {...remUnavailable} compact /> : <PublicationNotice data={remit} />}
 
       <p className="country-trends__intro">
         Trade figures are SBP by-country export receipts and import payments (US$ million):
@@ -151,6 +149,8 @@ export default function CountryTrendsSection() {
       {corridorChart && (
         <div className="section-grid" style={{ marginBottom: '1.25rem' }}>
           <ChartCard
+            datasetId="remittances"
+            evidenceRows={remit.monthly}
             title="Remittance Corridors — Monthly Trend"
             observationDates={remit.monthly.map((row) => row.date)}
             defaultRange="3y"
@@ -168,16 +168,10 @@ export default function CountryTrendsSection() {
       )}
 
       <div className="country-cards">
-        {cm.countries.map((c) => {
+        {(cm.countries || []).map((c) => {
           const expFytd = c.exports?.fytd;
                     const impFytd = c.imports?.fytd;
-                    const balance = expFytd != null && impFytd != null
-                      ? expFytd - impFytd
-                      : expFytd != null
-                        ? expFytd
-                        : impFytd != null
-                          ? -impFytd
-                          : null;
+                    const balance = Number.isFinite(expFytd) && Number.isFinite(impFytd) ? expFytd - impFytd : null;
                     const surplus = balance == null ? null : balance >= 0;
           const rem = remitByCountry[c.country];
           const expGrowth = pct(c.exports?.fytd, c.exports?.fytdPrior);
@@ -197,16 +191,17 @@ export default function CountryTrendsSection() {
               <FlowRow icon="🚢" label="Exports to" snap={c.exports} latestMonth={cm.latestMonth} goodWhenUp />
               <FlowRow icon="📦" label="Imports from" snap={c.imports} latestMonth={cm.latestMonth} goodWhenUp={false} />
               {rem && rem.latest != null && (
-                <FlowRow icon="💸" label="Remittances from" snap={rem} latestMonth={rem.month} goodWhenUp />
+                <FlowRow icon="💸" label="Remittances from" snap={rem} latestMonth={rem.month} goodWhenUp datasetId="remittances" />
               )}
 
               <div className="country-card__fytd">
-                <span>{tx("Exports")}<b>${fmtUSD(c.exports?.fytd)}</b> {expGrowth != null && <em style={{ fontStyle: 'normal', color: expGrowth >= 0 ? COLORS.teal : COLORS.coral }}>({expGrowth >= 0 ? '+' : ''}{expGrowth.toFixed(1)}%)</em>}</span>
-                <span>{tx("Imports")}<b>${fmtUSD(c.imports?.fytd)}</b> {impGrowth != null && <em style={{ fontStyle: 'normal', color: impGrowth >= 0 ? COLORS.coral : COLORS.teal }}>({impGrowth >= 0 ? '+' : ''}{impGrowth.toFixed(1)}%)</em>}</span>
+                <span>{tx("Exports")}<b>{Number.isFinite(c.exports?.fytd) ? `$${fmtUSD(c.exports.fytd)}` : '—'}</b> {expGrowth != null && <em style={{ fontStyle: 'normal', color: expGrowth >= 0 ? COLORS.teal : COLORS.coral }}>({expGrowth >= 0 ? '+' : ''}{expGrowth.toFixed(1)}%)</em>}</span>
+                <span>{tx("Imports")}<b>{Number.isFinite(c.imports?.fytd) ? `$${fmtUSD(c.imports.fytd)}` : '—'}</b> {impGrowth != null && <em style={{ fontStyle: 'normal', color: impGrowth >= 0 ? COLORS.coral : COLORS.teal }}>({impGrowth >= 0 ? '+' : ''}{impGrowth.toFixed(1)}%)</em>}</span>
               </div>
               <div className="country-card__fytd" style={{ borderTop: 'none', paddingTop: 0, marginTop: '-0.3rem' }}>
                 <span style={{ fontSize: '0.68rem' }}>{cm.fytdLabel} vs {cm.fytdPriorLabel}</span>
               </div>
+              <FigureTrust datasetId="trade" row={c} period={cm.fytdLabel} derivation={balance == null ? undefined : 'Country FYTD export receipts − country FYTD import payments'} compact />
             </div>
           );
         })}

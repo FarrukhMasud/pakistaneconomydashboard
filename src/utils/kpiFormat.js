@@ -32,6 +32,15 @@ export function formatKpiUnit(unit) {
 /** Daily → `31 Jul 2026`, monthly → `Jul 2026`, FY26 → FY2026. */
 export function formatKpiPeriod(period) {
   if (!period) return '—';
+  if (typeof period === 'object') {
+    if (typeof period.label === 'string') return formatKpiPeriod(period.label);
+    if (typeof period.start !== 'string' || typeof period.end !== 'string') return '—';
+    const range = period.start === period.end ? formatKpiPeriod(period.start)
+      : `${formatKpiPeriod(period.start)} – ${formatKpiPeriod(period.end)}`;
+    const fy = period.fiscalYear;
+    return typeof fy === 'string' || Number.isInteger(fy)
+      ? `${range} (${formatKpiPeriod(/^FY/i.test(String(fy)) ? fy : `FY${fy}`)})` : range;
+  }
   const text = String(period);
   const daily = text.match(/^(\d{4})-(\d{2})-(\d{2})$/);
   if (daily) {
@@ -53,6 +62,7 @@ export function formatCompareBasis(basis) {
 }
 
 export function formatKpiChange(kpi, t = (_key, fallback) => fallback) {
+  if (kpi?.unavailable) return null;
   if (kpi?.changeDescription) {
     const { key, fallback, value } = kpi.changeDescription;
     return t(key, fallback).replace('{value}', value);
@@ -67,6 +77,7 @@ export function formatKpiChange(kpi, t = (_key, fallback) => fallback) {
 }
 
 export function formatKpiDisplay(kpi) {
+  if (kpi?.unavailable) return 'Unavailable';
   if (kpi?.displayValue) return kpi.displayValue;
   const unit = formatKpiUnit(kpi?.unit);
   return `${formatKpiNumber(kpi)}${unit ? ` ${unit}` : ''}`;

@@ -2,16 +2,17 @@ import { Line } from 'react-chartjs-2';
 import { useData } from '../hooks/useData';
 import { COLORS, baseLineOptions } from '../utils/chartConfig';
 import TrackerFooter from './ui/TrackerFooter';
-import { LoadingCard, ErrorCard } from './ui/DataState';
+import { LoadingCard, ErrorCard, PublicationNotice } from './ui/DataState';
+import FigureTrust from './FigureTrust';
 import './ui/Trackers.css';
 import useI18n from '../i18n/useI18n';
 import ChartCard from './ChartCard';
 
 export default function ReservesAdequacyTracker() {
   const { t, tx } = useI18n();
-  const { data, loading, error, retry } = useData('reserves-adequacy.json');
+  const { data, loading, error, retry, unavailable, dependencyErrors } = useData('reserves-adequacy.json');
   if (loading) return <LoadingCard label="Loading reserves adequacy…" />;
-  if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load reserves adequacy" compact />;
+  if (error || !data) return <ErrorCard error={error} unavailable={unavailable} onRetry={retry} label="Could not load reserves adequacy" compact />;
 
   const { current, benchmark, imfTarget, trajectory = [], drivers = [], context, sourceUrl, lastVerified, verifiedFrom, methodologyNote } = data;
 
@@ -29,7 +30,7 @@ export default function ReservesAdequacyTracker() {
         fill: true,
       },
       {
-        label: `${benchmark?.label || 'Benchmark'} (${benchmark?.months} months)`,
+        label: benchmark?.months != null ? `${benchmark?.label || 'Benchmark'} (${benchmark.months} months)` : 'Benchmark unavailable',
         isComparison: true,
         data: trajectory.map(() => benchmark?.months),
         borderColor: COLORS.amber,
@@ -56,13 +57,17 @@ export default function ReservesAdequacyTracker() {
     },
   };
 
-  const meetsBenchmark = (current?.importCoverMonths ?? 0) >= (benchmark?.months ?? 3);
+  const meetsBenchmark = Number.isFinite(current?.importCoverMonths) && Number.isFinite(benchmark?.months)
+    ? current.importCoverMonths >= benchmark.months : null;
+  const usd = (value) => Number.isFinite(value) ? `$${value}B` : '—';
 
   return (
     <div className="tracker card">
+      <PublicationNotice data={data} />
+      {dependencyErrors.map((result) => <ErrorCard key={result.id} error={result.error} onRetry={retry} compact />)}
       <div className="tracker__header">
         <h3>🏦 Reserves Adequacy Tracker</h3>
-        <span className="tracker__badge">~{current?.importCoverMonths} months</span>
+        <span className="tracker__badge">{Number.isFinite(current?.importCoverMonths) ? `${current.importCoverMonths} months` : '—'}</span>
       </div>
       <p className="tracker__subtitle">
         How many months of goods imports Pakistan's SBP-held reserves can cover — one gauge of external resilience. {context}
@@ -71,28 +76,28 @@ export default function ReservesAdequacyTracker() {
       <div className="tracker__stats">
         <div className="tracker-stat">
           <span className="tracker-stat__label">{tx("SBP reserves")}</span>
-          <span className="tracker-stat__value">${current?.sbpReserves}B</span>
-          <span className="tracker-stat__sub">total ${current?.totalReserves}B · {current?.asOf}</span>
+          <span className="tracker-stat__value">{usd(current?.sbpReserves)}</span>
+          <span className="tracker-stat__sub">total {usd(current?.totalReserves)} · {current?.asOf}</span>
+          <FigureTrust datasetId="reserves-adequacy" data={data} row={current} period={current?.asOf} compact />
         </div>
         <div className="tracker-stat">
           <span className="tracker-stat__label">{current?.importCoverLabel || 'Import cover'}</span>
-          <span className="tracker-stat__value" style={{ color: meetsBenchmark ? COLORS.teal : COLORS.amber }}>~{current?.importCoverMonths} mo</span>
-          <span className="tracker-stat__sub">{meetsBenchmark ? 'meets' : 'below'} common 3-month rule</span>
+          <span className="tracker-stat__value" style={{ color: meetsBenchmark == null ? COLORS.text : meetsBenchmark ? COLORS.teal : COLORS.amber }}>{Number.isFinite(current?.importCoverMonths) ? `${current.importCoverMonths} mo` : '—'}</span>
+          {meetsBenchmark != null && <span className="tracker-stat__sub">{meetsBenchmark ? 'meets' : 'below'} {benchmark.months}-month benchmark</span>}
+          <FigureTrust datasetId="reserves-adequacy" data={data} row={current} field="current.importCoverMonths" period={current?.asOf} derivation={current?.importCoverFormula || data.derivation} compact />
         </div>
         <div className="tracker-stat">
           <span className="tracker-stat__label">{tx("IMF reserves target")}</span>
-          <span className="tracker-stat__value" style={{ color: COLORS.teal }}>${imfTarget?.value}B ✓</span>
-          <span className="tracker-stat__sub">end-FY25 target — exceeded</span>
-        </div>
-        <div className="tracker-stat">
-          <span className="tracker-stat__label">vs early 2023</span>
-          <span className="tracker-stat__value">~2 wks → ~3 mo</span>
-          <span className="tracker-stat__sub">major external-buffer rebuild</span>
+          <span className="tracker-stat__value">{usd(imfTarget?.value)}</span>
+          <span className="tracker-stat__sub">{imfTarget?.label || imfTarget?.asOf}</span>
+          <FigureTrust datasetId="reserves-adequacy" data={data} row={imfTarget} field="imfTarget" period={imfTarget?.asOf || imfTarget?.label} compact />
         </div>
       </div>
 
       {trajectory.length > 1 && (
         <ChartCard
+          datasetId="reserves-adequacy"
+          evidenceRows={trajectory}
           chartId="chart-goods-import-cover-history"
           title={t('chart.importCoverHistory', 'Goods-import cover history')}
           observationDates={trajectory.map((point) => point.date)}

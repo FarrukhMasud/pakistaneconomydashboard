@@ -65,7 +65,7 @@ export default function MonetarySection() {
       legend: { display: false },
       tooltip: {
         ...baseLineOptions.plugins.tooltip,
-        callbacks: { label: (ctx) => `M2 Growth: ${ctx.parsed.y.toFixed(1)}%` },
+        callbacks: { label: (ctx) => `M2 Growth: ${fmtPct(ctx.parsed.y)}` },
       },
     },
     scales: {
@@ -113,7 +113,7 @@ export default function MonetarySection() {
       ...baseLineOptions.plugins,
       tooltip: {
         ...baseLineOptions.plugins.tooltip,
-        callbacks: { label: (ctx) => `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(1)}%` },
+        callbacks: { label: (ctx) => `${ctx.dataset.label}: ${fmtPct(ctx.parsed.y)}` },
       },
     },
     scales: {
@@ -208,8 +208,8 @@ export default function MonetarySection() {
           title={cy ? `${cy.rangeLabel} — Calendar YTD` : 'Latest Monetary Indicators'}
           accent={COLORS.purple}
           items={[
-            { label: 'Broad Money (M2)', value: fmtPKR(latestM2?.value), sub: latestM2 ? formatDate(latestM2.date) : '—', color: COLORS.purple },
-            { label: 'M2 Growth', value: fmtPct(latestM2Yoy?.value), sub: `YoY`, direction: (latestM2Yoy?.value ?? 0) > 0 ? 'up' : 'down', sentiment: 'neutral', color: COLORS.teal },
+            { label: 'Broad Money (M2)', value: fmtPKR(latestM2?.value), row: latestM2, period: latestM2?.date, field: 'm2', sub: latestM2 ? formatDate(latestM2.date) : '—', color: COLORS.purple },
+            { label: 'M2 Growth', value: fmtPct(latestM2Yoy?.value), row: latestM2Yoy, period: latestM2Yoy?.date, field: 'm2_yoy', sub: `YoY`, direction: Number.isFinite(latestM2Yoy?.value) ? latestM2Yoy.value > 0 ? 'up' : latestM2Yoy.value < 0 ? 'down' : 'flat' : null, sentiment: 'neutral', color: COLORS.teal },
           ]}
           footnote={`Source: ${dataSource || 'SBP EasyData API'}`}
         />
@@ -218,8 +218,8 @@ export default function MonetarySection() {
             title={formatFySummaryTitle(fy)}
             accent={COLORS.blue}
             items={[
-              { label: 'Private Credit', value: fmtPKR(latestCredit?.value), sub: `${fmtPct(latestCreditYoy?.value)} YoY`, color: COLORS.blue },
-              { label: 'Bank Deposits', value: fmtPKR(latestDeposits?.value), sub: `${fmtPct(latestDepYoy?.value)} YoY`, color: COLORS.amber },
+              { label: 'Private Credit', value: fmtPKR(latestCredit?.value), row: latestCredit, period: latestCredit?.date, field: 'credit_private', sub: Number.isFinite(latestCreditYoy?.value) ? `${fmtPct(latestCreditYoy.value)} YoY` : null, color: COLORS.blue },
+              { label: 'Bank Deposits', value: fmtPKR(latestDeposits?.value), row: latestDeposits, period: latestDeposits?.date, field: 'deposits', sub: Number.isFinite(latestDepYoy?.value) ? `${fmtPct(latestDepYoy.value)} YoY` : null, color: COLORS.amber },
             ]}
             footnote={`${fy.months} month${fy.months > 1 ? 's' : ''} · Last updated: ${lastUpdated || 'N/A'}`}
           />

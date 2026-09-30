@@ -1,0 +1,452 @@
+import { createHash } from 'node:crypto';
+import { readFile, writeFile } from 'node:fs/promises';
+import { resolve, dirname, basename } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { officialDomain, validateOfficialUrl, getSourceEvidence, auditSourceArtifacts } from './source-evidence.mjs';
+
+export const PUBLICATION_POLICY = 'official-only';
+export const CURATED_FILES = [
+  'fbr-tax.json', 'circular-debt.json', 'external-debt.json',
+  'budget-provincial.json', 'budget-federal.json', 'imf-tracker.json',
+  'monetary-policy.json', 'economic-events.json', 'explainers.json', 'indicators.json',
+];
+const SHA256 = /^[a-f0-9]{64}$/;
+const ALLOWED_TYPES = new Set(['official-primary', 'official-derived']);
+const CURATED_IDS = new Set(CURATED_FILES.map(file => file.replace(/\.json$/, '')));
+const METADATA = new Set([
+  'title', 'unit', 'basis', 'source', 'sourceUrl', 'sourceLinks', 'dataSource',
+  'lastUpdated', 'lastVerified', 'lastChecked', 'verificationDate',
+  'publication', 'publicationEvidence', 'reviewRequired', 'reviewReason',
+]);
+const TECHNICAL_KEYS = new Set([
+  'publication', 'publicationEvidence', 'sourceEvidence', 'reviewRequired', 'reviewReason',
+]);
+const EVIDENCE_KEYS = new Set([
+  'sourceType', 'sourceKey', 'sourceUrl', 'artifactId', 'evidenceHash',
+  'contentHash', 'location', 'method', 'status', 'formula', 'inputs',
+]);
+
+function canonical(value) {
+  if (Array.isArray(value)) return value.map(canonical);
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(Object.keys(value).sort().map(key => [key, canonical(value[key])]));
+  }
+  return value;
+}
+
+export function hashContent(value) {
+  return createHash('sha256').update(JSON.stringify(canonical(value))).digest('hex');
+}
+
+/** The reviewed payload excludes policy/evidence envelopes, never its claims. */
+export function publicationContentHash(data) {
+  return hashContent(Object.fromEntries(Object.entries(data).filter(([key]) => !TECHNICAL_KEYS.has(key))));
+}
+
+export function publicationEvidenceHash(evidence) {
+  return hashContent(evidence);
+}
+
+/**
+ * Review format: { contentHash, approvals: [
+ *   { reviewer: "<real identity>", approvedAt: "<ISO timestamp>", evidenceHash },
+ *   { reviewer: "<different real identity>", approvedAt: "<ISO timestamp>", evidenceHash }
+ * ] }. Obtain hashes with --review-hashes after attaching exact official evidence.
+ * Changes invalidate approvals. This validates binding, not identity authentication;
+ * reviewer identities must be checked through the repository's human review process.
+ */
+export function validateReview(review, { contentHash, evidenceHash, now = new Date().toISOString() }) {
+  const errors = [];
+  if (!review || review.contentHash !== contentHash || !SHA256.test(contentHash || '')) {
+    errors.push('Review content hash is absent or stale.');
+  }
+  const approvals = review?.approvals;
+  if (review && Object.keys(review).some(key => !['contentHash', 'approvals'].includes(key))) {
+    errors.push('Unknown review metadata is not permitted.');
+  }
+  if (!Array.isArray(approvals) || approvals.length < 2) {
+    errors.push('Two distinct real reviewer approvals are required.');
+  }
+  const reviewers = new Set();
+  for (const approval of Array.isArray(approvals) ? approvals : []) {
+    if (!approval || typeof approval !== 'object'
+      || Object.keys(approval).some(key => !['reviewer', 'approvedAt', 'evidenceHash'].includes(key))) {
+      errors.push('Unknown approval metadata is not permitted.');
+    }
+    const reviewer = typeof approval?.reviewer === 'string' ? approval.reviewer.trim().toLowerCase() : '';
+    if (!reviewer || /^(?:pending|placeholder|reviewer[- ]?\d*|copilot|ai|unknown)$/.test(reviewer)) {
+      errors.push('Reviewer identity must identify a real reviewer.');
+    } else if (reviewers.has(reviewer)) {
+      errors.push('Reviewer approvals must be distinct.');
+    }
+    reviewers.add(reviewer);
+    if (approval?.evidenceHash !== evidenceHash || !SHA256.test(evidenceHash || '')) {
+      errors.push('Approval evidence hash is absent or stale.');
+    }
+    const timestamp = approval?.approvedAt;
+    if (typeof timestamp !== 'string' || !/^\d{4}-\d{2}-\d{2}T/.test(timestamp)
+      || !Number.isFinite(Date.parse(timestamp)) || Date.parse(timestamp) > Date.parse(now)) {
+      errors.push('Approval timestamp must be a valid non-future timestamp.');
+    }
+  }
+  return { ok: errors.length === 0, errors };
+}
+
+export function isOfficialDocumentUrl(value) {
+  if (!officialDomain(value)) return false;
+  try {
+    const url = new URL(validateOfficialUrl(value));
+    return !/^\/?$/.test(url.pathname)
+      && !/\/(?:countries\/pak|ecodata\/index2\.asp|m_policy\/index\.asp|our-operations\/monetary-policy)\/?$/i.test(url.pathname);
+  } catch {
+    return false;
+  }
+}
+
+export function hasNumericClaims(value, key = '') {
+  if (value === null || value === undefined) return false;
+  if (typeof value === 'number') return true;
+  if (typeof value === 'string') {
+    if (/^(?:date|asOf|period|fy|fyLabel|label|id|color|source|sourceUrl|sourceType|title|unit|basis)$/.test(key)
+      && /^(?:\d{4}(?:-\d{2}){0,2}|FY\d{4}(?:-\d{2})?|#[a-f0-9]{3,8})$/i.test(value)) return false;
+    if (/^(?:sourceUrl|source|sourceKey|artifactId|evidenceHash|contentHash|path|retrievedAt|parserVersion)$/.test(key)) return false;
+    return /(?:\d|[£$%₨])/.test(value) || /\b(?:zero|one|two|three|four|five|six|seven|eight|nine|ten)\b/i.test(value);
+  }
+  if (Array.isArray(value)) return value.some(item => hasNumericClaims(item, key));
+  return Object.entries(value).some(([name, item]) => !TECHNICAL_KEYS.has(name) && hasNumericClaims(item, name));
+}
+
+function getPath(data, path) {
+  return path ? path.split('.').reduce((value, key) => value?.[key], data) : data;
+}
+
+function isUnavailableValue(value) {
+  if (value === null || value === undefined) return true;
+  if (typeof value !== 'object') return false;
+  return Object.values(value).every(isUnavailableValue);
+}
+
+function claims(data) {
+  const paths = [];
+  for (const [key, value] of Object.entries(data)) {
+    if (METADATA.has(key) || key === 'sourceType' || key === 'sourceEvidence') continue;
+    if (isUnavailableValue(value)) continue;
+    if (['monthly', 'fyTotals', 'annualTargets', 'indicators', 'events'].includes(key) && Array.isArray(value)) {
+      value.forEach((item, index) => { if (item !== null) paths.push(`${key}.${index}`); });
+    } else {
+      paths.push(key);
+    }
+
+  }
+  return paths;
+}
+
+function declaredSources(value, path = '') {
+  if (!value || typeof value !== 'object') return [];
+  return Object.entries(value).flatMap(([key, item]) => {
+    const field = path ? `${path}.${key}` : key;
+    if (key === 'publication' || key === 'publicationEvidence' || key === 'sourceEvidence') return [];
+    if (key === 'sourceType') return [{ path: field, value: item }];
+    return declaredSources(item, field);
+  });
+}
+
+function declaredSourceUrls(value) {
+  if (!value || typeof value !== 'object') return [];
+  return Object.entries(value).flatMap(([key, item]) => {
+    if (['publication', 'publicationEvidence', 'sourceEvidence'].includes(key)) return [];
+    if (['source', 'sourceUrl', 'url'].includes(key) && typeof item === 'string' && /^https?:/i.test(item)) return [item];
+    return declaredSourceUrls(item);
+  });
+}
+
+function receiptFor(record, options) {
+  const evidence = options.evidence || {};
+  if (Array.isArray(evidence)) return evidence.find(item => item.artifactId === record.artifactId);
+  return evidence[record.artifactId] || evidence[record.sourceKey];
+}
+
+function validateEvidence(record, value, path, dataset, options) {
+  const errors = [];
+  if (!record || !ALLOWED_TYPES.has(record.sourceType)
+    || Object.keys(record).some(key => !EVIDENCE_KEYS.has(key))) return ['Missing or forbidden source class or evidence fields.'];
+  if (record.contentHash !== hashContent(value)) errors.push('Evidence is not tied to this exact content.');
+  if (!record.location || typeof record.location !== 'string') errors.push('Exact document location is required.');
+  if (record.sourceType === 'official-derived') {
+    if (typeof record.formula !== 'string' || !record.formula.trim() || !Array.isArray(record.inputs) || record.inputs.length === 0) {
+      errors.push('Derived claims require a formula and official input references.');
+    } else {
+      for (const input of record.inputs) {
+        const supported = options.derivedInputs?.[input];
+        if (!supported || !ALLOWED_TYPES.has(supported.sourceType) || supported.status !== 'published'
+          || !SHA256.test(supported.contentHash || '') || !SHA256.test(supported.evidenceHash || '')) {
+          errors.push(`Derived input is not an independently supported official claim: ${input}`);
+        }
+      }
+    }
+  } else {
+    const receipt = receiptFor(record, options);
+    if (!isOfficialDocumentUrl(record.sourceUrl)) errors.push('A direct official HTTPS publication is required, not an institutional homepage.');
+    if (!receipt || receipt.sourceKey !== record.sourceKey || receipt.artifactId !== record.artifactId || receipt.sha256 !== record.evidenceHash
+      || receipt.sourceUrl !== record.sourceUrl || !isOfficialDocumentUrl(receipt.responseUrl)
+      || officialDomain(receipt.responseUrl) !== officialDomain(record.sourceUrl)
+      || !receipt.parserVersion || !SHA256.test(receipt.sha256 || '')) {
+      errors.push('An authentic matching archived source receipt is required.');
+    }
+  }
+  for (const declaration of declaredSources(value)) {
+    if (!ALLOWED_TYPES.has(declaration.value) || declaration.value !== record.sourceType) {
+      errors.push(`Mixed or unsupported source classification at ${path}.${declaration.path}.`);
+    }
+  }
+  if (declaredSourceUrls(value).some(url => !isOfficialDocumentUrl(url))) {
+    errors.push('Claim contains a secondary or generic source URL; it cannot be relabelled as primary.');
+  }
+  if (record.sourceType === 'official-primary' && isOfficialDocumentUrl(record.sourceUrl)
+    && declaredSourceUrls(value).some(url => isOfficialDocumentUrl(url)
+      && validateOfficialUrl(url) !== validateOfficialUrl(record.sourceUrl))) {
+    errors.push('Mixed primary documents require separate figure-level evidence, not one receipt for the whole scope.');
+  }
+  const manual = CURATED_IDS.has(dataset.id) || dataset.parser === 'manual-curation' || dataset.manual === true;
+  const automatedException = (dataset.id === 'fbr-tax' && /^(?:monthly|fyTotals)\.\d+$/.test(path)
+    && record.method === 'automated'
+    && receiptFor(record, options)?.parserVersion?.startsWith('update-fbr.mjs:sha256:'))
+    || (dataset.id === 'external-debt' && ['stock', 'observationDate'].includes(path)
+      && record.sourceKey === 'pakdebt.pdf'
+      && receiptFor(record, options)?.parserVersion?.startsWith('enforce-publication-policy.mjs:sha256:'));
+  const independentlyParsed = options.verifiedAutomatedClaims?.[path] === hashContent(value);
+  if (automatedException && !independentlyParsed) {
+    errors.push('Automated content does not match an independently reparsed archived official source.');
+  }
+  if (manual && hasNumericClaims(value) && !(automatedException && independentlyParsed)) {
+    const review = validateReview(options.review || options.data?.publication?.review, {
+      contentHash: publicationContentHash(options.data),
+      evidenceHash: publicationEvidenceHash(options.data.publicationEvidence || {}),
+      now: options.now,
+    });
+    errors.push(...review.errors);
+  }
+  return errors;
+}
+
+/** Read-only audit contract: no I/O, mutations, source inference, or silent skips. */
+export function assessPublication(dataset, data, options = {}) {
+  const violations = [];
+  const paths = claims(data);
+  const records = data.publicationEvidence || {};
+  const existing = data.publication;
+  for (const [path, record] of Object.entries(records)) {
+    if (!record || typeof record !== 'object' || Array.isArray(record)
+      || !ALLOWED_TYPES.has(record.sourceType)
+      || Object.keys(record).some(key => !EVIDENCE_KEYS.has(key))
+      || (path !== '' && !paths.includes(path))) {
+      violations.push({ path: `publicationEvidence.${path}`, reasons: ['Unknown, unused or forbidden scoped publication evidence.'] });
+    }
+  }
+  for (const key of ['title', 'basis', 'dataSource', 'source']) {
+    if (typeof data[key] === 'string' && hasNumericClaims(data[key], key)) {
+      violations.push({ path: key, reasons: ['Economic numeric claims cannot be hidden in metadata.'] });
+    }
+  }
+  if (Object.hasOwn(data, 'sourceType') && !ALLOWED_TYPES.has(data.sourceType)) {
+    violations.push({ path: 'sourceType', reasons: ['Unknown or forbidden dataset source class.'] });
+  }
+  for (const path of paths) {
+    const record = records[path] || records[''];
+    const value = records[path] ? getPath(data, path)
+      : records[''] ? Object.fromEntries(paths.map(key => [key, getPath(data, key)])) : getPath(data, path);
+    const reasons = validateEvidence(record, value, path, dataset, { ...options, data });
+    if (reasons.length) violations.push({ path, reasons });
+  }
+  if (existing?.status === 'withheld' && paths.length) {
+    violations.push({ path: '', reasons: ['A wholly withheld payload must not contain claim sections.'] });
+  }
+  if (existing && (existing.policy !== PUBLICATION_POLICY || !['published', 'partial', 'withheld'].includes(existing.status)
+    || Object.keys(existing).some(key => !['policy', 'status', 'reason', 'withheldFields', 'review'].includes(key))
+    || !Array.isArray(existing.withheldFields) || existing.withheldFields.some(path => typeof path !== 'string')
+    || !('reason' in existing) || (existing.status !== 'published' && typeof existing.reason !== 'string')
+    || (existing.status !== 'published' && !existing.reason)
+    || (existing.status === 'published' && (existing.reason !== null || existing.withheldFields.length)))) {
+    violations.push({ path: 'publication', reasons: ['Invalid publication metadata contract.'] });
+  }
+  const rejected = violations.filter(item => paths.includes(item.path)).map(item => item.path);
+  const withheldFields = [...new Set([...(existing?.withheldFields || []), ...rejected])];
+  const status = paths.length === 0 ? 'withheld'
+    : rejected.length === paths.length || violations.some(item => item.path === 'sourceType' || METADATA.has(item.path)) ? 'withheld'
+      : withheldFields.length ? 'partial' : 'published';
+  if (existing && existing.status !== status) {
+    violations.push({ path: 'publication', reasons: ['Declared publication status does not match supported content.'] });
+  }
+  return {
+    ok: violations.length === 0,
+    publication: {
+      policy: PUBLICATION_POLICY,
+      status,
+      reason: status === 'published' ? null : existing?.reason
+        || 'Publication withheld until exact official evidence and required independent review approvals are available.',
+      withheldFields,
+      ...(existing?.review ? { review: {
+        contentHash: existing.review.contentHash,
+        approvals: Array.isArray(existing.review.approvals) ? existing.review.approvals.map(approval => ({
+          reviewer: approval?.reviewer, approvedAt: approval?.approvedAt, evidenceHash: approval?.evidenceHash,
+        })) : [],
+      } } : {}),
+    },
+    violations,
+  };
+}
+
+function unavailable(value) {
+  if (value === null || value === undefined) return value;
+  if (Array.isArray(value)) return [];
+  if (typeof value !== 'object') return null;
+  const result = {};
+  for (const [key, item] of Object.entries(value)) {
+    if (item === null) result[key] = null;
+    else if (typeof item === 'number' || ['net', 'value', 'target', 'actual', 'budgetTarget', 'revisedTarget'].includes(key)) result[key] = null;
+  }
+  return result;
+}
+
+/** Fail closed by removing rejected claims while retaining independently supported scopes. */
+export function applyPublicationPolicy(dataset, data, options = {}) {
+  const audit = assessPublication(dataset, data, options);
+  const output = structuredClone(data);
+  if (audit.publication.status === 'withheld') {
+    const metadata = Object.fromEntries(Object.entries(output).filter(([key]) => METADATA.has(key)
+      && !['publicationEvidence', 'publication', 'dataSource', 'source', 'reviewReason'].includes(key)
+      && !audit.violations.some(violation => violation.path === key)));
+    metadata.publication = audit.publication;
+    metadata.reviewRequired = true;
+    metadata.reviewReason = audit.publication.reason;
+    return metadata;
+  }
+  for (const violation of audit.violations) {
+    if (!violation.path || violation.path === 'publication') continue;
+    if (violation.path.startsWith('publicationEvidence.')) {
+      delete output.publicationEvidence?.[violation.path.slice('publicationEvidence.'.length)];
+      continue;
+    }
+    const parts = violation.path.split('.');
+    const key = parts.pop();
+    const parent = parts.reduce((value, part) => value?.[part], output);
+    if (parent) {
+      if (Array.isArray(parent)) {
+        const identity = parent[key]?.date || parent[key]?.fy || parent[key]?.id || `removed-${key}`;
+        // Stable identities avoid pointing a withheld index at a retained row after compaction.
+        const stablePath = [...parts, identity].join('.');
+        audit.publication.withheldFields = audit.publication.withheldFields.map(path => path === violation.path ? stablePath : path);
+        parent[key] = null;
+      } else parent[key] = unavailable(parent[key]);
+    }
+    delete output.publicationEvidence?.[violation.path];
+  }
+  for (const key of ['monthly', 'fyTotals', 'annualTargets', 'indicators', 'events']) {
+    if (!Array.isArray(output[key])) continue;
+    const original = output[key];
+    const evidence = output.publicationEvidence || {};
+    const kept = [];
+    const remapped = {};
+    original.forEach((item, index) => {
+      if (item === null) return;
+      if (evidence[`${key}.${index}`]) remapped[`${key}.${kept.length}`] = evidence[`${key}.${index}`];
+      kept.push(item);
+    });
+    for (const path of Object.keys(evidence)) if (path.startsWith(`${key}.`)) delete evidence[path];
+    Object.assign(evidence, remapped);
+    output[key] = kept;
+  }
+  output.publication = audit.publication;
+  output.reviewRequired = audit.publication.status !== 'published';
+  if (output.reviewRequired) output.reviewReason = audit.publication.reason;
+  return output;
+}
+
+/** Reparse archived official PDFs before granting narrow manual-review exceptions. */
+export async function verifyAutomatedPublicationClaims(dataset, data, { evidence, dataDir } = {}) {
+  const verified = {};
+  const publicDir = resolve(dataDir || resolve(dirname(fileURLToPath(import.meta.url)), '..', '..', 'public', 'data'), '..');
+  if (dataset.id === 'fbr-tax') {
+    const { parsePdfLines, extractMonthly, FBR_MONTHWISE_SOURCES } = await import('../update-fbr.mjs');
+    for (const source of FBR_MONTHWISE_SOURCES) {
+      const candidates = [...new Map(Object.values(evidence || {}).filter(receipt => receipt?.sourceKey === source.sourceKey
+        && receipt.sourceUrl === source.url).map(receipt => [receipt.artifactId, receipt])).values()];
+      for (const receipt of candidates) {
+        const parsed = extractMonthly(await parsePdfLines(resolve(publicDir, 'source-evidence', basename(receipt.path))), source);
+        for (const [index, row] of (data.monthly || []).entries()) {
+          const official = parsed.monthly.find(item => item.date === row?.date);
+          if (data.publicationEvidence?.[`monthly.${index}`]?.artifactId === receipt.artifactId
+            && official && hashContent(row) === hashContent(official)) verified[`monthly.${index}`] = hashContent(row);
+        }
+        for (const [index, row] of (data.fyTotals || []).entries()) {
+          const official = {
+            fy: source.fyLabel, net: parsed.fyTotal, provisional: source.provisional,
+            sourceType: 'official-primary', source: source.url,
+          };
+          if (data.publicationEvidence?.[`fyTotals.${index}`]?.artifactId === receipt.artifactId
+            && hashContent(row) === hashContent(official)) verified[`fyTotals.${index}`] = hashContent(row);
+        }
+      }
+    }
+  } else if (dataset.id === 'external-debt') {
+    const record = data.publicationEvidence?.stock;
+    const receipt = record ? receiptFor(record, { evidence }) : null;
+    if (!receipt) return verified;
+    const { parsePdfTextItems } = await import('../pdf-text.mjs');
+    const { extractExternalStock } = await import('../enforce-publication-policy.mjs');
+    const stock = extractExternalStock(await parsePdfTextItems(resolve(publicDir, 'source-evidence', basename(receipt.path))));
+    if (hashContent(stock) === hashContent(data.stock)) verified.stock = hashContent(stock);
+    if (data.observationDate === stock.asOf
+      && data.publicationEvidence?.observationDate?.artifactId === receipt.artifactId) {
+      verified.observationDate = hashContent(stock.asOf);
+    }
+  }
+  return verified;
+}
+
+/** Resolve immutable receipts, including an older authentic artifact for the same source key. */
+export async function loadPublicationEvidence(data, { dataDir, evidence } = {}) {
+  const receipts = { ...evidence };
+  const rootDir = dataDir ? resolve(dataDir, '..', '..') : resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
+  let catalog;
+  for (const record of Object.values(data.publicationEvidence || {})) {
+    if (!record?.sourceKey || record.sourceType === 'official-derived') continue;
+    const provided = receiptFor(record, { evidence: receipts });
+    if (provided?.artifactId === record.artifactId) continue;
+    const latest = await getSourceEvidence(record.sourceKey, { rootDir });
+    let receipt = latest;
+    if (latest?.artifactId !== record.artifactId) {
+      catalog ||= await auditSourceArtifacts({ rootDir });
+      receipt = catalog.artifacts.find(item => item.artifactId === record.artifactId);
+    }
+    receipts[record.sourceKey] = receipt || null;
+    if (receipt) receipts[receipt.artifactId] = receipt;
+  }
+  return receipts;
+}
+
+/** Async pipeline stage. Violations are reported, sanitised, and re-audited before writing. */
+export async function enforcePublicationPolicy({
+  dataDir = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..', 'public', 'data'),
+  datasets, evidence, derivedInputs, write = true,
+} = {}) {
+  if (!Array.isArray(datasets)) throw new Error('Publication enforcement requires explicit dataset descriptors.');
+  const reports = [];
+  for (const dataset of datasets) {
+    const file = resolve(dataDir, dataset.file);
+    const data = JSON.parse(await readFile(file, 'utf8'));
+    const receipts = await loadPublicationEvidence(data, { evidence, dataDir });
+    const verifiedAutomatedClaims = await verifyAutomatedPublicationClaims(dataset, data, { evidence: receipts, dataDir });
+    const options = { evidence: receipts, derivedInputs, verifiedAutomatedClaims };
+    const before = assessPublication(dataset, data, options);
+    const output = applyPublicationPolicy(dataset, data, options);
+    const afterVerified = await verifyAutomatedPublicationClaims(dataset, output, { evidence: receipts, dataDir });
+    const after = assessPublication(dataset, output, { ...options, verifiedAutomatedClaims: afterVerified });
+    if (!after.ok) throw new Error(`Publication enforcement failed for ${dataset.id}: ${JSON.stringify(after.violations)}`);
+    if (write && JSON.stringify(data) !== JSON.stringify(output)) {
+      await writeFile(file, `${JSON.stringify(output, null, 2)}\n`);
+    }
+    reports.push({ id: dataset.id, publication: output.publication, violations: before.violations });
+  }
+  return reports;
+}

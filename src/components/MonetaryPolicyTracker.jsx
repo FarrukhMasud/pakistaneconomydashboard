@@ -2,7 +2,8 @@ import { Line } from 'react-chartjs-2';
 import { useData } from '../hooks/useData';
 import { COLORS, baseLineOptions } from '../utils/chartConfig';
 import TrackerFooter from './ui/TrackerFooter';
-import { LoadingCard, ErrorCard } from './ui/DataState';
+import { LoadingCard, ErrorCard, PublicationNotice } from './ui/DataState';
+import FigureTrust from './FigureTrust';
 import './ui/Trackers.css';
 import useI18n from '../i18n/useI18n';
 import ChartCard from './ChartCard';
@@ -15,11 +16,13 @@ function fmtMonth(dateStr, opts = { month: 'short', year: 'numeric' }) {
 
 export default function MonetaryPolicyTracker() {
   const { t, tx } = useI18n();
-  const { data, loading, error, retry } = useData('monetary-policy.json');
+  const { data, loading, error, retry, unavailable } = useData('monetary-policy.json');
   if (loading) return <LoadingCard label="Loading monetary policy tracker…" />;
-  if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load monetary policy tracker" compact />;
+  if (error || !data) return <ErrorCard error={error} unavailable={unavailable} onRetry={retry} label="Could not load monetary policy tracker" compact />;
 
-  const { currentRate, asOf, lastDecision, nextMeeting, context = {}, decisions = [], sourceUrl, lastVerified, verifiedFrom, methodologyNote } = data;
+  const { currentRate, asOf, lastDecision, nextMeeting, decisions = [], sourceUrl, lastVerified, verifiedFrom, methodologyNote } = data;
+  const context = data.context || {};
+  const rate = (value) => Number.isFinite(value) ? `${value}%` : '—';
 
   const chart = {
     labels: decisions.map((d) => fmtMonth(d.date)),
@@ -59,13 +62,14 @@ export default function MonetaryPolicyTracker() {
   };
 
   const recent = [...decisions].reverse().slice(0, 6);
-  const actionWord = lastDecision?.action === 'cut' ? 'Cut' : lastDecision?.action === 'hike' ? 'Hiked' : 'Held';
+  const actionWord = lastDecision?.action === 'cut' ? 'Cut' : lastDecision?.action === 'hike' ? 'Hiked' : lastDecision?.action === 'hold' ? 'Held' : '—';
 
   return (
     <div className="tracker card">
+      <PublicationNotice data={data} />
       <div className="tracker__header">
         <h3>🏛️ SBP Policy Rate Tracker</h3>
-        <span className="tracker__badge">{currentRate}%</span>
+        <span className="tracker__badge">{rate(currentRate)}</span>
       </div>
       <p className="tracker__subtitle">
         The State Bank of Pakistan's headline policy (target) rate — the main lever for taming inflation and defending the rupee. {context.easingNote}
@@ -74,25 +78,29 @@ export default function MonetaryPolicyTracker() {
       <div className="tracker__stats">
         <div className="tracker-stat">
           <span className="tracker-stat__label">{tx("Current rate")}</span>
-          <span className="tracker-stat__value">{currentRate}%</span>
+          <span className="tracker-stat__value">{rate(currentRate)}</span>
           <span className="tracker-stat__sub">as of {fmtMonth(asOf, { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+          <FigureTrust datasetId="monetary-policy" data={data} field="currentRate" period={asOf} compact />
         </div>
         <div className="tracker-stat">
           <span className="tracker-stat__label">{tx("Real policy rate")}</span>
-          <span className="tracker-stat__value" style={{ color: (context.realRate ?? 0) < 0 ? COLORS.coral : COLORS.teal }}>
-            {context.realRate > 0 ? '+' : ''}{context.realRate}%
+          <span className="tracker-stat__value" style={{ color: !Number.isFinite(context.realRate) ? COLORS.text : context.realRate < 0 ? COLORS.coral : COLORS.teal }}>
+            {rate(context.realRate)}
           </span>
-          <span className="tracker-stat__sub">vs {context.inflationYoY}% CPI ({context.inflationPeriod})</span>
+          <span className="tracker-stat__sub">vs {rate(context.inflationYoY)} CPI ({context.inflationPeriod})</span>
+          <FigureTrust datasetId="monetary-policy" data={data} row={context} field="context.realRate" period={context.inflationPeriod} derivation="Policy rate − CPI inflation (percentage points)" compact />
         </div>
         <div className="tracker-stat">
           <span className="tracker-stat__label">{tx("Last decision")}</span>
           <span className="tracker-stat__value" style={{ color: lastDecision?.action === 'hike' ? COLORS.coral : lastDecision?.action === 'cut' ? COLORS.teal : COLORS.textPrimary }}>{actionWord}</span>
           <span className="tracker-stat__sub">{fmtMonth(lastDecision?.date, { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+          <FigureTrust datasetId="monetary-policy" data={data} row={lastDecision} period={lastDecision?.date} compact />
         </div>
         <div className="tracker-stat">
           <span className="tracker-stat__label">Cycle peak → trough</span>
-          <span className="tracker-stat__value">{context.peak?.rate}% → {context.trough?.rate}%</span>
+          <span className="tracker-stat__value">{rate(context.peak?.rate)} → {rate(context.trough?.rate)}</span>
           <span className="tracker-stat__sub">{fmtMonth(context.peak?.date)} → {fmtMonth(context.trough?.date)}</span>
+          <FigureTrust datasetId="monetary-policy" data={data} row={context} period={`${context.peak?.date || '—'} → ${context.trough?.date || '—'}`} compact />
         </div>
       </div>
 
@@ -107,6 +115,8 @@ export default function MonetaryPolicyTracker() {
       )}
 
       <ChartCard
+        datasetId="monetary-policy"
+        evidenceRows={decisions}
         chartId="chart-policy-rate-history"
         title={t('chart.policyHistory', 'Policy rate history')}
         observationDates={decisions.map((decision) => decision.date)}
@@ -123,11 +133,12 @@ export default function MonetaryPolicyTracker() {
         {recent.map((d) => (
           <div key={d.date} className="tracker-decision">
             <span className="tracker-decision__date">{fmtMonth(d.date, { month: 'short', day: 'numeric', year: 'numeric' })}</span>
-            <span className="tracker-decision__rate">{d.rate}%</span>
+            <span className="tracker-decision__rate">{rate(d.rate)}</span>
             <span className={`tracker-decision__chip tracker-decision__chip--${d.action}`}>
               {d.changeBps === 0 ? 'HOLD' : `${d.changeBps > 0 ? '+' : ''}${d.changeBps} bps`}
             </span>
             {d.note && <span className="tracker-decision__note">{d.note}</span>}
+            <FigureTrust datasetId="monetary-policy" data={data} row={d} period={d.date} compact />
           </div>
         ))}
       </div>

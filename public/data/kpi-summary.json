@@ -14,6 +14,21 @@
       "sentiment": "neutral",
       "source": "SBP",
       "provenanceKey": "reserves.weekly.total",
+      "status": "not-stated",
+      "evidence": {
+        "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+        "sourceKey": "forex.pdf",
+        "retrievedAt": "2026-09-30T21:58:01.348Z",
+        "locator": {
+          "page": 1,
+          "x": 29.051,
+          "y": 41.999,
+          "dateLabel": "18-Sep-26",
+          "columnLabel": "TOTAL LIQUID     "
+        },
+        "rawValue": "26,810.6",
+        "scale": 0.001
+      },
       "sub": "SBP: $21.4B · Banks: $5.41B"
     },
     {
@@ -28,7 +43,20 @@
       "trend": "stable",
       "sentiment": "neutral",
       "source": "SBP",
-      "provenanceKey": "exchange-rates.monthly.usd"
+      "provenanceKey": "exchange-rates.monthly.usd",
+      "status": "not-stated",
+      "evidence": {
+        "artifactId": "IBF_Arch.xls:9841e21ca29483ce31a45a912275f83e36e6a53e4545a41ba45a4b9996aa2b7c:014515a6f2dd",
+        "sourceKey": "IBF_Arch.xls",
+        "retrievedAt": "2026-09-30T21:58:06.500Z",
+        "locator": {
+          "sheet": "Monthly Avg. Ex. Rates in PKR",
+          "row": 849,
+          "column": 24,
+          "cell": "X849"
+        },
+        "rawValue": 277.9187405947368
+      }
     },
     {
       "id": "remittances",
@@ -42,7 +70,29 @@
       "trend": "stable",
       "sentiment": "neutral",
       "source": "SBP",
-      "provenanceKey": "remittances.monthly.total"
+      "provenanceKey": "remittances.monthly.total",
+      "status": "not-stated",
+      "evidence": {
+        "artifactId": "TS_GP_BOP_WR_M.WR0010:beff53d74ac04b0f76a7669282f3036df37342e97a32ac615a4f716961de04b1:2c11aac59663",
+        "sourceKey": "TS_GP_BOP_WR_M.WR0010",
+        "retrievedAt": "2026-09-30T22:08:37.395Z",
+        "locator": {
+          "seriesKey": "TS_GP_BOP_WR_M.WR0010",
+          "observationDate": "2026-08-31",
+          "row": 1,
+          "column": 5,
+          "columns": {
+            "seriesKey": 2,
+            "date": 4,
+            "value": 5,
+            "unit": 6,
+            "status": 7,
+            "comments": 8
+          }
+        },
+        "rawValue": "3656.33767",
+        "scale": 0.001
+      }
     },
     {
       "id": "fdi",
@@ -57,7 +107,21 @@
       "trend": "up",
       "sentiment": "positive",
       "source": "SBP",
-      "provenanceKey": "fdi.fytd.current"
+      "provenanceKey": "fdi.fytd.current",
+      "status": "provisional",
+      "evidence": {
+        "artifactId": "Netinflow.xls:51f6f6f0ba1d742563fd836b0aac101be7b281bdc05f27a4505c320134c9dd0f:97abc66641b2",
+        "sourceKey": "Netinflow.xls",
+        "retrievedAt": "2026-09-30T21:57:58.574Z",
+        "locator": {
+          "sheet": "Country",
+          "row": 66,
+          "column": 11,
+          "cell": "K66"
+        },
+        "rawValue": 494.45320469886065,
+        "scale": 0.001
+      }
     },
     {
       "id": "it_exports",
@@ -65,28 +129,87 @@
       "value": 0.81,
       "unit": "$B",
       "decimals": 2,
-      "period": "null FY27",
-      "change": 17.39,
+      "period": "Jul-Aug FY27",
+      "change": 17.37,
       "changeUnit": "%",
       "changeBasis": "vs Jul-Aug FY26",
       "trend": "up",
       "sentiment": "positive",
       "source": "SBP",
-      "provenanceKey": "services.itHeadline.fytd"
+      "provenanceKey": "services.itHeadline.fytd",
+      "status": "provisional",
+      "evidence": {
+        "derivation": "US$ million divided by 1000 to US$ billion",
+        "inputs": [
+          {
+            "artifactId": "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:ab5ed8e3f335",
+            "sourceKey": "ExportsImports-Goods.pdf",
+            "retrievedAt": "2026-09-30T21:58:19.141Z",
+            "locator": {
+              "page": 1,
+              "rowLabel": "9. Telecommunications, Computer, and Information Services",
+              "x": 32.816,
+              "y": 16.501,
+              "rawValue": "811",
+              "periodHeader": {
+                "x": 30.454,
+                "y": 5.649,
+                "text": "Jul-Aug"
+              },
+              "fiscalYearHeader": {
+                "x": 31.848999999999997,
+                "y": 6.339,
+                "text": "FY27"
+              }
+            },
+            "rawValue": "811",
+            "sourceUnit": "US$ million",
+            "unit": "US$ million",
+            "scale": 1
+          }
+        ]
+      }
     },
     {
       "id": "gdp-growth",
       "label": "GDP Growth Rate",
       "value": 3.7,
       "unit": "%",
-      "period": "FY2026 (Est.)",
+      "period": "FY2026",
       "change": 0.52,
       "changeUnit": "pp",
       "changeBasis": "vs FY2025",
       "trend": "up",
       "sentiment": "positive",
-      "source": "PBS / IMF",
-      "provenanceKey": "fiscal.gdpGrowth.latest"
+      "source": "PBS via SBP",
+      "provenanceKey": "fiscal.gdpGrowth.latest",
+      "status": "not-stated",
+      "evidence": {
+        "artifactId": "GDP_table.xlsx:6bcf5cac2a6f2e34acd03f0332eb92132a9b36d5b9ef8bf04245f74d9a449761:8c69f6d3578b",
+        "sourceKey": "GDP_table.xlsx",
+        "retrievedAt": "2026-09-30T21:58:00.092Z",
+        "locator": {
+          "sheet": "Annual",
+          "row": 6,
+          "column": 30,
+          "cell": "AD6"
+        },
+        "rawValue": 3.701874914329025,
+        "unit": "%",
+        "sourceUnit": "GDP Growth Rate (%)",
+        "periodHeader": {
+          "row": 5,
+          "column": 30,
+          "cell": "AD5",
+          "text": "2025-26"
+        },
+        "unitHeader": {
+          "row": 6,
+          "column": 3,
+          "cell": "C6",
+          "text": "GDP Growth Rate (%)"
+        }
+      }
     },
     {
       "id": "inflation",
@@ -98,42 +221,755 @@
       "changeUnit": "pp",
       "changeBasis": "vs 2026-07",
       "trend": "up",
-      "sentiment": "negative",
+      "sentiment": "neutral",
       "source": "PBS",
       "provenanceKey": "inflation.nationalCpi.latest",
-      "sub": "SBP target: 5–7%"
-    },
+      "status": "not-stated",
+      "evidence": {
+        "artifactId": "TS_GP_PT_CPI_M.P00011516:992ea9d6835afb2264ee8f8289a0a8ca857050e6ceb60fcf75307ace6671092a:0d69e7d9200f",
+        "sourceKey": "TS_GP_PT_CPI_M.P00011516",
+        "retrievedAt": "2026-09-30T22:08:39.268Z",
+        "locator": {
+          "seriesKey": "TS_GP_PT_CPI_M.P00011516",
+          "observationDate": "2026-08-31",
+          "row": 1,
+          "column": 5,
+          "columns": {
+            "seriesKey": 2,
+            "date": 4,
+            "value": 5,
+            "unit": 6,
+            "status": 7,
+            "comments": 8
+          }
+        },
+        "rawValue": "11.1"
+      }
+    }
+  ],
+  "withheldIndicators": [
     {
       "id": "fbr-tax",
-      "label": "FBR Tax Collection (FY2026)",
-      "value": 13,
-      "unit": "T PKR",
-      "period": "Jul–Jun FY2026",
-      "change": 10.72,
-      "changeUnit": "%",
-      "changeBasis": "vs same period last year",
-      "trend": "up",
-      "sentiment": "positive",
-      "source": "Pakistani financial reporting citing provisional FBR figures",
-      "sourceType": "secondary-attributed",
-      "provenanceKey": "fbr.fytd.net",
-      "sub": "Target ₨12.98T · surplus ₨20B"
+      "dataset": "fbr-tax.json",
+      "reason": "Current fiscal-year totals and targets are unavailable: the official target-achievement statement omits the numeric collection total, and manually curated numeric claims lack independent reviewer approvals."
     },
     {
       "id": "policy-rate",
-      "label": "SBP Policy Rate",
-      "value": 11.5,
-      "unit": "%",
-      "period": "2026-07-27",
-      "change": 0,
-      "changeUnit": "pp",
-      "changeBasis": "last MPC decision 2026-07-27",
-      "trend": "stable",
-      "sentiment": "neutral",
-      "source": "SBP Monetary Policy Committee",
-      "provenanceKey": "monetaryPolicy.currentRate",
-      "sub": "Next MPC: 14 September 2026"
+      "dataset": "monetary-policy.json",
+      "reason": "An official monetary policy statement has been downloaded and archived. Manually curated rates, historical decisions, inflation context and meeting dates remain unavailable pending exact per-claim evidence and two distinct real reviewer approvals."
     }
   ],
+  "sourceEvidence": {
+    "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b": {
+      "artifactId": "forex.pdf:8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868:6db20661cb1b",
+      "sha256": "8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868",
+      "sourceKey": "forex.pdf",
+      "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
+      "responseUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
+      "path": "/source-evidence/8c952dde6a666f211ffa3538b59c9f6c8b621e540809869aaeee8e492ffa5868.pdf",
+      "bytes": 142091,
+      "contentType": "application/pdf",
+      "retrievedAt": "2026-09-30T21:58:01.348Z",
+      "parserVersion": "parse-sbp-excel.mjs:sha256:a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+      "parserPath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt",
+      "parserDependencies": [
+        {
+          "file": "package-lock.json",
+          "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+          "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+        },
+        {
+          "file": "package.json",
+          "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+          "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+        },
+        {
+          "file": "scripts/data-catalog.mjs",
+          "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+          "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+        },
+        {
+          "file": "scripts/enforce-publication-policy.mjs",
+          "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+          "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+        },
+        {
+          "file": "scripts/lib/data-writer.mjs",
+          "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+          "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+        },
+        {
+          "file": "scripts/lib/ingestion-validation.mjs",
+          "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+          "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+        },
+        {
+          "file": "scripts/lib/provenance-store.mjs",
+          "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+          "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+        },
+        {
+          "file": "scripts/lib/publication-policy.mjs",
+          "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+          "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+        },
+        {
+          "file": "scripts/lib/release-calendar.mjs",
+          "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+          "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+        },
+        {
+          "file": "scripts/lib/reserves-parser.mjs",
+          "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+          "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+        },
+        {
+          "file": "scripts/lib/sbp-resolvers.mjs",
+          "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+          "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+        },
+        {
+          "file": "scripts/lib/services-headline.mjs",
+          "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+          "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+        },
+        {
+          "file": "scripts/lib/sheet-utils.mjs",
+          "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+          "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+        },
+        {
+          "file": "scripts/lib/source-docs.mjs",
+          "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+          "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+        },
+        {
+          "file": "scripts/lib/source-evidence.mjs",
+          "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+          "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+        },
+        {
+          "file": "scripts/pdf-text.mjs",
+          "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+          "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+        },
+        {
+          "file": "scripts/update-fbr.mjs",
+          "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+          "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+        }
+      ]
+    },
+    "IBF_Arch.xls:9841e21ca29483ce31a45a912275f83e36e6a53e4545a41ba45a4b9996aa2b7c:014515a6f2dd": {
+      "artifactId": "IBF_Arch.xls:9841e21ca29483ce31a45a912275f83e36e6a53e4545a41ba45a4b9996aa2b7c:014515a6f2dd",
+      "sha256": "9841e21ca29483ce31a45a912275f83e36e6a53e4545a41ba45a4b9996aa2b7c",
+      "sourceKey": "IBF_Arch.xls",
+      "sourceUrl": "https://www.sbp.org.pk/assets/document/IBF_Arch.xls",
+      "responseUrl": "https://www.sbp.org.pk/assets/document/IBF_Arch.xls",
+      "path": "/source-evidence/9841e21ca29483ce31a45a912275f83e36e6a53e4545a41ba45a4b9996aa2b7c.xls",
+      "bytes": 3250688,
+      "contentType": "application/vnd.ms-excel",
+      "retrievedAt": "2026-09-30T21:58:06.500Z",
+      "parserVersion": "parse-sbp-excel.mjs:sha256:a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+      "parserPath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt",
+      "parserDependencies": [
+        {
+          "file": "package-lock.json",
+          "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+          "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+        },
+        {
+          "file": "package.json",
+          "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+          "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+        },
+        {
+          "file": "scripts/data-catalog.mjs",
+          "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+          "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+        },
+        {
+          "file": "scripts/enforce-publication-policy.mjs",
+          "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+          "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+        },
+        {
+          "file": "scripts/lib/data-writer.mjs",
+          "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+          "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+        },
+        {
+          "file": "scripts/lib/ingestion-validation.mjs",
+          "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+          "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+        },
+        {
+          "file": "scripts/lib/provenance-store.mjs",
+          "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+          "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+        },
+        {
+          "file": "scripts/lib/publication-policy.mjs",
+          "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+          "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+        },
+        {
+          "file": "scripts/lib/release-calendar.mjs",
+          "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+          "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+        },
+        {
+          "file": "scripts/lib/reserves-parser.mjs",
+          "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+          "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+        },
+        {
+          "file": "scripts/lib/sbp-resolvers.mjs",
+          "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+          "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+        },
+        {
+          "file": "scripts/lib/services-headline.mjs",
+          "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+          "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+        },
+        {
+          "file": "scripts/lib/sheet-utils.mjs",
+          "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+          "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+        },
+        {
+          "file": "scripts/lib/source-docs.mjs",
+          "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+          "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+        },
+        {
+          "file": "scripts/lib/source-evidence.mjs",
+          "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+          "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+        },
+        {
+          "file": "scripts/pdf-text.mjs",
+          "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+          "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+        },
+        {
+          "file": "scripts/update-fbr.mjs",
+          "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+          "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+        }
+      ]
+    },
+    "TS_GP_BOP_WR_M.WR0010:beff53d74ac04b0f76a7669282f3036df37342e97a32ac615a4f716961de04b1:2c11aac59663": {
+      "artifactId": "TS_GP_BOP_WR_M.WR0010:beff53d74ac04b0f76a7669282f3036df37342e97a32ac615a4f716961de04b1:2c11aac59663",
+      "sha256": "beff53d74ac04b0f76a7669282f3036df37342e97a32ac615a4f716961de04b1",
+      "sourceKey": "TS_GP_BOP_WR_M.WR0010",
+      "sourceUrl": "https://easydata.sbp.org.pk/api/v1/series/TS_GP_BOP_WR_M.WR0010/data?format=json&start_date=2021-09-30&end_date=2026-09-30",
+      "responseUrl": "https://easydata.sbp.org.pk/api/v1/series/TS_GP_BOP_WR_M.WR0010/data?format=json&start_date=2021-09-30&end_date=2026-09-30",
+      "path": "/source-evidence/beff53d74ac04b0f76a7669282f3036df37342e97a32ac615a4f716961de04b1.json",
+      "bytes": 11547,
+      "contentType": "application/json;charset=utf-8",
+      "retrievedAt": "2026-09-30T22:08:37.395Z",
+      "parserVersion": "update-data.mjs:sha256:b0474b6e87ded8cb9e1124738d94e51c69499fb1e06551c89fe3f63d359c16f1:environment:fa62c8b03b0d33878b4074671762e28c81fef2ee53bc911b48b2be715a86fe83",
+      "parserPath": "/source-evidence/parser-b0474b6e87ded8cb9e1124738d94e51c69499fb1e06551c89fe3f63d359c16f1.txt",
+      "parserDependencies": [
+        {
+          "file": "package-lock.json",
+          "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+          "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+        },
+        {
+          "file": "package.json",
+          "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+          "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+        },
+        {
+          "file": "scripts/data-catalog.mjs",
+          "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+          "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+        },
+        {
+          "file": "scripts/enforce-publication-policy.mjs",
+          "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+          "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+        },
+        {
+          "file": "scripts/lib/data-writer.mjs",
+          "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+          "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+        },
+        {
+          "file": "scripts/lib/ingestion-validation.mjs",
+          "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+          "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+        },
+        {
+          "file": "scripts/lib/provenance-store.mjs",
+          "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+          "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+        },
+        {
+          "file": "scripts/lib/publication-policy.mjs",
+          "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+          "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+        },
+        {
+          "file": "scripts/lib/release-calendar.mjs",
+          "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+          "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+        },
+        {
+          "file": "scripts/lib/reserves-parser.mjs",
+          "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+          "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+        },
+        {
+          "file": "scripts/lib/sbp-resolvers.mjs",
+          "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+          "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+        },
+        {
+          "file": "scripts/lib/services-headline.mjs",
+          "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+          "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+        },
+        {
+          "file": "scripts/lib/sheet-utils.mjs",
+          "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+          "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+        },
+        {
+          "file": "scripts/lib/source-docs.mjs",
+          "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+          "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+        },
+        {
+          "file": "scripts/lib/source-evidence.mjs",
+          "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+          "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+        },
+        {
+          "file": "scripts/parse-sbp-excel.mjs",
+          "sha256": "a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a",
+          "sourcePath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt"
+        },
+        {
+          "file": "scripts/pdf-text.mjs",
+          "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+          "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+        },
+        {
+          "file": "scripts/update-fbr.mjs",
+          "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+          "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+        }
+      ]
+    },
+    "Netinflow.xls:51f6f6f0ba1d742563fd836b0aac101be7b281bdc05f27a4505c320134c9dd0f:97abc66641b2": {
+      "artifactId": "Netinflow.xls:51f6f6f0ba1d742563fd836b0aac101be7b281bdc05f27a4505c320134c9dd0f:97abc66641b2",
+      "sha256": "51f6f6f0ba1d742563fd836b0aac101be7b281bdc05f27a4505c320134c9dd0f",
+      "sourceKey": "Netinflow.xls",
+      "sourceUrl": "https://www.sbp.org.pk/assets/document/Netinflow.xls",
+      "responseUrl": "https://www.sbp.org.pk/assets/document/Netinflow.xls",
+      "path": "/source-evidence/51f6f6f0ba1d742563fd836b0aac101be7b281bdc05f27a4505c320134c9dd0f.xls",
+      "bytes": 81920,
+      "contentType": "application/vnd.ms-excel",
+      "retrievedAt": "2026-09-30T21:57:58.574Z",
+      "parserVersion": "parse-sbp-excel.mjs:sha256:a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+      "parserPath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt",
+      "parserDependencies": [
+        {
+          "file": "package-lock.json",
+          "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+          "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+        },
+        {
+          "file": "package.json",
+          "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+          "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+        },
+        {
+          "file": "scripts/data-catalog.mjs",
+          "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+          "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+        },
+        {
+          "file": "scripts/enforce-publication-policy.mjs",
+          "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+          "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+        },
+        {
+          "file": "scripts/lib/data-writer.mjs",
+          "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+          "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+        },
+        {
+          "file": "scripts/lib/ingestion-validation.mjs",
+          "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+          "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+        },
+        {
+          "file": "scripts/lib/provenance-store.mjs",
+          "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+          "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+        },
+        {
+          "file": "scripts/lib/publication-policy.mjs",
+          "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+          "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+        },
+        {
+          "file": "scripts/lib/release-calendar.mjs",
+          "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+          "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+        },
+        {
+          "file": "scripts/lib/reserves-parser.mjs",
+          "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+          "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+        },
+        {
+          "file": "scripts/lib/sbp-resolvers.mjs",
+          "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+          "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+        },
+        {
+          "file": "scripts/lib/services-headline.mjs",
+          "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+          "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+        },
+        {
+          "file": "scripts/lib/sheet-utils.mjs",
+          "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+          "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+        },
+        {
+          "file": "scripts/lib/source-docs.mjs",
+          "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+          "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+        },
+        {
+          "file": "scripts/lib/source-evidence.mjs",
+          "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+          "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+        },
+        {
+          "file": "scripts/pdf-text.mjs",
+          "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+          "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+        },
+        {
+          "file": "scripts/update-fbr.mjs",
+          "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+          "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+        }
+      ]
+    },
+    "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:ab5ed8e3f335": {
+      "artifactId": "ExportsImports-Goods.pdf:a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b:ab5ed8e3f335",
+      "sha256": "a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b",
+      "sourceKey": "ExportsImports-Goods.pdf",
+      "sourceUrl": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf",
+      "responseUrl": "https://www.sbp.org.pk/assets/document/ExportsImports-Goods.pdf",
+      "path": "/source-evidence/a5cc77d1fb2627e1c8a6925c01c6df3dfd239a32746c3ead3479df0b0009dd3b.pdf",
+      "bytes": 289433,
+      "contentType": "application/pdf",
+      "retrievedAt": "2026-09-30T21:58:19.141Z",
+      "parserVersion": "parse-sbp-excel.mjs:sha256:a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+      "parserPath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt",
+      "parserDependencies": [
+        {
+          "file": "package-lock.json",
+          "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+          "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+        },
+        {
+          "file": "package.json",
+          "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+          "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+        },
+        {
+          "file": "scripts/data-catalog.mjs",
+          "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+          "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+        },
+        {
+          "file": "scripts/enforce-publication-policy.mjs",
+          "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+          "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+        },
+        {
+          "file": "scripts/lib/data-writer.mjs",
+          "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+          "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+        },
+        {
+          "file": "scripts/lib/ingestion-validation.mjs",
+          "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+          "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+        },
+        {
+          "file": "scripts/lib/provenance-store.mjs",
+          "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+          "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+        },
+        {
+          "file": "scripts/lib/publication-policy.mjs",
+          "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+          "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+        },
+        {
+          "file": "scripts/lib/release-calendar.mjs",
+          "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+          "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+        },
+        {
+          "file": "scripts/lib/reserves-parser.mjs",
+          "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+          "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+        },
+        {
+          "file": "scripts/lib/sbp-resolvers.mjs",
+          "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+          "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+        },
+        {
+          "file": "scripts/lib/services-headline.mjs",
+          "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+          "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+        },
+        {
+          "file": "scripts/lib/sheet-utils.mjs",
+          "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+          "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+        },
+        {
+          "file": "scripts/lib/source-docs.mjs",
+          "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+          "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+        },
+        {
+          "file": "scripts/lib/source-evidence.mjs",
+          "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+          "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+        },
+        {
+          "file": "scripts/pdf-text.mjs",
+          "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+          "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+        },
+        {
+          "file": "scripts/update-fbr.mjs",
+          "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+          "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+        }
+      ]
+    },
+    "GDP_table.xlsx:6bcf5cac2a6f2e34acd03f0332eb92132a9b36d5b9ef8bf04245f74d9a449761:8c69f6d3578b": {
+      "artifactId": "GDP_table.xlsx:6bcf5cac2a6f2e34acd03f0332eb92132a9b36d5b9ef8bf04245f74d9a449761:8c69f6d3578b",
+      "sha256": "6bcf5cac2a6f2e34acd03f0332eb92132a9b36d5b9ef8bf04245f74d9a449761",
+      "sourceKey": "GDP_table.xlsx",
+      "sourceUrl": "https://www.sbp.org.pk/assets/document/GDP_table.xlsx",
+      "responseUrl": "https://www.sbp.org.pk/assets/document/GDP_table.xlsx",
+      "path": "/source-evidence/6bcf5cac2a6f2e34acd03f0332eb92132a9b36d5b9ef8bf04245f74d9a449761.xlsx",
+      "bytes": 28312,
+      "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "retrievedAt": "2026-09-30T21:58:00.092Z",
+      "parserVersion": "parse-sbp-excel.mjs:sha256:a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a:environment:970297a05ab363c9d54397a83d34cfc9609578a50d28174947479f7795ff3125",
+      "parserPath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt",
+      "parserDependencies": [
+        {
+          "file": "package-lock.json",
+          "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+          "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+        },
+        {
+          "file": "package.json",
+          "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+          "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+        },
+        {
+          "file": "scripts/data-catalog.mjs",
+          "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+          "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+        },
+        {
+          "file": "scripts/enforce-publication-policy.mjs",
+          "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+          "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+        },
+        {
+          "file": "scripts/lib/data-writer.mjs",
+          "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+          "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+        },
+        {
+          "file": "scripts/lib/ingestion-validation.mjs",
+          "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+          "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+        },
+        {
+          "file": "scripts/lib/provenance-store.mjs",
+          "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+          "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+        },
+        {
+          "file": "scripts/lib/publication-policy.mjs",
+          "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+          "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+        },
+        {
+          "file": "scripts/lib/release-calendar.mjs",
+          "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+          "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+        },
+        {
+          "file": "scripts/lib/reserves-parser.mjs",
+          "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+          "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+        },
+        {
+          "file": "scripts/lib/sbp-resolvers.mjs",
+          "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+          "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+        },
+        {
+          "file": "scripts/lib/services-headline.mjs",
+          "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+          "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+        },
+        {
+          "file": "scripts/lib/sheet-utils.mjs",
+          "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+          "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+        },
+        {
+          "file": "scripts/lib/source-docs.mjs",
+          "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+          "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+        },
+        {
+          "file": "scripts/lib/source-evidence.mjs",
+          "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+          "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+        },
+        {
+          "file": "scripts/pdf-text.mjs",
+          "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+          "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+        },
+        {
+          "file": "scripts/update-fbr.mjs",
+          "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+          "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+        }
+      ]
+    },
+    "TS_GP_PT_CPI_M.P00011516:992ea9d6835afb2264ee8f8289a0a8ca857050e6ceb60fcf75307ace6671092a:0d69e7d9200f": {
+      "artifactId": "TS_GP_PT_CPI_M.P00011516:992ea9d6835afb2264ee8f8289a0a8ca857050e6ceb60fcf75307ace6671092a:0d69e7d9200f",
+      "sha256": "992ea9d6835afb2264ee8f8289a0a8ca857050e6ceb60fcf75307ace6671092a",
+      "sourceKey": "TS_GP_PT_CPI_M.P00011516",
+      "sourceUrl": "https://easydata.sbp.org.pk/api/v1/series/TS_GP_PT_CPI_M.P00011516/data?format=json&start_date=2021-09-30&end_date=2026-09-30",
+      "responseUrl": "https://easydata.sbp.org.pk/api/v1/series/TS_GP_PT_CPI_M.P00011516/data?format=json&start_date=2021-09-30&end_date=2026-09-30",
+      "path": "/source-evidence/992ea9d6835afb2264ee8f8289a0a8ca857050e6ceb60fcf75307ace6671092a.json",
+      "bytes": 10846,
+      "contentType": "application/json;charset=utf-8",
+      "retrievedAt": "2026-09-30T22:08:39.268Z",
+      "parserVersion": "update-data.mjs:sha256:b0474b6e87ded8cb9e1124738d94e51c69499fb1e06551c89fe3f63d359c16f1:environment:fa62c8b03b0d33878b4074671762e28c81fef2ee53bc911b48b2be715a86fe83",
+      "parserPath": "/source-evidence/parser-b0474b6e87ded8cb9e1124738d94e51c69499fb1e06551c89fe3f63d359c16f1.txt",
+      "parserDependencies": [
+        {
+          "file": "package-lock.json",
+          "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+          "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+        },
+        {
+          "file": "package.json",
+          "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+          "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+        },
+        {
+          "file": "scripts/data-catalog.mjs",
+          "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+          "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+        },
+        {
+          "file": "scripts/enforce-publication-policy.mjs",
+          "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+          "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+        },
+        {
+          "file": "scripts/lib/data-writer.mjs",
+          "sha256": "449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56",
+          "sourcePath": "/source-evidence/parser-449f0ea6ac9f2bf29a445bd84ebc9f0e88c059734c07f3b8edfc6f5144c50e56.txt"
+        },
+        {
+          "file": "scripts/lib/ingestion-validation.mjs",
+          "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+          "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+        },
+        {
+          "file": "scripts/lib/provenance-store.mjs",
+          "sha256": "2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6",
+          "sourcePath": "/source-evidence/parser-2ac485d5f660d4cbcbe67e79edef0843ec47e119821e2a05af806fcd8d2575e6.txt"
+        },
+        {
+          "file": "scripts/lib/publication-policy.mjs",
+          "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+          "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+        },
+        {
+          "file": "scripts/lib/release-calendar.mjs",
+          "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+          "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+        },
+        {
+          "file": "scripts/lib/reserves-parser.mjs",
+          "sha256": "7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489",
+          "sourcePath": "/source-evidence/parser-7e971999a36525d2b7e5512a6221d3fdd2d545d5f6d31ed00580bf72877e5489.txt"
+        },
+        {
+          "file": "scripts/lib/sbp-resolvers.mjs",
+          "sha256": "cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59",
+          "sourcePath": "/source-evidence/parser-cbfc17fe3d909f6e77eeb7f94daa346b319b0cd5e3a792cd58d5c1aa6e726b59.txt"
+        },
+        {
+          "file": "scripts/lib/services-headline.mjs",
+          "sha256": "cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5",
+          "sourcePath": "/source-evidence/parser-cc46645e29d38e6a9b187c3eb7442845c2fc7ee6f1822b0ea83749d964b72ce5.txt"
+        },
+        {
+          "file": "scripts/lib/sheet-utils.mjs",
+          "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+          "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+        },
+        {
+          "file": "scripts/lib/source-docs.mjs",
+          "sha256": "c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1",
+          "sourcePath": "/source-evidence/parser-c3e72a518d4434f7582f60f4e060a1d0c05d9f5b12fdc1afc5a73cfa3e2f0ab1.txt"
+        },
+        {
+          "file": "scripts/lib/source-evidence.mjs",
+          "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+          "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+        },
+        {
+          "file": "scripts/parse-sbp-excel.mjs",
+          "sha256": "a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a",
+          "sourcePath": "/source-evidence/parser-a3d233d101879afbcae65d0dd01b24cd9fe56bbd520939455dea72ba84691e0a.txt"
+        },
+        {
+          "file": "scripts/pdf-text.mjs",
+          "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+          "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+        },
+        {
+          "file": "scripts/update-fbr.mjs",
+          "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+          "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+        }
+      ]
+    }
+  },
   "lastChecked": "2026-09-30"
 }

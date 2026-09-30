@@ -1,0 +1,7 @@
+public/data/** -text
+public/api/** -text
+# Preserve issuer whitespace as part of the immutable source bytes.
+public/source-evidence/** -text -whitespace
+public/feed.xml -text
+public/sitemap.xml -text
+public/release-manifest.json -text

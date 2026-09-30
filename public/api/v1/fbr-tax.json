@@ -3,29 +3,61 @@
   "label": "FBR Tax Collection",
   "source": "Federal Board of Revenue (FBR)",
   "sourceUrl": "https://www.fbr.gov.pk",
-  "sourceType": "secondary-attributed",
-  "cadence": "Monthly (provisional)",
-  "latestObservation": "2026-06",
-  "dates": {
-    "observation": "2026-06",
-    "publication": "2026-07-02",
-    "verification": "2026-09-30",
-    "dashboardUpdated": "2026-08-07"
+  "sourceType": "official-primary",
+  "publication": {
+    "policy": "official-only",
+    "status": "partial",
+    "reason": "Current fiscal-year totals and targets are unavailable: the official target-achievement statement omits the numeric collection total, and manually curated numeric claims lack independent reviewer approvals.",
+    "withheldFields": [
+      "fytd",
+      "annualTargets",
+      "currentFiscalYear",
+      "methodologyNote"
+    ]
   },
-  "lastUpdated": "2026-08-07",
+  "authenticity": "official-primary",
+  "freshnessStatus": "overdue",
+  "validation": {
+    "status": "passed",
+    "checkedAt": "2026-09-30T22:09:57.146Z",
+    "contentHash": "759f7a2aaefbfa41d6aad32015683a23b684577dfd328bd2f03be91a64df1e81",
+    "checks": [
+      {
+        "id": "audit-sanity.mjs",
+        "status": "passed"
+      },
+      {
+        "id": "audit-publication.mjs",
+        "status": "passed"
+      },
+      {
+        "id": "audit-evidence.mjs",
+        "status": "passed"
+      }
+    ]
+  },
+  "cadence": "Monthly (provisional)",
+  "latestObservation": "2025-06",
+  "dates": {
+    "observation": "2025-06",
+    "publication": null,
+    "verification": "2026-09-30T21:58:46.460Z",
+    "dashboardUpdated": "2026-09-30"
+  },
+  "lastUpdated": "2026-09-30",
   "lastChecked": null,
-  "licence": "Official public data, redistributed with attribution. Cite the original institution.",
+  "licence": "Consult the issuing institution for reuse terms. Source attribution does not establish a redistribution licence.",
   "data": {
     "unit": "PKR Billion",
     "basis": "Net collection (after refunds)",
-    "dataSource": "FBR official tables/releases, with separately identified secondary provisional reporting where no official numeric release exists",
-    "lastUpdated": "2026-08-07",
-    "lastVerified": "2026-09-30",
+    "dataSource": "Federal Board of Revenue official month-wise / tax-wise net collection PDF",
+    "lastUpdated": "2026-09-30",
     "reviewRequired": true,
-    "reviewReason": "FBR's official 1 July release confirms target achievement and Rs599bn of refunds but omits the numeric collection total. The Rs13,003bn FY2025-26 net collection is therefore retained as explicitly attributed provisional reporting until FBR publishes its official month-wise/tax-wise table or year book.",
-    "observationDate": "2026-06-30",
-    "publicationDate": "2026-07-02",
-    "sourceUrl": "https://www.fbr.gov.pk",
+    "reviewReason": "Current fiscal-year totals and targets are unavailable: the official target-achievement statement omits the numeric collection total, and manually curated numeric claims lack independent reviewer approvals.",
+    "sourceUrl": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf",
+    "sourceLinks": [
+      "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
+    ],
     "monthly": [
       {
         "date": "2024-07",
@@ -36,7 +68,7 @@
         "fed": 37.4,
         "customs": 81.9,
         "provisional": true,
-        "sourceType": "official",
+        "sourceType": "official-primary",
         "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
       },
       {
@@ -48,7 +80,7 @@
         "fed": 58.2,
         "customs": 90.5,
         "provisional": true,
-        "sourceType": "official",
+        "sourceType": "official-primary",
         "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
       },
       {
@@ -60,7 +92,7 @@
         "fed": 55.4,
         "customs": 104.5,
         "provisional": true,
-        "sourceType": "official",
+        "sourceType": "official-primary",
         "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
       },
       {
@@ -72,7 +104,7 @@
         "fed": 62.6,
         "customs": 99.6,
         "provisional": true,
-        "sourceType": "official",
+        "sourceType": "official-primary",
         "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
       },
       {
@@ -84,7 +116,7 @@
         "fed": 63.7,
         "customs": 99.3,
         "provisional": true,
-        "sourceType": "official",
+        "sourceType": "official-primary",
         "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
       },
       {
@@ -96,7 +128,7 @@
         "fed": 69.2,
         "customs": 122.8,
         "provisional": true,
-        "sourceType": "official",
+        "sourceType": "official-primary",
         "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
       },
       {
@@ -108,7 +140,7 @@
         "fed": 57.5,
         "customs": 115.1,
         "provisional": true,
-        "sourceType": "official",
+        "sourceType": "official-primary",
         "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
       },
       {
@@ -120,7 +152,7 @@
         "fed": 62.7,
         "customs": 106.1,
         "provisional": true,
-        "sourceType": "official",
+        "sourceType": "official-primary",
         "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
       },
       {
@@ -132,7 +164,7 @@
         "fed": 70.3,
         "customs": 107.7,
         "provisional": true,
-        "sourceType": "official",
+        "sourceType": "official-primary",
         "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
       },
       {
@@ -144,7 +176,7 @@
         "fed": 66.4,
         "customs": 115.9,
         "provisional": true,
-        "sourceType": "official",
+        "sourceType": "official-primary",
         "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
       },
       {
@@ -156,7 +188,7 @@
         "fed": 69.5,
         "customs": 113.3,
         "provisional": true,
-        "sourceType": "official",
+        "sourceType": "official-primary",
         "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
       },
       {
@@ -168,252 +200,248 @@
         "fed": 93.7,
         "customs": 127.9,
         "provisional": true,
-        "sourceType": "official",
+        "sourceType": "official-primary",
         "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
-      },
-      {
-        "date": "2025-07",
-        "fy": "FY2026",
-        "net": 754,
-        "target": 748,
-        "provisional": true,
-        "sourceType": "secondary-attributed",
-        "source": "https://thestandard.com.pk/fbr-collects-rs-754n-in-july-2025/"
-      },
-      {
-        "date": "2026-01",
-        "fy": "FY2026",
-        "net": 1015,
-        "incomeTax": 483,
-        "salesTax": 360,
-        "provisional": true,
-        "partialBreakdown": true,
-        "sourceType": "official",
-        "source": "https://www.fbr.gov.pk/pr/fbr-revenue-collection-picks-up-momentum-in-j/174566/2026"
       }
     ],
     "fytd": {
-      "fyLabel": "FY2026",
-      "period": "Jul–Jun FY2026",
-      "asOf": "2026-06",
-      "net": 13003,
-      "target": 12983,
-      "priorNet": 11744.3,
-      "provisional": true,
-      "sourceType": "secondary-attributed",
-      "sourceLabel": "Pakistani financial reporting citing provisional FBR figures",
-      "source": "https://dailytimes.com.pk/1516044/fbr-achieves-fy2025-26-tax-target-with-rs13-6-trillion-collection/",
-      "note": "Reported gross collection was Rs13,601bn and refunds were about Rs598bn, yielding provisional net collection of approximately Rs13,003bn. FBR's official release confirms target achievement and Rs599bn refunds but does not state the collection total."
+      "net": null,
+      "target": null,
+      "priorNet": null
     },
-    "annualTargets": [
-      {
-        "fy": "FY2023-24",
-        "fyLabel": "FY2024",
-        "budgetTarget": 9415,
-        "revisedTarget": 9252,
-        "actual": 9306,
-        "status": "final",
-        "note": "FBR met its downward-revised target, collecting Rs9,306bn — the only recent target-achievement claim here backed by a published numeric year-end collection.",
-        "sources": [
-          {
-            "label": "FBR — comfortably achieves FY2023-24 target (official PR)",
-            "url": "https://www.fbr.gov.pk/pr/fbr-comfortably-achieves-target-for-the-fy-20/174097/2024"
-          }
-        ]
-      },
-      {
-        "fy": "FY2024-25",
-        "fyLabel": "FY2025",
-        "budgetTarget": 12970,
-        "revisedTarget": 11900,
-        "actual": 11744.3,
-        "status": "official provisional",
-        "note": "FBR's official FY2024-25 table reports Rs11,744.3bn. The table is provisional subject to reconciliation; it is not labeled final.",
-        "sources": [
-          {
-            "label": "FBR — official month-wise/tax-wise FY2024-25 table",
-            "url": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
-          },
-          {
-            "label": "Business Recorder — FBR misses revised FY25 target by Rs178bn",
-            "url": "https://www.brecorder.com/news/40370455"
-          },
-          {
-            "label": "Geo — FBR falls Rs1.235tr short of original FY25 target",
-            "url": "https://www.geo.tv/latest/611798-fbr-falls-rs1235-trillion-short-of-annual-tax-target-in-fiscal-year-2024-25"
-          }
-        ]
-      },
-      {
-        "fy": "FY2025-26",
-        "fyLabel": "FY2026",
-        "budgetTarget": 14131,
-        "revisedTarget": 12983,
-        "actual": 13003,
-        "status": "secondary provisional",
-        "note": "Financial reporting citing provisional FBR figures places FY2025-26 net collection at Rs13,003bn, slightly above the Rs12,983bn revised target. FBR's official 1 July release confirms target achievement and Rs599bn refunds but does not state the numeric collection total.",
-        "sources": [
-          {
-            "label": "ProPakistani — IMF lowers FY26 FBR target to Rs13.98tr",
-            "url": "https://propakistani.pk/2025/12/11/imf-lowers-pakistans-tax-collection-target-to-rs-13-98-trillion-for-fy26/"
-          },
-          {
-            "label": "Dawn — Finance Minister's FY2026-27 budget speech",
-            "url": "https://www.dawn.com/news/2007283"
-          },
-          {
-            "label": "FBR — 1 July release claims target achieved but states no collection amount",
-            "url": "https://www.fbr.gov.pk/pr/finance-minister-visits-fbr-headquarters-comm/174643/2026"
-          },
-          {
-            "label": "Daily Times — provisional FY2025-26 gross and net collection",
-            "url": "https://dailytimes.com.pk/1516044/fbr-achieves-fy2025-26-tax-target-with-rs13-6-trillion-collection/"
-          }
-        ]
-      },
-      {
-        "fy": "FY2026-27",
-        "fyLabel": "FY2027",
-        "budgetTarget": 15264,
-        "revisedTarget": null,
-        "actual": null,
-        "status": "target",
-        "note": "Budgeted FBR target for the new fiscal year — 17.6% above the finance minister's pre-year-end FY2025-26 budget-speech estimate and the basis for the FY2026-27 federal budget.",
-        "sources": [
-          {
-            "label": "Dawn — FY2026-27 federal budget",
-            "url": "https://www.dawn.com/news/2007283"
-          }
-        ]
-      }
-    ],
+    "annualTargets": [],
     "fyTotals": [
-      {
-        "fy": "FY2023",
-        "net": 7164,
-        "provisional": false,
-        "source": "https://www.fbr.gov.pk"
-      },
-      {
-        "fy": "FY2024",
-        "net": 9306,
-        "provisional": false,
-        "source": "https://www.fbr.gov.pk/pr/fbr-comfortably-achieves-target-for-the-fy-20/174097/2024"
-      },
       {
         "fy": "FY2025",
         "net": 11744.3,
         "provisional": true,
-        "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
-      },
-      {
-        "fy": "FY2026",
-        "net": 13003,
-        "provisional": true,
-        "sourceType": "secondary-attributed",
-        "source": "https://dailytimes.com.pk/1516044/fbr-achieves-fy2025-26-tax-target-with-rs13-6-trillion-collection/"
+        "source": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf",
+        "sourceType": "official-primary"
       }
     ],
-    "methodologyNote": "FY2024-25 monthly figures come verbatim from FBR's official month-wise/tax-wise table. For FY2025-26, January 2026 remains the latest individual month with a numeric official FBR release; missing monthly rows are not estimated or interpolated. The full-year Rs13,003bn net aggregate is explicitly marked secondary provisional because FBR's official target-achievement release omits the numeric collection total. All figures are NET collection in PKR billion unless stated otherwise.",
-    "verifiedFrom": [
-      {
-        "label": "FBR — Month-wise/Tax-wise Net Collection FY2024-25 (official table)",
-        "url": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf"
+    "methodologyNote": null,
+    "publicationEvidence": {
+      "monthly.0": {
+        "sourceType": "official-primary",
+        "method": "automated",
+        "sourceKey": "fbr-monthwise-FY2024-25.pdf",
+        "sourceUrl": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf",
+        "artifactId": "fbr-monthwise-FY2024-25.pdf:32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9:2d575e822f28",
+        "evidenceHash": "32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9",
+        "contentHash": "465dfa17edd3207eabf1206c44a51e96567b94b64fee593358be5c00d2eb5d7c",
+        "location": "Month-wise / tax-wise net collection table; 2024-07",
+        "status": "provisional"
       },
-      {
-        "label": "FBR — FY2023-24 record Rs9,306bn (official press release)",
-        "url": "https://www.fbr.gov.pk/pr/fbr-comfortably-achieves-target-for-the-fy-20/174097/2024"
+      "monthly.1": {
+        "sourceType": "official-primary",
+        "method": "automated",
+        "sourceKey": "fbr-monthwise-FY2024-25.pdf",
+        "sourceUrl": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf",
+        "artifactId": "fbr-monthwise-FY2024-25.pdf:32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9:2d575e822f28",
+        "evidenceHash": "32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9",
+        "contentHash": "00e9190bd03773f0d0a9be8dd22e2530ced8424e41c495c9e2917a494af174d3",
+        "location": "Month-wise / tax-wise net collection table; 2024-08",
+        "status": "provisional"
       },
-      {
-        "label": "FBR — Rs1,588bn gross / Rs1,456bn net Jul-Aug 2024-25 (official)",
-        "url": "https://www.fbr.gov.pk/fbr-collects-rs-1588-billion-in-gross-revenue-in-first-two-months-of-202425/174126"
+      "monthly.2": {
+        "sourceType": "official-primary",
+        "method": "automated",
+        "sourceKey": "fbr-monthwise-FY2024-25.pdf",
+        "sourceUrl": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf",
+        "artifactId": "fbr-monthwise-FY2024-25.pdf:32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9:2d575e822f28",
+        "evidenceHash": "32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9",
+        "contentHash": "5e524596d9058606b4eb4fb2bd54515ace811e74d5d7cc901de80d8409f104a6",
+        "location": "Month-wise / tax-wise net collection table; 2024-09",
+        "status": "provisional"
       },
-      {
-        "label": "Jul 2025 collection Rs754bn vs Rs748bn target",
-        "url": "https://thestandard.com.pk/fbr-collects-rs-754n-in-july-2025/"
+      "monthly.3": {
+        "sourceType": "official-primary",
+        "method": "automated",
+        "sourceKey": "fbr-monthwise-FY2024-25.pdf",
+        "sourceUrl": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf",
+        "artifactId": "fbr-monthwise-FY2024-25.pdf:32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9:2d575e822f28",
+        "evidenceHash": "32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9",
+        "contentHash": "0822c6a6c29074038b17a36e5ad865ca4e873327127d11c19420b0f40787a5d7",
+        "location": "Month-wise / tax-wise net collection table; 2024-10",
+        "status": "provisional"
       },
-      {
-        "label": "FBR — January 2026 Rs1,015bn and Jul-Jan Rs7,176bn (official press release)",
-        "url": "https://www.fbr.gov.pk/pr/fbr-revenue-collection-picks-up-momentum-in-j/174566/2026"
+      "monthly.4": {
+        "sourceType": "official-primary",
+        "method": "automated",
+        "sourceKey": "fbr-monthwise-FY2024-25.pdf",
+        "sourceUrl": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf",
+        "artifactId": "fbr-monthwise-FY2024-25.pdf:32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9:2d575e822f28",
+        "evidenceHash": "32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9",
+        "contentHash": "a6c380e83d17ef1e6693831c25fd4139e932409344cd81feeed9e952c8f46619",
+        "location": "Month-wise / tax-wise net collection table; 2024-11",
+        "status": "provisional"
       },
-      {
-        "label": "FBR — FY2025-26 target-achievement statement and Rs599bn refunds; no collection amount",
-        "url": "https://www.fbr.gov.pk/pr/finance-minister-visits-fbr-headquarters-comm/174643/2026"
+      "monthly.5": {
+        "sourceType": "official-primary",
+        "method": "automated",
+        "sourceKey": "fbr-monthwise-FY2024-25.pdf",
+        "sourceUrl": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf",
+        "artifactId": "fbr-monthwise-FY2024-25.pdf:32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9:2d575e822f28",
+        "evidenceHash": "32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9",
+        "contentHash": "20bcba53de3236dbc5d14fba938a593b8ef1eb690ec7e54437a2b857a1ae6cb8",
+        "location": "Month-wise / tax-wise net collection table; 2024-12",
+        "status": "provisional"
       },
-      {
-        "label": "Daily Times — FY2025-26 gross Rs13,601bn and provisional net Rs13,003bn",
-        "url": "https://dailytimes.com.pk/1516044/fbr-achieves-fy2025-26-tax-target-with-rs13-6-trillion-collection/"
+      "monthly.6": {
+        "sourceType": "official-primary",
+        "method": "automated",
+        "sourceKey": "fbr-monthwise-FY2024-25.pdf",
+        "sourceUrl": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf",
+        "artifactId": "fbr-monthwise-FY2024-25.pdf:32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9:2d575e822f28",
+        "evidenceHash": "32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9",
+        "contentHash": "48d5b0a29a29fd438c0997173d3ad44f89e232860a3deb7c04db79a77465bfd6",
+        "location": "Month-wise / tax-wise net collection table; 2025-01",
+        "status": "provisional"
       },
-      {
-        "label": "FY2025-26 Jul–May provisional Rs11,227bn vs Rs12,095bn target (shortfall ~Rs868bn)",
-        "url": "https://www.brecorder.com/news/40423269"
+      "monthly.7": {
+        "sourceType": "official-primary",
+        "method": "automated",
+        "sourceKey": "fbr-monthwise-FY2024-25.pdf",
+        "sourceUrl": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf",
+        "artifactId": "fbr-monthwise-FY2024-25.pdf:32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9:2d575e822f28",
+        "evidenceHash": "32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9",
+        "contentHash": "f03f1a021a87e8746a34d939eb5945a6c34a67633adbe772ea19b1051265d157",
+        "location": "Month-wise / tax-wise net collection table; 2025-02",
+        "status": "provisional"
       },
-      {
-        "label": "FBR collects Rs966bn in May 2026, misses Rs1,150bn target",
-        "url": "https://www.nation.com.pk/01-Jun-2026/fbr-collects-rs-966bn-misses-target-may"
+      "monthly.8": {
+        "sourceType": "official-primary",
+        "method": "automated",
+        "sourceKey": "fbr-monthwise-FY2024-25.pdf",
+        "sourceUrl": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf",
+        "artifactId": "fbr-monthwise-FY2024-25.pdf:32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9:2d575e822f28",
+        "evidenceHash": "32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9",
+        "contentHash": "454a42bd214ee43bab6ce63b8c2819377f7b28e92abbebd6054335b356de45bf",
+        "location": "Month-wise / tax-wise net collection table; 2025-03",
+        "status": "provisional"
       },
-      {
-        "label": "H1 FY2025-26 (Jul-Dec 2025) Rs6,154bn vs Rs6,490bn target",
-        "url": "https://www.brecorder.com/news/40400131"
+      "monthly.9": {
+        "sourceType": "official-primary",
+        "method": "automated",
+        "sourceKey": "fbr-monthwise-FY2024-25.pdf",
+        "sourceUrl": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf",
+        "artifactId": "fbr-monthwise-FY2024-25.pdf:32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9:2d575e822f28",
+        "evidenceHash": "32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9",
+        "contentHash": "61a85fc1e6c6edee5d4b815aedfcc579fdd7ed33812ce744de1fe2e2e6aa9f40",
+        "location": "Month-wise / tax-wise net collection table; 2025-04",
+        "status": "provisional"
+      },
+      "monthly.10": {
+        "sourceType": "official-primary",
+        "method": "automated",
+        "sourceKey": "fbr-monthwise-FY2024-25.pdf",
+        "sourceUrl": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf",
+        "artifactId": "fbr-monthwise-FY2024-25.pdf:32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9:2d575e822f28",
+        "evidenceHash": "32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9",
+        "contentHash": "da994c3b6db7b457a84a5e84822f409381aa65ae6131380c751f87b357f8591c",
+        "location": "Month-wise / tax-wise net collection table; 2025-05",
+        "status": "provisional"
+      },
+      "monthly.11": {
+        "sourceType": "official-primary",
+        "method": "automated",
+        "sourceKey": "fbr-monthwise-FY2024-25.pdf",
+        "sourceUrl": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf",
+        "artifactId": "fbr-monthwise-FY2024-25.pdf:32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9:2d575e822f28",
+        "evidenceHash": "32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9",
+        "contentHash": "5eb32f22be60dc5d81de27e585ddb0e46fd6f99a18c7cba50709e24c81277e7f",
+        "location": "Month-wise / tax-wise net collection table; 2025-06",
+        "status": "provisional"
+      },
+      "fyTotals.0": {
+        "sourceType": "official-primary",
+        "method": "automated",
+        "sourceKey": "fbr-monthwise-FY2024-25.pdf",
+        "sourceUrl": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf",
+        "artifactId": "fbr-monthwise-FY2024-25.pdf:32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9:2d575e822f28",
+        "evidenceHash": "32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9",
+        "contentHash": "9285b63b670ea424586c5d5ba1d7dccf599c847a7bd27ec464d225f794b2eb56",
+        "location": "Month-wise / tax-wise net collection table; FY2025",
+        "status": "provisional"
       }
-    ],
-    "releaseDiscovery": {
-      "checkedAt": "2026-09-30",
-      "archiveUrl": "https://www.fbr.gov.pk/pr/2026",
-      "candidates": [
-        {
-          "title": "Statement by the Federal Board of Revenue",
-          "url": "https://www.fbr.gov.pk/pr/statement-by-the-federal-board-of-revenue/174684/2026",
-          "numericMentions": [
-            "rs, "
-          ]
-        },
-        {
-          "title": "Finance Minister Visits FBR Headquarters, Commends Historic Revenue Achievement",
-          "url": "https://www.fbr.gov.pk/pr/finance-minister-visits-fbr-headquarters-comm/174643/2026",
-          "numericMentions": [
-            "rs, ",
-            "rs, ",
-            "rs, ",
-            "rs, ",
-            "Rs. 599 billion",
-            "Rs. 13.5 billion",
-            "rs. "
-          ]
-        },
-        {
-          "title": "FBR revenue collection picks up momentum in January 2026",
-          "url": "https://www.fbr.gov.pk/pr/fbr-revenue-collection-picks-up-momentum-in-j/174566/2026",
-          "numericMentions": [
-            "Rs.1015 billion",
-            "Rs.873 billion",
-            "Rs. 7,176 billion",
-            "Rs.6,490 "
-          ]
-        },
-        {
-          "title": "53rd CTP Probationary Officers of IRS Visit Federal Board of Revenue",
-          "url": "https://www.fbr.gov.pk/pr/53rd-ctp-probationary-officers-of-irs-visit-f/174527/2026",
-          "numericMentions": [
-            "rs, ",
-            "rs, "
-          ]
-        },
-        {
-          "title": "MCMC Participants Visit Federal Board of Revenue",
-          "url": "https://www.fbr.gov.pk/pr/mcmc-participants-visit-federal-board-of-reve/174512/2026",
-          "numericMentions": [
-            "rs. "
-          ]
-        },
-        {
-          "title": "Federal Board of Revenue",
-          "url": "http://www.fbr.gov.pk/",
-          "numericMentions": [
-            "Rs. 9.41 Billion"
-          ]
-        }
+    },
+    "publication": {
+      "policy": "official-only",
+      "status": "partial",
+      "reason": "Current fiscal-year totals and targets are unavailable: the official target-achievement statement omits the numeric collection total, and manually curated numeric claims lack independent reviewer approvals.",
+      "withheldFields": [
+        "fytd",
+        "annualTargets",
+        "currentFiscalYear",
+        "methodologyNote"
       ]
+    },
+    "sourceEvidence": {
+      "fbr-monthwise-FY2024-25.pdf": {
+        "artifactId": "fbr-monthwise-FY2024-25.pdf:32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9:2d575e822f28",
+        "sha256": "32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9",
+        "sourceKey": "fbr-monthwise-FY2024-25.pdf",
+        "sourceUrl": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf",
+        "responseUrl": "https://download1.fbr.gov.pk/Docs/20261151114844602MONTHWISE-TAXWISENETCOLLECTIONDURINGFY2024-25.pdf",
+        "path": "/source-evidence/32892f31d4487e3503c8dd2e4239d634e72a3bea845a2ba54d9cb667c2b004f9.pdf",
+        "bytes": 249864,
+        "contentType": "application/pdf",
+        "retrievedAt": "2026-09-30T21:48:35.962Z",
+        "parserVersion": "update-fbr.mjs:sha256:eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f:environment:65360a85cfba6b3429338121b1cec57e334f7b3d33995a7d39268f8c5c2c0b32",
+        "parserPath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt",
+        "parserDependencies": [
+          {
+            "file": "package-lock.json",
+            "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+            "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+          },
+          {
+            "file": "package.json",
+            "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+            "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+          },
+          {
+            "file": "scripts/data-catalog.mjs",
+            "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+            "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+          },
+          {
+            "file": "scripts/enforce-publication-policy.mjs",
+            "sha256": "6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a",
+            "sourcePath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt"
+          },
+          {
+            "file": "scripts/lib/ingestion-validation.mjs",
+            "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+            "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+          },
+          {
+            "file": "scripts/lib/publication-policy.mjs",
+            "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+            "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+          },
+          {
+            "file": "scripts/lib/release-calendar.mjs",
+            "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+            "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+          },
+          {
+            "file": "scripts/lib/sheet-utils.mjs",
+            "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+            "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+          },
+          {
+            "file": "scripts/lib/source-evidence.mjs",
+            "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+            "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+          },
+          {
+            "file": "scripts/pdf-text.mjs",
+            "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+            "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+          }
+        ]
+      }
     }
   }
 }

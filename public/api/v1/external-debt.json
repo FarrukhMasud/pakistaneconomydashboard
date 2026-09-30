@@ -4,96 +4,184 @@
   "source": "State Bank of Pakistan / IMF",
   "sourceUrl": "https://www.imf.org/en/Countries/PAK",
   "sourceType": "secondary-attributed",
-  "cadence": "Event-driven",
-  "latestObservation": "2026-03-31",
-  "dates": {
-    "observation": "2026-03-31",
-    "publication": "2026-05-12",
-    "verification": "2026-08-07",
-    "dashboardUpdated": "2026-08-07"
+  "publication": {
+    "policy": "official-only",
+    "status": "partial",
+    "reason": "Official outstanding debt stock is available. Fiscal-year repayments, rollover assumptions and bond schedules are withheld because exact official evidence and required independent approvals are absent.",
+    "withheldFields": [
+      "fy26",
+      "repaymentSplit",
+      "eurobonds",
+      "fy27",
+      "methodologyNote"
+    ]
   },
-  "lastUpdated": "2026-08-07",
+  "authenticity": "unverified",
+  "freshnessStatus": "needs-review",
+  "validation": {
+    "status": "passed",
+    "checkedAt": "2026-09-30T22:09:57.146Z",
+    "contentHash": "c1cda8881917a5173f269b62f1c2ab4c92bbc16db831a9a774e65d3688919dca",
+    "checks": [
+      {
+        "id": "audit-sanity.mjs",
+        "status": "passed"
+      },
+      {
+        "id": "audit-publication.mjs",
+        "status": "passed"
+      },
+      {
+        "id": "audit-evidence.mjs",
+        "status": "passed"
+      }
+    ]
+  },
+  "cadence": "Event-driven",
+  "latestObservation": "2026-06-30",
+  "dates": {
+    "observation": "2026-06-30",
+    "publication": null,
+    "verification": "2026-09-30T21:58:52.756Z",
+    "dashboardUpdated": "2026-09-30"
+  },
+  "lastUpdated": "2026-09-30",
   "lastChecked": null,
-  "licence": "Official public data, redistributed with attribution. Cite the original institution.",
+  "licence": "Consult the issuing institution for reuse terms. Source attribution does not establish a redistribution licence.",
   "data": {
-    "title": "External Debt Repayments",
+    "title": "External Debt and Liabilities",
     "unit": "US$ billion",
     "fy26": {
-      "label": "FY2025-26",
-      "grossRepayment": 25.9,
-      "grossRange": "23–26",
-      "expectedRollovers": 16,
-      "hardRepayment": 10,
-      "interest": 6,
-      "principalNonRolled": 4,
-      "onSbpBooks": 9,
-      "note": "Pakistan owes about $25.9bn in external debt servicing in FY2025-26. Roughly $16bn is expected to be rolled over by friendly creditors (China, Saudi Arabia, UAE, Qatar, Kuwait), leaving about $10bn of hard cash outflow (~$6bn interest + ~$4bn principal). Around $9bn of the servicing sits on the SBP's books."
+      "grossRepayment": null,
+      "expectedRollovers": null,
+      "hardRepayment": null,
+      "interest": null,
+      "principalNonRolled": null,
+      "onSbpBooks": null
     },
     "stock": {
-      "totalExternalDebtAndLiabilities": 137.558,
-      "asOf": "2026-03-31",
-      "publicationDate": "2026-05-12",
-      "imfOutstanding": 9.3,
-      "imfOutstandingSDR": 7.1,
-      "imfAsOf": "2026-03-31",
-      "note": "SBP reports total external debt and liabilities of $137.558bn at end-March 2026. The $136.027bn figure in the preceding column is for end-June 2025, not June 2026. Outstanding credit to the IMF was SDR 7.1bn (~$9.3bn) at end-March 2026."
+      "totalExternalDebtAndLiabilities": 138.85,
+      "imfOutstanding": 11.05,
+      "asOf": "2026-06-30",
+      "unit": "US$ billion",
+      "sourceType": "official-primary",
+      "status": "provisional"
     },
-    "repaymentSplit": [
-      {
-        "label": "Expected rollovers",
-        "value": 16,
-        "color": "#a78bfa",
-        "note": "Re-financed / rolled over with creditors' consent."
-      },
-      {
-        "label": "Interest (hard cash)",
-        "value": 6,
-        "color": "#ef4444",
-        "note": "Interest on debt not rolled over."
-      },
-      {
-        "label": "Principal (hard cash)",
-        "value": 4,
-        "color": "#f59e0b",
-        "note": "Principal not expected to be rolled over."
-      }
-    ],
-    "eurobonds": [
-      {
-        "date": "2025-09",
-        "value": 0.5,
-        "label": "$500M Eurobond (Sep 2025)"
-      },
-      {
-        "date": "2026-04",
-        "value": 1,
-        "label": "$1.0bn Eurobond (Apr 2026)"
-      }
-    ],
+    "repaymentSplit": [],
+    "eurobonds": [],
     "fy27": {
-      "label": "FY2026-27",
-      "estimate": "21.5",
-      "grossRepayment": 21.5,
-      "principal": 18,
-      "interest": 3.5,
-      "expectedRollovers": "10–11",
-      "note": "SBP projected $21.5bn of FY2026-27 external debt servicing: $18bn principal and $3.5bn interest. Around $10–11bn of principal is expected to be rolled over or refinanced."
+      "grossRepayment": null,
+      "principal": null,
+      "interest": null
     },
-    "riskNote": "Pakistan's external position depends heavily on rollovers of bilateral deposits and loans. Any failure to secure rollovers would sharply increase the hard-cash repayment burden and pressure reserves.",
-    "observationDate": "2026-03-31",
-    "publicationDate": "2026-05-12",
+    "observationDate": "2026-06-30",
     "sourceUrl": "https://www.sbp.org.pk/assets/document/pakdebt.pdf",
-    "lastVerified": "2026-08-07",
-    "lastUpdated": "2026-08-07",
-    "verifiedFrom": [
-      "https://www.sbp.org.pk/assets/document/pakdebt.pdf",
-      "https://www.brecorder.com/news/40432030",
-      "https://www.brecorder.com/news/40432106",
-      "https://thestandard.com.pk/pakistan-faces-external-debt-repayments-of-25-9bn-in-fy26/",
-      "https://www.geo.tv/latest/614559-pakistan-to-repay-over-23-billion-in-external-debt-in-fy26",
-      "https://nukta.com/pakistan-external-debt-obligations-in-fy26",
-      "https://bloompakistan.com/pakistan-external-debt-2026-repayment-risk/"
-    ],
-    "methodologyNote": "The external-debt stock is taken directly from SBP's Pakistan Debt and Liabilities table. Fiscal-year servicing and rollover figures are gross obligations compiled from SBP briefings and attributed Pakistani financial reporting; the rollover vs hard-cash split remains an estimate subject to change."
+    "lastUpdated": "2026-09-30",
+    "methodologyNote": null,
+    "publicationEvidence": {
+      "stock": {
+        "sourceType": "official-primary",
+        "method": "automated",
+        "sourceKey": "pakdebt.pdf",
+        "sourceUrl": "https://www.sbp.org.pk/assets/document/pakdebt.pdf",
+        "artifactId": "pakdebt.pdf:40a0cb00185222ee0ad2cd329184b23831ab80e62514ac35530972bdc318753d:82ab57125f48",
+        "evidenceHash": "40a0cb00185222ee0ad2cd329184b23831ab80e62514ac35530972bdc318753d",
+        "contentHash": "d9b298813d29d682bbdb1fb9ee3e89c86a7fdf04ba79498c6762b5de577ee4f0",
+        "location": "Outstanding table: total external debt and liabilities and From IMF rows; 2026-06-30 column",
+        "status": "provisional"
+      },
+      "observationDate": {
+        "sourceType": "official-primary",
+        "method": "automated",
+        "sourceKey": "pakdebt.pdf",
+        "sourceUrl": "https://www.sbp.org.pk/assets/document/pakdebt.pdf",
+        "artifactId": "pakdebt.pdf:40a0cb00185222ee0ad2cd329184b23831ab80e62514ac35530972bdc318753d:82ab57125f48",
+        "evidenceHash": "40a0cb00185222ee0ad2cd329184b23831ab80e62514ac35530972bdc318753d",
+        "contentHash": "b2318f09c7219e46c4c367e04169c013ca42a34415b713bba66b8e12646dffce",
+        "location": "Outstanding table date header; latest column 2026-06-30",
+        "status": "provisional"
+      }
+    },
+    "publication": {
+      "policy": "official-only",
+      "status": "partial",
+      "reason": "Official outstanding debt stock is available. Fiscal-year repayments, rollover assumptions and bond schedules are withheld because exact official evidence and required independent approvals are absent.",
+      "withheldFields": [
+        "fy26",
+        "repaymentSplit",
+        "eurobonds",
+        "fy27",
+        "methodologyNote"
+      ]
+    },
+    "reviewRequired": true,
+    "reviewReason": "Official outstanding debt stock is available. Fiscal-year repayments, rollover assumptions and bond schedules are withheld because exact official evidence and required independent approvals are absent.",
+    "sourceEvidence": {
+      "pakdebt.pdf": {
+        "artifactId": "pakdebt.pdf:40a0cb00185222ee0ad2cd329184b23831ab80e62514ac35530972bdc318753d:82ab57125f48",
+        "sha256": "40a0cb00185222ee0ad2cd329184b23831ab80e62514ac35530972bdc318753d",
+        "sourceKey": "pakdebt.pdf",
+        "sourceUrl": "https://www.sbp.org.pk/assets/document/pakdebt.pdf",
+        "responseUrl": "https://www.sbp.org.pk/assets/document/pakdebt.pdf",
+        "path": "/source-evidence/40a0cb00185222ee0ad2cd329184b23831ab80e62514ac35530972bdc318753d.pdf",
+        "bytes": 344625,
+        "contentType": "application/pdf",
+        "retrievedAt": "2026-09-30T21:48:41.428Z",
+        "parserVersion": "enforce-publication-policy.mjs:sha256:6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a:environment:e00ef7f60ce57a892626f2ecc7feb8ac81298224387388e2737157a2dd369780",
+        "parserPath": "/source-evidence/parser-6c04a19c3c7eaf6084bf949837295d30aa7e350b27f6bbf5e56813f2582fe63a.txt",
+        "parserDependencies": [
+          {
+            "file": "package-lock.json",
+            "sha256": "9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84",
+            "sourcePath": "/source-evidence/parser-9aa0441f6a4cd751659312af63195eb61cc76e4d13464752d16e9aed31024e84.txt"
+          },
+          {
+            "file": "package.json",
+            "sha256": "8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1",
+            "sourcePath": "/source-evidence/parser-8a8b2f94c2ee577f59daff5426c44cbd56c83b5d8f197f690c8ea361940a2cd1.txt"
+          },
+          {
+            "file": "scripts/data-catalog.mjs",
+            "sha256": "26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246",
+            "sourcePath": "/source-evidence/parser-26d33dcbb6726e8f81c50953a6803275cb4d99aeefbed5f2c59389fd6ab25246.txt"
+          },
+          {
+            "file": "scripts/lib/ingestion-validation.mjs",
+            "sha256": "82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7",
+            "sourcePath": "/source-evidence/parser-82ebfac64a4f74671e077fcc3cc2709f096f1d30d2e9f9150b1fa6ef84a7bdd7.txt"
+          },
+          {
+            "file": "scripts/lib/publication-policy.mjs",
+            "sha256": "c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae",
+            "sourcePath": "/source-evidence/parser-c80902af39588e94a997823efda7cacf9bcc9e498168d3216a3e42b8f64508ae.txt"
+          },
+          {
+            "file": "scripts/lib/release-calendar.mjs",
+            "sha256": "c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f",
+            "sourcePath": "/source-evidence/parser-c732022cd05a562f1cceb0d278ca5126ed6f90cb9ef329369460154112b6ad2f.txt"
+          },
+          {
+            "file": "scripts/lib/sheet-utils.mjs",
+            "sha256": "d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a",
+            "sourcePath": "/source-evidence/parser-d0e8ee24152d938505d63e9e13ee6e4e905a95379a504e7acd51e131856ad13a.txt"
+          },
+          {
+            "file": "scripts/lib/source-evidence.mjs",
+            "sha256": "1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d",
+            "sourcePath": "/source-evidence/parser-1f3ccf76d2bfe9954fd1eff63e1be375d03dc91d10ff16997d859a0c768bb14d.txt"
+          },
+          {
+            "file": "scripts/pdf-text.mjs",
+            "sha256": "4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6",
+            "sourcePath": "/source-evidence/parser-4d56802016b5de516ba79c6a1de8eb79cb4a155db5c4ee5d4a1c0afbd3992fe6.txt"
+          },
+          {
+            "file": "scripts/update-fbr.mjs",
+            "sha256": "eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f",
+            "sourcePath": "/source-evidence/parser-eb98ea56a61b760fd3c446b2521acb0942fe5d9473d68766619b3aa6135a008f.txt"
+          }
+        ]
+      }
+    }
   }
 }

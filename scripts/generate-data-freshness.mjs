@@ -5,6 +5,7 @@ import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { DATASETS, SOURCE_TIERS, getDatasetFreshness } from './data-catalog.mjs';
 import { buildReleaseRow, sortReleaseRows } from './lib/release-calendar.mjs';
+import { sha256 } from './lib/source-evidence.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = resolve(__dirname, '..', 'public', 'data');
@@ -22,11 +23,23 @@ async function main() {
   const now = new Date();
   const datasets = [];
   const releases = [];
+  const optionalJson = async file => {
+    try { return await readJson(file); }
+    catch (error) {
+      if (error.code !== 'ENOENT') throw error;
+      return null;
+    }
+  };
+  const artifacts = await optionalJson('source-artifacts.json');
+  const quality = await optionalJson('data-quality.json');
 
   for (const dataset of DATASETS) {
     try {
       const data = await readJson(dataset.file);
-      const freshness = getDatasetFreshness(dataset, data);
+      const report = quality?.datasets?.[dataset.id];
+      const body = await readFile(resolve(DATA_DIR, dataset.file));
+      const validation = report?.contentHash === sha256(body) ? report : null;
+      const freshness = getDatasetFreshness(dataset, data, { now, checks: artifacts?.checks || {}, validation });
       datasets.push(freshness);
       releases.push(buildReleaseRow({ dataset, data, freshness, now }));
     } catch (err) {

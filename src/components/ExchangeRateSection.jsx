@@ -19,7 +19,7 @@ export default function ExchangeRateSection() {
   if (loading) return <LoadingCard label="Loading exchange rates…" />;
   if (error || !data) return <ErrorCard error={error} onRetry={retry} label="Could not load exchange rates" />;
 
-  const { monthly, lastUpdated: exLU, dataCoverage: exDC } = data;
+  const { monthly = [], lastUpdated: exLU, dataCoverage: exDC } = data;
   const cy = currentCalendarYear(monthly);
   const fy = currentFiscalYear(monthly);
   const labels = monthly.map((d) => formatDate(d.date));
@@ -29,6 +29,7 @@ export default function ExchangeRateSection() {
     datasets: [
       {
         label: 'USD',
+        valueField: 'USD',
         data: monthly.map((d) => d.USD),
         borderColor: COLORS.teal,
         backgroundColor: COLORS.tealAlpha,
@@ -36,6 +37,7 @@ export default function ExchangeRateSection() {
       },
       {
         label: 'EUR',
+        valueField: 'EUR',
         data: monthly.map((d) => d.EUR),
         borderColor: COLORS.amber,
         backgroundColor: COLORS.amberAlpha,
@@ -43,6 +45,7 @@ export default function ExchangeRateSection() {
       },
       {
         label: 'GBP',
+        valueField: 'GBP',
         data: monthly.map((d) => d.GBP),
         borderColor: COLORS.coral,
         backgroundColor: COLORS.coralAlpha,
@@ -50,6 +53,7 @@ export default function ExchangeRateSection() {
       },
       {
         label: 'CNY',
+        valueField: 'CNY',
         data: monthly.map((d) => d.CNY),
         borderColor: COLORS.purple,
         backgroundColor: COLORS.purpleAlpha,
@@ -102,9 +106,10 @@ export default function ExchangeRateSection() {
           const end = period.rows[period.rows.length - 1];
           const canCompare = period.rows.length >= 2;
           return currencies.map(c => {
-            const chg = canCompare ? pctChange(end[c], start[c]) : { pct: null, direction: 'flat' };
+            const chg = canCompare ? pctChange(end[c], start[c]) : { pct: null, direction: 'unavailable' };
             return {
               label: `PKR / ${c}`,
+              row: end, field: c, period: end.date,
               value: fmtRate(end[c]),
               sub: chg.pct != null ? `${chg.pct > 0 ? '+' : ''}${chg.pct}% ${suffix}` : '',
               direction: chg.direction,
