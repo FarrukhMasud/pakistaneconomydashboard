@@ -237,8 +237,8 @@
   "countryPriorPeriod": "Jul-Aug FY26",
   "source": "State Bank of Pakistan",
   "dataSource": "SBP",
-  "lastUpdated": "2026-09-16",
-  "dataCoverage": "monthly through 2026-07; sector Jul-Aug FY27; country Jul-Aug FY27; headline FY2027 Jul-Aug (Netinflow.xls)",
+  "lastUpdated": "2026-09-30",
+  "dataCoverage": "monthly through 2026-08; sector Jul-Aug FY27; country Jul-Aug FY27; summary FY2027 Jul-Aug",
   "fytdComparison": {
     "period": "Jul-Aug",
     "current": {
@@ -259,21 +259,24 @@
     "sourceLocation": "\"Total\" row, net FDI column of the current fiscal-year-to-date block"
   },
   "monthlyComparison": {
-    "month": "May",
+    "month": "Aug",
     "current": {
-      "label": "FY2026",
-      "net_fdi": 214.29,
-      "inflow": 295.07,
-      "outflow": 80.78,
-      "status": "provisional"
+      "label": "FY2027",
+      "net_fdi": 316,
+      "inflow": null,
+      "outflow": null,
+      "equity": 250,
+      "debt": 66,
+      "date": "2026-08"
     },
     "prior": {
-      "label": "FY2025",
-      "net_fdi": 231.91,
-      "inflow": 320.85,
-      "outflow": 88.94,
-      "status": null
-    }
+      "label": "FY2026",
+      "net_fdi": 175,
+      "inflow": null,
+      "outflow": null,
+      "date": "2025-08"
+    },
+    "source": "monthly-series"
   },
   "monthly": [
     {
@@ -629,6 +632,12 @@
       "net_fdi": 179,
       "equity": 168,
       "debt": 11
+    },
+    {
+      "date": "2026-08",
+      "net_fdi": 316,
+      "equity": 250,
+      "debt": 66
     }
   ],
   "monthlyDataSource": "SBP EasyData API - BOP BPM6",
@@ -646,6 +655,6 @@
       "name": "Debt Instruments"
     }
   },
-  "monthlyDataCoverage": "2021-09 – 2026-07",
-  "lastChecked": "2026-09-16"
+  "monthlyDataCoverage": "2021-09 – 2026-08",
+  "lastChecked": "2026-09-30"
 }

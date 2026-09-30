@@ -9,11 +9,11 @@
   "dates": {
     "observation": "2026-08",
     "publication": null,
-    "verification": "2026-09-16",
-    "dashboardUpdated": "2026-09-16"
+    "verification": "2026-09-30",
+    "dashboardUpdated": "2026-09-30"
   },
-  "lastUpdated": "2026-09-16",
-  "lastChecked": "2026-09-16",
+  "lastUpdated": "2026-09-30",
+  "lastChecked": "2026-09-30",
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",
   "data": {
     "categories": [
@@ -309,9 +309,9 @@
       }
     ],
     "dataSource": "SBP",
-    "lastUpdated": "2026-09-16",
+    "lastUpdated": "2026-09-30",
     "dataCoverage": "Jul-May FY26",
-    "lastChecked": "2026-09-16",
+    "lastChecked": "2026-09-30",
     "bopSummary": {
       "source": "SBP Balance of Payments (BPM6) summary",
       "sourceFile": "Balancepayment_BPM6.xls",

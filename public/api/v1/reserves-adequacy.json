@@ -5,26 +5,26 @@
   "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
   "sourceType": "official-derived",
   "cadence": "Weekly",
-  "latestObservation": "2026-09-04",
+  "latestObservation": "2026-09-18",
   "dates": {
-    "observation": "2026-09-04",
+    "observation": "2026-09-18",
     "publication": null,
-    "verification": "2026-09-16",
-    "dashboardUpdated": "2026-09-16"
+    "verification": "2026-09-30",
+    "dashboardUpdated": "2026-09-30"
   },
-  "lastUpdated": "2026-09-16",
-  "lastChecked": "2026-09-16",
+  "lastUpdated": "2026-09-30",
+  "lastChecked": "2026-09-30",
   "licence": "Official public data, redistributed with attribution. Cite the original institution.",
   "data": {
     "title": "Reserves Adequacy & Import Cover",
     "current": {
-      "sbpReserves": 18.33,
-      "totalReserves": 23.72,
-      "bankReserves": 5.39,
-      "asOf": "2026-09-04",
-      "importCoverMonths": 3.3,
+      "sbpReserves": 21.4,
+      "totalReserves": 26.81,
+      "bankReserves": 5.41,
+      "asOf": "2026-09-18",
+      "importCoverMonths": 3.9,
       "importCoverLabel": "Goods-import cover",
-      "importCoverNote": "Computed from SBP-held reserves of $18.33bn and the trailing 12-month average monthly goods-import bill of $5.47bn.",
+      "importCoverNote": "Computed from SBP-held reserves of $21.4bn and the trailing 12-month average monthly goods-import bill of $5.47bn.",
       "importCoverBasis": "SBP-held reserves divided by the trailing 12-month average of official SBP monthly goods imports.",
       "unit": "US$ billion"
     },
@@ -77,9 +77,9 @@
       },
       {
         "date": "2026-09",
-        "sbpReserves": 18.33,
-        "importCoverMonths": 3.3,
-        "label": "Sep 4, 2026"
+        "sbpReserves": 21.4,
+        "importCoverMonths": 3.9,
+        "label": "Sep 18, 2026"
       }
     ],
     "drivers": [
@@ -88,9 +88,9 @@
       "A contained current-account balance and stronger remittances",
       "Tighter monetary policy supporting the rupee and inflows"
     ],
-    "context": "The latest official SBP reserve stock covers about 3.3 months of the trailing goods-import bill on this dashboard's stated calculation. This is a transparent directional measure, not the IMF's broader reserve-adequacy metric.",
+    "context": "The latest official SBP reserve stock covers about 3.9 months of the trailing goods-import bill on this dashboard's stated calculation. This is a transparent directional measure, not the IMF's broader reserve-adequacy metric.",
     "sourceUrl": "https://www.sbp.org.pk/assets/document/forex.pdf",
-    "lastVerified": "2026-09-16",
+    "lastVerified": "2026-09-30",
     "verifiedFrom": [
       "https://www.sbp.org.pk/assets/document/forex.pdf",
       "https://www.sbp.org.pk/assets/document/exp_import_BOP_Arch.xls",
@@ -101,8 +101,8 @@
       "https://www.geo.tv/latest/612144-pakistan-exceeds-imfs-target-with-sbps-reserves-reaching-145bn",
       "https://www.imf.org/-/media/files/publications/cr/2026/english/1pakea2026001.pdf"
     ],
-    "methodologyNote": "The current 3.3-month figure is calculated as $18.33bn of SBP-held reserves divided by $5.47bn, the trailing 12-month average of SBP monthly goods imports through 2026-08. It therefore measures goods-import cover and may differ from official or IMF measures that use broader imports or reserve-adequacy methods. Historical trajectory points are reported estimates and are not recalculated on the same basis.",
-    "lastUpdated": "2026-09-16",
-    "lastChecked": "2026-09-16"
+    "methodologyNote": "The current 3.9-month figure is calculated as $21.4bn of SBP-held reserves divided by $5.47bn, the trailing 12-month average of SBP monthly goods imports through 2026-08. It therefore measures goods-import cover and may differ from official or IMF measures that use broader imports or reserve-adequacy methods. Historical trajectory points are reported estimates and are not recalculated on the same basis.",
+    "lastUpdated": "2026-09-30",
+    "lastChecked": "2026-09-30"
   }
 }
